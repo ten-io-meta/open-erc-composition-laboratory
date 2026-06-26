@@ -143,11 +143,11 @@ async function main() {
             `${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`
         );
     }
-
-    if (!validationPassed) {
-        console.log("");
-        console.log("Experiment validation failed.");
-    }
+if (!validationPassed) {
+    console.log("");
+    console.log("Experiment validation failed.");
+    process.exitCode = 1;
+}
 
     console.log("");
     console.log("Metrics:");
