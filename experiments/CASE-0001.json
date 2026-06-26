@@ -1,0 +1,19 @@
+{
+  "id": "CASE-0001",
+  "name": "First OECL Experiment",
+  "description": "Bootstrap experiment validating the laboratory execution pipeline.",
+  "composition": [
+    "MockAuthority",
+    "MockReservation",
+    "MockSettlement"
+  ],
+  "metrics": [
+    "Safety",
+    "Liveness",
+    "Isolation"
+  ],
+  "benchmark": {
+    "iterations": 10,
+    "seed": 42
+  }
+}
