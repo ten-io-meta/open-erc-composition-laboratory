@@ -1,15 +1,27 @@
 import type { ProtocolAdapter } from "../adapters/ProtocolAdapter.js";
+import type { ExecutionContext } from "../runtime/ExecutionContext.js";
 
 export class MockReservation implements ProtocolAdapter {
     readonly protocolId = "MockReservation";
 
-    async initialize(): Promise<void> {}
+    async initialize(context: ExecutionContext): Promise<void> {
+        context.totalValue = 100;
+        context.lockedValue = 0;
+        context.availableValue = 100;
+    }
 
-    async getState(): Promise<Record<string, unknown>> {
+    async execute(context: ExecutionContext): Promise<void> {
+        const amountToReserve = context.consumedAuthority;
+
+        context.lockedValue = amountToReserve;
+        context.availableValue = context.totalValue - amountToReserve;
+    }
+
+    async getState(context: ExecutionContext): Promise<Record<string, unknown>> {
         return {
-            lockedValue: 40,
-            availableValue: 60,
-            totalValue: 100
+            lockedValue: context.lockedValue,
+            availableValue: context.availableValue,
+            totalValue: context.totalValue
         };
     }
 

@@ -1,14 +1,13 @@
+import type { ExecutionContext } from "../runtime/ExecutionContext.js";
+
 export interface ProtocolAdapter {
     readonly protocolId: string;
 
-    initialize(): Promise<void>;
+    initialize(context: ExecutionContext): Promise<void>;
 
-    getState(): Promise<Record<string, unknown>>;
+    execute(context: ExecutionContext): Promise<void>;
 
-    executeAction(
-        action: string,
-        params?: Record<string, unknown>
-    ): Promise<void>;
+    getState(context: ExecutionContext): Promise<Record<string, unknown>>;
 
     collectEvents(): Promise<unknown[]>;
 

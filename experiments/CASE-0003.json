@@ -1,0 +1,19 @@
+{
+  "id": "CASE-0003",
+  "name": "Composable Agent Settlement Stack",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement",
+    "Accounting"
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism"
+  ],
+  "benchmark": {
+    "iterations": 25,
+    "seed": 8004
+  }
+}

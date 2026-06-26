@@ -12,6 +12,7 @@ import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
 import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
 import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafetyRule.js";
 import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
+import { ExecutionContext } from "../laboratory/runtime/ExecutionContext.js";
 
 async function main() {
     const experimentId = process.argv[2] ?? "CASE-0001";
@@ -25,6 +26,8 @@ async function main() {
     const experiment = JSON.parse(
         await readFile(`./experiments/${experimentId}.json`, "utf8")
     );
+
+    const context = new ExecutionContext();
 
     const capabilityRegistry = new CapabilityRegistry();
     const capabilityLoader = new CapabilityLoader();
@@ -49,7 +52,6 @@ async function main() {
         capabilityRegistry.register(capability);
     }
 
-    
     await protocolDiscovery.discover("./laboratory/protocols");
 
     const resolver = new CapabilityResolver(
@@ -94,8 +96,16 @@ async function main() {
     console.log("Initializing adapters:");
 
     for (const adapter of adapters) {
-        await adapter.initialize();
+        await adapter.initialize(context);
         console.log("OK initialized " + adapter.protocolId);
+    }
+
+    console.log("");
+    console.log("Executing adapters:");
+
+    for (const adapter of adapters) {
+        await adapter.execute(context);
+        console.log("OK executed " + adapter.protocolId);
     }
 
     console.log("");
@@ -104,7 +114,7 @@ async function main() {
     const states: Record<string, unknown> = {};
 
     for (const adapter of adapters) {
-        const state = await adapter.getState();
+        const state = await adapter.getState(context);
         states[adapter.protocolId] = state;
         console.log(adapter.protocolId, state);
     }
@@ -113,18 +123,19 @@ async function main() {
     console.log("Validation:");
 
     const validationResults = validationEngine.validate(states);
+    const validationPassed = validationResults.every(result => result.passed);
 
     for (const result of validationResults) {
         console.log(
             `${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`
         );
     }
-const validationPassed = validationResults.every(result => result.passed);
 
-if (!validationPassed) {
-    console.log("");
-    console.log("Experiment validation failed.");
-}
+    if (!validationPassed) {
+        console.log("");
+        console.log("Experiment validation failed.");
+    }
+
     console.log("");
     console.log("Metrics:");
 
@@ -143,6 +154,7 @@ if (!validationPassed) {
         experimentName: experiment.name,
         requiredCapabilities: experiment.requiredCapabilities,
         resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
+        context,
         states,
         validationResults,
         validationPassed,
