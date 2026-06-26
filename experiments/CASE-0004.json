@@ -1,0 +1,36 @@
+{
+  "id": "CASE-0004",
+  "name": "Negative Settlement Safety Check",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement",
+    "Accounting"
+  ],
+  "actions": [
+    {
+      "protocol": "MockAuthority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "MockSettlement",
+      "action": "settle",
+      "amount": 50
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism"
+  ],
+  "benchmark": {
+    "iterations": 1,
+    "seed": 4
+  }
+}
