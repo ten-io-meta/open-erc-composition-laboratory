@@ -5,7 +5,7 @@ export class ReservationSafetyRule implements ValidationRule {
     readonly id = "reservation-safety";
 
     validate(states: Record<string, unknown>): ValidationResult {
-        const reservationState = states["MockReservation"] as
+        const reservationState = states["ERC8060Reservable"] as
             | {
                   lockedValue?: number;
                   availableValue?: number;
@@ -17,7 +17,7 @@ export class ReservationSafetyRule implements ValidationRule {
             return {
                 rule: this.id,
                 passed: false,
-                message: "MockReservation state not found"
+                message: "ERC8060Reservable state not found"
             };
         }
 

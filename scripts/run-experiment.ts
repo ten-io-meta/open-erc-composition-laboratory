@@ -1,4 +1,3 @@
-import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
 import { readFile } from "fs/promises";
 
 import { CapabilityRegistry } from "../laboratory/capabilities/CapabilityRegistry.js";
@@ -9,6 +8,7 @@ import { DatasetWriter } from "../laboratory/dataset/DatasetWriter.js";
 import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
 import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
 import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafetyRule.js";
+import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
 
 async function main() {
     console.log("====================================");
@@ -54,8 +54,8 @@ async function main() {
     });
 
     protocolRegistry.register({
-        id: "MockReservation",
-        name: "Mock Reservation Protocol",
+        id: "ERC8060Reservable",
+        name: "ERC-8060 Reservable Adapter",
         version: "0.1",
         capabilities: ["Reservation"]
     });
@@ -91,7 +91,9 @@ async function main() {
     console.log("Resolved protocols:");
 
     for (const protocol of resolvedProtocols) {
-        console.log("OK " + protocol.id + " -> " + protocol.capabilities.join(", "));
+        console.log(
+            "OK " + protocol.id + " -> " + protocol.capabilities.join(", ")
+        );
     }
 
     console.log("");
