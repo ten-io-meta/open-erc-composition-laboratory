@@ -1,0 +1,20 @@
+{
+  "id": "ERC8001Authority",
+  "name": "ERC-8001 Authority Adapter",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Adapter exposing Authority capability to OECL.",
+  "capabilities": [
+    "Authority"
+  ],
+  "invariants": [
+    {
+      "id": "authority-safety",
+      "description": "consumedAuthority must be less than or equal to authorityLimit"
+    }
+  ],
+  "adapter": {
+    "entrypoint": "ERC8001AuthorityAdapter.ts"
+  }
+}

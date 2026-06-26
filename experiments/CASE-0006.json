@@ -1,0 +1,37 @@
+{
+  "id": "CASE-0006",
+  "name": "ERC8001 + ERC8060 + ERC8275 Composition",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Accounting",
+    "Settlement"
+  ],
+  "actions": [
+    {
+      "protocol": "ERC8001Authority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism",
+    "Composability"
+  ],
+  "benchmark": {
+    "iterations": 100,
+    "seed": 8001
+  }
+}

@@ -3,6 +3,7 @@ import type { ProtocolAdapter } from "../adapters/ProtocolAdapter.js";
 import { MockAuthority } from "./MockAuthority.js";
 import { MockSettlement } from "./MockSettlement.js";
 
+import { ERC8001AuthorityAdapter } from "./erc8001-authority/ERC8001AuthorityAdapter.js";
 import { ERC8060ReservableAdapter } from "./erc8060-reservable/ERC8060ReservableAdapter.js";
 import { ERC8275SettlementAdapter } from "./erc8275-settlement/ERC8275SettlementAdapter.js";
 
@@ -14,6 +15,9 @@ export class ProtocolFactory {
 
             case "MockAuthority":
                 return new MockAuthority();
+
+            case "ERC8001Authority":
+                return new ERC8001AuthorityAdapter();
 
             case "ERC8060Reservable":
                 return new ERC8060ReservableAdapter();

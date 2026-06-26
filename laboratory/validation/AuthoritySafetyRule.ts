@@ -5,7 +5,10 @@ export class AuthoritySafetyRule implements ValidationRule {
     readonly id = "authority-safety";
 
     validate(states: Record<string, unknown>): ValidationResult {
-        const authorityState = states["MockAuthority"] as
+        const authorityState = (
+            states["ERC8001Authority"] ??
+            states["MockAuthority"]
+        ) as
             | {
                   authorityLimit?: number;
                   consumed?: number;
@@ -16,7 +19,7 @@ export class AuthoritySafetyRule implements ValidationRule {
             return {
                 rule: this.id,
                 passed: false,
-                message: "MockAuthority state not found"
+                message: "Authority state not found"
             };
         }
 
