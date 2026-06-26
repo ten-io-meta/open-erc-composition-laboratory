@@ -1,11 +1,11 @@
 {
   "id": "CASE-0001",
-  "name": "First OECL Experiment",
-  "description": "Bootstrap experiment validating the laboratory execution pipeline.",
-  "composition": [
-    "MockAuthority",
-    "MockReservation",
-    "MockSettlement"
+  "name": "First OECL Capability-Based Experiment",
+  "description": "Bootstrap experiment validating capability resolution and laboratory execution pipeline.",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement"
   ],
   "metrics": [
     "Safety",
