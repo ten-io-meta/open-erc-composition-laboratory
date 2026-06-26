@@ -6,6 +6,7 @@ import { CapabilityResolver } from "../laboratory/capabilities/CapabilityResolve
 import { ProtocolRegistry } from "../laboratory/registry/ProtocolRegistry.js";
 import { ProtocolFactory } from "../laboratory/protocols/ProtocolFactory.js";
 import { ProtocolManifestLoader } from "../laboratory/protocols/ProtocolManifestLoader.js";
+import { ProtocolDiscovery } from "../laboratory/discovery/ProtocolDiscovery.js";
 import { DatasetWriter } from "../laboratory/dataset/DatasetWriter.js";
 import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
 import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
@@ -27,8 +28,14 @@ async function main() {
 
     const capabilityRegistry = new CapabilityRegistry();
     const capabilityLoader = new CapabilityLoader();
+
     const protocolRegistry = new ProtocolRegistry();
     const manifestLoader = new ProtocolManifestLoader();
+    const protocolDiscovery = new ProtocolDiscovery(
+        protocolRegistry,
+        manifestLoader
+    );
+
     const datasetWriter = new DatasetWriter();
     const reportWriter = new ReportWriter();
 
@@ -49,23 +56,14 @@ async function main() {
         capabilities: ["Authority"]
     });
 
-    const erc8060Manifest = await manifestLoader.load(
-        "./laboratory/protocols/erc8060-reservable/manifest.json"
-    );
-
-    protocolRegistry.register({
-        id: erc8060Manifest.id,
-        name: erc8060Manifest.name,
-        version: erc8060Manifest.version,
-        capabilities: erc8060Manifest.capabilities
-    });
-
     protocolRegistry.register({
         id: "MockSettlement",
         name: "Mock Settlement Protocol",
         version: "0.1",
         capabilities: ["Settlement"]
     });
+
+    await protocolDiscovery.discover("./laboratory/protocols");
 
     const resolver = new CapabilityResolver(
         capabilityRegistry,
