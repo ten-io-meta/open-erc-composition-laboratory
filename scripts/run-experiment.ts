@@ -1,3 +1,4 @@
+import { SettlementSafetyRule } from "../laboratory/validation/SettlementSafetyRule.js";
 import { readFile } from "fs/promises";
 
 import { CapabilityLoader } from "../laboratory/capabilities/CapabilityLoader.js";
@@ -45,6 +46,7 @@ async function main() {
     const validationEngine = new ValidationEngine();
     validationEngine.register(new ReservationSafetyRule());
     validationEngine.register(new AuthoritySafetyRule());
+    validationEngine.register(new SettlementSafetyRule());
 
     const capabilities = await capabilityLoader.load("./registry/capabilities.json");
 
