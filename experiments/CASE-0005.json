@@ -1,0 +1,37 @@
+{
+  "id": "CASE-0005",
+  "name": "ERC8060 + ERC8275 Settlement Composition",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Accounting",
+    "Settlement"
+  ],
+  "actions": [
+    {
+      "protocol": "MockAuthority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism",
+    "Composability"
+  ],
+  "benchmark": {
+    "iterations": 50,
+    "seed": 8275
+  }
+}

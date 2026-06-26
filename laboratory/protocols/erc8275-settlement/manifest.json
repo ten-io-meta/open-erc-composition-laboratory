@@ -1,0 +1,20 @@
+{
+  "id": "ERC8275Settlement",
+  "name": "ERC-8275 Settlement Adapter",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Adapter exposing settlement execution capability to OECL.",
+  "capabilities": [
+    "Settlement"
+  ],
+  "invariants": [
+    {
+      "id": "settlement-safety",
+      "description": "settledValue must equal lockedValue"
+    }
+  ],
+  "adapter": {
+    "entrypoint": "ERC8275SettlementAdapter.ts"
+  }
+}

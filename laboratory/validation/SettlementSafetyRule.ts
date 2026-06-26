@@ -5,7 +5,10 @@ export class SettlementSafetyRule implements ValidationRule {
     readonly id = "settlement-safety";
 
     validate(states: Record<string, unknown>): ValidationResult {
-        const settlementState = states["MockSettlement"] as
+        const settlementState = (
+            states["ERC8275Settlement"] ??
+            states["MockSettlement"]
+        ) as
             | {
                   settled?: number;
                   reserved?: number;
@@ -16,7 +19,7 @@ export class SettlementSafetyRule implements ValidationRule {
             return {
                 rule: this.id,
                 passed: false,
-                message: "MockSettlement state not found"
+                message: "Settlement state not found"
             };
         }
 
