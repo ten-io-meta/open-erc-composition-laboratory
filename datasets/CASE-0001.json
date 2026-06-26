@@ -31,6 +31,11 @@
       "rule": "reservation-safety",
       "passed": true,
       "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
     }
   ],
   "metrics": [
@@ -42,5 +47,5 @@
     "iterations": 10,
     "seed": 42
   },
-  "executedAt": "2026-06-26T19:47:51.186Z"
+  "executedAt": "2026-06-26T19:51:58.084Z"
 }

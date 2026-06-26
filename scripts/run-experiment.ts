@@ -1,3 +1,4 @@
+import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
 import { readFile } from "fs/promises";
 
 import { CapabilityRegistry } from "../laboratory/capabilities/CapabilityRegistry.js";
@@ -25,6 +26,7 @@ async function main() {
 
     const validationEngine = new ValidationEngine();
     validationEngine.register(new ReservationSafetyRule());
+    validationEngine.register(new AuthoritySafetyRule());
 
     capabilityRegistry.register({
         id: "Authority",
