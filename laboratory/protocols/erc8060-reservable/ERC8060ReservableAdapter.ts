@@ -1,5 +1,6 @@
 import type { ProtocolAdapter } from "../../adapters/ProtocolAdapter.js";
 import type { ExecutionContext } from "../../runtime/ExecutionContext.js";
+import type { ExecutionAction } from "../../runtime/ExecutionAction.js";
 
 export class ERC8060ReservableAdapter implements ProtocolAdapter {
     readonly protocolId = "ERC8060Reservable";
@@ -10,8 +11,15 @@ export class ERC8060ReservableAdapter implements ProtocolAdapter {
         context.availableValue = 100;
     }
 
-    async execute(context: ExecutionContext): Promise<void> {
-        const amountToReserve = context.consumedAuthority;
+    async execute(
+        context: ExecutionContext,
+        action: ExecutionAction
+    ): Promise<void> {
+        if (action.action !== "reserve") {
+            return;
+        }
+
+        const amountToReserve = action.amount ?? context.consumedAuthority;
 
         context.lockedValue = amountToReserve;
         context.availableValue = context.totalValue - amountToReserve;
@@ -23,13 +31,6 @@ export class ERC8060ReservableAdapter implements ProtocolAdapter {
             availableValue: context.availableValue,
             totalValue: context.totalValue
         };
-    }
-
-    async executeAction(
-        action: string,
-        params?: Record<string, unknown>
-    ): Promise<void> {
-        console.log(`ERC8060Reservable action: ${action}`, params ?? {});
     }
 
     async collectEvents(): Promise<unknown[]> {

@@ -1,13 +1,21 @@
 import type { ProtocolAdapter } from "../adapters/ProtocolAdapter.js";
 import type { ExecutionContext } from "../runtime/ExecutionContext.js";
+import type { ExecutionAction } from "../runtime/ExecutionAction.js";
 
 export class MockSettlement implements ProtocolAdapter {
     readonly protocolId = "MockSettlement";
 
     async initialize(_context: ExecutionContext): Promise<void> {}
 
-    async execute(context: ExecutionContext): Promise<void> {
-        context.settledValue = context.lockedValue;
+    async execute(
+        context: ExecutionContext,
+        action: ExecutionAction
+    ): Promise<void> {
+        if (action.action !== "settle") {
+            return;
+        }
+
+        context.settledValue = action.amount ?? context.lockedValue;
     }
 
     async getState(context: ExecutionContext): Promise<Record<string, unknown>> {
@@ -15,13 +23,6 @@ export class MockSettlement implements ProtocolAdapter {
             settled: context.settledValue,
             reserved: context.lockedValue
         };
-    }
-
-    async executeAction(
-        action: string,
-        params?: Record<string, unknown>
-    ): Promise<void> {
-        console.log(`MockSettlement action: ${action}`, params ?? {});
     }
 
     async collectEvents(): Promise<unknown[]> {

@@ -7,6 +7,23 @@
     "Settlement",
     "Accounting"
   ],
+  "actions": [
+    {
+      "protocol": "MockAuthority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "MockSettlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
   "metrics": [
     "Safety",
     "Isolation",

@@ -1,4 +1,3 @@
-import { SettlementSafetyRule } from "../laboratory/validation/SettlementSafetyRule.js";
 import { readFile } from "fs/promises";
 
 import { CapabilityLoader } from "../laboratory/capabilities/CapabilityLoader.js";
@@ -13,6 +12,7 @@ import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
 import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
 import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafetyRule.js";
 import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
+import { SettlementSafetyRule } from "../laboratory/validation/SettlementSafetyRule.js";
 import { ExecutionContext } from "../laboratory/runtime/ExecutionContext.js";
 
 async function main() {
@@ -103,11 +103,22 @@ async function main() {
     }
 
     console.log("");
-    console.log("Executing adapters:");
+    console.log("Executing actions:");
 
-    for (const adapter of adapters) {
-        await adapter.execute(context);
-        console.log("OK executed " + adapter.protocolId);
+    for (const action of experiment.actions ?? []) {
+        const adapter = adapters.find(
+            adapter => adapter.protocolId === action.protocol
+        );
+
+        if (!adapter) {
+            throw new Error(`No adapter found for action protocol: ${action.protocol}`);
+        }
+
+        await adapter.execute(context, action);
+
+        console.log(
+            `OK ${action.protocol}.${action.action}(${action.amount ?? ""})`
+        );
     }
 
     console.log("");
