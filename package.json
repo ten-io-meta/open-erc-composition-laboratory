@@ -8,9 +8,10 @@
     "test": "test"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "experiment": "tsx scripts/run-experiment.ts",
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
+    "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004"
   },
   "repository": {
     "type": "git",
