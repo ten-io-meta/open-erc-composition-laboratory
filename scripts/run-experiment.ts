@@ -6,6 +6,8 @@ import { ProtocolRegistry } from "../laboratory/registry/ProtocolRegistry.js";
 import { ProtocolFactory } from "../laboratory/protocols/ProtocolFactory.js";
 import { DatasetWriter } from "../laboratory/dataset/DatasetWriter.js";
 import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
+import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
+import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafetyRule.js";
 
 async function main() {
     console.log("====================================");
@@ -20,6 +22,9 @@ async function main() {
     const protocolRegistry = new ProtocolRegistry();
     const datasetWriter = new DatasetWriter();
     const reportWriter = new ReportWriter();
+
+    const validationEngine = new ValidationEngine();
+    validationEngine.register(new ReservationSafetyRule());
 
     capabilityRegistry.register({
         id: "Authority",
@@ -116,6 +121,15 @@ async function main() {
     }
 
     console.log("");
+    console.log("Validation:");
+
+    const validationResults = validationEngine.validate(states);
+
+    for (const result of validationResults) {
+        console.log(`${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`);
+    }
+
+    console.log("");
     console.log("Metrics:");
 
     for (const metric of experiment.metrics) {
@@ -134,6 +148,7 @@ async function main() {
         requiredCapabilities: experiment.requiredCapabilities,
         resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
         states,
+        validationResults,
         metrics: experiment.metrics,
         benchmark: experiment.benchmark,
         executedAt
