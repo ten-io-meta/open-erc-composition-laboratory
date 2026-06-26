@@ -1,0 +1,20 @@
+{
+  "id": "MockAuthority",
+  "name": "Mock Authority Protocol",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Mock protocol exposing Authority capability for OECL bootstrap experiments.",
+  "capabilities": [
+    "Authority"
+  ],
+  "invariants": [
+    {
+      "id": "authority-safety",
+      "description": "consumed must be less than or equal to authorityLimit"
+    }
+  ],
+  "adapter": {
+    "entrypoint": "MockAuthority.ts"
+  }
+}

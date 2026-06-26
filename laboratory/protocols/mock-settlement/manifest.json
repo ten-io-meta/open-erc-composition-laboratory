@@ -1,0 +1,15 @@
+{
+  "id": "MockSettlement",
+  "name": "Mock Settlement Protocol",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Mock protocol exposing Settlement capability for OECL bootstrap experiments.",
+  "capabilities": [
+    "Settlement"
+  ],
+  "invariants": [],
+  "adapter": {
+    "entrypoint": "MockSettlement.ts"
+  }
+}

@@ -49,20 +49,7 @@ async function main() {
         capabilityRegistry.register(capability);
     }
 
-    protocolRegistry.register({
-        id: "MockAuthority",
-        name: "Mock Authority Protocol",
-        version: "0.1",
-        capabilities: ["Authority"]
-    });
-
-    protocolRegistry.register({
-        id: "MockSettlement",
-        name: "Mock Settlement Protocol",
-        version: "0.1",
-        capabilities: ["Settlement"]
-    });
-
+    
     await protocolDiscovery.discover("./laboratory/protocols");
 
     const resolver = new CapabilityResolver(
