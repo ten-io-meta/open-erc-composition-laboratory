@@ -4,6 +4,7 @@ import { CapabilityRegistry } from "../laboratory/capabilities/CapabilityRegistr
 import { CapabilityResolver } from "../laboratory/capabilities/CapabilityResolver.js";
 import { ProtocolRegistry } from "../laboratory/registry/ProtocolRegistry.js";
 import { ProtocolFactory } from "../laboratory/protocols/ProtocolFactory.js";
+import { ProtocolManifestLoader } from "../laboratory/protocols/ProtocolManifestLoader.js";
 import { DatasetWriter } from "../laboratory/dataset/DatasetWriter.js";
 import { ReportWriter } from "../laboratory/publication/ReportWriter.js";
 import { ValidationEngine } from "../laboratory/validation/ValidationEngine.js";
@@ -21,6 +22,7 @@ async function main() {
 
     const capabilityRegistry = new CapabilityRegistry();
     const protocolRegistry = new ProtocolRegistry();
+    const manifestLoader = new ProtocolManifestLoader();
     const datasetWriter = new DatasetWriter();
     const reportWriter = new ReportWriter();
 
@@ -53,11 +55,15 @@ async function main() {
         capabilities: ["Authority"]
     });
 
+    const erc8060Manifest = await manifestLoader.load(
+        "./laboratory/protocols/erc8060-reservable/manifest.json"
+    );
+
     protocolRegistry.register({
-        id: "ERC8060Reservable",
-        name: "ERC-8060 Reservable Adapter",
-        version: "0.1",
-        capabilities: ["Reservation"]
+        id: erc8060Manifest.id,
+        name: erc8060Manifest.name,
+        version: erc8060Manifest.version,
+        capabilities: erc8060Manifest.capabilities
     });
 
     protocolRegistry.register({
