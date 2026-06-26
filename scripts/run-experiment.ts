@@ -169,6 +169,7 @@ async function main() {
         resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
         context,
         states,
+        actions: experiment.actions,
         validationResults,
         validationPassed,
         metrics: experiment.metrics,
@@ -184,6 +185,7 @@ async function main() {
         experimentName: experiment.name,
         composition: resolvedProtocols.map(protocol => protocol.id),
         validationResults,
+        actions: experiment.actions,
         metrics: experiment.metrics,
         benchmark: experiment.benchmark,
         executedAt
