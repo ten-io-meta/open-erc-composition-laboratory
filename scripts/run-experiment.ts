@@ -126,7 +126,9 @@ async function main() {
     const validationResults = validationEngine.validate(states);
 
     for (const result of validationResults) {
-        console.log(`${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`);
+        console.log(
+            `${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`
+        );
     }
 
     console.log("");
@@ -161,6 +163,7 @@ async function main() {
     await reportWriter.write(experiment.id, {
         experimentName: experiment.name,
         composition: resolvedProtocols.map(protocol => protocol.id),
+        validationResults,
         metrics: experiment.metrics,
         benchmark: experiment.benchmark,
         executedAt
