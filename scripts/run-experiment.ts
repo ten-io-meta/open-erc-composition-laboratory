@@ -1,5 +1,6 @@
 import { readFile } from "fs/promises";
 
+import { CapabilityLoader } from "../laboratory/capabilities/CapabilityLoader.js";
 import { CapabilityRegistry } from "../laboratory/capabilities/CapabilityRegistry.js";
 import { CapabilityResolver } from "../laboratory/capabilities/CapabilityResolver.js";
 import { ProtocolRegistry } from "../laboratory/registry/ProtocolRegistry.js";
@@ -25,6 +26,7 @@ async function main() {
     );
 
     const capabilityRegistry = new CapabilityRegistry();
+    const capabilityLoader = new CapabilityLoader();
     const protocolRegistry = new ProtocolRegistry();
     const manifestLoader = new ProtocolManifestLoader();
     const datasetWriter = new DatasetWriter();
@@ -34,23 +36,11 @@ async function main() {
     validationEngine.register(new ReservationSafetyRule());
     validationEngine.register(new AuthoritySafetyRule());
 
-    capabilityRegistry.register({
-        id: "Authority",
-        name: "Authority",
-        description: "Authority and permission boundary"
-    });
+    const capabilities = await capabilityLoader.load("./registry/capabilities.json");
 
-    capabilityRegistry.register({
-        id: "Reservation",
-        name: "Reservation",
-        description: "Value reservation and availability accounting"
-    });
-
-    capabilityRegistry.register({
-        id: "Settlement",
-        name: "Settlement",
-        description: "Settlement execution"
-    });
+    for (const capability of capabilities) {
+        capabilityRegistry.register(capability);
+    }
 
     protocolRegistry.register({
         id: "MockAuthority",

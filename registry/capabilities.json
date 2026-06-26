@@ -1,0 +1,22 @@
+[
+  {
+    "id": "Authority",
+    "name": "Authority",
+    "description": "Authority and permission boundary"
+  },
+  {
+    "id": "Reservation",
+    "name": "Reservation",
+    "description": "Value reservation and availability accounting"
+  },
+  {
+    "id": "Settlement",
+    "name": "Settlement",
+    "description": "Settlement execution"
+  },
+  {
+    "id": "Accounting",
+    "name": "Accounting",
+    "description": "Accounting state and value consistency"
+  }
+]
