@@ -1,0 +1,25 @@
+{
+  "id": "ERC8060Reservable",
+  "name": "ERC-8060 Reservable",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Adapter exposing ERC-8060 Reservable reservation and accounting capabilities to OECL.",
+  "capabilities": [
+    "Reservation",
+    "Accounting"
+  ],
+  "invariants": [
+    {
+      "id": "reservation-safety",
+      "description": "lockedValue + availableValue must equal totalValue"
+    }
+  ],
+  "source": {
+    "repository": "",
+    "doi": ""
+  },
+  "adapter": {
+    "entrypoint": "ERC8060ReservableAdapter.ts"
+  }
+}
