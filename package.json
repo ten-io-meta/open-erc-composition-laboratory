@@ -8,11 +8,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "experiment": "tsx scripts/run-experiment.ts",
-    "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
-    "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004"
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "experiment": "tsx scripts/run-experiment.ts",
+  "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
+  "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
+  "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ten-io-meta/open-erc-composition-laboratory.git"
