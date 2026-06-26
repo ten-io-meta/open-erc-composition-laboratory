@@ -1,0 +1,19 @@
+{
+  "experimentId": "CASE-0001",
+  "experimentName": "First OECL Experiment",
+  "composition": [
+    "MockAuthority",
+    "MockReservation",
+    "MockSettlement"
+  ],
+  "metrics": [
+    "Safety",
+    "Liveness",
+    "Isolation"
+  ],
+  "benchmark": {
+    "iterations": 10,
+    "seed": 42
+  },
+  "executedAt": "2026-06-26T19:14:04.809Z"
+}
