@@ -38,6 +38,7 @@
       "message": "Authority safety invariant holds"
     }
   ],
+  "validationPassed": true,
   "metrics": [
     "Safety",
     "Liveness",
@@ -47,5 +48,5 @@
     "iterations": 10,
     "seed": 8060
   },
-  "executedAt": "2026-06-26T21:32:18.323Z"
+  "executedAt": "2026-06-26T21:37:45.240Z"
 }

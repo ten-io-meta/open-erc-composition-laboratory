@@ -119,7 +119,12 @@ async function main() {
             `${result.passed ? "PASS" : "FAIL"} ${result.rule}: ${result.message}`
         );
     }
+const validationPassed = validationResults.every(result => result.passed);
 
+if (!validationPassed) {
+    console.log("");
+    console.log("Experiment validation failed.");
+}
     console.log("");
     console.log("Metrics:");
 
@@ -140,6 +145,7 @@ async function main() {
         resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
         states,
         validationResults,
+        validationPassed,
         metrics: experiment.metrics,
         benchmark: experiment.benchmark,
         executedAt
