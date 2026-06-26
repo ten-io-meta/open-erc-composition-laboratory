@@ -12,12 +12,16 @@ import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafet
 import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
 
 async function main() {
+    const experimentId = process.argv[2] ?? "CASE-0001";
+
     console.log("====================================");
     console.log("Open ERC Composition Laboratory");
     console.log("====================================");
+    console.log("");
+    console.log(`Selected experiment: ${experimentId}`);
 
     const experiment = JSON.parse(
-        await readFile("./experiments/CASE-0002.json", "utf8")
+        await readFile(`./experiments/${experimentId}.json`, "utf8")
     );
 
     const capabilityRegistry = new CapabilityRegistry();
