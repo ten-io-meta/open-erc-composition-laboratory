@@ -1,0 +1,30 @@
+{
+  "name": "open-erc-composition-laboratory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ten-io-meta/open-erc-composition-laboratory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ten-io-meta/open-erc-composition-laboratory/issues"
+  },
+  "homepage": "https://github.com/ten-io-meta/open-erc-composition-laboratory#readme",
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "safety": {},
+  "liveness": {},
+  "isolation": {},
+  "monotonicity": {},
+  "convergence": {},
+  "gas": {}
+}
