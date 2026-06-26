@@ -17,7 +17,7 @@ async function main() {
     console.log("====================================");
 
     const experiment = JSON.parse(
-        await readFile("./experiments/CASE-0001.json", "utf8")
+        await readFile("./experiments/CASE-0002.json", "utf8")
     );
 
     const capabilityRegistry = new CapabilityRegistry();

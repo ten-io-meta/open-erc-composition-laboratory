@@ -1,0 +1,19 @@
+{
+  "id": "CASE-0002",
+  "name": "ERC8060 Reservable Capability Resolution",
+  "description": "Case Study 001 validating ERC8060 Reservable as the provider of Reservation and Accounting capabilities.",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement"
+  ],
+  "metrics": [
+    "Safety",
+    "Liveness",
+    "Isolation"
+  ],
+  "benchmark": {
+    "iterations": 10,
+    "seed": 8060
+  }
+}

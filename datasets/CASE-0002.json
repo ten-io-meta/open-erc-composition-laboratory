@@ -1,0 +1,51 @@
+{
+  "experimentId": "CASE-0002",
+  "experimentName": "ERC8060 Reservable Capability Resolution",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement"
+  ],
+  "resolvedProtocols": [
+    "MockAuthority",
+    "ERC8060Reservable",
+    "MockSettlement"
+  ],
+  "states": {
+    "MockAuthority": {
+      "authorityLimit": 100,
+      "consumed": 0
+    },
+    "ERC8060Reservable": {
+      "lockedValue": 40,
+      "availableValue": 60,
+      "totalValue": 100
+    },
+    "MockSettlement": {
+      "settled": 40,
+      "reserved": 40
+    }
+  },
+  "validationResults": [
+    {
+      "rule": "reservation-safety",
+      "passed": true,
+      "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Liveness",
+    "Isolation"
+  ],
+  "benchmark": {
+    "iterations": 10,
+    "seed": 8060
+  },
+  "executedAt": "2026-06-26T20:40:49.919Z"
+}
