@@ -14,6 +14,28 @@
     "ERC8312Cursor",
     "ERC8275Settlement"
   ],
+  "actions": [
+    {
+      "protocol": "ERC8001Authority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8312Cursor",
+      "action": "consume",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
   "context": {
     "authorityLimit": 100,
     "consumedAuthority": 40,
@@ -42,28 +64,6 @@
       "reserved": 40
     }
   },
-  "actions": [
-    {
-      "protocol": "ERC8001Authority",
-      "action": "authorize",
-      "amount": 40
-    },
-    {
-      "protocol": "ERC8060Reservable",
-      "action": "reserve",
-      "amount": 40
-    },
-    {
-      "protocol": "ERC8312Cursor",
-      "action": "consume",
-      "amount": 40
-    },
-    {
-      "protocol": "ERC8275Settlement",
-      "action": "settle",
-      "amount": 40
-    }
-  ],
   "validationResults": [
     {
       "rule": "reservation-safety",
@@ -98,5 +98,5 @@
     "iterations": 100,
     "seed": 8312
   },
-  "executedAt": "2026-06-27T00:26:34.674Z"
+  "executedAt": "2026-06-27T01:25:56.462Z"
 }
