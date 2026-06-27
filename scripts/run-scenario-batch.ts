@@ -44,6 +44,7 @@ async function main() {
         const actions = scenarioRunner.buildActions(scenario);
 
         experiment.actions = actions;
+
         experiment.metrics = [
             "Safety",
             "Isolation",
@@ -74,22 +75,25 @@ async function main() {
         (total, result) => total + result.propertyResults.length,
         0
     );
+
     const protocolsUsed = new Set(
-    results.flatMap(result => result.resolvedProtocols)
-).size;
+        results.flatMap(result => result.resolvedProtocols)
+    ).size;
 
-const capabilitiesResolved = results.reduce(
-    (total, result) => total + result.requiredCapabilities.length,
-    0
-);
+    const capabilitiesResolved = results.reduce(
+        (total, result) => total + result.requiredCapabilities.length,
+        0
+    );
 
-const validationPassedCount = results.reduce(
-    (total, result) =>
-        total + result.validationResults.filter((rule: any) => rule.passed).length,
-    0
-);
+    const validationPassedCount = results.reduce(
+        (total, result) =>
+            total +
+            result.validationResults.filter((rule: any) => rule.passed).length,
+        0
+    );
 
-const validationFailedCount = validationRulesChecked - validationPassedCount;
+    const validationFailedCount =
+        validationRulesChecked - validationPassedCount;
 
     console.log("");
     console.log("====================================");
@@ -103,9 +107,9 @@ const validationFailedCount = validationRulesChecked - validationPassedCount;
     console.log(`Datasets generated: ${results.length}`);
     console.log(`Reports generated: ${results.length}`);
     console.log(`Protocols used: ${protocolsUsed}`);
-console.log(`Capabilities resolved: ${capabilitiesResolved}`);
-console.log(`Validation passed: ${validationPassedCount}`);
-console.log(`Validation failed: ${validationFailedCount}`);
+    console.log(`Capabilities resolved: ${capabilitiesResolved}`);
+    console.log(`Validation passed: ${validationPassedCount}`);
+    console.log(`Validation failed: ${validationFailedCount}`);
 
     console.log("");
     console.log("Batch finished.");
