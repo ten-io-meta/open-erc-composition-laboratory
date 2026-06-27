@@ -4,7 +4,7 @@
 
 - ID: STACK-0004
 - Name: Partial Settlement Scenario
-- Executed At: 2026-06-27T12:11:25.773Z
+- Executed At: 2026-06-27T13:27:23.689Z
 
 ## Composition
 

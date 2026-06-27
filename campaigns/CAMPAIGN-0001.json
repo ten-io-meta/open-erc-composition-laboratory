@@ -1,0 +1,7 @@
+{
+  "id": "CAMPAIGN-0001",
+  "name": "Standard Research Campaign",
+  "batches": [
+    "BATCH-0001"
+  ]
+}

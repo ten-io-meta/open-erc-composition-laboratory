@@ -33,4 +33,4 @@ async function main() {
     console.log(`./scenarios/generated/${strategy}`);
 }
 
-main();
+main()
