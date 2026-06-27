@@ -14,7 +14,20 @@ async function main() {
     const batches = await loader.loadAll();
 
     const benchmark = engine.aggregate(batches);
+const successRate =
+    benchmark.scenariosExecuted === 0
+        ? 0
+        : (benchmark.scenariosPassed / benchmark.scenariosExecuted) * 100;
 
+const validationPassRate =
+    benchmark.validationRulesChecked === 0
+        ? 0
+        : (benchmark.validationPassed / benchmark.validationRulesChecked) * 100;
+
+const validationFailRate =
+    benchmark.validationRulesChecked === 0
+        ? 0
+        : (benchmark.validationFailed / benchmark.validationRulesChecked) * 100;
     console.log("");
     console.log("Benchmark Summary");
     console.log("------------------------------");
@@ -23,12 +36,15 @@ async function main() {
     console.log("Scenarios:", benchmark.scenariosExecuted);
     console.log("Passed:", benchmark.scenariosPassed);
     console.log("Failed:", benchmark.scenariosFailed);
+    console.log("Success Rate:", `${successRate.toFixed(2)}%`);
 
     console.log("");
 
     console.log("Validation Rules:", benchmark.validationRulesChecked);
     console.log("Validation Passed:", benchmark.validationPassed);
     console.log("Validation Failed:", benchmark.validationFailed);
+    console.log("Validation Pass Rate:", `${validationPassRate.toFixed(2)}%`);
+console.log("Validation Fail Rate:", `${validationFailRate.toFixed(2)}%`);
 
     console.log("");
 
