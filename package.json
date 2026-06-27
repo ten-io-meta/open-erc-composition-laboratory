@@ -15,7 +15,8 @@
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
-    "scenario": "tsx scripts/run-scenario.ts"
+    "scenario": "tsx scripts/run-scenario.ts",
+    "scenario:batch": "tsx scripts/run-scenario-batch.ts"
   },
   "repository": {
     "type": "git",

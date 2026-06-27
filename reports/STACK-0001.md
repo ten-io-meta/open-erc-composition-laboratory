@@ -4,7 +4,7 @@
 
 - ID: STACK-0001
 - Name: Standard Agent Settlement Scenario
-- Executed At: 2026-06-27T01:26:08.571Z
+- Executed At: 2026-06-27T01:48:53.961Z
 
 ## Composition
 
@@ -33,13 +33,14 @@
 - Isolation
 - Determinism
 - Composability
-- ScenarioGeneration
+- ScenarioBatch
 
 ## Benchmark
 
 ```json
 {
   "generated": true,
+  "batch": "BATCH-0001",
   "scenario": "STACK-0001"
 }
 ```

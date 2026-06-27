@@ -92,11 +92,12 @@
     "Isolation",
     "Determinism",
     "Composability",
-    "ScenarioGeneration"
+    "ScenarioBatch"
   ],
   "benchmark": {
     "generated": true,
+    "batch": "BATCH-0001",
     "scenario": "STACK-0001"
   },
-  "executedAt": "2026-06-27T01:26:08.571Z"
+  "executedAt": "2026-06-27T01:48:53.961Z"
 }

@@ -1,0 +1,7 @@
+{
+  "id": "BATCH-0001",
+  "name": "Standard Stack Scenario Batch",
+  "scenarios": [
+    "STACK-0001"
+  ]
+}
