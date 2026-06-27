@@ -1,4 +1,4 @@
-import { readFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
 
 import { ScenarioLoader } from "../laboratory/scenario/ScenarioLoader.js";
 import { ScenarioRunner } from "../laboratory/scenario/ScenarioRunner.js";
@@ -110,7 +110,31 @@ async function main() {
     console.log(`Capabilities resolved: ${capabilitiesResolved}`);
     console.log(`Validation passed: ${validationPassedCount}`);
     console.log(`Validation failed: ${validationFailedCount}`);
+await mkdir("./campaign-results", { recursive: true });
 
+await writeFile(
+    `./campaign-results/${batch.id}.json`,
+    JSON.stringify(
+        {
+            batchId: batch.id,
+            batchName: batch.name,
+            scenariosExecuted: results.length,
+            passed,
+            failed,
+            validationRulesChecked,
+            compositionPropertiesEvaluated,
+            datasetsGenerated: results.length,
+            reportsGenerated: results.length,
+            protocolsUsed,
+            capabilitiesResolved,
+            validationPassed: validationPassedCount,
+            validationFailed: validationFailedCount
+        },
+        null,
+        2
+    ),
+    "utf8"
+);
     console.log("");
     console.log("Batch finished.");
 }
