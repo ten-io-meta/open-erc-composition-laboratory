@@ -15,6 +15,7 @@
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
     "campaign": "tsx scripts/run-campaign.ts",
     "benchmark": "tsx scripts/run-benchmark.ts",
+    "requirements": "tsx scripts/run-requirements.ts",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
     "scenario": "tsx scripts/run-scenario.ts",
