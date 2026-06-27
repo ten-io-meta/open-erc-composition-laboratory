@@ -23,6 +23,8 @@
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
     "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
     "scenario": "tsx scripts/run-scenario.ts",
+    "auto:scenarios": "tsx scripts/run-auto-scenarios.ts",
+    "adaptive": "tsx scripts/run-adaptive-research.ts",
     "knowledge": "tsx scripts/run-research-knowledge.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
     "validation": "tsx scripts/run-hypothesis-validation.ts",

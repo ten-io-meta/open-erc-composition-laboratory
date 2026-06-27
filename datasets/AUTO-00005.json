@@ -1,0 +1,117 @@
+{
+  "experimentId": "AUTO-00005",
+  "experimentName": "Auto Generated valid Scenario",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Accounting",
+    "Cursor",
+    "Settlement"
+  ],
+  "resolvedProtocols": [
+    "ERC8001Authority",
+    "ERC8060Reservable",
+    "ERC8312Cursor",
+    "ERC8275Settlement"
+  ],
+  "actions": [
+    {
+      "protocol": "ERC8001Authority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8312Cursor",
+      "action": "consume",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
+  "context": {
+    "authorityLimit": 100,
+    "consumedAuthority": 40,
+    "totalValue": 100,
+    "lockedValue": 40,
+    "availableValue": 60,
+    "settledValue": 40,
+    "cursor": 40
+  },
+  "states": {
+    "ERC8001Authority": {
+      "authorityLimit": 100,
+      "consumed": 40
+    },
+    "ERC8060Reservable": {
+      "lockedValue": 40,
+      "availableValue": 60,
+      "totalValue": 100
+    },
+    "ERC8312Cursor": {
+      "cursor": 40,
+      "consumedAuthority": 40
+    },
+    "ERC8275Settlement": {
+      "settled": 40,
+      "reserved": 40
+    }
+  },
+  "validationResults": [
+    {
+      "rule": "reservation-safety",
+      "passed": true,
+      "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
+    },
+    {
+      "rule": "settlement-safety",
+      "passed": true,
+      "message": "Settlement safety invariant holds"
+    },
+    {
+      "rule": "cursor-safety",
+      "passed": true,
+      "message": "Cursor safety invariant holds"
+    }
+  ],
+  "validationPassed": true,
+  "propertyResults": [
+    {
+      "property": "Compatibility",
+      "passed": true,
+      "score": 100,
+      "message": "All required capabilities were resolved by the composition."
+    },
+    {
+      "property": "Composability",
+      "passed": true,
+      "score": 100,
+      "message": "Multiple protocols composed successfully."
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism",
+    "Composability",
+    "AutoScenario"
+  ],
+  "benchmark": {
+    "generated": true,
+    "source": "auto-scenario-runner",
+    "scenario": "AUTO-00005"
+  },
+  "executedAt": "2026-06-27T17:42:53.956Z"
+}

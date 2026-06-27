@@ -1,0 +1,108 @@
+[
+    {
+        "id": "ADAPT-00001",
+        "target": "ERC8001Authority+ERC8060Reservable",
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
+        ],
+        "parameters": {
+            "authority": 40,
+            "reserve": 40,
+            "consume": 40,
+            "settle": 40
+        }
+    },
+    {
+        "id": "ADAPT-00002",
+        "target": "ERC8001Authority+ERC8275Settlement",
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
+        ],
+        "parameters": {
+            "authority": 40,
+            "reserve": 40,
+            "consume": 40,
+            "settle": 40
+        }
+    },
+    {
+        "id": "ADAPT-00003",
+        "target": "ERC8001Authority+ERC8312Cursor",
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
+        ],
+        "parameters": {
+            "authority": 40,
+            "reserve": 40,
+            "consume": 40,
+            "settle": 40
+        }
+    },
+    {
+        "id": "ADAPT-00004",
+        "target": "ERC8060Reservable+ERC8312Cursor",
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
+        ],
+        "parameters": {
+            "authority": 40,
+            "reserve": 40,
+            "consume": 40,
+            "settle": 40
+        }
+    },
+    {
+        "id": "ADAPT-00005",
+        "target": "ERC8312Cursor+ERC8275Settlement",
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
+        ],
+        "parameters": {
+            "authority": 40,
+            "reserve": 40,
+            "consume": 40,
+            "settle": 40
+        }
+    },
+    {
+        "id": "ADAPT-00006",
+        "target": "ERC8060Reservable+ERC8275Settlement",
+        "reason": "Eligible composition has medium observed risk and should be tested with boundary variation.",
+        "priority": "Medium",
+        "recommendedScenarioTypes": [
+            "valid",
+            "boundary"
+        ],
+        "parameters": {
+            "authority": 60,
+            "reserve": 60,
+            "consume": 40,
+            "settle": 60
+        }
+    }
+]
