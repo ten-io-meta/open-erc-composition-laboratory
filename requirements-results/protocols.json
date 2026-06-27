@@ -1,0 +1,55 @@
+[
+    {
+        "protocolId": "ERC8001Authority",
+        "eligibility": "Eligible",
+        "passed": 5,
+        "total": 5,
+        "capabilities": [
+            "Authority"
+        ],
+        "invariants": [
+            "authority-safety"
+        ],
+        "adapterAvailable": true
+    },
+    {
+        "protocolId": "ERC8060Reservable",
+        "eligibility": "Eligible",
+        "passed": 5,
+        "total": 5,
+        "capabilities": [
+            "Reservation",
+            "Accounting"
+        ],
+        "invariants": [
+            "reservation-safety"
+        ],
+        "adapterAvailable": true
+    },
+    {
+        "protocolId": "ERC8312Cursor",
+        "eligibility": "Eligible",
+        "passed": 5,
+        "total": 5,
+        "capabilities": [
+            "Cursor"
+        ],
+        "invariants": [
+            "cursor-safety"
+        ],
+        "adapterAvailable": true
+    },
+    {
+        "protocolId": "ERC8275Settlement",
+        "eligibility": "Eligible",
+        "passed": 5,
+        "total": 5,
+        "capabilities": [
+            "Settlement"
+        ],
+        "invariants": [
+            "settlement-safety"
+        ],
+        "adapterAvailable": true
+    }
+]

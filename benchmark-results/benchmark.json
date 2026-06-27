@@ -1,0 +1,14 @@
+{
+    "batchesAnalysed": 1,
+    "scenariosExecuted": 4,
+    "scenariosPassed": 2,
+    "scenariosFailed": 2,
+    "validationRulesChecked": 16,
+    "validationPassed": 14,
+    "validationFailed": 2,
+    "compositionPropertiesEvaluated": 8,
+    "protocolsUsed": 4,
+    "capabilitiesResolved": 20,
+    "datasetsGenerated": 4,
+    "reportsGenerated": 4
+}

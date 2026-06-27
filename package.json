@@ -16,10 +16,15 @@
     "campaign": "tsx scripts/run-campaign.ts",
     "benchmark": "tsx scripts/run-benchmark.ts",
     "requirements": "tsx scripts/run-requirements.ts",
+    "emergent": "tsx scripts/run-emergent.ts",
+    "patterns": "tsx scripts/run-pattern-discovery.ts",
+    "relationships": "tsx scripts/run-relationships.ts",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
     "scenario": "tsx scripts/run-scenario.ts",
+    "knowledge": "tsx scripts/run-research-knowledge.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
+    "matrix": "tsx scripts/run-composition-matrix.ts",
     "scenario:generate": "tsx scripts/generate-scenarios.ts"
   },
   "repository": {

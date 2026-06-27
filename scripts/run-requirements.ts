@@ -1,3 +1,5 @@
+import { writeFile, mkdir } from "fs/promises";
+
 import { ProtocolDiscovery } from "../laboratory/discovery/ProtocolDiscovery.js";
 import { ProtocolManifestLoader } from "../laboratory/protocols/ProtocolManifestLoader.js";
 import { ProtocolRegistry } from "../laboratory/registry/ProtocolRegistry.js";
@@ -38,6 +40,7 @@ const protocols = [
 ];
 
 async function main() {
+
     console.log("");
     console.log("====================================");
     console.log("OECL Requirements Engine");
@@ -61,7 +64,10 @@ async function main() {
     requirementEngine.register(new AdapterRequirement());
     requirementEngine.register(new ActionRequirement());
 
+    const exportedResults: any[] = [];
+
     for (const protocol of protocols) {
+
         console.log("");
         console.log("------------------------------------");
         console.log(`Protocol: ${protocol.id}`);
@@ -84,6 +90,15 @@ async function main() {
         });
 
         const passed = results.filter(result => result.passed).length;
+        const total = results.length;
+
+        let status = "Not Ready";
+
+        if (passed === total) {
+            status = "Eligible";
+        } else if (passed > 0) {
+            status = "Partial";
+        }
 
         for (const result of results) {
             console.log(
@@ -92,16 +107,30 @@ async function main() {
         }
 
         console.log("");
-        console.log(`Eligibility: ${passed}/${results.length}`);
+        console.log(`Eligibility: ${passed}/${total}`);
+        console.log(`Status: ${status}`);
 
-        if (passed === results.length) {
-            console.log("Status: Eligible");
-        } else if (passed > 0) {
-            console.log("Status: Partial");
-        } else {
-            console.log("Status: Not Ready");
-        }
+        exportedResults.push({
+            protocolId: protocol.id,
+            eligibility: status,
+            passed,
+            total,
+            capabilities: protocol.capabilities,
+            invariants: protocol.invariants,
+            adapterAvailable
+        });
     }
+
+    await mkdir("./requirements-results", { recursive: true });
+
+    await writeFile(
+        "./requirements-results/protocols.json",
+        JSON.stringify(exportedResults, null, 4)
+    );
+
+    console.log("");
+    console.log("Requirements exported:");
+    console.log("./requirements-results/protocols.json");
 
     console.log("");
     console.log("Requirements check finished.");

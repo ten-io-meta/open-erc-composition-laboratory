@@ -1,0 +1,303 @@
+{
+    "benchmark": {
+        "batchesAnalysed": 1,
+        "scenariosExecuted": 4,
+        "scenariosPassed": 2,
+        "scenariosFailed": 2,
+        "validationRulesChecked": 16,
+        "validationPassed": 14,
+        "validationFailed": 2,
+        "compositionPropertiesEvaluated": 8,
+        "protocolsUsed": 4,
+        "capabilitiesResolved": 20,
+        "datasetsGenerated": 4,
+        "reportsGenerated": 4
+    },
+    "requirements": [
+        {
+            "protocolId": "ERC8001Authority",
+            "eligibility": "Eligible",
+            "passed": 5,
+            "total": 5,
+            "capabilities": [
+                "Authority"
+            ],
+            "invariants": [
+                "authority-safety"
+            ],
+            "adapterAvailable": true
+        },
+        {
+            "protocolId": "ERC8060Reservable",
+            "eligibility": "Eligible",
+            "passed": 5,
+            "total": 5,
+            "capabilities": [
+                "Reservation",
+                "Accounting"
+            ],
+            "invariants": [
+                "reservation-safety"
+            ],
+            "adapterAvailable": true
+        },
+        {
+            "protocolId": "ERC8312Cursor",
+            "eligibility": "Eligible",
+            "passed": 5,
+            "total": 5,
+            "capabilities": [
+                "Cursor"
+            ],
+            "invariants": [
+                "cursor-safety"
+            ],
+            "adapterAvailable": true
+        },
+        {
+            "protocolId": "ERC8275Settlement",
+            "eligibility": "Eligible",
+            "passed": 5,
+            "total": 5,
+            "capabilities": [
+                "Settlement"
+            ],
+            "invariants": [
+                "settlement-safety"
+            ],
+            "adapterAvailable": true
+        }
+    ],
+    "emergentProperties": [
+        {
+            "property": "Reservation Integrity",
+            "confidence": 100,
+            "evidence": 11,
+            "description": "Reserved value never exceeded total value."
+        },
+        {
+            "property": "Cursor Authority Correlation",
+            "confidence": 80,
+            "evidence": 5,
+            "description": "Cursor never exceeded consumed authority."
+        }
+    ],
+    "patterns": [
+        {
+            "name": "Settlement Failure Frequency",
+            "confidence": 78,
+            "evidence": 9,
+            "description": "Observed settlement safety success rate."
+        },
+        {
+            "name": "Cursor Safety Frequency",
+            "confidence": 83,
+            "evidence": 6,
+            "description": "Observed cursor safety success rate."
+        }
+    ],
+    "relationships": [
+        {
+            "from": "MockAuthority",
+            "to": "ERC8060Reservable",
+            "occurrences": 5,
+            "confidence": 60,
+            "successfulCompositions": 3
+        },
+        {
+            "from": "MockAuthority",
+            "to": "MockSettlement",
+            "occurrences": 4,
+            "confidence": 50,
+            "successfulCompositions": 2
+        },
+        {
+            "from": "ERC8060Reservable",
+            "to": "MockSettlement",
+            "occurrences": 4,
+            "confidence": 50,
+            "successfulCompositions": 2
+        },
+        {
+            "from": "MockAuthority",
+            "to": "ERC8275Settlement",
+            "occurrences": 1,
+            "confidence": 100,
+            "successfulCompositions": 1
+        },
+        {
+            "from": "ERC8060Reservable",
+            "to": "ERC8275Settlement",
+            "occurrences": 7,
+            "confidence": 71,
+            "successfulCompositions": 5
+        },
+        {
+            "from": "ERC8001Authority",
+            "to": "ERC8060Reservable",
+            "occurrences": 6,
+            "confidence": 67,
+            "successfulCompositions": 4
+        },
+        {
+            "from": "ERC8001Authority",
+            "to": "ERC8275Settlement",
+            "occurrences": 6,
+            "confidence": 67,
+            "successfulCompositions": 4
+        },
+        {
+            "from": "ERC8001Authority",
+            "to": "ERC8312Cursor",
+            "occurrences": 5,
+            "confidence": 60,
+            "successfulCompositions": 3
+        },
+        {
+            "from": "ERC8060Reservable",
+            "to": "ERC8312Cursor",
+            "occurrences": 5,
+            "confidence": 60,
+            "successfulCompositions": 3
+        },
+        {
+            "from": "ERC8312Cursor",
+            "to": "ERC8275Settlement",
+            "occurrences": 5,
+            "confidence": 60,
+            "successfulCompositions": 3
+        }
+    ],
+    "compositionMatrix": [
+        {
+            "protocolA": "MockAuthority",
+            "protocolB": "ERC8060Reservable",
+            "occurrences": 5,
+            "successfulCompositions": 3,
+            "compatibility": 60,
+            "eligibility": false,
+            "relationshipConfidence": 60,
+            "evidence": 5,
+            "stabilityScore": 60,
+            "safetyScore": 60,
+            "risk": "High"
+        },
+        {
+            "protocolA": "MockAuthority",
+            "protocolB": "MockSettlement",
+            "occurrences": 4,
+            "successfulCompositions": 2,
+            "compatibility": 50,
+            "eligibility": false,
+            "relationshipConfidence": 50,
+            "evidence": 4,
+            "stabilityScore": 50,
+            "safetyScore": 50,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8060Reservable",
+            "protocolB": "MockSettlement",
+            "occurrences": 4,
+            "successfulCompositions": 2,
+            "compatibility": 50,
+            "eligibility": false,
+            "relationshipConfidence": 50,
+            "evidence": 4,
+            "stabilityScore": 50,
+            "safetyScore": 50,
+            "risk": "High"
+        },
+        {
+            "protocolA": "MockAuthority",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 1,
+            "successfulCompositions": 1,
+            "compatibility": 100,
+            "eligibility": false,
+            "relationshipConfidence": 100,
+            "evidence": 1,
+            "stabilityScore": 100,
+            "safetyScore": 100,
+            "risk": "Low"
+        },
+        {
+            "protocolA": "ERC8060Reservable",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 7,
+            "successfulCompositions": 5,
+            "compatibility": 71,
+            "eligibility": true,
+            "relationshipConfidence": 71,
+            "evidence": 7,
+            "stabilityScore": 71,
+            "safetyScore": 71,
+            "risk": "Medium"
+        },
+        {
+            "protocolA": "ERC8001Authority",
+            "protocolB": "ERC8060Reservable",
+            "occurrences": 6,
+            "successfulCompositions": 4,
+            "compatibility": 67,
+            "eligibility": true,
+            "relationshipConfidence": 67,
+            "evidence": 6,
+            "stabilityScore": 67,
+            "safetyScore": 67,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8001Authority",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 6,
+            "successfulCompositions": 4,
+            "compatibility": 67,
+            "eligibility": true,
+            "relationshipConfidence": 67,
+            "evidence": 6,
+            "stabilityScore": 67,
+            "safetyScore": 67,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8001Authority",
+            "protocolB": "ERC8312Cursor",
+            "occurrences": 5,
+            "successfulCompositions": 3,
+            "compatibility": 60,
+            "eligibility": true,
+            "relationshipConfidence": 60,
+            "evidence": 5,
+            "stabilityScore": 60,
+            "safetyScore": 60,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8060Reservable",
+            "protocolB": "ERC8312Cursor",
+            "occurrences": 5,
+            "successfulCompositions": 3,
+            "compatibility": 60,
+            "eligibility": true,
+            "relationshipConfidence": 60,
+            "evidence": 5,
+            "stabilityScore": 60,
+            "safetyScore": 60,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8312Cursor",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 5,
+            "successfulCompositions": 3,
+            "compatibility": 60,
+            "eligibility": true,
+            "relationshipConfidence": 60,
+            "evidence": 5,
+            "stabilityScore": 60,
+            "safetyScore": 60,
+            "risk": "High"
+        }
+    ]
+}

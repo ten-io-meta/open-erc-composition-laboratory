@@ -1,0 +1,14 @@
+[
+    {
+        "property": "Reservation Integrity",
+        "confidence": 100,
+        "evidence": 11,
+        "description": "Reserved value never exceeded total value."
+    },
+    {
+        "property": "Cursor Authority Correlation",
+        "confidence": 80,
+        "evidence": 5,
+        "description": "Cursor never exceeded consumed authority."
+    }
+]

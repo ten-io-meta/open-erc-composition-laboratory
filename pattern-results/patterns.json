@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Settlement Failure Frequency",
+        "confidence": 78,
+        "evidence": 9,
+        "description": "Observed settlement safety success rate."
+    },
+    {
+        "name": "Cursor Safety Frequency",
+        "confidence": 83,
+        "evidence": 6,
+        "description": "Observed cursor safety success rate."
+    }
+]

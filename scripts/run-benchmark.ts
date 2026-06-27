@@ -1,3 +1,5 @@
+import { mkdir, writeFile } from "fs/promises";
+
 import { BenchmarkLoader } from "../laboratory/benchmark/BenchmarkLoader.js";
 import { BenchmarkEngine } from "../laboratory/benchmark/BenchmarkEngine.js";
 
@@ -14,20 +16,22 @@ async function main() {
     const batches = await loader.loadAll();
 
     const benchmark = engine.aggregate(batches);
-const successRate =
-    benchmark.scenariosExecuted === 0
-        ? 0
-        : (benchmark.scenariosPassed / benchmark.scenariosExecuted) * 100;
 
-const validationPassRate =
-    benchmark.validationRulesChecked === 0
-        ? 0
-        : (benchmark.validationPassed / benchmark.validationRulesChecked) * 100;
+    const successRate =
+        benchmark.scenariosExecuted === 0
+            ? 0
+            : (benchmark.scenariosPassed / benchmark.scenariosExecuted) * 100;
 
-const validationFailRate =
-    benchmark.validationRulesChecked === 0
-        ? 0
-        : (benchmark.validationFailed / benchmark.validationRulesChecked) * 100;
+    const validationPassRate =
+        benchmark.validationRulesChecked === 0
+            ? 0
+            : (benchmark.validationPassed / benchmark.validationRulesChecked) * 100;
+
+    const validationFailRate =
+        benchmark.validationRulesChecked === 0
+            ? 0
+            : (benchmark.validationFailed / benchmark.validationRulesChecked) * 100;
+
     console.log("");
     console.log("Benchmark Summary");
     console.log("------------------------------");
@@ -44,7 +48,7 @@ const validationFailRate =
     console.log("Validation Passed:", benchmark.validationPassed);
     console.log("Validation Failed:", benchmark.validationFailed);
     console.log("Validation Pass Rate:", `${validationPassRate.toFixed(2)}%`);
-console.log("Validation Fail Rate:", `${validationFailRate.toFixed(2)}%`);
+    console.log("Validation Fail Rate:", `${validationFailRate.toFixed(2)}%`);
 
     console.log("");
 
@@ -56,6 +60,18 @@ console.log("Validation Fail Rate:", `${validationFailRate.toFixed(2)}%`);
 
     console.log("Datasets:", benchmark.datasetsGenerated);
     console.log("Reports:", benchmark.reportsGenerated);
+
+    // Exportación del benchmark
+    await mkdir("./benchmark-results", { recursive: true });
+
+    await writeFile(
+        "./benchmark-results/benchmark.json",
+        JSON.stringify(benchmark, null, 4)
+    );
+
+    console.log("");
+    console.log("Benchmark exported:");
+    console.log("./benchmark-results/benchmark.json");
 
     console.log("");
     console.log("Benchmark finished.");
