@@ -299,5 +299,67 @@
             "safetyScore": 60,
             "risk": "High"
         }
+    ],
+    "protocolIntelligence": [
+        {
+            "protocolId": "MockAuthority",
+            "observations": 3,
+            "successfulCompositions": 6,
+            "averageCompatibility": 70,
+            "averageStability": 70,
+            "averageSafety": 70,
+            "averageRisk": "Medium",
+            "eligibleRelationships": 0
+        },
+        {
+            "protocolId": "ERC8060Reservable",
+            "observations": 5,
+            "successfulCompositions": 17,
+            "averageCompatibility": 62,
+            "averageStability": 62,
+            "averageSafety": 62,
+            "averageRisk": "High",
+            "eligibleRelationships": 3
+        },
+        {
+            "protocolId": "MockSettlement",
+            "observations": 2,
+            "successfulCompositions": 4,
+            "averageCompatibility": 50,
+            "averageStability": 50,
+            "averageSafety": 50,
+            "averageRisk": "High",
+            "eligibleRelationships": 0
+        },
+        {
+            "protocolId": "ERC8275Settlement",
+            "observations": 4,
+            "successfulCompositions": 13,
+            "averageCompatibility": 75,
+            "averageStability": 75,
+            "averageSafety": 75,
+            "averageRisk": "Medium",
+            "eligibleRelationships": 3
+        },
+        {
+            "protocolId": "ERC8001Authority",
+            "observations": 3,
+            "successfulCompositions": 11,
+            "averageCompatibility": 65,
+            "averageStability": 65,
+            "averageSafety": 65,
+            "averageRisk": "High",
+            "eligibleRelationships": 3
+        },
+        {
+            "protocolId": "ERC8312Cursor",
+            "observations": 3,
+            "successfulCompositions": 9,
+            "averageCompatibility": 60,
+            "averageStability": 60,
+            "averageSafety": 60,
+            "averageRisk": "High",
+            "eligibleRelationships": 3
+        }
     ]
 }

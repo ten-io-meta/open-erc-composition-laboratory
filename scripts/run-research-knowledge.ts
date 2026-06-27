@@ -51,6 +51,13 @@ async function main() {
         )
     );
 
+    const intelligence = JSON.parse(
+        await readFile(
+            "./intelligence-results/protocol-intelligence.json",
+            "utf8"
+        )
+    );
+
     const engine = new ResearchKnowledgeEngine();
 
     const knowledge = engine.build(
@@ -59,7 +66,8 @@ async function main() {
         emergent,
         patterns,
         relationships,
-        matrix
+        matrix,
+        intelligence
     );
 
     await mkdir("./knowledge-results", {

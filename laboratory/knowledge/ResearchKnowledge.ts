@@ -1,5 +1,4 @@
 export interface ResearchKnowledge {
-
     benchmark: any;
 
     requirements: any[];
@@ -12,4 +11,5 @@ export interface ResearchKnowledge {
 
     compositionMatrix: any[];
 
+    protocolIntelligence: any[];
 }
