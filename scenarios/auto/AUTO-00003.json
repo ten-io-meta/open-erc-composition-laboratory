@@ -1,0 +1,21 @@
+{
+    "id": "AUTO-00003",
+    "name": "Auto Generated settlement-failure Scenario",
+    "description": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence.",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 40,
+        "settle": 50
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ],
+    "sourceHypothesis": "Eligible compositions can still present high risk",
+    "priority": "High",
+    "scenarioType": "settlement-failure"
+}

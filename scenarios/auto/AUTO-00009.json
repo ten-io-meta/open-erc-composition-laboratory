@@ -1,0 +1,21 @@
+{
+    "id": "AUTO-00009",
+    "name": "Auto Generated boundary Scenario",
+    "description": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows.",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 40,
+        "settle": 40
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ],
+    "sourceHypothesis": "Most observed protocol candidate",
+    "priority": "Medium",
+    "scenarioType": "boundary"
+}

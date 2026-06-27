@@ -1,0 +1,21 @@
+{
+    "id": "AUTO-00004",
+    "name": "Auto Generated cursor-failure Scenario",
+    "description": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence.",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 50,
+        "settle": 40
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ],
+    "sourceHypothesis": "Eligible compositions can still present high risk",
+    "priority": "High",
+    "scenarioType": "cursor-failure"
+}
