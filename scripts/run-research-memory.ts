@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "fs/promises";
 
 import { ResearchMemoryEngine } from "../laboratory/research-memory/ResearchMemoryEngine.js";
 
@@ -8,13 +8,6 @@ async function main() {
     console.log("====================================");
     console.log("OECL Research Memory Engine");
     console.log("====================================");
-
-    const benchmark = JSON.parse(
-        await readFile(
-            "./benchmark-results/benchmark.json",
-            "utf8"
-        )
-    );
 
     const requirements = JSON.parse(
         await readFile(
@@ -51,13 +44,33 @@ async function main() {
         )
     );
 
+    const datasets = await loadDatasets("./datasets");
+
+    const passedScenarios = datasets.filter(
+        dataset => dataset.validationPassed === true
+    ).length;
+
+    const failedScenarios =
+        datasets.length - passedScenarios;
+
+    const protocols = [
+        ...new Set(
+            datasets.flatMap(dataset =>
+                dataset.resolvedProtocols ?? []
+            )
+        )
+    ];
+
     const campaign = {
         campaignId: `MEM-${new Date().toISOString()}`,
         timestamp: new Date().toISOString(),
-        executedScenarios: benchmark.scenariosExecuted,
-        passedScenarios: benchmark.scenariosPassed,
-        failedScenarios: benchmark.scenariosFailed,
-        protocols: requirements.map((protocol: any) => protocol.protocolId),
+        executedScenarios: datasets.length,
+        passedScenarios,
+        failedScenarios,
+        protocols:
+            protocols.length > 0
+                ? protocols
+                : requirements.map((protocol: any) => protocol.protocolId),
         hypothesesGenerated: hypotheses.length,
         hypothesesValidated: 0,
         emergentProperties: emergent.length,
@@ -101,6 +114,31 @@ async function main() {
 
     console.log("");
     console.log("Research Memory finished.");
+
+}
+
+async function loadDatasets(directory: string): Promise<any[]> {
+
+    const files = await readdir(directory);
+
+    const datasets: any[] = [];
+
+    for (const file of files) {
+
+        if (!file.endsWith(".json")) {
+            continue;
+        }
+
+        const content = await readFile(
+            `${directory}/${file}`,
+            "utf8"
+        );
+
+        datasets.push(JSON.parse(content));
+
+    }
+
+    return datasets;
 
 }
 

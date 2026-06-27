@@ -10,7 +10,8 @@ export class ResearchKnowledgeEngine {
         matrix: any[],
         intelligence: any[],
         hypotheses: any[],
-        validationPlans: any[]
+        validationPlans: any[],
+        memory: any
     ): ResearchKnowledge {
         return {
             benchmark,
@@ -21,7 +22,8 @@ export class ResearchKnowledgeEngine {
             compositionMatrix: matrix,
             protocolIntelligence: intelligence,
             compositionHypotheses: hypotheses,
-            hypothesisValidationPlans: validationPlans
+            hypothesisValidationPlans: validationPlans,
+            researchMemory: memory
         };
     }
 }

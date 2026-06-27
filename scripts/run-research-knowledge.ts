@@ -72,6 +72,13 @@ async function main() {
         )
     );
 
+    const researchMemory = JSON.parse(
+        await readFile(
+            "./research-memory-results/research-memory.json",
+            "utf8"
+        )
+    );
+
     const engine = new ResearchKnowledgeEngine();
 
     const knowledge = engine.build(
@@ -83,7 +90,8 @@ async function main() {
         matrix,
         intelligence,
         hypotheses,
-        validationPlans
+        validationPlans,
+        researchMemory
     );
 
     await mkdir("./knowledge-results", {

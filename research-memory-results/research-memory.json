@@ -1,16 +1,18 @@
 {
     "campaigns": [
         {
-            "campaignId": "MEM-2026-06-27T18:04:56.466Z",
-            "timestamp": "2026-06-27T18:04:56.469Z",
-            "executedScenarios": 4,
-            "passedScenarios": 2,
-            "failedScenarios": 2,
+            "campaignId": "MEM-2026-06-27T18:19:22.911Z",
+            "timestamp": "2026-06-27T18:19:22.912Z",
+            "executedScenarios": 20,
+            "passedScenarios": 14,
+            "failedScenarios": 6,
             "protocols": [
                 "ERC8001Authority",
                 "ERC8060Reservable",
                 "ERC8312Cursor",
-                "ERC8275Settlement"
+                "ERC8275Settlement",
+                "MockAuthority",
+                "MockSettlement"
             ],
             "hypothesesGenerated": 3,
             "hypothesesValidated": 0,
@@ -20,14 +22,16 @@
         }
     ],
     "totalCampaigns": 1,
-    "totalScenarios": 4,
-    "totalPassed": 2,
-    "totalFailed": 2,
+    "totalScenarios": 20,
+    "totalPassed": 14,
+    "totalFailed": 6,
     "protocolCoverage": {
         "ERC8001Authority": 1,
         "ERC8060Reservable": 1,
         "ERC8312Cursor": 1,
-        "ERC8275Settlement": 1
+        "ERC8275Settlement": 1,
+        "MockAuthority": 1,
+        "MockSettlement": 1
     },
     "hypothesisCoverage": 0
 }

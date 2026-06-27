@@ -416,5 +416,42 @@
             ],
             "priority": "Medium"
         }
-    ]
+    ],
+    "researchMemory": {
+        "campaigns": [
+            {
+                "campaignId": "MEM-2026-06-27T18:19:22.911Z",
+                "timestamp": "2026-06-27T18:19:22.912Z",
+                "executedScenarios": 20,
+                "passedScenarios": 14,
+                "failedScenarios": 6,
+                "protocols": [
+                    "ERC8001Authority",
+                    "ERC8060Reservable",
+                    "ERC8312Cursor",
+                    "ERC8275Settlement",
+                    "MockAuthority",
+                    "MockSettlement"
+                ],
+                "hypothesesGenerated": 3,
+                "hypothesesValidated": 0,
+                "emergentProperties": 2,
+                "patterns": 2,
+                "relationships": 10
+            }
+        ],
+        "totalCampaigns": 1,
+        "totalScenarios": 20,
+        "totalPassed": 14,
+        "totalFailed": 6,
+        "protocolCoverage": {
+            "ERC8001Authority": 1,
+            "ERC8060Reservable": 1,
+            "ERC8312Cursor": 1,
+            "ERC8275Settlement": 1,
+            "MockAuthority": 1,
+            "MockSettlement": 1
+        },
+        "hypothesisCoverage": 0
+    }
 }

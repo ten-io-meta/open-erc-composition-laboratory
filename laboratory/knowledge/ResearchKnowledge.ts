@@ -16,4 +16,6 @@ export interface ResearchKnowledge {
     compositionHypotheses: any[];
 
     hypothesisValidationPlans: any[];
+
+    researchMemory: any;
 }
