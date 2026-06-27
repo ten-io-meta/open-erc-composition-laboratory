@@ -1,0 +1,10 @@
+{
+  "id": "STACK-0001",
+  "name": "Standard Agent Settlement Scenario",
+  "parameters": {
+    "authority": 40,
+    "reserve": 40,
+    "consume": 40,
+    "settle": 40
+  }
+}
