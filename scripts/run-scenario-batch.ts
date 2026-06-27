@@ -3,7 +3,10 @@ import { readFile } from "fs/promises";
 import { ScenarioLoader } from "../laboratory/scenario/ScenarioLoader.js";
 import { ScenarioRunner } from "../laboratory/scenario/ScenarioRunner.js";
 import { ExperimentBuilder } from "../laboratory/scenario/ExperimentBuilder.js";
-import { ExperimentExecutor } from "../laboratory/engine/ExperimentExecutor.js";
+import {
+    ExperimentExecutor,
+    ExperimentExecutionResult
+} from "../laboratory/engine/ExperimentExecutor.js";
 
 async function main() {
     const batchId = process.argv[2] ?? "BATCH-0001";
@@ -24,6 +27,8 @@ async function main() {
     const scenarioRunner = new ScenarioRunner();
     const experimentBuilder = new ExperimentBuilder();
     const executor = new ExperimentExecutor();
+
+    const results: ExperimentExecutionResult[] = [];
 
     for (const scenarioId of batch.scenarios) {
         console.log("");
@@ -52,8 +57,20 @@ async function main() {
             scenario: scenario.id
         };
 
-        await executor.execute(experiment);
+        const result = await executor.execute(experiment);
+        results.push(result);
     }
+
+    const passed = results.filter(result => result.validationPassed).length;
+    const failed = results.length - passed;
+
+    console.log("");
+    console.log("====================================");
+    console.log("Batch Summary");
+    console.log("====================================");
+    console.log(`Scenarios executed: ${results.length}`);
+    console.log(`Passed: ${passed}`);
+    console.log(`Failed: ${failed}`);
 
     console.log("");
     console.log("Batch finished.");

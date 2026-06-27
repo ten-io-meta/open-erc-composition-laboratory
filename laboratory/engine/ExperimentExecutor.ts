@@ -7,11 +7,17 @@ import { ProtocolManifestLoader } from "../protocols/ProtocolManifestLoader.js";
 import { ProtocolDiscovery } from "../discovery/ProtocolDiscovery.js";
 import { DatasetWriter } from "../dataset/DatasetWriter.js";
 import { ReportWriter } from "../publication/ReportWriter.js";
+
 import { ValidationEngine } from "../validation/ValidationEngine.js";
 import { ReservationSafetyRule } from "../validation/ReservationSafetyRule.js";
 import { AuthoritySafetyRule } from "../validation/AuthoritySafetyRule.js";
 import { SettlementSafetyRule } from "../validation/SettlementSafetyRule.js";
 import { CursorSafetyRule } from "../validation/CursorSafetyRule.js";
+
+import { CompositionPropertyEngine } from "../properties/CompositionPropertyEngine.js";
+import { CompatibilityProperty } from "../properties/CompatibilityProperty.js";
+import { ComposabilityProperty } from "../properties/ComposabilityProperty.js";
+
 import { ExecutionContext } from "../runtime/ExecutionContext.js";
 import type { ExecutionAction } from "../runtime/ExecutionAction.js";
 
@@ -24,8 +30,17 @@ export interface ExecutableExperiment {
     benchmark?: Record<string, unknown>;
 }
 
+export interface ExperimentExecutionResult {
+    experimentId: string;
+    validationPassed: boolean;
+    validationResults: unknown[];
+    propertyResults: unknown[];
+}
+
 export class ExperimentExecutor {
-    async execute(experiment: ExecutableExperiment): Promise<void> {
+    async execute(
+        experiment: ExecutableExperiment
+    ): Promise<ExperimentExecutionResult> {
         const context = new ExecutionContext();
 
         const capabilityRegistry = new CapabilityRegistry();
@@ -47,6 +62,10 @@ export class ExperimentExecutor {
         validationEngine.register(new AuthoritySafetyRule());
         validationEngine.register(new SettlementSafetyRule());
         validationEngine.register(new CursorSafetyRule());
+
+        const propertyEngine = new CompositionPropertyEngine();
+        propertyEngine.register(new CompatibilityProperty());
+        propertyEngine.register(new ComposabilityProperty());
 
         const capabilities = await capabilityLoader.load("./registry/capabilities.json");
 
@@ -144,6 +163,21 @@ export class ExperimentExecutor {
             );
         }
 
+        const propertyResults = propertyEngine.evaluate({
+            requiredCapabilities: experiment.requiredCapabilities,
+            resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
+            validationPassed
+        });
+
+        console.log("");
+        console.log("Composition Properties:");
+
+        for (const property of propertyResults) {
+            console.log(
+                `${property.passed ? "PASS" : "FAIL"} ${property.property}: ${property.message} (Score: ${property.score})`
+            );
+        }
+
         if (!validationPassed) {
             console.log("");
             console.log("Experiment validation failed.");
@@ -184,6 +218,7 @@ export class ExperimentExecutor {
             states,
             validationResults,
             validationPassed,
+            propertyResults,
             metrics,
             benchmark,
             executedAt
@@ -205,5 +240,12 @@ export class ExperimentExecutor {
 
         console.log("Report written:");
         console.log(`./reports/${experiment.id}.md`);
+
+        return {
+            experimentId: experiment.id,
+            validationPassed,
+            validationResults,
+            propertyResults
+        };
     }
 }

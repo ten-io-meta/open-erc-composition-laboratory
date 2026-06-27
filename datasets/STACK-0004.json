@@ -87,6 +87,20 @@
     }
   ],
   "validationPassed": true,
+  "propertyResults": [
+    {
+      "property": "Compatibility",
+      "passed": true,
+      "score": 100,
+      "message": "All required capabilities were resolved by the composition."
+    },
+    {
+      "property": "Composability",
+      "passed": true,
+      "score": 100,
+      "message": "Multiple protocols composed successfully."
+    }
+  ],
   "metrics": [
     "Safety",
     "Isolation",
@@ -99,5 +113,5 @@
     "batch": "BATCH-0001",
     "scenario": "STACK-0004"
   },
-  "executedAt": "2026-06-27T11:17:37.590Z"
+  "executedAt": "2026-06-27T12:00:20.731Z"
 }

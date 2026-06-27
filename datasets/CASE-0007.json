@@ -87,6 +87,20 @@
     }
   ],
   "validationPassed": true,
+  "propertyResults": [
+    {
+      "property": "Compatibility",
+      "passed": true,
+      "score": 100,
+      "message": "All required capabilities were resolved by the composition."
+    },
+    {
+      "property": "Composability",
+      "passed": true,
+      "score": 100,
+      "message": "Multiple protocols composed successfully."
+    }
+  ],
   "metrics": [
     "Safety",
     "Isolation",
@@ -98,5 +112,5 @@
     "iterations": 100,
     "seed": 8312
   },
-  "executedAt": "2026-06-27T01:25:56.462Z"
+  "executedAt": "2026-06-27T11:46:23.137Z"
 }
