@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Eligible compositions can still present high risk",
+        "confidence": 100,
+        "evidence": 5,
+        "description": "Some compositions meet eligibility requirements but still show high observed risk.",
+        "recommendation": "Expand scenario coverage for eligible high-risk compositions before treating them as stable."
+    },
+    {
+        "title": "Strongest eligible composition candidate",
+        "confidence": 71,
+        "evidence": 7,
+        "description": "ERC8060Reservable + ERC8275Settlement is currently the strongest eligible observed composition.",
+        "recommendation": "Use this pair as a baseline candidate for deeper multi-protocol composition experiments."
+    },
+    {
+        "title": "Most observed protocol candidate",
+        "confidence": 62,
+        "evidence": 5,
+        "description": "ERC8060Reservable appears in the largest number of observed protocol relationships.",
+        "recommendation": "Prioritize this protocol when expanding higher-order composition experiments."
+    }
+]
