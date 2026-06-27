@@ -1,0 +1,21 @@
+{
+    "id": "ADAPT-00002-boundary",
+    "name": "Adaptive boundary Scenario",
+    "description": "Eligible composition has high observed risk and requires additional validation.",
+    "target": "ERC8001Authority+ERC8275Settlement",
+    "priority": "High",
+    "scenarioType": "boundary",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 40,
+        "settle": 40
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ]
+}

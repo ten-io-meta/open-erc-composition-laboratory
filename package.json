@@ -26,6 +26,7 @@
     "auto:scenarios": "tsx scripts/run-auto-scenarios.ts",
     "adaptive": "tsx scripts/run-adaptive-research.ts",
     "knowledge": "tsx scripts/run-research-knowledge.ts",
+    "memory": "tsx scripts/run-research-memory.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
     "validation": "tsx scripts/run-hypothesis-validation.ts",
     "query": "tsx scripts/run-query.ts",

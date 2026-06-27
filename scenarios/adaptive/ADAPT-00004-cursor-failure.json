@@ -1,0 +1,21 @@
+{
+    "id": "ADAPT-00004-cursor-failure",
+    "name": "Adaptive cursor-failure Scenario",
+    "description": "Eligible composition has high observed risk and requires additional validation.",
+    "target": "ERC8060Reservable+ERC8312Cursor",
+    "priority": "High",
+    "scenarioType": "cursor-failure",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 50,
+        "settle": 40
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ]
+}

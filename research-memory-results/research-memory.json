@@ -1,0 +1,33 @@
+{
+    "campaigns": [
+        {
+            "campaignId": "MEM-2026-06-27T18:04:56.466Z",
+            "timestamp": "2026-06-27T18:04:56.469Z",
+            "executedScenarios": 4,
+            "passedScenarios": 2,
+            "failedScenarios": 2,
+            "protocols": [
+                "ERC8001Authority",
+                "ERC8060Reservable",
+                "ERC8312Cursor",
+                "ERC8275Settlement"
+            ],
+            "hypothesesGenerated": 3,
+            "hypothesesValidated": 0,
+            "emergentProperties": 2,
+            "patterns": 2,
+            "relationships": 10
+        }
+    ],
+    "totalCampaigns": 1,
+    "totalScenarios": 4,
+    "totalPassed": 2,
+    "totalFailed": 2,
+    "protocolCoverage": {
+        "ERC8001Authority": 1,
+        "ERC8060Reservable": 1,
+        "ERC8312Cursor": 1,
+        "ERC8275Settlement": 1
+    },
+    "hypothesisCoverage": 0
+}

@@ -31,23 +31,91 @@ async function main() {
         console.log(`Target: ${plan.target}`);
         console.log(`Priority: ${plan.priority}`);
         console.log(`Reason: ${plan.reason}`);
-        console.log(`Scenario Types: ${plan.recommendedScenarioTypes.join(", ")}`);
+        console.log(
+            `Scenario Types: ${plan.recommendedScenarioTypes.join(", ")}`
+        );
         console.log(
             `Parameters: authority=${plan.parameters.authority}, reserve=${plan.parameters.reserve}, consume=${plan.parameters.consume}, settle=${plan.parameters.settle}`
         );
 
     }
 
-    await mkdir("./adaptive-research-results", { recursive: true });
+    await mkdir(
+        "./adaptive-research-results",
+        { recursive: true }
+    );
 
     await writeFile(
         "./adaptive-research-results/adaptive-plans.json",
         JSON.stringify(plans, null, 4)
     );
 
+    await mkdir(
+        "./scenarios/adaptive",
+        { recursive: true }
+    );
+
+    for (const plan of plans) {
+
+        for (const scenarioType of plan.recommendedScenarioTypes) {
+
+            const consume =
+                scenarioType === "cursor-failure"
+                    ? plan.parameters.authority + 10
+                    : plan.parameters.consume;
+
+            const settle =
+                scenarioType === "settlement-failure"
+                    ? plan.parameters.reserve + 10
+                    : plan.parameters.settle;
+
+            await writeFile(
+                `./scenarios/adaptive/${plan.id}-${scenarioType}.json`,
+                JSON.stringify(
+                    {
+                        id: `${plan.id}-${scenarioType}`,
+
+                        name: `Adaptive ${scenarioType} Scenario`,
+
+                        description: plan.reason,
+
+                        target: plan.target,
+
+                        priority: plan.priority,
+
+                        scenarioType,
+
+                        parameters: {
+                            authority: plan.parameters.authority,
+                            reserve: plan.parameters.reserve,
+                            consume,
+                            settle
+                        },
+
+                        requiredCapabilities: [
+                            "Authority",
+                            "Reservation",
+                            "Accounting",
+                            "Cursor",
+                            "Settlement"
+                        ]
+                    },
+                    null,
+                    4
+                )
+            );
+
+        }
+
+    }
+
     console.log("");
     console.log("Adaptive research plans exported:");
     console.log("./adaptive-research-results/adaptive-plans.json");
+
+    console.log("");
+    console.log("Adaptive executable scenarios exported:");
+    console.log("./scenarios/adaptive");
 
     console.log("");
     console.log("Adaptive Research Planning finished.");

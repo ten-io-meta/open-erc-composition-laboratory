@@ -1,0 +1,21 @@
+{
+    "id": "ADAPT-00006-valid",
+    "name": "Adaptive valid Scenario",
+    "description": "Eligible composition has medium observed risk and should be tested with boundary variation.",
+    "target": "ERC8060Reservable+ERC8275Settlement",
+    "priority": "Medium",
+    "scenarioType": "valid",
+    "parameters": {
+        "authority": 60,
+        "reserve": 60,
+        "consume": 40,
+        "settle": 60
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ]
+}

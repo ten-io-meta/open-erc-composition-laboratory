@@ -1,0 +1,21 @@
+{
+    "id": "ADAPT-00003-settlement-failure",
+    "name": "Adaptive settlement-failure Scenario",
+    "description": "Eligible composition has high observed risk and requires additional validation.",
+    "target": "ERC8001Authority+ERC8312Cursor",
+    "priority": "High",
+    "scenarioType": "settlement-failure",
+    "parameters": {
+        "authority": 40,
+        "reserve": 40,
+        "consume": 40,
+        "settle": 50
+    },
+    "requiredCapabilities": [
+        "Authority",
+        "Reservation",
+        "Accounting",
+        "Cursor",
+        "Settlement"
+    ]
+}
