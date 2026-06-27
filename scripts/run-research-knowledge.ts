@@ -65,6 +65,13 @@ async function main() {
         )
     );
 
+    const validationPlans = JSON.parse(
+        await readFile(
+            "./hypothesis-validation-results/validation-plans.json",
+            "utf8"
+        )
+    );
+
     const engine = new ResearchKnowledgeEngine();
 
     const knowledge = engine.build(
@@ -75,7 +82,8 @@ async function main() {
         relationships,
         matrix,
         intelligence,
-        hypotheses
+        hypotheses,
+        validationPlans
     );
 
     await mkdir("./knowledge-results", {

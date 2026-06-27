@@ -14,4 +14,6 @@ export interface ResearchKnowledge {
     protocolIntelligence: any[];
 
     compositionHypotheses: any[];
+
+    hypothesisValidationPlans: any[];
 }
