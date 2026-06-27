@@ -24,6 +24,7 @@
     "scenario": "tsx scripts/run-scenario.ts",
     "knowledge": "tsx scripts/run-research-knowledge.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
+    "validation": "tsx scripts/run-hypothesis-validation.ts",
     "query": "tsx scripts/run-query.ts",
     "intelligence": "tsx scripts/run-composition-intelligence.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
