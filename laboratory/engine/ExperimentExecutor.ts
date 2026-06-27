@@ -35,6 +35,8 @@ export interface ExperimentExecutionResult {
     validationPassed: boolean;
     validationResults: unknown[];
     propertyResults: unknown[];
+    resolvedProtocols: string[];
+    requiredCapabilities: string[];
 }
 
 export class ExperimentExecutor {
@@ -242,10 +244,12 @@ export class ExperimentExecutor {
         console.log(`./reports/${experiment.id}.md`);
 
         return {
-            experimentId: experiment.id,
-            validationPassed,
-            validationResults,
-            propertyResults
-        };
+    experimentId: experiment.id,
+    validationPassed,
+    validationResults,
+    propertyResults,
+    resolvedProtocols: resolvedProtocols.map(protocol => protocol.id),
+    requiredCapabilities: experiment.requiredCapabilities
+};
     }
 }

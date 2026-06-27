@@ -4,7 +4,7 @@
 
 - ID: STACK-0002
 - Name: Settlement Exceeds Reserved Scenario
-- Executed At: 2026-06-27T13:27:23.246Z
+- Executed At: 2026-06-27T13:39:25.826Z
 
 ## Composition
 

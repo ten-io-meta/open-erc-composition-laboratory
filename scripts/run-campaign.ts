@@ -1,6 +1,12 @@
 import { CampaignLoader } from "../laboratory/campaign/CampaignLoader.js";
 import { spawn } from "child_process";
 
+interface BatchRunResult {
+    batchId: string;
+    completed: boolean;
+    hadValidationFailures: boolean;
+}
+
 async function main() {
     const campaignId = process.argv[2] ?? "CAMPAIGN-0001";
 
@@ -18,20 +24,36 @@ async function main() {
     console.log("Campaign:");
     console.log(campaign.name);
 
+    const results: BatchRunResult[] = [];
+
     for (const batch of campaign.batches) {
         console.log("");
         console.log("------------------------------------");
         console.log(`Executing batch ${batch}`);
         console.log("------------------------------------");
 
-        await runBatch(batch);
+        const result = await runBatch(batch);
+        results.push(result);
     }
+
+    const completed = results.filter(result => result.completed).length;
+    const withValidationFailures = results.filter(
+        result => result.hadValidationFailures
+    ).length;
+
+    console.log("");
+    console.log("====================================");
+    console.log("Campaign Summary");
+    console.log("====================================");
+    console.log(`Batches executed: ${results.length}`);
+    console.log(`Batches completed: ${completed}`);
+    console.log(`Batches with validation failures: ${withValidationFailures}`);
 
     console.log("");
     console.log("Campaign finished.");
 }
 
-function runBatch(batchId: string): Promise<void> {
+function runBatch(batchId: string): Promise<BatchRunResult> {
     return new Promise(resolve => {
         const child = spawn(
             "npm",
@@ -43,12 +65,18 @@ function runBatch(batchId: string): Promise<void> {
         );
 
         child.on("exit", code => {
-            if (code !== 0) {
+            const hadValidationFailures = code !== 0;
+
+            if (hadValidationFailures) {
                 console.log("");
                 console.log(`Batch completed with validation failures: ${batchId}`);
             }
 
-            resolve();
+            resolve({
+                batchId,
+                completed: true,
+                hadValidationFailures
+            });
         });
     });
 }
