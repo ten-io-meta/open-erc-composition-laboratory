@@ -1,0 +1,10 @@
+{
+  "id": "GENERATED-0007",
+  "name": "Generated Scenario 7",
+  "parameters": {
+    "authority": 100,
+    "reserve": 46,
+    "consume": 33,
+    "settle": 5
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "VALID-4",
+  "name": "Generated Valid Scenario",
+  "parameters": {
+    "authority": 100,
+    "reserve": 60,
+    "consume": 60,
+    "settle": 60
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "CURSOR-2",
+  "name": "Generated Cursor Failure",
+  "parameters": {
+    "authority": 40,
+    "reserve": 40,
+    "consume": 60,
+    "settle": 40
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "BOUNDARY-1",
+  "name": "Boundary Scenario",
+  "parameters": {
+    "authority": 100,
+    "reserve": 100,
+    "consume": 100,
+    "settle": 100
+  }
+}

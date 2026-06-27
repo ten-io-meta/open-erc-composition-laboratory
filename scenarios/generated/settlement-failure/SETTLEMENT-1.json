@@ -1,0 +1,10 @@
+{
+  "id": "SETTLEMENT-1",
+  "name": "Generated Settlement Failure",
+  "parameters": {
+    "authority": 100,
+    "reserve": 40,
+    "consume": 40,
+    "settle": 60
+  }
+}
