@@ -21,6 +21,7 @@
     "relationships": "tsx scripts/run-relationships.ts",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
+    "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
     "scenario": "tsx scripts/run-scenario.ts",
     "knowledge": "tsx scripts/run-research-knowledge.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",

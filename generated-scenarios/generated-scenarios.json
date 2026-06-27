@@ -1,0 +1,119 @@
+[
+    {
+        "id": "AUTO-00001",
+        "sourceHypothesis": "Eligible compositions can still present high risk",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "valid",
+        "priority": "High",
+        "reason": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence."
+    },
+    {
+        "id": "AUTO-00002",
+        "sourceHypothesis": "Eligible compositions can still present high risk",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "boundary",
+        "priority": "High",
+        "reason": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence."
+    },
+    {
+        "id": "AUTO-00003",
+        "sourceHypothesis": "Eligible compositions can still present high risk",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "settlement-failure",
+        "priority": "High",
+        "reason": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence."
+    },
+    {
+        "id": "AUTO-00004",
+        "sourceHypothesis": "Eligible compositions can still present high risk",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "cursor-failure",
+        "priority": "High",
+        "reason": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence."
+    },
+    {
+        "id": "AUTO-00005",
+        "sourceHypothesis": "Strongest eligible composition candidate",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "valid",
+        "priority": "Medium",
+        "reason": "Use the strongest eligible pair as a baseline and expand it into higher-order compositions."
+    },
+    {
+        "id": "AUTO-00006",
+        "sourceHypothesis": "Strongest eligible composition candidate",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "boundary",
+        "priority": "Medium",
+        "reason": "Use the strongest eligible pair as a baseline and expand it into higher-order compositions."
+    },
+    {
+        "id": "AUTO-00007",
+        "sourceHypothesis": "Most observed protocol candidate",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "valid",
+        "priority": "Medium",
+        "reason": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows."
+    },
+    {
+        "id": "AUTO-00008",
+        "sourceHypothesis": "Most observed protocol candidate",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "random",
+        "priority": "Medium",
+        "reason": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows."
+    },
+    {
+        "id": "AUTO-00009",
+        "sourceHypothesis": "Most observed protocol candidate",
+        "protocols": [
+            "ERC8001Authority",
+            "ERC8060Reservable",
+            "ERC8312Cursor",
+            "ERC8275Settlement"
+        ],
+        "scenarioType": "boundary",
+        "priority": "Medium",
+        "reason": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows."
+    }
+]
