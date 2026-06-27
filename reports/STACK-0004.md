@@ -2,9 +2,9 @@
 
 ## Experiment
 
-- ID: STACK-0001
-- Name: Standard Agent Settlement Scenario
-- Executed At: 2026-06-27T11:17:37.096Z
+- ID: STACK-0004
+- Name: Partial Settlement Scenario
+- Executed At: 2026-06-27T11:17:37.590Z
 
 ## Composition
 
@@ -15,10 +15,10 @@
 
 ## Executed Actions
 
-1. ERC8001Authority.authorize(40)
-2. ERC8060Reservable.reserve(40)
+1. ERC8001Authority.authorize(60)
+2. ERC8060Reservable.reserve(60)
 3. ERC8312Cursor.consume(40)
-4. ERC8275Settlement.settle(40)
+4. ERC8275Settlement.settle(60)
 
 ## Validation
 
@@ -41,7 +41,7 @@
 {
   "generated": true,
   "batch": "BATCH-0001",
-  "scenario": "STACK-0001"
+  "scenario": "STACK-0004"
 }
 ```
 

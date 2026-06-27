@@ -1,0 +1,10 @@
+{
+  "id": "STACK-0004",
+  "name": "Partial Settlement Scenario",
+  "parameters": {
+    "authority": 60,
+    "reserve": 60,
+    "consume": 40,
+    "settle": 60
+  }
+}

@@ -2,6 +2,9 @@
   "id": "BATCH-0001",
   "name": "Standard Stack Scenario Batch",
   "scenarios": [
-    "STACK-0001"
+    "STACK-0001",
+    "STACK-0002",
+    "STACK-0003",
+    "STACK-0004"
   ]
 }

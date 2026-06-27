@@ -2,9 +2,9 @@
 
 ## Experiment
 
-- ID: STACK-0001
-- Name: Standard Agent Settlement Scenario
-- Executed At: 2026-06-27T11:17:37.096Z
+- ID: STACK-0002
+- Name: Settlement Exceeds Reserved Scenario
+- Executed At: 2026-06-27T11:17:37.242Z
 
 ## Composition
 
@@ -18,13 +18,13 @@
 1. ERC8001Authority.authorize(40)
 2. ERC8060Reservable.reserve(40)
 3. ERC8312Cursor.consume(40)
-4. ERC8275Settlement.settle(40)
+4. ERC8275Settlement.settle(50)
 
 ## Validation
 
 - PASS **reservation-safety** — Reservation safety invariant holds
 - PASS **authority-safety** — Authority safety invariant holds
-- PASS **settlement-safety** — Settlement safety invariant holds
+- FAIL **settlement-safety** — Settlement safety invariant failed
 - PASS **cursor-safety** — Cursor safety invariant holds
 
 ## Metrics
@@ -41,7 +41,7 @@
 {
   "generated": true,
   "batch": "BATCH-0001",
-  "scenario": "STACK-0001"
+  "scenario": "STACK-0002"
 }
 ```
 

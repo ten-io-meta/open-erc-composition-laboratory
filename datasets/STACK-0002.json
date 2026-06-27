@@ -1,6 +1,6 @@
 {
-  "experimentId": "STACK-0001",
-  "experimentName": "Standard Agent Settlement Scenario",
+  "experimentId": "STACK-0002",
+  "experimentName": "Settlement Exceeds Reserved Scenario",
   "requiredCapabilities": [
     "Authority",
     "Reservation",
@@ -33,7 +33,7 @@
     {
       "protocol": "ERC8275Settlement",
       "action": "settle",
-      "amount": 40
+      "amount": 50
     }
   ],
   "context": {
@@ -42,7 +42,7 @@
     "totalValue": 100,
     "lockedValue": 40,
     "availableValue": 60,
-    "settledValue": 40,
+    "settledValue": 50,
     "cursor": 40
   },
   "states": {
@@ -60,7 +60,7 @@
       "consumedAuthority": 40
     },
     "ERC8275Settlement": {
-      "settled": 40,
+      "settled": 50,
       "reserved": 40
     }
   },
@@ -77,8 +77,8 @@
     },
     {
       "rule": "settlement-safety",
-      "passed": true,
-      "message": "Settlement safety invariant holds"
+      "passed": false,
+      "message": "Settlement safety invariant failed"
     },
     {
       "rule": "cursor-safety",
@@ -86,7 +86,7 @@
       "message": "Cursor safety invariant holds"
     }
   ],
-  "validationPassed": true,
+  "validationPassed": false,
   "metrics": [
     "Safety",
     "Isolation",
@@ -97,7 +97,7 @@
   "benchmark": {
     "generated": true,
     "batch": "BATCH-0001",
-    "scenario": "STACK-0001"
+    "scenario": "STACK-0002"
   },
-  "executedAt": "2026-06-27T11:17:37.096Z"
+  "executedAt": "2026-06-27T11:17:37.242Z"
 }

@@ -1,0 +1,10 @@
+{
+  "id": "STACK-0002",
+  "name": "Settlement Exceeds Reserved Scenario",
+  "parameters": {
+    "authority": 40,
+    "reserve": 40,
+    "consume": 40,
+    "settle": 50
+  }
+}

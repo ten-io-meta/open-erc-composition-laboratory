@@ -1,0 +1,10 @@
+{
+  "id": "STACK-0003",
+  "name": "Cursor Exceeds Authority Scenario",
+  "parameters": {
+    "authority": 40,
+    "reserve": 40,
+    "consume": 50,
+    "settle": 40
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "experimentId": "STACK-0001",
-  "experimentName": "Standard Agent Settlement Scenario",
+  "experimentId": "STACK-0003",
+  "experimentName": "Cursor Exceeds Authority Scenario",
   "requiredCapabilities": [
     "Authority",
     "Reservation",
@@ -28,7 +28,7 @@
     {
       "protocol": "ERC8312Cursor",
       "action": "consume",
-      "amount": 40
+      "amount": 50
     },
     {
       "protocol": "ERC8275Settlement",
@@ -43,7 +43,7 @@
     "lockedValue": 40,
     "availableValue": 60,
     "settledValue": 40,
-    "cursor": 40
+    "cursor": 50
   },
   "states": {
     "ERC8001Authority": {
@@ -56,7 +56,7 @@
       "totalValue": 100
     },
     "ERC8312Cursor": {
-      "cursor": 40,
+      "cursor": 50,
       "consumedAuthority": 40
     },
     "ERC8275Settlement": {
@@ -82,11 +82,11 @@
     },
     {
       "rule": "cursor-safety",
-      "passed": true,
-      "message": "Cursor safety invariant holds"
+      "passed": false,
+      "message": "Cursor exceeded consumed authority"
     }
   ],
-  "validationPassed": true,
+  "validationPassed": false,
   "metrics": [
     "Safety",
     "Isolation",
@@ -97,7 +97,7 @@
   "benchmark": {
     "generated": true,
     "batch": "BATCH-0001",
-    "scenario": "STACK-0001"
+    "scenario": "STACK-0003"
   },
-  "executedAt": "2026-06-27T11:17:37.096Z"
+  "executedAt": "2026-06-27T11:17:37.516Z"
 }

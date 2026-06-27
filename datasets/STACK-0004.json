@@ -1,6 +1,6 @@
 {
-  "experimentId": "STACK-0001",
-  "experimentName": "Standard Agent Settlement Scenario",
+  "experimentId": "STACK-0004",
+  "experimentName": "Partial Settlement Scenario",
   "requiredCapabilities": [
     "Authority",
     "Reservation",
@@ -18,12 +18,12 @@
     {
       "protocol": "ERC8001Authority",
       "action": "authorize",
-      "amount": 40
+      "amount": 60
     },
     {
       "protocol": "ERC8060Reservable",
       "action": "reserve",
-      "amount": 40
+      "amount": 60
     },
     {
       "protocol": "ERC8312Cursor",
@@ -33,35 +33,35 @@
     {
       "protocol": "ERC8275Settlement",
       "action": "settle",
-      "amount": 40
+      "amount": 60
     }
   ],
   "context": {
     "authorityLimit": 100,
-    "consumedAuthority": 40,
+    "consumedAuthority": 60,
     "totalValue": 100,
-    "lockedValue": 40,
-    "availableValue": 60,
-    "settledValue": 40,
+    "lockedValue": 60,
+    "availableValue": 40,
+    "settledValue": 60,
     "cursor": 40
   },
   "states": {
     "ERC8001Authority": {
       "authorityLimit": 100,
-      "consumed": 40
+      "consumed": 60
     },
     "ERC8060Reservable": {
-      "lockedValue": 40,
-      "availableValue": 60,
+      "lockedValue": 60,
+      "availableValue": 40,
       "totalValue": 100
     },
     "ERC8312Cursor": {
       "cursor": 40,
-      "consumedAuthority": 40
+      "consumedAuthority": 60
     },
     "ERC8275Settlement": {
-      "settled": 40,
-      "reserved": 40
+      "settled": 60,
+      "reserved": 60
     }
   },
   "validationResults": [
@@ -97,7 +97,7 @@
   "benchmark": {
     "generated": true,
     "batch": "BATCH-0001",
-    "scenario": "STACK-0001"
+    "scenario": "STACK-0004"
   },
-  "executedAt": "2026-06-27T11:17:37.096Z"
+  "executedAt": "2026-06-27T11:17:37.590Z"
 }
