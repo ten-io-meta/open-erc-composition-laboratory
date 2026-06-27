@@ -1,52 +1,68 @@
 {
   "name": "open-erc-composition-laboratory",
   "version": "1.0.0",
-  "description": "",
+  "description": "Open research infrastructure for studying deterministic Ethereum protocol composition through reproducible experiments.",
   "main": "index.js",
+  "type": "module",
+  "author": "TEN.IO",
+  "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "erc",
+    "protocol-composition",
+    "interoperability",
+    "research",
+    "benchmark",
+    "deterministic-accounting",
+    "experiments",
+    "composition",
+    "laboratory"
+  ],
   "directories": {
     "doc": "docs",
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run benchmark && npm run requirements",
+
     "experiment": "tsx scripts/run-experiment.ts",
     "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
     "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
+    "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
+    "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
+
     "campaign": "tsx scripts/run-campaign.ts",
+
     "benchmark": "tsx scripts/run-benchmark.ts",
     "requirements": "tsx scripts/run-requirements.ts",
     "emergent": "tsx scripts/run-emergent.ts",
     "patterns": "tsx scripts/run-pattern-discovery.ts",
     "relationships": "tsx scripts/run-relationships.ts",
-    "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
-    "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
-    "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
-    "scenario": "tsx scripts/run-scenario.ts",
-    "auto:scenarios": "tsx scripts/run-auto-scenarios.ts",
-    "adaptive": "tsx scripts/run-adaptive-research.ts",
-    "knowledge": "tsx scripts/run-research-knowledge.ts",
-    "memory": "tsx scripts/run-research-memory.ts",
+    "matrix": "tsx scripts/run-composition-matrix.ts",
+    "intelligence": "tsx scripts/run-composition-intelligence.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
     "validation": "tsx scripts/run-hypothesis-validation.ts",
+    "knowledge": "tsx scripts/run-research-knowledge.ts",
+    "memory": "tsx scripts/run-research-memory.ts",
+    "adaptive": "tsx scripts/run-adaptive-research.ts",
     "query": "tsx scripts/run-query.ts",
-    "intelligence": "tsx scripts/run-composition-intelligence.ts",
+
+    "scenario": "tsx scripts/run-scenario.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
-    "matrix": "tsx scripts/run-composition-matrix.ts",
-    "scenario:generate": "tsx scripts/generate-scenarios.ts"
+    "scenario:generate": "tsx scripts/generate-scenarios.ts",
+    "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
+    "auto:scenarios": "tsx scripts/run-auto-scenarios.ts",
+    "adaptive:scenarios": "tsx scripts/run-adaptive-scenarios.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ten-io-meta/open-erc-composition-laboratory.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
   "bugs": {
     "url": "https://github.com/ten-io-meta/open-erc-composition-laboratory/issues"
   },
-  "homepage": "https://github.com/ten-io-meta/open-erc-composition-laboratory#readme",
+  "homepage": "https://github.com/ten-io-meta/open-erc-composition-laboratory",
   "devDependencies": {
     "@types/node": "^26.0.1",
     "tsx": "^4.22.4",
