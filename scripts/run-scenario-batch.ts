@@ -5,7 +5,7 @@ import { ScenarioRunner } from "../laboratory/scenario/ScenarioRunner.js";
 import { ExperimentBuilder } from "../laboratory/scenario/ExperimentBuilder.js";
 import {
     ExperimentExecutor,
-    ExperimentExecutionResult
+    type ExperimentExecutionResult
 } from "../laboratory/engine/ExperimentExecutor.js";
 
 async function main() {
@@ -51,6 +51,7 @@ async function main() {
             "Composability",
             "ScenarioBatch"
         ];
+
         experiment.benchmark = {
             generated: true,
             batch: batch.id,
@@ -64,6 +65,16 @@ async function main() {
     const passed = results.filter(result => result.validationPassed).length;
     const failed = results.length - passed;
 
+    const validationRulesChecked = results.reduce(
+        (total, result) => total + result.validationResults.length,
+        0
+    );
+
+    const compositionPropertiesEvaluated = results.reduce(
+        (total, result) => total + result.propertyResults.length,
+        0
+    );
+
     console.log("");
     console.log("====================================");
     console.log("Batch Summary");
@@ -71,6 +82,10 @@ async function main() {
     console.log(`Scenarios executed: ${results.length}`);
     console.log(`Passed: ${passed}`);
     console.log(`Failed: ${failed}`);
+    console.log(`Validation rules checked: ${validationRulesChecked}`);
+    console.log(`Composition properties evaluated: ${compositionPropertiesEvaluated}`);
+    console.log(`Datasets generated: ${results.length}`);
+    console.log(`Reports generated: ${results.length}`);
 
     console.log("");
     console.log("Batch finished.");

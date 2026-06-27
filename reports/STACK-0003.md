@@ -4,7 +4,7 @@
 
 - ID: STACK-0003
 - Name: Cursor Exceeds Authority Scenario
-- Executed At: 2026-06-27T12:00:20.646Z
+- Executed At: 2026-06-27T12:07:38.585Z
 
 ## Composition
 
