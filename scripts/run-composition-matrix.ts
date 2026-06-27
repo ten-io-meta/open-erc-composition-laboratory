@@ -57,7 +57,21 @@ async function main() {
         console.log(
             `Eligible: ${row.eligibility ? "YES" : "NO"}`
         );
+console.log(
+    `Evidence: ${row.evidence}`
+);
 
+console.log(
+    `Stability Score: ${row.stabilityScore}%`
+);
+
+console.log(
+    `Safety Score: ${row.safetyScore}%`
+);
+
+console.log(
+    `Risk: ${row.risk}`
+);
     }
 
     await mkdir(
