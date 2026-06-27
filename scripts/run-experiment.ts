@@ -14,6 +14,7 @@ import { ReservationSafetyRule } from "../laboratory/validation/ReservationSafet
 import { AuthoritySafetyRule } from "../laboratory/validation/AuthoritySafetyRule.js";
 import { SettlementSafetyRule } from "../laboratory/validation/SettlementSafetyRule.js";
 import { ExecutionContext } from "../laboratory/runtime/ExecutionContext.js";
+import { CursorSafetyRule } from "../laboratory/validation/CursorSafetyRule.js";
 
 async function main() {
     const experimentId = process.argv[2] ?? "CASE-0001";
@@ -44,10 +45,11 @@ async function main() {
     const reportWriter = new ReportWriter();
 
     const validationEngine = new ValidationEngine();
-    validationEngine.register(new ReservationSafetyRule());
-    validationEngine.register(new AuthoritySafetyRule());
-    validationEngine.register(new SettlementSafetyRule());
 
+validationEngine.register(new ReservationSafetyRule());
+validationEngine.register(new AuthoritySafetyRule());
+validationEngine.register(new SettlementSafetyRule());
+validationEngine.register(new CursorSafetyRule());
     const capabilities = await capabilityLoader.load("./registry/capabilities.json");
 
     for (const capability of capabilities) {

@@ -12,4 +12,6 @@ export class ExecutionContext {
 
     settledValue = 0;
 
+    cursor = 0;
+
 }

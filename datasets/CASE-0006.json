@@ -18,7 +18,8 @@
     "totalValue": 100,
     "lockedValue": 40,
     "availableValue": 60,
-    "settledValue": 40
+    "settledValue": 40,
+    "cursor": 0
   },
   "states": {
     "ERC8001Authority": {
@@ -67,6 +68,11 @@
       "rule": "settlement-safety",
       "passed": true,
       "message": "Settlement safety invariant holds"
+    },
+    {
+      "rule": "cursor-safety",
+      "passed": true,
+      "message": "Cursor safety skipped: ERC8312Cursor not present"
     }
   ],
   "validationPassed": true,
@@ -80,5 +86,5 @@
     "iterations": 100,
     "seed": 8001
   },
-  "executedAt": "2026-06-26T23:45:07.006Z"
+  "executedAt": "2026-06-27T00:10:51.120Z"
 }
