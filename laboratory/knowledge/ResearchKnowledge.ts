@@ -12,4 +12,6 @@ export interface ResearchKnowledge {
     compositionMatrix: any[];
 
     protocolIntelligence: any[];
+
+    compositionHypotheses: any[];
 }

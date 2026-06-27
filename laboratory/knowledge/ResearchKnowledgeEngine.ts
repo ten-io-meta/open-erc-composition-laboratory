@@ -8,7 +8,8 @@ export class ResearchKnowledgeEngine {
         patterns: any[],
         relationships: any[],
         matrix: any[],
-        intelligence: any[]
+        intelligence: any[],
+        hypotheses: any[]
     ): ResearchKnowledge {
         return {
             benchmark,
@@ -17,7 +18,8 @@ export class ResearchKnowledgeEngine {
             patterns,
             relationships,
             compositionMatrix: matrix,
-            protocolIntelligence: intelligence
+            protocolIntelligence: intelligence,
+            compositionHypotheses: hypotheses
         };
     }
 }

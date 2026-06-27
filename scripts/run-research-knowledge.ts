@@ -58,6 +58,13 @@ async function main() {
         )
     );
 
+    const hypotheses = JSON.parse(
+        await readFile(
+            "./hypothesis-results/composition-hypotheses.json",
+            "utf8"
+        )
+    );
+
     const engine = new ResearchKnowledgeEngine();
 
     const knowledge = engine.build(
@@ -67,7 +74,8 @@ async function main() {
         patterns,
         relationships,
         matrix,
-        intelligence
+        intelligence,
+        hypotheses
     );
 
     await mkdir("./knowledge-results", {
