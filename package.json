@@ -13,7 +13,8 @@
     "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
     "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
-    "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006"
+    "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
+    "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007"
   },
   "repository": {
     "type": "git",

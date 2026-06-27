@@ -1,0 +1,20 @@
+{
+  "id": "ERC8312Cursor",
+  "name": "ERC-8312 Cursor Adapter",
+  "version": "0.1",
+  "type": "protocol-adapter",
+  "status": "experimental",
+  "description": "Cursor accounting adapter for OECL.",
+  "capabilities": [
+    "Cursor"
+  ],
+  "invariants": [
+    {
+      "id": "cursor-safety",
+      "description": "cursor must never exceed consumedAuthority"
+    }
+  ],
+  "adapter": {
+    "entrypoint": "ERC8312CursorAdapter.ts"
+  }
+}

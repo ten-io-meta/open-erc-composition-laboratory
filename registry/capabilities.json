@@ -18,5 +18,10 @@
     "id": "Accounting",
     "name": "Accounting",
     "description": "Accounting state and value consistency"
+  },
+  {
+    "id": "Cursor",
+    "name": "Cursor",
+    "description": "Consumption cursor and usage accounting"
   }
 ]
