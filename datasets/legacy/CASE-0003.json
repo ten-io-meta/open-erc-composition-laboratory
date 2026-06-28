@@ -1,0 +1,83 @@
+{
+  "experimentId": "CASE-0003",
+  "experimentName": "Composable Agent Settlement Stack",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Settlement",
+    "Accounting"
+  ],
+  "resolvedProtocols": [
+    "MockAuthority",
+    "ERC8060Reservable",
+    "MockSettlement"
+  ],
+  "context": {
+    "authorityLimit": 100,
+    "consumedAuthority": 40,
+    "totalValue": 100,
+    "lockedValue": 40,
+    "availableValue": 60,
+    "settledValue": 40
+  },
+  "states": {
+    "MockAuthority": {
+      "authorityLimit": 100,
+      "consumed": 40
+    },
+    "ERC8060Reservable": {
+      "lockedValue": 40,
+      "availableValue": 60,
+      "totalValue": 100
+    },
+    "MockSettlement": {
+      "settled": 40,
+      "reserved": 40
+    }
+  },
+  "actions": [
+    {
+      "protocol": "MockAuthority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "MockSettlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
+  "validationResults": [
+    {
+      "rule": "reservation-safety",
+      "passed": true,
+      "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
+    },
+    {
+      "rule": "settlement-safety",
+      "passed": true,
+      "message": "Settlement safety invariant holds"
+    }
+  ],
+  "validationPassed": true,
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism"
+  ],
+  "benchmark": {
+    "iterations": 25,
+    "seed": 8004
+  },
+  "executedAt": "2026-06-26T23:04:58.344Z"
+}

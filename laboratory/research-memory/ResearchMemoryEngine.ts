@@ -20,31 +20,40 @@ export class ResearchMemoryEngine {
             hypothesisCoverage +=
                 campaign.hypothesesValidated ?? 0;
 
-            for (const protocol of campaign.protocols ?? []) {
+            const protocolCounts =
+                campaign.protocolCoverage ?? {};
 
-                protocolCoverage[protocol] =
-                    (protocolCoverage[protocol] ?? 0) + 1;
+            if (Object.keys(protocolCounts).length > 0) {
+
+                for (const [protocol, count] of Object.entries(protocolCounts)) {
+
+                    protocolCoverage[protocol] =
+                        (protocolCoverage[protocol] ?? 0) +
+                        Number(count);
+
+                }
+
+            } else {
+
+                for (const protocol of campaign.protocols ?? []) {
+
+                    protocolCoverage[protocol] =
+                        (protocolCoverage[protocol] ?? 0) + 1;
+
+                }
 
             }
 
         }
 
         return {
-
             campaigns,
-
             totalCampaigns: campaigns.length,
-
             totalScenarios,
-
             totalPassed,
-
             totalFailed,
-
             protocolCoverage,
-
             hypothesisCoverage
-
         };
 
     }

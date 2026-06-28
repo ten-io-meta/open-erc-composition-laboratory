@@ -16,25 +16,53 @@ export class AdaptiveResearchPlanner {
 
         for (const entry of highRiskEligible) {
             plans.push({
-                id: `ADAPT-${String(counter).padStart(5, "0")}`,
-                target: `${entry.protocolA}+${entry.protocolB}`,
-                reason:
-                    "Eligible composition has high observed risk and requires additional validation.",
-                priority: "High",
-                recommendedScenarioTypes: [
-                    "valid",
-                    "boundary",
-                    "settlement-failure",
-                    "cursor-failure"
-                ],
-                parameters: {
-                    authority: 40,
-                    reserve: 40,
-                    consume: 40,
-                    settle: 40
-                }
-            });
 
+    id: `ADAPT-${String(counter).padStart(5,"0")}`,
+
+    protocolA: entry.protocolA,
+
+    protocolB: entry.protocolB,
+
+    target: `${entry.protocolA}+${entry.protocolB}`,
+
+    sourceHypothesis: "HYP-0001",
+
+    validationTarget:
+        "Reduce uncertainty around this high-risk eligible composition.",
+
+    supportingEvidence: [
+
+        `Compatibility: ${entry.compatibility}%`,
+        `Safety: ${entry.safetyScore}%`,
+        `Stability: ${entry.stabilityScore}%`,
+        `Risk: ${entry.risk}`
+
+    ],
+
+    reason:
+        "Eligible composition has high observed risk and requires additional validation.",
+
+    priority: "High",
+
+    recommendedScenarioTypes: [
+
+        "valid",
+        "boundary",
+        "settlement-failure",
+        "cursor-failure"
+
+    ],
+
+    parameters: {
+
+        authority:40,
+        reserve:40,
+        consume:40,
+        settle:40
+
+    }
+
+});
             counter++;
         }
 
@@ -45,24 +73,43 @@ export class AdaptiveResearchPlanner {
         );
 
         for (const entry of mediumRiskEligible) {
-            plans.push({
-                id: `ADAPT-${String(counter).padStart(5, "0")}`,
-                target: `${entry.protocolA}+${entry.protocolB}`,
-                reason:
-                    "Eligible composition has medium observed risk and should be tested with boundary variation.",
-                priority: "Medium",
-                recommendedScenarioTypes: [
-                    "valid",
-                    "boundary"
-                ],
-                parameters: {
-                    authority: 60,
-                    reserve: 60,
-                    consume: 40,
-                    settle: 60
-                }
-            });
+           plans.push({
+    id: `ADAPT-${String(counter).padStart(5, "0")}`,
 
+    protocolA: entry.protocolA,
+    protocolB: entry.protocolB,
+
+    target: `${entry.protocolA}+${entry.protocolB}`,
+
+    sourceHypothesis: "HYP-0002",
+
+    validationTarget:
+        "Increase confidence around this medium-risk eligible composition.",
+
+    supportingEvidence: [
+        `Compatibility: ${entry.compatibility}%`,
+        `Safety: ${entry.safetyScore}%`,
+        `Stability: ${entry.stabilityScore}%`,
+        `Risk: ${entry.risk}`
+    ],
+
+    reason:
+        "Eligible composition has medium observed risk and should be tested with boundary variation.",
+
+    priority: "Medium",
+
+    recommendedScenarioTypes: [
+        "valid",
+        "boundary"
+    ],
+
+    parameters: {
+        authority: 60,
+        reserve: 60,
+        consume: 40,
+        settle: 60
+    }
+});
             counter++;
         }
 

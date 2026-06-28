@@ -2,7 +2,17 @@
     "id": "ADAPT-00003-cursor-failure",
     "name": "Adaptive cursor-failure Scenario",
     "description": "Eligible composition has high observed risk and requires additional validation.",
-    "target": "ERC8001Authority+ERC8312Cursor",
+    "target": "ERC8001Authority+ERC8275Settlement",
+    "protocolA": "ERC8001Authority",
+    "protocolB": "ERC8275Settlement",
+    "sourceHypothesis": "HYP-0001",
+    "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+    "supportingEvidence": [
+        "Compatibility: 58%",
+        "Safety: 58%",
+        "Stability: 58%",
+        "Risk: High"
+    ],
     "priority": "High",
     "scenarioType": "cursor-failure",
     "parameters": {

@@ -7,4 +7,9 @@ export interface ProtocolIntelligenceResult {
     averageSafety: number;
     averageRisk: "Low" | "Medium" | "High";
     eligibleRelationships: number;
+
+    strongestPartner?: string;
+    weakestPartner?: string;
+    dominantRiskReason: string;
+    supportingEvidence: string[];
 }

@@ -3,7 +3,6 @@ import { mkdir, readFile, writeFile } from "fs/promises";
 import { CompositionIntelligenceEngine } from "../laboratory/intelligence/CompositionIntelligenceEngine.js";
 
 async function main() {
-
     console.log("");
     console.log("====================================");
     console.log("OECL Composition Intelligence Engine");
@@ -25,7 +24,6 @@ async function main() {
     console.log("------------------------------");
 
     for (const protocol of intelligence) {
-
         console.log("");
 
         console.log(protocol.protocolId);
@@ -58,6 +56,23 @@ async function main() {
             `Eligible relationships: ${protocol.eligibleRelationships}`
         );
 
+        console.log(
+            `Strongest partner: ${protocol.strongestPartner ?? "N/A"}`
+        );
+
+        console.log(
+            `Weakest partner: ${protocol.weakestPartner ?? "N/A"}`
+        );
+
+        console.log(
+            `Dominant risk reason: ${protocol.dominantRiskReason}`
+        );
+
+        console.log("Supporting evidence:");
+
+        for (const evidence of protocol.supportingEvidence ?? []) {
+            console.log(`- ${evidence}`);
+        }
     }
 
     await mkdir(
@@ -76,7 +91,6 @@ async function main() {
 
     console.log("");
     console.log("Composition Intelligence finished.");
-
 }
 
 main();

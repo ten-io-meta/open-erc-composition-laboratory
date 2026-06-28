@@ -8,12 +8,24 @@ async function main() {
     console.log("OECL Composition Hypothesis Engine");
     console.log("====================================");
 
-    const knowledge = JSON.parse(
+    const matrix = JSON.parse(
         await readFile(
-            "./knowledge-results/research-knowledge.json",
+            "./matrix-results/composition-matrix.json",
             "utf8"
         )
     );
+
+    const intelligence = JSON.parse(
+        await readFile(
+            "./intelligence-results/protocol-intelligence.json",
+            "utf8"
+        )
+    );
+
+    const knowledge = {
+        compositionMatrix: matrix,
+        protocolIntelligence: intelligence
+    };
 
     const engine = new CompositionHypothesisEngine();
 
@@ -25,11 +37,18 @@ async function main() {
 
     for (const hypothesis of hypotheses) {
         console.log("");
-        console.log(hypothesis.title);
+        console.log(`${hypothesis.hypothesisId}: ${hypothesis.title}`);
         console.log(`Confidence: ${hypothesis.confidence}%`);
         console.log(`Evidence: ${hypothesis.evidence}`);
+        console.log(`Falsifiable: ${hypothesis.falsifiable}`);
+        console.log(`Validation target: ${hypothesis.validationTarget}`);
         console.log(hypothesis.description);
         console.log(`Recommendation: ${hypothesis.recommendation}`);
+
+        console.log("Supporting evidence:");
+        for (const evidence of hypothesis.supportingEvidence ?? []) {
+            console.log(`- ${evidence}`);
+        }
     }
 
     await mkdir("./hypothesis-results", {

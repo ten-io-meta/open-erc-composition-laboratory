@@ -3,7 +3,6 @@ import { mkdir, readFile, writeFile } from "fs/promises";
 import { AdaptiveResearchPlanner } from "../laboratory/adaptive-research/AdaptiveResearchPlanner.js";
 
 async function main() {
-
     console.log("");
     console.log("====================================");
     console.log("OECL Adaptive Research Planner");
@@ -25,19 +24,29 @@ async function main() {
     console.log("------------------------------");
 
     for (const plan of plans) {
-
         console.log("");
         console.log(`Plan: ${plan.id}`);
         console.log(`Target: ${plan.target}`);
+        console.log(`Protocol A: ${plan.protocolA}`);
+        console.log(`Protocol B: ${plan.protocolB}`);
+        console.log(`Source hypothesis: ${plan.sourceHypothesis ?? "N/A"}`);
+        console.log(`Validation target: ${plan.validationTarget ?? "N/A"}`);
         console.log(`Priority: ${plan.priority}`);
         console.log(`Reason: ${plan.reason}`);
+
+        console.log("Supporting evidence:");
+
+        for (const evidence of plan.supportingEvidence ?? []) {
+            console.log(`- ${evidence}`);
+        }
+
         console.log(
             `Scenario Types: ${plan.recommendedScenarioTypes.join(", ")}`
         );
+
         console.log(
             `Parameters: authority=${plan.parameters.authority}, reserve=${plan.parameters.reserve}, consume=${plan.parameters.consume}, settle=${plan.parameters.settle}`
         );
-
     }
 
     await mkdir(
@@ -56,9 +65,7 @@ async function main() {
     );
 
     for (const plan of plans) {
-
         for (const scenarioType of plan.recommendedScenarioTypes) {
-
             const consume =
                 scenarioType === "cursor-failure"
                     ? plan.parameters.authority + 10
@@ -74,24 +81,22 @@ async function main() {
                 JSON.stringify(
                     {
                         id: `${plan.id}-${scenarioType}`,
-
                         name: `Adaptive ${scenarioType} Scenario`,
-
                         description: plan.reason,
-
                         target: plan.target,
-
+                        protocolA: plan.protocolA,
+                        protocolB: plan.protocolB,
+                        sourceHypothesis: plan.sourceHypothesis,
+                        validationTarget: plan.validationTarget,
+                        supportingEvidence: plan.supportingEvidence,
                         priority: plan.priority,
-
                         scenarioType,
-
                         parameters: {
                             authority: plan.parameters.authority,
                             reserve: plan.parameters.reserve,
                             consume,
                             settle
                         },
-
                         requiredCapabilities: [
                             "Authority",
                             "Reservation",
@@ -104,9 +109,7 @@ async function main() {
                     4
                 )
             );
-
         }
-
     }
 
     console.log("");
@@ -119,7 +122,6 @@ async function main() {
 
     console.log("");
     console.log("Adaptive Research Planning finished.");
-
 }
 
 main();

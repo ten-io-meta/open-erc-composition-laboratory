@@ -4,7 +4,7 @@
   "description": "Open research infrastructure for studying deterministic Ethereum protocol composition through reproducible experiments.",
   "main": "index.js",
   "type": "module",
-  "author": "TEN.IO",
+  "author": "tenio.eth",
   "license": "MIT",
   "keywords": [
     "ethereum",
@@ -24,6 +24,7 @@
   },
   "scripts": {
     "test": "npm run benchmark && npm run requirements",
+    "oecl": "tsx scripts/run-oecl.ts",
 
     "experiment": "tsx scripts/run-experiment.ts",
     "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
@@ -40,6 +41,7 @@
     "patterns": "tsx scripts/run-pattern-discovery.ts",
     "relationships": "tsx scripts/run-relationships.ts",
     "matrix": "tsx scripts/run-composition-matrix.ts",
+    "report": "tsx scripts/run-research-report.ts",
     "intelligence": "tsx scripts/run-composition-intelligence.ts",
     "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
     "validation": "tsx scripts/run-hypothesis-validation.ts",

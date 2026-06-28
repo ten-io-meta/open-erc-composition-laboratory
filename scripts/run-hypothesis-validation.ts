@@ -3,7 +3,6 @@ import { mkdir, readFile, writeFile } from "fs/promises";
 import { HypothesisValidationEngine } from "../laboratory/hypothesis-validation/HypothesisValidationEngine.js";
 
 async function main() {
-
     console.log("");
     console.log("====================================");
     console.log("OECL Hypothesis Validation Engine");
@@ -25,13 +24,16 @@ async function main() {
     console.log("------------------------------");
 
     for (const plan of plans) {
-
         console.log("");
 
-        console.log(plan.hypothesisTitle);
+        console.log(`${plan.hypothesisId}: ${plan.hypothesisTitle}`);
 
         console.log(
             `Priority: ${plan.priority}`
+        );
+
+        console.log(
+            `Validation target: ${plan.validationTarget}`
         );
 
         console.log(
@@ -43,7 +45,6 @@ async function main() {
         for (const scenario of plan.recommendedScenarios) {
             console.log(`- ${scenario}`);
         }
-
     }
 
     await mkdir(
@@ -62,7 +63,6 @@ async function main() {
 
     console.log("");
     console.log("Hypothesis Validation finished.");
-
 }
 
 main();

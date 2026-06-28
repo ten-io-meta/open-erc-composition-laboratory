@@ -1,7 +1,9 @@
 [
     {
+        "hypothesisId": "HYP-0001",
         "hypothesisTitle": "Eligible compositions can still present high risk",
-        "validationStrategy": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence.",
+        "validationTarget": "Run additional eligible high-risk scenarios and measure whether the observed risk decreases with broader evidence.",
+        "validationStrategy": "Generate additional eligible scenarios currently classified as high risk and test whether risk decreases with broader evidence.",
         "recommendedScenarios": [
             "valid",
             "boundary",
@@ -11,7 +13,9 @@
         "priority": "High"
     },
     {
+        "hypothesisId": "HYP-0002",
         "hypothesisTitle": "Strongest eligible composition candidate",
+        "validationTarget": "Expand the strongest eligible pair into higher-order compositions and verify whether it remains the strongest baseline.",
         "validationStrategy": "Use the strongest eligible pair as a baseline and expand it into higher-order compositions.",
         "recommendedScenarios": [
             "valid",
@@ -20,7 +24,9 @@
         "priority": "Medium"
     },
     {
+        "hypothesisId": "HYP-0003",
         "hypothesisTitle": "Most observed protocol candidate",
+        "validationTarget": "Run additional compositions around the most observed protocol and verify whether it remains central as the dataset grows.",
         "validationStrategy": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows.",
         "recommendedScenarios": [
             "valid",

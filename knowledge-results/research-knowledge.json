@@ -1,17 +1,17 @@
 {
     "benchmark": {
         "batchesAnalysed": 1,
-        "scenariosExecuted": 4,
-        "scenariosPassed": 2,
-        "scenariosFailed": 2,
-        "validationRulesChecked": 16,
-        "validationPassed": 14,
-        "validationFailed": 2,
-        "compositionPropertiesEvaluated": 8,
+        "scenariosExecuted": 38,
+        "scenariosPassed": 22,
+        "scenariosFailed": 16,
+        "validationRulesChecked": 152,
+        "validationPassed": 136,
+        "validationFailed": 16,
+        "compositionPropertiesEvaluated": 76,
         "protocolsUsed": 4,
-        "capabilitiesResolved": 20,
-        "datasetsGenerated": 4,
-        "reportsGenerated": 4
+        "capabilitiesResolved": 5,
+        "datasetsGenerated": 38,
+        "reportsGenerated": 38
     },
     "requirements": [
         {
@@ -72,323 +72,284 @@
         {
             "property": "Reservation Integrity",
             "confidence": 100,
-            "evidence": 11,
+            "evidence": 38,
             "description": "Reserved value never exceeded total value."
         },
         {
             "property": "Cursor Authority Correlation",
-            "confidence": 80,
-            "evidence": 5,
+            "confidence": 79,
+            "evidence": 38,
             "description": "Cursor never exceeded consumed authority."
         }
     ],
     "patterns": [
         {
             "name": "Settlement Failure Frequency",
-            "confidence": 78,
-            "evidence": 9,
+            "confidence": 79,
+            "evidence": 38,
             "description": "Observed settlement safety success rate."
         },
         {
             "name": "Cursor Safety Frequency",
-            "confidence": 83,
-            "evidence": 6,
+            "confidence": 79,
+            "evidence": 38,
             "description": "Observed cursor safety success rate."
         }
     ],
     "relationships": [
         {
-            "from": "MockAuthority",
-            "to": "ERC8060Reservable",
-            "occurrences": 5,
-            "confidence": 60,
-            "successfulCompositions": 3
-        },
-        {
-            "from": "MockAuthority",
-            "to": "MockSettlement",
-            "occurrences": 4,
-            "confidence": 50,
-            "successfulCompositions": 2
-        },
-        {
-            "from": "ERC8060Reservable",
-            "to": "MockSettlement",
-            "occurrences": 4,
-            "confidence": 50,
-            "successfulCompositions": 2
-        },
-        {
-            "from": "MockAuthority",
-            "to": "ERC8275Settlement",
-            "occurrences": 1,
-            "confidence": 100,
-            "successfulCompositions": 1
-        },
-        {
-            "from": "ERC8060Reservable",
-            "to": "ERC8275Settlement",
-            "occurrences": 7,
-            "confidence": 71,
-            "successfulCompositions": 5
-        },
-        {
             "from": "ERC8001Authority",
             "to": "ERC8060Reservable",
-            "occurrences": 6,
-            "confidence": 67,
-            "successfulCompositions": 4
-        },
-        {
-            "from": "ERC8001Authority",
-            "to": "ERC8275Settlement",
-            "occurrences": 6,
-            "confidence": 67,
-            "successfulCompositions": 4
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
         },
         {
             "from": "ERC8001Authority",
             "to": "ERC8312Cursor",
-            "occurrences": 5,
-            "confidence": 60,
-            "successfulCompositions": 3
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
+        },
+        {
+            "from": "ERC8001Authority",
+            "to": "ERC8275Settlement",
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
         },
         {
             "from": "ERC8060Reservable",
             "to": "ERC8312Cursor",
-            "occurrences": 5,
-            "confidence": 60,
-            "successfulCompositions": 3
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
+        },
+        {
+            "from": "ERC8060Reservable",
+            "to": "ERC8275Settlement",
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
         },
         {
             "from": "ERC8312Cursor",
             "to": "ERC8275Settlement",
-            "occurrences": 5,
-            "confidence": 60,
-            "successfulCompositions": 3
+            "occurrences": 38,
+            "confidence": 58,
+            "successfulCompositions": 22
         }
     ],
     "compositionMatrix": [
         {
-            "protocolA": "MockAuthority",
-            "protocolB": "ERC8060Reservable",
-            "occurrences": 5,
-            "successfulCompositions": 3,
-            "compatibility": 60,
-            "eligibility": false,
-            "relationshipConfidence": 60,
-            "evidence": 5,
-            "stabilityScore": 60,
-            "safetyScore": 60,
-            "risk": "High"
-        },
-        {
-            "protocolA": "MockAuthority",
-            "protocolB": "MockSettlement",
-            "occurrences": 4,
-            "successfulCompositions": 2,
-            "compatibility": 50,
-            "eligibility": false,
-            "relationshipConfidence": 50,
-            "evidence": 4,
-            "stabilityScore": 50,
-            "safetyScore": 50,
-            "risk": "High"
-        },
-        {
-            "protocolA": "ERC8060Reservable",
-            "protocolB": "MockSettlement",
-            "occurrences": 4,
-            "successfulCompositions": 2,
-            "compatibility": 50,
-            "eligibility": false,
-            "relationshipConfidence": 50,
-            "evidence": 4,
-            "stabilityScore": 50,
-            "safetyScore": 50,
-            "risk": "High"
-        },
-        {
-            "protocolA": "MockAuthority",
-            "protocolB": "ERC8275Settlement",
-            "occurrences": 1,
-            "successfulCompositions": 1,
-            "compatibility": 100,
-            "eligibility": false,
-            "relationshipConfidence": 100,
-            "evidence": 1,
-            "stabilityScore": 100,
-            "safetyScore": 100,
-            "risk": "Low"
-        },
-        {
-            "protocolA": "ERC8060Reservable",
-            "protocolB": "ERC8275Settlement",
-            "occurrences": 7,
-            "successfulCompositions": 5,
-            "compatibility": 71,
-            "eligibility": true,
-            "relationshipConfidence": 71,
-            "evidence": 7,
-            "stabilityScore": 71,
-            "safetyScore": 71,
-            "risk": "Medium"
-        },
-        {
             "protocolA": "ERC8001Authority",
             "protocolB": "ERC8060Reservable",
-            "occurrences": 6,
-            "successfulCompositions": 4,
-            "compatibility": 67,
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
             "eligibility": true,
-            "relationshipConfidence": 67,
-            "evidence": 6,
-            "stabilityScore": 67,
-            "safetyScore": 67,
-            "risk": "High"
-        },
-        {
-            "protocolA": "ERC8001Authority",
-            "protocolB": "ERC8275Settlement",
-            "occurrences": 6,
-            "successfulCompositions": 4,
-            "compatibility": 67,
-            "eligibility": true,
-            "relationshipConfidence": 67,
-            "evidence": 6,
-            "stabilityScore": 67,
-            "safetyScore": 67,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
             "risk": "High"
         },
         {
             "protocolA": "ERC8001Authority",
             "protocolB": "ERC8312Cursor",
-            "occurrences": 5,
-            "successfulCompositions": 3,
-            "compatibility": 60,
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
             "eligibility": true,
-            "relationshipConfidence": 60,
-            "evidence": 5,
-            "stabilityScore": 60,
-            "safetyScore": 60,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8001Authority",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
+            "eligibility": true,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
             "risk": "High"
         },
         {
             "protocolA": "ERC8060Reservable",
             "protocolB": "ERC8312Cursor",
-            "occurrences": 5,
-            "successfulCompositions": 3,
-            "compatibility": 60,
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
             "eligibility": true,
-            "relationshipConfidence": 60,
-            "evidence": 5,
-            "stabilityScore": 60,
-            "safetyScore": 60,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
+            "risk": "High"
+        },
+        {
+            "protocolA": "ERC8060Reservable",
+            "protocolB": "ERC8275Settlement",
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
+            "eligibility": true,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
             "risk": "High"
         },
         {
             "protocolA": "ERC8312Cursor",
             "protocolB": "ERC8275Settlement",
-            "occurrences": 5,
-            "successfulCompositions": 3,
-            "compatibility": 60,
+            "occurrences": 38,
+            "successfulCompositions": 22,
+            "compatibility": 58,
             "eligibility": true,
-            "relationshipConfidence": 60,
-            "evidence": 5,
-            "stabilityScore": 60,
-            "safetyScore": 60,
+            "relationshipConfidence": 58,
+            "evidence": 38,
+            "stabilityScore": 58,
+            "safetyScore": 58,
             "risk": "High"
         }
     ],
     "protocolIntelligence": [
         {
-            "protocolId": "MockAuthority",
+            "protocolId": "ERC8001Authority",
             "observations": 3,
-            "successfulCompositions": 6,
-            "averageCompatibility": 70,
-            "averageStability": 70,
-            "averageSafety": 70,
-            "averageRisk": "Medium",
-            "eligibleRelationships": 0
+            "successfulCompositions": 66,
+            "averageCompatibility": 58,
+            "averageStability": 58,
+            "averageSafety": 58,
+            "averageRisk": "High",
+            "eligibleRelationships": 3,
+            "strongestPartner": "ERC8060Reservable",
+            "weakestPartner": "ERC8060Reservable",
+            "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+            "supportingEvidence": [
+                "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+            ]
         },
         {
             "protocolId": "ERC8060Reservable",
-            "observations": 5,
-            "successfulCompositions": 17,
-            "averageCompatibility": 62,
-            "averageStability": 62,
-            "averageSafety": 62,
-            "averageRisk": "High",
-            "eligibleRelationships": 3
-        },
-        {
-            "protocolId": "MockSettlement",
-            "observations": 2,
-            "successfulCompositions": 4,
-            "averageCompatibility": 50,
-            "averageStability": 50,
-            "averageSafety": 50,
-            "averageRisk": "High",
-            "eligibleRelationships": 0
-        },
-        {
-            "protocolId": "ERC8275Settlement",
-            "observations": 4,
-            "successfulCompositions": 13,
-            "averageCompatibility": 75,
-            "averageStability": 75,
-            "averageSafety": 75,
-            "averageRisk": "Medium",
-            "eligibleRelationships": 3
-        },
-        {
-            "protocolId": "ERC8001Authority",
             "observations": 3,
-            "successfulCompositions": 11,
-            "averageCompatibility": 65,
-            "averageStability": 65,
-            "averageSafety": 65,
+            "successfulCompositions": 66,
+            "averageCompatibility": 58,
+            "averageStability": 58,
+            "averageSafety": 58,
             "averageRisk": "High",
-            "eligibleRelationships": 3
+            "eligibleRelationships": 3,
+            "strongestPartner": "ERC8001Authority",
+            "weakestPartner": "ERC8001Authority",
+            "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+            "supportingEvidence": [
+                "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+            ]
         },
         {
             "protocolId": "ERC8312Cursor",
             "observations": 3,
-            "successfulCompositions": 9,
-            "averageCompatibility": 60,
-            "averageStability": 60,
-            "averageSafety": 60,
+            "successfulCompositions": 66,
+            "averageCompatibility": 58,
+            "averageStability": 58,
+            "averageSafety": 58,
             "averageRisk": "High",
-            "eligibleRelationships": 3
+            "eligibleRelationships": 3,
+            "strongestPartner": "ERC8001Authority",
+            "weakestPartner": "ERC8001Authority",
+            "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+            "supportingEvidence": [
+                "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+            ]
+        },
+        {
+            "protocolId": "ERC8275Settlement",
+            "observations": 3,
+            "successfulCompositions": 66,
+            "averageCompatibility": 58,
+            "averageStability": 58,
+            "averageSafety": 58,
+            "averageRisk": "High",
+            "eligibleRelationships": 3,
+            "strongestPartner": "ERC8001Authority",
+            "weakestPartner": "ERC8001Authority",
+            "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+            "supportingEvidence": [
+                "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+                "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High"
+            ]
         }
     ],
     "compositionHypotheses": [
         {
+            "hypothesisId": "HYP-0001",
             "title": "Eligible compositions can still present high risk",
             "confidence": 100,
-            "evidence": 5,
+            "evidence": 6,
             "description": "Some compositions meet eligibility requirements but still show high observed risk.",
-            "recommendation": "Expand scenario coverage for eligible high-risk compositions before treating them as stable."
+            "recommendation": "Expand scenario coverage for eligible high-risk compositions before treating them as stable.",
+            "falsifiable": true,
+            "validationTarget": "Run additional eligible high-risk scenarios and measure whether the observed risk decreases with broader evidence.",
+            "supportingEvidence": [
+                "ERC8001Authority + ERC8060Reservable: compatibility 58%, safety 58%, stability 58%, risk High",
+                "ERC8001Authority + ERC8312Cursor: compatibility 58%, safety 58%, stability 58%, risk High",
+                "ERC8001Authority + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High",
+                "ERC8060Reservable + ERC8312Cursor: compatibility 58%, safety 58%, stability 58%, risk High",
+                "ERC8060Reservable + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High",
+                "ERC8312Cursor + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High"
+            ]
         },
         {
+            "hypothesisId": "HYP-0002",
             "title": "Strongest eligible composition candidate",
-            "confidence": 71,
-            "evidence": 7,
-            "description": "ERC8060Reservable + ERC8275Settlement is currently the strongest eligible observed composition.",
-            "recommendation": "Use this pair as a baseline candidate for deeper multi-protocol composition experiments."
+            "confidence": 58,
+            "evidence": 38,
+            "description": "ERC8001Authority + ERC8060Reservable is currently the strongest eligible observed composition.",
+            "recommendation": "Use this pair as a baseline candidate for deeper multi-protocol composition experiments.",
+            "falsifiable": true,
+            "validationTarget": "Expand the strongest eligible pair into higher-order compositions and verify whether it remains the strongest baseline.",
+            "supportingEvidence": [
+                "ERC8001Authority + ERC8060Reservable: compatibility 58%, safety 58%, stability 58%, risk High"
+            ]
         },
         {
+            "hypothesisId": "HYP-0003",
             "title": "Most observed protocol candidate",
-            "confidence": 62,
-            "evidence": 5,
-            "description": "ERC8060Reservable appears in the largest number of observed protocol relationships.",
-            "recommendation": "Prioritize this protocol when expanding higher-order composition experiments."
+            "confidence": 58,
+            "evidence": 3,
+            "description": "ERC8001Authority appears in the largest number of observed protocol relationships.",
+            "recommendation": "Prioritize this protocol when expanding higher-order composition experiments.",
+            "falsifiable": true,
+            "validationTarget": "Run additional compositions around the most observed protocol and verify whether it remains central as the dataset grows.",
+            "supportingEvidence": [
+                "Observed relationships: 3",
+                "Average compatibility: 58%",
+                "Average safety: 58%",
+                "Average stability: 58%",
+                "Average risk: High"
+            ]
         }
     ],
     "hypothesisValidationPlans": [
         {
+            "hypothesisId": "HYP-0001",
             "hypothesisTitle": "Eligible compositions can still present high risk",
-            "validationStrategy": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence.",
+            "validationTarget": "Run additional eligible high-risk scenarios and measure whether the observed risk decreases with broader evidence.",
+            "validationStrategy": "Generate additional eligible scenarios currently classified as high risk and test whether risk decreases with broader evidence.",
             "recommendedScenarios": [
                 "valid",
                 "boundary",
@@ -398,7 +359,9 @@
             "priority": "High"
         },
         {
+            "hypothesisId": "HYP-0002",
             "hypothesisTitle": "Strongest eligible composition candidate",
+            "validationTarget": "Expand the strongest eligible pair into higher-order compositions and verify whether it remains the strongest baseline.",
             "validationStrategy": "Use the strongest eligible pair as a baseline and expand it into higher-order compositions.",
             "recommendedScenarios": [
                 "valid",
@@ -407,7 +370,9 @@
             "priority": "Medium"
         },
         {
+            "hypothesisId": "HYP-0003",
             "hypothesisTitle": "Most observed protocol candidate",
+            "validationTarget": "Run additional compositions around the most observed protocol and verify whether it remains central as the dataset grows.",
             "validationStrategy": "Generate more scenarios around the most observed protocol to confirm whether it remains central as the dataset grows.",
             "recommendedScenarios": [
                 "valid",
@@ -420,38 +385,40 @@
     "researchMemory": {
         "campaigns": [
             {
-                "campaignId": "MEM-2026-06-27T18:19:22.911Z",
-                "timestamp": "2026-06-27T18:19:22.912Z",
-                "executedScenarios": 20,
-                "passedScenarios": 14,
-                "failedScenarios": 6,
+                "campaignId": "MEM-2026-06-28T22:57:47.686Z",
+                "timestamp": "2026-06-28T22:57:47.690Z",
+                "executedScenarios": 38,
+                "passedScenarios": 22,
+                "failedScenarios": 16,
                 "protocols": [
                     "ERC8001Authority",
                     "ERC8060Reservable",
                     "ERC8312Cursor",
-                    "ERC8275Settlement",
-                    "MockAuthority",
-                    "MockSettlement"
+                    "ERC8275Settlement"
                 ],
+                "protocolCoverage": {
+                    "ERC8001Authority": 38,
+                    "ERC8060Reservable": 38,
+                    "ERC8312Cursor": 38,
+                    "ERC8275Settlement": 38
+                },
                 "hypothesesGenerated": 3,
-                "hypothesesValidated": 0,
+                "hypothesesValidated": 3,
                 "emergentProperties": 2,
                 "patterns": 2,
-                "relationships": 10
+                "relationships": 6
             }
         ],
         "totalCampaigns": 1,
-        "totalScenarios": 20,
-        "totalPassed": 14,
-        "totalFailed": 6,
+        "totalScenarios": 38,
+        "totalPassed": 22,
+        "totalFailed": 16,
         "protocolCoverage": {
-            "ERC8001Authority": 1,
-            "ERC8060Reservable": 1,
-            "ERC8312Cursor": 1,
-            "ERC8275Settlement": 1,
-            "MockAuthority": 1,
-            "MockSettlement": 1
+            "ERC8001Authority": 38,
+            "ERC8060Reservable": 38,
+            "ERC8312Cursor": 38,
+            "ERC8275Settlement": 38
         },
-        "hypothesisCoverage": 0
+        "hypothesisCoverage": 3
     }
 }

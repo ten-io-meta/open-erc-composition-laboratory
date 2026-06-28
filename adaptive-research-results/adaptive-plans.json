@@ -1,7 +1,17 @@
 [
     {
         "id": "ADAPT-00001",
+        "protocolA": "ERC8001Authority",
+        "protocolB": "ERC8060Reservable",
         "target": "ERC8001Authority+ERC8060Reservable",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
         "reason": "Eligible composition has high observed risk and requires additional validation.",
         "priority": "High",
         "recommendedScenarioTypes": [
@@ -19,7 +29,17 @@
     },
     {
         "id": "ADAPT-00002",
-        "target": "ERC8001Authority+ERC8275Settlement",
+        "protocolA": "ERC8001Authority",
+        "protocolB": "ERC8312Cursor",
+        "target": "ERC8001Authority+ERC8312Cursor",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
         "reason": "Eligible composition has high observed risk and requires additional validation.",
         "priority": "High",
         "recommendedScenarioTypes": [
@@ -37,7 +57,17 @@
     },
     {
         "id": "ADAPT-00003",
-        "target": "ERC8001Authority+ERC8312Cursor",
+        "protocolA": "ERC8001Authority",
+        "protocolB": "ERC8275Settlement",
+        "target": "ERC8001Authority+ERC8275Settlement",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
         "reason": "Eligible composition has high observed risk and requires additional validation.",
         "priority": "High",
         "recommendedScenarioTypes": [
@@ -55,7 +85,17 @@
     },
     {
         "id": "ADAPT-00004",
+        "protocolA": "ERC8060Reservable",
+        "protocolB": "ERC8312Cursor",
         "target": "ERC8060Reservable+ERC8312Cursor",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
         "reason": "Eligible composition has high observed risk and requires additional validation.",
         "priority": "High",
         "recommendedScenarioTypes": [
@@ -73,7 +113,17 @@
     },
     {
         "id": "ADAPT-00005",
-        "target": "ERC8312Cursor+ERC8275Settlement",
+        "protocolA": "ERC8060Reservable",
+        "protocolB": "ERC8275Settlement",
+        "target": "ERC8060Reservable+ERC8275Settlement",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
         "reason": "Eligible composition has high observed risk and requires additional validation.",
         "priority": "High",
         "recommendedScenarioTypes": [
@@ -91,18 +141,30 @@
     },
     {
         "id": "ADAPT-00006",
-        "target": "ERC8060Reservable+ERC8275Settlement",
-        "reason": "Eligible composition has medium observed risk and should be tested with boundary variation.",
-        "priority": "Medium",
+        "protocolA": "ERC8312Cursor",
+        "protocolB": "ERC8275Settlement",
+        "target": "ERC8312Cursor+ERC8275Settlement",
+        "sourceHypothesis": "HYP-0001",
+        "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+        "supportingEvidence": [
+            "Compatibility: 58%",
+            "Safety: 58%",
+            "Stability: 58%",
+            "Risk: High"
+        ],
+        "reason": "Eligible composition has high observed risk and requires additional validation.",
+        "priority": "High",
         "recommendedScenarioTypes": [
             "valid",
-            "boundary"
+            "boundary",
+            "settlement-failure",
+            "cursor-failure"
         ],
         "parameters": {
-            "authority": 60,
-            "reserve": 60,
+            "authority": 40,
+            "reserve": 40,
             "consume": 40,
-            "settle": 60
+            "settle": 40
         }
     }
 ]

@@ -1,23 +1,50 @@
 [
     {
+        "hypothesisId": "HYP-0001",
         "title": "Eligible compositions can still present high risk",
         "confidence": 100,
-        "evidence": 5,
+        "evidence": 6,
         "description": "Some compositions meet eligibility requirements but still show high observed risk.",
-        "recommendation": "Expand scenario coverage for eligible high-risk compositions before treating them as stable."
+        "recommendation": "Expand scenario coverage for eligible high-risk compositions before treating them as stable.",
+        "falsifiable": true,
+        "validationTarget": "Run additional eligible high-risk scenarios and measure whether the observed risk decreases with broader evidence.",
+        "supportingEvidence": [
+            "ERC8001Authority + ERC8060Reservable: compatibility 58%, safety 58%, stability 58%, risk High",
+            "ERC8001Authority + ERC8312Cursor: compatibility 58%, safety 58%, stability 58%, risk High",
+            "ERC8001Authority + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High",
+            "ERC8060Reservable + ERC8312Cursor: compatibility 58%, safety 58%, stability 58%, risk High",
+            "ERC8060Reservable + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High",
+            "ERC8312Cursor + ERC8275Settlement: compatibility 58%, safety 58%, stability 58%, risk High"
+        ]
     },
     {
+        "hypothesisId": "HYP-0002",
         "title": "Strongest eligible composition candidate",
-        "confidence": 71,
-        "evidence": 7,
-        "description": "ERC8060Reservable + ERC8275Settlement is currently the strongest eligible observed composition.",
-        "recommendation": "Use this pair as a baseline candidate for deeper multi-protocol composition experiments."
+        "confidence": 58,
+        "evidence": 38,
+        "description": "ERC8001Authority + ERC8060Reservable is currently the strongest eligible observed composition.",
+        "recommendation": "Use this pair as a baseline candidate for deeper multi-protocol composition experiments.",
+        "falsifiable": true,
+        "validationTarget": "Expand the strongest eligible pair into higher-order compositions and verify whether it remains the strongest baseline.",
+        "supportingEvidence": [
+            "ERC8001Authority + ERC8060Reservable: compatibility 58%, safety 58%, stability 58%, risk High"
+        ]
     },
     {
+        "hypothesisId": "HYP-0003",
         "title": "Most observed protocol candidate",
-        "confidence": 62,
-        "evidence": 5,
-        "description": "ERC8060Reservable appears in the largest number of observed protocol relationships.",
-        "recommendation": "Prioritize this protocol when expanding higher-order composition experiments."
+        "confidence": 58,
+        "evidence": 3,
+        "description": "ERC8001Authority appears in the largest number of observed protocol relationships.",
+        "recommendation": "Prioritize this protocol when expanding higher-order composition experiments.",
+        "falsifiable": true,
+        "validationTarget": "Run additional compositions around the most observed protocol and verify whether it remains central as the dataset grows.",
+        "supportingEvidence": [
+            "Observed relationships: 3",
+            "Average compatibility: 58%",
+            "Average safety: 58%",
+            "Average stability: 58%",
+            "Average risk: High"
+        ]
     }
 ]

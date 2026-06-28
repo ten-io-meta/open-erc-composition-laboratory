@@ -1,62 +1,74 @@
 [
     {
-        "protocolId": "MockAuthority",
+        "protocolId": "ERC8001Authority",
         "observations": 3,
-        "successfulCompositions": 6,
-        "averageCompatibility": 70,
-        "averageStability": 70,
-        "averageSafety": 70,
-        "averageRisk": "Medium",
-        "eligibleRelationships": 0
+        "successfulCompositions": 66,
+        "averageCompatibility": 58,
+        "averageStability": 58,
+        "averageSafety": 58,
+        "averageRisk": "High",
+        "eligibleRelationships": 3,
+        "strongestPartner": "ERC8060Reservable",
+        "weakestPartner": "ERC8060Reservable",
+        "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+        "supportingEvidence": [
+            "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+        ]
     },
     {
         "protocolId": "ERC8060Reservable",
-        "observations": 5,
-        "successfulCompositions": 17,
-        "averageCompatibility": 62,
-        "averageStability": 62,
-        "averageSafety": 62,
-        "averageRisk": "High",
-        "eligibleRelationships": 3
-    },
-    {
-        "protocolId": "MockSettlement",
-        "observations": 2,
-        "successfulCompositions": 4,
-        "averageCompatibility": 50,
-        "averageStability": 50,
-        "averageSafety": 50,
-        "averageRisk": "High",
-        "eligibleRelationships": 0
-    },
-    {
-        "protocolId": "ERC8275Settlement",
-        "observations": 4,
-        "successfulCompositions": 13,
-        "averageCompatibility": 75,
-        "averageStability": 75,
-        "averageSafety": 75,
-        "averageRisk": "Medium",
-        "eligibleRelationships": 3
-    },
-    {
-        "protocolId": "ERC8001Authority",
         "observations": 3,
-        "successfulCompositions": 11,
-        "averageCompatibility": 65,
-        "averageStability": 65,
-        "averageSafety": 65,
+        "successfulCompositions": 66,
+        "averageCompatibility": 58,
+        "averageStability": 58,
+        "averageSafety": 58,
         "averageRisk": "High",
-        "eligibleRelationships": 3
+        "eligibleRelationships": 3,
+        "strongestPartner": "ERC8001Authority",
+        "weakestPartner": "ERC8001Authority",
+        "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+        "supportingEvidence": [
+            "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+        ]
     },
     {
         "protocolId": "ERC8312Cursor",
         "observations": 3,
-        "successfulCompositions": 9,
-        "averageCompatibility": 60,
-        "averageStability": 60,
-        "averageSafety": 60,
+        "successfulCompositions": 66,
+        "averageCompatibility": 58,
+        "averageStability": 58,
+        "averageSafety": 58,
         "averageRisk": "High",
-        "eligibleRelationships": 3
+        "eligibleRelationships": 3,
+        "strongestPartner": "ERC8001Authority",
+        "weakestPartner": "ERC8001Authority",
+        "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+        "supportingEvidence": [
+            "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8275Settlement: 22/38 successful compositions, compatibility 58%, risk High"
+        ]
+    },
+    {
+        "protocolId": "ERC8275Settlement",
+        "observations": 3,
+        "successfulCompositions": 66,
+        "averageCompatibility": 58,
+        "averageStability": 58,
+        "averageSafety": 58,
+        "averageRisk": "High",
+        "eligibleRelationships": 3,
+        "strongestPartner": "ERC8001Authority",
+        "weakestPartner": "ERC8001Authority",
+        "dominantRiskReason": "Risk is driven by high-risk relationships with low compatibility and low safety scores.",
+        "supportingEvidence": [
+            "ERC8001Authority: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8060Reservable: 22/38 successful compositions, compatibility 58%, risk High",
+            "ERC8312Cursor: 22/38 successful compositions, compatibility 58%, risk High"
+        ]
     }
 ]

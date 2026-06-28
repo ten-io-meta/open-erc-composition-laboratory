@@ -111,7 +111,9 @@
   "benchmark": {
     "generated": true,
     "source": "auto-scenario-runner",
-    "scenario": "AUTO-00004"
+    "scenario": "AUTO-00004",
+    "priority": "High",
+    "scenarioType": "cursor-failure"
   },
-  "executedAt": "2026-06-27T17:42:53.861Z"
+  "executedAt": "2026-06-28T22:57:38.011Z"
 }

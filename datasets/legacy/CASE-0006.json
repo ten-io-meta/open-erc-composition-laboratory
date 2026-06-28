@@ -1,0 +1,90 @@
+{
+  "experimentId": "CASE-0006",
+  "experimentName": "ERC8001 + ERC8060 + ERC8275 Composition",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Accounting",
+    "Settlement"
+  ],
+  "resolvedProtocols": [
+    "ERC8001Authority",
+    "ERC8060Reservable",
+    "ERC8275Settlement"
+  ],
+  "context": {
+    "authorityLimit": 100,
+    "consumedAuthority": 40,
+    "totalValue": 100,
+    "lockedValue": 40,
+    "availableValue": 60,
+    "settledValue": 40,
+    "cursor": 0
+  },
+  "states": {
+    "ERC8001Authority": {
+      "authorityLimit": 100,
+      "consumed": 40
+    },
+    "ERC8060Reservable": {
+      "lockedValue": 40,
+      "availableValue": 60,
+      "totalValue": 100
+    },
+    "ERC8275Settlement": {
+      "settled": 40,
+      "reserved": 40
+    }
+  },
+  "actions": [
+    {
+      "protocol": "ERC8001Authority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 40
+    }
+  ],
+  "validationResults": [
+    {
+      "rule": "reservation-safety",
+      "passed": true,
+      "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
+    },
+    {
+      "rule": "settlement-safety",
+      "passed": true,
+      "message": "Settlement safety invariant holds"
+    },
+    {
+      "rule": "cursor-safety",
+      "passed": true,
+      "message": "Cursor safety skipped: ERC8312Cursor not present"
+    }
+  ],
+  "validationPassed": true,
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism",
+    "Composability"
+  ],
+  "benchmark": {
+    "iterations": 100,
+    "seed": 8001
+  },
+  "executedAt": "2026-06-27T00:10:51.120Z"
+}

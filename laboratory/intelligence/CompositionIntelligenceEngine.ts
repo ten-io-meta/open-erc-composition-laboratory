@@ -10,28 +10,33 @@ export class CompositionIntelligenceEngine {
         }
 
         return [...protocolMap.entries()].map(([protocolId, data]) => {
-            const observations = data.rows.length;
+            const rows = data.rows;
+            const observations = rows.length;
 
-            const averageCompatibility = average(
-                data.rows.map((row: any) => row.compatibility)
-            );
+            const averageCompatibility = average(rows.map((row: any) => row.compatibility));
+            const averageStability = average(rows.map((row: any) => row.stabilityScore));
+            const averageSafety = average(rows.map((row: any) => row.safetyScore));
+            const averageRiskScore = average(rows.map((row: any) => riskScore(row.risk)));
 
-            const averageStability = average(
-                data.rows.map((row: any) => row.stabilityScore)
-            );
+            const strongest = [...rows].sort((a, b) => b.compatibility - a.compatibility)[0];
+            const weakest = [...rows].sort((a, b) => a.compatibility - b.compatibility)[0];
 
-            const averageSafety = average(
-                data.rows.map((row: any) => row.safetyScore)
-            );
+            const highRiskRows = rows.filter((row: any) => row.risk === "High");
+            const lowCompatibilityRows = rows.filter((row: any) => row.compatibility < 70);
+            const lowSafetyRows = rows.filter((row: any) => row.safetyScore < 70);
 
-            const averageRiskScore = average(
-                data.rows.map((row: any) => riskScore(row.risk))
-            );
+            const supportingEvidence: string[] = [];
+
+            for (const row of rows) {
+                supportingEvidence.push(
+                    `${otherProtocol(protocolId, row)}: ${row.successfulCompositions}/${row.occurrences} successful compositions, compatibility ${row.compatibility}%, risk ${row.risk}`
+                );
+            }
 
             return {
                 protocolId,
                 observations,
-                successfulCompositions: data.rows.reduce(
+                successfulCompositions: rows.reduce(
                     (total: number, row: any) => total + row.successfulCompositions,
                     0
                 ),
@@ -39,9 +44,16 @@ export class CompositionIntelligenceEngine {
                 averageStability,
                 averageSafety,
                 averageRisk: riskLabel(averageRiskScore),
-                eligibleRelationships: data.rows.filter(
-                    (row: any) => row.eligibility === true
-                ).length
+                eligibleRelationships: rows.filter((row: any) => row.eligibility === true).length,
+                strongestPartner: strongest ? otherProtocol(protocolId, strongest) : undefined,
+                weakestPartner: weakest ? otherProtocol(protocolId, weakest) : undefined,
+                dominantRiskReason: explainRisk(
+                    highRiskRows.length,
+                    lowCompatibilityRows.length,
+                    lowSafetyRows.length,
+                    observations
+                ),
+                supportingEvidence
             };
         });
     }
@@ -93,4 +105,39 @@ function riskLabel(score: number): "Low" | "Medium" | "High" {
     }
 
     return "High";
+}
+
+function otherProtocol(protocolId: string, row: any): string {
+    return row.protocolA === protocolId
+        ? row.protocolB
+        : row.protocolA;
+}
+
+function explainRisk(
+    highRiskRows: number,
+    lowCompatibilityRows: number,
+    lowSafetyRows: number,
+    observations: number
+): string {
+    if (observations === 0) {
+        return "No observations available.";
+    }
+
+    if (highRiskRows > 0 && lowCompatibilityRows > 0 && lowSafetyRows > 0) {
+        return "Risk is driven by high-risk relationships with low compatibility and low safety scores.";
+    }
+
+    if (highRiskRows > 0 && lowCompatibilityRows > 0) {
+        return "Risk is driven by high-risk relationships with limited observed compatibility.";
+    }
+
+    if (highRiskRows > 0 && lowSafetyRows > 0) {
+        return "Risk is driven by high-risk relationships with reduced safety scores.";
+    }
+
+    if (highRiskRows > 0) {
+        return "Risk is driven by one or more high-risk observed relationships.";
+    }
+
+    return "No dominant high-risk pattern detected in current observations.";
 }

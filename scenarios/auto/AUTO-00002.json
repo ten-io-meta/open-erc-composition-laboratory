@@ -1,7 +1,7 @@
 {
     "id": "AUTO-00002",
     "name": "Auto Generated boundary Scenario",
-    "description": "Generate additional eligible scenarios that currently classify as high risk and test whether risk decreases with broader evidence.",
+    "description": "Generate additional eligible scenarios currently classified as high risk and test whether risk decreases with broader evidence.",
     "parameters": {
         "authority": 40,
         "reserve": 40,

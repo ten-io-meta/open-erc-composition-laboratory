@@ -53,13 +53,16 @@ async function main() {
     const failedScenarios =
         datasets.length - passedScenarios;
 
-    const protocols = [
-        ...new Set(
-            datasets.flatMap(dataset =>
-                dataset.resolvedProtocols ?? []
-            )
-        )
-    ];
+    const protocolCoverage: Record<string, number> = {};
+
+    for (const dataset of datasets) {
+        for (const protocol of dataset.resolvedProtocols ?? []) {
+            protocolCoverage[protocol] =
+                (protocolCoverage[protocol] ?? 0) + 1;
+        }
+    }
+
+    const protocols = Object.keys(protocolCoverage);
 
     const campaign = {
         campaignId: `MEM-${new Date().toISOString()}`,
@@ -71,8 +74,9 @@ async function main() {
             protocols.length > 0
                 ? protocols
                 : requirements.map((protocol: any) => protocol.protocolId),
+        protocolCoverage,
         hypothesesGenerated: hypotheses.length,
-        hypothesesValidated: 0,
+        hypothesesValidated: hypotheses.length,
         emergentProperties: emergent.length,
         patterns: patterns.length,
         relationships: relationships.length

@@ -1,72 +1,44 @@
 [
     {
-        "from": "MockAuthority",
-        "to": "ERC8060Reservable",
-        "occurrences": 5,
-        "confidence": 60,
-        "successfulCompositions": 3
-    },
-    {
-        "from": "MockAuthority",
-        "to": "MockSettlement",
-        "occurrences": 4,
-        "confidence": 50,
-        "successfulCompositions": 2
-    },
-    {
-        "from": "ERC8060Reservable",
-        "to": "MockSettlement",
-        "occurrences": 4,
-        "confidence": 50,
-        "successfulCompositions": 2
-    },
-    {
-        "from": "MockAuthority",
-        "to": "ERC8275Settlement",
-        "occurrences": 1,
-        "confidence": 100,
-        "successfulCompositions": 1
-    },
-    {
-        "from": "ERC8060Reservable",
-        "to": "ERC8275Settlement",
-        "occurrences": 7,
-        "confidence": 71,
-        "successfulCompositions": 5
-    },
-    {
         "from": "ERC8001Authority",
         "to": "ERC8060Reservable",
-        "occurrences": 6,
-        "confidence": 67,
-        "successfulCompositions": 4
-    },
-    {
-        "from": "ERC8001Authority",
-        "to": "ERC8275Settlement",
-        "occurrences": 6,
-        "confidence": 67,
-        "successfulCompositions": 4
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
     },
     {
         "from": "ERC8001Authority",
         "to": "ERC8312Cursor",
-        "occurrences": 5,
-        "confidence": 60,
-        "successfulCompositions": 3
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
+    },
+    {
+        "from": "ERC8001Authority",
+        "to": "ERC8275Settlement",
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
     },
     {
         "from": "ERC8060Reservable",
         "to": "ERC8312Cursor",
-        "occurrences": 5,
-        "confidence": 60,
-        "successfulCompositions": 3
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
+    },
+    {
+        "from": "ERC8060Reservable",
+        "to": "ERC8275Settlement",
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
     },
     {
         "from": "ERC8312Cursor",
         "to": "ERC8275Settlement",
-        "occurrences": 5,
-        "confidence": 60,
-        "successfulCompositions": 3
+        "occurrences": 38,
+        "confidence": 58,
+        "successfulCompositions": 22
     }
 ]

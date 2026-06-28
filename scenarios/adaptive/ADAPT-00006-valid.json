@@ -1,15 +1,25 @@
 {
     "id": "ADAPT-00006-valid",
     "name": "Adaptive valid Scenario",
-    "description": "Eligible composition has medium observed risk and should be tested with boundary variation.",
-    "target": "ERC8060Reservable+ERC8275Settlement",
-    "priority": "Medium",
+    "description": "Eligible composition has high observed risk and requires additional validation.",
+    "target": "ERC8312Cursor+ERC8275Settlement",
+    "protocolA": "ERC8312Cursor",
+    "protocolB": "ERC8275Settlement",
+    "sourceHypothesis": "HYP-0001",
+    "validationTarget": "Reduce uncertainty around this high-risk eligible composition.",
+    "supportingEvidence": [
+        "Compatibility: 58%",
+        "Safety: 58%",
+        "Stability: 58%",
+        "Risk: High"
+    ],
+    "priority": "High",
     "scenarioType": "valid",
     "parameters": {
-        "authority": 60,
-        "reserve": 60,
+        "authority": 40,
+        "reserve": 40,
         "consume": 40,
-        "settle": 60
+        "settle": 40
     },
     "requiredCapabilities": [
         "Authority",

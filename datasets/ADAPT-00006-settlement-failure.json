@@ -1,0 +1,120 @@
+{
+  "experimentId": "ADAPT-00006-settlement-failure",
+  "experimentName": "Adaptive settlement-failure Scenario",
+  "requiredCapabilities": [
+    "Authority",
+    "Reservation",
+    "Accounting",
+    "Cursor",
+    "Settlement"
+  ],
+  "resolvedProtocols": [
+    "ERC8001Authority",
+    "ERC8060Reservable",
+    "ERC8312Cursor",
+    "ERC8275Settlement"
+  ],
+  "actions": [
+    {
+      "protocol": "ERC8001Authority",
+      "action": "authorize",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8060Reservable",
+      "action": "reserve",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8312Cursor",
+      "action": "consume",
+      "amount": 40
+    },
+    {
+      "protocol": "ERC8275Settlement",
+      "action": "settle",
+      "amount": 50
+    }
+  ],
+  "context": {
+    "authorityLimit": 100,
+    "consumedAuthority": 40,
+    "totalValue": 100,
+    "lockedValue": 40,
+    "availableValue": 60,
+    "settledValue": 50,
+    "cursor": 40
+  },
+  "states": {
+    "ERC8001Authority": {
+      "authorityLimit": 100,
+      "consumed": 40
+    },
+    "ERC8060Reservable": {
+      "lockedValue": 40,
+      "availableValue": 60,
+      "totalValue": 100
+    },
+    "ERC8312Cursor": {
+      "cursor": 40,
+      "consumedAuthority": 40
+    },
+    "ERC8275Settlement": {
+      "settled": 50,
+      "reserved": 40
+    }
+  },
+  "validationResults": [
+    {
+      "rule": "reservation-safety",
+      "passed": true,
+      "message": "Reservation safety invariant holds"
+    },
+    {
+      "rule": "authority-safety",
+      "passed": true,
+      "message": "Authority safety invariant holds"
+    },
+    {
+      "rule": "settlement-safety",
+      "passed": false,
+      "message": "Settlement safety invariant failed"
+    },
+    {
+      "rule": "cursor-safety",
+      "passed": true,
+      "message": "Cursor safety invariant holds"
+    }
+  ],
+  "validationPassed": false,
+  "propertyResults": [
+    {
+      "property": "Compatibility",
+      "passed": true,
+      "score": 100,
+      "message": "All required capabilities were resolved by the composition."
+    },
+    {
+      "property": "Composability",
+      "passed": false,
+      "score": 0,
+      "message": "Composition did not complete successfully."
+    }
+  ],
+  "metrics": [
+    "Safety",
+    "Isolation",
+    "Determinism",
+    "Composability",
+    "AdaptiveScenario"
+  ],
+  "benchmark": {
+    "generated": true,
+    "source": "adaptive-scenario-runner",
+    "scenario": "ADAPT-00006-settlement-failure",
+    "priority": "High",
+    "scenarioType": "settlement-failure",
+    "target": "ERC8312Cursor+ERC8275Settlement"
+  },
+  "executedAt": "2026-06-28T22:57:45.412Z"
+}
