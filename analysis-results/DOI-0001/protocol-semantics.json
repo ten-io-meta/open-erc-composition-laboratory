@@ -1,0 +1,151 @@
+{
+    "sourceId": "DOI-0001",
+    "extractedAt": "2026-06-29T02:51:16.471Z",
+    "semantics": [
+        {
+            "protocolId": "ERC8004",
+            "capabilities": [
+                "AgentIdentity"
+            ],
+            "role": "Agent identity binding",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8217",
+            "capabilities": [
+                "IdentityBinding"
+            ],
+            "role": "Identity binding",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8281",
+            "capabilities": [
+                "InputProvenance"
+            ],
+            "role": "Input provenance",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8299",
+            "capabilities": [
+                "SpineCommitment"
+            ],
+            "role": "Spine commitment",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8001",
+            "capabilities": [
+                "Authority"
+            ],
+            "role": "Authority envelope",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8312",
+            "capabilities": [
+                "Cursor"
+            ],
+            "role": "Consumption cursor",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8301",
+            "capabilities": [
+                "Workflow"
+            ],
+            "role": "Workflow state machine",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8263",
+            "capabilities": [
+                "Anchoring"
+            ],
+            "role": "Commitment anchoring",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8274",
+            "capabilities": [
+                "Verification"
+            ],
+            "role": "Verification",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ReceiptOS",
+            "capabilities": [
+                "Eligibility"
+            ],
+            "role": "Eligibility",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8275",
+            "capabilities": [
+                "Settlement"
+            ],
+            "role": "Settlement layer",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8060",
+            "capabilities": [
+                "EmbeddedValue"
+            ],
+            "role": "Embedded native value",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "IERC8060Reservable",
+            "capabilities": [
+                "Reservation",
+                "Accounting"
+            ],
+            "role": "Reservable accounting layer",
+            "evidence": [
+                "DOI-0001"
+            ],
+            "confidence": 100
+        }
+    ],
+    "errors": []
+}
