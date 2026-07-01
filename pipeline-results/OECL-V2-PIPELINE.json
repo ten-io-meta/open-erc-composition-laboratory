@@ -1,11 +1,11 @@
 {
     "manifestId": "OECL-V2-SOURCE-MANIFEST",
     "executedSources": 1,
-    "generatedAt": "2026-07-01T20:42:06.504Z",
+    "generatedAt": "2026-07-01T20:51:31.320Z",
     "results": [
         {
             "pipelineId": "PIPELINE-DOI-0001",
-            "executedAt": "2026-07-01T20:42:06.344Z",
+            "executedAt": "2026-07-01T20:51:31.164Z",
             "sourceId": "DOI-0001",
             "analysisPath": "./analysis-results/DOI-0001",
             "corpusPath": "./corpus-results/research-corpus.json",

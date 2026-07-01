@@ -1,5 +1,5 @@
 {
-    "learnedAt": "2026-07-01T20:42:06.442Z",
+    "learnedAt": "2026-07-01T20:51:31.270Z",
     "observations": [
         {
             "observationId": "OBS-00001",
@@ -154,7 +154,7 @@
         }
     ],
     "knowledge": {
-        "generatedAt": "2026-07-01T20:42:06.442Z",
+        "generatedAt": "2026-07-01T20:51:31.270Z",
         "totalObservations": 10,
         "statistics": [
             {
