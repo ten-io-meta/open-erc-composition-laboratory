@@ -1,0 +1,10 @@
+{
+    "manifestId": "OECL-V2-SOURCE-MANIFEST",
+    "sources": [
+        {
+            "sourceId": "DOI-0001",
+            "path": "./sources/research/DOI-0001.json",
+            "enabled": true
+        }
+    ]
+}

@@ -1,20 +1,27 @@
 {
-    "pipelineId": "PIPELINE-DOI-0001",
-    "executedAt": "2026-07-01T19:48:44.788Z",
-    "sourceId": "DOI-0001",
-    "analysisPath": "./analysis-results/DOI-0001",
-    "corpusPath": "./corpus-results/research-corpus.json",
-    "learningPath": "./composition-learning-results/DOI-0001-composition-learning.json",
-    "knowledgePath": "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
-    "protocols": 13,
-    "capabilities": 14,
-    "claims": 10,
-    "candidateClaims": 4,
-    "inconclusiveClaims": 6,
-    "knowledgeEntries": 10,
-    "supportedKnowledge": 4,
-    "emergingKnowledge": 6,
-    "incrementalKnowledgePath": "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
-    "incrementalObservations": 40,
-    "errors": []
+    "manifestId": "OECL-V2-SOURCE-MANIFEST",
+    "executedSources": 1,
+    "generatedAt": "2026-07-01T20:42:06.504Z",
+    "results": [
+        {
+            "pipelineId": "PIPELINE-DOI-0001",
+            "executedAt": "2026-07-01T20:42:06.344Z",
+            "sourceId": "DOI-0001",
+            "analysisPath": "./analysis-results/DOI-0001",
+            "corpusPath": "./corpus-results/research-corpus.json",
+            "learningPath": "./composition-learning-results/DOI-0001-composition-learning.json",
+            "knowledgePath": "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
+            "protocols": 13,
+            "capabilities": 14,
+            "claims": 10,
+            "candidateClaims": 4,
+            "inconclusiveClaims": 6,
+            "knowledgeEntries": 10,
+            "supportedKnowledge": 4,
+            "emergingKnowledge": 6,
+            "incrementalKnowledgePath": "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
+            "incrementalObservations": 40,
+            "errors": []
+        }
+    ]
 }
