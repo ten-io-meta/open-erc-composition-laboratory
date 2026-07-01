@@ -1,0 +1,15 @@
+{
+    "pipelineId": "PIPELINE-DOI-0001",
+    "executedAt": "2026-07-01T15:19:54.998Z",
+    "sourceId": "DOI-0001",
+    "analysisPath": "./analysis-results/DOI-0001",
+    "corpusPath": "./corpus-results/research-corpus.json",
+    "learningPath": "./composition-learning-results/DOI-0001-composition-learning.json",
+    "protocols": 13,
+    "capabilities": 14,
+    "claims": 10,
+    "candidateClaims": 4,
+    "inconclusiveClaims": 6,
+    "knowledgeEntries": 10,
+    "errors": []
+}
