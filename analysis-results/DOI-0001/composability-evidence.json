@@ -1,0 +1,187 @@
+{
+    "sourceId": "GRAPH-DOI-0001",
+    "generatedAt": "2026-07-01T14:06:45.067Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8312",
+            "capabilityA": "Authority",
+            "capabilityB": "Cursor",
+            "relation": "CONSTRAINS",
+            "reason": "Authority constrains how much consumption can be represented by the cursor.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 100,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8001",
+            "capabilityA": "Cursor",
+            "capabilityB": "Authority",
+            "relation": "DEPENDS_ON",
+            "reason": "Cursor accounting depends on an authority boundary to determine valid consumption.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 100,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00003",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8275",
+            "capabilityA": "Reservation",
+            "capabilityB": "Settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Reservation constrains settlement by defining the maximum reserved value available for settlement.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 100,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00004",
+            "protocolA": "ERC8275",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "Settlement",
+            "capabilityB": "Reservation",
+            "relation": "DEPENDS_ON",
+            "reason": "Settlement depends on reserved value to remain bounded by deterministic accounting.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 100,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00005",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 90,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 54,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00006",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8001",
+            "capabilityA": "Workflow",
+            "capabilityB": "Authority",
+            "relation": "DEPENDS_ON",
+            "reason": "Workflow execution depends on authority constraints to remain bounded.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 85,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00007",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8275",
+            "capabilityA": "Workflow",
+            "capabilityB": "Settlement",
+            "relation": "PRODUCES",
+            "reason": "Workflow execution can produce settlement actions as part of a composed protocol flow.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 85,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00008",
+            "protocolA": "ERC8274",
+            "protocolB": "ERC8275",
+            "capabilityA": "Verification",
+            "capabilityB": "Settlement",
+            "relation": "VALIDATES",
+            "reason": "Verification validates settlement conditions before value movement is accepted.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 85,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00009",
+            "protocolA": "ERC8263",
+            "protocolB": "ERC8274",
+            "capabilityA": "Anchoring",
+            "capabilityB": "Verification",
+            "relation": "ANCHORS",
+            "reason": "Anchoring provides commitment references that verification can use as evidence.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 85,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00010",
+            "protocolA": "ReceiptOS",
+            "protocolB": "ERC8275",
+            "capabilityA": "Eligibility",
+            "capabilityB": "Settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Eligibility constrains settlement by determining whether a settlement path is allowed.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "semanticConfidence": 85,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
+        }
+    ],
+    "errors": []
+}
