@@ -1,0 +1,209 @@
+{
+    "generatedAt": "2026-07-01T22:00:34.646Z",
+    "memory": {
+        "memoryId": "OECL-V2-RESEARCH-MEMORY",
+        "generatedAt": "2026-07-01T22:00:34.646Z",
+        "timelines": [
+            {
+                "relation": "Authority->CONSTRAINS->Cursor",
+                "protocolPair": "ERC8001+ERC8312",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00001",
+                        "sourceId": "DOI-0001",
+                        "relation": "Authority->CONSTRAINS->Cursor",
+                        "protocolPair": "ERC8001+ERC8312",
+                        "confidence": 75,
+                        "status": "SUPPORTED",
+                        "observedAt": "2026-07-01T22:00:34.641Z",
+                        "evidence": [
+                            "learning:Authority->CONSTRAINS->Cursor",
+                            "validation:HYP-00001"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Cursor->DEPENDS_ON->Authority",
+                "protocolPair": "ERC8001+ERC8312",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00002",
+                        "sourceId": "DOI-0001",
+                        "relation": "Cursor->DEPENDS_ON->Authority",
+                        "protocolPair": "ERC8001+ERC8312",
+                        "confidence": 75,
+                        "status": "SUPPORTED",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Cursor->DEPENDS_ON->Authority",
+                            "validation:HYP-00002"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Reservation->CONSTRAINS->Settlement",
+                "protocolPair": "ERC8275+IERC8060Reservable",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00003",
+                        "sourceId": "DOI-0001",
+                        "relation": "Reservation->CONSTRAINS->Settlement",
+                        "protocolPair": "ERC8275+IERC8060Reservable",
+                        "confidence": 75,
+                        "status": "SUPPORTED",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Reservation->CONSTRAINS->Settlement",
+                            "validation:HYP-00003"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Settlement->DEPENDS_ON->Reservation",
+                "protocolPair": "ERC8275+IERC8060Reservable",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00004",
+                        "sourceId": "DOI-0001",
+                        "relation": "Settlement->DEPENDS_ON->Reservation",
+                        "protocolPair": "ERC8275+IERC8060Reservable",
+                        "confidence": 75,
+                        "status": "SUPPORTED",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Settlement->DEPENDS_ON->Reservation",
+                            "validation:HYP-00004"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "EmbeddedValue->ENABLES->Reservation",
+                "protocolPair": "ERC8060+IERC8060Reservable",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00005",
+                        "sourceId": "DOI-0001",
+                        "relation": "EmbeddedValue->ENABLES->Reservation",
+                        "protocolPair": "ERC8060+IERC8060Reservable",
+                        "confidence": 31,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:EmbeddedValue->ENABLES->Reservation",
+                            "validation:HYP-00005"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Workflow->DEPENDS_ON->Authority",
+                "protocolPair": "ERC8001+ERC8301",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00006",
+                        "sourceId": "DOI-0001",
+                        "relation": "Workflow->DEPENDS_ON->Authority",
+                        "protocolPair": "ERC8001+ERC8301",
+                        "confidence": 30,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Workflow->DEPENDS_ON->Authority",
+                            "validation:HYP-00006"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Workflow->PRODUCES->Settlement",
+                "protocolPair": "ERC8275+ERC8301",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00007",
+                        "sourceId": "DOI-0001",
+                        "relation": "Workflow->PRODUCES->Settlement",
+                        "protocolPair": "ERC8275+ERC8301",
+                        "confidence": 41,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Workflow->PRODUCES->Settlement",
+                            "validation:HYP-00007"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Verification->VALIDATES->Settlement",
+                "protocolPair": "ERC8274+ERC8275",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00008",
+                        "sourceId": "DOI-0001",
+                        "relation": "Verification->VALIDATES->Settlement",
+                        "protocolPair": "ERC8274+ERC8275",
+                        "confidence": 41,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Verification->VALIDATES->Settlement",
+                            "validation:HYP-00008"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Anchoring->ANCHORS->Verification",
+                "protocolPair": "ERC8263+ERC8274",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00009",
+                        "sourceId": "DOI-0001",
+                        "relation": "Anchoring->ANCHORS->Verification",
+                        "protocolPair": "ERC8263+ERC8274",
+                        "confidence": 30,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Anchoring->ANCHORS->Verification",
+                            "validation:HYP-00009"
+                        ]
+                    }
+                ]
+            },
+            {
+                "relation": "Eligibility->CONSTRAINS->Settlement",
+                "protocolPair": "ERC8275+ReceiptOS",
+                "events": [
+                    {
+                        "eventId": "MEM-DOI-0001-00010",
+                        "sourceId": "DOI-0001",
+                        "relation": "Eligibility->CONSTRAINS->Settlement",
+                        "protocolPair": "ERC8275+ReceiptOS",
+                        "confidence": 41,
+                        "status": "EMERGING",
+                        "observedAt": "2026-07-01T22:00:34.645Z",
+                        "evidence": [
+                            "learning:Eligibility->CONSTRAINS->Settlement",
+                            "validation:HYP-00010"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "statistics": {
+            "events": 10,
+            "timelines": 10,
+            "sources": 1,
+            "averageConfidence": 51,
+            "supportedEvents": 4,
+            "emergingEvents": 6,
+            "rejectedEvents": 0
+        }
+    },
+    "errors": []
+}

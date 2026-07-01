@@ -3,12 +3,12 @@
     "sources": [
         {
             "sourceId": "DOI-0001",
-            "path": "./sources/research/DOI-0001.json",
+            "path": "./sources/research/DOI-0001/source.json",
             "enabled": true
         },
         {
             "sourceId": "DOI-0002",
-            "path": "./sources/research/DOI-0002.json",
+            "path": "./sources/research/DOI-0002/source.json",
             "enabled": true
         }
     ]

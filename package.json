@@ -63,6 +63,7 @@
     "knowledge:incremental": "tsx scripts/run-incremental-knowledge.ts",
     "learning": "tsx scripts/run-composition-learning.ts",
     "corpus": "tsx scripts/run-corpus.ts",
+    "memory:v2": "tsx scripts/run-research-memory.ts",
     "hypothesis": "tsx scripts/run-hypothesis.ts",
     "hypothesis:v2:validate": "tsx scripts/run-hypothesis-v2-validation.ts",
     "knowledge:v2": "tsx scripts/run-research-knowledge-v2.ts",
