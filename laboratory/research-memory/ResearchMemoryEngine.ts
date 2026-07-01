@@ -18,13 +18,9 @@ export class ResearchMemoryEngine {
             const existingEvents =
                 previous?.timelines.flatMap(timeline => timeline.events) ?? [];
 
-            const newEvents = knowledge.entries.map(
-                (entry, index) => this.eventFromEntry(
-                    entry,
-                    sourceId,
-                    index
-                )
-            );
+            const newEvents = knowledge.entries
+                .map((entry, index) => this.eventFromEntry(entry, sourceId, index))
+                .filter(event => !this.alreadyExists(existingEvents, event));
 
             const allEvents = [
                 ...existingEvents,
@@ -87,6 +83,17 @@ export class ResearchMemoryEngine {
             observedAt: new Date().toISOString(),
             evidence: entry.evidence
         };
+    }
+
+    private alreadyExists(
+        existingEvents: ResearchMemoryEvent[],
+        event: ResearchMemoryEvent
+    ): boolean {
+        return existingEvents.some(existing =>
+            existing.sourceId === event.sourceId &&
+            existing.relation === event.relation &&
+            existing.protocolPair === event.protocolPair
+        );
     }
 
     private buildTimelines(
