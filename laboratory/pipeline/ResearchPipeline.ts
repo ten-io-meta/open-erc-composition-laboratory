@@ -206,10 +206,10 @@ try {
 } catch {
     previousKnowledge = null;
 }
-
 const incrementalResult = incrementalEngine.build(
     previousKnowledge,
-    knowledgeResult.knowledge
+    knowledgeResult.knowledge,
+    sourceId
 );
 
 await writeFile(

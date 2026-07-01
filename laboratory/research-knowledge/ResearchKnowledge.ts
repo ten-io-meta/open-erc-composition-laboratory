@@ -11,4 +11,9 @@ export interface ResearchKnowledge {
 
     statistics: KnowledgeStatistics;
 
+    processedSources?: {
+        sourceId: string;
+        processedAt: string;
+    }[];
+
 }

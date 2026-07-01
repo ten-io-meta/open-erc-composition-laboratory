@@ -1,6 +1,6 @@
 {
     "pipelineId": "PIPELINE-DOI-0001",
-    "executedAt": "2026-07-01T19:28:50.401Z",
+    "executedAt": "2026-07-01T19:48:44.788Z",
     "sourceId": "DOI-0001",
     "analysisPath": "./analysis-results/DOI-0001",
     "corpusPath": "./corpus-results/research-corpus.json",
@@ -15,6 +15,6 @@
     "supportedKnowledge": 4,
     "emergingKnowledge": 6,
     "incrementalKnowledgePath": "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
-    "incrementalObservations": 30,
+    "incrementalObservations": 40,
     "errors": []
 }

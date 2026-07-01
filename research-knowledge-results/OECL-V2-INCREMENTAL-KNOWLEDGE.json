@@ -1,16 +1,16 @@
 {
-    "generatedAt": "2026-07-01T19:28:50.539Z",
+    "generatedAt": "2026-07-01T19:48:44.910Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-INCREMENTAL-2026-07-01T19:28:50.537Z",
-        "generatedAt": "2026-07-01T19:28:50.538Z",
+        "knowledgeBaseId": "KB-INCREMENTAL-2026-07-01T19:48:31.404Z",
+        "generatedAt": "2026-07-01T19:48:31.405Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
                 "relation": "Authority->CONSTRAINS->Cursor",
                 "protocolPair": "ERC8001+ERC8312",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 75,
-                "confirmed": 3,
+                "confirmed": 4,
                 "partial": 0,
                 "unsupported": 0,
                 "status": "SUPPORTED",
@@ -23,9 +23,9 @@
                 "entryId": "KNOW-00002",
                 "relation": "Cursor->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8312",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 75,
-                "confirmed": 3,
+                "confirmed": 4,
                 "partial": 0,
                 "unsupported": 0,
                 "status": "SUPPORTED",
@@ -38,9 +38,9 @@
                 "entryId": "KNOW-00003",
                 "relation": "Reservation->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+IERC8060Reservable",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 75,
-                "confirmed": 3,
+                "confirmed": 4,
                 "partial": 0,
                 "unsupported": 0,
                 "status": "SUPPORTED",
@@ -53,9 +53,9 @@
                 "entryId": "KNOW-00004",
                 "relation": "Settlement->DEPENDS_ON->Reservation",
                 "protocolPair": "ERC8275+IERC8060Reservable",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 75,
-                "confirmed": 3,
+                "confirmed": 4,
                 "partial": 0,
                 "unsupported": 0,
                 "status": "SUPPORTED",
@@ -68,10 +68,10 @@
                 "entryId": "KNOW-00005",
                 "relation": "EmbeddedValue->ENABLES->Reservation",
                 "protocolPair": "ERC8060+IERC8060Reservable",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 31,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -83,10 +83,10 @@
                 "entryId": "KNOW-00006",
                 "relation": "Workflow->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8301",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 30,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -98,10 +98,10 @@
                 "entryId": "KNOW-00007",
                 "relation": "Workflow->PRODUCES->Settlement",
                 "protocolPair": "ERC8275+ERC8301",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -113,10 +113,10 @@
                 "entryId": "KNOW-00008",
                 "relation": "Verification->VALIDATES->Settlement",
                 "protocolPair": "ERC8274+ERC8275",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -128,10 +128,10 @@
                 "entryId": "KNOW-00009",
                 "relation": "Anchoring->ANCHORS->Verification",
                 "protocolPair": "ERC8263+ERC8274",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 30,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -143,10 +143,10 @@
                 "entryId": "KNOW-00010",
                 "relation": "Eligibility->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+ReceiptOS",
-                "observations": 3,
+                "observations": 4,
                 "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 3,
+                "partial": 4,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
@@ -157,106 +157,21 @@
         ],
         "statistics": {
             "entries": 10,
-            "totalObservations": 30,
+            "totalObservations": 40,
             "emerging": 6,
             "supported": 4,
             "validated": 0,
             "canonical": 0,
             "rejected": 0
-        }
+        },
+        "processedSources": [
+            {
+                "sourceId": "DOI-0001",
+                "processedAt": "2026-07-01T19:48:31.404Z"
+            }
+        ]
     },
-    "merges": [
-        {
-            "relation": "Authority->CONSTRAINS->Cursor",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 75,
-            "newConfidence": 75,
-            "mergedConfidence": 75
-        },
-        {
-            "relation": "Cursor->DEPENDS_ON->Authority",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 75,
-            "newConfidence": 75,
-            "mergedConfidence": 75
-        },
-        {
-            "relation": "Reservation->CONSTRAINS->Settlement",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 75,
-            "newConfidence": 75,
-            "mergedConfidence": 75
-        },
-        {
-            "relation": "Settlement->DEPENDS_ON->Reservation",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 75,
-            "newConfidence": 75,
-            "mergedConfidence": 75
-        },
-        {
-            "relation": "EmbeddedValue->ENABLES->Reservation",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 31,
-            "newConfidence": 31,
-            "mergedConfidence": 31
-        },
-        {
-            "relation": "Workflow->DEPENDS_ON->Authority",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 30,
-            "newConfidence": 30,
-            "mergedConfidence": 30
-        },
-        {
-            "relation": "Workflow->PRODUCES->Settlement",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 41,
-            "newConfidence": 41,
-            "mergedConfidence": 41
-        },
-        {
-            "relation": "Verification->VALIDATES->Settlement",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 41,
-            "newConfidence": 41,
-            "mergedConfidence": 41
-        },
-        {
-            "relation": "Anchoring->ANCHORS->Verification",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 30,
-            "newConfidence": 30,
-            "mergedConfidence": 30
-        },
-        {
-            "relation": "Eligibility->CONSTRAINS->Settlement",
-            "previousObservations": 2,
-            "newObservations": 1,
-            "mergedObservations": 3,
-            "previousConfidence": 41,
-            "newConfidence": 41,
-            "mergedConfidence": 41
-        }
-    ],
+    "merges": [],
     "conflicts": [],
     "resolutions": [],
     "evolution": [],

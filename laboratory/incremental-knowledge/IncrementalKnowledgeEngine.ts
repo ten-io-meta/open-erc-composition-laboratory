@@ -9,10 +9,27 @@ export class IncrementalKnowledgeEngine {
 
     build(
         previous: ResearchKnowledge | null,
-        incoming: ResearchKnowledge
+        incoming: ResearchKnowledge,
+        sourceId = "UNKNOWN"
     ): IncrementalKnowledgeResult {
 
         try {
+
+            const alreadyProcessed = previous?.processedSources?.some(
+                source => source.sourceId === sourceId
+            ) ?? false;
+
+            if (previous && alreadyProcessed) {
+                return {
+                    generatedAt: new Date().toISOString(),
+                    knowledge: previous,
+                    merges: [],
+                    conflicts: [],
+                    resolutions: [],
+                    evolution: [],
+                    errors: []
+                };
+            }
 
             const conflictDetector = new KnowledgeConflictDetector();
             const builder = new IncrementalKnowledgeBuilder();
@@ -26,7 +43,16 @@ export class IncrementalKnowledgeEngine {
             );
 
             const evolved = evolutionEngine.evolve(
-                merged.knowledge
+                {
+                    ...merged.knowledge,
+                    processedSources: [
+                        ...(previous?.processedSources ?? []),
+                        {
+                            sourceId,
+                            processedAt: new Date().toISOString()
+                        }
+                    ]
+                }
             );
 
             return {
