@@ -1,3 +1,6 @@
+import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
+import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
+import { KnowledgeEngine } from "../research-knowledge/KnowledgeEngine.js";
 import { mkdir, readFile, writeFile } from "fs/promises";
 
 import { ResearchSourceLoader } from "../research-source/ResearchSourceLoader.js";
@@ -150,7 +153,46 @@ export class ResearchPipeline {
                 "./composition-learning-results/DOI-0001-composition-learning.json",
                 JSON.stringify(learningResult, null, 4)
             );
+const hypothesisEngine = new HypothesisEngine();
 
+const hypothesisResult = hypothesisEngine.generate(
+    learningResult
+);
+
+await mkdir("./hypothesis-results", { recursive: true });
+
+await writeFile(
+    "./hypothesis-results/DOI-0001-hypotheses.json",
+    JSON.stringify(hypothesisResult, null, 4)
+);
+
+const hypothesisValidationEngine = new HypothesisValidationEngine();
+
+const hypothesisValidationResult = hypothesisValidationEngine.validate(
+    hypothesisResult,
+    supportedComposabilityEvidenceResult
+);
+
+await mkdir("./hypothesis-validation-results", { recursive: true });
+
+await writeFile(
+    "./hypothesis-validation-results/DOI-0001-v2-validation.json",
+    JSON.stringify(hypothesisValidationResult, null, 4)
+);
+
+const knowledgeEngine = new KnowledgeEngine();
+
+const knowledgeResult = knowledgeEngine.build(
+    learningResult,
+    hypothesisValidationResult
+);
+
+await mkdir("./research-knowledge-results", { recursive: true });
+
+await writeFile(
+    "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
+    JSON.stringify(knowledgeResult, null, 4)
+);
             return {
                 pipelineId: `PIPELINE-${sourceId}`,
                 executedAt,
@@ -158,7 +200,9 @@ export class ResearchPipeline {
                 analysisPath,
                 corpusPath: "./corpus-results/research-corpus.json",
                 learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",
-                protocols: extractionResult.extraction.protocols.length,
+knowledgePath: "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
+
+protocols: extractionResult.extraction.protocols.length,
                 capabilities: extractionResult.extraction.capabilities.length,
                 claims: supportedComposabilityEvidenceResult.claims.length,
                 candidateClaims: supportedComposabilityEvidenceResult.claims.filter(
@@ -167,8 +211,15 @@ export class ResearchPipeline {
                 inconclusiveClaims: supportedComposabilityEvidenceResult.claims.filter(
                     claim => claim.status === "INCONCLUSIVE"
                 ).length,
-                knowledgeEntries: learningResult.knowledge.statistics.length,
-                errors: []
+                knowledgeEntries: knowledgeResult.knowledge.statistics.entries,
+
+supportedKnowledge:
+    knowledgeResult.knowledge.statistics.supported,
+
+emergingKnowledge:
+    knowledgeResult.knowledge.statistics.emerging,
+
+errors: []
             };
 
         } catch (error) {
@@ -179,12 +230,15 @@ export class ResearchPipeline {
                 analysisPath,
                 corpusPath: "./corpus-results/research-corpus.json",
                 learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",
+                knowledgePath: "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
                 protocols: 0,
                 capabilities: 0,
                 claims: 0,
                 candidateClaims: 0,
                 inconclusiveClaims: 0,
                 knowledgeEntries: 0,
+                supportedKnowledge: 0,
+emergingKnowledge: 0,
                 errors: [
                     error instanceof Error
                         ? error.message

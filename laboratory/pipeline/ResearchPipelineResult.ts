@@ -12,6 +12,8 @@ export interface ResearchPipelineResult {
 
     learningPath: string;
 
+    knowledgePath: string;
+
     protocols: number;
 
     capabilities: number;
@@ -23,6 +25,10 @@ export interface ResearchPipelineResult {
     inconclusiveClaims: number;
 
     knowledgeEntries: number;
+
+    supportedKnowledge: number;
+
+    emergingKnowledge: number;
 
     errors: string[];
 

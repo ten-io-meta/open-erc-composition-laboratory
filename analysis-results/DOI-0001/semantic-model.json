@@ -1,9 +1,9 @@
 {
     "graphId": "GRAPH-DOI-0001",
-    "discoveredAt": "2026-07-01T15:19:55.004Z",
+    "discoveredAt": "2026-07-01T17:49:46.807Z",
     "model": {
         "modelId": "SEMANTIC-GRAPH-DOI-0001",
-        "generatedAt": "2026-07-01T15:19:55.004Z",
+        "generatedAt": "2026-07-01T17:49:46.807Z",
         "capabilities": [
             {
                 "capabilityId": "AgentIdentity",

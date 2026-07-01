@@ -29,6 +29,9 @@ async function main() {
     console.log(`Candidate claims: ${result.candidateClaims}`);
     console.log(`Inconclusive claims: ${result.inconclusiveClaims}`);
     console.log(`Knowledge entries: ${result.knowledgeEntries}`);
+    console.log(`Supported knowledge: ${result.supportedKnowledge}`);
+console.log(`Emerging knowledge: ${result.emergingKnowledge}`);
+console.log(`Knowledge base: ${result.knowledgePath}`);
 
     console.log("");
     console.log("Pipeline exported:");
