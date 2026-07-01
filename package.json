@@ -59,6 +59,7 @@
     "evidence": "tsx scripts/run-evidence-evaluation.ts",
     "analyze": "tsx scripts/run-research-analysis.ts",
     "evidence:composability": "tsx scripts/run-composability-evidence.ts",
+    "evidence:support": "tsx scripts/run-evidence-support.ts",
     "extract": "tsx scripts/run-research-extraction.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
     "scenario:generate": "tsx scripts/generate-scenarios.ts",
