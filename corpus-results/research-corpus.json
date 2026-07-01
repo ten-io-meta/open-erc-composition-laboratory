@@ -1,0 +1,26 @@
+{
+    "corpusId": "CORPUS-2026-07-01T14:52:46.385Z",
+    "generatedAt": "2026-07-01T14:52:46.388Z",
+    "entries": [
+        {
+            "sourceId": "DOI-0001",
+            "analysisPath": "./analysis-results/DOI-0001",
+            "protocols": 13,
+            "capabilities": 14,
+            "claims": 10,
+            "supportedClaims": 0,
+            "candidateClaims": 4,
+            "inconclusiveClaims": 6,
+            "status": "ANALYZED"
+        }
+    ],
+    "statistics": {
+        "sources": 1,
+        "protocols": 13,
+        "capabilities": 14,
+        "claims": 10,
+        "supportedClaims": 0,
+        "candidateClaims": 4,
+        "inconclusiveClaims": 6
+    }
+}

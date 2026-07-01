@@ -1,0 +1,263 @@
+{
+    "learnedAt": "2026-07-01T14:24:50.572Z",
+    "observations": [
+        {
+            "observationId": "OBS-00001",
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8312",
+            "capabilityA": "Authority",
+            "capabilityB": "Cursor",
+            "relation": "CONSTRAINS",
+            "status": "CANDIDATE",
+            "overallConfidence": 75,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "matrix:ERC8001Authority+ERC8312Cursor",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00002",
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8001",
+            "capabilityA": "Cursor",
+            "capabilityB": "Authority",
+            "relation": "DEPENDS_ON",
+            "status": "CANDIDATE",
+            "overallConfidence": 75,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "matrix:ERC8001Authority+ERC8312Cursor",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00003",
+            "claimId": "COMP-EVIDENCE-00003",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8275",
+            "capabilityA": "Reservation",
+            "capabilityB": "Settlement",
+            "relation": "CONSTRAINS",
+            "status": "CANDIDATE",
+            "overallConfidence": 75,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "matrix:ERC8060Reservable+ERC8275Settlement",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00004",
+            "claimId": "COMP-EVIDENCE-00004",
+            "protocolA": "ERC8275",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "Settlement",
+            "capabilityB": "Reservation",
+            "relation": "DEPENDS_ON",
+            "status": "CANDIDATE",
+            "overallConfidence": 75,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "matrix:ERC8060Reservable+ERC8275Settlement",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00005",
+            "claimId": "COMP-EVIDENCE-00005",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation",
+            "relation": "ENABLES",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 31,
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ]
+        },
+        {
+            "observationId": "OBS-00006",
+            "claimId": "COMP-EVIDENCE-00006",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8001",
+            "capabilityA": "Workflow",
+            "capabilityB": "Authority",
+            "relation": "DEPENDS_ON",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 30,
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ]
+        },
+        {
+            "observationId": "OBS-00007",
+            "claimId": "COMP-EVIDENCE-00007",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8275",
+            "capabilityA": "Workflow",
+            "capabilityB": "Settlement",
+            "relation": "PRODUCES",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 41,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00008",
+            "claimId": "COMP-EVIDENCE-00008",
+            "protocolA": "ERC8274",
+            "protocolB": "ERC8275",
+            "capabilityA": "Verification",
+            "capabilityB": "Settlement",
+            "relation": "VALIDATES",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 41,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "emergent-patterns"
+            ]
+        },
+        {
+            "observationId": "OBS-00009",
+            "claimId": "COMP-EVIDENCE-00009",
+            "protocolA": "ERC8263",
+            "protocolB": "ERC8274",
+            "capabilityA": "Anchoring",
+            "capabilityB": "Verification",
+            "relation": "ANCHORS",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 30,
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ]
+        },
+        {
+            "observationId": "OBS-00010",
+            "claimId": "COMP-EVIDENCE-00010",
+            "protocolA": "ReceiptOS",
+            "protocolB": "ERC8275",
+            "capabilityA": "Eligibility",
+            "capabilityB": "Settlement",
+            "relation": "CONSTRAINS",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 41,
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "emergent-patterns"
+            ]
+        }
+    ],
+    "knowledge": {
+        "generatedAt": "2026-07-01T14:24:50.570Z",
+        "totalObservations": 10,
+        "statistics": [
+            {
+                "relationKey": "Authority->CONSTRAINS->Cursor",
+                "protocolPair": "ERC8001+ERC8312",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 1,
+                "inconclusive": 0,
+                "averageConfidence": 75,
+                "status": "EMERGING"
+            },
+            {
+                "relationKey": "Cursor->DEPENDS_ON->Authority",
+                "protocolPair": "ERC8001+ERC8312",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 1,
+                "inconclusive": 0,
+                "averageConfidence": 75,
+                "status": "EMERGING"
+            },
+            {
+                "relationKey": "Reservation->CONSTRAINS->Settlement",
+                "protocolPair": "ERC8275+IERC8060Reservable",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 1,
+                "inconclusive": 0,
+                "averageConfidence": 75,
+                "status": "EMERGING"
+            },
+            {
+                "relationKey": "Settlement->DEPENDS_ON->Reservation",
+                "protocolPair": "ERC8275+IERC8060Reservable",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 1,
+                "inconclusive": 0,
+                "averageConfidence": 75,
+                "status": "EMERGING"
+            },
+            {
+                "relationKey": "EmbeddedValue->ENABLES->Reservation",
+                "protocolPair": "ERC8060+IERC8060Reservable",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 31,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Workflow->DEPENDS_ON->Authority",
+                "protocolPair": "ERC8001+ERC8301",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 30,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Workflow->PRODUCES->Settlement",
+                "protocolPair": "ERC8275+ERC8301",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 41,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Verification->VALIDATES->Settlement",
+                "protocolPair": "ERC8274+ERC8275",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 41,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Anchoring->ANCHORS->Verification",
+                "protocolPair": "ERC8263+ERC8274",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 30,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Eligibility->CONSTRAINS->Settlement",
+                "protocolPair": "ERC8275+ReceiptOS",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 41,
+                "status": "UNKNOWN"
+            }
+        ]
+    },
+    "errors": []
+}
