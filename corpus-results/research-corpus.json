@@ -1,6 +1,6 @@
 {
-    "corpusId": "CORPUS-2026-07-01T20:51:31.265Z",
-    "generatedAt": "2026-07-01T20:51:31.265Z",
+    "corpusId": "CORPUS-2026-07-01T21:11:34.155Z",
+    "generatedAt": "2026-07-01T21:11:34.155Z",
     "entries": [
         {
             "sourceId": "DOI-0001",
@@ -12,15 +12,26 @@
             "candidateClaims": 4,
             "inconclusiveClaims": 6,
             "status": "ANALYZED"
+        },
+        {
+            "sourceId": "DOI-0002",
+            "analysisPath": "./analysis-results/DOI-0002",
+            "protocols": 13,
+            "capabilities": 14,
+            "claims": 10,
+            "supportedClaims": 0,
+            "candidateClaims": 4,
+            "inconclusiveClaims": 6,
+            "status": "ANALYZED"
         }
     ],
     "statistics": {
-        "sources": 1,
-        "protocols": 13,
-        "capabilities": 14,
-        "claims": 10,
+        "sources": 2,
+        "protocols": 26,
+        "capabilities": 28,
+        "claims": 20,
         "supportedClaims": 0,
-        "candidateClaims": 4,
-        "inconclusiveClaims": 6
+        "candidateClaims": 8,
+        "inconclusiveClaims": 12
     }
 }

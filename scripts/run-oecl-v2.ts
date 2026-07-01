@@ -27,7 +27,7 @@ async function main() {
         console.log(`Running source: ${source.sourceId}`);
         console.log("------------------------------------");
 
-        const result = await pipeline.run(source.sourceId);
+        const result = await pipeline.run(source.sourceId, source.path);
 
         results.push(result);
 

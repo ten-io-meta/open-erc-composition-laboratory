@@ -5,6 +5,11 @@
             "sourceId": "DOI-0001",
             "path": "./sources/research/DOI-0001.json",
             "enabled": true
+        },
+        {
+            "sourceId": "DOI-0002",
+            "path": "./sources/research/DOI-0002.json",
+            "enabled": true
         }
     ]
 }

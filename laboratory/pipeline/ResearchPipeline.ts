@@ -26,7 +26,10 @@ async function readJson(path: string): Promise<any> {
 
 export class ResearchPipeline {
 
-    async run(sourceId = "DOI-0001"): Promise<ResearchPipelineResult> {
+    async run(
+    sourceId = "DOI-0001",
+    sourcePath = `./sources/research/${sourceId}.json`
+): Promise<ResearchPipelineResult> {
 
         const executedAt = new Date().toISOString();
         const analysisPath = `./analysis-results/${sourceId}`;
@@ -42,7 +45,7 @@ export class ResearchPipeline {
             const composabilityEvidenceEngine = new ComposabilityEvidenceEngine();
             const evidenceSupportEngine = new EvidenceSupportEngine();
 
-            const source = await sourceLoader.load(`./sources/doi/${sourceId}.json`);
+            const source = await sourceLoader.load(sourcePath);
             const extractionResult = extractionEngine.extract(source);
 
             if (!extractionResult.success || !extractionResult.extraction) {

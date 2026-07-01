@@ -1,5 +1,6 @@
 {
-    "generatedAt": "2026-07-01T21:11:33.901Z",
+    "sourceId": "GRAPH-DOI-0001",
+    "generatedAt": "2026-07-01T21:11:34.079Z",
     "claims": [
         {
             "claimId": "COMP-EVIDENCE-00001",
@@ -10,15 +11,13 @@
             "relation": "CONSTRAINS",
             "reason": "Authority constrains how much consumption can be represented by the cursor.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "matrix:ERC8001Authority+ERC8312Cursor",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 100,
-            "experimentalSupport": 58,
-            "statisticalSupport": 58,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 75,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
             "status": "CANDIDATE"
         },
         {
@@ -30,15 +29,13 @@
             "relation": "DEPENDS_ON",
             "reason": "Cursor accounting depends on an authority boundary to determine valid consumption.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "matrix:ERC8001Authority+ERC8312Cursor",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 100,
-            "experimentalSupport": 58,
-            "statisticalSupport": 58,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 75,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
             "status": "CANDIDATE"
         },
         {
@@ -50,15 +47,13 @@
             "relation": "CONSTRAINS",
             "reason": "Reservation constrains settlement by defining the maximum reserved value available for settlement.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "matrix:ERC8060Reservable+ERC8275Settlement",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 100,
-            "experimentalSupport": 58,
-            "statisticalSupport": 58,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 75,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
             "status": "CANDIDATE"
         },
         {
@@ -70,15 +65,13 @@
             "relation": "DEPENDS_ON",
             "reason": "Settlement depends on reserved value to remain bounded by deterministic accounting.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "matrix:ERC8060Reservable+ERC8275Settlement",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 100,
-            "experimentalSupport": 58,
-            "statisticalSupport": 58,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 75,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 60,
             "status": "CANDIDATE"
         },
         {
@@ -96,8 +89,8 @@
             "experimentalSupport": 0,
             "statisticalSupport": 0,
             "emergentPatternSupport": 0,
-            "overallConfidence": 31,
-            "status": "INCONCLUSIVE"
+            "overallConfidence": 54,
+            "status": "CANDIDATE"
         },
         {
             "claimId": "COMP-EVIDENCE-00006",
@@ -114,8 +107,8 @@
             "experimentalSupport": 0,
             "statisticalSupport": 0,
             "emergentPatternSupport": 0,
-            "overallConfidence": 30,
-            "status": "INCONCLUSIVE"
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
         },
         {
             "claimId": "COMP-EVIDENCE-00007",
@@ -126,15 +119,14 @@
             "relation": "PRODUCES",
             "reason": "Workflow execution can produce settlement actions as part of a composed protocol flow.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 85,
             "experimentalSupport": 0,
             "statisticalSupport": 0,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 41,
-            "status": "INCONCLUSIVE"
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
         },
         {
             "claimId": "COMP-EVIDENCE-00008",
@@ -145,15 +137,14 @@
             "relation": "VALIDATES",
             "reason": "Verification validates settlement conditions before value movement is accepted.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 85,
             "experimentalSupport": 0,
             "statisticalSupport": 0,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 41,
-            "status": "INCONCLUSIVE"
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
         },
         {
             "claimId": "COMP-EVIDENCE-00009",
@@ -170,8 +161,8 @@
             "experimentalSupport": 0,
             "statisticalSupport": 0,
             "emergentPatternSupport": 0,
-            "overallConfidence": 30,
-            "status": "INCONCLUSIVE"
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
         },
         {
             "claimId": "COMP-EVIDENCE-00010",
@@ -182,15 +173,14 @@
             "relation": "CONSTRAINS",
             "reason": "Eligibility constrains settlement by determining whether a settlement path is allowed.",
             "evidence": [
-                "GRAPH-DOI-0001",
-                "emergent-patterns"
+                "GRAPH-DOI-0001"
             ],
             "semanticConfidence": 85,
             "experimentalSupport": 0,
             "statisticalSupport": 0,
-            "emergentPatternSupport": 75,
-            "overallConfidence": 41,
-            "status": "INCONCLUSIVE"
+            "emergentPatternSupport": 0,
+            "overallConfidence": 51,
+            "status": "CANDIDATE"
         }
     ],
     "errors": []
