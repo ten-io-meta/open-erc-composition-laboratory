@@ -1,6 +1,7 @@
 import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
 import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
 import { KnowledgeEngine } from "../research-knowledge/KnowledgeEngine.js";
+import { IncrementalKnowledgeEngine } from "../incremental-knowledge/IncrementalKnowledgeEngine.js";
 import { mkdir, readFile, writeFile } from "fs/promises";
 
 import { ResearchSourceLoader } from "../research-source/ResearchSourceLoader.js";
@@ -193,6 +194,30 @@ await writeFile(
     "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
     JSON.stringify(knowledgeResult, null, 4)
 );
+const incrementalEngine = new IncrementalKnowledgeEngine();
+
+const incrementalResult = incrementalEngine.build(
+    null,
+    knowledgeResult.knowledge
+);
+
+await writeFile(
+    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
+    JSON.stringify(
+        incrementalResult.knowledge,
+        null,
+        4
+    )
+);
+
+await writeFile(
+    "./research-knowledge-results/OECL-V2-INCREMENTAL-KNOWLEDGE.json",
+    JSON.stringify(
+        incrementalResult,
+        null,
+        4
+    )
+);
             return {
                 pipelineId: `PIPELINE-${sourceId}`,
                 executedAt,
@@ -211,7 +236,8 @@ protocols: extractionResult.extraction.protocols.length,
                 inconclusiveClaims: supportedComposabilityEvidenceResult.claims.filter(
                     claim => claim.status === "INCONCLUSIVE"
                 ).length,
-                knowledgeEntries: knowledgeResult.knowledge.statistics.entries,
+                knowledgeEntries:
+    knowledgeResult.knowledge.statistics.entries,
 
 supportedKnowledge:
     knowledgeResult.knowledge.statistics.supported,
@@ -219,32 +245,45 @@ supportedKnowledge:
 emergingKnowledge:
     knowledgeResult.knowledge.statistics.emerging,
 
+incrementalKnowledgePath:
+    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
+
+incrementalObservations:
+    incrementalResult.knowledge.statistics.totalObservations,
+
 errors: []
             };
 
         } catch (error) {
-            return {
-                pipelineId: `PIPELINE-${sourceId}`,
-                executedAt,
-                sourceId,
-                analysisPath,
-                corpusPath: "./corpus-results/research-corpus.json",
-                learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",
-                knowledgePath: "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
-                protocols: 0,
-                capabilities: 0,
-                claims: 0,
-                candidateClaims: 0,
-                inconclusiveClaims: 0,
-                knowledgeEntries: 0,
-                supportedKnowledge: 0,
-emergingKnowledge: 0,
-                errors: [
-                    error instanceof Error
-                        ? error.message
-                        : "Unknown OECL V2 pipeline error"
-                ]
-            };
+           return {
+    pipelineId: `PIPELINE-${sourceId}`,
+    executedAt,
+    sourceId,
+    analysisPath,
+    corpusPath: "./corpus-results/research-corpus.json",
+    learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",
+    knowledgePath: "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
+
+    protocols: 0,
+    capabilities: 0,
+    claims: 0,
+    candidateClaims: 0,
+    inconclusiveClaims: 0,
+
+    knowledgeEntries: 0,
+    supportedKnowledge: 0,
+    emergingKnowledge: 0,
+
+    incrementalKnowledgePath: "",
+
+    incrementalObservations: 0,
+
+    errors: [
+        error instanceof Error
+            ? error.message
+            : "Unknown OECL V2 pipeline error"
+    ]
+};
         }
     }
 }

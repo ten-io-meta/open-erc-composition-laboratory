@@ -1,0 +1,165 @@
+{
+    "knowledgeBaseId": "KB-2026-07-01T19:19:45.842Z",
+    "generatedAt": "2026-07-01T19:19:45.865Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "relation": "Authority->CONSTRAINS->Cursor",
+            "protocolPair": "ERC8001+ERC8312",
+            "observations": 1,
+            "averageConfidence": 75,
+            "confirmed": 1,
+            "partial": 0,
+            "unsupported": 0,
+            "status": "SUPPORTED",
+            "evidence": [
+                "learning:Authority->CONSTRAINS->Cursor",
+                "validation:HYP-00001"
+            ]
+        },
+        {
+            "entryId": "KNOW-00002",
+            "relation": "Cursor->DEPENDS_ON->Authority",
+            "protocolPair": "ERC8001+ERC8312",
+            "observations": 1,
+            "averageConfidence": 75,
+            "confirmed": 1,
+            "partial": 0,
+            "unsupported": 0,
+            "status": "SUPPORTED",
+            "evidence": [
+                "learning:Cursor->DEPENDS_ON->Authority",
+                "validation:HYP-00002"
+            ]
+        },
+        {
+            "entryId": "KNOW-00003",
+            "relation": "Reservation->CONSTRAINS->Settlement",
+            "protocolPair": "ERC8275+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 75,
+            "confirmed": 1,
+            "partial": 0,
+            "unsupported": 0,
+            "status": "SUPPORTED",
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement",
+                "validation:HYP-00003"
+            ]
+        },
+        {
+            "entryId": "KNOW-00004",
+            "relation": "Settlement->DEPENDS_ON->Reservation",
+            "protocolPair": "ERC8275+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 75,
+            "confirmed": 1,
+            "partial": 0,
+            "unsupported": 0,
+            "status": "SUPPORTED",
+            "evidence": [
+                "learning:Settlement->DEPENDS_ON->Reservation",
+                "validation:HYP-00004"
+            ]
+        },
+        {
+            "entryId": "KNOW-00005",
+            "relation": "EmbeddedValue->ENABLES->Reservation",
+            "protocolPair": "ERC8060+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 31,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00005"
+            ]
+        },
+        {
+            "entryId": "KNOW-00006",
+            "relation": "Workflow->DEPENDS_ON->Authority",
+            "protocolPair": "ERC8001+ERC8301",
+            "observations": 1,
+            "averageConfidence": 30,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Workflow->DEPENDS_ON->Authority",
+                "validation:HYP-00006"
+            ]
+        },
+        {
+            "entryId": "KNOW-00007",
+            "relation": "Workflow->PRODUCES->Settlement",
+            "protocolPair": "ERC8275+ERC8301",
+            "observations": 1,
+            "averageConfidence": 41,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Workflow->PRODUCES->Settlement",
+                "validation:HYP-00007"
+            ]
+        },
+        {
+            "entryId": "KNOW-00008",
+            "relation": "Verification->VALIDATES->Settlement",
+            "protocolPair": "ERC8274+ERC8275",
+            "observations": 1,
+            "averageConfidence": 41,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Verification->VALIDATES->Settlement",
+                "validation:HYP-00008"
+            ]
+        },
+        {
+            "entryId": "KNOW-00009",
+            "relation": "Anchoring->ANCHORS->Verification",
+            "protocolPair": "ERC8263+ERC8274",
+            "observations": 1,
+            "averageConfidence": 30,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Anchoring->ANCHORS->Verification",
+                "validation:HYP-00009"
+            ]
+        },
+        {
+            "entryId": "KNOW-00010",
+            "relation": "Eligibility->CONSTRAINS->Settlement",
+            "protocolPair": "ERC8275+ReceiptOS",
+            "observations": 1,
+            "averageConfidence": 41,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Eligibility->CONSTRAINS->Settlement",
+                "validation:HYP-00010"
+            ]
+        }
+    ],
+    "statistics": {
+        "entries": 10,
+        "totalObservations": 10,
+        "emerging": 6,
+        "supported": 4,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    }
+}

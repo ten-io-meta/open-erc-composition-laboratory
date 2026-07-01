@@ -30,6 +30,10 @@ export interface ResearchPipelineResult {
 
     emergingKnowledge: number;
 
+    incrementalKnowledgePath: string;
+
+    incrementalObservations: number;
+
     errors: string[];
 
 }

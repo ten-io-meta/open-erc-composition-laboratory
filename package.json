@@ -60,6 +60,7 @@
     "analyze": "tsx scripts/run-research-analysis.ts",
     "evidence:composability": "tsx scripts/run-composability-evidence.ts",
     "evidence:support": "tsx scripts/run-evidence-support.ts",
+    "knowledge:incremental": "tsx scripts/run-incremental-knowledge.ts",
     "learning": "tsx scripts/run-composition-learning.ts",
     "corpus": "tsx scripts/run-corpus.ts",
     "hypothesis": "tsx scripts/run-hypothesis.ts",

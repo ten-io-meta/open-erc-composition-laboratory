@@ -32,6 +32,13 @@ async function main() {
     console.log(`Supported knowledge: ${result.supportedKnowledge}`);
 console.log(`Emerging knowledge: ${result.emergingKnowledge}`);
 console.log(`Knowledge base: ${result.knowledgePath}`);
+console.log(
+    `Incremental observations: ${result.incrementalObservations}`
+);
+
+console.log(
+    `Incremental knowledge: ${result.incrementalKnowledgePath}`
+);
 
     console.log("");
     console.log("Pipeline exported:");

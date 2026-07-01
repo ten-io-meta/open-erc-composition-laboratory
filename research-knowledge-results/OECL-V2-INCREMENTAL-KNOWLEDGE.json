@@ -1,8 +1,8 @@
 {
-    "generatedAt": "2026-07-01T19:19:45.842Z",
+    "generatedAt": "2026-07-01T19:19:45.865Z",
     "knowledge": {
         "knowledgeBaseId": "KB-2026-07-01T19:19:45.842Z",
-        "generatedAt": "2026-07-01T19:19:45.842Z",
+        "generatedAt": "2026-07-01T19:19:45.865Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
@@ -165,5 +165,100 @@
             "rejected": 0
         }
     },
+    "merges": [
+        {
+            "relation": "Authority->CONSTRAINS->Cursor",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 75,
+            "mergedConfidence": 75
+        },
+        {
+            "relation": "Cursor->DEPENDS_ON->Authority",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 75,
+            "mergedConfidence": 75
+        },
+        {
+            "relation": "Reservation->CONSTRAINS->Settlement",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 75,
+            "mergedConfidence": 75
+        },
+        {
+            "relation": "Settlement->DEPENDS_ON->Reservation",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 75,
+            "mergedConfidence": 75
+        },
+        {
+            "relation": "EmbeddedValue->ENABLES->Reservation",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 31,
+            "mergedConfidence": 31
+        },
+        {
+            "relation": "Workflow->DEPENDS_ON->Authority",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 30,
+            "mergedConfidence": 30
+        },
+        {
+            "relation": "Workflow->PRODUCES->Settlement",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 41,
+            "mergedConfidence": 41
+        },
+        {
+            "relation": "Verification->VALIDATES->Settlement",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 41,
+            "mergedConfidence": 41
+        },
+        {
+            "relation": "Anchoring->ANCHORS->Verification",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 30,
+            "mergedConfidence": 30
+        },
+        {
+            "relation": "Eligibility->CONSTRAINS->Settlement",
+            "previousObservations": 0,
+            "newObservations": 1,
+            "mergedObservations": 1,
+            "previousConfidence": 0,
+            "newConfidence": 41,
+            "mergedConfidence": 41
+        }
+    ],
+    "conflicts": [],
+    "resolutions": [],
+    "evolution": [],
     "errors": []
 }
