@@ -28,6 +28,10 @@ export interface ResearchPipelineResult {
 
     supportedKnowledge: number;
 
+    memoryPath: string;
+
+    memoryEvents: number;
+
     emergingKnowledge: number;
 
     incrementalKnowledgePath: string;

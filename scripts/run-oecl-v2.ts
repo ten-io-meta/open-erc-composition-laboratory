@@ -42,6 +42,13 @@ async function main() {
         console.log(`Supported knowledge: ${result.supportedKnowledge}`);
         console.log(`Emerging knowledge: ${result.emergingKnowledge}`);
         console.log(`Incremental observations: ${result.incrementalObservations}`);
+        console.log(
+    `Memory events: ${result.memoryEvents}`
+);
+
+console.log(
+    `Research memory: ${result.memoryPath}`
+);
     }
 
     await mkdir("./pipeline-results", { recursive: true });

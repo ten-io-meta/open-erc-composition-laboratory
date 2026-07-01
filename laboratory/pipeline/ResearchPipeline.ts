@@ -2,6 +2,8 @@ import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
 import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
 import { KnowledgeEngine } from "../research-knowledge/KnowledgeEngine.js";
 import { IncrementalKnowledgeEngine } from "../incremental-knowledge/IncrementalKnowledgeEngine.js";
+import { ResearchMemoryEngine } from "../research-memory/ResearchMemoryEngine.js";
+import { ResearchMemoryLoader } from "../research-memory/ResearchMemoryLoader.js";
 import { mkdir, readFile, writeFile } from "fs/promises";
 
 import { ResearchSourceLoader } from "../research-source/ResearchSourceLoader.js";
@@ -232,6 +234,32 @@ await writeFile(
         4
     )
 );
+const memoryPath =
+    "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json";
+
+const memoryLoader = new ResearchMemoryLoader();
+
+const previousMemory = await memoryLoader.load(memoryPath);
+
+const memoryEngine = new ResearchMemoryEngine();
+
+const memoryResult = memoryEngine.update(
+    previousMemory,
+    knowledgeResult.knowledge,
+    sourceId
+);
+
+await mkdir("./research-memory-results", { recursive: true });
+
+await writeFile(
+    memoryPath,
+    JSON.stringify(memoryResult.memory, null, 4)
+);
+
+await writeFile(
+    "./research-memory-results/OECL-V2-RESEARCH-MEMORY-RESULT.json",
+    JSON.stringify(memoryResult, null, 4)
+);
             return {
                 pipelineId: `PIPELINE-${sourceId}`,
                 executedAt,
@@ -264,6 +292,11 @@ incrementalKnowledgePath:
 
 incrementalObservations:
     incrementalResult.knowledge.statistics.totalObservations,
+    memoryPath:
+    "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json",
+
+memoryEvents:
+    memoryResult.memory.statistics.events,
 
 errors: []
             };
@@ -291,6 +324,9 @@ errors: []
     incrementalKnowledgePath: "",
 
     incrementalObservations: 0,
+    memoryPath: "",
+
+memoryEvents: 0,
 
     errors: [
         error instanceof Error
