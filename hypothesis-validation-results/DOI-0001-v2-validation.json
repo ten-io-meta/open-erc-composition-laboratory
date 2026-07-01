@@ -1,0 +1,146 @@
+{
+    "validatedAt": "2026-07-01T17:10:49.527Z",
+    "validations": [
+        {
+            "hypothesisId": "HYP-00001",
+            "relation": "Authority->CONSTRAINS->Cursor",
+            "statusBefore": "SUPPORTED",
+            "statusAfter": "SUPPORTED",
+            "confidenceBefore": 75,
+            "confidenceAfter": 75,
+            "evidenceMatched": 1,
+            "validationOutcome": "CONFIRMED",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 75%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00002",
+            "relation": "Cursor->DEPENDS_ON->Authority",
+            "statusBefore": "SUPPORTED",
+            "statusAfter": "SUPPORTED",
+            "confidenceBefore": 75,
+            "confidenceAfter": 75,
+            "evidenceMatched": 1,
+            "validationOutcome": "CONFIRMED",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 75%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00003",
+            "relation": "Reservation->CONSTRAINS->Settlement",
+            "statusBefore": "SUPPORTED",
+            "statusAfter": "SUPPORTED",
+            "confidenceBefore": 75,
+            "confidenceAfter": 75,
+            "evidenceMatched": 1,
+            "validationOutcome": "CONFIRMED",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 75%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00004",
+            "relation": "Settlement->DEPENDS_ON->Reservation",
+            "statusBefore": "SUPPORTED",
+            "statusAfter": "SUPPORTED",
+            "confidenceBefore": 75,
+            "confidenceAfter": 75,
+            "evidenceMatched": 1,
+            "validationOutcome": "CONFIRMED",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 75%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00005",
+            "relation": "EmbeddedValue->ENABLES->Reservation",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 31,
+            "confidenceAfter": 31,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 31%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00006",
+            "relation": "Workflow->DEPENDS_ON->Authority",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 30,
+            "confidenceAfter": 30,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 30%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00007",
+            "relation": "Workflow->PRODUCES->Settlement",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 41,
+            "confidenceAfter": 41,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 41%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00008",
+            "relation": "Verification->VALIDATES->Settlement",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 41,
+            "confidenceAfter": 41,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 41%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00009",
+            "relation": "Anchoring->ANCHORS->Verification",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 30,
+            "confidenceAfter": 30,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 30%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00010",
+            "relation": "Eligibility->CONSTRAINS->Settlement",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 41,
+            "confidenceAfter": 41,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 41%."
+            ]
+        }
+    ],
+    "errors": []
+}

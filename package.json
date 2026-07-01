@@ -63,6 +63,8 @@
     "learning": "tsx scripts/run-composition-learning.ts",
     "corpus": "tsx scripts/run-corpus.ts",
     "hypothesis": "tsx scripts/run-hypothesis.ts",
+    "hypothesis:v2:validate": "tsx scripts/run-hypothesis-v2-validation.ts",
+    "knowledge:v2": "tsx scripts/run-research-knowledge-v2.ts",
     "v2": "tsx scripts/run-oecl-v2.ts",
     "extract": "tsx scripts/run-research-extraction.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
