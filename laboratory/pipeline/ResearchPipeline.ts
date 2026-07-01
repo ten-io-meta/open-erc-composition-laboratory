@@ -196,8 +196,19 @@ await writeFile(
 );
 const incrementalEngine = new IncrementalKnowledgeEngine();
 
+const persistentKnowledgePath =
+    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json";
+
+let previousKnowledge = null;
+
+try {
+    previousKnowledge = await readJson(persistentKnowledgePath);
+} catch {
+    previousKnowledge = null;
+}
+
 const incrementalResult = incrementalEngine.build(
-    null,
+    previousKnowledge,
     knowledgeResult.knowledge
 );
 

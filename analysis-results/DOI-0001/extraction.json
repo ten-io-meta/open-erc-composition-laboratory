@@ -3,7 +3,7 @@
     "success": true,
     "extraction": {
         "sourceId": "DOI-0001",
-        "extractedAt": "2026-07-01T19:19:45.727Z",
+        "extractedAt": "2026-07-01T19:28:50.405Z",
         "protocols": [
             "ERC8004",
             "ERC8217",
