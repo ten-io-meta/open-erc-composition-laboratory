@@ -1,3 +1,4 @@
+import { EvidenceProfileLoader } from "../evidence-profile/EvidenceProfileLoader.js";
 import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
 import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
 import { KnowledgeEngine } from "../research-knowledge/KnowledgeEngine.js";
@@ -30,7 +31,8 @@ export class ResearchPipeline {
 
     async run(
     sourceId = "DOI-0001",
-    sourcePath = `./sources/research/${sourceId}.json`
+    sourcePath = `./sources/research/${sourceId}/source.json`,
+    evidencePath = `./sources/research/${sourceId}/evidence.json`
 ): Promise<ResearchPipelineResult> {
 
         const executedAt = new Date().toISOString();
@@ -192,12 +194,52 @@ const knowledgeResult = knowledgeEngine.build(
     learningResult,
     hypothesisValidationResult
 );
+const evidenceProfileLoader = new EvidenceProfileLoader();
+
+const evidenceProfile = await evidenceProfileLoader.load(evidencePath);
+
+const weightedEntries = knowledgeResult.knowledge.entries.map(entry => ({
+    ...entry,
+    averageConfidence: Math.min(
+        100,
+        Math.round(entry.averageConfidence * evidenceProfile.confidenceWeight)
+    ),
+    evidence: [
+        ...entry.evidence,
+        `evidence-profile:${evidenceProfile.sourceId}:${evidenceProfile.quality}`
+    ]
+}));
+
+knowledgeResult.knowledge.entries = weightedEntries;
+
+knowledgeResult.knowledge.statistics = {
+    ...knowledgeResult.knowledge.statistics,
+    emerging: weightedEntries.filter(entry => entry.status === "EMERGING").length,
+    supported: weightedEntries.filter(entry => entry.status === "SUPPORTED").length,
+    validated: weightedEntries.filter(entry => entry.status === "VALIDATED").length,
+    canonical: weightedEntries.filter(entry => entry.status === "CANONICAL").length,
+    rejected: weightedEntries.filter(entry => entry.status === "REJECTED").length
+};
 
 await mkdir("./research-knowledge-results", { recursive: true });
 
 await writeFile(
     "./research-knowledge-results/OECL-V2-RESEARCH-KNOWLEDGE.json",
     JSON.stringify(knowledgeResult, null, 4)
+);
+knowledgeResult.knowledge.processedSources = [
+    {
+        sourceId,
+        processedAt: new Date().toISOString()
+    }
+];
+await writeFile(
+    `${analysisPath}/research-knowledge.json`,
+    JSON.stringify(
+        knowledgeResult.knowledge,
+        null,
+        4
+    )
 );
 const incrementalEngine = new IncrementalKnowledgeEngine();
 
@@ -297,6 +339,8 @@ incrementalObservations:
 
 memoryEvents:
     memoryResult.memory.statistics.events,
+    partialKnowledgePath:
+    `${analysisPath}/research-knowledge.json`,
 
 errors: []
             };
@@ -327,7 +371,7 @@ errors: []
     memoryPath: "",
 
 memoryEvents: 0,
-
+partialKnowledgePath: "",
     errors: [
         error instanceof Error
             ? error.message

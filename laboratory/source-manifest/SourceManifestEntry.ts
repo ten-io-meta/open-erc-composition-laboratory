@@ -4,6 +4,8 @@ export interface SourceManifestEntry {
 
     path: string;
 
+    evidencePath: string;
+
     enabled: boolean;
 
 }

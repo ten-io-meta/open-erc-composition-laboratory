@@ -4,6 +4,8 @@ export interface ResearchPipelineResult {
 
     executedAt: string;
 
+    partialKnowledgePath: string;
+
     sourceId: string;
 
     analysisPath: string;

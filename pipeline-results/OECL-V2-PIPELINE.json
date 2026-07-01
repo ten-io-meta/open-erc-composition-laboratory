@@ -1,11 +1,11 @@
 {
     "manifestId": "OECL-V2-SOURCE-MANIFEST",
     "executedSources": 2,
-    "generatedAt": "2026-07-01T22:46:12.608Z",
+    "generatedAt": "2026-07-01T23:54:25.168Z",
     "results": [
         {
             "pipelineId": "PIPELINE-DOI-0001",
-            "executedAt": "2026-07-01T22:46:12.290Z",
+            "executedAt": "2026-07-01T23:54:24.770Z",
             "sourceId": "DOI-0001",
             "analysisPath": "./analysis-results/DOI-0001",
             "corpusPath": "./corpus-results/research-corpus.json",
@@ -23,11 +23,12 @@
             "incrementalObservations": 50,
             "memoryPath": "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json",
             "memoryEvents": 30,
+            "partialKnowledgePath": "./analysis-results/DOI-0001/research-knowledge.json",
             "errors": []
         },
         {
             "pipelineId": "PIPELINE-DOI-0002",
-            "executedAt": "2026-07-01T22:46:12.457Z",
+            "executedAt": "2026-07-01T23:54:24.979Z",
             "sourceId": "DOI-0002",
             "analysisPath": "./analysis-results/DOI-0002",
             "corpusPath": "./corpus-results/research-corpus.json",
@@ -45,6 +46,7 @@
             "incrementalObservations": 50,
             "memoryPath": "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json",
             "memoryEvents": 30,
+            "partialKnowledgePath": "./analysis-results/DOI-0002/research-knowledge.json",
             "errors": []
         }
     ]

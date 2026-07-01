@@ -1,4 +1,7 @@
-import { mkdir, writeFile } from "fs/promises";
+import { readFile, mkdir, writeFile } from "fs/promises";
+import { KnowledgeMergeEngine } from "../laboratory/research-knowledge/KnowledgeMergeEngine.js";
+import type { ResearchKnowledge } from "../laboratory/research-knowledge/ResearchKnowledge.js";
+import { readFile, mkdir, writeFile } from "fs/promises";
 
 import { ResearchPipeline } from "../laboratory/pipeline/ResearchPipeline.js";
 import { SourceManifestLoader } from "../laboratory/source-manifest/SourceManifestLoader.js";
@@ -27,7 +30,11 @@ async function main() {
         console.log(`Running source: ${source.sourceId}`);
         console.log("------------------------------------");
 
-        const result = await pipeline.run(source.sourceId, source.path);
+        const result = await pipeline.run(
+    source.sourceId,
+    source.path,
+    source.evidencePath
+);
 
         results.push(result);
 
@@ -50,7 +57,32 @@ console.log(
     `Research memory: ${result.memoryPath}`
 );
     }
+const partialKnowledgeBases: ResearchKnowledge[] = [];
 
+for (const result of results) {
+    if (!result.partialKnowledgePath || result.errors.length > 0) {
+        continue;
+    }
+
+    const partialKnowledge = JSON.parse(
+        await readFile(result.partialKnowledgePath, "utf8")
+    ) as ResearchKnowledge;
+
+    partialKnowledgeBases.push(partialKnowledge);
+}
+
+const knowledgeMergeEngine = new KnowledgeMergeEngine();
+
+const mergedKnowledgeResult = knowledgeMergeEngine.merge(
+    partialKnowledgeBases
+);
+
+await mkdir("./research-knowledge-results", { recursive: true });
+
+await writeFile(
+    "./research-knowledge-results/OECL-V2-MERGED-KNOWLEDGE.json",
+    JSON.stringify(mergedKnowledgeResult, null, 4)
+);
     await mkdir("./pipeline-results", { recursive: true });
 
     await writeFile(
@@ -72,6 +104,8 @@ console.log(
     console.log("------------------------------");
     console.log(`Manifest: ${manifest.manifestId}`);
     console.log(`Executed sources: ${results.length}`);
+    console.log(`Merged knowledge entries: ${mergedKnowledgeResult.mergedEntries}`);
+console.log(`Merged sources: ${mergedKnowledgeResult.mergedSources.length}`);
 
     console.log("");
     console.log("Pipeline exported:");
