@@ -12,6 +12,18 @@
             "path": "./sources/research/DOI-0002/source.json",
             "evidencePath": "./sources/research/DOI-0002/evidence.json",
             "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-ERC8060-RESERVABLE",
+            "path": "./sources/research/GITHUB-ERC8060-RESERVABLE/source.json",
+            "evidencePath": "./sources/research/GITHUB-ERC8060-RESERVABLE/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "path": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/source.json",
+            "evidencePath": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/evidence.json",
+            "enabled": false
         }
     ]
 }

@@ -7,3 +7,7 @@ dist/
 on type .package.json
 
 /on type .package.json
+# Local cloned repositories used by OECL adapters
+
+external/
+github-adapter-results/

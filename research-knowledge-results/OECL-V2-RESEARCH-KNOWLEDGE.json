@@ -1,15 +1,15 @@
 {
-    "generatedAt": "2026-07-02T13:47:27.967Z",
+    "generatedAt": "2026-07-02T14:14:59.401Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-2026-07-02T13:47:27.967Z",
-        "generatedAt": "2026-07-02T13:47:27.967Z",
+        "knowledgeBaseId": "KB-2026-07-02T14:14:59.401Z",
+        "generatedAt": "2026-07-02T14:14:59.401Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
                 "relation": "Authority->CONSTRAINS->Cursor",
                 "protocolPair": "ERC8001+ERC8312",
                 "observations": 1,
-                "averageConfidence": 75,
+                "averageConfidence": 38,
                 "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
@@ -17,7 +17,7 @@
                 "evidence": [
                     "learning:Authority->CONSTRAINS->Cursor",
                     "validation:HYP-00001",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -25,7 +25,7 @@
                 "relation": "Cursor->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8312",
                 "observations": 1,
-                "averageConfidence": 75,
+                "averageConfidence": 38,
                 "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
@@ -33,7 +33,7 @@
                 "evidence": [
                     "learning:Cursor->DEPENDS_ON->Authority",
                     "validation:HYP-00002",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -41,7 +41,7 @@
                 "relation": "Reservation->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+IERC8060Reservable",
                 "observations": 1,
-                "averageConfidence": 75,
+                "averageConfidence": 38,
                 "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
@@ -49,7 +49,7 @@
                 "evidence": [
                     "learning:Reservation->CONSTRAINS->Settlement",
                     "validation:HYP-00003",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -57,7 +57,7 @@
                 "relation": "Settlement->DEPENDS_ON->Reservation",
                 "protocolPair": "ERC8275+IERC8060Reservable",
                 "observations": 1,
-                "averageConfidence": 75,
+                "averageConfidence": 38,
                 "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
@@ -65,7 +65,7 @@
                 "evidence": [
                     "learning:Settlement->DEPENDS_ON->Reservation",
                     "validation:HYP-00004",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -73,7 +73,7 @@
                 "relation": "EmbeddedValue->ENABLES->Reservation",
                 "protocolPair": "ERC8060+IERC8060Reservable",
                 "observations": 1,
-                "averageConfidence": 31,
+                "averageConfidence": 16,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -81,7 +81,7 @@
                 "evidence": [
                     "learning:EmbeddedValue->ENABLES->Reservation",
                     "validation:HYP-00005",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -89,7 +89,7 @@
                 "relation": "Workflow->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8301",
                 "observations": 1,
-                "averageConfidence": 30,
+                "averageConfidence": 15,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -97,7 +97,7 @@
                 "evidence": [
                     "learning:Workflow->DEPENDS_ON->Authority",
                     "validation:HYP-00006",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -105,7 +105,7 @@
                 "relation": "Workflow->PRODUCES->Settlement",
                 "protocolPair": "ERC8275+ERC8301",
                 "observations": 1,
-                "averageConfidence": 41,
+                "averageConfidence": 21,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -113,7 +113,7 @@
                 "evidence": [
                     "learning:Workflow->PRODUCES->Settlement",
                     "validation:HYP-00007",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -121,7 +121,7 @@
                 "relation": "Verification->VALIDATES->Settlement",
                 "protocolPair": "ERC8274+ERC8275",
                 "observations": 1,
-                "averageConfidence": 41,
+                "averageConfidence": 21,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -129,7 +129,7 @@
                 "evidence": [
                     "learning:Verification->VALIDATES->Settlement",
                     "validation:HYP-00008",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -137,7 +137,7 @@
                 "relation": "Anchoring->ANCHORS->Verification",
                 "protocolPair": "ERC8263+ERC8274",
                 "observations": 1,
-                "averageConfidence": 30,
+                "averageConfidence": 15,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -145,7 +145,7 @@
                 "evidence": [
                     "learning:Anchoring->ANCHORS->Verification",
                     "validation:HYP-00009",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             },
             {
@@ -153,7 +153,7 @@
                 "relation": "Eligibility->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+ReceiptOS",
                 "observations": 1,
-                "averageConfidence": 41,
+                "averageConfidence": 21,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
@@ -161,7 +161,7 @@
                 "evidence": [
                     "learning:Eligibility->CONSTRAINS->Settlement",
                     "validation:HYP-00010",
-                    "evidence-profile:DOI-0001:HIGH"
+                    "evidence-profile:DOI-0002:MEDIUM"
                 ]
             }
         ],
