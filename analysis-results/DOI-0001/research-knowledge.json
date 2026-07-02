@@ -1,6 +1,6 @@
 {
-    "knowledgeBaseId": "KB-2026-07-01T23:54:24.898Z",
-    "generatedAt": "2026-07-01T23:54:24.898Z",
+    "knowledgeBaseId": "KB-2026-07-02T13:47:27.967Z",
+    "generatedAt": "2026-07-02T13:47:27.967Z",
     "entries": [
         {
             "entryId": "KNOW-00001",
@@ -175,7 +175,7 @@
     "processedSources": [
         {
             "sourceId": "DOI-0001",
-            "processedAt": "2026-07-01T23:54:24.903Z"
+            "processedAt": "2026-07-02T13:47:27.971Z"
         }
     ]
 }

@@ -11,7 +11,7 @@
             "sourceId": "DOI-0002",
             "path": "./sources/research/DOI-0002/source.json",
             "evidencePath": "./sources/research/DOI-0002/evidence.json",
-            "enabled": true
+            "enabled": false
         }
     ]
 }
