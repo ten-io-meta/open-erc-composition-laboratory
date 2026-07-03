@@ -1,8 +1,8 @@
 {
-    "generatedAt": "2026-07-03T15:25:20.640Z",
+    "generatedAt": "2026-07-03T15:43:36.973Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-MERGED-2026-07-03T15:25:20.640Z",
-        "generatedAt": "2026-07-03T15:25:20.640Z",
+        "knowledgeBaseId": "KB-MERGED-2026-07-03T15:43:36.971Z",
+        "generatedAt": "2026-07-03T15:43:36.971Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
@@ -170,11 +170,11 @@
         "processedSources": [
             {
                 "sourceId": "DOI-0001",
-                "processedAt": "2026-07-03T15:25:20.640Z"
+                "processedAt": "2026-07-03T15:43:36.972Z"
             },
             {
                 "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-                "processedAt": "2026-07-03T15:25:20.640Z"
+                "processedAt": "2026-07-03T15:43:36.972Z"
             }
         ],
         "statistics": {

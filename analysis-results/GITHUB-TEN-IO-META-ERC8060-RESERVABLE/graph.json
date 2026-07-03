@@ -1,6 +1,6 @@
 {
     "graphId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-    "generatedAt": "2026-07-03T15:25:20.486Z",
+    "generatedAt": "2026-07-03T15:43:36.811Z",
     "nodes": [
         {
             "id": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
@@ -73,7 +73,309 @@
             "label": "InputProvenance"
         },
         {
-            "type": "Claim"
+            "id": "GITHUB-CLAIM-00001",
+            "type": "Claim",
+            "label": "Commitment Accounting for ERC-8060"
+        },
+        {
+            "id": "GITHUB-CLAIM-00002",
+            "type": "Claim",
+            "label": "These applications require accounting for commitments rather than moving assets."
+        },
+        {
+            "id": "GITHUB-CLAIM-00003",
+            "type": "Claim",
+            "label": "The missing primitive is commitment accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00004",
+            "type": "Claim",
+            "label": "The extension only tracks commitment accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00005",
+            "type": "Claim",
+            "label": "IERC8060Reservable\tCommitment accounting"
+        },
+        {
+            "id": "GITHUB-CLAIM-00006",
+            "type": "Claim",
+            "label": "IERC8060Reservable provides commitment accounting for that value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00007",
+            "type": "Claim",
+            "label": "Draft (Protocol-Closed Accounting Layer)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00008",
+            "type": "Claim",
+            "label": "IERC8060Reservable extends ERC-8060 with a minimal reservation accounting primitive."
+        },
+        {
+            "id": "GITHUB-CLAIM-00009",
+            "type": "Claim",
+            "label": "These concerns were classified as application-layer concerns rather than accounting-layer concerns."
+        },
+        {
+            "id": "GITHUB-CLAIM-00010",
+            "type": "Claim",
+            "label": "No protocol-layer accounting defect was identified."
+        },
+        {
+            "id": "GITHUB-CLAIM-00011",
+            "type": "Claim",
+            "label": "No missing mandatory accounting primitive was identified."
+        },
+        {
+            "id": "GITHUB-CLAIM-00012",
+            "type": "Claim",
+            "label": "IERC8060Reservable appears protocol-closed for reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00013",
+            "type": "Claim",
+            "label": "No additional accounting primitive has been demonstrated as necessary."
+        },
+        {
+            "id": "GITHUB-CLAIM-00014",
+            "type": "Claim",
+            "label": "Final hostile review rounds did not identify any transaction sequence capable of violating the documented accounting invariants. Remaining concerns were classified as integration-layer, application-layer, disclosure-layer, or recoverability-layer risks."
+        },
+        {
+            "id": "GITHUB-CLAIM-00015",
+            "type": "Claim",
+            "label": "IERC8060Reservable standardizes reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00016",
+            "type": "Claim",
+            "label": "IERC8060Reservable remains a minimal accounting primitive."
+        },
+        {
+            "id": "GITHUB-CLAIM-00017",
+            "type": "Claim",
+            "label": "IERC8060Reservable intentionally standardizes only reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00018",
+            "type": "Claim",
+            "label": "Applications may voluntarily expose recovery functionality while preserving reservation accounting compatibility."
+        },
+        {
+            "id": "GITHUB-CLAIM-00019",
+            "type": "Claim",
+            "label": "IERC8060Reservable supports both:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00020",
+            "type": "Claim",
+            "label": "Minimal reservation accounting extension for ERC-8060 value-bearing NFTs."
+        },
+        {
+            "id": "GITHUB-CLAIM-00021",
+            "type": "Claim",
+            "label": "mapping(uint256 => mapping(address => uint256)) private _lockedValue;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00022",
+            "type": "Claim",
+            "label": "require(amount <= availableValue(tokenId, asset), \"insufficient available value\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00023",
+            "type": "Claim",
+            "label": "_lockedValue[tokenId][asset] += amount;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00024",
+            "type": "Claim",
+            "label": "emit ValueReserved(tokenId, msg.sender, asset, amount);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00025",
+            "type": "Claim",
+            "label": "require(amount <= r.locked, \"release exceeds locked value\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00026",
+            "type": "Claim",
+            "label": "_lockedValue[tokenId][asset] -= amount;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00027",
+            "type": "Claim",
+            "label": "if (r.approved <= r.locked) {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00028",
+            "type": "Claim",
+            "label": "return r.approved - r.locked;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00029",
+            "type": "Claim",
+            "label": "function lockedValue("
+        },
+        {
+            "id": "GITHUB-CLAIM-00030",
+            "type": "Claim",
+            "label": "return _lockedValue[tokenId][asset];"
+        },
+        {
+            "id": "GITHUB-CLAIM-00031",
+            "type": "Claim",
+            "label": "function availableValue("
+        },
+        {
+            "id": "GITHUB-CLAIM-00032",
+            "type": "Claim",
+            "label": "return _totalValue[tokenId][asset] - _lockedValue[tokenId][asset];"
+        },
+        {
+            "id": "GITHUB-CLAIM-00033",
+            "type": "Claim",
+            "label": "reserve allowance on transfer while preserving active locked value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00034",
+            "type": "Claim",
+            "label": "/ It only provides the minimal accounting required to prevent reserved"
+        },
+        {
+            "id": "GITHUB-CLAIM-00035",
+            "type": "Claim",
+            "label": "event ValueReserved("
+        },
+        {
+            "id": "GITHUB-CLAIM-00036",
+            "type": "Claim",
+            "label": "/ @notice Moves `amount` from available value to locked value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00037",
+            "type": "Claim",
+            "label": "/      Reverts if `amount` exceeds remaining allowance or available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00038",
+            "type": "Claim",
+            "label": "/ @dev Must equal totalValue(tokenId, asset) - lockedValue(tokenId, asset)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00039",
+            "type": "Claim",
+            "label": "* Required Invariants"
+        },
+        {
+            "id": "GITHUB-CLAIM-00040",
+            "type": "Claim",
+            "label": "* Any correct implementation MUST maintain these invariants."
+        },
+        {
+            "id": "GITHUB-CLAIM-00041",
+            "type": "Claim",
+            "label": "* Violations MUST cause reverts in the relevant functions."
+        },
+        {
+            "id": "GITHUB-CLAIM-00042",
+            "type": "Claim",
+            "label": "* 1. lockedValue(tokenId, asset) <= totalValue(tokenId, asset)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00043",
+            "type": "Claim",
+            "label": "* 2. availableValue(tokenId, asset) == totalValue(tokenId, asset) - lockedValue(tokenId, asset)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00044",
+            "type": "Claim",
+            "label": "*    (withdraw, burn, or internal value movement) MUST revert if"
+        },
+        {
+            "id": "GITHUB-CLAIM-00045",
+            "type": "Claim",
+            "label": "*    amount > availableValue(tokenId, asset)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00046",
+            "type": "Claim",
+            "label": "* 4. reserveValue() MUST revert unless BOTH hold:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00047",
+            "type": "Claim",
+            "label": "*    - amount <= availableValue(tokenId, asset)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00048",
+            "type": "Claim",
+            "label": "* 5. releaseValue() MUST revert if the caller tries to release more"
+        },
+        {
+            "id": "GITHUB-CLAIM-00049",
+            "type": "Claim",
+            "label": "*    than it currently has locked."
+        },
+        {
+            "id": "GITHUB-CLAIM-00050",
+            "type": "Claim",
+            "label": "* 6. Reservations and locked value are bound to tokenId. If the NFT is"
+        },
+        {
+            "id": "GITHUB-CLAIM-00051",
+            "type": "Claim",
+            "label": "Repository contains README research context."
+        },
+        {
+            "id": "GITHUB-CLAIM-00052",
+            "type": "Claim",
+            "label": "Repository contains contract or interface material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00053",
+            "type": "Claim",
+            "label": "Repository does not expose test evidence."
+        },
+        {
+            "id": "GITHUB-CLAIM-00054",
+            "type": "Claim",
+            "label": "Repository contains documentation material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00055",
+            "type": "Claim",
+            "label": "Repository contains invariant-like statements."
+        },
+        {
+            "id": "GITHUB-CLAIM-00056",
+            "type": "Claim",
+            "label": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00057",
+            "type": "Claim",
+            "label": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00058",
+            "type": "Claim",
+            "label": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement."
+        },
+        {
+            "id": "GITHUB-CLAIM-00059",
+            "type": "Claim",
+            "label": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety."
+        },
+        {
+            "id": "GITHUB-CLAIM-00060",
+            "type": "Claim",
+            "label": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation."
+        },
+        {
+            "id": "GITHUB-CLAIM-00061",
+            "type": "Claim",
+            "label": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value."
         }
     ],
     "edges": [
@@ -175,7 +477,369 @@
         },
         {
             "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-            "relation": "SUPPORTS_CLAIM"
+            "to": "GITHUB-CLAIM-00001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00002",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00003",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00004",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00005",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00006",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00007",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00008",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00009",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00010",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00011",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00012",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00013",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00014",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00015",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00016",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00017",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00018",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00019",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00020",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00021",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00022",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00023",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00024",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00025",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00026",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00027",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00028",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00029",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00030",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00031",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00032",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00033",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00034",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00035",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00036",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00037",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00038",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00039",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00040",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00041",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00042",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00043",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00044",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00045",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00046",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00047",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00048",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00049",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00050",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00051",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00052",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00053",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00054",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00055",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00056",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00057",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00058",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00059",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00060",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "GITHUB-CLAIM-00061",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
         }
     ]
 }

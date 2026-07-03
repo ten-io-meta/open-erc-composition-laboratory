@@ -1,11 +1,11 @@
 {
     "manifestId": "OECL-V2-SOURCE-MANIFEST",
     "executedSources": 2,
-    "generatedAt": "2026-07-03T15:25:20.643Z",
+    "generatedAt": "2026-07-03T15:43:36.978Z",
     "results": [
         {
             "pipelineId": "PIPELINE-DOI-0001",
-            "executedAt": "2026-07-03T15:25:20.315Z",
+            "executedAt": "2026-07-03T15:43:36.629Z",
             "sourceId": "DOI-0001",
             "analysisPath": "./analysis-results/DOI-0001",
             "corpusPath": "./corpus-results/research-corpus.json",
@@ -28,7 +28,7 @@
         },
         {
             "pipelineId": "PIPELINE-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-            "executedAt": "2026-07-03T15:25:20.485Z",
+            "executedAt": "2026-07-03T15:43:36.802Z",
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "analysisPath": "./analysis-results/GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "corpusPath": "./corpus-results/research-corpus.json",

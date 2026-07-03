@@ -62,10 +62,16 @@ const extractionResult = githubAdapter.supports(sourceBundle)
         extraction: {
             sourceId,
             extractedAt: new Date().toISOString(),
-            protocols: sourceBundle.protocols ?? [],
-            capabilities: sourceBundle.capabilities ?? [],
-            claims: sourceBundle.claims ?? [],
-            invariants: [],
+            protocols: githubAdapter.adapt(sourceBundle).protocols,
+capabilities: githubAdapter.adapt(sourceBundle).capabilities,
+claims: githubAdapter.adapt(sourceBundle).claims.map(
+    (claim: string, index: number) => ({
+        claimId: `GITHUB-CLAIM-${String(index + 1).padStart(5, "0")}`,
+        text: claim,
+        evidence: sourceId,
+        confidence: 70
+    })
+),            invariants: [],
             relationships: [],
             errors: []
         },

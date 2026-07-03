@@ -1,9 +1,9 @@
 {
     "graphId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-    "discoveredAt": "2026-07-03T15:25:20.487Z",
+    "discoveredAt": "2026-07-03T15:43:36.812Z",
     "model": {
         "modelId": "SEMANTIC-GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-        "generatedAt": "2026-07-03T15:25:20.487Z",
+        "generatedAt": "2026-07-03T15:43:36.812Z",
         "capabilities": [
             {
                 "capabilityId": "Reservation",
