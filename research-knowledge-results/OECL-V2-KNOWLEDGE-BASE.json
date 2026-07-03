@@ -1,6 +1,6 @@
 {
-    "knowledgeBaseId": "KB-INCREMENTAL-2026-07-01T21:07:41.808Z",
-    "generatedAt": "2026-07-01T21:07:41.808Z",
+    "knowledgeBaseId": "KB-INCREMENTAL-2026-07-03T13:13:41.035Z",
+    "generatedAt": "2026-07-03T13:13:41.035Z",
     "entries": [
         {
             "entryId": "KNOW-00001",
@@ -66,15 +66,17 @@
             "entryId": "KNOW-00005",
             "relation": "EmbeddedValue->ENABLES->Reservation",
             "protocolPair": "ERC8060+IERC8060Reservable",
-            "observations": 5,
-            "averageConfidence": 31,
+            "observations": 6,
+            "averageConfidence": 29,
             "confirmed": 0,
-            "partial": 5,
+            "partial": 6,
             "unsupported": 0,
             "status": "EMERGING",
             "evidence": [
                 "learning:EmbeddedValue->ENABLES->Reservation",
-                "validation:HYP-00005"
+                "validation:HYP-00005",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
             ]
         },
         {
@@ -155,7 +157,7 @@
     ],
     "statistics": {
         "entries": 10,
-        "totalObservations": 50,
+        "totalObservations": 51,
         "emerging": 6,
         "supported": 4,
         "validated": 0,
@@ -170,6 +172,10 @@
         {
             "sourceId": "DOI-0002",
             "processedAt": "2026-07-01T21:07:41.808Z"
+        },
+        {
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "processedAt": "2026-07-03T13:13:41.035Z"
         }
     ]
 }

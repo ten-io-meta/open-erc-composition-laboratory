@@ -1,6 +1,6 @@
 {
     "memoryId": "OECL-V2-RESEARCH-MEMORY",
-    "generatedAt": "2026-07-02T14:14:59.423Z",
+    "generatedAt": "2026-07-03T14:05:25.847Z",
     "timelines": [
         {
             "relation": "Authority->CONSTRAINS->Cursor",
@@ -223,6 +223,20 @@
                     "evidence": [
                         "learning:EmbeddedValue->ENABLES->Reservation",
                         "validation:HYP-00005"
+                    ]
+                },
+                {
+                    "eventId": "MEM-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-00001",
+                    "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+                    "relation": "EmbeddedValue->ENABLES->Reservation",
+                    "protocolPair": "ERC8060+IERC8060Reservable",
+                    "confidence": 19,
+                    "status": "EMERGING",
+                    "observedAt": "2026-07-03T13:13:41.043Z",
+                    "evidence": [
+                        "learning:EmbeddedValue->ENABLES->Reservation",
+                        "validation:HYP-00001",
+                        "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
                     ]
                 }
             ]
@@ -454,12 +468,12 @@
         }
     ],
     "statistics": {
-        "events": 30,
+        "events": 31,
         "timelines": 10,
-        "sources": 2,
-        "averageConfidence": 51,
+        "sources": 3,
+        "averageConfidence": 50,
         "supportedEvents": 12,
-        "emergingEvents": 18,
+        "emergingEvents": 19,
         "rejectedEvents": 0
     }
 }

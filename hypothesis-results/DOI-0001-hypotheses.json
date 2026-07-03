@@ -1,83 +1,11 @@
 {
-    "generatedAt": "2026-07-02T14:14:59.384Z",
+    "generatedAt": "2026-07-03T14:05:25.830Z",
     "hypotheses": [
         {
             "hypothesisId": "HYP-00001",
-            "statement": "Authority->CONSTRAINS->Cursor appears to represent a reproducible protocol composition.",
-            "relation": "Authority->CONSTRAINS->Cursor",
-            "confidence": 75,
-            "evidence": 1,
-            "status": "SUPPORTED"
-        },
-        {
-            "hypothesisId": "HYP-00002",
-            "statement": "Cursor->DEPENDS_ON->Authority appears to represent a reproducible protocol composition.",
-            "relation": "Cursor->DEPENDS_ON->Authority",
-            "confidence": 75,
-            "evidence": 1,
-            "status": "SUPPORTED"
-        },
-        {
-            "hypothesisId": "HYP-00003",
-            "statement": "Reservation->CONSTRAINS->Settlement appears to represent a reproducible protocol composition.",
-            "relation": "Reservation->CONSTRAINS->Settlement",
-            "confidence": 75,
-            "evidence": 1,
-            "status": "SUPPORTED"
-        },
-        {
-            "hypothesisId": "HYP-00004",
-            "statement": "Settlement->DEPENDS_ON->Reservation appears to represent a reproducible protocol composition.",
-            "relation": "Settlement->DEPENDS_ON->Reservation",
-            "confidence": 75,
-            "evidence": 1,
-            "status": "SUPPORTED"
-        },
-        {
-            "hypothesisId": "HYP-00005",
             "statement": "EmbeddedValue->ENABLES->Reservation appears to represent a reproducible protocol composition.",
             "relation": "EmbeddedValue->ENABLES->Reservation",
             "confidence": 31,
-            "evidence": 1,
-            "status": "EMERGING"
-        },
-        {
-            "hypothesisId": "HYP-00006",
-            "statement": "Workflow->DEPENDS_ON->Authority appears to represent a reproducible protocol composition.",
-            "relation": "Workflow->DEPENDS_ON->Authority",
-            "confidence": 30,
-            "evidence": 1,
-            "status": "EMERGING"
-        },
-        {
-            "hypothesisId": "HYP-00007",
-            "statement": "Workflow->PRODUCES->Settlement appears to represent a reproducible protocol composition.",
-            "relation": "Workflow->PRODUCES->Settlement",
-            "confidence": 41,
-            "evidence": 1,
-            "status": "EMERGING"
-        },
-        {
-            "hypothesisId": "HYP-00008",
-            "statement": "Verification->VALIDATES->Settlement appears to represent a reproducible protocol composition.",
-            "relation": "Verification->VALIDATES->Settlement",
-            "confidence": 41,
-            "evidence": 1,
-            "status": "EMERGING"
-        },
-        {
-            "hypothesisId": "HYP-00009",
-            "statement": "Anchoring->ANCHORS->Verification appears to represent a reproducible protocol composition.",
-            "relation": "Anchoring->ANCHORS->Verification",
-            "confidence": 30,
-            "evidence": 1,
-            "status": "EMERGING"
-        },
-        {
-            "hypothesisId": "HYP-00010",
-            "statement": "Eligibility->CONSTRAINS->Settlement appears to represent a reproducible protocol composition.",
-            "relation": "Eligibility->CONSTRAINS->Settlement",
-            "confidence": 41,
             "evidence": 1,
             "status": "EMERGING"
         }

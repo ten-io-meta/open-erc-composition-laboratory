@@ -1,0 +1,181 @@
+{
+    "graphId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+    "generatedAt": "2026-07-03T14:05:25.587Z",
+    "nodes": [
+        {
+            "id": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "type": "ResearchSource",
+            "label": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "id": "IERC8060Reservable",
+            "type": "Protocol",
+            "label": "IERC8060Reservable"
+        },
+        {
+            "id": "ERC8004",
+            "type": "Protocol",
+            "label": "ERC8004"
+        },
+        {
+            "id": "ERC8281",
+            "type": "Protocol",
+            "label": "ERC8281"
+        },
+        {
+            "id": "ERC8060",
+            "type": "Protocol",
+            "label": "ERC8060"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "Settlement",
+            "type": "Capability",
+            "label": "Settlement"
+        },
+        {
+            "id": "EmbeddedValue",
+            "type": "Capability",
+            "label": "EmbeddedValue"
+        },
+        {
+            "id": "InvariantValidation",
+            "type": "Capability",
+            "label": "InvariantValidation"
+        },
+        {
+            "id": "Testing",
+            "type": "Capability",
+            "label": "Testing"
+        },
+        {
+            "id": "Redemption",
+            "type": "Capability",
+            "label": "Redemption"
+        },
+        {
+            "id": "AgentIdentity",
+            "type": "Capability",
+            "label": "AgentIdentity"
+        },
+        {
+            "id": "InputProvenance",
+            "type": "Capability",
+            "label": "InputProvenance"
+        },
+        {
+            "type": "Claim"
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "IERC8060Reservable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "ERC8004",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "ERC8281",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "ERC8060",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "Settlement",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "EmbeddedValue",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "InvariantValidation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "Testing",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "to": "Redemption",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Reservation",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Accounting",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "ERC8004",
+            "to": "AgentIdentity",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "ERC8281",
+            "to": "InputProvenance",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "ERC8060",
+            "to": "EmbeddedValue",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+        },
+        {
+            "from": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "SUPPORTS_CLAIM"
+        }
+    ]
+}

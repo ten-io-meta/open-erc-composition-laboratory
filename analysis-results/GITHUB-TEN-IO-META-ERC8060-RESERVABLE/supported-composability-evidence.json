@@ -1,0 +1,24 @@
+{
+    "generatedAt": "2026-07-03T14:05:25.592Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "semanticConfidence": 90,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 31,
+            "status": "INCONCLUSIVE"
+        }
+    ],
+    "errors": []
+}

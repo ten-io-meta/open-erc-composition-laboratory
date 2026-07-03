@@ -1,0 +1,46 @@
+{
+    "graphId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+    "discoveredAt": "2026-07-03T14:05:25.587Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 4 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "IERC8060Reservable",
+                "ERC8004",
+                "ERC8281",
+                "ERC8060"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 9 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "Reservation",
+                "Accounting",
+                "Settlement",
+                "EmbeddedValue",
+                "InvariantValidation",
+                "Testing",
+                "Redemption",
+                "AgentIdentity",
+                "InputProvenance"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-undefined",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "evidence": [
+                null
+            ],
+            "confidence": 100
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 {
-    "corpusId": "CORPUS-2026-07-02T14:14:59.368Z",
-    "generatedAt": "2026-07-02T14:14:59.368Z",
+    "corpusId": "CORPUS-2026-07-03T14:05:25.825Z",
+    "generatedAt": "2026-07-03T14:05:25.825Z",
     "entries": [
         {
             "sourceId": "DOI-0001",
@@ -23,15 +23,26 @@
             "candidateClaims": 4,
             "inconclusiveClaims": 6,
             "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "analysisPath": "./analysis-results/GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "protocols": 4,
+            "capabilities": 7,
+            "claims": 1,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 1,
+            "status": "ANALYZED"
         }
     ],
     "statistics": {
-        "sources": 2,
-        "protocols": 26,
-        "capabilities": 28,
-        "claims": 20,
+        "sources": 3,
+        "protocols": 30,
+        "capabilities": 35,
+        "claims": 21,
         "supportedClaims": 0,
         "candidateClaims": 8,
-        "inconclusiveClaims": 12
+        "inconclusiveClaims": 13
     }
 }

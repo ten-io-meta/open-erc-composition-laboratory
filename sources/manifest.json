@@ -23,7 +23,7 @@
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "path": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/source.json",
             "evidencePath": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/evidence.json",
-            "enabled": false
+            "enabled": true
         }
     ]
 }

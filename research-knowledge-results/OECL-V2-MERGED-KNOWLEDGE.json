@@ -1,75 +1,71 @@
 {
-    "generatedAt": "2026-07-02T14:14:59.463Z",
+    "generatedAt": "2026-07-03T14:05:25.902Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-MERGED-2026-07-02T14:14:59.462Z",
-        "generatedAt": "2026-07-02T14:14:59.462Z",
+        "knowledgeBaseId": "KB-MERGED-2026-07-03T14:05:25.902Z",
+        "generatedAt": "2026-07-03T14:05:25.902Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
                 "relation": "Authority->CONSTRAINS->Cursor",
                 "protocolPair": "ERC8001+ERC8312",
-                "observations": 2,
-                "averageConfidence": 57,
-                "confirmed": 2,
+                "observations": 1,
+                "averageConfidence": 75,
+                "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
-                "status": "EMERGING",
+                "status": "SUPPORTED",
                 "evidence": [
                     "learning:Authority->CONSTRAINS->Cursor",
                     "validation:HYP-00001",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00002",
                 "relation": "Cursor->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8312",
-                "observations": 2,
-                "averageConfidence": 57,
-                "confirmed": 2,
+                "observations": 1,
+                "averageConfidence": 75,
+                "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
-                "status": "EMERGING",
+                "status": "SUPPORTED",
                 "evidence": [
                     "learning:Cursor->DEPENDS_ON->Authority",
                     "validation:HYP-00002",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00003",
                 "relation": "Reservation->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+IERC8060Reservable",
-                "observations": 2,
-                "averageConfidence": 57,
-                "confirmed": 2,
+                "observations": 1,
+                "averageConfidence": 75,
+                "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
-                "status": "EMERGING",
+                "status": "SUPPORTED",
                 "evidence": [
                     "learning:Reservation->CONSTRAINS->Settlement",
                     "validation:HYP-00003",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00004",
                 "relation": "Settlement->DEPENDS_ON->Reservation",
                 "protocolPair": "ERC8275+IERC8060Reservable",
-                "observations": 2,
-                "averageConfidence": 57,
-                "confirmed": 2,
+                "observations": 1,
+                "averageConfidence": 75,
+                "confirmed": 1,
                 "partial": 0,
                 "unsupported": 0,
-                "status": "EMERGING",
+                "status": "SUPPORTED",
                 "evidence": [
                     "learning:Settlement->DEPENDS_ON->Reservation",
                     "validation:HYP-00004",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
@@ -77,7 +73,7 @@
                 "relation": "EmbeddedValue->ENABLES->Reservation",
                 "protocolPair": "ERC8060+IERC8060Reservable",
                 "observations": 2,
-                "averageConfidence": 24,
+                "averageConfidence": 25,
                 "confirmed": 0,
                 "partial": 2,
                 "unsupported": 0,
@@ -86,110 +82,106 @@
                     "learning:EmbeddedValue->ENABLES->Reservation",
                     "validation:HYP-00005",
                     "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
                 ]
             },
             {
                 "entryId": "KNOW-00006",
                 "relation": "Workflow->DEPENDS_ON->Authority",
                 "protocolPair": "ERC8001+ERC8301",
-                "observations": 2,
-                "averageConfidence": 23,
+                "observations": 1,
+                "averageConfidence": 30,
                 "confirmed": 0,
-                "partial": 2,
+                "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:Workflow->DEPENDS_ON->Authority",
                     "validation:HYP-00006",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00007",
                 "relation": "Workflow->PRODUCES->Settlement",
                 "protocolPair": "ERC8275+ERC8301",
-                "observations": 2,
-                "averageConfidence": 31,
+                "observations": 1,
+                "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 2,
+                "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:Workflow->PRODUCES->Settlement",
                     "validation:HYP-00007",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00008",
                 "relation": "Verification->VALIDATES->Settlement",
                 "protocolPair": "ERC8274+ERC8275",
-                "observations": 2,
-                "averageConfidence": 31,
+                "observations": 1,
+                "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 2,
+                "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:Verification->VALIDATES->Settlement",
                     "validation:HYP-00008",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00009",
                 "relation": "Anchoring->ANCHORS->Verification",
                 "protocolPair": "ERC8263+ERC8274",
-                "observations": 2,
-                "averageConfidence": 23,
+                "observations": 1,
+                "averageConfidence": 30,
                 "confirmed": 0,
-                "partial": 2,
+                "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:Anchoring->ANCHORS->Verification",
                     "validation:HYP-00009",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             },
             {
                 "entryId": "KNOW-00010",
                 "relation": "Eligibility->CONSTRAINS->Settlement",
                 "protocolPair": "ERC8275+ReceiptOS",
-                "observations": 2,
-                "averageConfidence": 31,
+                "observations": 1,
+                "averageConfidence": 41,
                 "confirmed": 0,
-                "partial": 2,
+                "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:Eligibility->CONSTRAINS->Settlement",
                     "validation:HYP-00010",
-                    "evidence-profile:DOI-0001:HIGH",
-                    "evidence-profile:DOI-0002:MEDIUM"
+                    "evidence-profile:DOI-0001:HIGH"
                 ]
             }
         ],
         "processedSources": [
             {
                 "sourceId": "DOI-0001",
-                "processedAt": "2026-07-02T14:14:59.462Z"
+                "processedAt": "2026-07-03T14:05:25.902Z"
             },
             {
-                "sourceId": "DOI-0002",
-                "processedAt": "2026-07-02T14:14:59.462Z"
+                "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+                "processedAt": "2026-07-03T14:05:25.902Z"
             }
         ],
         "statistics": {
             "entries": 10,
-            "totalObservations": 20,
-            "emerging": 10,
-            "supported": 0,
+            "totalObservations": 11,
+            "emerging": 6,
+            "supported": 4,
             "validated": 0,
             "canonical": 0,
             "rejected": 0
@@ -197,7 +189,7 @@
     },
     "mergedSources": [
         "DOI-0001",
-        "DOI-0002"
+        "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
     ],
     "mergedEntries": 10,
     "errors": []

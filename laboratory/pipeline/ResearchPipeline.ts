@@ -1,3 +1,4 @@
+import { GitHubResearchAdapter } from "../research-source-adapter/GitHubResearchAdapter.js";
 import { EvidenceProfileLoader } from "../evidence-profile/EvidenceProfileLoader.js";
 import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
 import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
@@ -50,11 +51,31 @@ export class ResearchPipeline {
             const evidenceSupportEngine = new EvidenceSupportEngine();
 
             const source = await sourceLoader.load(sourcePath);
-            const extractionResult = extractionEngine.extract(source);
 
-            if (!extractionResult.success || !extractionResult.extraction) {
-                throw new Error("Research extraction failed.");
-            }
+const githubAdapter = new GitHubResearchAdapter();
+
+const sourceBundle = source as any;
+
+const extractionResult = githubAdapter.supports(sourceBundle)
+    ? {
+        success: true,
+        extraction: {
+            sourceId,
+            extractedAt: new Date().toISOString(),
+            protocols: sourceBundle.protocols ?? [],
+            capabilities: sourceBundle.capabilities ?? [],
+            claims: sourceBundle.claims ?? [],
+            invariants: [],
+            relationships: [],
+            errors: []
+        },
+        errors: []
+    }
+    : extractionEngine.extract(source);
+
+if (!extractionResult.success || !extractionResult.extraction) {
+    throw new Error("Research extraction failed.");
+}
 
             const protocolSemanticResult = protocolSemanticEngine.extract(
                 extractionResult.extraction
