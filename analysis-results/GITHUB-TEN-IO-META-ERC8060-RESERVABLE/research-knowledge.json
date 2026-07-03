@@ -1,6 +1,6 @@
 {
-    "knowledgeBaseId": "KB-2026-07-03T14:05:25.836Z",
-    "generatedAt": "2026-07-03T14:05:25.837Z",
+    "knowledgeBaseId": "KB-2026-07-03T15:25:20.570Z",
+    "generatedAt": "2026-07-03T15:25:20.570Z",
     "entries": [
         {
             "entryId": "KNOW-00001",
@@ -31,7 +31,7 @@
     "processedSources": [
         {
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-            "processedAt": "2026-07-03T14:05:25.840Z"
+            "processedAt": "2026-07-03T15:25:20.574Z"
         }
     ]
 }

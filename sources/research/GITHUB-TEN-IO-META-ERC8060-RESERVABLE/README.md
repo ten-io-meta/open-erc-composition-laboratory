@@ -47,3 +47,38 @@ Automatically generated OECL research bundle from GitHub repository ten-io-meta/
 - Applications may voluntarily expose recovery functionality while preserving reservation accounting compatibility.
 - IERC8060Reservable supports both:
 - Minimal reservation accounting extension for ERC-8060 value-bearing NFTs.
+- mapping(uint256 => mapping(address => uint256)) private _lockedValue;
+- require(amount <= availableValue(tokenId, asset), "insufficient available value");
+- _lockedValue[tokenId][asset] += amount;
+- emit ValueReserved(tokenId, msg.sender, asset, amount);
+- require(amount <= r.locked, "release exceeds locked value");
+- _lockedValue[tokenId][asset] -= amount;
+- if (r.approved <= r.locked) {
+- return r.approved - r.locked;
+- function lockedValue(
+- return _lockedValue[tokenId][asset];
+- function availableValue(
+- return _totalValue[tokenId][asset] - _lockedValue[tokenId][asset];
+- reserve allowance on transfer while preserving active locked value.
+- / It only provides the minimal accounting required to prevent reserved
+- event ValueReserved(
+- / @notice Moves `amount` from available value to locked value.
+- /      Reverts if `amount` exceeds remaining allowance or available value.
+- / @dev Must equal totalValue(tokenId, asset) - lockedValue(tokenId, asset).
+- * Required Invariants
+- * Any correct implementation MUST maintain these invariants.
+- * Violations MUST cause reverts in the relevant functions.
+- * 1. lockedValue(tokenId, asset) <= totalValue(tokenId, asset)
+- * 2. availableValue(tokenId, asset) == totalValue(tokenId, asset) - lockedValue(tokenId, asset)
+- *    (withdraw, burn, or internal value movement) MUST revert if
+- *    amount > availableValue(tokenId, asset).
+- * 4. reserveValue() MUST revert unless BOTH hold:
+- *    - amount <= availableValue(tokenId, asset)
+- * 5. releaseValue() MUST revert if the caller tries to release more
+- *    than it currently has locked.
+- * 6. Reservations and locked value are bound to tokenId. If the NFT is
+- Repository contains README research context.
+- Repository contains contract or interface material.
+- Repository does not expose test evidence.
+- Repository contains documentation material.
+- Repository contains invariant-like statements.

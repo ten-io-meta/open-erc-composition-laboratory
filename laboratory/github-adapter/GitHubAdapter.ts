@@ -3,6 +3,7 @@ import { GitHubFileScanner } from "./GitHubFileScanner.js";
 import { GitHubSemanticExtractor } from "./GitHubSemanticExtractor.js";
 import { GitHubClaimExtractor } from "./GitHubClaimExtractor.js";
 import { GitHubEvidenceExtractor } from "./GitHubEvidenceExtractor.js";
+import { GitHubRepositoryIntelligence } from "./GitHubRepositoryIntelligence.js";
 import { GitHubBundleBuilder } from "./GitHubBundleBuilder.js";
 import { SourceBundleWriter } from "../source-adapters/SourceBundleWriter.js";
 
@@ -22,15 +23,24 @@ export class GitHubAdapter {
             const semanticExtractor = new GitHubSemanticExtractor();
             const claimExtractor = new GitHubClaimExtractor();
             const evidenceExtractor = new GitHubEvidenceExtractor();
+            const repositoryIntelligence = new GitHubRepositoryIntelligence();
             const bundleBuilder = new GitHubBundleBuilder();
             const writer = new SourceBundleWriter();
 
             const repository = await loader.load(params);
             const files = await scanner.scan(repository.localPath);
 
+            const intelligence = repositoryIntelligence.analyze(files);
+
             const protocols = semanticExtractor.extractProtocols(files);
             const capabilities = semanticExtractor.extractCapabilities(files);
-            const claims = claimExtractor.extract(files);
+
+            const claims = [
+                ...claimExtractor.extract(files),
+                ...intelligence.invariants,
+                ...intelligence.intelligenceSignals
+            ];
+
             const evidence = evidenceExtractor.extract(files);
 
             const bundle = bundleBuilder.build({
@@ -41,17 +51,17 @@ export class GitHubAdapter {
                 evidence
             });
 
-          await writer.write({
-    sourceId: bundle.sourceId,
-    repository: bundle.repository,
-    url: bundle.url,
-    title: bundle.title,
-    description: bundle.description,
-    protocols: bundle.protocols,
-    capabilities: bundle.capabilities,
-    claims: bundle.claims,
-    evidence
-});
+            await writer.write({
+                sourceId: bundle.sourceId,
+                repository: bundle.repository,
+                url: bundle.url,
+                title: bundle.title,
+                description: bundle.description,
+                protocols: bundle.protocols,
+                capabilities: bundle.capabilities,
+                claims: bundle.claims,
+                evidence
+            });
 
             return {
                 generatedAt: new Date().toISOString(),
