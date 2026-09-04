@@ -17,8 +17,8 @@ export class GitHubSemanticExtractor {
 
         const capabilities = new Set<string>();
 
-        if (text.includes("reserv")) capabilities.add("Reservation");
-        if (text.includes("account")) capabilities.add("Accounting");
+        if (/\breservations?\b/.test(text)) capabilities.add("Reservation");
+        if (/\baccounting\b/.test(text)) capabilities.add("Accounting");
         if (text.includes("settlement")) capabilities.add("Settlement");
         if (text.includes("embedded value") || text.includes("value-bearing")) capabilities.add("EmbeddedValue");
         if (text.includes("invariant")) capabilities.add("InvariantValidation");

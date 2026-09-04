@@ -44,6 +44,12 @@
             "enabled": true
         },
         {
+            "sourceId": "GITHUB-ERC-8004-ERC-8004-CONTRACTS",
+            "path": "./sources/research/GITHUB-ERC-8004-ERC-8004-CONTRACTS/source.json",
+            "evidencePath": "./sources/research/GITHUB-ERC-8004-ERC-8004-CONTRACTS/evidence.json",
+            "enabled": false
+        },
+        {
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "path": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/source.json",
             "evidencePath": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/evidence.json",
