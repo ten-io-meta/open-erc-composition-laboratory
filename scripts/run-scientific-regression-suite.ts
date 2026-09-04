@@ -5,8 +5,13 @@ import {
 } from "fs/promises";
 
 import {
+    execFile,
     spawn
 } from "child_process";
+
+import {
+    promisify
+} from "util";
 
 interface RegressionResult {
     script: string;
@@ -46,6 +51,63 @@ const excludedChecks =
         "check-solady-full-refresh.ts",
         "check-source-independence-assessment.ts"
     ]);
+
+const execFileAsync =
+    promisify(
+        execFile
+    );
+
+const externalFixtureRepositories =
+    [
+        "./external/github/ten-io-meta/erc8060-reservable"
+    ];
+
+async function assertCleanExternalBaseline() {
+
+    for (
+        const repository
+        of externalFixtureRepositories
+    ) {
+
+        const { stdout } =
+            await execFileAsync(
+                "git",
+                [
+                    "-C",
+                    repository,
+                    "status",
+                    "--porcelain"
+                ],
+                {
+                    encoding: "utf8"
+                }
+            );
+
+        if (
+            stdout.trim().length > 0
+        ) {
+
+            console.error(
+                "EXTERNAL_BASELINE_DIRTY"
+            );
+
+            console.error(
+                repository
+            );
+
+            console.error(
+                stdout.trim()
+            );
+
+            throw new Error(
+                `EXTERNAL_BASELINE_DIRTY: ${repository}`
+            );
+
+        }
+
+    }
+
+}
 
 function execute(
     command: string,
@@ -110,6 +172,8 @@ async function main() {
     console.log("OECL V2 Scientific Regression Suite");
     console.log("====================================");
     console.log("");
+
+    await assertCleanExternalBaseline();
 
     const entries =
         await readdir(
@@ -221,6 +285,8 @@ async function main() {
                     `scripts/${script}`
                 ]
             );
+
+        await assertCleanExternalBaseline();
 
         const status:
             RegressionResult["status"] =
