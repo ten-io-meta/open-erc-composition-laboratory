@@ -47,12 +47,15 @@ export class GitHubStructureAnalyzer {
                 ),
 
             configFiles:
-                files.filter(file =>
-                    file.path.endsWith("package.json") ||
-                    file.path.endsWith("tsconfig.json") ||
-                    file.path.endsWith("hardhat.config.ts") ||
-                    file.path.endsWith("foundry.toml")
-                ),
+    files.filter(file =>
+        file.path.endsWith("package.json") ||
+        file.path.endsWith("tsconfig.json") ||
+        file.path.endsWith("hardhat.config.ts") ||
+        file.path.endsWith("hardhat.config.js") ||
+        file.path.endsWith("hardhat.config.cjs") ||
+        file.path.endsWith("hardhat.config.mjs") ||
+        file.path.endsWith("foundry.toml")
+    ),
 
             workflowFiles:
                 files.filter(file =>

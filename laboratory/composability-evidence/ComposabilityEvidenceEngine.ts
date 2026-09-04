@@ -7,7 +7,8 @@ export class ComposabilityEvidenceEngine {
 
     build(
         semantics: ProtocolSemanticResult,
-        reasoning: SemanticReasoningResult
+        reasoning: SemanticReasoningResult,
+        extraction?: any
     ): ComposabilityEvidenceResult {
 
         try {
@@ -19,17 +20,11 @@ export class ComposabilityEvidenceEngine {
             const protocolByCapability = new Map<string, string[]>();
 
             for (const semantic of semantics.semantics) {
-
                 for (const capability of semantic.capabilities) {
-
                     const protocols = protocolByCapability.get(capability) ?? [];
-
                     protocols.push(semantic.protocolId);
-
                     protocolByCapability.set(capability, protocols);
-
                 }
-
             }
 
             for (const relation of reasoning.relations) {
@@ -38,57 +33,38 @@ export class ComposabilityEvidenceEngine {
                 const protocolsB = protocolByCapability.get(relation.toCapability) ?? [];
 
                 for (const protocolA of protocolsA) {
-
                     for (const protocolB of protocolsB) {
 
                         if (protocolA === protocolB) {
                             continue;
                         }
 
-                        const semanticConfidence = relation.confidence;
-
-                        const experimentalSupport = 0;
-                        const statisticalSupport = 0;
-                        const emergentPatternSupport = 0;
-
-                        const overallConfidence = Math.round(
-                            semanticConfidence * 0.6 +
-                            experimentalSupport * 0.2 +
-                            statisticalSupport * 0.1 +
-                            emergentPatternSupport * 0.1
+                        claims.push(
+                            this.createClaim(
+                                counter,
+                                protocolA,
+                                protocolB,
+                                relation.fromCapability,
+                                relation.toCapability,
+                                relation.relation,
+                                relation.reason,
+                                relation.evidence,
+                                relation.confidence
+                            )
                         );
-
-                        const status =
-                            overallConfidence >= 80
-                                ? "SUPPORTED"
-                                : overallConfidence >= 50
-                                    ? "CANDIDATE"
-                                    : "INCONCLUSIVE";
-
-                        claims.push({
-                            claimId: `COMP-EVIDENCE-${String(counter).padStart(5, "0")}`,
-                            protocolA,
-                            protocolB,
-                            capabilityA: relation.fromCapability,
-                            capabilityB: relation.toCapability,
-                            relation: relation.relation,
-                            reason: relation.reason,
-                            evidence: relation.evidence,
-                            semanticConfidence,
-                            experimentalSupport,
-                            statisticalSupport,
-                            emergentPatternSupport,
-                            overallConfidence,
-                            status
-                        });
 
                         counter++;
 
                     }
-
                 }
-
             }
+
+            const structuredClaims = this.extractStructuredClaims(
+                extraction,
+                counter
+            );
+
+            claims.push(...structuredClaims);
 
             return {
                 sourceId: reasoning.sourceId,
@@ -111,6 +87,129 @@ export class ComposabilityEvidenceEngine {
             };
 
         }
+
+    }
+
+    private extractStructuredClaims(
+        extraction: any,
+        startCounter: number
+    ): ComposabilityEvidenceClaim[] {
+
+        if (!extraction?.claims) {
+            return [];
+        }
+
+        const protocols = extraction.protocols ?? [];
+        const sourceId = extraction.sourceId ?? "UNKNOWN-SOURCE";
+
+        const supportedRelations = [
+            "ENABLES",
+            "CONSTRAINS",
+            "SUPPORTS",
+            "BOUNDS",
+            "REQUIRES",
+            "VALIDATES",
+            "INDICATES"
+        ];
+
+        const claims: ComposabilityEvidenceClaim[] = [];
+
+        let counter = startCounter;
+
+        for (const claim of extraction.claims) {
+
+            const text = typeof claim === "string"
+                ? claim
+                : claim.text ?? "";
+
+            const cleanText = text.replace(/\.$/, "").trim();
+
+            const matchedRelation = supportedRelations.find(relation =>
+                cleanText.includes(` ${relation} `)
+            );
+
+            if (!matchedRelation) {
+                continue;
+            }
+const [capabilityA, capabilityB] = cleanText
+    .split(` ${matchedRelation} `)
+    .map((part: string) => part.trim());
+
+            if (!capabilityA || !capabilityB) {
+                continue;
+            }
+
+            const protocolA = protocols[0] ?? sourceId;
+            const protocolB = protocols[1] ?? protocolA;
+
+            claims.push(
+                this.createClaim(
+                    counter,
+                    protocolA,
+                    protocolB,
+                    capabilityA,
+                    capabilityB,
+                    matchedRelation,
+                    `Structured claim extracted from source: ${cleanText}`,
+                    [`claim:${cleanText}`],
+                    70
+                )
+            );
+
+            counter++;
+
+        }
+
+        return claims;
+
+    }
+
+    private createClaim(
+        counter: number,
+        protocolA: string,
+        protocolB: string,
+        capabilityA: string,
+        capabilityB: string,
+        relation: string,
+        reason: string,
+        evidence: string[],
+        semanticConfidence: number
+    ): ComposabilityEvidenceClaim {
+
+        const experimentalSupport = 0;
+        const statisticalSupport = 0;
+        const emergentPatternSupport = 0;
+
+        const overallConfidence = Math.round(
+            semanticConfidence * 0.6 +
+            experimentalSupport * 0.2 +
+            statisticalSupport * 0.1 +
+            emergentPatternSupport * 0.1
+        );
+
+        const status =
+            overallConfidence >= 80
+                ? "SUPPORTED"
+                : overallConfidence >= 50
+                    ? "CANDIDATE"
+                    : "INCONCLUSIVE";
+
+        return {
+            claimId: `COMP-EVIDENCE-${String(counter).padStart(5, "0")}`,
+            protocolA,
+            protocolB,
+            capabilityA,
+            capabilityB,
+            relation,
+            reason,
+            evidence,
+            semanticConfidence,
+            experimentalSupport,
+            statisticalSupport,
+            emergentPatternSupport,
+            overallConfidence,
+            status
+        };
 
     }
 

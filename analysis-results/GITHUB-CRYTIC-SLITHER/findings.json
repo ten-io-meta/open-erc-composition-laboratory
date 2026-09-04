@@ -1,0 +1,427 @@
+{
+    "graphId": "GRAPH-GITHUB-CRYTIC-SLITHER",
+    "discoveredAt": "2026-09-03T23:17:15.929Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 20 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "EIP2612",
+                "ERC721",
+                "ERC223",
+                "ERC777",
+                "EIP777",
+                "EIP721",
+                "ERC165",
+                "EIP165",
+                "ERC1155",
+                "EIP1155",
+                "ERC1820",
+                "EIP1820",
+                "ERC4524",
+                "EIP4524",
+                "ERC1363",
+                "EIP1363",
+                "ERC2612",
+                "ERC4626",
+                "EIP4626",
+                "ERC20"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 13 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "Accounting",
+                "Reservation",
+                "Authority",
+                "Transfer",
+                "Burn",
+                "Mint",
+                "Ownership",
+                "Upgradeability",
+                "AccessControl",
+                "Verification",
+                "InvariantValidation",
+                "Standardization",
+                "Interoperability"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00001",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Standardization ENABLES Interoperability.",
+            "evidence": [
+                "GITHUB-CLAIM-00001"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00002",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Authority CONSTRAINS Transfer.",
+            "evidence": [
+                "GITHUB-CLAIM-00002"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00003",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reservation CONSTRAINS Accounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00003"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00004",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "InvariantValidation VALIDATES Accounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00004"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00005",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "AccessControl IMPLEMENTS Authority.",
+            "evidence": [
+                "GITHUB-CLAIM-00005"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00006",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Ownership CONSTRAINS Upgradeability.",
+            "evidence": [
+                "GITHUB-CLAIM-00006"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00007",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP2612 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00007"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00008",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC721 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00008"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00009",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC223 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00009"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00010",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC777 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00010"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00011",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP777 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00011"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00012",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP721 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00012"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00013",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC165 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00013"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00014",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP165 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00014"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00015",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC1155 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00015"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00016",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP1155 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00016"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00017",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC1820 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00017"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00018",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP1820 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00018"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00019",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC4524 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00019"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00020",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP4524 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00020"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00021",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC1363 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00021"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00022",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP1363 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00022"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00023",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC2612 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00023"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00024",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC4626 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00024"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00025",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP4626 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00025"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00026",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC20 SUPPORTS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00026"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00027",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC20 ENABLES FungibleAccounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00027"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00028",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC20 SUPPORTS Transfer.",
+            "evidence": [
+                "GITHUB-CLAIM-00028"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00029",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC721 ENABLES Ownership.",
+            "evidence": [
+                "GITHUB-CLAIM-00029"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00030",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "ERC721 SUPPORTS Transfer.",
+            "evidence": [
+                "GITHUB-CLAIM-00030"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00031",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Mint ENABLES Supply.",
+            "evidence": [
+                "GITHUB-CLAIM-00031"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00032",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "SignatureAuthorization ENABLES Authority.",
+            "evidence": [
+                "GITHUB-CLAIM-00032"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00033",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EIP712 SUPPORTS SignatureAuthorization.",
+            "evidence": [
+                "GITHUB-CLAIM-00033"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00034",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Transfer PRESERVES Accounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00034"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00035",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Interoperability SUPPORTS Composition.",
+            "evidence": [
+                "GITHUB-CLAIM-00035"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00036",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Specification ENABLES Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00036"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-CRYTIC-SLITHER-CLAIM-GITHUB-CLAIM-00037",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "SecurityConsiderations CONSTRAINS Standardization.",
+            "evidence": [
+                "GITHUB-CLAIM-00037"
+            ],
+            "confidence": 100
+        }
+    ]
+}

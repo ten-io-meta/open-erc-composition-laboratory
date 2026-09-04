@@ -4,14 +4,21 @@ import type { HypothesisValidationResult } from "../hypothesis/HypothesisValidat
 import type { KnowledgeEntry } from "./KnowledgeEntry.js";
 import type { ResearchKnowledge } from "./ResearchKnowledge.js";
 
+import { ReasoningKnowledgeAdapter } from "./ReasoningKnowledgeAdapter.js";
+import type { MachineReasoningResult } from "../machine-reasoning/MachineReasoningResult.js";
+
 export class KnowledgeBuilder {
 
     build(
         learning: CompositionLearningResult,
-        validation: HypothesisValidationResult
+        validation: HypothesisValidationResult,
+        machineReasoning?: MachineReasoningResult,
+        sourceId = "UNKNOWN"
     ): ResearchKnowledge {
 
-        const entries: KnowledgeEntry[] = learning.knowledge.statistics.map(
+        const timestamp = new Date().toISOString();
+
+        const learningEntries: KnowledgeEntry[] = learning.knowledge.statistics.map(
             (stat, index) => {
 
                 const matchingValidation = validation.validations.find(
@@ -45,6 +52,7 @@ export class KnowledgeBuilder {
 
                 return {
                     entryId: `KNOW-${String(index + 1).padStart(5, "0")}`,
+                    sourceId,
                     relation: stat.relationKey,
                     protocolPair: stat.protocolPair,
                     observations: stat.observations,
@@ -58,11 +66,24 @@ export class KnowledgeBuilder {
                         ...(matchingValidation
                             ? [`validation:${matchingValidation.hypothesisId}`]
                             : [])
-                    ]
+                    ],
+                    generatedBy: "LEARNING",
+                    timestamp
                 };
 
             }
         );
+
+        const reasoningEntries = ReasoningKnowledgeAdapter.toKnowledgeEntries(
+            machineReasoning,
+            learningEntries.length,
+            sourceId
+        );
+
+        const entries = [
+            ...learningEntries,
+            ...reasoningEntries
+        ];
 
         const statistics = {
             entries: entries.length,
@@ -78,8 +99,8 @@ export class KnowledgeBuilder {
         };
 
         return {
-            knowledgeBaseId: `KB-${new Date().toISOString()}`,
-            generatedAt: new Date().toISOString(),
+            knowledgeBaseId: `KB-${timestamp}`,
+            generatedAt: timestamp,
             entries,
             statistics
         };

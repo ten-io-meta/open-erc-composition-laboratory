@@ -1,0 +1,636 @@
+{
+    "generatedAt": "2026-09-03T23:17:15.931Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Standardization",
+            "capabilityB": "Interoperability",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: Standardization ENABLES Interoperability",
+            "evidence": [
+                "claim:Standardization ENABLES Interoperability"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Authority",
+            "capabilityB": "Transfer",
+            "relation": "CONSTRAINS",
+            "reason": "Structured claim extracted from source: Authority CONSTRAINS Transfer",
+            "evidence": [
+                "claim:Authority CONSTRAINS Transfer"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00003",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Reservation",
+            "capabilityB": "Accounting",
+            "relation": "CONSTRAINS",
+            "reason": "Structured claim extracted from source: Reservation CONSTRAINS Accounting",
+            "evidence": [
+                "claim:Reservation CONSTRAINS Accounting"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00004",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "InvariantValidation",
+            "capabilityB": "Accounting",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: InvariantValidation VALIDATES Accounting",
+            "evidence": [
+                "claim:InvariantValidation VALIDATES Accounting"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00005",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Ownership",
+            "capabilityB": "Upgradeability",
+            "relation": "CONSTRAINS",
+            "reason": "Structured claim extracted from source: Ownership CONSTRAINS Upgradeability",
+            "evidence": [
+                "claim:Ownership CONSTRAINS Upgradeability"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00006",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP2612",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP2612 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP2612 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00007",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC721",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC721 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC721 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00008",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC223",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC223 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC223 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00009",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC777",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC777 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC777 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00010",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP777",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP777 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP777 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00011",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP721",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP721 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP721 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00012",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC165",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC165 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC165 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00013",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP165",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP165 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP165 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00014",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC1155",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC1155 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC1155 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00015",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP1155",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP1155 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP1155 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00016",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC1820",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC1820 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC1820 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00017",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP1820",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP1820 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP1820 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00018",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC4524",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC4524 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC4524 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00019",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP4524",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP4524 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP4524 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00020",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC1363",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC1363 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC1363 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00021",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP1363",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP1363 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP1363 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00022",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC2612",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC2612 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC2612 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00023",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC4626",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC4626 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC4626 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00024",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP4626",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP4626 SUPPORTS Standardization",
+            "evidence": [
+                "claim:EIP4626 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00025",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC20",
+            "capabilityB": "Standardization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC20 SUPPORTS Standardization",
+            "evidence": [
+                "claim:ERC20 SUPPORTS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00026",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC20",
+            "capabilityB": "FungibleAccounting",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: ERC20 ENABLES FungibleAccounting",
+            "evidence": [
+                "claim:ERC20 ENABLES FungibleAccounting"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00027",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC20",
+            "capabilityB": "Transfer",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC20 SUPPORTS Transfer",
+            "evidence": [
+                "claim:ERC20 SUPPORTS Transfer"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00028",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC721",
+            "capabilityB": "Ownership",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: ERC721 ENABLES Ownership",
+            "evidence": [
+                "claim:ERC721 ENABLES Ownership"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00029",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "ERC721",
+            "capabilityB": "Transfer",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: ERC721 SUPPORTS Transfer",
+            "evidence": [
+                "claim:ERC721 SUPPORTS Transfer"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00030",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Mint",
+            "capabilityB": "Supply",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: Mint ENABLES Supply",
+            "evidence": [
+                "claim:Mint ENABLES Supply"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00031",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "SignatureAuthorization",
+            "capabilityB": "Authority",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: SignatureAuthorization ENABLES Authority",
+            "evidence": [
+                "claim:SignatureAuthorization ENABLES Authority"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00032",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "EIP712",
+            "capabilityB": "SignatureAuthorization",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: EIP712 SUPPORTS SignatureAuthorization",
+            "evidence": [
+                "claim:EIP712 SUPPORTS SignatureAuthorization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00033",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Interoperability",
+            "capabilityB": "Composition",
+            "relation": "SUPPORTS",
+            "reason": "Structured claim extracted from source: Interoperability SUPPORTS Composition",
+            "evidence": [
+                "claim:Interoperability SUPPORTS Composition"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00034",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "Specification",
+            "capabilityB": "Standardization",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: Specification ENABLES Standardization",
+            "evidence": [
+                "claim:Specification ENABLES Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00035",
+            "protocolA": "EIP2612",
+            "protocolB": "ERC721",
+            "capabilityA": "SecurityConsiderations",
+            "capabilityB": "Standardization",
+            "relation": "CONSTRAINS",
+            "reason": "Structured claim extracted from source: SecurityConsiderations CONSTRAINS Standardization",
+            "evidence": [
+                "claim:SecurityConsiderations CONSTRAINS Standardization"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        }
+    ],
+    "errors": []
+}

@@ -1,6 +1,6 @@
 {
     "graphId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-    "discoveredAt": "2026-07-03T15:43:36.812Z",
+    "discoveredAt": "2026-09-03T23:17:52.901Z",
     "findings": [
         {
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-FINDING-0001",
@@ -237,7 +237,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00021",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "mapping(uint256 => mapping(address => uint256)) private _lockedValue;",
+            "description": "it(\"blocks owner withdraw when value is locked\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00021"
             ],
@@ -247,7 +247,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00022",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "require(amount <= availableValue(tokenId, asset), \"insufficient available value\");",
+            "description": "it(\"keeps locked value bound to tokenId after transfer\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00022"
             ],
@@ -257,7 +257,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00023",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "_lockedValue[tokenId][asset] += amount;",
+            "description": "it(\"reducing allowance does not release already locked value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00023"
             ],
@@ -267,7 +267,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00024",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "emit ValueReserved(tokenId, msg.sender, asset, amount);",
+            "description": "expect((await mock.lockedValue(TOKEN_ID, ETH)).toString()).to.equal(",
             "evidence": [
                 "GITHUB-CLAIM-00024"
             ],
@@ -277,7 +277,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00025",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "require(amount <= r.locked, \"release exceeds locked value\");",
+            "description": "expect((await mock.availableValue(TOKEN_ID, ETH)).toString()).to.equal(",
             "evidence": [
                 "GITHUB-CLAIM-00025"
             ],
@@ -287,7 +287,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00026",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "_lockedValue[tokenId][asset] -= amount;",
+            "description": "it(\"cannot reserve zero value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00026"
             ],
@@ -297,7 +297,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00027",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "if (r.approved <= r.locked) {",
+            "description": "it(\"cannot release zero value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00027"
             ],
@@ -307,7 +307,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00028",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "return r.approved - r.locked;",
+            "description": "it(\"underlying value inflation increases available value without changing locked value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00028"
             ],
@@ -317,7 +317,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00029",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "function lockedValue(",
+            "description": "expect((await mock.lockedValue(TOKEN_ID, ETH)).toString()).to.equal(\"0\");",
             "evidence": [
                 "GITHUB-CLAIM-00029"
             ],
@@ -327,7 +327,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00030",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "return _lockedValue[tokenId][asset];",
+            "description": "expect((await mock.lockedValue(TOKEN_ID_2, ETH)).toString()).to.equal(\"0\");",
             "evidence": [
                 "GITHUB-CLAIM-00030"
             ],
@@ -337,7 +337,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00031",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "function availableValue(",
+            "description": "it(\"prevents spender from releasing more than its own locked allocation\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00031"
             ],
@@ -347,7 +347,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00032",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "return _totalValue[tokenId][asset] - _lockedValue[tokenId][asset];",
+            "description": "it(\"releases locked value back to available value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00032"
             ],
@@ -357,7 +357,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00033",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "reserve allowance on transfer while preserving active locked value.",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"1000\");",
             "evidence": [
                 "GITHUB-CLAIM-00033"
             ],
@@ -367,7 +367,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00034",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "/ It only provides the minimal accounting required to prevent reserved",
+            "description": "expect((await token.availableValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"0\");",
             "evidence": [
                 "GITHUB-CLAIM-00034"
             ],
@@ -377,7 +377,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00035",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "event ValueReserved(",
+            "description": "expect(error.message).to.include(\"insufficient available value\");",
             "evidence": [
                 "GITHUB-CLAIM-00035"
             ],
@@ -387,7 +387,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00036",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "/ @notice Moves `amount` from available value to locked value.",
+            "description": "it(\"new owner can reserve remaining available value after transfer\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00036"
             ],
@@ -397,7 +397,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00037",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "/      Reverts if `amount` exceeds remaining allowance or available value.",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"700\");",
             "evidence": [
                 "GITHUB-CLAIM-00037"
             ],
@@ -407,7 +407,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00038",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "/ @dev Must equal totalValue(tokenId, asset) - lockedValue(tokenId, asset).",
+            "description": "expect((await token.availableValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"300\");",
             "evidence": [
                 "GITHUB-CLAIM-00038"
             ],
@@ -417,7 +417,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00039",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* Required Invariants",
+            "description": "it(\"old spender cannot reserve more after transfer without sufficient allowance\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00039"
             ],
@@ -427,7 +427,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00040",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* Any correct implementation MUST maintain these invariants.",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"100\");",
             "evidence": [
                 "GITHUB-CLAIM-00040"
             ],
@@ -437,7 +437,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00041",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* Violations MUST cause reverts in the relevant functions.",
+            "description": "expect((await token.availableValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"900\");",
             "evidence": [
                 "GITHUB-CLAIM-00041"
             ],
@@ -447,7 +447,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00042",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* 1. lockedValue(tokenId, asset) <= totalValue(tokenId, asset)",
+            "description": "it(\"new owner can withdraw only available value after transfer\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00042"
             ],
@@ -457,7 +457,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00043",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* 2. availableValue(tokenId, asset) == totalValue(tokenId, asset) - lockedValue(tokenId, asset)",
+            "description": "ethers.utils.toUtf8Bytes(\"new-owner-withdraw-available\")",
             "evidence": [
                 "GITHUB-CLAIM-00043"
             ],
@@ -467,7 +467,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00044",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "*    (withdraw, burn, or internal value movement) MUST revert if",
+            "description": "it(\"cannot reserve after new owner withdraws all available value\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00044"
             ],
@@ -477,7 +477,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00045",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "*    amount > availableValue(tokenId, asset).",
+            "description": "it(\"active obligations remain releasable after available value is withdrawn\", async function () {",
             "evidence": [
                 "GITHUB-CLAIM-00045"
             ],
@@ -487,7 +487,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00046",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* 4. reserveValue() MUST revert unless BOTH hold:",
+            "description": "ethers.utils.toUtf8Bytes(\"withdraw-available-then-release\")",
             "evidence": [
                 "GITHUB-CLAIM-00046"
             ],
@@ -497,7 +497,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00047",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "*    - amount <= availableValue(tokenId, asset)",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"400\");",
             "evidence": [
                 "GITHUB-CLAIM-00047"
             ],
@@ -507,7 +507,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00048",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* 5. releaseValue() MUST revert if the caller tries to release more",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"0\");",
             "evidence": [
                 "GITHUB-CLAIM-00048"
             ],
@@ -517,7 +517,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00049",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "*    than it currently has locked.",
+            "description": "expect((await token.availableValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"700\");",
             "evidence": [
                 "GITHUB-CLAIM-00049"
             ],
@@ -527,7 +527,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00050",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "* 6. Reservations and locked value are bound to tokenId. If the NFT is",
+            "description": "expect((await token.lockedValue(TOKEN_ID, ETH_ASSET)).toString()).to.equal(\"900\");",
             "evidence": [
                 "GITHUB-CLAIM-00050"
             ],
@@ -557,7 +557,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00053",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "Repository does not expose test evidence.",
+            "description": "Repository contains test evidence.",
             "evidence": [
                 "GITHUB-CLAIM-00053"
             ],
@@ -587,7 +587,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00056",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
+            "description": "Repository exposes 61 executable test or invariant target(s).",
             "evidence": [
                 "GITHUB-CLAIM-00056"
             ],
@@ -597,7 +597,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00057",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
+            "description": "Repository uses the Hardhat toolchain.",
             "evidence": [
                 "GITHUB-CLAIM-00057"
             ],
@@ -607,7 +607,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00058",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement.",
+            "description": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
             "evidence": [
                 "GITHUB-CLAIM-00058"
             ],
@@ -617,7 +617,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00059",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+            "description": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
             "evidence": [
                 "GITHUB-CLAIM-00059"
             ],
@@ -627,7 +627,7 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00060",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+            "description": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement.",
             "evidence": [
                 "GITHUB-CLAIM-00060"
             ],
@@ -637,9 +637,29 @@
             "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00061",
             "type": "SOURCE_CLAIM",
             "title": "Research claim detected",
-            "description": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value.",
+            "description": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
             "evidence": [
                 "GITHUB-CLAIM-00061"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00062",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+            "evidence": [
+                "GITHUB-CLAIM-00062"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE-CLAIM-GITHUB-CLAIM-00063",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value.",
+            "evidence": [
+                "GITHUB-CLAIM-00063"
             ],
             "confidence": 100
         }

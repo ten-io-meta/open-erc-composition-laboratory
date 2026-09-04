@@ -1,0 +1,36 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.310Z",
+    "patterns": [
+        {
+            "patternId": "CROSS-PATTERN-00001",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "normalizedRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "sources": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "occurrences": 2,
+            "confidence": 49,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH",
+                "learning:Reservation->CONSTRAINS->Accounting",
+                "validation:HYP-00003"
+            ]
+        }
+    ],
+    "statistics": {
+        "patterns": 1,
+        "candidate": 0,
+        "emerging": 1,
+        "supported": 0,
+        "sources": 3
+    },
+    "errors": []
+}

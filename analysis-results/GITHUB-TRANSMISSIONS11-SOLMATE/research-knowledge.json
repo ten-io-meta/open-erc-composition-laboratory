@@ -1,0 +1,142 @@
+{
+    "knowledgeBaseId": "KB-2026-09-03T23:17:58.536Z",
+    "generatedAt": "2026-09-03T23:17:58.536Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "protocolPair": "ERC20+ERC721",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:58.536Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "protocolPair": "ERC20+ERC721",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:58.536Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "protocolPair": "InvariantValidation->Accounting",
+            "observations": 1,
+            "averageConfidence": 66,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:58.537Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "Testing:SUPPORTS:InvariantValidation",
+            "protocolPair": "Testing->InvariantValidation",
+            "observations": 1,
+            "averageConfidence": 60,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:58.537Z"
+        },
+        {
+            "entryId": "KNOW-00005",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "DeterministicExecution:REQUIRES:Accounting",
+            "protocolPair": "DeterministicExecution->Accounting",
+            "observations": 1,
+            "averageConfidence": 58,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:58.537Z"
+        },
+        {
+            "entryId": "KNOW-00006",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+            "protocolPair": "InvariantLanguage->SafetyConstraint",
+            "observations": 1,
+            "averageConfidence": 54,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:58.537Z"
+        }
+    ],
+    "statistics": {
+        "entries": 6,
+        "totalObservations": 6,
+        "emerging": 6,
+        "supported": 0,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    },
+    "processedSources": [
+        {
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "processedAt": "2026-09-03T23:17:58.540Z"
+        }
+    ]
+}

@@ -7,7 +7,9 @@ import { GitHubRepositoryIntelligence } from "./GitHubRepositoryIntelligence.js"
 import { GitHubBundleBuilder } from "./GitHubBundleBuilder.js";
 import { SourceBundleWriter } from "../source-adapters/SourceBundleWriter.js";
 
-import type { GitHubAdapterResult } from "./GitHubAdapterResult.js";
+import type {
+    GitHubAdapterResult
+} from "./GitHubAdapterResult.js";
 
 export class GitHubAdapter {
 
@@ -18,22 +20,97 @@ export class GitHubAdapter {
     }): Promise<GitHubAdapterResult> {
 
         try {
-            const loader = new GitHubRepositoryLoader();
-            const scanner = new GitHubFileScanner();
-            const semanticExtractor = new GitHubSemanticExtractor();
-            const claimExtractor = new GitHubClaimExtractor();
-            const evidenceExtractor = new GitHubEvidenceExtractor();
-            const repositoryIntelligence = new GitHubRepositoryIntelligence();
-            const bundleBuilder = new GitHubBundleBuilder();
-            const writer = new SourceBundleWriter();
 
-            const repository = await loader.load(params);
-            const files = await scanner.scan(repository.localPath);
+            const loader =
+                new GitHubRepositoryLoader();
 
-            const intelligence = repositoryIntelligence.analyze(files);
+            const scanner =
+                new GitHubFileScanner();
 
-            const protocols = semanticExtractor.extractProtocols(files);
-            const capabilities = semanticExtractor.extractCapabilities(files);
+            const semanticExtractor =
+                new GitHubSemanticExtractor();
+
+            const claimExtractor =
+                new GitHubClaimExtractor();
+
+            const evidenceExtractor =
+                new GitHubEvidenceExtractor();
+
+            const repositoryIntelligence =
+                new GitHubRepositoryIntelligence();
+
+            const bundleBuilder =
+                new GitHubBundleBuilder();
+
+            const writer =
+                new SourceBundleWriter();
+
+            console.log(
+                "[GitHubAdapter] loading repository..."
+            );
+
+            const repository =
+                await loader.load(params);
+
+            console.log(
+                `[GitHubAdapter] repository loaded: ${repository.localPath}`
+            );
+
+            console.log(
+                "[GitHubAdapter] scanning files..."
+            );
+
+            const files =
+                await scanner.scan(
+                    repository.localPath
+                );
+
+            console.log(
+                `[GitHubAdapter] files scanned: ${files.length}`
+            );
+
+            console.log(
+                "[GitHubAdapter] analyzing repository intelligence..."
+            );
+
+            const intelligence =
+                repositoryIntelligence.analyze(
+                    files
+                );
+
+            console.log(
+                `[GitHubAdapter] toolchain detected: ${intelligence.toolchain}`
+            );
+
+            console.log(
+                "[GitHubAdapter] extracting protocols..."
+            );
+
+            const protocols =
+                semanticExtractor.extractProtocols(
+                    files
+                );
+
+            console.log(
+                `[GitHubAdapter] protocols extracted: ${protocols.length}`
+            );
+
+            console.log(
+                "[GitHubAdapter] extracting capabilities..."
+            );
+
+            const capabilities =
+                semanticExtractor.extractCapabilities(
+                    files
+                );
+
+            console.log(
+                `[GitHubAdapter] capabilities extracted: ${capabilities.length}`
+            );
+
+            console.log(
+                "[GitHubAdapter] extracting claims..."
+            );
 
             const claims = [
                 ...claimExtractor.extract(files),
@@ -41,63 +118,192 @@ export class GitHubAdapter {
                 ...intelligence.intelligenceSignals
             ];
 
-            const evidence = evidenceExtractor.extract(files);
+            console.log(
+                `[GitHubAdapter] claims extracted: ${claims.length}`
+            );
 
-            const bundle = bundleBuilder.build({
-                repository,
-                protocols,
-                capabilities,
-                claims,
-                evidence
-            });
+            console.log(
+                "[GitHubAdapter] extracting evidence..."
+            );
+
+            const evidence =
+                evidenceExtractor.extract(
+                    files
+                );
+
+            console.log(
+                "[GitHubAdapter] evidence extracted."
+            );
+
+            console.log(
+                "[GitHubAdapter] building bundle..."
+            );
+
+            const bundle =
+                bundleBuilder.build({
+                    repository,
+                    protocols,
+                    capabilities,
+                    claims,
+                    evidence
+                });
+
+            console.log(
+                `[GitHubAdapter] bundle built: ${bundle.sourceId}`
+            );
+
+            console.log(
+                "[GitHubAdapter] writing source bundle..."
+            );
 
             await writer.write({
-                sourceId: bundle.sourceId,
-                repository: bundle.repository,
-                url: bundle.url,
-                title: bundle.title,
-                description: bundle.description,
-                protocols: bundle.protocols,
-                capabilities: bundle.capabilities,
-                claims: bundle.claims,
-                evidence
-            });
+                sourceId:
+                    bundle.sourceId,
+
+                repository:
+                    bundle.repository,
+
+                localPath:
+                    repository.localPath,
+
+                url:
+                    bundle.url,
+
+                title:
+                    bundle.title,
+
+                description:
+                    bundle.description,
+
+                toolchain:
+                    intelligence.toolchain,
+
+                protocols:
+                    bundle.protocols,
+
+                capabilities:
+                    bundle.capabilities,
+
+                claims:
+    bundle.claims,
+
+executableTargets:
+    intelligence.executableTargets,
+
+evidence
+});
+
+            console.log(
+                "[GitHubAdapter] source bundle written."
+            );
 
             return {
-                generatedAt: new Date().toISOString(),
+
+                generatedAt:
+                    new Date().toISOString(),
+
                 repository,
-                sourceId: bundle.sourceId,
-                bundlePath: `./sources/research/${bundle.sourceId}`,
+
+                intelligence,
+
+                sourceId:
+                    bundle.sourceId,
+
+                bundlePath:
+                    `./sources/research/${bundle.sourceId}`,
+
                 protocols,
+
                 capabilities,
+
                 claims,
-                evidenceQuality: evidence.quality,
-                confidenceWeight: evidence.confidenceWeight,
+
+                evidenceQuality:
+                    evidence.quality,
+
+                confidenceWeight:
+                    evidence.confidenceWeight,
+
                 errors: []
+
             };
 
         } catch (error) {
+
+            console.error(
+                "[GitHubAdapter] error:",
+                error
+            );
+
             return {
-                generatedAt: new Date().toISOString(),
+
+                generatedAt:
+                    new Date().toISOString(),
+
                 repository: {
-                    owner: params.owner,
-                    repo: params.repo,
-                    url: `https://github.com/${params.owner}/${params.repo}`,
-                    localPath: ""
+                    owner:
+                        params.owner,
+
+                    repo:
+                        params.repo,
+
+                    url:
+                        `https://github.com/${params.owner}/${params.repo}`,
+
+                    localPath:
+                        ""
                 },
-                sourceId: "",
-                bundlePath: "",
-                protocols: [],
-                capabilities: [],
-                claims: [],
-                evidenceQuality: "SUSPICIOUS",
-                confidenceWeight: 0,
+
+                intelligence: {
+    structure: {
+        readmes: 0,
+        contracts: 0,
+        tests: 0,
+        docs: 0,
+        configs: 0,
+        workflows: 0,
+        totalFiles: 0
+    },
+
+    toolchain:
+        "UNKNOWN",
+
+    invariants: [],
+
+    executableTargets: [],
+
+    intelligenceSignals: []
+},
+
+                sourceId:
+                    "",
+
+                bundlePath:
+                    "",
+
+                protocols:
+                    [],
+
+                capabilities:
+                    [],
+
+                claims:
+                    [],
+
+                evidenceQuality:
+                    "SUSPICIOUS",
+
+                confidenceWeight:
+                    0,
+
                 errors: [
                     error instanceof Error
                         ? error.message
                         : "Unknown GitHub adapter error"
                 ]
+
             };
+
         }
 
     }

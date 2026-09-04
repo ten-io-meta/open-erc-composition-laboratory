@@ -1,0 +1,203 @@
+{
+    "knowledgeBaseId": "KB-2026-08-23T13:09:26.254Z",
+    "generatedAt": "2026-08-23T13:09:26.254Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "protocolPair": "IERC20+IERC20ToBytes32Map",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "protocolPair": "IERC20+IERC20ToBytes32Map",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "protocolPair": "IERC20+IERC20ToBytes32Map",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "EmbeddedValue:ENABLES:Reservation",
+            "protocolPair": "EmbeddedValue->Reservation",
+            "observations": 1,
+            "averageConfidence": 61,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00005",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 65,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00006",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "protocolPair": "InvariantValidation->Accounting",
+            "observations": 1,
+            "averageConfidence": 66,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00007",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "Testing:SUPPORTS:InvariantValidation",
+            "protocolPair": "Testing->InvariantValidation",
+            "observations": 1,
+            "averageConfidence": 60,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00008",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "DeterministicExecution:REQUIRES:Accounting",
+            "protocolPair": "DeterministicExecution->Accounting",
+            "observations": 1,
+            "averageConfidence": 58,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        },
+        {
+            "entryId": "KNOW-00009",
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+            "protocolPair": "InvariantLanguage->SafetyConstraint",
+            "observations": 1,
+            "averageConfidence": 54,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-08-23T13:09:26.254Z"
+        }
+    ],
+    "statistics": {
+        "entries": 9,
+        "totalObservations": 9,
+        "emerging": 9,
+        "supported": 0,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    },
+    "processedSources": [
+        {
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "processedAt": "2026-08-23T13:09:26.257Z"
+        }
+    ]
+}

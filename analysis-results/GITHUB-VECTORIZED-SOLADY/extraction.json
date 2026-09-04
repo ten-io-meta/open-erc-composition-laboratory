@@ -1,0 +1,438 @@
+{
+    "success": true,
+    "extraction": {
+        "sourceId": "GITHUB-VECTORIZED-SOLADY",
+        "extractedAt": "2026-09-03T23:17:56.957Z",
+        "protocols": [
+            "ERC1967",
+            "ERC1271",
+            "ERC4337",
+            "ERC7739",
+            "ERC6551",
+            "ERC7562",
+            "IERC6551Executable",
+            "ERC165",
+            "ERC721",
+            "ERC7821",
+            "ERC7579",
+            "ERC1155",
+            "ERC20",
+            "ERC2981",
+            "ERC4626",
+            "ERC6909",
+            "ERC5805",
+            "ERC6372",
+            "IERC721Receiver",
+            "ERC6492",
+            "ERC1167",
+            "ERC2771",
+            "IERC20",
+            "IERC1155Receiver",
+            "IERC20Permit",
+            "ERC1822",
+            "ERC155",
+            "IERC6551Registry"
+        ],
+        "capabilities": [
+            "Reservation",
+            "Accounting",
+            "InvariantValidation",
+            "Testing",
+            "Redemption"
+        ],
+        "claims": [
+            {
+                "claimId": "GITHUB-CLAIM-00001",
+                "text": "Performs the signature validation without nested EIP-712 if the caller is",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00002",
+                "text": "ERC1271 signature validation (Nested EIP-712 workflow).",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00003",
+                "text": "Performs the signature validation without nested EIP-712 to allow for easy sign ins.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00004",
+                "text": "`LibClone.deployDeterministicERC1967` to clone the implementation. See: [`ERC4337Factory.sol`](accounts/erc4337factory.md).",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00005",
+                "text": "returns (uint256 validationData)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00006",
+                "text": "this validation call returns successfully.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00007",
+                "text": ") internal virtual returns (uint256 validationData)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00008",
+                "text": "- The ERC4337 standard expects the factory to use deterministic deployment.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00009",
+                "text": "As such, this factory does not include any non-deterministic deployment methods.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00010",
+                "text": "Deploys an ERC4337 account with `ownSalt` and returns its deterministic address.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00011",
+                "text": "Returns the deterministic address of the account created via `createAccount`.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00012",
+                "text": "Recent updates to the account abstraction validation scope rules",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00013",
+                "text": "[ERC7562](https://eips.ethereum.org/EIPS/eip-7562) has made ERC6551 compatible with ERC4337.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00014",
+                "text": "user operation validation functionality (and use ERC6551's execution functionality).",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00015",
+                "text": "function supportsInterface(bytes4 interfaceId)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00016",
+                "text": "Returns true if this contract implements the interface defined by `interfaceId`.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00017",
+                "text": "- `0x01000000000078210001...`: Single batch. Supports optional `opData`.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00018",
+                "text": "supportsExecutionMode(bytes32)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00019",
+                "text": "function supportsExecutionMode(bytes32 mode)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00020",
+                "text": "deployProxyDeterministic(address,address,bytes32)",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00021",
+                "text": "uint256 savedBlockedNumber,",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00022",
+                "text": "savedBlockedNumber = _bound(savedBlockedNumber, 0, 2 ** 64 - 1);",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00023",
+                "text": "vm.roll(savedBlockedNumber + 1);",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00024",
+                "text": "vm.setBlockhash(savedBlockedNumber, hashToSave);",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00025",
+                "text": "function testFullMulDivAlwaysRevertsIfDivisorIsZero(uint256 a, uint256 b) public {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00026",
+                "text": "import \"./utils/InvariantTest.sol\";",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00027",
+                "text": "contract ERC20Invariants is SoladyTest, InvariantTest {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00028",
+                "text": "function invariantBalanceSum() public {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00029",
+                "text": "struct _TestVoteInvariantsTemps {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00030",
+                "text": "function testVoteInvariants(bytes32) public {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00031",
+                "text": "_TestVoteInvariantsTemps memory t;",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00032",
+                "text": "if (_randomChance(8)) _checkVoteInvariants(t);",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00033",
+                "text": "_checkVoteInvariants(t);",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00034",
+                "text": "function _checkVoteInvariants(_TestVoteInvariantsTemps memory t) internal {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00035",
+                "text": "`bob` must accept recovery.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00036",
+                "text": "function testCannotExceedMaxBalance() public {",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00037",
+                "text": "so always 2 * 2 * 64 = 256",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00038",
+                "text": "/ @dev bytes32[] because len_in_bytes is always a multiple of 32 in our case even 128",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00039",
+                "text": "exponent always 1",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00040",
+                "text": "The pool must not also fund a vault for that same payout.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00041",
+                "text": "This must be placed at the end of the `and` clause,",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00042",
+                "text": "_mustCompute(this.argsOnClone(instance));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00043",
+                "text": "_mustCompute(this.argsOnClone(instance, _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00044",
+                "text": "_mustCompute(this.argsOnClone(instance, _random(), _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00045",
+                "text": "_mustCompute(this.argsOnERC1967(instance));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00046",
+                "text": "_mustCompute(this.argsOnERC1967(instance, _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00047",
+                "text": "_mustCompute(this.argsOnERC1967(instance, _random(), _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00048",
+                "text": "_mustCompute(this.argsOnERC1967I(instance));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00049",
+                "text": "_mustCompute(this.argsOnERC1967I(instance, _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00050",
+                "text": "_mustCompute(this.argsOnERC1967I(instance, _random(), _random()));",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00051",
+                "text": "Repository contains README research context.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00052",
+                "text": "Repository contains contract or interface material.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00053",
+                "text": "Repository contains test evidence.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00054",
+                "text": "Repository contains documentation material.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00055",
+                "text": "Repository contains invariant-like statements.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00056",
+                "text": "Repository exposes 1995 executable test or invariant target(s).",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00057",
+                "text": "Repository uses the Foundry toolchain.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00058",
+                "text": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00059",
+                "text": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00060",
+                "text": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            }
+        ],
+        "invariants": [],
+        "relationships": [
+            {
+                "relationshipId": "GITHUB-REL-00001",
+                "fromCapability": "Reservation",
+                "toCapability": "Accounting",
+                "relation": "PROTECTS",
+                "reason": "GitHub repository claims indicate that reservation separates locked value from available value.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00002",
+                "fromCapability": "InvariantValidation",
+                "toCapability": "Accounting",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00003",
+                "fromCapability": "Testing",
+                "toCapability": "InvariantValidation",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-VECTORIZED-SOLADY",
+                "confidence": 70
+            }
+        ],
+        "errors": []
+    },
+    "errors": []
+}

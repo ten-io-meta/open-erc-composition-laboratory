@@ -1,0 +1,3311 @@
+OECL V2 ARCHITECTURE AUDIT
+Generated: 2026-07-17T18:26:57.9092945+01:00
+Root: C:\Users\ibano\Documents\open-erc-composition-laboratory
+
+============================================================
+1. GLOBAL FILE STATISTICS
+============================================================
+
+Total files: 20233
+Total directories: 1607
+TypeScript files: 413
+JSON files: 7036
+
+============================================================
+2. TOP-LEVEL STRUCTURE
+============================================================
+
+[DIR]  .github
+[FILE] .gitignore
+[DIR]  adaptive-research-results
+[DIR]  analysis-results
+[DIR]  architecture-audit-results
+[DIR]  autonomous-experiment-results
+[DIR]  benchmark-results
+[DIR]  benchmarks
+[DIR]  campaign-results
+[DIR]  campaigns
+[DIR]  case-studies
+[DIR]  composability-evidence-results
+[DIR]  composition-discovery-results
+[DIR]  composition-learning-results
+[DIR]  confidence-results
+[DIR]  contracts
+[DIR]  contradiction-results
+[DIR]  corpus-results
+[DIR]  cross-source-pattern-results
+[DIR]  datasets
+[FILE] disconnected-engines-audit.txt
+[DIR]  discovery-results
+[DIR]  dist
+[DIR]  docs
+[DIR]  emergent-results
+[FILE] engine-usage-audit.json
+[DIR]  evidence-graph-results
+[DIR]  evidence-results
+[DIR]  evidence-support-results
+[DIR]  experiments
+[DIR]  external
+[DIR]  extraction-results
+[DIR]  generated-scenarios
+[DIR]  github-adapter-results
+[DIR]  hypothesis-refinement-results
+[DIR]  hypothesis-results
+[DIR]  hypothesis-validation-results
+[DIR]  inference-results
+[DIR]  intelligence-results
+[DIR]  knowledge-consolidation-results
+[FILE] knowledge-entry-history-current.txt
+[DIR]  knowledge-gain-results
+[DIR]  knowledge-gap-results
+[DIR]  knowledge-graph-results
+[DIR]  knowledge-results
+[FILE] knowledge-sources-persistence-audit.txt
+[DIR]  laboratory
+[FILE] LICENSE
+[DIR]  matrix-results
+[DIR]  migration-backup-20260713-185413
+[DIR]  node_modules
+[FILE] NOTICE
+[FILE] OECL-LABORATORY.txt
+[FILE] OECL-SCRIPTS.txt
+[FILE] oecl-v2-modern-pipelines-audit.txt
+[FILE] package.json
+[FILE] package-lock.json
+[DIR]  pattern-results
+[DIR]  pipeline-results
+[DIR]  prediction-results
+[FILE] README.md
+[DIR]  reasoning-results
+[DIR]  registry
+[DIR]  relationship-results
+[DIR]  reports
+[DIR]  repository-intelligence-results
+[DIR]  requirements-results
+[DIR]  research-conclusion-results
+[FILE] research-evolution-current.txt
+[FILE] research-evolution-persistence-audit.txt
+[DIR]  research-evolution-results
+[DIR]  research-history
+[DIR]  research-knowledge-results
+[DIR]  research-memory-results
+[DIR]  research-planner-results
+[DIR]  research-question-results
+[DIR]  research-report-results
+[DIR]  research-strategy-results
+[FILE] result-output-audit.json
+[DIR]  runner
+[DIR]  scenario-batches
+[DIR]  scenarios
+[DIR]  scientific-consensus-results
+[DIR]  scientific-discovery-results
+[FILE] scientific-evidence-accumulator-current.txt
+[DIR]  scientific-evidence-accumulator-results
+[DIR]  scientific-execution-capability-results
+[DIR]  scientific-execution-observation-results
+[DIR]  scientific-execution-outcome-results
+[DIR]  scientific-execution-plan-results
+[DIR]  scientific-execution-runtime-results
+[DIR]  scientific-experiment-execution-results
+[DIR]  scientific-experiment-queue-results
+[FILE] scientific-knowledge-evolution-current.txt
+[DIR]  scientific-knowledge-evolution-results
+[DIR]  scientific-memory-results
+[DIR]  scientific-retest-experiment-results
+[FILE] scientific-retest-planner-inputs-audit.txt
+[DIR]  scientific-retest-planner-results
+[FILE] scientific-revision-inputs-audit.txt
+[DIR]  scientific-revision-results
+[DIR]  scientific-runtime-outcome-adapter-results
+[FILE] scientific-self-critique-current.txt
+[DIR]  scientific-self-critique-results
+[FILE] scientific-self-critique-v21-inputs.txt
+[DIR]  scientific-validation-results
+[DIR]  scripts
+[FILE] SECURITY.md
+[DIR]  semantic-discovery-results
+[DIR]  sources
+[DIR]  specifications
+[DIR]  test
+[DIR]  theory-results
+[DIR]  tmp
+[FILE] tsconfig.json
+
+============================================================
+3. LABORATORY DIRECTORIES
+============================================================
+
+adapters
+adaptive-research
+archive
+autonomous-experiment-design
+benchmark
+campaign
+capabilities
+composability-evidence
+composition
+composition-discovery
+composition-learning
+confidence-engine
+contradiction-engine
+corpus
+cross-source-patterns
+dataset
+discovery
+emergent
+engine
+evidence
+evidence-graph
+evidence-profile
+evidence-support
+experiment
+extraction
+github-adapter
+github-ingestion
+hypotheses
+hypothesis
+hypothesis-discovery
+hypothesis-refinement
+hypothesis-validation
+incremental-knowledge
+inference-engine
+ingestion
+intelligence
+knowledge
+knowledge-consolidation
+knowledge-gain
+knowledge-gap
+knowledge-graph
+machine-reasoning
+matrix
+metrics
+normalization
+normalized-source
+orchestration
+patterns
+pipeline
+prediction-engine
+properties
+protocols
+protocol-semantics
+publication
+query
+reasoning
+registry
+relationships
+repository-intelligence
+requirements
+research-conclusions
+research-evolution
+research-history
+research-knowledge
+research-memory
+research-planner
+research-questions
+research-report
+research-source
+research-source-adapter
+research-strategy
+runtime
+scenario
+scenario-generation
+scientific-consensus
+scientific-discovery
+scientific-evidence-accumulator
+scientific-execution-capability
+scientific-execution-observation
+scientific-execution-outcome
+scientific-execution-plan
+scientific-execution-runtime
+scientific-experiment-execution
+scientific-experiment-queue
+scientific-knowledge-evolution
+scientific-memory
+scientific-retest-experiment
+scientific-retest-planner
+scientific-revision
+scientific-runtime-outcome-adapter
+scientific-self-critique
+scientific-validation
+semantic-discovery
+source-adapters
+source-loader
+source-manifest
+statistics
+theory-engine
+validation
+
+============================================================
+4. ENGINE INVENTORY
+============================================================
+
+Engine files found: 80
+
+laboratory\autonomous-experiment-design\AutonomousExperimentDesignEngine.ts
+laboratory\benchmark\BenchmarkEngine.ts
+laboratory\composability-evidence\ComposabilityEvidenceEngine.ts
+laboratory\composition\CompositionEngine.ts
+laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+laboratory\composition-learning\CompositionLearningEngine.ts
+laboratory\confidence-engine\ConfidenceEngine.ts
+laboratory\contradiction-engine\ContradictionEngine.ts
+laboratory\cross-source-patterns\CrossSourcePatternEngine.ts
+laboratory\discovery\DiscoveryEngine.ts
+laboratory\emergent\EmergentPropertyEngine.ts
+laboratory\engine\LaboratoryEngine.ts
+laboratory\evidence-graph\EvidenceGraphEngine.ts
+laboratory\evidence-support\EvidenceSupportEngine.ts
+laboratory\extraction\ResearchExtractionEngine.ts
+laboratory\hypotheses\CompositionHypothesisEngine.ts
+laboratory\hypothesis\HypothesisEngine.ts
+laboratory\hypothesis\HypothesisValidationEngine.ts
+laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+laboratory\hypothesis-discovery\HypothesisMergeEngine.ts
+laboratory\hypothesis-refinement\HypothesisRefinementEngine.ts
+laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+laboratory\incremental-knowledge\KnowledgeEvolutionEngine.ts
+laboratory\inference-engine\InferenceEngine.ts
+laboratory\intelligence\CompositionIntelligenceEngine.ts
+laboratory\knowledge\ResearchKnowledgeEngine.ts
+laboratory\knowledge-consolidation\KnowledgeConsolidationEngine.ts
+laboratory\knowledge-gain\KnowledgeGainEngine.ts
+laboratory\knowledge-gap\KnowledgeGapEngine.ts
+laboratory\machine-reasoning\MachineReasoningEngine.ts
+laboratory\matrix\CompositionMatrixEngine.ts
+laboratory\metrics\MetricsEngine.ts
+laboratory\patterns\PatternDiscoveryEngine.ts
+laboratory\prediction-engine\PredictionEngine.ts
+laboratory\properties\CompositionPropertyEngine.ts
+laboratory\protocol-semantics\ProtocolSemanticEngine.ts
+laboratory\query\CompositionQueryEngine.ts
+laboratory\reasoning\SemanticReasoningEngine.ts
+laboratory\relationships\CompositionRelationshipEngine.ts
+laboratory\repository-intelligence\RepositoryIntelligenceEngine.ts
+laboratory\requirements\ProtocolRequirementEngine.ts
+laboratory\research-conclusions\ResearchConclusionEngine.ts
+laboratory\research-evolution\ResearchEvolutionEngine.ts
+laboratory\research-knowledge\KnowledgeEngine.ts
+laboratory\research-knowledge\KnowledgeMergeEngine.ts
+laboratory\research-memory\ResearchMemoryEngine.ts
+laboratory\research-planner\ResearchPlannerEngine.ts
+laboratory\research-questions\ResearchQuestionsEngine.ts
+laboratory\research-report\ResearchReportEngine.ts
+laboratory\research-report\ResearchReportV2Engine.ts
+laboratory\research-strategy\ResearchStrategyEngine.ts
+laboratory\scenario-generation\ScenarioGenerationEngine.ts
+laboratory\scientific-consensus\ScientificConsensusEngine.ts
+laboratory\scientific-discovery\ScientificDiscoveryEngine.ts
+laboratory\scientific-evidence-accumulator\ScientificEvidenceAccumulatorEngine.ts
+laboratory\scientific-execution-capability\ScientificExecutionCapabilityEngine.ts
+laboratory\scientific-execution-observation\ScientificExecutionObservationEngine.ts
+laboratory\scientific-execution-outcome\ScientificExecutionOutcomeEngine.ts
+laboratory\scientific-execution-plan\ScientificExecutionPlanEngine.ts
+laboratory\scientific-execution-runtime\ScientificExecutionRuntimeEngine.ts
+laboratory\scientific-experiment-execution\ScientificExperimentExecutionPlannerEngine.ts
+laboratory\scientific-experiment-queue\ScientificExperimentQueueEngine.ts
+laboratory\scientific-knowledge-evolution\ScientificKnowledgeEvolutionEngine.ts
+laboratory\scientific-memory\ScientificMemoryEngine.ts
+laboratory\scientific-retest-experiment\ScientificRetestExperimentEngine.ts
+laboratory\scientific-retest-planner\ScientificRetestPlannerEngine.ts
+laboratory\scientific-revision\ScientificRevisionEngine.ts
+laboratory\scientific-self-critique\ContradictionCritiqueEngine.ts
+laboratory\scientific-self-critique\DiscoveryCritiqueEngine.ts
+laboratory\scientific-self-critique\EvidenceCritiqueEngine.ts
+laboratory\scientific-self-critique\MemoryCritiqueEngine.ts
+laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+laboratory\scientific-self-critique\TheoryCritiqueEngine.ts
+laboratory\scientific-validation\ScientificValidationEngine.ts
+laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+laboratory\statistics\CampaignStatisticsEngine.ts
+laboratory\theory-engine\TheoryEngine.ts
+laboratory\validation\ValidationEngine.ts
+runner\metrics\MetricsEngine.ts
+
+============================================================
+5. PIPELINE INVENTORY
+============================================================
+
+Pipeline files found: 7
+
+laboratory\orchestration\export-pipeline\ExportPipeline.ts
+laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+laboratory\orchestration\planning-pipeline\PlanningPipeline.ts
+laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+laboratory\orchestration\source-pipeline\SourcePipeline.ts
+laboratory\pipeline\ResearchPipeline.ts
+
+============================================================
+6. ADAPTER INVENTORY
+============================================================
+
+Adapter files found: 13
+
+laboratory\adapters\ProtocolAdapter.ts
+laboratory\github-adapter\GitHubAdapter.ts
+laboratory\protocols\erc8001-authority\ERC8001AuthorityAdapter.ts
+laboratory\protocols\erc8060-reservable\ERC8060ReservableAdapter.ts
+laboratory\protocols\erc8275-settlement\ERC8275SettlementAdapter.ts
+laboratory\protocols\erc8312-cursor\ERC8312CursorAdapter.ts
+laboratory\research-knowledge\ReasoningKnowledgeAdapter.ts
+laboratory\research-source-adapter\GitHubResearchAdapter.ts
+laboratory\research-source-adapter\ResearchSourceAdapter.ts
+laboratory\scientific-runtime-outcome-adapter\ScientificRuntimeOutcomeAdapter.ts
+laboratory\source-adapters\GitHubAdapter.ts
+laboratory\source-adapters\GitHubSourceAdapter.ts
+runner\adapters\ProtocolAdapter.ts
+
+============================================================
+7. RESULT TYPE INVENTORY
+============================================================
+
+Result type files found: 67
+
+laboratory\autonomous-experiment-design\AutonomousExperimentResult.ts
+laboratory\benchmark\BenchmarkResult.ts
+laboratory\composability-evidence\ComposabilityEvidenceResult.ts
+laboratory\composition\CompositionResult.ts
+laboratory\composition-discovery\CompositionDiscoveryResult.ts
+laboratory\composition-learning\CompositionLearningResult.ts
+laboratory\confidence-engine\ConfidenceAssessmentResult.ts
+laboratory\contradiction-engine\ContradictionResult.ts
+laboratory\corpus\CorpusResult.ts
+laboratory\cross-source-patterns\CrossSourcePatternResult.ts
+laboratory\discovery\DiscoveryResult.ts
+laboratory\evidence\EvidenceEvaluationResult.ts
+laboratory\evidence-graph\EvidenceGraphResult.ts
+laboratory\evidence-support\EvidenceSupportResult.ts
+laboratory\experiment\ExperimentResult.ts
+laboratory\extraction\ResearchExtractionResult.ts
+laboratory\github-adapter\GitHubAdapterResult.ts
+laboratory\hypothesis\HypothesisResult.ts
+laboratory\hypothesis\HypothesisValidationResult.ts
+laboratory\hypothesis-refinement\HypothesisRefinementResult.ts
+laboratory\incremental-knowledge\IncrementalKnowledgeResult.ts
+laboratory\inference-engine\InferenceResult.ts
+laboratory\intelligence\CompositionIntelligenceResult.ts
+laboratory\knowledge-consolidation\KnowledgeConsolidationResult.ts
+laboratory\knowledge-gain\KnowledgeGainResult.ts
+laboratory\knowledge-gap\KnowledgeGapResult.ts
+laboratory\machine-reasoning\MachineReasoningResult.ts
+laboratory\orchestration\export-pipeline\ExportPipelineResult.ts
+laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+laboratory\orchestration\planning-pipeline\PlanningPipelineResult.ts
+laboratory\orchestration\scientific-pipeline\ScientificPipelineResult.ts
+laboratory\orchestration\source-pipeline\SourcePipelineResult.ts
+laboratory\pipeline\ResearchPipelineResult.ts
+laboratory\prediction-engine\PredictionResult.ts
+laboratory\protocol-semantics\ProtocolSemanticResult.ts
+laboratory\reasoning\SemanticReasoningResult.ts
+laboratory\repository-intelligence\RepositoryIntelligenceResult.ts
+laboratory\research-conclusions\ResearchConclusionResult.ts
+laboratory\research-evolution\ResearchEvolutionResult.ts
+laboratory\research-knowledge\KnowledgeMergeResult.ts
+laboratory\research-knowledge\KnowledgeResult.ts
+laboratory\research-memory\ResearchMemoryResult.ts
+laboratory\research-questions\ResearchQuestionResult.ts
+laboratory\research-report\ResearchReportResult.ts
+laboratory\research-strategy\ResearchStrategyResult.ts
+laboratory\scientific-consensus\ScientificConsensusResult.ts
+laboratory\scientific-discovery\ScientificDiscoveryResult.ts
+laboratory\scientific-evidence-accumulator\ScientificEvidenceAccumulatorResult.ts
+laboratory\scientific-execution-capability\ScientificExecutionCapabilityResult.ts
+laboratory\scientific-execution-observation\ScientificExecutionObservationResult.ts
+laboratory\scientific-execution-outcome\ScientificExecutionOutcomeResult.ts
+laboratory\scientific-execution-plan\ScientificExecutionPlanResult.ts
+laboratory\scientific-execution-runtime\ScientificRuntimeExecutionResult.ts
+laboratory\scientific-experiment-execution\ScientificExperimentExecutionResult.ts
+laboratory\scientific-experiment-queue\ScientificExperimentQueueResult.ts
+laboratory\scientific-knowledge-evolution\ScientificKnowledgeEvolutionResult.ts
+laboratory\scientific-memory\ScientificMemoryResult.ts
+laboratory\scientific-retest-experiment\ScientificRetestExperimentResult.ts
+laboratory\scientific-retest-planner\ScientificRetestPlannerResult.ts
+laboratory\scientific-revision\ScientificRevisionResult.ts
+laboratory\scientific-runtime-outcome-adapter\ScientificRuntimeOutcomeAdapterResult.ts
+laboratory\scientific-self-critique\ScientificSelfCritiqueResult.ts
+laboratory\scientific-validation\ScientificValidationResult.ts
+laboratory\semantic-discovery\SemanticDiscoveryResult.ts
+laboratory\theory-engine\ResearchTheoryResult.ts
+laboratory\validation\ValidationResult.ts
+
+============================================================
+8. RESULT DIRECTORIES
+============================================================
+
+Result directories found: 66
+
+adaptive-research-results | JSON files: 1
+analysis-results | JSON files: 0
+architecture-audit-results | JSON files: 0
+autonomous-experiment-results | JSON files: 1
+benchmark-results | JSON files: 1
+campaign-results | JSON files: 1
+composability-evidence-results | JSON files: 1
+composition-discovery-results | JSON files: 1
+composition-learning-results | JSON files: 1
+confidence-results | JSON files: 1
+contradiction-results | JSON files: 1
+corpus-results | JSON files: 1
+cross-source-pattern-results | JSON files: 1
+discovery-results | JSON files: 1
+emergent-results | JSON files: 1
+evidence-graph-results | JSON files: 1
+evidence-results | JSON files: 1
+evidence-support-results | JSON files: 1
+extraction-results | JSON files: 1
+github-adapter-results | JSON files: 1
+hypothesis-refinement-results | JSON files: 1
+hypothesis-results | JSON files: 3
+hypothesis-validation-results | JSON files: 2
+inference-results | JSON files: 1
+intelligence-results | JSON files: 1
+knowledge-consolidation-results | JSON files: 1
+knowledge-gain-results | JSON files: 1
+knowledge-gap-results | JSON files: 1
+knowledge-graph-results | JSON files: 1
+knowledge-results | JSON files: 1
+matrix-results | JSON files: 1
+pattern-results | JSON files: 1
+pipeline-results | JSON files: 1
+prediction-results | JSON files: 1
+reasoning-results | JSON files: 1
+relationship-results | JSON files: 1
+repository-intelligence-results | JSON files: 1
+requirements-results | JSON files: 1
+research-conclusion-results | JSON files: 1
+research-evolution-results | JSON files: 1
+research-knowledge-results | JSON files: 4
+research-memory-results | JSON files: 3
+research-planner-results | JSON files: 1
+research-question-results | JSON files: 1
+research-report-results | JSON files: 1
+research-strategy-results | JSON files: 1
+scientific-consensus-results | JSON files: 1
+scientific-discovery-results | JSON files: 1
+scientific-evidence-accumulator-results | JSON files: 1
+scientific-execution-capability-results | JSON files: 1
+scientific-execution-observation-results | JSON files: 1
+scientific-execution-outcome-results | JSON files: 1
+scientific-execution-plan-results | JSON files: 1
+scientific-execution-runtime-results | JSON files: 1
+scientific-experiment-execution-results | JSON files: 1
+scientific-experiment-queue-results | JSON files: 1
+scientific-knowledge-evolution-results | JSON files: 1
+scientific-memory-results | JSON files: 1
+scientific-retest-experiment-results | JSON files: 1
+scientific-retest-planner-results | JSON files: 1
+scientific-revision-results | JSON files: 1
+scientific-runtime-outcome-adapter-results | JSON files: 1
+scientific-self-critique-results | JSON files: 1
+scientific-validation-results | JSON files: 1
+semantic-discovery-results | JSON files: 1
+theory-results | JSON files: 1
+
+============================================================
+9. SCIENTIFIC PIPELINE REFERENCES
+============================================================
+
+import { readFile } from "fs/promises";
+
+import {
+    ScientificExperimentQueueEngine
+} from "../../scientific-experiment-queue/ScientificExperimentQueueEngine.js";
+
+import {
+    ScientificExperimentExecutionPlannerEngine
+} from "../../scientific-experiment-execution/ScientificExperimentExecutionPlannerEngine.js";
+
+import {
+    ScientificExecutionCapabilityEngine
+} from "../../scientific-execution-capability/ScientificExecutionCapabilityEngine.js";
+
+import {
+    ScientificExecutionPlanEngine
+} from "../../scientific-execution-plan/ScientificExecutionPlanEngine.js";
+
+import {
+    ScientificExecutionOutcomeEngine
+} from "../../scientific-execution-outcome/ScientificExecutionOutcomeEngine.js";
+
+import {
+    ScientificExecutionObservationEngine
+} from "../../scientific-execution-observation/ScientificExecutionObservationEngine.js";
+
+import {
+    ScientificExecutionRuntimeEngine
+} from "../../scientific-execution-runtime/ScientificExecutionRuntimeEngine.js";
+
+import {
+    ScientificRuntimeOutcomeAdapter
+} from "../../scientific-runtime-outcome-adapter/ScientificRuntimeOutcomeAdapter.js";
+
+import {
+    KnowledgeConsolidationEngine
+} from "../../knowledge-consolidation/KnowledgeConsolidationEngine.js";
+
+import {
+    ScientificValidationEngine
+} from "../../scientific-validation/ScientificValidationEngine.js";
+
+import {
+    ScientificRetestPlannerEngine
+} from "../../scientific-retest-planner/ScientificRetestPlannerEngine.js";
+
+import {
+    ScientificRetestExperimentEngine
+} from "../../scientific-retest-experiment/ScientificRetestExperimentEngine.js";
+
+import {
+    ScientificRevisionEngine
+} from "../../scientific-revision/ScientificRevisionEngine.js";
+
+import {
+    AutonomousExperimentDesignEngine
+} from "../../autonomous-experiment-design/AutonomousExperimentDesignEngine.js";
+
+import {
+    ScientificKnowledgeEvolutionEngine
+} from "../../scientific-knowledge-evolution/ScientificKnowledgeEvolutionEngine.js";
+
+import {
+    ScientificEvidenceAccumulatorEngine
+} from "../../scientific-evidence-accumulator/ScientificEvidenceAccumulatorEngine.js";
+
+import {
+    ScientificMemoryEngine
+} from "../../scientific-memory/ScientificMemoryEngine.js";
+
+import {
+    ScientificSelfCritiqueEngine
+} from "../../scientific-self-critique/ScientificSelfCritiqueEngine.js";
+
+import type {
+    ConfidenceAssessmentResult
+} from "../../confidence-engine/ConfidenceAssessmentResult.js";
+
+import type {
+    ResearchTheoryResult
+} from "../../theory-engine/ResearchTheoryResult.js";
+
+import type {
+    EvidenceGraphResult
+} from "../../evidence-graph/EvidenceGraphResult.js";
+
+import type {
+    ContradictionResult
+} from "../../contradiction-engine/ContradictionResult.js";
+
+import type {
+    KnowledgeGapResult
+} from "../../knowledge-gap/KnowledgeGapResult.js";
+
+import type {
+    ScientificConsensusResult
+} from "../../scientific-consensus/ScientificConsensusResult.js";
+
+import type {
+    ScientificKnowledgeEvolutionResult
+} from "../../scientific-knowledge-evolution/ScientificKnowledgeEvolutionResult.js";
+
+import type {
+    ScientificEvidenceAccumulatorResult
+} from "../../scientific-evidence-accumulator/ScientificEvidenceAccumulatorResult.js";
+
+import type {
+    ScientificPipelineResult
+} from "./ScientificPipelineResult.js";
+
+import type {
+    ScientificDiscoveryResult
+} from "../../scientific-discovery/ScientificDiscoveryResult.js";
+
+import type {
+    HypothesisRefinementResult
+} from "../../hypothesis-refinement/HypothesisRefinementResult.js";
+
+export interface ScientificPipelineInput {
+
+    campaignId: string;
+
+    confidence:
+        ConfidenceAssessmentResult;
+
+    theories:
+        ResearchTheoryResult;
+
+    evidenceGraph:
+        EvidenceGraphResult;
+
+    contradictions:
+        ContradictionResult;
+
+    knowledgeGaps:
+        KnowledgeGapResult;
+
+    consensus:
+        ScientificConsensusResult;
+
+    scientificDiscoveries:
+        ScientificDiscoveryResult;
+
+    refinedHypotheses:
+        HypothesisRefinementResult;
+
+}
+
+export class ScientificPipeline {
+
+    async run(
+        input: ScientificPipelineInput
+    ): Promise<ScientificPipelineResult> {
+
+        /*
+         * 1. Consolidate current knowledge.
+         */
+
+        const knowledgeConsolidation =
+            new KnowledgeConsolidationEngine().build(
+                input.confidence
+            );
+
+        /*
+         * 2. Validate and challenge theories.
+         */
+
+        const scientificValidation =
+            new ScientificValidationEngine().build(
+                input.theories,
+                input.evidenceGraph,
+                input.contradictions
+            );
+
+        /*
+         * 3. Design autonomous experiments.
+         */
+
+        const autonomousExperiments =
+            new AutonomousExperimentDesignEngine().build(
+                scientificValidation,
+                input.knowledgeGaps,
+                input.contradictions,
+                input.confidence
+            );
+
+        /*
+         * 4. Load previous scientific evolution.
+         */
+
+        const previousScientificEvolution =
+            await this.loadOptionalJson<
+                ScientificKnowledgeEvolutionResult
+            >(
+                "./scientific-knowledge-evolution-results/" +
+                "OECL-V2-SCIENTIFIC-KNOWLEDGE-EVOLUTION.json"
+            );
+
+        /*
+         * 5. Build scientific knowledge evolution.
+         */
+
+        const scientificKnowledgeEvolution =
+            new ScientificKnowledgeEvolutionEngine().build(
+                input.campaignId,
+                knowledgeConsolidation,
+                scientificValidation,
+                input.consensus,
+                previousScientificEvolution
+            );
+
+        /*
+         * 6. Load previous evidence accumulator.
+         */
+
+        const previousEvidenceAccumulator =
+            await this.loadOptionalJson<
+                ScientificEvidenceAccumulatorResult
+            >(
+                "./scientific-evidence-accumulator-results/" +
+                "OECL-V2-SCIENTIFIC-EVIDENCE-ACCUMULATOR.json"
+            );
+
+        /*
+         * 7. Accumulate scientific evidence.
+         */
+
+        const scientificEvidenceAccumulator =
+            new ScientificEvidenceAccumulatorEngine().build(
+                scientificKnowledgeEvolution,
+                previousEvidenceAccumulator
+            );
+
+        /*
+         * 8. Build persistent scientific memory.
+         */
+
+        const scientificMemory =
+            await new ScientificMemoryEngine().build(
+                input.campaignId,
+                scientificKnowledgeEvolution
+            );
+
+        /*
+         * 9. Critique current theories and knowledge.
+         */
+
+        const scientificSelfCritique =
+            new ScientificSelfCritiqueEngine().build(
+                input.campaignId,
+                scientificValidation,
+                input.contradictions,
+                scientificEvidenceAccumulator,
+                scientificMemory,
+                input.scientificDiscoveries
+            );
+
+        /*
+         * 10. Build scientific revision decisions.
+         */
+
+        const scientificRevision =
+            new ScientificRevisionEngine().build(
+                input.campaignId,
+                scientificSelfCritique,
+                scientificKnowledgeEvolution
+            );
+
+        /*
+         * 11. Build scientific retest plans.
+         */
+
+        const scientificRetestPlanner =
+            new ScientificRetestPlannerEngine().build(
+                input.campaignId,
+                scientificRevision
+            );
+
+        /*
+         * 12. Build scientific retest experiments.
+         */
+
+        const scientificRetestExperiments =
+            new ScientificRetestExperimentEngine().build(
+                input.campaignId,
+                scientificRetestPlanner
+            );
+
+        /*
+         * 13. Build unified scientific experiment queue.
+         */
+
+        const scientificExperimentQueue =
+            new ScientificExperimentQueueEngine().build(
+                input.campaignId,
+                autonomousExperiments,
+                scientificRetestExperiments
+            );
+
+        /*
+         * 14. Build scientific experiment execution tasks.
+         */
+
+        const scientificExperimentExecution =
+            new ScientificExperimentExecutionPlannerEngine().build(
+                input.campaignId,
+                scientificExperimentQueue
+            );
+
+        /*
+         * 15. Build scientific execution capability classification.
+         */
+
+        const scientificExecutionCapabilities =
+            new ScientificExecutionCapabilityEngine().build(
+                input.campaignId,
+                scientificExperimentExecution
+            );
+
+        /*
+         * 16. Build operational scientific execution plans.
+         */
+
+        const scientificExecutionPlans =
+            new ScientificExecutionPlanEngine().build(
+                input.campaignId,
+                scientificExperimentExecution,
+                scientificExecutionCapabilities
+            );
+
+/*
+ * 17. Build initial scientific execution outcomes.
+ */
+
+const scientificExecutionOutcomes =
+    new ScientificExecutionOutcomeEngine().build(
+        input.campaignId,
+        scientificExecutionPlans
+    );
+
+/*
+ * 18. Execute supported scientific runtime steps.
+ */
+
+const scientificExecutionRuntime =
+    new ScientificExecutionRuntimeEngine().build(
+        input.campaignId,
+        scientificExecutionPlans
+    );
+
+/*
+ * 19. Reconcile runtime executions with scientific outcomes.
+ */
+
+const scientificRuntimeOutcomeAdapter =
+    new ScientificRuntimeOutcomeAdapter().build(
+        input.campaignId,
+        scientificExecutionOutcomes,
+        scientificExecutionRuntime
+    );
+
+/*
+ * 20. Build scientific observations from updated outcomes.
+ */
+
+const scientificExecutionObservations =
+    new ScientificExecutionObservationEngine().build(
+        input.campaignId,
+        scientificRuntimeOutcomeAdapter.updatedOutcomes
+    );
+
+        return {
+
+    knowledgeConsolidation,
+
+    scientificValidation,
+
+    autonomousExperiments,
+
+    scientificKnowledgeEvolution,
+
+    scientificEvidenceAccumulator,
+
+    scientificMemory,
+
+    scientificSelfCritique,
+
+    scientificRevision,
+
+    scientificRetestPlanner,
+
+    scientificRetestExperiments,
+
+    scientificExperimentQueue,
+
+    scientificExperimentExecution,
+
+    scientificExecutionCapabilities,
+
+    scientificExecutionPlans,
+
+    scientificExecutionOutcomes,
+
+scientificExecutionRuntime,
+
+scientificRuntimeOutcomeAdapter,
+
+scientificExecutionObservations
+
+};
+
+    }
+
+    private async loadOptionalJson<T>(
+        path: string
+    ): Promise<T | null> {
+
+        try {
+
+            const content =
+                await readFile(
+                    path,
+                    "utf8"
+                );
+
+            return JSON.parse(
+                content
+            ) as T;
+
+        } catch (error) {
+
+            if (
+                error instanceof Error &&
+                "code" in error &&
+                error.code === "ENOENT"
+            ) {
+                return null;
+            }
+
+            throw error;
+
+        }
+
+    }
+
+}
+
+============================================================
+10. SCIENTIFIC PIPELINE RESULT CONTRACT
+============================================================
+
+import type {
+    ScientificRuntimeOutcomeAdapterResult
+} from "../../scientific-runtime-outcome-adapter/ScientificRuntimeOutcomeAdapterResult.js";
+
+import type {
+    ScientificRuntimeExecutionResult
+} from "../../scientific-execution-runtime/ScientificRuntimeExecutionResult.js";
+
+import type {
+    ScientificExecutionObservationResult
+} from "../../scientific-execution-observation/ScientificExecutionObservationResult.js";
+
+import type {
+    ScientificExecutionOutcomeResult
+} from "../../scientific-execution-outcome/ScientificExecutionOutcomeResult.js";
+
+import type {
+    ScientificExecutionPlanResult
+} from "../../scientific-execution-plan/ScientificExecutionPlanResult.js";
+
+import type {
+    ScientificExecutionCapabilityResult
+} from "../../scientific-execution-capability/ScientificExecutionCapabilityResult.js";
+
+import type {
+    ScientificExperimentQueueResult
+} from "../../scientific-experiment-queue/ScientificExperimentQueueResult.js";
+
+import type {
+    ScientificRetestPlannerResult
+} from "../../scientific-retest-planner/ScientificRetestPlannerResult.js";
+
+import type {
+    ScientificExperimentExecutionResult
+} from "../../scientific-experiment-execution/ScientificExperimentExecutionResult.js";
+
+import type {
+    ScientificRetestExperimentResult
+} from "../../scientific-retest-experiment/ScientificRetestExperimentResult.js";
+
+import type {
+    KnowledgeConsolidationResult
+} from "../../knowledge-consolidation/KnowledgeConsolidationResult.js";
+
+import type {
+    ScientificValidationResult
+} from "../../scientific-validation/ScientificValidationResult.js";
+
+import type {
+    ScientificRevisionResult
+} from "../../scientific-revision/ScientificRevisionResult.js";
+
+import type {
+    AutonomousExperimentResult
+} from "../../autonomous-experiment-design/AutonomousExperimentResult.js";
+
+import type {
+    ScientificKnowledgeEvolutionResult
+} from "../../scientific-knowledge-evolution/ScientificKnowledgeEvolutionResult.js";
+
+import type {
+    ScientificEvidenceAccumulatorResult
+} from "../../scientific-evidence-accumulator/ScientificEvidenceAccumulatorResult.js";
+
+import type {
+    ScientificMemoryResult
+} from "../../scientific-memory/ScientificMemoryResult.js";
+
+import type {
+    ScientificSelfCritiqueResult
+} from "../../scientific-self-critique/ScientificSelfCritiqueResult.js";
+
+export interface ScientificPipelineResult {
+
+    knowledgeConsolidation:
+        KnowledgeConsolidationResult;
+
+    scientificValidation:
+        ScientificValidationResult;
+
+    autonomousExperiments:
+        AutonomousExperimentResult;
+
+    scientificKnowledgeEvolution:
+        ScientificKnowledgeEvolutionResult;
+
+    scientificEvidenceAccumulator:
+        ScientificEvidenceAccumulatorResult;
+
+    scientificMemory:
+        ScientificMemoryResult;
+
+    scientificSelfCritique:
+        ScientificSelfCritiqueResult;
+
+    scientificRevision:
+        ScientificRevisionResult;
+
+    scientificRetestPlanner:
+        ScientificRetestPlannerResult;
+
+    scientificRetestExperiments:
+        ScientificRetestExperimentResult;
+
+    scientificExperimentQueue:
+        ScientificExperimentQueueResult;
+
+    scientificExperimentExecution:
+        ScientificExperimentExecutionResult;
+
+    scientificExecutionCapabilities:
+        ScientificExecutionCapabilityResult;
+
+    scientificExecutionPlans:
+        ScientificExecutionPlanResult;
+
+    scientificExecutionOutcomes:
+    ScientificExecutionOutcomeResult;
+
+    scientificExecutionObservations:
+    ScientificExecutionObservationResult;
+
+    scientificExecutionRuntime:
+    ScientificRuntimeExecutionResult;
+
+    scientificRuntimeOutcomeAdapter:
+    ScientificRuntimeOutcomeAdapterResult;
+
+}
+
+============================================================
+11. MAIN V2 ORCHESTRATOR REFERENCES
+============================================================
+
+import {
+    readFile
+} from "fs/promises";
+
+import {
+    KnowledgeMergeEngine
+} from "../laboratory/research-knowledge/KnowledgeMergeEngine.js";
+
+import {
+    ResearchHistoryManager
+} from "../laboratory/research-history/ResearchHistoryManager.js";
+
+import {
+    ResearchPlannerEngine
+} from "../laboratory/research-planner/ResearchPlannerEngine.js";
+
+import {
+    ResearchPlannerEvaluator
+} from "../laboratory/research-planner/ResearchPlannerEvaluator.js";
+
+import {
+    ResearchReportV2Engine
+} from "../laboratory/research-report/ResearchReportV2Engine.js";
+
+import {
+    SourcePipeline
+} from "../laboratory/orchestration/source-pipeline/SourcePipeline.js";
+
+import {
+    KnowledgePipeline
+} from "../laboratory/orchestration/knowledge-pipeline/KnowledgePipeline.js";
+
+import {
+    ScientificPipeline
+} from "../laboratory/orchestration/scientific-pipeline/ScientificPipeline.js";
+
+import {
+    IntelligencePipeline
+} from "../laboratory/orchestration/intelligence-pipeline/IntelligencePipeline.js";
+
+import {
+    ExportPipeline
+} from "../laboratory/orchestration/export-pipeline/ExportPipeline.js";
+
+import type {
+    ExportDefinition
+} from "../laboratory/orchestration/export-pipeline/ExportDefinition.js";
+
+async function main(): Promise<void> {
+
+    const runStartedAt =
+        new Date().toISOString();
+
+    const campaignId =
+        `OECL-V2-CAMPAIGN-${runStartedAt.replace(
+            /[:.]/g,
+            "-"
+        )}`;
+
+    console.log("");
+    console.log("====================================");
+    console.log("OECL V2 Pipeline");
+    console.log("====================================");
+    console.log(`Campaign: ${campaignId}`);
+
+    /*
+     * ==================================================
+     * 1. SOURCE PIPELINE
+     * ==================================================
+     */
+
+    const source =
+        await new SourcePipeline().run({
+
+            manifestPath:
+                "./sources/manifest.json",
+
+            printSourceSummary:
+                true
+
+        });
+
+    if (source.errors.length > 0) {
+
+        console.log("");
+        console.warn(
+            `Source pipeline completed with ` +
+            `${source.errors.length} error(s).`
+        );
+
+        for (const error of source.errors) {
+
+            console.warn(
+                `- ${error}`
+            );
+
+        }
+
+    }
+
+    if (
+        source.partialKnowledgeBases.length === 0
+    ) {
+
+        throw new Error(
+            "No partial knowledge bases were produced by the enabled sources."
+        );
+
+    }
+
+    /*
+     * ==================================================
+     * 2. KNOWLEDGE MERGE
+     * ==================================================
+     */
+
+    const mergedKnowledgeResult =
+        new KnowledgeMergeEngine().merge(
+            source.partialKnowledgeBases
+        );
+
+    /*
+     * ==================================================
+     * 3. KNOWLEDGE PIPELINE
+     * ==================================================
+     */
+
+    const knowledge =
+        new KnowledgePipeline().run(
+            mergedKnowledgeResult
+        );
+
+    /*
+     * ==================================================
+     * 4. SCIENTIFIC PIPELINE
+     * ==================================================
+     */
+
+    const scientific =
+        await new ScientificPipeline().run({
+
+            campaignId,
+
+            confidence:
+                knowledge.confidence,
+
+            theories:
+                knowledge.theories,
+
+            evidenceGraph:
+                knowledge.evidenceGraph,
+
+            contradictions:
+                knowledge.contradictions,
+
+            knowledgeGaps:
+                knowledge.knowledgeGaps,
+
+            consensus:
+    knowledge.scientificConsensus,
+
+scientificDiscoveries:
+    knowledge.scientificDiscoveries,
+
+refinedHypotheses:
+    knowledge.refinedHypotheses
+
+        });
+
+    /*
+     * ==================================================
+     * 5. RESEARCH PLANNING
+     * ==================================================
+     */
+
+    const existingRepositories =
+        source.sources.map(
+            researchSource =>
+                researchSource.sourceId
+        );
+
+    const researchPlan =
+        new ResearchPlannerEngine().build(
+            knowledge.crossSourcePatterns,
+            existingRepositories
+        );
+
+    const evaluatedResearchPlan =
+        new ResearchPlannerEvaluator().evaluate(
+            researchPlan
+        );
+
+    /*
+     * ==================================================
+     * 6. PREVIOUS RESEARCH STATE
+     * ==================================================
+     */
+
+    const researchHistoryManager =
+        new ResearchHistoryManager();
+
+    const previousResearchState =
+        await researchHistoryManager.load();
+
+    /*
+     * ==================================================
+     * 7. INTELLIGENCE PIPELINE
+     * ==================================================
+     */
+
+    const intelligence =
+        new IntelligencePipeline().run({
+
+            previousResearchState:
+                previousResearchState ?? {},
+
+            knowledge:
+                mergedKnowledgeResult.knowledge,
+
+            patterns:
+                knowledge.crossSourcePatterns,
+
+            conclusions:
+                knowledge.researchConclusions,
+
+            knowledgeGaps:
+                knowledge.knowledgeGaps,
+
+            scientificDiscoveries:
+                knowledge.scientificDiscoveries,
+
+            evaluatedResearchPlan
+
+        });
+
+    /*
+     * ==================================================
+     * 8. RESEARCH MEMORY
+     * ==================================================
+     */
+
+    const researchMemoryContent =
+        await readFile(
+            "./research-memory-results/" +
+            "OECL-V2-RESEARCH-MEMORY.json",
+            "utf8"
+        );
+
+    const researchMemory =
+        JSON.parse(
+            researchMemoryContent
+        );
+
+    /*
+     * ==================================================
+     * 9. RESEARCH REPORT
+     * ==================================================
+     */
+
+    const researchReport =
+        new ResearchReportV2Engine().build(
+
+            mergedKnowledgeResult.knowledge,
+
+            knowledge.crossSourcePatterns,
+
+            knowledge.researchConclusions,
+
+            intelligence.researchEvolution,
+
+            researchMemory
+
+        );
+
+    /*
+     * ==================================================
+     * 10. PRESERVE RESEARCH HISTORY
+     * ==================================================
+     */
+
+    await researchHistoryManager.save({
+
+    generatedAt:
+        new Date().toISOString(),
+
+    knowledge:
+        mergedKnowledgeResult.knowledge,
+
+    patterns:
+        knowledge.crossSourcePatterns,
+
+    conclusions:
+        knowledge.researchConclusions,
+
+    researchEvolution:
+        intelligence.researchEvolution
+
+});
+
+    /*
+     * ==================================================
+     * 11. PIPELINE ARTIFACT
+     * ==================================================
+     */
+
+    const pipelineArtifact = {
+
+        manifestId:
+            source.manifest.manifestId,
+
+        campaignId,
+
+        generatedAt:
+            new Date().toISOString(),
+
+        sourceSummary: {
+
+            configuredSources:
+                source.statistics.configuredSources,
+
+            enabledSources:
+                source.statistics.enabledSources,
+
+            executedSources:
+                source.statistics.executedSources,
+
+            successfulSources:
+                source.statistics.successfulSources,
+
+            failedSources:
+                source.statistics.failedSources,
+
+            partialKnowledgeBases:
+                source.statistics.partialKnowledgeBases
+
+        },
+
+        results:
+            source.sourceResults,
+
+        knowledgeSummary: {
+
+            mergedKnowledgeEntries:
+                mergedKnowledgeResult.mergedEntries,
+
+            mergedSources:
+                mergedKnowledgeResult.mergedSources.length,
+
+            crossSourcePatterns:
+                knowledge.crossSourcePatterns
+                    .statistics.patterns,
+
+            supportedPatterns:
+                knowledge.crossSourcePatterns
+                    .statistics.supported,
+
+            emergingPatterns:
+                knowledge.crossSourcePatterns
+                    .statistics.emerging,
+
+            conclusions:
+                knowledge.researchConclusions
+                    .conclusions.length,
+
+            discoveries:
+                knowledge.scientificDiscoveries
+                    .discoveries.length,
+
+            knowledgeGaps:
+                knowledge.knowledgeGaps
+                    .gaps.length
+
+        },
+
+        scientificSummary: {
+
+            knowledgeConsolidations:
+                scientific
+                    .knowledgeConsolidation
+                    .consolidations
+                    .length,
+
+            scientificValidations:
+                scientific
+                    .scientificValidation
+                    .validations
+                    .length,
+
+            validatedTheories:
+                scientific
+                    .scientificValidation
+                    .statistics
+                    .validated,
+
+            challengedTheories:
+                scientific
+                    .scientificValidation
+                    .statistics
+                    .challenged,
+
+            rejectedTheories:
+                scientific
+                    .scientificValidation
+                    .statistics
+                    .rejected,
+
+            autonomousExperiments:
+                scientific
+                    .autonomousExperiments
+                    .experiments
+                    .length,
+
+            scientificKnowledgeStates:
+                scientific
+                    .scientificKnowledgeEvolution
+                    .states
+                    .length,
+
+            scientificKnowledgeEvolutions:
+                scientific
+                    .scientificKnowledgeEvolution
+                    .evolutions
+                    .length,
+
+            evidenceHistories:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .histories
+                    .length,
+
+            evidenceAccumulations:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .accumulations
+                    .length,
+
+            growingEvidenceTrends:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .statistics
+                    .growingTrends,
+
+            stableEvidenceTrends:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .statistics
+                    .stableTrends,
+
+            decliningEvidenceTrends:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .statistics
+                    .decliningTrends,
+
+            volatileEvidenceTrends:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .statistics
+                    .volatileTrends,
+
+            averageEvidenceStability:
+                scientific
+                    .scientificEvidenceAccumulator
+                    .statistics
+                    .averageStabilityScore,
+    trackedScientificMemory:
+    scientific
+        .scientificMemory
+        .statistics
+        .trackedKnowledge,
+
+newScientificKnowledge:
+    scientific
+        .scientificMemory
+        .statistics
+        .newKnowledge,
+
+recurringScientificKnowledge:
+    scientific
+        .scientificMemory
+        .statistics
+        .recurringKnowledge,
+
+scientificCritiques:
+    scientific
+        .scientificSelfCritique
+        .statistics
+        .critiques,
+
+criticalScientificCritiques:
+    scientific
+        .scientificSelfCritique
+        .statistics
+        .critical,
+
+averageRobustnessScore:
+    scientific
+        .scientificSelfCritique
+        .statistics
+        .averageRobustnessScore,
+
+scientificRevisions:
+    scientific
+        .scientificRevision
+        .statistics
+        .total,
+
+scientificRevisionsKeep:
+    scientific
+        .scientificRevision
+        .statistics
+        .keep,
+
+scientificRevisionsReview:
+    scientific
+        .scientificRevision
+        .statistics
+        .review,
+
+scientificRevisionsWeaken:
+    scientific
+        .scientificRevision
+        .statistics
+        .weaken,
+
+scientificRevisionsChallenge:
+    scientific
+        .scientificRevision
+        .statistics
+        .challenge,
+
+scientificRevisionsRetest:
+    scientific
+        .scientificRevision
+        .statistics
+        .retest,
+
+scientificRevisionsRefuteCandidate:
+    scientific
+        .scientificRevision
+        .statistics
+        .refuteCandidate,
+
+scientificRetestPlans:
+    scientific
+        .scientificRetestPlanner
+        .statistics
+        .plans,
+
+scientificTheoryRetests:
+    scientific
+        .scientificRetestPlanner
+        .statistics
+        .theoryRetests,
+
+scientificDiscoveryRetests:
+    scientific
+        .scientificRetestPlanner
+        .statistics
+        .discoveryRetests,
+
+scientificKnowledgeRetests:
+    scientific
+        .scientificRetestPlanner
+        .statistics
+        .knowledgeRetests,
+
+scientificEvidenceHistoryRetests:
+    scientific
+        .scientificRetestPlanner
+        .statistics
+        .evidenceHistoryRetests,
+
+scientificRetestExperiments:
+    scientific
+        .scientificRetestExperiments
+        .statistics
+        .experiments,
+
+scientificTheoryRetestExperiments:
+    scientific
+        .scientificRetestExperiments
+        .statistics
+        .theoryExperiments,
+
+scientificDiscoveryRetestExperiments:
+    scientific
+        .scientificRetestExperiments
+        .statistics
+        .discoveryExperiments,
+
+scientificKnowledgeRetestExperiments:
+    scientific
+        .scientificRetestExperiments
+        .statistics
+        .knowledgeExperiments,
+
+scientificEvidenceHistoryRetestExperiments:
+    scientific
+        .scientificRetestExperiments
+        .statistics
+        .evidenceHistoryExperiments,
+        scientificExperimentQueueTotal:
+    scientific
+        .scientificExperimentQueue
+        .statistics
+        .total,
+
+scientificExperimentQueueAutonomous:
+    scientific
+        .scientificExperimentQueue
+        .statistics
+        .autonomous,
+
+scientificExperimentQueueRetest:
+    scientific
+        .scientificExperimentQueue
+        .statistics
+        .retest,
+
+scientificExperimentQueueDeduplicated:
+    scientific
+        .scientificExperimentQueue
+        .statistics
+        .deduplicated,
+
+scientificExperimentQueueAverageScore:
+    scientific
+        .scientificExperimentQueue
+        .statistics
+        .averageQueueScore,
+        scientificExecutionTasks:
+    scientific
+        .scientificExperimentExecution
+        .statistics
+        .total,
+
+scientificExecutionReady:
+    scientific
+        .scientificExperimentExecution
+        .statistics
+        .ready,
+
+scientificExecutionBlocked:
+    scientific
+        .scientificExperimentExecution
+        .statistics
+        .blocked,
+
+scientificExecutionAutonomous:
+    scientific
+        .scientificExperimentExecution
+        .statistics
+        .autonomous,
+
+scientificExecutionRetest:
+    scientific
+        .scientificExperimentExecution
+        .statistics
+        .retest,
+        scientificExecutionCapabilities:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .total,
+
+scientificExecutionStaticAnalysis:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .staticAnalysis,
+
+scientificExecutionTestExecution:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .testExecution,
+
+scientificExecutionInvariantValidation:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .invariantValidation,
+
+scientificExecutionSourceReingestion:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .sourceReingestion,
+
+scientificExecutionManualReview:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .manualReview,
+
+scientificExecutionCapabilityAverageConfidence:
+    scientific
+        .scientificExecutionCapabilities
+        .statistics
+        .averageConfidence,
+
+scientificExecutionPlans:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .plans,
+
+scientificExecutionPlanSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .totalSteps,
+
+scientificExecutionReadyPlans:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .readyPlans,
+
+scientificExecutionBlockedPlans:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .blockedPlans,
+
+scientificExecutionSourceReingestionSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .sourceReingestionSteps,
+
+scientificExecutionStaticAnalysisSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .staticAnalysisSteps,
+
+scientificExecutionTestExecutionSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .testExecutionSteps,
+
+scientificExecutionInvariantValidationSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .invariantValidationSteps,
+
+scientificExecutionEvidenceCollectionSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .evidenceCollectionSteps,
+
+scientificExecutionManualReviewSteps:
+    scientific
+        .scientificExecutionPlans
+        .statistics
+        .manualReviewSteps,
+scientificExecutionOutcomes:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .total,
+
+scientificExecutionOutcomesNotExecuted:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .notExecuted,
+
+scientificExecutionOutcomesSuccess:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .success,
+
+scientificExecutionOutcomesFailure:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .failure,
+
+scientificExecutionOutcomesInconclusive:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .inconclusive,
+
+scientificExecutionOutcomesBlocked:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .blocked,
+
+scientificExecutionOutcomesExecuted:
+    scientific
+        .scientificExecutionOutcomes
+        .statistics
+        .executed,
+scientificExecutionObservations:
+    scientific
+        .scientificExecutionObservations
+        .statistics
+        .total,
+
+scientificExecutionObservationsSupported:
+    scientific
+        .scientificExecutionObservations
+        .statistics
+        .supported,
+
+scientificExecutionObservationsChallenged:
+    scientific
+        .scientificExecutionObservations
+        .statistics
+        .challenged,
+
+scientificExecutionObservationsInconclusive:
+    scientific
+        .scientificExecutionObservations
+        .statistics
+        .inconclusive,
+        scientificExecutionRuntimeTotal:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .total,
+
+scientificExecutionRuntimeSuccess:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .success,
+
+scientificExecutionRuntimeFailure:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .failure,
+
+scientificExecutionRuntimeInconclusive:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .inconclusive,
+
+scientificExecutionRuntimeUnsupported:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .unsupported,
+
+scientificExecutionRuntimeSkipped:
+    scientific
+        .scientificExecutionRuntime
+        .statistics
+        .skipped,
+        scientificRuntimeOutcomeAdapterTotal:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .total,
+
+scientificRuntimeOutcomeAdapterUpdated:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .updated,
+
+scientificRuntimeOutcomeAdapterUnchanged:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .unchanged,
+
+scientificRuntimeOutcomeAdapterSuccessMapped:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .successMapped,
+
+scientificRuntimeOutcomeAdapterFailureMapped:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .failureMapped,
+
+scientificRuntimeOutcomeAdapterInconclusiveMapped:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .inconclusiveMapped,
+
+scientificRuntimeOutcomeAdapterUnsupportedIgnored:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .unsupportedIgnored,
+
+scientificRuntimeOutcomeAdapterSkippedIgnored:
+    scientific
+        .scientificRuntimeOutcomeAdapter
+        .statistics
+        .skippedIgnored,
+},
+        intelligenceSummary: {
+
+            knowledgeGain:
+                intelligence
+                    .knowledgeGain
+                    .statistics
+                    .totalKnowledgeGain,
+
+            researchEvolutions:
+                intelligence
+                    .researchEvolution
+                    .statistics
+                    .evolutions,
+
+            repositoriesEvaluated:
+                intelligence
+                    .repositoryIntelligence
+                    .statistics
+                    .repositories
+
+        }
+
+    };
+
+    /*
+     * ==================================================
+     * 12. EXPORT DEFINITIONS
+     * ==================================================
+     */
+
+    const outputs:
+        ReadonlyArray<ExportDefinition> = [
+
+        {
+            directory:
+                "./research-knowledge-results",
+
+            filename:
+                "OECL-V2-MERGED-KNOWLEDGE.json",
+
+            data:
+                mergedKnowledgeResult
+        },
+
+        {
+            directory:
+                "./cross-source-pattern-results",
+
+            filename:
+                "OECL-V2-CROSS-SOURCE-PATTERNS.json",
+
+            data:
+                knowledge.crossSourcePatterns
+        },
+
+        {
+            directory:
+                "./research-conclusion-results",
+
+            filename:
+                "OECL-V2-RESEARCH-CONCLUSIONS.json",
+
+            data:
+                knowledge.researchConclusions
+        },
+
+        {
+            directory:
+                "./confidence-results",
+
+            filename:
+                "OECL-V2-CONFIDENCE-ASSESSMENTS.json",
+
+            data:
+                knowledge.confidence
+        },
+
+        {
+            directory:
+                "./contradiction-results",
+
+            filename:
+                "OECL-V2-CONTRADICTIONS.json",
+
+            data:
+                knowledge.contradictions
+        },
+
+        {
+            directory:
+                "./evidence-graph-results",
+
+            filename:
+                "OECL-V2-EVIDENCE-GRAPH.json",
+
+            data:
+                knowledge.evidenceGraph
+        },
+
+        {
+            directory:
+                "./inference-results",
+
+            filename:
+                "OECL-V2-INFERENCES.json",
+
+            data:
+                knowledge.inferences
+        },
+
+        {
+            directory:
+                "./theory-results",
+
+            filename:
+                "OECL-V2-THEORIES.json",
+
+            data:
+                knowledge.theories
+        },
+
+        {
+            directory:
+                "./scientific-discovery-results",
+
+            filename:
+                "OECL-V2-SCIENTIFIC-DISCOVERIES.json",
+
+            data:
+                knowledge.scientificDiscoveries
+        },
+
+        {
+            directory:
+                "./research-question-results",
+
+            filename:
+                "OECL-V2-RESEARCH-QUESTIONS.json",
+
+            data:
+                knowledge.researchQuestions
+        },
+
+        {
+            directory:
+                "./hypothesis-refinement-results",
+
+            filename:
+                "OECL-V2-REFINED-HYPOTHESES.json",
+
+            data:
+                knowledge.refinedHypotheses
+        },
+
+        {
+            directory:
+                "./knowledge-gap-results",
+
+            filename:
+                "OECL-V2-KNOWLEDGE-GAPS.json",
+
+            data:
+                knowledge.knowledgeGaps
+        },
+
+        {
+            directory:
+                "./scientific-consensus-results",
+
+            filename:
+                "OECL-V2-SCIENTIFIC-CONSENSUS.json",
+
+            data:
+                knowledge.scientificConsensus
+        },
+
+        {
+            directory:
+                "./knowledge-consolidation-results",
+
+            filename:
+                "OECL-V2-KNOWLEDGE-CONSOLIDATION.json",
+
+            data:
+                scientific.knowledgeConsolidation
+        },
+
+        {
+            directory:
+                "./scientific-validation-results",
+
+            filename:
+                "OECL-V2-SCIENTIFIC-VALIDATIONS.json",
+
+            data:
+                scientific.scientificValidation
+        },
+
+        {
+            directory:
+                "./autonomous-experiment-results",
+
+            filename:
+                "OECL-V2-AUTONOMOUS-EXPERIMENTS.json",
+
+            data:
+                scientific.autonomousExperiments
+        },
+
+        {
+            directory:
+                "./scientific-knowledge-evolution-results",
+
+            filename:
+                "OECL-V2-SCIENTIFIC-KNOWLEDGE-EVOLUTION.json",
+
+            data:
+                scientific.scientificKnowledgeEvolution
+        },
+
+        {
+            directory:
+                "./scientific-evidence-accumulator-results",
+
+            filename:
+                "OECL-V2-SCIENTIFIC-EVIDENCE-ACCUMULATOR.json",
+
+            data:
+                scientific.scientificEvidenceAccumulator
+        },
+{
+    directory:
+        "./scientific-memory-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-MEMORY.json",
+
+    data:
+        scientific.scientificMemory
+},
+
+{
+    directory:
+        "./scientific-self-critique-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-SELF-CRITIQUE.json",
+
+    data:
+        scientific.scientificSelfCritique
+},
+
+{
+    directory:
+        "./scientific-revision-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-REVISION.json",
+
+    data:
+        scientific.scientificRevision
+},
+
+{
+    directory:
+        "./scientific-retest-planner-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-RETEST-PLANS.json",
+
+    data:
+        scientific.scientificRetestPlanner
+},
+{
+    directory:
+        "./scientific-retest-experiment-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-RETEST-EXPERIMENTS.json",
+
+    data:
+        scientific.scientificRetestExperiments
+},
+{
+    directory:
+        "./scientific-experiment-queue-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXPERIMENT-QUEUE.json",
+
+    data:
+        scientific.scientificExperimentQueue
+},
+{
+    directory:
+        "./scientific-experiment-execution-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXPERIMENT-EXECUTION.json",
+
+    data:
+        scientific.scientificExperimentExecution
+},
+{
+    directory:
+        "./scientific-execution-capability-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXECUTION-CAPABILITIES.json",
+
+    data:
+        scientific.scientificExecutionCapabilities
+},
+{
+    directory:
+        "./scientific-execution-plan-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXECUTION-PLANS.json",
+
+    data:
+        scientific.scientificExecutionPlans
+},
+{
+    directory:
+        "./scientific-execution-outcome-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXECUTION-OUTCOMES.json",
+
+    data:
+        scientific.scientificExecutionOutcomes
+},
+{
+    directory:
+        "./scientific-execution-observation-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXECUTION-OBSERVATIONS.json",
+
+    data:
+        scientific.scientificExecutionObservations
+},
+{
+    directory:
+        "./scientific-execution-runtime-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-EXECUTION-RUNTIME.json",
+
+    data:
+        scientific.scientificExecutionRuntime
+},
+{
+    directory:
+        "./scientific-runtime-outcome-adapter-results",
+
+    filename:
+        "OECL-V2-SCIENTIFIC-RUNTIME-OUTCOME-ADAPTER.json",
+
+    data:
+        scientific.scientificRuntimeOutcomeAdapter
+},
+{
+    directory:
+        "./prediction-results",
+
+            filename:
+                "OECL-V2-PREDICTIONS.json",
+
+            data:
+                intelligence.predictions
+        },
+
+        {
+            directory:
+                "./research-evolution-results",
+
+            filename:
+                "OECL-V2-RESEARCH-EVOLUTION.json",
+
+            data:
+                intelligence.researchEvolution
+        },
+
+        {
+            directory:
+                "./knowledge-gain-results",
+
+            filename:
+                "OECL-V2-KNOWLEDGE-GAIN.json",
+
+            data:
+                intelligence.knowledgeGain
+        },
+
+        {
+            directory:
+                "./repository-intelligence-results",
+
+            filename:
+                "OECL-V2-REPOSITORY-INTELLIGENCE.json",
+
+            data:
+                intelligence.repositoryIntelligence
+        },
+
+        {
+            directory:
+                "./research-planner-results",
+
+            filename:
+                "OECL-V2-RESEARCH-PLAN.json",
+
+            data:
+                evaluatedResearchPlan
+        },
+
+        {
+            directory:
+                "./research-strategy-results",
+
+            filename:
+                "OECL-V2-RESEARCH-STRATEGY.json",
+
+            data:
+                intelligence.researchStrategy
+        },
+
+        {
+            directory:
+                "./research-report-results",
+
+            filename:
+                "OECL-V2-RESEARCH-REPORT.json",
+
+            data:
+                researchReport
+        },
+
+        {
+            directory:
+                "./pipeline-results",
+
+            filename:
+                "OECL-V2-PIPELINE.json",
+
+            data:
+                pipelineArtifact
+        }
+
+    ];
+
+    /*
+     * ==================================================
+     * 13. EXPORT PIPELINE
+     * ==================================================
+     */
+
+    const exportResult =
+        await new ExportPipeline().run(
+            outputs
+        );
+
+    if (
+        exportResult.errors.length > 0
+    ) {
+
+        console.error("");
+        console.error(
+            "Some artifacts could not be exported:"
+        );
+
+        for (
+            const error
+            of exportResult.errors
+        ) {
+
+            console.error(
+                `- ${error}`
+            );
+
+        }
+
+        throw new Error(
+            `${exportResult.statistics.failed} artifact export(s) failed.`
+        );
+
+    }
+
+    /*
+     * ==================================================
+     * 14. CONSOLE SUMMARY
+     * ==================================================
+     */
+
+    console.log("");
+    console.log("OECL V2 Pipeline Summary");
+    console.log("------------------------------");
+
+    console.log(
+        `Manifest: ${source.manifest.manifestId}`
+    );
+
+    console.log(
+        `Campaign: ${campaignId}`
+    );
+
+    console.log(
+        `Configured sources: ` +
+        `${source.statistics.configuredSources}`
+    );
+
+    console.log(
+        `Enabled sources: ` +
+        `${source.statistics.enabledSources}`
+    );
+
+    console.log(
+        `Executed sources: ` +
+        `${source.statistics.executedSources}`
+    );
+
+    console.log(
+        `Successful sources: ` +
+        `${source.statistics.successfulSources}`
+    );
+
+    console.log(
+        `Failed sources: ` +
+        `${source.statistics.failedSources}`
+    );
+
+    console.log(
+        `Merged knowledge entries: ` +
+        `${mergedKnowledgeResult.mergedEntries}`
+    );
+
+    console.log(
+        `Merged sources: ` +
+        `${mergedKnowledgeResult.mergedSources.length}`
+    );
+
+    console.log(
+        `Cross-source patterns: ` +
+        `${knowledge.crossSourcePatterns.statistics.patterns}`
+    );
+
+    console.log(
+        `Supported cross-source patterns: ` +
+        `${knowledge.crossSourcePatterns.statistics.supported}`
+    );
+
+    console.log(
+        `Research conclusions: ` +
+        `${knowledge.researchConclusions.conclusions.length}`
+    );
+
+    console.log(
+        `Scientific discoveries: ` +
+        `${knowledge.scientificDiscoveries.discoveries.length}`
+    );
+
+    console.log(
+        `Knowledge gaps: ` +
+        `${knowledge.knowledgeGaps.gaps.length}`
+    );
+
+    console.log(
+        `Knowledge consolidations: ` +
+        `${scientific.knowledgeConsolidation.consolidations.length}`
+    );
+
+    console.log(
+        `Scientific validations: ` +
+        `${scientific.scientificValidation.validations.length}`
+    );
+
+    console.log(
+        `Validated theories: ` +
+        `${scientific.scientificValidation.statistics.validated}`
+    );
+
+    console.log(
+        `Challenged theories: ` +
+        `${scientific.scientificValidation.statistics.challenged}`
+    );
+
+    console.log(
+        `Rejected theories: ` +
+        `${scientific.scientificValidation.statistics.rejected}`
+    );
+
+    console.log(
+        `Autonomous experiments: ` +
+        `${scientific.autonomousExperiments.experiments.length}`
+    );
+
+    console.log(
+        `Scientific knowledge states: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.totalKnowledge}`
+    );
+
+    console.log(
+        `Scientific evolutions: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.evolutions}`
+    );
+
+    console.log(
+        `Discovered knowledge: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.discovered}`
+    );
+
+    console.log(
+        `Promoted knowledge: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.promoted}`
+    );
+
+    console.log(
+        `Stabilized knowledge: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.stabilized}`
+    );
+
+    console.log(
+        `Refuted knowledge: ` +
+        `${scientific.scientificKnowledgeEvolution.statistics.refuted}`
+    );
+
+    console.log(
+        `Evidence histories: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.knowledgeTracked}`
+    );
+
+    console.log(
+        `Evidence strengthened: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.strengthened}`
+    );
+
+    console.log(
+        `Evidence stable: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.stable}`
+    );
+
+    console.log(
+        `Evidence weakened: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.weakened}`
+    );
+
+    console.log(
+        `Evidence conflicted: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.conflicted}`
+    );
+
+    console.log(
+        `Growing evidence trends: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.growingTrends}`
+    );
+
+    console.log(
+        `Stable evidence trends: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.stableTrends}`
+    );
+
+    console.log(
+        `Average evidence stability: ` +
+        `${scientific.scientificEvidenceAccumulator.statistics.averageStabilityScore}`
+    );
+console.log(
+    `Tracked scientific memory: ` +
+    `${scientific.scientificMemory.statistics.trackedKnowledge}`
+);
+
+console.log(
+    `New scientific knowledge: ` +
+    `${scientific.scientificMemory.statistics.newKnowledge}`
+);
+
+console.log(
+    `Recurring scientific knowledge: ` +
+    `${scientific.scientificMemory.statistics.recurringKnowledge}`
+);
+
+console.log(
+    `Scientific critiques: ` +
+    `${scientific.scientificSelfCritique.statistics.critiques}`
+);
+
+console.log(
+    `Critical critiques: ` +
+    `${scientific.scientificSelfCritique.statistics.critical}`
+);
+
+console.log(
+    `Average robustness score: ` +
+    `${scientific.scientificSelfCritique.statistics.averageRobustnessScore}`
+);
+console.log(
+    `Scientific revisions: ` +
+    `${scientific.scientificRevision.statistics.total}`
+);
+
+console.log(
+    `Revisions KEEP: ` +
+    `${scientific.scientificRevision.statistics.keep}`
+);
+
+console.log(
+    `Revisions REVIEW: ` +
+    `${scientific.scientificRevision.statistics.review}`
+);
+
+console.log(
+    `Revisions WEAKEN: ` +
+    `${scientific.scientificRevision.statistics.weaken}`
+);
+
+console.log(
+    `Revisions CHALLENGE: ` +
+    `${scientific.scientificRevision.statistics.challenge}`
+);
+
+console.log(
+    `Revisions RETEST: ` +
+    `${scientific.scientificRevision.statistics.retest}`
+);
+
+console.log(
+    `Revisions REFUTE_CANDIDATE: ` +
+    `${scientific.scientificRevision.statistics.refuteCandidate}`
+);
+console.log(
+    `Scientific retest plans: ` +
+    `${scientific.scientificRetestPlanner.statistics.plans}`
+);
+
+console.log(
+    `Theory retests: ` +
+    `${scientific.scientificRetestPlanner.statistics.theoryRetests}`
+);
+
+console.log(
+    `Discovery retests: ` +
+    `${scientific.scientificRetestPlanner.statistics.discoveryRetests}`
+);
+
+console.log(
+    `Knowledge retests: ` +
+    `${scientific.scientificRetestPlanner.statistics.knowledgeRetests}`
+);
+
+console.log(
+    `Evidence-history retests: ` +
+    `${scientific.scientificRetestPlanner.statistics.evidenceHistoryRetests}`
+);
+
+console.log(
+    `Scientific retest experiments: ` +
+    `${scientific.scientificRetestExperiments.statistics.experiments}`
+);
+
+console.log(
+    `Theory retest experiments: ` +
+    `${scientific.scientificRetestExperiments.statistics.theoryExperiments}`
+);
+
+console.log(
+    `Discovery retest experiments: ` +
+    `${scientific.scientificRetestExperiments.statistics.discoveryExperiments}`
+);
+
+console.log(
+    `Knowledge retest experiments: ` +
+    `${scientific.scientificRetestExperiments.statistics.knowledgeExperiments}`
+);
+
+console.log(
+    `Evidence-history retest experiments: ` +
+    `${scientific.scientificRetestExperiments.statistics.evidenceHistoryExperiments}`
+);
+console.log(
+    `Scientific experiment queue: ` +
+    `${scientific.scientificExperimentQueue.statistics.total}`
+);
+
+console.log(
+    `Queue autonomous experiments: ` +
+    `${scientific.scientificExperimentQueue.statistics.autonomous}`
+);
+
+console.log(
+    `Queue retest experiments: ` +
+    `${scientific.scientificExperimentQueue.statistics.retest}`
+);
+
+console.log(
+    `Queue deduplicated experiments: ` +
+    `${scientific.scientificExperimentQueue.statistics.deduplicated}`
+);
+
+console.log(
+    `Average experiment queue score: ` +
+    `${scientific.scientificExperimentQueue.statistics.averageQueueScore}`
+);
+
+console.log(
+    `Scientific execution tasks: ` +
+    `${scientific.scientificExperimentExecution.statistics.total}`
+);
+
+console.log(
+    `Execution tasks READY: ` +
+    `${scientific.scientificExperimentExecution.statistics.ready}`
+);
+
+console.log(
+    `Execution tasks BLOCKED: ` +
+    `${scientific.scientificExperimentExecution.statistics.blocked}`
+);
+
+console.log(
+    `Execution tasks autonomous: ` +
+    `${scientific.scientificExperimentExecution.statistics.autonomous}`
+);
+
+console.log(
+    `Execution tasks retest: ` +
+    `${scientific.scientificExperimentExecution.statistics.retest}`
+);
+
+console.log(
+    `Scientific execution capabilities: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.total}`
+);
+
+console.log(
+    `Execution STATIC_ANALYSIS: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.staticAnalysis}`
+);
+
+console.log(
+    `Execution TEST_EXECUTION: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.testExecution}`
+);
+
+console.log(
+    `Execution INVARIANT_VALIDATION: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.invariantValidation}`
+);
+
+console.log(
+    `Execution SOURCE_REINGESTION: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.sourceReingestion}`
+);
+
+console.log(
+    `Execution MANUAL_REVIEW: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.manualReview}`
+);
+
+console.log(
+    `Average execution capability confidence: ` +
+    `${scientific.scientificExecutionCapabilities.statistics.averageConfidence}`
+);
+console.log(
+    `Scientific execution plans: ` +
+    `${scientific.scientificExecutionPlans.statistics.plans}`
+);
+
+console.log(
+    `Execution plan steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.totalSteps}`
+);
+
+console.log(
+    `Execution plans READY: ` +
+    `${scientific.scientificExecutionPlans.statistics.readyPlans}`
+);
+
+console.log(
+    `Execution plans BLOCKED: ` +
+    `${scientific.scientificExecutionPlans.statistics.blockedPlans}`
+);
+
+console.log(
+    `Execution SOURCE_REINGESTION steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.sourceReingestionSteps}`
+);
+
+console.log(
+    `Execution STATIC_ANALYSIS steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.staticAnalysisSteps}`
+);
+
+console.log(
+    `Execution TEST_EXECUTION steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.testExecutionSteps}`
+);
+
+console.log(
+    `Execution INVARIANT_VALIDATION steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.invariantValidationSteps}`
+);
+
+console.log(
+    `Execution EVIDENCE_COLLECTION steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.evidenceCollectionSteps}`
+);
+
+console.log(
+    `Execution MANUAL_REVIEW steps: ` +
+    `${scientific.scientificExecutionPlans.statistics.manualReviewSteps}`
+);
+
+console.log(
+    `Scientific execution outcomes: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.total}`
+);
+
+console.log(
+    `Execution outcomes NOT_EXECUTED: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.notExecuted}`
+);
+
+console.log(
+    `Execution outcomes SUCCESS: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.success}`
+);
+
+console.log(
+    `Execution outcomes FAILURE: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.failure}`
+);
+
+console.log(
+    `Execution outcomes INCONCLUSIVE: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.inconclusive}`
+);
+
+console.log(
+    `Execution outcomes BLOCKED: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.blocked}`
+);
+
+console.log(
+    `Execution outcomes EXECUTED: ` +
+    `${scientific.scientificExecutionOutcomes.statistics.executed}`
+);
+
+console.log(
+    `Scientific execution observations: ` +
+    `${scientific.scientificExecutionObservations.statistics.total}`
+);
+
+console.log(
+    `Execution observations SUPPORTED: ` +
+    `${scientific.scientificExecutionObservations.statistics.supported}`
+);
+
+console.log(
+    `Execution observations CHALLENGED: ` +
+    `${scientific.scientificExecutionObservations.statistics.challenged}`
+);
+
+console.log(
+    `Execution observations INCONCLUSIVE: ` +
+    `${scientific.scientificExecutionObservations.statistics.inconclusive}`
+);
+
+console.log(
+    `Scientific runtime executions: ` +
+    `${scientific.scientificExecutionRuntime.statistics.total}`
+);
+
+console.log(
+    `Runtime SUCCESS: ` +
+    `${scientific.scientificExecutionRuntime.statistics.success}`
+);
+
+console.log(
+    `Runtime FAILURE: ` +
+    `${scientific.scientificExecutionRuntime.statistics.failure}`
+);
+
+console.log(
+    `Runtime INCONCLUSIVE: ` +
+    `${scientific.scientificExecutionRuntime.statistics.inconclusive}`
+);
+
+console.log(
+    `Runtime UNSUPPORTED: ` +
+    `${scientific.scientificExecutionRuntime.statistics.unsupported}`
+);
+
+console.log(
+    `Runtime SKIPPED: ` +
+    `${scientific.scientificExecutionRuntime.statistics.skipped}`
+);
+
+console.log(
+    `Runtime outcome adapter total: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.total}`
+);
+
+console.log(
+    `Runtime outcomes updated: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.updated}`
+);
+
+console.log(
+    `Runtime outcomes unchanged: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.unchanged}`
+);
+
+console.log(
+    `Runtime SUCCESS mapped: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.successMapped}`
+);
+
+console.log(
+    `Runtime FAILURE mapped: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.failureMapped}`
+);
+
+console.log(
+    `Runtime INCONCLUSIVE mapped: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.inconclusiveMapped}`
+);
+
+console.log(
+    `Runtime UNSUPPORTED ignored: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.unsupportedIgnored}`
+);
+
+console.log(
+    `Runtime SKIPPED ignored: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.statistics.skippedIgnored}`
+);
+
+console.log(
+    `Reconciled outcomes NOT_EXECUTED: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.updatedOutcomes.statistics.notExecuted}`
+);
+
+console.log(
+    `Reconciled outcomes SUCCESS: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.updatedOutcomes.statistics.success}`
+);
+
+console.log(
+    `Reconciled outcomes FAILURE: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.updatedOutcomes.statistics.failure}`
+);
+
+console.log(
+    `Reconciled outcomes INCONCLUSIVE: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.updatedOutcomes.statistics.inconclusive}`
+);
+
+console.log(
+    `Reconciled outcomes EXECUTED: ` +
+    `${scientific.scientificRuntimeOutcomeAdapter.updatedOutcomes.statistics.executed}`
+);
+
+console.log(
+    `Knowledge gain: ` +
+    `${intelligence.knowledgeGain.statistics.totalKnowledgeGain}`
+);
+
+console.log(
+    `Artifacts exported: ` +
+    `${exportResult.statistics.exported}`
+);
+
+console.log("");
+console.log("Pipeline exported:");
+
+console.log(
+    "./pipeline-results/OECL-V2-PIPELINE.json"
+);
+
+console.log("");
+console.log("OECL V2 finished.");
+
+}
+
+main().catch(
+    error => {
+
+        console.error("");
+        console.error(
+            "OECL V2 Pipeline failed."
+        );
+
+        console.error(
+            error instanceof Error
+                ? error.stack ??
+                  error.message
+                : error
+        );
+
+        process.exit(1);
+
+    }
+);
+
+============================================================
+12. PACKAGE SCRIPTS
+============================================================
+
+{
+  "name": "open-erc-composition-laboratory",
+  "version": "1.0.0",
+  "description": "Open research infrastructure for studying deterministic Ethereum protocol composition through reproducible experiments.",
+  "main": "index.js",
+  "type": "module",
+  "author": "tenio.eth",
+  "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "erc",
+    "protocol-composition",
+    "interoperability",
+    "research",
+    "benchmark",
+    "deterministic-accounting",
+    "experiments",
+    "composition",
+    "laboratory"
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run benchmark && npm run requirements",
+    "oecl": "tsx scripts/run-oecl.ts",
+
+    "experiment": "tsx scripts/run-experiment.ts",
+    "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
+    "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
+    "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
+    "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
+    "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
+
+    "campaign": "tsx scripts/run-campaign.ts",
+
+    "benchmark": "tsx scripts/run-benchmark.ts",
+    "requirements": "tsx scripts/run-requirements.ts",
+    "emergent": "tsx scripts/run-emergent.ts",
+    "patterns": "tsx scripts/run-pattern-discovery.ts",
+    "relationships": "tsx scripts/run-relationships.ts",
+    "matrix": "tsx scripts/run-composition-matrix.ts",
+    "report": "tsx scripts/run-research-report.ts",
+    "intelligence": "tsx scripts/run-composition-intelligence.ts",
+    "hypotheses": "tsx scripts/run-composition-hypotheses.ts",
+    "validation": "tsx scripts/run-hypothesis-validation.ts",
+    "knowledge": "tsx scripts/run-research-knowledge.ts",
+    "memory": "tsx scripts/run-research-memory.ts",
+    "graph": "tsx scripts/run-knowledge-graph.ts",
+    "adaptive": "tsx scripts/run-adaptive-research.ts",
+    "discover": "tsx scripts/run-discovery.ts",
+    "query": "tsx scripts/run-query.ts",
+
+    "scenario": "tsx scripts/run-scenario.ts",
+    "compose:discover": "tsx scripts/run-composition-discovery.ts",
+    "semantic": "tsx scripts/run-semantic-discovery.ts",
+    "reason": "tsx scripts/run-semantic-reasoning.ts",
+    "evidence": "tsx scripts/run-evidence-evaluation.ts",
+    "analyze": "tsx scripts/run-research-analysis.ts",
+    "evidence:composability": "tsx scripts/run-composability-evidence.ts",
+    "evidence:support": "tsx scripts/run-evidence-support.ts",
+    "knowledge:incremental": "tsx scripts/run-incremental-knowledge.ts",
+    "learning": "tsx scripts/run-composition-learning.ts",
+    "corpus": "tsx scripts/run-corpus.ts",
+    "memory:v2": "tsx scripts/run-research-memory.ts",
+    "github:bundle": "tsx scripts/run-github-bundle.ts",
+    "hypothesis": "tsx scripts/run-hypothesis.ts",
+    "hypothesis:v2:validate": "tsx scripts/run-hypothesis-v2-validation.ts",
+    "knowledge:v2": "tsx scripts/run-research-knowledge-v2.ts",
+    "v2": "tsx scripts/run-oecl-v2.ts",
+    "extract": "tsx scripts/run-research-extraction.ts",
+    "scenario:batch": "tsx scripts/run-scenario-batch.ts",
+    "scenario:generate": "tsx scripts/generate-scenarios.ts",
+    "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
+    "auto:scenarios": "tsx scripts/run-auto-scenarios.ts",
+    "adaptive:scenarios": "tsx scripts/run-adaptive-scenarios.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ten-io-meta/open-erc-composition-laboratory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ten-io-meta/open-erc-composition-laboratory/issues"
+  },
+  "homepage": "https://github.com/ten-io-meta/open-erc-composition-laboratory",
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
+
+============================================================
+13. ENGINE REFERENCE COUNTS
+============================================================
+
+AutonomousExperimentDesignEngine | references outside own file: 3
+BenchmarkEngine | references outside own file: 3
+ComposabilityEvidenceEngine | references outside own file: 8
+CompositionEngine | references outside own file: 0
+CompositionDiscoveryEngine | references outside own file: 2
+CompositionLearningEngine | references outside own file: 4
+ConfidenceEngine | references outside own file: 6
+ContradictionEngine | references outside own file: 6
+CrossSourcePatternEngine | references outside own file: 7
+DiscoveryEngine | references outside own file: 34
+EmergentPropertyEngine | references outside own file: 2
+LaboratoryEngine | references outside own file: 0
+EvidenceGraphEngine | references outside own file: 6
+EvidenceSupportEngine | references outside own file: 8
+ResearchExtractionEngine | references outside own file: 8
+CompositionHypothesisEngine | references outside own file: 2
+HypothesisEngine | references outside own file: 8
+HypothesisValidationEngine | references outside own file: 8
+HypothesisDiscoveryEngine | references outside own file: 3
+HypothesisMergeEngine | references outside own file: 3
+HypothesisRefinementEngine | references outside own file: 6
+HypothesisValidationEngine | references outside own file: 8
+IncrementalKnowledgeEngine | references outside own file: 4
+KnowledgeEvolutionEngine | references outside own file: 6
+InferenceEngine | references outside own file: 6
+CompositionIntelligenceEngine | references outside own file: 2
+ResearchKnowledgeEngine | references outside own file: 2
+KnowledgeConsolidationEngine | references outside own file: 3
+KnowledgeGainEngine | references outside own file: 6
+KnowledgeGapEngine | references outside own file: 6
+MachineReasoningEngine | references outside own file: 3
+CompositionMatrixEngine | references outside own file: 2
+MetricsEngine | references outside own file: 0
+PatternDiscoveryEngine | references outside own file: 2
+PredictionEngine | references outside own file: 6
+CompositionPropertyEngine | references outside own file: 2
+ProtocolSemanticEngine | references outside own file: 8
+CompositionQueryEngine | references outside own file: 2
+SemanticReasoningEngine | references outside own file: 8
+CompositionRelationshipEngine | references outside own file: 2
+RepositoryIntelligenceEngine | references outside own file: 6
+ProtocolRequirementEngine | references outside own file: 2
+ResearchConclusionEngine | references outside own file: 6
+ResearchEvolutionEngine | references outside own file: 8
+KnowledgeEngine | references outside own file: 14
+KnowledgeMergeEngine | references outside own file: 3
+ResearchMemoryEngine | references outside own file: 4
+ResearchPlannerEngine | references outside own file: 11
+ResearchQuestionsEngine | references outside own file: 6
+ResearchReportEngine | references outside own file: 2
+ResearchReportV2Engine | references outside own file: 3
+ResearchStrategyEngine | references outside own file: 6
+ScenarioGenerationEngine | references outside own file: 2
+ScientificConsensusEngine | references outside own file: 6
+ScientificDiscoveryEngine | references outside own file: 6
+ScientificEvidenceAccumulatorEngine | references outside own file: 3
+ScientificExecutionCapabilityEngine | references outside own file: 3
+ScientificExecutionObservationEngine | references outside own file: 3
+ScientificExecutionOutcomeEngine | references outside own file: 3
+ScientificExecutionPlanEngine | references outside own file: 3
+ScientificExecutionRuntimeEngine | references outside own file: 3
+ScientificExperimentExecutionPlannerEngine | references outside own file: 3
+ScientificExperimentQueueEngine | references outside own file: 3
+ScientificKnowledgeEvolutionEngine | references outside own file: 3
+ScientificMemoryEngine | references outside own file: 3
+ScientificRetestExperimentEngine | references outside own file: 3
+ScientificRetestPlannerEngine | references outside own file: 3
+ScientificRevisionEngine | references outside own file: 3
+ContradictionCritiqueEngine | references outside own file: 3
+DiscoveryCritiqueEngine | references outside own file: 3
+EvidenceCritiqueEngine | references outside own file: 3
+MemoryCritiqueEngine | references outside own file: 3
+ScientificSelfCritiqueEngine | references outside own file: 3
+TheoryCritiqueEngine | references outside own file: 3
+ScientificValidationEngine | references outside own file: 3
+SemanticDiscoveryEngine | references outside own file: 8
+CampaignStatisticsEngine | references outside own file: 0
+TheoryEngine | references outside own file: 6
+ValidationEngine | references outside own file: 20
+MetricsEngine | references outside own file: 1
+
+============================================================
+14. POSSIBLE ORPHAN ENGINES
+============================================================
+
+laboratory\composition\CompositionEngine.ts
+laboratory\engine\LaboratoryEngine.ts
+laboratory\metrics\MetricsEngine.ts
+laboratory\statistics\CampaignStatisticsEngine.ts
+
+============================================================
+15. AUDIT SUMMARY
+============================================================
+
+Files: 20233
+Directories: 1607
+TypeScript files: 413
+Engines: 80
+Pipelines: 7
+Adapters: 13
+Result types: 67
+Result directories: 66
+Possible orphan engines: 4

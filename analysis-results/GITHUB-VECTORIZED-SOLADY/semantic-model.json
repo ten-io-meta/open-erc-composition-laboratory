@@ -1,0 +1,51 @@
+{
+    "graphId": "GRAPH-GITHUB-VECTORIZED-SOLADY",
+    "discoveredAt": "2026-09-03T23:17:56.958Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-VECTORIZED-SOLADY",
+        "generatedAt": "2026-09-03T23:17:56.958Z",
+        "capabilities": [
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-VECTORIZED-SOLADY"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-VECTORIZED-SOLADY"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-VECTORIZED-SOLADY"
+                ]
+            },
+            {
+                "capabilityId": "Testing",
+                "label": "Testing",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-VECTORIZED-SOLADY"
+                ]
+            },
+            {
+                "capabilityId": "Redemption",
+                "label": "Redemption",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-VECTORIZED-SOLADY"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}

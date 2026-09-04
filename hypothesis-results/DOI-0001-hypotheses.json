@@ -1,11 +1,19 @@
 {
-    "generatedAt": "2026-07-03T15:43:36.883Z",
+    "generatedAt": "2026-09-03T23:18:00.694Z",
     "hypotheses": [
         {
             "hypothesisId": "HYP-00001",
-            "statement": "EmbeddedValue->ENABLES->Reservation appears to represent a reproducible protocol composition.",
-            "relation": "EmbeddedValue->ENABLES->Reservation",
-            "confidence": 31,
+            "statement": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety appears to represent a reproducible protocol composition.",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "confidence": 25,
+            "evidence": 1,
+            "status": "EMERGING"
+        },
+        {
+            "hypothesisId": "HYP-00002",
+            "statement": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation appears to represent a reproducible protocol composition.",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "confidence": 25,
             "evidence": 1,
             "status": "EMERGING"
         }

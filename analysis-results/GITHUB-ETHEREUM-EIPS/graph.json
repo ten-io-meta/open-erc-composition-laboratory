@@ -1,0 +1,1080 @@
+{
+    "graphId": "GRAPH-GITHUB-ETHEREUM-EIPS",
+    "generatedAt": "2026-09-03T23:17:16.094Z",
+    "nodes": [
+        {
+            "id": "GITHUB-ETHEREUM-EIPS",
+            "type": "ResearchSource",
+            "label": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "id": "ERC20",
+            "type": "Protocol",
+            "label": "ERC20"
+        },
+        {
+            "id": "ERC1155",
+            "type": "Protocol",
+            "label": "ERC1155"
+        },
+        {
+            "id": "IERC1155",
+            "type": "Protocol",
+            "label": "IERC1155"
+        },
+        {
+            "id": "ERC721",
+            "type": "Protocol",
+            "label": "ERC721"
+        },
+        {
+            "id": "IERC1155MetadataURI",
+            "type": "Protocol",
+            "label": "IERC1155MetadataURI"
+        },
+        {
+            "id": "IERC1155Receiver",
+            "type": "Protocol",
+            "label": "IERC1155Receiver"
+        },
+        {
+            "id": "ERC165",
+            "type": "Protocol",
+            "label": "ERC165"
+        },
+        {
+            "id": "IERC1155TokenReceiver",
+            "type": "Protocol",
+            "label": "IERC1155TokenReceiver"
+        },
+        {
+            "id": "IERC1155Views",
+            "type": "Protocol",
+            "label": "IERC1155Views"
+        },
+        {
+            "id": "IERC165",
+            "type": "Protocol",
+            "label": "IERC165"
+        },
+        {
+            "id": "ERC1271",
+            "type": "Protocol",
+            "label": "ERC1271"
+        },
+        {
+            "id": "ERC137",
+            "type": "Protocol",
+            "label": "ERC137"
+        },
+        {
+            "id": "ERC1723",
+            "type": "Protocol",
+            "label": "ERC1723"
+        },
+        {
+            "id": "ERC1724",
+            "type": "Protocol",
+            "label": "ERC1724"
+        },
+        {
+            "id": "ERC223",
+            "type": "Protocol",
+            "label": "ERC223"
+        },
+        {
+            "id": "ERC4337",
+            "type": "Protocol",
+            "label": "ERC4337"
+        },
+        {
+            "id": "ERC2535",
+            "type": "Protocol",
+            "label": "ERC2535"
+        },
+        {
+            "id": "ERC191",
+            "type": "Protocol",
+            "label": "ERC191"
+        },
+        {
+            "id": "ERC2612",
+            "type": "Protocol",
+            "label": "ERC2612"
+        },
+        {
+            "id": "ERC1046",
+            "type": "Protocol",
+            "label": "ERC1046"
+        },
+        {
+            "id": "ERC7201",
+            "type": "Protocol",
+            "label": "ERC7201"
+        },
+        {
+            "id": "ERC7683",
+            "type": "Protocol",
+            "label": "ERC7683"
+        },
+        {
+            "id": "ERC1167",
+            "type": "Protocol",
+            "label": "ERC1167"
+        },
+        {
+            "id": "ERC1967",
+            "type": "Protocol",
+            "label": "ERC1967"
+        },
+        {
+            "id": "ERC7562",
+            "type": "Protocol",
+            "label": "ERC7562"
+        },
+        {
+            "id": "ERC2470",
+            "type": "Protocol",
+            "label": "ERC2470"
+        },
+        {
+            "id": "ERC2335",
+            "type": "Protocol",
+            "label": "ERC2335"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "Settlement",
+            "type": "Capability",
+            "label": "Settlement"
+        },
+        {
+            "id": "EmbeddedValue",
+            "type": "Capability",
+            "label": "EmbeddedValue"
+        },
+        {
+            "id": "InvariantValidation",
+            "type": "Capability",
+            "label": "InvariantValidation"
+        },
+        {
+            "id": "Testing",
+            "type": "Capability",
+            "label": "Testing"
+        },
+        {
+            "id": "Redemption",
+            "type": "Capability",
+            "label": "Redemption"
+        },
+        {
+            "id": "GITHUB-CLAIM-00001",
+            "type": "Claim",
+            "label": "- Coordinate many implementations that must all be compatible? Allow."
+        },
+        {
+            "id": "GITHUB-CLAIM-00002",
+            "type": "Claim",
+            "label": "The function map\\_to\\_curve\\_simple\\_swu(u) implements a simplification"
+        },
+        {
+            "id": "GITHUB-CLAIM-00003",
+            "type": "Claim",
+            "label": "1. MAJOR version when you make incompatible API changes,"
+        },
+        {
+            "id": "GITHUB-CLAIM-00004",
+            "type": "Claim",
+            "label": "1. MINOR version when you add functionality in a backwards compatible"
+        },
+        {
+            "id": "GITHUB-CLAIM-00005",
+            "type": "Claim",
+            "label": "1. PATCH version when you make backwards compatible bug fixes."
+        },
+        {
+            "id": "GITHUB-CLAIM-00006",
+            "type": "Claim",
+            "label": "affecting the API increment the patch version, backwards compatible API"
+        },
+        {
+            "id": "GITHUB-CLAIM-00007",
+            "type": "Claim",
+            "label": "additions/changes increment the minor version, and backwards incompatible API"
+        },
+        {
+            "id": "GITHUB-CLAIM-00008",
+            "type": "Claim",
+            "label": "compatible bug fixes are introduced. A bug fix is defined as an internal"
+        },
+        {
+            "id": "GITHUB-CLAIM-00009",
+            "type": "Claim",
+            "label": "compatible functionality is introduced to the public API. It MUST be"
+        },
+        {
+            "id": "GITHUB-CLAIM-00010",
+            "type": "Claim",
+            "label": "incompatible changes are introduced to the public API. It MAY also include minor"
+        },
+        {
+            "id": "GITHUB-CLAIM-00011",
+            "type": "Claim",
+            "label": "package management system and know that they will be compatible with existing"
+        },
+        {
+            "id": "GITHUB-CLAIM-00012",
+            "type": "Claim",
+            "label": "If even the tiniest backwards incompatible changes to the public API require a major version bump, won't I end up at version 42.0.0 very rapidly?"
+        },
+        {
+            "id": "GITHUB-CLAIM-00013",
+            "type": "Claim",
+            "label": "This is a question of responsible development and foresight. Incompatible"
+        },
+        {
+            "id": "GITHUB-CLAIM-00014",
+            "type": "Claim",
+            "label": "Having to bump major versions to release incompatible changes means you'll"
+        },
+        {
+            "id": "GITHUB-CLAIM-00015",
+            "type": "Claim",
+            "label": "What do I do if I accidentally release a backwards incompatible change as a minor version?"
+        },
+        {
+            "id": "GITHUB-CLAIM-00016",
+            "type": "Claim",
+            "label": "That would be considered compatible since it does not affect the public API."
+        },
+        {
+            "id": "GITHUB-CLAIM-00017",
+            "type": "Claim",
+            "label": "(PCRE [Perl Compatible Regular Expressions, i.e. Perl, PHP and R], Python"
+        },
+        {
+            "id": "GITHUB-CLAIM-00018",
+            "type": "Claim",
+            "label": "cg3 = patch, cg4 = prerelease and cg5 = buildmetadata) that is compatible"
+        },
+        {
+            "id": "GITHUB-CLAIM-00019",
+            "type": "Claim",
+            "label": "with ECMA Script (JavaScript), PCRE (Perl Compatible Regular Expressions,"
+        },
+        {
+            "id": "GITHUB-CLAIM-00020",
+            "type": "Claim",
+            "label": "\"AA_ENTRY_POINT\"->SC: Validate AA Transaction\\n\"\"senderValidationData\"\""
+        },
+        {
+            "id": "GITHUB-CLAIM-00021",
+            "type": "Claim",
+            "label": "/ Are transfers of a conditional token locked?"
+        },
+        {
+            "id": "GITHUB-CLAIM-00022",
+            "type": "Claim",
+            "label": "/ @param _user Querying if locked for this user."
+        },
+        {
+            "id": "GITHUB-CLAIM-00023",
+            "type": "Claim",
+            "label": "function isConditionalLocked(address _user, uint256 _condition) public view returns (bool) {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00024",
+            "type": "Claim",
+            "label": "require(_to != address(0), \"ERC1155: target address must be non-zero\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00025",
+            "type": "Claim",
+            "label": "require(_ids.length == _values.length, \"ERC1155: IDs and _values must have same lengths\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00026",
+            "type": "Claim",
+            "label": "INVARIANT: `_originalAddress(newToOldAccount[newAccount]) == _originalAddress(newAccount)`"
+        },
+        {
+            "id": "GITHUB-CLAIM-00027",
+            "type": "Claim",
+            "label": "INVARIANT: originalAddresses and originalToCurrentAddresses are mutually inverse."
+        },
+        {
+            "id": "GITHUB-CLAIM-00028",
+            "type": "Claim",
+            "label": "Auditor: Check that the above invariant hold."
+        },
+        {
+            "id": "GITHUB-CLAIM-00029",
+            "type": "Claim",
+            "label": "Auditor: Check that the above invariants hold."
+        },
+        {
+            "id": "GITHUB-CLAIM-00030",
+            "type": "Claim",
+            "label": "/ because the tokens may be already withdrawn. And it cannot be done in a fully decentralized way because"
+        },
+        {
+            "id": "GITHUB-CLAIM-00031",
+            "type": "Claim",
+            "label": "/ To make it safe, it must stop accepting any new tokens after a transfer."
+        },
+        {
+            "id": "GITHUB-CLAIM-00032",
+            "type": "Claim",
+            "label": "/ Must be called with `_id != 0`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00033",
+            "type": "Claim",
+            "label": "/ In functions of this contract `condition` is always a customer's original address."
+        },
+        {
+            "id": "GITHUB-CLAIM-00034",
+            "type": "Claim",
+            "label": "* _Available since v3.1._"
+        },
+        {
+            "id": "GITHUB-CLAIM-00035",
+            "type": "Claim",
+            "label": "* Clients calling this function must replace the `\\{id\\}` substring with the"
+        },
+        {
+            "id": "GITHUB-CLAIM-00036",
+            "type": "Claim",
+            "label": "* - `account` cannot be the zero address."
+        },
+        {
+            "id": "GITHUB-CLAIM-00037",
+            "type": "Claim",
+            "label": "* - `accounts` and `ids` must have the same length."
+        },
+        {
+            "id": "GITHUB-CLAIM-00038",
+            "type": "Claim",
+            "label": "* Because these URIs cannot be meaningfully represented by the {URI} event,"
+        },
+        {
+            "id": "GITHUB-CLAIM-00039",
+            "type": "Claim",
+            "label": "* - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the"
+        },
+        {
+            "id": "GITHUB-CLAIM-00040",
+            "type": "Claim",
+            "label": "* - `ids` and `amounts` must have the same length."
+        },
+        {
+            "id": "GITHUB-CLAIM-00041",
+            "type": "Claim",
+            "label": "* - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the"
+        },
+        {
+            "id": "GITHUB-CLAIM-00042",
+            "type": "Claim",
+            "label": "* - `account` must have at least `amount` tokens of token type `id`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00043",
+            "type": "Claim",
+            "label": "* - `from` and `to` are never both zero."
+        },
+        {
+            "id": "GITHUB-CLAIM-00044",
+            "type": "Claim",
+            "label": "require(ids.length == values.length, \"ERC1155: IDs and values must have same lengths\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00045",
+            "type": "Claim",
+            "label": "To accept the transfer, this must return"
+        },
+        {
+            "id": "GITHUB-CLAIM-00046",
+            "type": "Claim",
+            "label": "been updated. To accept the transfer(s), this must return"
+        },
+        {
+            "id": "GITHUB-CLAIM-00047",
+            "type": "Claim",
+            "label": "@param ids An array containing ids of each token being transferred (order and length must match values array)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00048",
+            "type": "Claim",
+            "label": "@param values An array containing amounts of each token being transferred (order and length must match ids array)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00049",
+            "type": "Claim",
+            "label": "require(accountHasSalary[_orig], \"Cannot resign account receiving a salary.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00050",
+            "type": "Claim",
+            "label": "by calling this function, the contract storage variables cannot be modified  (precomputed values)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00051",
+            "type": "Claim",
+            "label": "Repository contains README research context."
+        },
+        {
+            "id": "GITHUB-CLAIM-00052",
+            "type": "Claim",
+            "label": "Repository contains contract or interface material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00053",
+            "type": "Claim",
+            "label": "Repository contains test evidence."
+        },
+        {
+            "id": "GITHUB-CLAIM-00054",
+            "type": "Claim",
+            "label": "Repository contains documentation material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00055",
+            "type": "Claim",
+            "label": "Repository contains invariant-like statements."
+        },
+        {
+            "id": "GITHUB-CLAIM-00056",
+            "type": "Claim",
+            "label": "Repository exposes 15 executable test or invariant target(s)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00057",
+            "type": "Claim",
+            "label": "Repository toolchain could not be determined."
+        },
+        {
+            "id": "GITHUB-CLAIM-00058",
+            "type": "Claim",
+            "label": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00059",
+            "type": "Claim",
+            "label": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00060",
+            "type": "Claim",
+            "label": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement."
+        },
+        {
+            "id": "GITHUB-CLAIM-00061",
+            "type": "Claim",
+            "label": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety."
+        },
+        {
+            "id": "GITHUB-CLAIM-00062",
+            "type": "Claim",
+            "label": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation."
+        },
+        {
+            "id": "GITHUB-CLAIM-00063",
+            "type": "Claim",
+            "label": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value."
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC1155MetadataURI",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC1155Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC1155TokenReceiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC1155Views",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "IERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1271",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC137",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1723",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1724",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC223",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC4337",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC2535",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC191",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC2612",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1046",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC7201",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC7683",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1167",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC1967",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC7562",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC2470",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "ERC2335",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "Settlement",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "EmbeddedValue",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "InvariantValidation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "Testing",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "Redemption",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00002",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00003",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00004",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00005",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00006",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00007",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00008",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00009",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00010",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00011",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00012",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00013",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00014",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00015",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00016",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00017",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00018",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00019",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00020",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00021",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00022",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00023",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00024",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00025",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00026",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00027",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00028",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00029",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00030",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00031",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00032",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00033",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00034",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00035",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00036",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00037",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00038",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00039",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00040",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00041",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00042",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00043",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00044",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00045",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00046",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00047",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00048",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00049",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00050",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00051",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00052",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00053",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00054",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00055",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00056",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00057",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00058",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00059",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00060",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00061",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00062",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        },
+        {
+            "from": "GITHUB-ETHEREUM-EIPS",
+            "to": "GITHUB-CLAIM-00063",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-ETHEREUM-EIPS"
+        }
+    ]
+}

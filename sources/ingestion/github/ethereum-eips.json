@@ -1,0 +1,44 @@
+{
+    "sourceId": "GITHUB-ETHEREUM-EIPS",
+    "repository": "ethereum/EIPs",
+    "title": "Ethereum Improvement Proposals",
+    "description": "Canonical repository for Ethereum Improvement Proposals, including ERC standards and specifications.",
+    "branch": "master",
+    "protocols": [
+        "EIP",
+        "ERC"
+    ],
+    "capabilities": [
+        "Specification",
+        "Standardization",
+        "InterfaceDefinition",
+        "ProtocolCoordination",
+        "Compatibility",
+        "SecurityConsiderations",
+        "Interoperability",
+        "SpecificationMetadata",
+        "Traceability"
+    ],
+    "claims": [
+        "Specification ENABLES Standardization.",
+        "Standardization ENABLES InterfaceDefinition.",
+        "InterfaceDefinition ENABLES Compatibility.",
+        "Compatibility ENABLES ProtocolCoordination.",
+        "SecurityConsiderations CONSTRAINS Standardization.",
+        "SpecificationMetadata SUPPORTS Traceability.",
+        "ERC ENABLES Interoperability.",
+        "EIP SUPPORTS ProtocolCoordination."
+    ],
+    "tags": [
+        "Ethereum",
+        "EIP",
+        "ERC",
+        "standards",
+        "specification"
+    ],
+    "metadata": {
+        "scope": "canonical-standards-repository",
+        "curation": "manual",
+        "priority": "high"
+    }
+}

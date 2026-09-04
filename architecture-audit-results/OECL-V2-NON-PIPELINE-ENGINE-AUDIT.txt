@@ -1,0 +1,404 @@
+OECL V2 - NON PIPELINE ENGINE AUDIT
+
+============================================================
+ENGINE: BenchmarkEngine
+FILE: laboratory\benchmark\BenchmarkEngine.ts
+FILE: laboratory\benchmark\BenchmarkEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\benchmark\BenchmarkLoader.ts : 2
+  -> scripts\run-benchmark.ts : 4
+  -> scripts\run-benchmark.ts : 14
+
+============================================================
+ENGINE: ComposabilityEvidenceEngine
+FILE: laboratory\composability-evidence\ComposabilityEvidenceEngine.ts
+FILE: laboratory\composability-evidence\ComposabilityEvidenceEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 21
+  -> laboratory\pipeline\ResearchPipeline.ts : 53
+  -> laboratory\pipeline\ResearchPipeline.ts : 145
+  -> scripts\run-composability-evidence.ts : 6
+  -> scripts\run-composability-evidence.ts : 29
+  -> scripts\run-research-analysis.ts : 10
+  -> scripts\run-research-analysis.ts : 33
+  -> scripts\run-research-analysis.ts : 60
+
+============================================================
+ENGINE: CompositionEngine
+FILE: laboratory\composition\CompositionEngine.ts
+FILE: laboratory\composition\CompositionEngine.ts
+TOTAL EXTERNAL REFERENCES: 0
+
+============================================================
+ENGINE: CompositionDiscoveryEngine
+FILE: laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+FILE: laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-composition-discovery.ts : 4
+  -> scripts\run-composition-discovery.ts : 20
+
+============================================================
+ENGINE: CompositionLearningEngine
+FILE: laboratory\composition-learning\CompositionLearningEngine.ts
+FILE: laboratory\composition-learning\CompositionLearningEngine.ts
+TOTAL EXTERNAL REFERENCES: 4
+  -> laboratory\pipeline\ResearchPipeline.ts : 25
+  -> laboratory\pipeline\ResearchPipeline.ts : 225
+  -> scripts\run-composition-learning.ts : 5
+  -> scripts\run-composition-learning.ts : 22
+
+============================================================
+ENGINE: EmergentPropertyEngine
+FILE: laboratory\emergent\EmergentPropertyEngine.ts
+FILE: laboratory\emergent\EmergentPropertyEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-emergent.ts : 4
+  -> scripts\run-emergent.ts : 23
+
+============================================================
+ENGINE: LaboratoryEngine
+FILE: laboratory\engine\LaboratoryEngine.ts
+FILE: laboratory\engine\LaboratoryEngine.ts
+TOTAL EXTERNAL REFERENCES: 0
+
+============================================================
+ENGINE: EvidenceSupportEngine
+FILE: laboratory\evidence-support\EvidenceSupportEngine.ts
+FILE: laboratory\evidence-support\EvidenceSupportEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 22
+  -> laboratory\pipeline\ResearchPipeline.ts : 54
+  -> laboratory\pipeline\ResearchPipeline.ts : 155
+  -> scripts\run-evidence-support.ts : 5
+  -> scripts\run-evidence-support.ts : 36
+  -> scripts\run-research-analysis.ts : 11
+  -> scripts\run-research-analysis.ts : 34
+  -> scripts\run-research-analysis.ts : 69
+
+============================================================
+ENGINE: ResearchExtractionEngine
+FILE: laboratory\extraction\ResearchExtractionEngine.ts
+FILE: laboratory\extraction\ResearchExtractionEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 15
+  -> laboratory\pipeline\ResearchPipeline.ts : 47
+  -> scripts\run-knowledge-graph.ts : 4
+  -> scripts\run-knowledge-graph.ts : 16
+  -> scripts\run-research-analysis.ts : 4
+  -> scripts\run-research-analysis.ts : 27
+  -> scripts\run-research-extraction.ts : 4
+  -> scripts\run-research-extraction.ts : 13
+
+============================================================
+ENGINE: CompositionHypothesisEngine
+FILE: laboratory\hypotheses\CompositionHypothesisEngine.ts
+FILE: laboratory\hypotheses\CompositionHypothesisEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-composition-hypotheses.ts : 3
+  -> scripts\run-composition-hypotheses.ts : 30
+
+============================================================
+ENGINE: HypothesisEngine
+FILE: laboratory\hypothesis\HypothesisEngine.ts
+FILE: laboratory\hypothesis\HypothesisEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\hypotheses\CompositionHypothesisEngine.ts : 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 4
+  -> laboratory\pipeline\ResearchPipeline.ts : 235
+  -> laboratory\pipeline\ResearchPipeline.ts : 237
+  -> scripts\run-composition-hypotheses.ts : 3
+  -> scripts\run-composition-hypotheses.ts : 30
+  -> scripts\run-hypothesis.ts : 5
+  -> scripts\run-hypothesis.ts : 27
+
+============================================================
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis\HypothesisValidationEngine.ts
+FILE: laboratory\hypothesis\HypothesisValidationEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\hypothesis-validation\HypothesisValidationEngine.ts : 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 7
+  -> laboratory\pipeline\ResearchPipeline.ts : 279
+  -> laboratory\pipeline\ResearchPipeline.ts : 281
+  -> scripts\run-hypothesis-v2-validation.ts : 6
+  -> scripts\run-hypothesis-v2-validation.ts : 27
+  -> scripts\run-hypothesis-validation.ts : 3
+  -> scripts\run-hypothesis-validation.ts : 18
+
+============================================================
+ENGINE: HypothesisDiscoveryEngine
+FILE: laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+FILE: laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 5
+  -> laboratory\pipeline\ResearchPipeline.ts : 260
+  -> laboratory\pipeline\ResearchPipeline.ts : 262
+
+============================================================
+ENGINE: HypothesisMergeEngine
+FILE: laboratory\hypothesis-discovery\HypothesisMergeEngine.ts
+FILE: laboratory\hypothesis-discovery\HypothesisMergeEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 6
+  -> laboratory\pipeline\ResearchPipeline.ts : 267
+  -> laboratory\pipeline\ResearchPipeline.ts : 269
+
+============================================================
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+FILE: laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\hypothesis\HypothesisValidationEngine.ts : 7
+  -> laboratory\pipeline\ResearchPipeline.ts : 7
+  -> laboratory\pipeline\ResearchPipeline.ts : 279
+  -> laboratory\pipeline\ResearchPipeline.ts : 281
+  -> scripts\run-hypothesis-v2-validation.ts : 6
+  -> scripts\run-hypothesis-v2-validation.ts : 27
+  -> scripts\run-hypothesis-validation.ts : 3
+  -> scripts\run-hypothesis-validation.ts : 18
+
+============================================================
+ENGINE: IncrementalKnowledgeEngine
+FILE: laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+FILE: laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+TOTAL EXTERNAL REFERENCES: 4
+  -> laboratory\pipeline\ResearchPipeline.ts : 9
+  -> laboratory\pipeline\ResearchPipeline.ts : 351
+  -> scripts\run-incremental-knowledge.ts : 6
+  -> scripts\run-incremental-knowledge.ts : 43
+
+============================================================
+ENGINE: CompositionIntelligenceEngine
+FILE: laboratory\intelligence\CompositionIntelligenceEngine.ts
+FILE: laboratory\intelligence\CompositionIntelligenceEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-composition-intelligence.ts : 3
+  -> scripts\run-composition-intelligence.ts : 18
+
+============================================================
+ENGINE: ResearchKnowledgeEngine
+FILE: laboratory\knowledge\ResearchKnowledgeEngine.ts
+FILE: laboratory\knowledge\ResearchKnowledgeEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-research-knowledge.ts : 3
+  -> scripts\run-research-knowledge.ts : 82
+
+============================================================
+ENGINE: MachineReasoningEngine
+FILE: laboratory\machine-reasoning\MachineReasoningEngine.ts
+FILE: laboratory\machine-reasoning\MachineReasoningEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 1
+  -> laboratory\pipeline\ResearchPipeline.ts : 55
+  -> laboratory\pipeline\ResearchPipeline.ts : 141
+
+============================================================
+ENGINE: CompositionMatrixEngine
+FILE: laboratory\matrix\CompositionMatrixEngine.ts
+FILE: laboratory\matrix\CompositionMatrixEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-composition-matrix.ts : 3
+  -> scripts\run-composition-matrix.ts : 26
+
+============================================================
+ENGINE: MetricsEngine
+FILE: laboratory\metrics\MetricsEngine.ts
+FILE: laboratory\metrics\MetricsEngine.ts
+TOTAL EXTERNAL REFERENCES: 0
+
+============================================================
+ENGINE: PatternDiscoveryEngine
+FILE: laboratory\patterns\PatternDiscoveryEngine.ts
+FILE: laboratory\patterns\PatternDiscoveryEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-pattern-discovery.ts : 4
+  -> scripts\run-pattern-discovery.ts : 20
+
+============================================================
+ENGINE: CompositionPropertyEngine
+FILE: laboratory\properties\CompositionPropertyEngine.ts
+FILE: laboratory\properties\CompositionPropertyEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> laboratory\engine\ExperimentExecutor.ts : 17
+  -> laboratory\engine\ExperimentExecutor.ts : 68
+
+============================================================
+ENGINE: ProtocolSemanticEngine
+FILE: laboratory\protocol-semantics\ProtocolSemanticEngine.ts
+FILE: laboratory\protocol-semantics\ProtocolSemanticEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 16
+  -> laboratory\pipeline\ResearchPipeline.ts : 48
+  -> laboratory\pipeline\ResearchPipeline.ts : 125
+  -> scripts\run-knowledge-graph.ts : 5
+  -> scripts\run-knowledge-graph.ts : 17
+  -> scripts\run-research-analysis.ts : 5
+  -> scripts\run-research-analysis.ts : 28
+  -> scripts\run-research-analysis.ts : 44
+
+============================================================
+ENGINE: CompositionQueryEngine
+FILE: laboratory\query\CompositionQueryEngine.ts
+FILE: laboratory\query\CompositionQueryEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-query.ts : 3
+  -> scripts\run-query.ts : 21
+
+============================================================
+ENGINE: SemanticReasoningEngine
+FILE: laboratory\reasoning\SemanticReasoningEngine.ts
+FILE: laboratory\reasoning\SemanticReasoningEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 20
+  -> laboratory\pipeline\ResearchPipeline.ts : 52
+  -> laboratory\pipeline\ResearchPipeline.ts : 137
+  -> scripts\run-research-analysis.ts : 9
+  -> scripts\run-research-analysis.ts : 32
+  -> scripts\run-research-analysis.ts : 56
+  -> scripts\run-semantic-reasoning.ts : 4
+  -> scripts\run-semantic-reasoning.ts : 20
+
+============================================================
+ENGINE: CompositionRelationshipEngine
+FILE: laboratory\relationships\CompositionRelationshipEngine.ts
+FILE: laboratory\relationships\CompositionRelationshipEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-relationships.ts : 4
+  -> scripts\run-relationships.ts : 20
+
+============================================================
+ENGINE: ProtocolRequirementEngine
+FILE: laboratory\requirements\ProtocolRequirementEngine.ts
+FILE: laboratory\requirements\ProtocolRequirementEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-requirements.ts : 8
+  -> scripts\run-requirements.ts : 59
+
+============================================================
+ENGINE: KnowledgeEngine
+FILE: laboratory\research-knowledge\KnowledgeEngine.ts
+FILE: laboratory\research-knowledge\KnowledgeEngine.ts
+TOTAL EXTERNAL REFERENCES: 14
+  -> laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts : 8
+  -> laboratory\knowledge\ResearchKnowledgeEngine.ts : 3
+  -> laboratory\pipeline\ResearchPipeline.ts : 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 9
+  -> laboratory\pipeline\ResearchPipeline.ts : 247
+  -> laboratory\pipeline\ResearchPipeline.ts : 249
+  -> laboratory\pipeline\ResearchPipeline.ts : 293
+  -> laboratory\pipeline\ResearchPipeline.ts : 351
+  -> scripts\run-incremental-knowledge.ts : 6
+  -> scripts\run-incremental-knowledge.ts : 43
+  -> scripts\run-research-knowledge-v2.ts : 6
+  -> scripts\run-research-knowledge-v2.ts : 27
+  -> scripts\run-research-knowledge.ts : 3
+  -> scripts\run-research-knowledge.ts : 82
+
+============================================================
+ENGINE: KnowledgeMergeEngine
+FILE: laboratory\research-knowledge\KnowledgeMergeEngine.ts
+FILE: laboratory\research-knowledge\KnowledgeMergeEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> scripts\run-oecl-v2.ts : 6
+  -> scripts\run-oecl-v2.ts : 7
+  -> scripts\run-oecl-v2.ts : 118
+
+============================================================
+ENGINE: ResearchMemoryEngine
+FILE: laboratory\research-memory\ResearchMemoryEngine.ts
+FILE: laboratory\research-memory\ResearchMemoryEngine.ts
+TOTAL EXTERNAL REFERENCES: 4
+  -> laboratory\pipeline\ResearchPipeline.ts : 10
+  -> laboratory\pipeline\ResearchPipeline.ts : 393
+  -> scripts\run-research-memory.ts : 5
+  -> scripts\run-research-memory.ts : 33
+
+============================================================
+ENGINE: ResearchReportEngine
+FILE: laboratory\research-report\ResearchReportEngine.ts
+FILE: laboratory\research-report\ResearchReportEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-research-report.ts : 3
+  -> scripts\run-research-report.ts : 19
+
+============================================================
+ENGINE: ResearchReportV2Engine
+FILE: laboratory\research-report\ResearchReportV2Engine.ts
+FILE: laboratory\research-report\ResearchReportV2Engine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> scripts\run-oecl-v2.ts : 22
+  -> scripts\run-oecl-v2.ts : 23
+  -> scripts\run-oecl-v2.ts : 261
+
+============================================================
+ENGINE: ScenarioGenerationEngine
+FILE: laboratory\scenario-generation\ScenarioGenerationEngine.ts
+FILE: laboratory\scenario-generation\ScenarioGenerationEngine.ts
+TOTAL EXTERNAL REFERENCES: 2
+  -> scripts\run-auto-scenario-generation.ts : 3
+  -> scripts\run-auto-scenario-generation.ts : 19
+
+============================================================
+ENGINE: ContradictionCritiqueEngine
+FILE: laboratory\scientific-self-critique\ContradictionCritiqueEngine.ts
+FILE: laboratory\scientific-self-critique\ContradictionCritiqueEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 18
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 19
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 128
+
+============================================================
+ENGINE: DiscoveryCritiqueEngine
+FILE: laboratory\scientific-self-critique\DiscoveryCritiqueEngine.ts
+FILE: laboratory\scientific-self-critique\DiscoveryCritiqueEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 6
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 7
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 146
+
+============================================================
+ENGINE: EvidenceCritiqueEngine
+FILE: laboratory\scientific-self-critique\EvidenceCritiqueEngine.ts
+FILE: laboratory\scientific-self-critique\EvidenceCritiqueEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 41
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 42
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 91
+
+============================================================
+ENGINE: MemoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\MemoryCritiqueEngine.ts
+FILE: laboratory\scientific-self-critique\MemoryCritiqueEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 45
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 46
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 110
+
+============================================================
+ENGINE: TheoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\TheoryCritiqueEngine.ts
+FILE: laboratory\scientific-self-critique\TheoryCritiqueEngine.ts
+TOTAL EXTERNAL REFERENCES: 3
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 38
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 39
+  -> laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts : 72
+
+============================================================
+ENGINE: SemanticDiscoveryEngine
+FILE: laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+FILE: laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+TOTAL EXTERNAL REFERENCES: 8
+  -> laboratory\pipeline\ResearchPipeline.ts : 19
+  -> laboratory\pipeline\ResearchPipeline.ts : 51
+  -> laboratory\pipeline\ResearchPipeline.ts : 135
+  -> scripts\run-research-analysis.ts : 8
+  -> scripts\run-research-analysis.ts : 31
+  -> scripts\run-research-analysis.ts : 54
+  -> scripts\run-semantic-discovery.ts : 4
+  -> scripts\run-semantic-discovery.ts : 20
+
+============================================================
+ENGINE: CampaignStatisticsEngine
+FILE: laboratory\statistics\CampaignStatisticsEngine.ts
+FILE: laboratory\statistics\CampaignStatisticsEngine.ts
+TOTAL EXTERNAL REFERENCES: 0

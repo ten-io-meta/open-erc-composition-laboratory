@@ -1,0 +1,323 @@
+{
+    "generatedAt": "2026-09-03T23:15:25.709Z",
+    "suite": "OECL_V2_SCIENTIFIC_REGRESSION",
+    "valid": true,
+    "statistics": {
+        "discovered": 54,
+        "executed": 49,
+        "passed": 49,
+        "failed": 0,
+        "excluded": 5,
+        "empty": 0,
+        "durationMs": 567652
+    },
+    "excluded": [
+        "check-knowledge-pipeline-source-independence.ts",
+        "check-real-source-independence.ts",
+        "check-real-target-polarity-cross-validation.ts",
+        "check-solady-full-refresh.ts",
+        "check-source-independence-assessment.ts"
+    ],
+    "empty": [],
+    "results": [
+        {
+            "script": "check-autonomous-experiment-evidence-novelty.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2347
+        },
+        {
+            "script": "check-autonomous-experiment-executable-target-recommendation.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2113
+        },
+        {
+            "script": "check-autonomous-experiment-information-gain.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2057
+        },
+        {
+            "script": "check-autonomous-experiment-novelty-prioritization.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2230
+        },
+        {
+            "script": "check-autonomous-experiment-relation-aware-design.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2158
+        },
+        {
+            "script": "check-autonomous-experiment-relation-structure.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2048
+        },
+        {
+            "script": "check-autonomous-experiment-scientific-criteria.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2168
+        },
+        {
+            "script": "check-autonomous-experiment-source-independence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2024
+        },
+        {
+            "script": "check-autonomous-experiment-source-provenance-coverage.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2312
+        },
+        {
+            "script": "check-autonomous-experiment-target-relevance-ranking.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2055
+        },
+        {
+            "script": "check-compound-concept-matching.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 3574
+        },
+        {
+            "script": "check-confidence-source-independence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2275
+        },
+        {
+            "script": "check-controlled-challenge-end-to-end.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2517
+        },
+        {
+            "script": "check-evidence-graph-conclusion-provenance.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2054
+        },
+        {
+            "script": "check-executable-target-provenance-end-to-end.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2099
+        },
+        {
+            "script": "check-foundry-context-direct.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 7544
+        },
+        {
+            "script": "check-knowledge-evolution-independent-source-boundary.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2266
+        },
+        {
+            "script": "check-knowledge-evolution-source-independence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2335
+        },
+        {
+            "script": "check-knowledge-merge-source-independence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2245
+        },
+        {
+            "script": "check-legacy-scientific-criteria-compatibility.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2216
+        },
+        {
+            "script": "check-runtime-assertion-failure.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 71467
+        },
+        {
+            "script": "check-runtime-cache-identical-reuse.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 24147
+        },
+        {
+            "script": "check-runtime-cache-selector-isolation.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 27225
+        },
+        {
+            "script": "check-runtime-compilation-inconclusive.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 39798
+        },
+        {
+            "script": "check-runtime-generic-execution-error.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 36629
+        },
+        {
+            "script": "check-runtime-hook-failure-inconclusive.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 46119
+        },
+        {
+            "script": "check-runtime-nonassertion-failure.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 41984
+        },
+        {
+            "script": "check-runtime-output-buffer-inconclusive.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 43375
+        },
+        {
+            "script": "check-runtime-source-reingestion-all-failed.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 11474
+        },
+        {
+            "script": "check-runtime-source-reingestion-no-inputs.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 10847
+        },
+        {
+            "script": "check-runtime-timeout-inconclusive.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 33661
+        },
+        {
+            "script": "check-runtime-toolchain-unavailable.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2604
+        },
+        {
+            "script": "check-runtime-unsafe-selector-unsupported.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 40988
+        },
+        {
+            "script": "check-runtime-zero-tests-inconclusive.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 44686
+        },
+        {
+            "script": "check-scientific-belief-revision.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2350
+        },
+        {
+            "script": "check-scientific-belief-state-transition.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2209
+        },
+        {
+            "script": "check-scientific-belief-transition-authorization.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2326
+        },
+        {
+            "script": "check-scientific-evidence-replication-semantics.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2090
+        },
+        {
+            "script": "check-scientific-execution-referential-integrity.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2087
+        },
+        {
+            "script": "check-scientific-knowledge-evidence-reconciliation.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2189
+        },
+        {
+            "script": "check-scientific-polarity-regression.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2269
+        },
+        {
+            "script": "check-scientific-post-execution-referential-integrity.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2242
+        },
+        {
+            "script": "check-scientific-provenance-closure.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2065
+        },
+        {
+            "script": "check-scientific-source-provenance-propagation.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2419
+        },
+        {
+            "script": "check-scientific-validation-source-independence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2642
+        },
+        {
+            "script": "check-semantic-relation-semantics.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2323
+        },
+        {
+            "script": "check-source-independence-set-assessment.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2555
+        },
+        {
+            "script": "check-structured-scientific-criteria-evaluation.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2804
+        },
+        {
+            "script": "check-unresolved-polarity-confidence.ts",
+            "status": "PASS",
+            "exitCode": 0,
+            "durationMs": 2012
+        }
+    ],
+    "typescript": {
+        "valid": true,
+        "exitCode": 0,
+        "durationMs": 7383
+    }
+}

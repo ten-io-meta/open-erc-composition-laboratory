@@ -1,0 +1,61 @@
+{
+    "sourceId": "GRAPH-GITHUB-FOUNDRY-RS-FOUNDRY",
+    "generatedAt": "2026-08-23T13:09:26.152Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "IERC20ToBytes32Map",
+            "protocolB": "IERC20",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "evidence": [
+                "claim:EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "IERC20ToBytes32Map",
+            "protocolB": "IERC20",
+            "capabilityA": "InvariantValidation",
+            "capabilityB": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "evidence": [
+                "claim:InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00003",
+            "protocolA": "IERC20ToBytes32Map",
+            "protocolB": "IERC20",
+            "capabilityA": "Testing",
+            "capabilityB": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "evidence": [
+                "claim:Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        }
+    ],
+    "errors": []
+}

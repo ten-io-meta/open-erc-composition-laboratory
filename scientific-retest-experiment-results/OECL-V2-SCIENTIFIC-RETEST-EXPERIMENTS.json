@@ -1,0 +1,92 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.644Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "experiments": [
+        {
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "title": "Adversarial retest of theory THEORY-00001",
+            "objective": "Resolve the scientific challenge affecting \"Reservation-Constrained Accounting Theory\" through independent and adversarial evidence.",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "hypothesis": "\"Reservation-Constrained Accounting Theory\" should remain scientifically defensible when tested against independent implementations, counterexamples, and adversarial evidence.",
+            "supportCondition": "The retested scientific claim is supported when independent executable evidence reproducibly confirms behavior consistent with the hypothesis.",
+            "challengeCondition": "The retested scientific claim is challenged when independent executable evidence reproducibly demonstrates behavior incompatible with the hypothesis.",
+            "priority": "HIGH",
+            "requiredEvidence": [
+                "At least one independent implementation source.",
+                "Direct implementation, executable test, or invariant evidence.",
+                "Traceable evidence linked to the target statement.",
+                "Explicit search for contradictory evidence.",
+                "At least one adversarial test designed specifically to falsify the theory."
+            ],
+            "recommendedRepositories": [
+                "ten-io-meta/erc8060-reservable",
+                "OpenZeppelin/openzeppelin-contracts",
+                "Vectorized/solady",
+                "transmissions11/solmate"
+            ],
+            "variables": {
+                "independent": [
+                    "Independent implementation source",
+                    "Adversarial evidence source",
+                    "Protocol implementation variant",
+                    "Repository under evaluation"
+                ],
+                "dependent": [
+                    "Scientific robustness score",
+                    "Falsification outcome",
+                    "Independent evidence count",
+                    "Scientific revision decision"
+                ],
+                "controlled": [
+                    "OECL normalization rules",
+                    "Evidence extraction rules",
+                    "Confidence thresholds",
+                    "Scientific critique criteria",
+                    "Revision decision rules"
+                ]
+            },
+            "procedure": [
+                "Select at least one independent source not responsible for the original evidence.",
+                "Ingest and normalize the selected source through the OECL source pipeline.",
+                "Search for independent implementations that do not exhibit the claimed relationship.",
+                "Search for direct counterexamples in executable code, tests, or invariants.",
+                "Compare supporting evidence against contradictory or alternative behavior.",
+                "Recalculate scientific confidence after introducing adversarial evidence.",
+                "Attempt to construct a valid protocol composition in which the theory does not hold.",
+                "Regenerate relevant evidence and scientific assessments.",
+                "Run scientific self-critique again for the target.",
+                "Generate a new scientific revision decision.",
+                "Compare the new revision with the revision that triggered this retest."
+            ],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "expectedOutcome": "The experiment should resolve or better characterize the scientific challenge using independent adversarial evidence.",
+            "estimatedKnowledgeGain": 85
+        }
+    ],
+    "statistics": {
+        "experiments": 1,
+        "theoryExperiments": 1,
+        "discoveryExperiments": 0,
+        "knowledgeExperiments": 0,
+        "evidenceHistoryExperiments": 0,
+        "highPriority": 1,
+        "mediumPriority": 0,
+        "lowPriority": 0,
+        "averageExpectedKnowledgeGain": 85
+    },
+    "errors": []
+}

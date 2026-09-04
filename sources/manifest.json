@@ -20,10 +20,58 @@
             "enabled": false
         },
         {
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "path": "./sources/research/GITHUB-CRYTIC-SLITHER/source.json",
+            "evidencePath": "./sources/research/GITHUB-CRYTIC-SLITHER/evidence.json",
+            "enabled": true
+        },
+        {
+            "sourceId": "GITHUB-TEST-0001",
+            "path": "./sources/research/GITHUB-TEST-0001/source.json",
+            "evidencePath": "./sources/research/GITHUB-TEST-0001/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "path": "./sources/research/GITHUB-FOUNDRY-RS-FOUNDRY/source.json",
+            "evidencePath": "./sources/research/GITHUB-FOUNDRY-RS-FOUNDRY/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-ETHEREUM-EIPS",
+            "path": "./sources/research/GITHUB-ETHEREUM-EIPS/source.json",
+            "evidencePath": "./sources/research/GITHUB-ETHEREUM-EIPS/evidence.json",
+            "enabled": true
+        },
+        {
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "path": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/source.json",
             "evidencePath": "./sources/research/GITHUB-TEN-IO-META-ERC8060-RESERVABLE/evidence.json",
-            "enabled": true
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "path": "./sources/research/GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS/source.json",
+            "evidencePath": "./sources/research/GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-VECTORIZED-SOLADY",
+            "path": "./sources/research/GITHUB-VECTORIZED-SOLADY/source.json",
+            "evidencePath": "./sources/research/GITHUB-VECTORIZED-SOLADY/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "path": "./sources/research/GITHUB-TRANSMISSIONS11-SOLMATE/source.json",
+            "evidencePath": "./sources/research/GITHUB-TRANSMISSIONS11-SOLMATE/evidence.json",
+            "enabled": false
+        },
+        {
+            "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "path": "./sources/research/GITHUB-THIRDWEB-DEV-CONTRACTS/source.json",
+            "evidencePath": "./sources/research/GITHUB-THIRDWEB-DEV-CONTRACTS/evidence.json",
+            "enabled": false
         }
     ]
 }

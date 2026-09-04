@@ -1,0 +1,32 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.314Z",
+    "assessments": [
+        {
+            "assessmentId": "CONFIDENCE-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "sourcePatternId": "CROSS-PATTERN-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "originalConfidence": 49,
+            "calculatedConfidence": 82,
+            "independentSources": 0,
+            "evidenceEvents": 9,
+            "evidenceQuality": "HIGH",
+            "maturity": "PRELIMINARY",
+            "reasons": [
+                "No scientifically independent source set was explicitly established for this conclusion.",
+                "9 evidence events were linked to this conclusion.",
+                "Evidence quality assessed as HIGH.",
+                "Calculated confidence is 82."
+            ]
+        }
+    ],
+    "statistics": {
+        "assessments": 1,
+        "preliminary": 1,
+        "supported": 0,
+        "established": 0,
+        "averageConfidence": 82
+    },
+    "errors": []
+}

@@ -1,0 +1,37 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.315Z",
+    "nodes": [
+        {
+            "nodeId": "Reservation",
+            "label": "Reservation",
+            "type": "CAPABILITY"
+        },
+        {
+            "nodeId": "Accounting",
+            "label": "Accounting",
+            "type": "CAPABILITY"
+        }
+    ],
+    "edges": [
+        {
+            "edgeId": "EDGE-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "from": "Reservation",
+            "relation": "CONSTRAIN",
+            "to": "Accounting",
+            "confidence": 49,
+            "sources": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ]
+        }
+    ],
+    "statistics": {
+        "nodes": 2,
+        "edges": 1,
+        "protocols": 0,
+        "capabilities": 2,
+        "conclusions": 1
+    },
+    "errors": []
+}

@@ -1,0 +1,203 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.645Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "tasks": [
+        {
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "queueItemId": "SCIENTIFIC-EXPERIMENT-QUEUE-00003",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "origin": "RETEST",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "title": "Adversarial retest of theory THEORY-00001",
+            "objective": "Resolve the scientific challenge affecting \"Reservation-Constrained Accounting Theory\" through independent and adversarial evidence.",
+            "hypothesis": "\"Reservation-Constrained Accounting Theory\" should remain scientifically defensible when tested against independent implementations, counterexamples, and adversarial evidence.",
+            "supportCondition": "The retested scientific claim is supported when independent executable evidence reproducibly confirms behavior consistent with the hypothesis.",
+            "challengeCondition": "The retested scientific claim is challenged when independent executable evidence reproducibly demonstrates behavior incompatible with the hypothesis.",
+            "priority": "HIGH",
+            "queueScore": 93,
+            "recommendedRepositories": [
+                "ten-io-meta/erc8060-reservable",
+                "OpenZeppelin/openzeppelin-contracts",
+                "Vectorized/solady",
+                "transmissions11/solmate"
+            ],
+            "procedure": [
+                "Select at least one independent source not responsible for the original evidence.",
+                "Ingest and normalize the selected source through the OECL source pipeline.",
+                "Search for independent implementations that do not exhibit the claimed relationship.",
+                "Search for direct counterexamples in executable code, tests, or invariants.",
+                "Compare supporting evidence against contradictory or alternative behavior.",
+                "Recalculate scientific confidence after introducing adversarial evidence.",
+                "Attempt to construct a valid protocol composition in which the theory does not hold.",
+                "Regenerate relevant evidence and scientific assessments.",
+                "Run scientific self-critique again for the target.",
+                "Generate a new scientific revision decision.",
+                "Compare the new revision with the revision that triggered this retest."
+            ],
+            "requiredEvidence": [
+                "At least one independent implementation source.",
+                "Direct implementation, executable test, or invariant evidence.",
+                "Traceable evidence linked to the target statement.",
+                "Explicit search for contradictory evidence.",
+                "At least one adversarial test designed specifically to falsify the theory."
+            ],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "executionStatus": "READY",
+            "blockReasons": [],
+            "explanation": "The experiment has sufficient planning metadata to be handed to a future execution runtime."
+        },
+        {
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "queueItemId": "SCIENTIFIC-EXPERIMENT-QUEUE-00001",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "origin": "AUTONOMOUS",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "sourceIds": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "title": "Validate Reservation-Constrained Accounting Theory",
+            "objective": "Collect sufficient independent evidence to determine whether \"Reservation-Constrained Accounting Theory\" should be validated or rejected.",
+            "hypothesis": "\"Reservation-Constrained Accounting Theory\" predicts that independent executable evidence will reproduce the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+            "supportCondition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+            "challengeCondition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+            "scientificCriteria": {
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "support": {
+                    "expectedPolarity": "SUPPORT",
+                    "condition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "challenge": {
+                    "expectedPolarity": "CHALLENGE",
+                    "condition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "inconclusive": {
+                    "whenNoScientificPolarity": true
+                }
+            },
+            "priority": "MEDIUM",
+            "queueScore": 69,
+            "recommendedRepositories": [
+                "OpenZeppelin/openzeppelin-contracts",
+                "ten-io-meta/erc8060-reservable",
+                "Vectorized/solady",
+                "transmissions11/solmate",
+                "thirdweb-dev/contracts"
+            ],
+            "procedure": [
+                "Select one repository not currently included in the supporting evidence.",
+                "Ingest and normalize the selected repository.",
+                "Extract protocols, capabilities, claims, tests, and invariants.",
+                "Regenerate the cross-source evidence graph.",
+                "Search for executable assertions that support or challenge the relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+                "Recalculate confidence, contradictions, and scientific validation.",
+                "Compare the new validation result with the previous result."
+            ],
+            "requiredEvidence": [
+                "At least one independent implementation source.",
+                "Executable tests or invariant checks.",
+                "Direct executable evidence supporting or challenging the relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+                "Evidence from a repository not currently responsible for the theory."
+            ],
+            "successCriteria": [
+                "Independent source count increases.",
+                "At least one new directly relevant evidence edge is discovered.",
+                "Validation score changes by at least 5 points.",
+                "The experiment produces a reproducible result."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is discovered.",
+                "The selected repository duplicates existing evidence without increasing diversity.",
+                "The validation score remains unchanged.",
+                "The evidence cannot be reproduced or traced to its source."
+            ],
+            "executionStatus": "READY",
+            "blockReasons": [],
+            "explanation": "The experiment has sufficient planning metadata to be handed to a future execution runtime."
+        },
+        {
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "queueItemId": "SCIENTIFIC-EXPERIMENT-QUEUE-00002",
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "origin": "AUTONOMOUS",
+            "targetType": "KNOWLEDGE_GAP",
+            "targetId": "GAP-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "title": "Investigate knowledge gap GAP-00001",
+            "objective": "Low-confidence conclusion: Reservation appears to constrain Accounting across 2 observed source identities.",
+            "hypothesis": "Additional independent evidence can reduce uncertainty associated with: Low-confidence conclusion: Reservation appears to constrain Accounting across 2 observed source identities.",
+            "supportCondition": "The knowledge gap is reduced when new independent executable evidence provides reproducible information directly relevant to the unresolved scientific statement.",
+            "challengeCondition": "The knowledge gap remains or increases when new executable evidence contradicts the unresolved statement or exposes additional uncertainty that prevents deterministic resolution.",
+            "priority": "MEDIUM",
+            "queueScore": 56,
+            "recommendedRepositories": [
+                "ten-io-meta/erc8060-reservable",
+                "OpenZeppelin/openzeppelin-contracts",
+                "Vectorized/solady",
+                "transmissions11/solmate",
+                "thirdweb-dev/contracts"
+            ],
+            "procedure": [
+                "Select a repository relevant to the gap.",
+                "Ingest the repository through the OECL GitHub ingestor.",
+                "Extract direct and indirect evidence related to the gap.",
+                "Rebuild conclusions and confidence assessments.",
+                "Check whether the gap remains, weakens, or is resolved."
+            ],
+            "requiredEvidence": [
+                "Additional independent sources.",
+                "Higher-quality implementation evidence.",
+                "Executable tests or formal invariants."
+            ],
+            "successCriteria": [
+                "Evidence diversity increases.",
+                "The associated confidence score increases or decreases meaningfully.",
+                "The gap receives a clear resolved or unresolved classification."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is found.",
+                "Only duplicate evidence is discovered.",
+                "The gap remains unchanged."
+            ],
+            "executionStatus": "READY",
+            "blockReasons": [],
+            "explanation": "The experiment has sufficient planning metadata to be handed to a future execution runtime."
+        }
+    ],
+    "statistics": {
+        "total": 3,
+        "ready": 3,
+        "pending": 0,
+        "blocked": 0,
+        "completed": 0,
+        "failed": 0,
+        "autonomous": 2,
+        "retest": 1,
+        "highPriority": 1,
+        "mediumPriority": 2,
+        "lowPriority": 0,
+        "averageQueueScore": 73
+    },
+    "errors": []
+}

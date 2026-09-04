@@ -1,30 +1,135 @@
 {
-    "generatedAt": "2026-07-03T15:43:36.888Z",
+    "generatedAt": "2026-09-03T23:18:00.702Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-2026-07-03T15:43:36.888Z",
-        "generatedAt": "2026-07-03T15:43:36.888Z",
+        "knowledgeBaseId": "KB-2026-09-03T23:18:00.702Z",
+        "generatedAt": "2026-09-03T23:18:00.702Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
-                "relation": "EmbeddedValue->ENABLES->Reservation",
-                "protocolPair": "ERC8060+IERC8060Reservable",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "protocolPair": "ERC1155+ERC20",
                 "observations": 1,
-                "averageConfidence": 19,
+                "averageConfidence": 25,
                 "confirmed": 0,
                 "partial": 1,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
-                    "learning:EmbeddedValue->ENABLES->Reservation",
+                    "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
                     "validation:HYP-00001",
-                    "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
-                ]
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "protocolPair": "ERC1155+ERC20",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "Reservation:CONSTRAINS:Accounting",
+                "protocolPair": "Reservation->Accounting",
+                "observations": 1,
+                "averageConfidence": 76,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:Reservation:CONSTRAINS:Accounting",
+                    "capability:Reservation",
+                    "capability:Accounting",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "InvariantValidation:VALIDATES:Accounting",
+                "protocolPair": "InvariantValidation->Accounting",
+                "observations": 1,
+                "averageConfidence": 78,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:InvariantValidation:VALIDATES:Accounting",
+                    "capability:InvariantValidation",
+                    "capability:Accounting",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "Testing:SUPPORTS:InvariantValidation",
+                "protocolPair": "Testing->InvariantValidation",
+                "observations": 1,
+                "averageConfidence": 70,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:Testing:SUPPORTS:InvariantValidation",
+                    "capability:Testing",
+                    "capability:InvariantValidation",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+                "protocolPair": "InvariantLanguage->SafetyConstraint",
+                "observations": 1,
+                "averageConfidence": 64,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                    "claim:normative-language",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-09-03T23:18:00.702Z"
             }
         ],
         "statistics": {
-            "entries": 1,
-            "totalObservations": 1,
-            "emerging": 1,
+            "entries": 6,
+            "totalObservations": 6,
+            "emerging": 6,
             "supported": 0,
             "validated": 0,
             "canonical": 0,

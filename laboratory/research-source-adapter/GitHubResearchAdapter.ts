@@ -10,7 +10,9 @@ export class GitHubResearchAdapter
 
     supports(source: any): boolean {
 
-        return source.type === "GITHUB_REPOSITORY";
+        return source?.type === "GITHUB_REPOSITORY"
+            || source?.type === "GITHUB"
+            || source?.ingested === true;
 
     }
 
@@ -28,14 +30,22 @@ export class GitHubResearchAdapter
 
             sourceId: source.sourceId,
 
-            protocols: source.protocols ?? [],
+            protocols:
+                source.protocols
+                ?? source.referencedProtocols
+                ?? [],
 
-            capabilities: source.capabilities ?? [],
+            capabilities:
+                source.capabilities
+                ?? source.referencedCapabilities
+                ?? [],
 
             claims: [
                 ...(source.claims ?? []),
                 ...signalClaims
-            ]
+            ],
+
+            compositionSignals: signals
 
         };
 

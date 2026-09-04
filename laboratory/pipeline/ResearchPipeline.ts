@@ -1,12 +1,17 @@
+import { MachineReasoningEngine } from "../machine-reasoning/MachineReasoningEngine.js";
 import { GitHubResearchAdapter } from "../research-source-adapter/GitHubResearchAdapter.js";
 import { EvidenceProfileLoader } from "../evidence-profile/EvidenceProfileLoader.js";
 import { HypothesisEngine } from "../hypothesis/HypothesisEngine.js";
+import { HypothesisDiscoveryEngine } from "../hypothesis-discovery/HypothesisDiscoveryEngine.js";
+import { HypothesisMergeEngine } from "../hypothesis-discovery/HypothesisMergeEngine.js";
 import { HypothesisValidationEngine } from "../hypothesis/HypothesisValidationEngine.js";
 import { KnowledgeEngine } from "../research-knowledge/KnowledgeEngine.js";
 import { IncrementalKnowledgeEngine } from "../incremental-knowledge/IncrementalKnowledgeEngine.js";
 import { ResearchMemoryEngine } from "../research-memory/ResearchMemoryEngine.js";
 import { ResearchMemoryLoader } from "../research-memory/ResearchMemoryLoader.js";
 import { mkdir, readFile, writeFile } from "fs/promises";
+import { KnowledgeIntegrationEngine } from "../knowledge-integration/KnowledgeIntegrationEngine.js";
+import { ResearchKnowledgeAggregator } from "../knowledge-integration/ResearchKnowledgeAggregator.js";
 
 import { ResearchSourceLoader } from "../research-source/ResearchSourceLoader.js";
 import { ResearchExtractionEngine } from "../extraction/ResearchExtractionEngine.js";
@@ -49,12 +54,14 @@ export class ResearchPipeline {
             const semanticReasoningEngine = new SemanticReasoningEngine();
             const composabilityEvidenceEngine = new ComposabilityEvidenceEngine();
             const evidenceSupportEngine = new EvidenceSupportEngine();
-
+const machineReasoningEngine = new MachineReasoningEngine();
             const source = await sourceLoader.load(sourcePath);
 
 const githubAdapter = new GitHubResearchAdapter();
 
 const sourceBundle = source as any;
+
+const adaptedSource = githubAdapter.adapt(sourceBundle);
 
 const extractionResult = githubAdapter.supports(sourceBundle)
     ? {
@@ -62,18 +69,52 @@ const extractionResult = githubAdapter.supports(sourceBundle)
         extraction: {
             sourceId,
             extractedAt: new Date().toISOString(),
-            protocols: githubAdapter.adapt(sourceBundle).protocols,
-capabilities: githubAdapter.adapt(sourceBundle).capabilities,
-claims: githubAdapter.adapt(sourceBundle).claims.map(
-    (claim: string, index: number) => ({
-        claimId: `GITHUB-CLAIM-${String(index + 1).padStart(5, "0")}`,
-        text: claim,
-        evidence: sourceId,
-        confidence: 70
-    })
-),            invariants: [],
-            relationships: [],
-            errors: []
+
+            protocols:
+                adaptedSource.protocols,
+
+            capabilities:
+                adaptedSource.capabilities,
+
+            claims:
+                adaptedSource.claims.map(
+                    (claim: string, index: number) => ({
+                        claimId:
+                            `GITHUB-CLAIM-${String(index + 1).padStart(5, "0")}`,
+                        text:
+                            claim,
+                        evidence:
+                            sourceId,
+                        confidence:
+                            70
+                    })
+                ),
+
+            invariants:
+                [],
+
+            relationships:
+                (adaptedSource.compositionSignals ?? []).map(
+                    (signal, index) => ({
+                        relationshipId:
+                            `GITHUB-REL-${String(index + 1).padStart(5, "0")}`,
+                        fromCapability:
+                            signal.fromCapability,
+                        toCapability:
+                            signal.toCapability,
+                        relation:
+                            signal.relation,
+                        reason:
+                            signal.reason,
+                        evidence:
+                            sourceId,
+                        confidence:
+                            70
+                    })
+                ) as any,
+
+            errors:
+                []
         },
         errors: []
     }
@@ -98,11 +139,16 @@ if (!extractionResult.success || !extractionResult.extraction) {
             const semanticReasoningResult = semanticReasoningEngine.reason(
                 semanticDiscoveryResult
             );
-
-            const composabilityEvidenceResult = composabilityEvidenceEngine.build(
-                protocolSemanticResult,
-                semanticReasoningResult
-            );
+const machineReasoningResult =
+    machineReasoningEngine.reason(
+        sourceId,
+        extractionResult.extraction
+    );
+           const composabilityEvidenceResult = composabilityEvidenceEngine.build(
+    protocolSemanticResult,
+    semanticReasoningResult,
+    extractionResult.extraction
+);
 
             const benchmark = await readJson("./benchmark-results/benchmark.json");
             const matrix = await readJson("./matrix-results/composition-matrix.json");
@@ -200,11 +246,42 @@ await writeFile(
     "./hypothesis-results/DOI-0001-hypotheses.json",
     JSON.stringify(hypothesisResult, null, 4)
 );
+const knowledgeEngine = new KnowledgeEngine();
+
+const preliminaryKnowledgeResult = knowledgeEngine.build(
+    learningResult,
+    {
+        validatedAt: new Date().toISOString(),
+        validations: [],
+        errors: []
+    },
+    machineReasoningResult,
+    sourceId
+);
+
+const hypothesisDiscoveryEngine = new HypothesisDiscoveryEngine();
+
+const derivedHypotheses = hypothesisDiscoveryEngine.discover(
+    preliminaryKnowledgeResult.knowledge,
+    hypothesisResult.hypotheses.length
+);
+
+const hypothesisMergeEngine = new HypothesisMergeEngine();
+
+const mergedHypothesisResult = hypothesisMergeEngine.merge(
+    hypothesisResult,
+    derivedHypotheses
+);
+
+await writeFile(
+    "./hypothesis-results/OECL-V2-MERGED-HYPOTHESES.json",
+    JSON.stringify(mergedHypothesisResult, null, 4)
+);
 
 const hypothesisValidationEngine = new HypothesisValidationEngine();
 
 const hypothesisValidationResult = hypothesisValidationEngine.validate(
-    hypothesisResult,
+    mergedHypothesisResult,
     supportedComposabilityEvidenceResult
 );
 
@@ -215,12 +292,13 @@ await writeFile(
     JSON.stringify(hypothesisValidationResult, null, 4)
 );
 
-const knowledgeEngine = new KnowledgeEngine();
-
 const knowledgeResult = knowledgeEngine.build(
     learningResult,
-    hypothesisValidationResult
+    hypothesisValidationResult,
+    machineReasoningResult,
+    sourceId
 );
+
 const evidenceProfileLoader = new EvidenceProfileLoader();
 
 const evidenceProfile = await evidenceProfileLoader.load(evidencePath);
@@ -267,6 +345,10 @@ await writeFile(
         null,
         4
     )
+);
+await writeFile(
+    `${analysisPath}/machine-reasoning.json`,
+    JSON.stringify(machineReasoningResult, null, 4)
 );
 const incrementalEngine = new IncrementalKnowledgeEngine();
 
@@ -328,6 +410,20 @@ await writeFile(
 await writeFile(
     "./research-memory-results/OECL-V2-RESEARCH-MEMORY-RESULT.json",
     JSON.stringify(memoryResult, null, 4)
+);
+const knowledgeAggregator =
+    new ResearchKnowledgeAggregator();
+
+const aggregatedKnowledge =
+    await knowledgeAggregator.aggregate();
+
+await writeFile(
+    "./research-knowledge-results/OECL-V2-AGGREGATED-KNOWLEDGE.json",
+    JSON.stringify(
+        aggregatedKnowledge,
+        null,
+        4
+    )
 );
             return {
                 pipelineId: `PIPELINE-${sourceId}`,

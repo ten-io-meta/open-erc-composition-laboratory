@@ -1,18 +1,88 @@
 {
-    "validatedAt": "2026-07-03T15:43:36.885Z",
+    "validatedAt": "2026-09-03T23:18:00.700Z",
     "validations": [
         {
             "hypothesisId": "HYP-00001",
-            "relation": "EmbeddedValue->ENABLES->Reservation",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
             "statusBefore": "EMERGING",
             "statusAfter": "EMERGING",
-            "confidenceBefore": 31,
-            "confidenceAfter": 31,
+            "confidenceBefore": 25,
+            "confidenceAfter": 25,
             "evidenceMatched": 1,
             "validationOutcome": "PARTIAL",
             "observations": [
                 "Matched 1 evidence claim(s).",
-                "Average evidence confidence: 31%."
+                "Average evidence confidence: 25%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-00002",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "statusBefore": "EMERGING",
+            "statusAfter": "EMERGING",
+            "confidenceBefore": 25,
+            "confidenceAfter": 25,
+            "evidenceMatched": 1,
+            "validationOutcome": "PARTIAL",
+            "observations": [
+                "Matched 1 evidence claim(s).",
+                "Average evidence confidence: 25%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-DERIVED-00003",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "statusBefore": "EMERGING",
+            "statusAfter": "REJECTED",
+            "confidenceBefore": 76,
+            "confidenceAfter": 66,
+            "evidenceMatched": 0,
+            "validationOutcome": "UNSUPPORTED",
+            "observations": [
+                "No supporting evidence claims matched this hypothesis.",
+                "Average evidence confidence: 0%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-DERIVED-00004",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "statusBefore": "EMERGING",
+            "statusAfter": "REJECTED",
+            "confidenceBefore": 78,
+            "confidenceAfter": 68,
+            "evidenceMatched": 0,
+            "validationOutcome": "UNSUPPORTED",
+            "observations": [
+                "No supporting evidence claims matched this hypothesis.",
+                "Average evidence confidence: 0%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-DERIVED-00005",
+            "relation": "Testing:SUPPORTS:InvariantValidation",
+            "statusBefore": "EMERGING",
+            "statusAfter": "REJECTED",
+            "confidenceBefore": 70,
+            "confidenceAfter": 60,
+            "evidenceMatched": 0,
+            "validationOutcome": "UNSUPPORTED",
+            "observations": [
+                "No supporting evidence claims matched this hypothesis.",
+                "Average evidence confidence: 0%."
+            ]
+        },
+        {
+            "hypothesisId": "HYP-DERIVED-00006",
+            "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+            "statusBefore": "EMERGING",
+            "statusAfter": "REJECTED",
+            "confidenceBefore": 64,
+            "confidenceAfter": 54,
+            "evidenceMatched": 0,
+            "validationOutcome": "UNSUPPORTED",
+            "observations": [
+                "No supporting evidence claims matched this hypothesis.",
+                "Average evidence confidence: 0%."
             ]
         }
     ],

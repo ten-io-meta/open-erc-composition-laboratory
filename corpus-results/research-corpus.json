@@ -1,6 +1,6 @@
 {
-    "corpusId": "CORPUS-2026-07-03T15:43:36.878Z",
-    "generatedAt": "2026-07-03T15:43:36.878Z",
+    "corpusId": "CORPUS-2026-09-03T23:18:00.691Z",
+    "generatedAt": "2026-09-03T23:18:00.691Z",
     "entries": [
         {
             "sourceId": "DOI-0001",
@@ -25,24 +25,112 @@
             "status": "ANALYZED"
         },
         {
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "analysisPath": "./analysis-results/GITHUB-CRYTIC-SLITHER",
+            "protocols": 20,
+            "capabilities": 13,
+            "claims": 35,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 35,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-ETHEREUM-EIPS",
+            "analysisPath": "./analysis-results/GITHUB-ETHEREUM-EIPS",
+            "protocols": 27,
+            "capabilities": 7,
+            "claims": 4,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 4,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+            "analysisPath": "./analysis-results/GITHUB-FOUNDRY-RS-FOUNDRY",
+            "protocols": 50,
+            "capabilities": 6,
+            "claims": 3,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 3,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "analysisPath": "./analysis-results/GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "protocols": 108,
+            "capabilities": 7,
+            "claims": 4,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 4,
+            "status": "ANALYZED"
+        },
+        {
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "analysisPath": "./analysis-results/GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "protocols": 4,
             "capabilities": 7,
+            "claims": 5,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 5,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-TEST-0001",
+            "analysisPath": "./analysis-results/GITHUB-TEST-0001",
+            "protocols": 2,
+            "capabilities": 3,
             "claims": 1,
             "supportedClaims": 0,
             "candidateClaims": 0,
             "inconclusiveClaims": 1,
             "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "analysisPath": "./analysis-results/GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "protocols": 55,
+            "capabilities": 5,
+            "claims": 2,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 2,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "analysisPath": "./analysis-results/GITHUB-TRANSMISSIONS11-SOLMATE",
+            "protocols": 8,
+            "capabilities": 4,
+            "claims": 2,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 2,
+            "status": "ANALYZED"
+        },
+        {
+            "sourceId": "GITHUB-VECTORIZED-SOLADY",
+            "analysisPath": "./analysis-results/GITHUB-VECTORIZED-SOLADY",
+            "protocols": 28,
+            "capabilities": 5,
+            "claims": 2,
+            "supportedClaims": 0,
+            "candidateClaims": 0,
+            "inconclusiveClaims": 2,
+            "status": "ANALYZED"
         }
     ],
     "statistics": {
-        "sources": 3,
-        "protocols": 30,
-        "capabilities": 35,
-        "claims": 21,
+        "sources": 11,
+        "protocols": 328,
+        "capabilities": 85,
+        "claims": 78,
         "supportedClaims": 0,
         "candidateClaims": 8,
-        "inconclusiveClaims": 13
+        "inconclusiveClaims": 70
     }
 }

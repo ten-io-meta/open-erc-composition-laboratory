@@ -1,7 +1,22 @@
-import type { GitHubScannedFile } from "./GitHubFileScanner.js";
+import type {
+    GitHubScannedFile
+} from "./GitHubFileScanner.js";
 
-import { GitHubStructureAnalyzer } from "./GitHubStructureAnalyzer.js";
-import { GitHubInvariantExtractor } from "./GitHubInvariantExtractor.js";
+import {
+    GitHubStructureAnalyzer
+} from "./GitHubStructureAnalyzer.js";
+
+import {
+    GitHubInvariantExtractor
+} from "./GitHubInvariantExtractor.js";
+
+import {
+    GitHubExecutableTargetExtractor
+} from "./GitHubExecutableTargetExtractor.js";
+
+import type {
+    GitHubExecutableTarget
+} from "./GitHubExecutableTargetExtractor.js";
 
 export interface GitHubRepositoryIntelligenceResult {
 
@@ -15,7 +30,16 @@ export interface GitHubRepositoryIntelligenceResult {
         totalFiles: number;
     };
 
+    toolchain:
+        | "FOUNDRY"
+        | "HARDHAT"
+        | "MIXED"
+        | "UNKNOWN";
+
     invariants: string[];
+
+    executableTargets:
+        GitHubExecutableTarget[];
 
     intelligenceSignals: string[];
 
@@ -23,17 +47,69 @@ export interface GitHubRepositoryIntelligenceResult {
 
 export class GitHubRepositoryIntelligence {
 
-    analyze(files: GitHubScannedFile[]): GitHubRepositoryIntelligenceResult {
+    analyze(
+        files:
+            GitHubScannedFile[]
+    ): GitHubRepositoryIntelligenceResult {
 
-        const structureAnalyzer = new GitHubStructureAnalyzer();
+        const structureAnalyzer =
+            new GitHubStructureAnalyzer();
 
-        const invariantExtractor = new GitHubInvariantExtractor();
+        const invariantExtractor =
+            new GitHubInvariantExtractor();
 
-        const structure = structureAnalyzer.analyze(files);
+        const executableTargetExtractor =
+            new GitHubExecutableTargetExtractor();
 
-        const invariants = invariantExtractor.extract(structure);
+        const structure =
+            structureAnalyzer.analyze(
+                files
+            );
+
+        const hasFoundry =
+            structure.configFiles.some(
+                file =>
+                    file.path.endsWith(
+                        "foundry.toml"
+                    )
+            );
+
+        const hasHardhat =
+            structure.configFiles.some(
+                file =>
+                    file.path.endsWith(
+                        "hardhat.config.ts"
+                    ) ||
+                    file.path.endsWith(
+                        "hardhat.config.js"
+                    )
+            );
+
+        const toolchain:
+            GitHubRepositoryIntelligenceResult[
+                "toolchain"
+            ] =
+                hasFoundry &&
+                hasHardhat
+                    ? "MIXED"
+                    : hasFoundry
+                        ? "FOUNDRY"
+                        : hasHardhat
+                            ? "HARDHAT"
+                            : "UNKNOWN";
+
+        const invariants =
+            invariantExtractor.extract(
+                structure
+            );
+
+        const executableTargets =
+            executableTargetExtractor.extract(
+                structure
+            );
 
         const intelligenceSignals = [
+
             structure.readmeFiles.length > 0
                 ? "Repository contains README research context."
                 : "Repository does not expose README research context.",
@@ -52,22 +128,57 @@ export class GitHubRepositoryIntelligence {
 
             invariants.length > 0
                 ? "Repository contains invariant-like statements."
-                : "Repository does not expose invariant-like statements."
+                : "Repository does not expose invariant-like statements.",
+
+            executableTargets.length > 0
+                ? (
+                    `Repository exposes ${executableTargets.length} ` +
+                    `executable test or invariant target(s).`
+                )
+                : "Repository does not expose executable test or invariant targets.",
+
+            toolchain === "FOUNDRY"
+                ? "Repository uses the Foundry toolchain."
+                : toolchain === "HARDHAT"
+                    ? "Repository uses the Hardhat toolchain."
+                    : toolchain === "MIXED"
+                        ? "Repository exposes both Foundry and Hardhat configuration."
+                        : "Repository toolchain could not be determined."
+
         ];
 
         return {
 
             structure: {
-                readmes: structure.readmeFiles.length,
-                contracts: structure.contractFiles.length,
-                tests: structure.testFiles.length,
-                docs: structure.documentationFiles.length,
-                configs: structure.configFiles.length,
-                workflows: structure.workflowFiles.length,
-                totalFiles: files.length
+
+                readmes:
+                    structure.readmeFiles.length,
+
+                contracts:
+                    structure.contractFiles.length,
+
+                tests:
+                    structure.testFiles.length,
+
+                docs:
+                    structure.documentationFiles.length,
+
+                configs:
+                    structure.configFiles.length,
+
+                workflows:
+                    structure.workflowFiles.length,
+
+                totalFiles:
+                    files.length
+
             },
 
+            toolchain,
+
             invariants,
+
+            executableTargets,
 
             intelligenceSignals
 

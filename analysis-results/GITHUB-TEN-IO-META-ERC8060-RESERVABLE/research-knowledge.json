@@ -1,13 +1,14 @@
 {
-    "knowledgeBaseId": "KB-2026-07-03T15:43:36.888Z",
-    "generatedAt": "2026-07-03T15:43:36.888Z",
+    "knowledgeBaseId": "KB-2026-09-03T23:17:52.985Z",
+    "generatedAt": "2026-09-03T23:17:52.985Z",
     "entries": [
         {
             "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
             "relation": "EmbeddedValue->ENABLES->Reservation",
             "protocolPair": "ERC8060+IERC8060Reservable",
             "observations": 1,
-            "averageConfidence": 19,
+            "averageConfidence": 26,
             "confirmed": 0,
             "partial": 1,
             "unsupported": 0,
@@ -15,14 +16,259 @@
             "evidence": [
                 "learning:EmbeddedValue->ENABLES->Reservation",
                 "validation:HYP-00001",
-                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
-            ]
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "protocolPair": "ERC8004+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "protocolPair": "ERC8004+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "protocolPair": "ERC8004+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00005",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "protocolPair": "ERC8004+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 21,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00005",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00006",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "EmbeddedValue:ENABLES:Reservation",
+            "protocolPair": "EmbeddedValue->Reservation",
+            "observations": 1,
+            "averageConfidence": 61,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00007",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 65,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00008",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "Reservation:BOUNDS:Settlement",
+            "protocolPair": "Reservation->Settlement",
+            "observations": 1,
+            "averageConfidence": 63,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00009",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "protocolPair": "InvariantValidation->Accounting",
+            "observations": 1,
+            "averageConfidence": 66,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00010",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "Testing:SUPPORTS:InvariantValidation",
+            "protocolPair": "Testing->InvariantValidation",
+            "observations": 1,
+            "averageConfidence": 60,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00011",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "DeterministicExecution:REQUIRES:Accounting",
+            "protocolPair": "DeterministicExecution->Accounting",
+            "observations": 1,
+            "averageConfidence": 58,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00012",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+            "protocolPair": "InvariantLanguage->SafetyConstraint",
+            "observations": 1,
+            "averageConfidence": 54,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
+        },
+        {
+            "entryId": "KNOW-00013",
+            "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+            "relation": "ERC8060:ENABLES:IERC8060Reservable",
+            "protocolPair": "ERC8060->IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 68,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:52.985Z"
         }
     ],
     "statistics": {
-        "entries": 1,
-        "totalObservations": 1,
-        "emerging": 1,
+        "entries": 13,
+        "totalObservations": 13,
+        "emerging": 13,
         "supported": 0,
         "validated": 0,
         "canonical": 0,
@@ -31,7 +277,7 @@
     "processedSources": [
         {
             "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
-            "processedAt": "2026-07-03T15:43:36.910Z"
+            "processedAt": "2026-09-03T23:17:52.989Z"
         }
     ]
 }

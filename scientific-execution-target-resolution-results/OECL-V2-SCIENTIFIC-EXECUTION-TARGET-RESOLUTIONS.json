@@ -1,0 +1,158 @@
+{
+    "generatedAt": "2026-09-03T23:17:20.611Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "resolutions": [
+        {
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "repository": "ten-io-meta/erc8060-reservable",
+            "selectedExecutableTarget": {
+                "repository": "ten-io-meta/erc8060-reservable",
+                "filePath": "external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js",
+                "selector": "settles escrow without releasing reserved accounting",
+                "type": "TEST",
+                "framework": "HARDHAT"
+            },
+            "executionKind": "TEST",
+            "testSelector": "settles escrow without releasing reserved accounting",
+            "invariantSelector": null,
+            "staticAnalysisSelector": null,
+            "confidence": 100,
+            "resolutionStatus": "RESOLVED",
+            "scientificPolarity": "NEUTRAL",
+            "polarityTrace": {
+                "polarity": "NEUTRAL",
+                "decisionSource": "NEUTRAL",
+                "relation": null,
+                "relationSubject": null,
+                "relationPredicate": null,
+                "relationObject": null,
+                "subjectMatched": false,
+                "objectMatched": false,
+                "hasExecutableAssertion": true,
+                "matchedSupportCues": [],
+                "matchedChallengeCues": [],
+                "negatedSupportCues": [],
+                "negatedChallengeCues": [],
+                "supportConditionScore": 0,
+                "challengeConditionScore": 0
+            },
+            "polarityConfidence": null,
+            "resolutionReasons": [
+                "Resolved THEORY:THEORY-00001 to an executable test target in ten-io-meta/erc8060-reservable.",
+                "Semantic score: 110.",
+                "Matched scientific terms: accounting, reserve, reserved, reservable, escrow.",
+                "File: external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js.",
+                "Selector: settles escrow without releasing reserved accounting.",
+                "The experiment explicitly requests executable test evidence."
+            ]
+        },
+        {
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "repository": "ten-io-meta/erc8060-reservable",
+            "selectedExecutableTarget": {
+                "repository": "ten-io-meta/erc8060-reservable",
+                "filePath": "external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js",
+                "selector": "settles escrow without releasing reserved accounting",
+                "type": "TEST",
+                "framework": "HARDHAT"
+            },
+            "executionKind": "TEST",
+            "testSelector": "settles escrow without releasing reserved accounting",
+            "invariantSelector": null,
+            "staticAnalysisSelector": null,
+            "confidence": 100,
+            "resolutionStatus": "RESOLVED",
+            "scientificPolarity": "SUPPORT",
+            "polarityTrace": {
+                "polarity": "SUPPORT",
+                "decisionSource": "RELATION_EVIDENCE",
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "relationSubject": "RESERVATION",
+                "relationPredicate": "CONSTRAINS",
+                "relationObject": "ACCOUNTING",
+                "subjectMatched": true,
+                "objectMatched": true,
+                "hasExecutableAssertion": true,
+                "matchedSupportCues": [
+                    "locked"
+                ],
+                "matchedChallengeCues": [],
+                "negatedSupportCues": [],
+                "negatedChallengeCues": [],
+                "supportConditionScore": 0,
+                "challengeConditionScore": 0
+            },
+            "polarityConfidence": 1,
+            "resolutionReasons": [
+                "Resolved THEORY-00001 to an executable test target in ten-io-meta/erc8060-reservable.",
+                "Semantic score: 110.",
+                "Matched scientific terms: accounting, reserve, reserved, reservable, escrow.",
+                "File: external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js.",
+                "Selector: settles escrow without releasing reserved accounting.",
+                "The experiment explicitly requests executable test evidence."
+            ]
+        },
+        {
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "targetType": "KNOWLEDGE_GAP",
+            "targetId": "GAP-00001",
+            "repository": "ten-io-meta/erc8060-reservable",
+            "selectedExecutableTarget": {
+                "repository": "ten-io-meta/erc8060-reservable",
+                "filePath": "external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js",
+                "selector": "settles escrow without releasing reserved accounting",
+                "type": "TEST",
+                "framework": "HARDHAT"
+            },
+            "executionKind": "TEST",
+            "testSelector": "settles escrow without releasing reserved accounting",
+            "invariantSelector": null,
+            "staticAnalysisSelector": null,
+            "confidence": 100,
+            "resolutionStatus": "RESOLVED",
+            "scientificPolarity": "NEUTRAL",
+            "polarityTrace": {
+                "polarity": "NEUTRAL",
+                "decisionSource": "NEUTRAL",
+                "relation": null,
+                "relationSubject": null,
+                "relationPredicate": null,
+                "relationObject": null,
+                "subjectMatched": false,
+                "objectMatched": false,
+                "hasExecutableAssertion": true,
+                "matchedSupportCues": [],
+                "matchedChallengeCues": [],
+                "negatedSupportCues": [],
+                "negatedChallengeCues": [],
+                "supportConditionScore": 0,
+                "challengeConditionScore": 0
+            },
+            "polarityConfidence": null,
+            "resolutionReasons": [
+                "Resolved GAP-00001 to an executable test target in ten-io-meta/erc8060-reservable.",
+                "Semantic score: 110.",
+                "Matched scientific terms: accounting, reserve, reserved, reservable, escrow.",
+                "File: external/github/ten-io-meta/erc8060-reservable/test/test/MinimalReservableEscrow.js.",
+                "Selector: settles escrow without releasing reserved accounting.",
+                "The experiment explicitly requests executable test evidence."
+            ]
+        }
+    ],
+    "statistics": {
+        "total": 3,
+        "resolved": 3,
+        "unresolved": 0,
+        "tests": 3,
+        "invariants": 0,
+        "staticAnalysis": 0
+    },
+    "errors": []
+}

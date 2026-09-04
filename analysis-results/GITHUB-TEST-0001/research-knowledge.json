@@ -1,0 +1,103 @@
+{
+    "knowledgeBaseId": "KB-2026-07-06T18:33:06.531Z",
+    "generatedAt": "2026-07-06T18:33:06.531Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-TEST-0001",
+            "relation": "EmbeddedValue->ENABLES->Reservation",
+            "protocolPair": "ERC8060+IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 26,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-07-06T18:33:06.531Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-TEST-0001",
+            "relation": "EmbeddedValue:ENABLES:Reservation",
+            "protocolPair": "EmbeddedValue->Reservation",
+            "observations": 1,
+            "averageConfidence": 61,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-07-06T18:33:06.531Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-TEST-0001",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 65,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-07-06T18:33:06.531Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-TEST-0001",
+            "relation": "ERC8060:ENABLES:IERC8060Reservable",
+            "protocolPair": "ERC8060->IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 68,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-07-06T18:33:06.531Z"
+        }
+    ],
+    "statistics": {
+        "entries": 4,
+        "totalObservations": 4,
+        "emerging": 4,
+        "supported": 0,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    },
+    "processedSources": [
+        {
+            "sourceId": "GITHUB-TEST-0001",
+            "processedAt": "2026-07-06T18:33:06.535Z"
+        }
+    ]
+}

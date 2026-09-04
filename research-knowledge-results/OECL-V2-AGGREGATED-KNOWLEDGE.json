@@ -1,0 +1,1908 @@
+{
+    "generatedAt": "2026-09-03T23:18:00.750Z",
+    "sourceCount": 11,
+    "integratedKnowledge": [
+        {
+            "knowledgeId": "DOI-0001-1",
+            "subject": "Authority",
+            "relation": "CONSTRAINS",
+            "object": "Cursor",
+            "supportingSources": [],
+            "confidence": 75,
+            "evidence": [
+                "learning:Authority->CONSTRAINS->Cursor",
+                "validation:HYP-00001",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-2",
+            "subject": "Cursor",
+            "relation": "DEPENDS_ON",
+            "object": "Authority",
+            "supportingSources": [],
+            "confidence": 75,
+            "evidence": [
+                "learning:Cursor->DEPENDS_ON->Authority",
+                "validation:HYP-00002",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-3",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 75,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement",
+                "validation:HYP-00003",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-4",
+            "subject": "Settlement",
+            "relation": "DEPENDS_ON",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 75,
+            "evidence": [
+                "learning:Settlement->DEPENDS_ON->Reservation",
+                "validation:HYP-00004",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-5",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 31,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00005",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-6",
+            "subject": "Workflow",
+            "relation": "DEPENDS_ON",
+            "object": "Authority",
+            "supportingSources": [],
+            "confidence": 30,
+            "evidence": [
+                "learning:Workflow->DEPENDS_ON->Authority",
+                "validation:HYP-00006",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-7",
+            "subject": "Workflow",
+            "relation": "PRODUCES",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 41,
+            "evidence": [
+                "learning:Workflow->PRODUCES->Settlement",
+                "validation:HYP-00007",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-8",
+            "subject": "Verification",
+            "relation": "VALIDATES",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 41,
+            "evidence": [
+                "learning:Verification->VALIDATES->Settlement",
+                "validation:HYP-00008",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-9",
+            "subject": "Anchoring",
+            "relation": "ANCHORS",
+            "object": "Verification",
+            "supportingSources": [],
+            "confidence": 30,
+            "evidence": [
+                "learning:Anchoring->ANCHORS->Verification",
+                "validation:HYP-00009",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-10",
+            "subject": "Eligibility",
+            "relation": "CONSTRAINS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 41,
+            "evidence": [
+                "learning:Eligibility->CONSTRAINS->Settlement",
+                "validation:HYP-00010",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "DOI-0001-11",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 72,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "DOI-0001-12",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 76,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "DOI-0001-13",
+            "subject": "Reservation",
+            "relation": "BOUNDS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 74,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "DOI-0001-14",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 68,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "DOI-0001-15",
+            "subject": "ERC8060",
+            "relation": "ENABLES",
+            "object": "IERC8060Reservable",
+            "supportingSources": [],
+            "confidence": 80,
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "DOI-0002-16",
+            "subject": "Authority",
+            "relation": "CONSTRAINS",
+            "object": "Cursor",
+            "supportingSources": [],
+            "confidence": 38,
+            "evidence": [
+                "learning:Authority->CONSTRAINS->Cursor",
+                "validation:HYP-00001",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-17",
+            "subject": "Cursor",
+            "relation": "DEPENDS_ON",
+            "object": "Authority",
+            "supportingSources": [],
+            "confidence": 38,
+            "evidence": [
+                "learning:Cursor->DEPENDS_ON->Authority",
+                "validation:HYP-00002",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-18",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 38,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement",
+                "validation:HYP-00003",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-19",
+            "subject": "Settlement",
+            "relation": "DEPENDS_ON",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 38,
+            "evidence": [
+                "learning:Settlement->DEPENDS_ON->Reservation",
+                "validation:HYP-00004",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-20",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 16,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00005",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-21",
+            "subject": "Workflow",
+            "relation": "DEPENDS_ON",
+            "object": "Authority",
+            "supportingSources": [],
+            "confidence": 15,
+            "evidence": [
+                "learning:Workflow->DEPENDS_ON->Authority",
+                "validation:HYP-00006",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-22",
+            "subject": "Workflow",
+            "relation": "PRODUCES",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Workflow->PRODUCES->Settlement",
+                "validation:HYP-00007",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-23",
+            "subject": "Verification",
+            "relation": "VALIDATES",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Verification->VALIDATES->Settlement",
+                "validation:HYP-00008",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-24",
+            "subject": "Anchoring",
+            "relation": "ANCHORS",
+            "object": "Verification",
+            "supportingSources": [],
+            "confidence": 15,
+            "evidence": [
+                "learning:Anchoring->ANCHORS->Verification",
+                "validation:HYP-00009",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "DOI-0002-25",
+            "subject": "Eligibility",
+            "relation": "CONSTRAINS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Eligibility->CONSTRAINS->Settlement",
+                "validation:HYP-00010",
+                "evidence-profile:DOI-0002:MEDIUM"
+            ],
+            "generatedBy": "DOI-0002"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-26",
+            "subject": "Standardization",
+            "relation": "ENABLES",
+            "object": "Interoperability",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Standardization->ENABLES->Interoperability",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-27",
+            "subject": "Authority",
+            "relation": "CONSTRAINS",
+            "object": "Transfer",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Authority->CONSTRAINS->Transfer",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-28",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Accounting",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-29",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-30",
+            "subject": "Ownership",
+            "relation": "CONSTRAINS",
+            "object": "Upgradeability",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Ownership->CONSTRAINS->Upgradeability",
+                "validation:HYP-00005",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-31",
+            "subject": "EIP2612",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP2612->SUPPORTS->Standardization",
+                "validation:HYP-00006",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-32",
+            "subject": "ERC721",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC721->SUPPORTS->Standardization",
+                "validation:HYP-00007",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-33",
+            "subject": "ERC223",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC223->SUPPORTS->Standardization",
+                "validation:HYP-00008",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-34",
+            "subject": "ERC777",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC777->SUPPORTS->Standardization",
+                "validation:HYP-00009",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-35",
+            "subject": "EIP777",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP777->SUPPORTS->Standardization",
+                "validation:HYP-00010",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-36",
+            "subject": "EIP721",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP721->SUPPORTS->Standardization",
+                "validation:HYP-00011",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-37",
+            "subject": "ERC165",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC165->SUPPORTS->Standardization",
+                "validation:HYP-00012",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-38",
+            "subject": "EIP165",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP165->SUPPORTS->Standardization",
+                "validation:HYP-00013",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-39",
+            "subject": "ERC1155",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC1155->SUPPORTS->Standardization",
+                "validation:HYP-00014",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-40",
+            "subject": "EIP1155",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP1155->SUPPORTS->Standardization",
+                "validation:HYP-00015",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-41",
+            "subject": "ERC1820",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC1820->SUPPORTS->Standardization",
+                "validation:HYP-00016",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-42",
+            "subject": "EIP1820",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP1820->SUPPORTS->Standardization",
+                "validation:HYP-00017",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-43",
+            "subject": "ERC4524",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC4524->SUPPORTS->Standardization",
+                "validation:HYP-00018",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-44",
+            "subject": "EIP4524",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP4524->SUPPORTS->Standardization",
+                "validation:HYP-00019",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-45",
+            "subject": "ERC1363",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC1363->SUPPORTS->Standardization",
+                "validation:HYP-00020",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-46",
+            "subject": "EIP1363",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP1363->SUPPORTS->Standardization",
+                "validation:HYP-00021",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-47",
+            "subject": "ERC2612",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC2612->SUPPORTS->Standardization",
+                "validation:HYP-00022",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-48",
+            "subject": "ERC4626",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC4626->SUPPORTS->Standardization",
+                "validation:HYP-00023",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-49",
+            "subject": "EIP4626",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP4626->SUPPORTS->Standardization",
+                "validation:HYP-00024",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-50",
+            "subject": "ERC20",
+            "relation": "SUPPORTS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC20->SUPPORTS->Standardization",
+                "validation:HYP-00025",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-51",
+            "subject": "ERC20",
+            "relation": "ENABLES",
+            "object": "FungibleAccounting",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC20->ENABLES->FungibleAccounting",
+                "validation:HYP-00026",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-52",
+            "subject": "ERC20",
+            "relation": "SUPPORTS",
+            "object": "Transfer",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC20->SUPPORTS->Transfer",
+                "validation:HYP-00027",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-53",
+            "subject": "ERC721",
+            "relation": "ENABLES",
+            "object": "Ownership",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC721->ENABLES->Ownership",
+                "validation:HYP-00028",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-54",
+            "subject": "ERC721",
+            "relation": "SUPPORTS",
+            "object": "Transfer",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:ERC721->SUPPORTS->Transfer",
+                "validation:HYP-00029",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-55",
+            "subject": "Mint",
+            "relation": "ENABLES",
+            "object": "Supply",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Mint->ENABLES->Supply",
+                "validation:HYP-00030",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-56",
+            "subject": "SignatureAuthorization",
+            "relation": "ENABLES",
+            "object": "Authority",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:SignatureAuthorization->ENABLES->Authority",
+                "validation:HYP-00031",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-57",
+            "subject": "EIP712",
+            "relation": "SUPPORTS",
+            "object": "SignatureAuthorization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EIP712->SUPPORTS->SignatureAuthorization",
+                "validation:HYP-00032",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-58",
+            "subject": "Interoperability",
+            "relation": "SUPPORTS",
+            "object": "Composition",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Interoperability->SUPPORTS->Composition",
+                "validation:HYP-00033",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-59",
+            "subject": "Specification",
+            "relation": "ENABLES",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Specification->ENABLES->Standardization",
+                "validation:HYP-00034",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-60",
+            "subject": "SecurityConsiderations",
+            "relation": "CONSTRAINS",
+            "object": "Standardization",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                "validation:HYP-00035",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-61",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 76,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-CRYTIC-SLITHER-62",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 78,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-63",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-64",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-65",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-66",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-67",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 61,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-68",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 65,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-69",
+            "subject": "Reservation",
+            "relation": "BOUNDS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 63,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-70",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 66,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-71",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 60,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-72",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 58,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-ETHEREUM-EIPS-73",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 54,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-74",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-75",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-76",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-77",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 61,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-78",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 65,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-79",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 66,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-80",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 60,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-81",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 58,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-FOUNDRY-RS-FOUNDRY-82",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 54,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-83",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-84",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-85",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-86",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-87",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 72,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-88",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 76,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-89",
+            "subject": "Reservation",
+            "relation": "BOUNDS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 74,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-90",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 78,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-91",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 70,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-92",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 68,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-93",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 64,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-94",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 26,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-95",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-96",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-97",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-98",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00005",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-99",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 61,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-100",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 65,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-101",
+            "subject": "Reservation",
+            "relation": "BOUNDS",
+            "object": "Settlement",
+            "supportingSources": [],
+            "confidence": 63,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-102",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 66,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-103",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 60,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-104",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 58,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-105",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 54,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE-106",
+            "subject": "ERC8060",
+            "relation": "ENABLES",
+            "object": "IERC8060Reservable",
+            "supportingSources": [],
+            "confidence": 68,
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEST-0001-107",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 26,
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEST-0001-108",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "supportingSources": [],
+            "confidence": 61,
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEST-0001-109",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 65,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TEST-0001-110",
+            "subject": "ERC8060",
+            "relation": "ENABLES",
+            "object": "IERC8060Reservable",
+            "supportingSources": [],
+            "confidence": 68,
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-111",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-112",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-113",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 76,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-114",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 78,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-115",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 70,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-THIRDWEB-DEV-CONTRACTS-116",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 64,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-117",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-118",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 21,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-119",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 66,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-120",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 60,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-121",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 58,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-TRANSMISSIONS11-SOLMATE-122",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 54,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-123",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-124",
+            "subject": "Testing",
+            "relation": "VALIDATES",
+            "object": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "supportingSources": [],
+            "confidence": 25,
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-125",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 76,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-126",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 78,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-127",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "supportingSources": [],
+            "confidence": 70,
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-128",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "supportingSources": [],
+            "confidence": 68,
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        },
+        {
+            "knowledgeId": "GITHUB-VECTORIZED-SOLADY-129",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "supportingSources": [],
+            "confidence": 64,
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-VECTORIZED-SOLADY:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING"
+        }
+    ],
+    "errors": []
+}

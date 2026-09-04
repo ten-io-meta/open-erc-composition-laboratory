@@ -1,0 +1,30 @@
+{
+    "sourceId": "GITHUB-TEST-0001",
+    "extractedAt": "2026-07-06T18:33:06.424Z",
+    "semantics": [
+        {
+            "protocolId": "ERC8060",
+            "capabilities": [
+                "EmbeddedValue"
+            ],
+            "role": "Embedded native value",
+            "evidence": [
+                "GITHUB-TEST-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "IERC8060Reservable",
+            "capabilities": [
+                "Reservation",
+                "Accounting"
+            ],
+            "role": "Reservable accounting layer",
+            "evidence": [
+                "GITHUB-TEST-0001"
+            ],
+            "confidence": 100
+        }
+    ],
+    "errors": []
+}

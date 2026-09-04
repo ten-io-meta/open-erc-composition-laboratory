@@ -1,9 +1,10 @@
 {
-    "knowledgeBaseId": "KB-2026-07-03T15:43:36.742Z",
-    "generatedAt": "2026-07-03T15:43:36.742Z",
+    "knowledgeBaseId": "KB-2026-09-03T23:17:15.846Z",
+    "generatedAt": "2026-09-03T23:17:15.846Z",
     "entries": [
         {
             "entryId": "KNOW-00001",
+            "sourceId": "DOI-0001",
             "relation": "Authority->CONSTRAINS->Cursor",
             "protocolPair": "ERC8001+ERC8312",
             "observations": 1,
@@ -16,10 +17,13 @@
                 "learning:Authority->CONSTRAINS->Cursor",
                 "validation:HYP-00001",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00002",
+            "sourceId": "DOI-0001",
             "relation": "Cursor->DEPENDS_ON->Authority",
             "protocolPair": "ERC8001+ERC8312",
             "observations": 1,
@@ -32,10 +36,13 @@
                 "learning:Cursor->DEPENDS_ON->Authority",
                 "validation:HYP-00002",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00003",
+            "sourceId": "DOI-0001",
             "relation": "Reservation->CONSTRAINS->Settlement",
             "protocolPair": "ERC8275+IERC8060Reservable",
             "observations": 1,
@@ -48,10 +55,13 @@
                 "learning:Reservation->CONSTRAINS->Settlement",
                 "validation:HYP-00003",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00004",
+            "sourceId": "DOI-0001",
             "relation": "Settlement->DEPENDS_ON->Reservation",
             "protocolPair": "ERC8275+IERC8060Reservable",
             "observations": 1,
@@ -64,10 +74,13 @@
                 "learning:Settlement->DEPENDS_ON->Reservation",
                 "validation:HYP-00004",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00005",
+            "sourceId": "DOI-0001",
             "relation": "EmbeddedValue->ENABLES->Reservation",
             "protocolPair": "ERC8060+IERC8060Reservable",
             "observations": 1,
@@ -80,10 +93,13 @@
                 "learning:EmbeddedValue->ENABLES->Reservation",
                 "validation:HYP-00005",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00006",
+            "sourceId": "DOI-0001",
             "relation": "Workflow->DEPENDS_ON->Authority",
             "protocolPair": "ERC8001+ERC8301",
             "observations": 1,
@@ -96,10 +112,13 @@
                 "learning:Workflow->DEPENDS_ON->Authority",
                 "validation:HYP-00006",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00007",
+            "sourceId": "DOI-0001",
             "relation": "Workflow->PRODUCES->Settlement",
             "protocolPair": "ERC8275+ERC8301",
             "observations": 1,
@@ -112,10 +131,13 @@
                 "learning:Workflow->PRODUCES->Settlement",
                 "validation:HYP-00007",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00008",
+            "sourceId": "DOI-0001",
             "relation": "Verification->VALIDATES->Settlement",
             "protocolPair": "ERC8274+ERC8275",
             "observations": 1,
@@ -128,10 +150,13 @@
                 "learning:Verification->VALIDATES->Settlement",
                 "validation:HYP-00008",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00009",
+            "sourceId": "DOI-0001",
             "relation": "Anchoring->ANCHORS->Verification",
             "protocolPair": "ERC8263+ERC8274",
             "observations": 1,
@@ -144,10 +169,13 @@
                 "learning:Anchoring->ANCHORS->Verification",
                 "validation:HYP-00009",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         },
         {
             "entryId": "KNOW-00010",
+            "sourceId": "DOI-0001",
             "relation": "Eligibility->CONSTRAINS->Settlement",
             "protocolPair": "ERC8275+ReceiptOS",
             "observations": 1,
@@ -160,13 +188,120 @@
                 "learning:Eligibility->CONSTRAINS->Settlement",
                 "validation:HYP-00010",
                 "evidence-profile:DOI-0001:HIGH"
-            ]
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
+        },
+        {
+            "entryId": "KNOW-00011",
+            "sourceId": "DOI-0001",
+            "relation": "EmbeddedValue:ENABLES:Reservation",
+            "protocolPair": "EmbeddedValue->Reservation",
+            "observations": 1,
+            "averageConfidence": 72,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
+        },
+        {
+            "entryId": "KNOW-00012",
+            "sourceId": "DOI-0001",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 76,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
+        },
+        {
+            "entryId": "KNOW-00013",
+            "sourceId": "DOI-0001",
+            "relation": "Reservation:BOUNDS:Settlement",
+            "protocolPair": "Reservation->Settlement",
+            "observations": 1,
+            "averageConfidence": 74,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
+        },
+        {
+            "entryId": "KNOW-00014",
+            "sourceId": "DOI-0001",
+            "relation": "DeterministicExecution:REQUIRES:Accounting",
+            "protocolPair": "DeterministicExecution->Accounting",
+            "observations": 1,
+            "averageConfidence": 68,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
+        },
+        {
+            "entryId": "KNOW-00015",
+            "sourceId": "DOI-0001",
+            "relation": "ERC8060:ENABLES:IERC8060Reservable",
+            "protocolPair": "ERC8060->IERC8060Reservable",
+            "observations": 1,
+            "averageConfidence": 80,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:ERC8060:ENABLES:IERC8060Reservable",
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable",
+                "evidence-profile:DOI-0001:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:15.846Z"
         }
     ],
     "statistics": {
-        "entries": 10,
-        "totalObservations": 10,
-        "emerging": 6,
+        "entries": 15,
+        "totalObservations": 15,
+        "emerging": 11,
         "supported": 4,
         "validated": 0,
         "canonical": 0,
@@ -175,7 +310,7 @@
     "processedSources": [
         {
             "sourceId": "DOI-0001",
-            "processedAt": "2026-07-03T15:43:36.746Z"
+            "processedAt": "2026-09-03T23:17:15.856Z"
         }
     ]
 }

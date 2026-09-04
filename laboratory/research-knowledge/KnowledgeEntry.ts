@@ -2,6 +2,15 @@ export interface KnowledgeEntry {
 
     entryId: string;
 
+    /*
+     * Primary source retained for backward compatibility.
+     * Aggregated knowledge should use sources[].
+     */
+
+    sourceId: string;
+
+    sources?: string[];
+
     relation: string;
 
     protocolPair: string;
@@ -16,8 +25,24 @@ export interface KnowledgeEntry {
 
     unsupported: number;
 
-    status: "EMERGING" | "SUPPORTED" | "VALIDATED" | "CANONICAL" | "REJECTED";
+    status:
+        | "EMERGING"
+        | "SUPPORTED"
+        | "VALIDATED"
+        | "CANONICAL"
+        | "REJECTED";
 
     evidence: string[];
+
+    derivedFrom?: string[];
+
+    generatedBy?:
+        | "LEARNING"
+        | "MACHINE_REASONING"
+        | "HYPOTHESIS"
+        | "VALIDATION"
+        | "MEMORY";
+
+    timestamp: string;
 
 }

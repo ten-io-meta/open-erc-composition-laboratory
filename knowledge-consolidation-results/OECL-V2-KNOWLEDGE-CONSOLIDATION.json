@@ -1,0 +1,33 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.321Z",
+    "consolidations": [
+        {
+            "consolidationId": "CONSOLIDATION-00001",
+            "knowledgeId": "Reservation-appears-to-constrain-Accounting-across-2-observed-source-identities.",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourcePatternId": "CROSS-PATTERN-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "previousStatus": "EMERGING",
+            "newStatus": "SUPPORTED",
+            "confidenceBefore": 0,
+            "confidenceAfter": 82,
+            "confidenceDelta": 82,
+            "evidenceBefore": 0,
+            "evidenceAfter": 0,
+            "evidenceDelta": 0,
+            "independentSources": 0,
+            "campaignsObserved": 1,
+            "action": "PROMOTED",
+            "explanation": "Consolidated with 0 explicitly established independent source(s) and confidence 82."
+        }
+    ],
+    "statistics": {
+        "promoted": 1,
+        "retained": 0,
+        "degraded": 0,
+        "archived": 0,
+        "canonical": 0
+    },
+    "errors": []
+}

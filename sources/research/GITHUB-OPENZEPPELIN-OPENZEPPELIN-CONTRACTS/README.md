@@ -1,0 +1,190 @@
+# OpenZeppelin/openzeppelin-contracts
+
+Repository: OpenZeppelin/openzeppelin-contracts
+
+URL: https://github.com/OpenZeppelin/openzeppelin-contracts
+
+## Description
+
+Automatically generated OECL research bundle from GitHub repository OpenZeppelin/openzeppelin-contracts.
+
+## Protocols
+
+- ERC7579
+- ERC2771
+- ERC7739
+- ERC4337
+- ERC7913
+- ERC20
+- ERC1271
+- ERC1155
+- ERC7786
+- ERC165
+- IERC6909ContentURI
+- IERC6909TokenSupply
+- IERC6909Metadata
+- ERC6909
+- IERC20
+- ERC721
+- ERC7201
+- ERC6093
+- IERC20Metadata
+- IERC7579Module
+- ERC4626
+- ERC1967
+- ERC6372
+- IERC4337
+- ERC3009
+- IERC1155Receiver
+- ERC7802
+- ERC7702
+- ERC7930
+- IERC7786
+- IERC7751
+- IERC7821
+- ERC7821
+- IERC6909
+- ERC1363
+- IERC1967
+- ERC1167
+- ERC7674
+- IERC721Receiver
+- ERC777
+- ERC1820
+- ERC1822
+- ERC5267
+- IERC20Upgradeable
+- IERC5313
+- IERC4906
+- ERC4906
+- IERC20Permit
+- ERC2981
+- ERC712
+- ERC3156
+- ERC2098
+- IERC1820Registry
+- IERC165
+- ERC6900
+- IERC1271
+- IERC7579Validator
+- IERC7579Execution
+- IERC7579AccountConfig
+- IERC7579ModuleConfig
+- IERC7579
+- IERC7579Hook
+- ERC7562
+- IERC721
+- IERC1155
+- IERC1155Errors
+- IERC6093
+- IERC721Errors
+- IERC7802
+- IERC7786GatewaySource
+- IERC7786Recipient
+- IERC5805
+- IERC6372
+- ERC5805
+- IERC1822
+- IERC1822Proxiable
+- IERC3009
+- IERC3009Cancel
+- IERC20Errors
+- IERC7674
+- IERC1155MetadataURI
+- IERC1363
+- IERC1363Receiver
+- IERC1363Spender
+- IERC1820Implementer
+- IERC2309
+- ERC2309
+- IERC2612
+- IERC2981
+- IERC3156
+- IERC3156FlashBorrower
+- IERC3156FlashLender
+- ERC7766
+- IERC4626
+- IERC5267
+- IERC721Enumerable
+- IERC721Metadata
+- ERC7751
+- IERC777
+- IERC777Sender
+- IERC777Recipient
+- IERC7913
+- IERC7913SignatureVerifier
+- ERC2612
+- ERC7572
+- ERC191
+- ERC6942
+- ERC7390
+
+## Capabilities
+
+- Reservation
+- Accounting
+- Settlement
+- EmbeddedValue
+- InvariantValidation
+- Testing
+- Redemption
+
+## Claims
+
+- `ERC4337Utils`: in `parseValidationData`, resolve `validUntil == 0` to `type(uint48).max` and only strip `BLOCK_RANGE_FLAG` when a block range is detected. Propagates to `packValidationData`, `getValidationData`, `combineValidationData` and `PaymasterSigner`, matching the EntryPoint's behavior.
+- `MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`.
+- `super` must be called in `_update` overrides, in `supportsInterface` overrides, and whenever an extension builds on base behavior. Skipping `super` is only acceptable for genuinely new functions that have no base implementation.
+- `supportsInterface` always follows the pattern:
+- interfaceId == type(X).interfaceId || super.supportsInterface(interfaceId)
+- `scripts/minimize-pragma.js` builds a dependency graph from compiled artifacts, compiles each file against every candidate `solc`, and writes back the lowest version that compiles for that file and is compatible with all of its dependents. The script picks the syntax for you (`>=` for interfaces, `^` for implementations and libraries) and respects the `minVersionForContracts` floor (default `0.8.20`).
+- Only use `unchecked` with an inline invariant comment that names the bound. The comment may be omitted only when the reason is immediately apparent from the line directly above:
+- | Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |
+- Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it.
+- - One sentence. No bullet points, no multi-paragraph prose. The release pipeline composes these into `CHANGELOG.md` automatically.
+- - `address.transfer(value)`, which is like `send` but automatically propagates exceptions, and supports `.gas()`. See https://github.com/ethereum/solidity/issues/610 for more on this.
+- - `ERC6372Utils`: Add utility library for ERC-6372 clock mode validation, supporting block number and timestamp modes with consistency checks. ([#6483](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6483))
+- - `MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`. ([#6642](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6642))
+- - `ERC4337Utils`: The `parseValidationData` now returns a `ValidationRange` as the last return tuple value indicating whether the `validationData` is compared against a timestamp or block number. Developers must update their code to handle this new return value (e.g. `(aggregator, validAfter, validUntil) -> (aggregator, validAfter, validUntil, range)`). ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))
+- - `SignerWebAuthn`: The `_rawSignatureValidation` function now returns `false` when the signature is not a valid WebAuthn authentication assertion. P256 fallback is removed. Developers can add it back by overriding the function. ([#6337](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6337))
+- - `ERC4337Utils`: Added variants of `packValidationData(address,uint48,uint48)` and `packValidationData(bool,uint48,uint48)` that receive a `ValidationRange` argument, could be timestamp or block number. Similarly, the `parseValidationData` now returns a `ValidationRange` too. ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))
+- - `ERC165Checker`: Ensure the `supportsERC165` function returns false if the target reverts during the `supportsInterface(0xffffffff)` call. ([#5880](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5880))
+- - `AccountERC7579`: Extension of `Account` that implements support for ERC-7579 modules of type executor, validator, and fallback handler. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))
+- - `AccountERC7579Hooked`: Extension of `AccountERC7579` that implements support for ERC-7579 hook modules. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))
+- - `ERC20Bridgeable`: Implementation of ERC-7802 that makes an ERC-20 compatible with crosschain bridges. ([#5735](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5735))
+- | Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |
+- Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it.
+- A bug fix must add a minimal test that reproduces the bug, committed alongside the fix. The objective is 100% branch coverage per PR.
+- Manual mocks live in `contracts/mocks/` (not `test/`) and mirror the `contracts/` directory layout. Write a manual mock only when `hardhat-exposed` cannot give you what you need:
+- Any contract that implements ERC-165 must explicitly indicate support of
+- * This function call must use less than 30 000 gas.
+- it('non-admin cannot grant role to other accounts', async function () {
+- it('non-admin cannot revoke role', async function () {
+- 'DefaultAdminTransferCanceled', // Cancellation is always emitted since it was never accepted
+- if (roleId === roles.PUBLIC.id) continue; // Every address belong to public and is locked
+- if (roleId === roles.ADMIN.id) continue; // Admin set during construction and is locked
+- .to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedRole')
+- .to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedFunction')
+- it('cannot execute a setAuthority call when a target admin delay is set', async function () {
+- cannot update directly - there is a delay
+- cannot bypass via execute either - targetAdminDelay is enforced for setAuthority
+- verify that accountA cannot accept ownership anymore
+- domain cannot be fetched using getDomain(mock) before the mock is deployed
+- it('cannot set weight to non-existent signer', async function () {
+- it('cannot set weight to 0', async function () {
+- ).to.be.revertedWithCustomError(this.mock, 'ERC7579CannotDecodeFallbackData');
+- it('prices the postOp unused-gas penalty so an inflated paymasterPostOpGasLimit cannot drain the paymaster', async function () {
+- the inflated postOp limit. The token charge (tokenPrice = 2) must cover it, i.e. the user pays for the
+- it('rejects a guaranteed op whose paymasterPostOpGasLimit cannot cover the refund', async function () {
+- Guarantor must propagate the reduced value returned by super, otherwise the postOp context
+- (calldata-padded with zeros) match the marker, so a 2-byte initCode must bind the delegate too.
+- 18 zeros, so a nonzero tail makes this a regular factory deployment. The digest must therefore
+- assertEq(hashA, hashB, "digest must not bind a delegate for a non-EIP-7702 initCode");
+- assertNotEq(hashA, hashB, "digest must bind the effective EIP-7702 delegate");
+- Parts of this test file are adapted from Adam Egyed (@adamegyed) proof of concept available at:
+- Repository contains README research context.
+- Repository contains contract or interface material.
+- Repository contains test evidence.
+- Repository contains documentation material.
+- Repository contains invariant-like statements.
+- Repository exposes 2718 executable test or invariant target(s).
+- Repository exposes both Foundry and Hardhat configuration.

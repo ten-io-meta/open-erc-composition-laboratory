@@ -1,30 +1,54 @@
-import type { GitHubSourceBundle } from "./GitHubSourceBundle.js";
+import type {
+    GitHubSourceBundle
+} from "./GitHubSourceBundle.js";
 
 export class GitHubSourceAdapter {
 
-    createBundle(): GitHubSourceBundle {
+    create(
+        repository: string,
+        localPath: string
+    ): GitHubSourceBundle {
+
+        const sourceId =
+            `GITHUB-${repository
+                .replace("/", "-")
+                .replace(/[^a-zA-Z0-9-]/g, "-")
+                .toUpperCase()}`;
+
         return {
-            sourceId: "GITHUB-ERC8060-RESERVABLE",
-            repository: "ten-io-meta/erc8060-reservable",
-            url: "https://github.com/ten-io-meta/erc8060-reservable",
-            title: "ERC8060 Reservable GitHub Repository",
+
+            sourceId,
+
+            repository,
+
+            localPath,
+
+            url:
+                `https://github.com/${repository}`,
+
+            title:
+                `GitHub Repository: ${repository}`,
+
             description:
-                "Reference implementation and validation suite for IERC8060Reservable, exploring reservation-based accounting over ERC8060 embedded value.",
-            protocols: [
-                "ERC8060",
-                "IERC8060Reservable"
-            ],
-            capabilities: [
-                "EmbeddedValue",
-                "Reservation",
-                "Accounting"
-            ],
-            claims: [
-                "IERC8060Reservable introduces reservation-based accounting over embedded ERC8060 value.",
-                "Reservation separates locked value from available value.",
-                "Reservable accounting can support deterministic settlement boundaries."
-            ]
+                `Research source generated from GitHub repository ${repository}.`,
+
+            toolchain:
+                "UNKNOWN",
+
+            protocols:
+                [],
+
+            capabilities:
+                [],
+
+            claims:
+                [],
+
+            executableTargets:
+                []
+
         };
+
     }
 
 }

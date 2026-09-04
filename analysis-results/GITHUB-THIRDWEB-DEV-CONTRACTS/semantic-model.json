@@ -1,0 +1,51 @@
+{
+    "graphId": "GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS",
+    "discoveredAt": "2026-09-03T23:18:00.633Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS",
+        "generatedAt": "2026-09-03T23:18:00.633Z",
+        "capabilities": [
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-THIRDWEB-DEV-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-THIRDWEB-DEV-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-THIRDWEB-DEV-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Testing",
+                "label": "Testing",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-THIRDWEB-DEV-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Redemption",
+                "label": "Redemption",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-THIRDWEB-DEV-CONTRACTS"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}

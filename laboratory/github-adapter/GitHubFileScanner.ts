@@ -8,7 +8,16 @@ export interface GitHubScannedFile {
 
 export class GitHubFileScanner {
 
-    private relevantExtensions = [".md", ".ts", ".sol", ".json", ".yml", ".yaml"];
+    private relevantExtensions = [
+    ".md",
+    ".ts",
+    ".js",
+    ".sol",
+    ".json",
+    ".yml",
+    ".yaml",
+    ".toml"
+];
 
     async scan(root: string): Promise<GitHubScannedFile[]> {
         const files: GitHubScannedFile[] = [];

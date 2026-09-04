@@ -1,0 +1,1190 @@
+{
+    "graphId": "GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS",
+    "generatedAt": "2026-09-03T23:18:00.633Z",
+    "nodes": [
+        {
+            "id": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "type": "ResearchSource",
+            "label": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "id": "ERC20",
+            "type": "Protocol",
+            "label": "ERC20"
+        },
+        {
+            "id": "ERC1155",
+            "type": "Protocol",
+            "label": "ERC1155"
+        },
+        {
+            "id": "ERC165",
+            "type": "Protocol",
+            "label": "ERC165"
+        },
+        {
+            "id": "IERC165",
+            "type": "Protocol",
+            "label": "IERC165"
+        },
+        {
+            "id": "IERC2981",
+            "type": "Protocol",
+            "label": "IERC2981"
+        },
+        {
+            "id": "ERC2981",
+            "type": "Protocol",
+            "label": "ERC2981"
+        },
+        {
+            "id": "ERC721",
+            "type": "Protocol",
+            "label": "ERC721"
+        },
+        {
+            "id": "IERC721Metadata",
+            "type": "Protocol",
+            "label": "IERC721Metadata"
+        },
+        {
+            "id": "IERC1155Receiver",
+            "type": "Protocol",
+            "label": "IERC1155Receiver"
+        },
+        {
+            "id": "IERC20",
+            "type": "Protocol",
+            "label": "IERC20"
+        },
+        {
+            "id": "IERC20Metadata",
+            "type": "Protocol",
+            "label": "IERC20Metadata"
+        },
+        {
+            "id": "IERC721Receiver",
+            "type": "Protocol",
+            "label": "IERC721Receiver"
+        },
+        {
+            "id": "IERC1155",
+            "type": "Protocol",
+            "label": "IERC1155"
+        },
+        {
+            "id": "IERC1155Metadata",
+            "type": "Protocol",
+            "label": "IERC1155Metadata"
+        },
+        {
+            "id": "ERC1271",
+            "type": "Protocol",
+            "label": "ERC1271"
+        },
+        {
+            "id": "IERC721A",
+            "type": "Protocol",
+            "label": "IERC721A"
+        },
+        {
+            "id": "IERC721",
+            "type": "Protocol",
+            "label": "IERC721"
+        },
+        {
+            "id": "IERC721AUpgradeable",
+            "type": "Protocol",
+            "label": "IERC721AUpgradeable"
+        },
+        {
+            "id": "IERC721ReceiverUpgradeable",
+            "type": "Protocol",
+            "label": "IERC721ReceiverUpgradeable"
+        },
+        {
+            "id": "IERC165Upgradeable",
+            "type": "Protocol",
+            "label": "IERC165Upgradeable"
+        },
+        {
+            "id": "IERC721Upgradeable",
+            "type": "Protocol",
+            "label": "IERC721Upgradeable"
+        },
+        {
+            "id": "IERC721MetadataUpgradeable",
+            "type": "Protocol",
+            "label": "IERC721MetadataUpgradeable"
+        },
+        {
+            "id": "IERC1155Enumerable",
+            "type": "Protocol",
+            "label": "IERC1155Enumerable"
+        },
+        {
+            "id": "IERC1155Supply",
+            "type": "Protocol",
+            "label": "IERC1155Supply"
+        },
+        {
+            "id": "IERC20Permit",
+            "type": "Protocol",
+            "label": "IERC20Permit"
+        },
+        {
+            "id": "IERC4906",
+            "type": "Protocol",
+            "label": "IERC4906"
+        },
+        {
+            "id": "IERC721Enumerable",
+            "type": "Protocol",
+            "label": "IERC721Enumerable"
+        },
+        {
+            "id": "IERC721Supply",
+            "type": "Protocol",
+            "label": "IERC721Supply"
+        },
+        {
+            "id": "IERC721AQueryable",
+            "type": "Protocol",
+            "label": "IERC721AQueryable"
+        },
+        {
+            "id": "IERC721AQueryableUpgradeable",
+            "type": "Protocol",
+            "label": "IERC721AQueryableUpgradeable"
+        },
+        {
+            "id": "ERC2309",
+            "type": "Protocol",
+            "label": "ERC2309"
+        },
+        {
+            "id": "ERC1967",
+            "type": "Protocol",
+            "label": "ERC1967"
+        },
+        {
+            "id": "IERC2309",
+            "type": "Protocol",
+            "label": "IERC2309"
+        },
+        {
+            "id": "IERC2771Context",
+            "type": "Protocol",
+            "label": "IERC2771Context"
+        },
+        {
+            "id": "ERC2771",
+            "type": "Protocol",
+            "label": "ERC2771"
+        },
+        {
+            "id": "IERC1822Proxiable",
+            "type": "Protocol",
+            "label": "IERC1822Proxiable"
+        },
+        {
+            "id": "ERC1167",
+            "type": "Protocol",
+            "label": "ERC1167"
+        },
+        {
+            "id": "ERC1822",
+            "type": "Protocol",
+            "label": "ERC1822"
+        },
+        {
+            "id": "IERC20Upgradeable",
+            "type": "Protocol",
+            "label": "IERC20Upgradeable"
+        },
+        {
+            "id": "IERC1822",
+            "type": "Protocol",
+            "label": "IERC1822"
+        },
+        {
+            "id": "ERC6551",
+            "type": "Protocol",
+            "label": "ERC6551"
+        },
+        {
+            "id": "IERC6551Account",
+            "type": "Protocol",
+            "label": "IERC6551Account"
+        },
+        {
+            "id": "ERC4337",
+            "type": "Protocol",
+            "label": "ERC4337"
+        },
+        {
+            "id": "ERC777",
+            "type": "Protocol",
+            "label": "ERC777"
+        },
+        {
+            "id": "IERC777Recipient",
+            "type": "Protocol",
+            "label": "IERC777Recipient"
+        },
+        {
+            "id": "IERC2981Upgradeable",
+            "type": "Protocol",
+            "label": "IERC2981Upgradeable"
+        },
+        {
+            "id": "IERC1155Upgradeable",
+            "type": "Protocol",
+            "label": "IERC1155Upgradeable"
+        },
+        {
+            "id": "IERC20MetadataUpgradeable",
+            "type": "Protocol",
+            "label": "IERC20MetadataUpgradeable"
+        },
+        {
+            "id": "IERC1155ReceiverUpgradeable",
+            "type": "Protocol",
+            "label": "IERC1155ReceiverUpgradeable"
+        },
+        {
+            "id": "IERC1155MetadataURIUpgradeable",
+            "type": "Protocol",
+            "label": "IERC1155MetadataURIUpgradeable"
+        },
+        {
+            "id": "ERC11555",
+            "type": "Protocol",
+            "label": "ERC11555"
+        },
+        {
+            "id": "ERC155",
+            "type": "Protocol",
+            "label": "ERC155"
+        },
+        {
+            "id": "ERC71155",
+            "type": "Protocol",
+            "label": "ERC71155"
+        },
+        {
+            "id": "ERC191",
+            "type": "Protocol",
+            "label": "ERC191"
+        },
+        {
+            "id": "IERC721EnumerableUpgradeable",
+            "type": "Protocol",
+            "label": "IERC721EnumerableUpgradeable"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "InvariantValidation",
+            "type": "Capability",
+            "label": "InvariantValidation"
+        },
+        {
+            "id": "Testing",
+            "type": "Capability",
+            "label": "Testing"
+        },
+        {
+            "id": "Redemption",
+            "type": "Capability",
+            "label": "Redemption"
+        },
+        {
+            "id": "GITHUB-CLAIM-00001",
+            "type": "Claim",
+            "label": "To be able to escrow NFTs in the case of auctions, Marketplace implements the receiver interfaces for [ERC1155](https://eips.ethereum.org/EIPS/eip-1155) and [ERC721](https://eips.ethereum.org/EIPS/eip-721) tokens."
+        },
+        {
+            "id": "GITHUB-CLAIM-00002",
+            "type": "Claim",
+            "label": "To enable meta-transactions (gasless), Marketplace implements [ERC2771](https://eips.ethereum.org/EIPS/eip-2771)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00003",
+            "type": "Claim",
+            "label": "The contract supports both ERC20 currencies and a chain's native token (e.g. ether for Ethereum mainnet). This means that any action that involves transferring currency (e.g. buying a token from a direct listing) can be performed with either an ERC20 token or the chain's native token."
+        },
+        {
+            "id": "GITHUB-CLAIM-00004",
+            "type": "Claim",
+            "label": "At a high level, we want `Marketplace` to be a single smart contract that supports all features related to both direct listings *and* auction listings."
+        },
+        {
+            "id": "GITHUB-CLAIM-00005",
+            "type": "Claim",
+            "label": "The `Marketplace` contract supports both ERC20 currencies, and a chain's native token (e.g. ether for Ethereum mainnet). This means that any action that involves transferring currency (e.g. buying a token from a direct listing) can be performed with either an ERC20 token or the chain's native token."
+        },
+        {
+            "id": "GITHUB-CLAIM-00006",
+            "type": "Claim",
+            "label": "| 2981 | https://eips.ethereum.org/EIPS/eip-2981 | Multiwrap implements ERC 2981 for distributing royalties for sales of the wrapped NFTs. |"
+        },
+        {
+            "id": "GITHUB-CLAIM-00007",
+            "type": "Claim",
+            "label": "| 2771 | https://eips.ethereum.org/EIPS/eip-2771 | Multiwrap implements ERC 2771 to support meta-transactions (aka “gasless” transactions). |"
+        },
+        {
+            "id": "GITHUB-CLAIM-00008",
+            "type": "Claim",
+            "label": "uint256 _availableAmount = drop.availableAmount(id);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00009",
+            "type": "Claim",
+            "label": "assertEq(drop.availableAmount(id), _availableAmount - quantity);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00010",
+            "type": "Claim",
+            "label": "function test_revert_claim_nonAllowlistedClaimer_exceedsAvailable() public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00011",
+            "type": "Claim",
+            "label": "for (; i < _availableAmount; i++) {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00012",
+            "type": "Claim",
+            "label": "vm.expectRevert(\"exceeds available tokens.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00013",
+            "type": "Claim",
+            "label": "uint256 _availableAmount = drop.availableAmount();"
+        },
+        {
+            "id": "GITHUB-CLAIM-00014",
+            "type": "Claim",
+            "label": "assertEq(erc20.balanceOf(address(airdropTokenOwner)), _availableAmount - quantity);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00015",
+            "type": "Claim",
+            "label": "assertEq(drop.availableAmount(), _availableAmount - quantity);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00016",
+            "type": "Claim",
+            "label": "/ @notice Emitted when a buyer is approved to buy from a reserved listing."
+        },
+        {
+            "id": "GITHUB-CLAIM-00017",
+            "type": "Claim",
+            "label": "bool reserved = false;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00018",
+            "type": "Claim",
+            "label": "function test_approveBuyerForListing_whenListingNotReserved() public whenListingExists whenCallerIsListingCreator {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00019",
+            "type": "Claim",
+            "label": "vm.expectRevert(\"Marketplace: listing not reserved.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00020",
+            "type": "Claim",
+            "label": "modifier whenListingIsReserved() {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00021",
+            "type": "Claim",
+            "label": "listingParams.reserved = true;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00022",
+            "type": "Claim",
+            "label": "function test_approveBuyerForListing_whenListingIsReserved()"
+        },
+        {
+            "id": "GITHUB-CLAIM-00023",
+            "type": "Claim",
+            "label": "whenListingIsReserved"
+        },
+        {
+            "id": "GITHUB-CLAIM-00024",
+            "type": "Claim",
+            "label": "bool reserved = true;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00025",
+            "type": "Claim",
+            "label": "vm.expectRevert(\"Marketplace: msg.value must exactly be the total price.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00026",
+            "type": "Claim",
+            "label": "assertEq(listing.reserved, true);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00027",
+            "type": "Claim",
+            "label": "vm.expectRevert(\"Marketplace: cannot update what token is listed.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00028",
+            "type": "Claim",
+            "label": "assertEq(updatedListing.reserved, true);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00029",
+            "type": "Claim",
+            "label": "assertEq(listing.reserved, reserved);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00030",
+            "type": "Claim",
+            "label": "vm.expectRevert(\"Marketplace: listed token must be ERC1155 or ERC721.\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00031",
+            "type": "Claim",
+            "label": "assertEq(listing.reserved, listingParamsToUpdate.reserved);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00032",
+            "type": "Claim",
+            "label": "assertEq(DirectListingsLogic(marketplace).getListing(listingId).reserved, true);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00033",
+            "type": "Claim",
+            "label": "Seller approves buyer for reserved listing."
+        },
+        {
+            "id": "GITHUB-CLAIM-00034",
+            "type": "Claim",
+            "label": "Someone other than the seller approves buyer for reserved listing."
+        },
+        {
+            "id": "GITHUB-CLAIM-00035",
+            "type": "Claim",
+            "label": "function test_revert_approveBuyerForListing_listingNotReserved() public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00036",
+            "type": "Claim",
+            "label": "listingParamsToUpdate.reserved = false;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00037",
+            "type": "Claim",
+            "label": "assertEq(DirectListingsLogic(marketplace).getListing(listingId).reserved, false);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00038",
+            "type": "Claim",
+            "label": "Repository contains README research context."
+        },
+        {
+            "id": "GITHUB-CLAIM-00039",
+            "type": "Claim",
+            "label": "Repository contains contract or interface material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00040",
+            "type": "Claim",
+            "label": "Repository contains test evidence."
+        },
+        {
+            "id": "GITHUB-CLAIM-00041",
+            "type": "Claim",
+            "label": "Repository contains documentation material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00042",
+            "type": "Claim",
+            "label": "Repository contains invariant-like statements."
+        },
+        {
+            "id": "GITHUB-CLAIM-00043",
+            "type": "Claim",
+            "label": "Repository exposes 2147 executable test or invariant target(s)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00044",
+            "type": "Claim",
+            "label": "Repository uses the Foundry toolchain."
+        },
+        {
+            "id": "GITHUB-CLAIM-00045",
+            "type": "Claim",
+            "label": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00046",
+            "type": "Claim",
+            "label": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety."
+        },
+        {
+            "id": "GITHUB-CLAIM-00047",
+            "type": "Claim",
+            "label": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation."
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC2981",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC2981",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC20Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC1271",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721A",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721AUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721ReceiverUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC165Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721MetadataUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155Enumerable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155Supply",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC20Permit",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC4906",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721Enumerable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721Supply",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721AQueryable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721AQueryableUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC2309",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC1967",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC2309",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC2771Context",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC2771",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1822Proxiable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC1167",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC1822",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC20Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1822",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC6551",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC6551Account",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC4337",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC777",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC777Recipient",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC2981Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC20MetadataUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155ReceiverUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC1155MetadataURIUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC11555",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC71155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "ERC191",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "IERC721EnumerableUpgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "InvariantValidation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "Testing",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "Redemption",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00002",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00003",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00004",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00005",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00006",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00007",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00008",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00009",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00010",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00011",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00012",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00013",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00014",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00015",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00016",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00017",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00018",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00019",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00020",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00021",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00022",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00023",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00024",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00025",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00026",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00027",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00028",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00029",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00030",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00031",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00032",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00033",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00034",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00035",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00036",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00037",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00038",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00039",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00040",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00041",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00042",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00043",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00044",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00045",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00046",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+            "to": "GITHUB-CLAIM-00047",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-THIRDWEB-DEV-CONTRACTS"
+        }
+    ]
+}

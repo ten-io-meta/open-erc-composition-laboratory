@@ -37,7 +37,31 @@ export interface ResearchSource {
      * May be a DOI, URL, repository, etc.
      */
     location?: string;
+    /**
+     * Repository associated with this source when known.
+     *
+     * Repository identity is execution/source provenance only.
+     * It must not by itself establish scientific source independence.
+     */
+    repository?: string;
 
+    /**
+     * Repository branch from which this source was ingested,
+     * when known.
+     */
+    branch?: string;
+
+    /**
+     * Repository commit from which this source was ingested,
+     * when known.
+     */
+    commit?: string;
+
+    /**
+     * Additional structured provenance preserved from the
+     * normalized source.
+     */
+    metadata?: Record<string, string>;
     /**
      * Short description.
      */

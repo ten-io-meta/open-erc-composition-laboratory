@@ -69,6 +69,8 @@
     "hypothesis:v2:validate": "tsx scripts/run-hypothesis-v2-validation.ts",
     "knowledge:v2": "tsx scripts/run-research-knowledge-v2.ts",
     "v2": "tsx scripts/run-oecl-v2.ts",
+    "unmatched": "tsx scripts/analyze-unmatched-knowledge.ts",
+    "scientific:regression": "tsx scripts/run-scientific-regression-suite.ts",
     "extract": "tsx scripts/run-research-extraction.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
     "scenario:generate": "tsx scripts/generate-scenarios.ts",

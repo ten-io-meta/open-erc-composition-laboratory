@@ -1,0 +1,62 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.643Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "plans": [
+        {
+            "retestPlanId": "SCIENTIFIC-RETEST-00001",
+            "targetId": "THEORY-00001",
+            "targetEvidenceIds": [],
+            "targetType": "THEORY",
+            "statement": "Reservation-Constrained Accounting Theory",
+            "triggerAction": "CHALLENGE",
+            "priority": "HIGH",
+            "objective": "Resolve the scientific challenge affecting \"Reservation-Constrained Accounting Theory\" through independent and adversarial evidence.",
+            "hypothesis": "\"Reservation-Constrained Accounting Theory\" should remain scientifically defensible when tested against independent implementations, counterexamples, and adversarial evidence.",
+            "falsificationStrategy": [
+                "Search for independent implementations that do not exhibit the claimed relationship.",
+                "Search for direct counterexamples in executable code, tests, or invariants.",
+                "Compare supporting evidence against contradictory or alternative behavior.",
+                "Recalculate scientific confidence after introducing adversarial evidence.",
+                "Attempt to construct a valid protocol composition in which the theory does not hold."
+            ],
+            "requiredEvidence": [
+                "At least one independent implementation source.",
+                "Direct implementation, executable test, or invariant evidence.",
+                "Traceable evidence linked to the target statement.",
+                "Explicit search for contradictory evidence.",
+                "At least one adversarial test designed specifically to falsify the theory."
+            ],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "sourceRevisionId": "SCIENTIFIC-REVISION-00001",
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00001"
+            ],
+            "experimentRequired": true,
+            "explanation": "Retest plan generated from revision SCIENTIFIC-REVISION-00001 with action CHALLENGE, priority HIGH, average robustness 43, and falsification risk HIGH."
+        }
+    ],
+    "statistics": {
+        "plans": 1,
+        "criticalPriority": 0,
+        "highPriority": 1,
+        "mediumPriority": 0,
+        "lowPriority": 0,
+        "theoryRetests": 1,
+        "discoveryRetests": 0,
+        "knowledgeRetests": 0,
+        "evidenceHistoryRetests": 0,
+        "experimentRequired": 1
+    },
+    "errors": []
+}

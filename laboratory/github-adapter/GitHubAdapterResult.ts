@@ -1,3 +1,7 @@
+import type {
+    GitHubRepositoryIntelligenceResult
+} from "./GitHubRepositoryIntelligence.js";
+
 import type { GitHubRepositoryMetadata } from "./GitHubRepositoryMetadata.js";
 
 export interface GitHubAdapterResult {
@@ -5,6 +9,9 @@ export interface GitHubAdapterResult {
     generatedAt: string;
 
     repository: GitHubRepositoryMetadata;
+
+    intelligence:
+    GitHubRepositoryIntelligenceResult;
 
     sourceId: string;
 

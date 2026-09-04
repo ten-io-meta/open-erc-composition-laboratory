@@ -8,6 +8,13 @@ export interface AdaptedResearchSource {
 
     claims: string[];
 
+    compositionSignals?: {
+        fromCapability: string;
+        toCapability: string;
+        relation: string;
+        reason: string;
+    }[];
+
 }
 
 export interface ResearchSourceAdapter {

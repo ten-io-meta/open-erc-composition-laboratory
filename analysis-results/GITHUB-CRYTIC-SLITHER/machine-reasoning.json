@@ -1,0 +1,33 @@
+{
+    "generatedAt": "2026-09-03T23:17:15.929Z",
+    "sourceId": "GITHUB-CRYTIC-SLITHER",
+    "inferences": [
+        {
+            "inferenceId": "MRI-00001",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "reason": "Reservation appears to constrain accounting by separating committed value from available value.",
+            "confidence": 76,
+            "evidence": [
+                "capability:Reservation",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00002",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "reason": "Invariant validation combined with accounting suggests that the repository attempts to prove accounting safety properties.",
+            "confidence": 78,
+            "evidence": [
+                "capability:InvariantValidation",
+                "capability:Accounting"
+            ]
+        }
+    ],
+    "errors": []
+}

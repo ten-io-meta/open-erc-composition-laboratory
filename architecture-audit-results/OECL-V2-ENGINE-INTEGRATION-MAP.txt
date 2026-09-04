@@ -1,0 +1,602 @@
+OECL V2 - ENGINE INTEGRATION MAP
+
+============================================================
+ENGINE: AutonomousExperimentDesignEngine
+FILE: laboratory\autonomous-experiment-design\AutonomousExperimentDesignEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: BenchmarkEngine
+FILE: laboratory\benchmark\BenchmarkEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-benchmark.ts
+
+============================================================
+ENGINE: ComposabilityEvidenceEngine
+FILE: laboratory\composability-evidence\ComposabilityEvidenceEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composability-evidence.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+
+============================================================
+ENGINE: CompositionEngine
+FILE: laboratory\composition\CompositionEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: CompositionDiscoveryEngine
+FILE: laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-discovery.ts
+
+============================================================
+ENGINE: CompositionLearningEngine
+FILE: laboratory\composition-learning\CompositionLearningEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-learning.ts
+
+============================================================
+ENGINE: ConfidenceEngine
+FILE: laboratory\confidence-engine\ConfidenceEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ContradictionEngine
+FILE: laboratory\contradiction-engine\ContradictionEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: CrossSourcePatternEngine
+FILE: laboratory\cross-source-patterns\CrossSourcePatternEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: DiscoveryEngine
+FILE: laboratory\discovery\DiscoveryEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 5
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-discovery.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-discovery.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-pattern-discovery.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-semantic-discovery.ts
+
+============================================================
+ENGINE: EmergentPropertyEngine
+FILE: laboratory\emergent\EmergentPropertyEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-emergent.ts
+
+============================================================
+ENGINE: LaboratoryEngine
+FILE: laboratory\engine\LaboratoryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: EvidenceGraphEngine
+FILE: laboratory\evidence-graph\EvidenceGraphEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: EvidenceSupportEngine
+FILE: laboratory\evidence-support\EvidenceSupportEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-evidence-support.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+
+============================================================
+ENGINE: ResearchExtractionEngine
+FILE: laboratory\extraction\ResearchExtractionEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 3
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-knowledge-graph.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-extraction.ts
+
+============================================================
+ENGINE: CompositionHypothesisEngine
+FILE: laboratory\hypotheses\CompositionHypothesisEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-hypotheses.ts
+
+============================================================
+ENGINE: HypothesisEngine
+FILE: laboratory\hypothesis\HypothesisEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-hypotheses.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis.ts
+
+============================================================
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis\HypothesisValidationEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-v2-validation.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-validation.ts
+
+============================================================
+ENGINE: HypothesisDiscoveryEngine
+FILE: laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: HypothesisMergeEngine
+FILE: laboratory\hypothesis-discovery\HypothesisMergeEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: HypothesisRefinementEngine
+FILE: laboratory\hypothesis-refinement\HypothesisRefinementEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-v2-validation.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-validation.ts
+
+============================================================
+ENGINE: IncrementalKnowledgeEngine
+FILE: laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-incremental-knowledge.ts
+
+============================================================
+ENGINE: KnowledgeEvolutionEngine
+FILE: laboratory\incremental-knowledge\KnowledgeEvolutionEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: InferenceEngine
+FILE: laboratory\inference-engine\InferenceEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: CompositionIntelligenceEngine
+FILE: laboratory\intelligence\CompositionIntelligenceEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-intelligence.ts
+
+============================================================
+ENGINE: ResearchKnowledgeEngine
+FILE: laboratory\knowledge\ResearchKnowledgeEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-knowledge.ts
+
+============================================================
+ENGINE: KnowledgeConsolidationEngine
+FILE: laboratory\knowledge-consolidation\KnowledgeConsolidationEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: KnowledgeGainEngine
+FILE: laboratory\knowledge-gain\KnowledgeGainEngine.ts
+PIPELINES: IntelligencePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: KnowledgeGapEngine
+FILE: laboratory\knowledge-gap\KnowledgeGapEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: MachineReasoningEngine
+FILE: laboratory\machine-reasoning\MachineReasoningEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: CompositionMatrixEngine
+FILE: laboratory\matrix\CompositionMatrixEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-composition-matrix.ts
+
+============================================================
+ENGINE: MetricsEngine
+FILE: laboratory\metrics\MetricsEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: PatternDiscoveryEngine
+FILE: laboratory\patterns\PatternDiscoveryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-pattern-discovery.ts
+
+============================================================
+ENGINE: PredictionEngine
+FILE: laboratory\prediction-engine\PredictionEngine.ts
+PIPELINES: IntelligencePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: CompositionPropertyEngine
+FILE: laboratory\properties\CompositionPropertyEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ProtocolSemanticEngine
+FILE: laboratory\protocol-semantics\ProtocolSemanticEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-knowledge-graph.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+
+============================================================
+ENGINE: CompositionQueryEngine
+FILE: laboratory\query\CompositionQueryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-query.ts
+
+============================================================
+ENGINE: SemanticReasoningEngine
+FILE: laboratory\reasoning\SemanticReasoningEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-semantic-reasoning.ts
+
+============================================================
+ENGINE: CompositionRelationshipEngine
+FILE: laboratory\relationships\CompositionRelationshipEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-relationships.ts
+
+============================================================
+ENGINE: RepositoryIntelligenceEngine
+FILE: laboratory\repository-intelligence\RepositoryIntelligenceEngine.ts
+PIPELINES: IntelligencePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ProtocolRequirementEngine
+FILE: laboratory\requirements\ProtocolRequirementEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-requirements.ts
+
+============================================================
+ENGINE: ResearchConclusionEngine
+FILE: laboratory\research-conclusions\ResearchConclusionEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ResearchEvolutionEngine
+FILE: laboratory\research-evolution\ResearchEvolutionEngine.ts
+PIPELINES: IntelligencePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: KnowledgeEngine
+FILE: laboratory\research-knowledge\KnowledgeEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 3
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-incremental-knowledge.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-knowledge-v2.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-knowledge.ts
+
+============================================================
+ENGINE: KnowledgeMergeEngine
+FILE: laboratory\research-knowledge\KnowledgeMergeEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: True
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-oecl-v2.ts
+
+============================================================
+ENGINE: ResearchMemoryEngine
+FILE: laboratory\research-memory\ResearchMemoryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-memory.ts
+
+============================================================
+ENGINE: ResearchPlannerEngine
+FILE: laboratory\research-planner\ResearchPlannerEngine.ts
+PIPELINES: PlanningPipeline.ts
+MAIN V2 ORCHESTRATOR: True
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-oecl-v2.ts
+
+============================================================
+ENGINE: ResearchQuestionsEngine
+FILE: laboratory\research-questions\ResearchQuestionsEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ResearchReportEngine
+FILE: laboratory\research-report\ResearchReportEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-report.ts
+
+============================================================
+ENGINE: ResearchReportV2Engine
+FILE: laboratory\research-report\ResearchReportV2Engine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: True
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-oecl-v2.ts
+
+============================================================
+ENGINE: ResearchStrategyEngine
+FILE: laboratory\research-strategy\ResearchStrategyEngine.ts
+PIPELINES: IntelligencePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScenarioGenerationEngine
+FILE: laboratory\scenario-generation\ScenarioGenerationEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 1
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-auto-scenario-generation.ts
+
+============================================================
+ENGINE: ScientificConsensusEngine
+FILE: laboratory\scientific-consensus\ScientificConsensusEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificDiscoveryEngine
+FILE: laboratory\scientific-discovery\ScientificDiscoveryEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificEvidenceAccumulatorEngine
+FILE: laboratory\scientific-evidence-accumulator\ScientificEvidenceAccumulatorEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExecutionCapabilityEngine
+FILE: laboratory\scientific-execution-capability\ScientificExecutionCapabilityEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExecutionObservationEngine
+FILE: laboratory\scientific-execution-observation\ScientificExecutionObservationEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExecutionOutcomeEngine
+FILE: laboratory\scientific-execution-outcome\ScientificExecutionOutcomeEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExecutionPlanEngine
+FILE: laboratory\scientific-execution-plan\ScientificExecutionPlanEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExecutionRuntimeEngine
+FILE: laboratory\scientific-execution-runtime\ScientificExecutionRuntimeEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExperimentExecutionPlannerEngine
+FILE: laboratory\scientific-experiment-execution\ScientificExperimentExecutionPlannerEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificExperimentQueueEngine
+FILE: laboratory\scientific-experiment-queue\ScientificExperimentQueueEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificKnowledgeEvolutionEngine
+FILE: laboratory\scientific-knowledge-evolution\ScientificKnowledgeEvolutionEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificMemoryEngine
+FILE: laboratory\scientific-memory\ScientificMemoryEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificRetestExperimentEngine
+FILE: laboratory\scientific-retest-experiment\ScientificRetestExperimentEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificRetestPlannerEngine
+FILE: laboratory\scientific-retest-planner\ScientificRetestPlannerEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificRevisionEngine
+FILE: laboratory\scientific-revision\ScientificRevisionEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ContradictionCritiqueEngine
+FILE: laboratory\scientific-self-critique\ContradictionCritiqueEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: DiscoveryCritiqueEngine
+FILE: laboratory\scientific-self-critique\DiscoveryCritiqueEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: EvidenceCritiqueEngine
+FILE: laboratory\scientific-self-critique\EvidenceCritiqueEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: MemoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\MemoryCritiqueEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificSelfCritiqueEngine
+FILE: laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: TheoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\TheoryCritiqueEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ScientificValidationEngine
+FILE: laboratory\scientific-validation\ScientificValidationEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: SemanticDiscoveryEngine
+FILE: laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-research-analysis.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-semantic-discovery.ts
+
+============================================================
+ENGINE: CampaignStatisticsEngine
+FILE: laboratory\statistics\CampaignStatisticsEngine.ts
+PIPELINES: NONE
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: TheoryEngine
+FILE: laboratory\theory-engine\TheoryEngine.ts
+PIPELINES: KnowledgePipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 0
+
+============================================================
+ENGINE: ValidationEngine
+FILE: laboratory\validation\ValidationEngine.ts
+PIPELINES: ScientificPipeline.ts
+MAIN V2 ORCHESTRATOR: False
+SCRIPT REFERENCES: 2
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-v2-validation.ts
+  - C:\Users\ibano\Documents\open-erc-composition-laboratory\scripts\run-hypothesis-validation.ts

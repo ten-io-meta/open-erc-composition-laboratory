@@ -1,0 +1,31 @@
+{
+    "generatedAt": "2026-09-03T23:18:00.783Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "integrity": [
+        {
+            "integrityId": "SCI-REFERENTIAL-INTEGRITY-00001",
+            "knowledgeId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourcePatternId": "CROSS-PATTERN-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "originTargetId": "CONCLUSION:CONCLUSION-00001",
+            "status": "VALID",
+            "valid": true,
+            "issues": [],
+            "explanation": "All scientific provenance references are valid and internally consistent."
+        }
+    ],
+    "statistics": {
+        "totalKnowledge": 1,
+        "validKnowledge": 1,
+        "invalidKnowledge": 0,
+        "brokenConclusionReferences": 0,
+        "brokenPatternReferences": 0,
+        "conclusionPatternMismatches": 0,
+        "relationMismatches": 0,
+        "originTargetMismatches": 0,
+        "duplicatedOrigins": 0,
+        "integrityScore": 100
+    },
+    "errors": []
+}

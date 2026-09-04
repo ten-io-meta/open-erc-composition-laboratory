@@ -1,0 +1,39 @@
+{
+    "graphId": "GRAPH-GITHUB-TEST-0001",
+    "discoveredAt": "2026-07-06T18:33:06.424Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-GITHUB-TEST-0001-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 2 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "ERC8060",
+                "IERC8060Reservable"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEST-0001-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 3 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-TEST-0001-CLAIM-GITHUB-TEST-0001-CLAIM-0001",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reference implementation of reservable accounting for ERC-8060.",
+            "evidence": [
+                "GITHUB-TEST-0001-CLAIM-0001"
+            ],
+            "confidence": 100
+        }
+    ]
+}

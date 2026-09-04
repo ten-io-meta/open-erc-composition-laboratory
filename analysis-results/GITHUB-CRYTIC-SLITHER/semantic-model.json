@@ -1,0 +1,115 @@
+{
+    "graphId": "GRAPH-GITHUB-CRYTIC-SLITHER",
+    "discoveredAt": "2026-09-03T23:17:15.929Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-CRYTIC-SLITHER",
+        "generatedAt": "2026-09-03T23:17:15.929Z",
+        "capabilities": [
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Authority",
+                "label": "Authority",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Transfer",
+                "label": "Transfer",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Burn",
+                "label": "Burn",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Mint",
+                "label": "Mint",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Ownership",
+                "label": "Ownership",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Upgradeability",
+                "label": "Upgradeability",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "AccessControl",
+                "label": "AccessControl",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Verification",
+                "label": "Verification",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Standardization",
+                "label": "Standardization",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            },
+            {
+                "capabilityId": "Interoperability",
+                "label": "Interoperability",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-CRYTIC-SLITHER"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}

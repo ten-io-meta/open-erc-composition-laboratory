@@ -1,0 +1,72 @@
+{
+    "generatedAt": "2026-09-03T23:17:15.756Z",
+    "sourceId": "DOI-0001",
+    "inferences": [
+        {
+            "inferenceId": "MRI-00001",
+            "sourceId": "DOI-0001",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "reason": "A repository that contains both embedded value and reservation capabilities suggests that embedded value can be committed without immediate transfer.",
+            "confidence": 72,
+            "evidence": [
+                "capability:EmbeddedValue",
+                "capability:Reservation"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00002",
+            "sourceId": "DOI-0001",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "reason": "Reservation appears to constrain accounting by separating committed value from available value.",
+            "confidence": 76,
+            "evidence": [
+                "capability:Reservation",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00003",
+            "sourceId": "DOI-0001",
+            "subject": "Reservation",
+            "relation": "BOUNDS",
+            "object": "Settlement",
+            "reason": "Reservation and settlement appearing together suggests that reserved value may define a deterministic settlement boundary.",
+            "confidence": 74,
+            "evidence": [
+                "capability:Reservation",
+                "capability:Settlement"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00004",
+            "sourceId": "DOI-0001",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "reason": "Claims mentioning deterministic behavior together with accounting indicate that deterministic execution depends on stable accounting boundaries.",
+            "confidence": 68,
+            "evidence": [
+                "claim:deterministic",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00005",
+            "sourceId": "DOI-0001",
+            "subject": "ERC8060",
+            "relation": "ENABLES",
+            "object": "IERC8060Reservable",
+            "reason": "The repository links ERC8060 with IERC8060Reservable, suggesting that reservable accounting extends embedded value behavior.",
+            "confidence": 80,
+            "evidence": [
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable"
+            ]
+        }
+    ],
+    "errors": []
+}

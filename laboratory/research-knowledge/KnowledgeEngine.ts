@@ -5,11 +5,15 @@ import type { KnowledgeResult } from "./KnowledgeResult.js";
 
 import { KnowledgeBuilder } from "./KnowledgeBuilder.js";
 
+import type { MachineReasoningResult } from "../machine-reasoning/MachineReasoningResult.js";
+
 export class KnowledgeEngine {
 
     build(
         learning: CompositionLearningResult,
-        validation: HypothesisValidationResult
+        validation: HypothesisValidationResult,
+        machineReasoning?: MachineReasoningResult,
+        sourceId = "UNKNOWN"
     ): KnowledgeResult {
 
         try {
@@ -18,7 +22,9 @@ export class KnowledgeEngine {
 
             const knowledge = builder.build(
                 learning,
-                validation
+                validation,
+                machineReasoning,
+                sourceId
             );
 
             return {

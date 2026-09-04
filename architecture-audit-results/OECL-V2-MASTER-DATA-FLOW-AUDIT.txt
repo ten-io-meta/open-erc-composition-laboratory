@@ -1,0 +1,1728 @@
+OECL V2 - MASTER DATA FLOW AUDIT
+
+Generated: 2026-07-17T19:21:21.2685322+01:00
+
+============================================================
+1. ENGINE DATA FLOW
+============================================================
+
+------------------------------------------------------------
+ENGINE: AutonomousExperimentDesignEngine
+FILE: laboratory\autonomous-experiment-design\AutonomousExperimentDesignEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: BenchmarkEngine
+FILE: laboratory\benchmark\BenchmarkEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\benchmark\BenchmarkLoader.ts
+  - scripts\run-benchmark.ts
+
+------------------------------------------------------------
+ENGINE: ComposabilityEvidenceEngine
+FILE: laboratory\composability-evidence\ComposabilityEvidenceEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composability-evidence.ts
+  - scripts\run-research-analysis.ts
+
+------------------------------------------------------------
+ENGINE: CompositionEngine
+FILE: laboratory\composition\CompositionEngine.ts
+STATUS: ISOLATED
+TOTAL REFERENCES: 0
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+
+------------------------------------------------------------
+ENGINE: CompositionDiscoveryEngine
+FILE: laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-discovery.ts
+
+------------------------------------------------------------
+ENGINE: CompositionLearningEngine
+FILE: laboratory\composition-learning\CompositionLearningEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composition-learning.ts
+
+------------------------------------------------------------
+ENGINE: ConfidenceEngine
+FILE: laboratory\confidence-engine\ConfidenceEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ContradictionEngine
+FILE: laboratory\contradiction-engine\ContradictionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: CrossSourcePatternEngine
+FILE: laboratory\cross-source-patterns\CrossSourcePatternEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: DiscoveryEngine
+FILE: laboratory\discovery\DiscoveryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 13
+PIPELINE REFERENCES: 2
+SCRIPT REFERENCES: 5
+ENGINE REFERENCES: 5
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\composition-discovery\CompositionDiscoveryEngine.ts
+  - laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+  - laboratory\patterns\PatternDiscoveryEngine.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - laboratory\scientific-discovery\ScientificDiscoveryEngine.ts
+  - laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+  - scripts\run-composition-discovery.ts
+  - scripts\run-discovery.ts
+  - scripts\run-pattern-discovery.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-semantic-discovery.ts
+
+------------------------------------------------------------
+ENGINE: EmergentPropertyEngine
+FILE: laboratory\emergent\EmergentPropertyEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-emergent.ts
+
+------------------------------------------------------------
+ENGINE: LaboratoryEngine
+FILE: laboratory\engine\LaboratoryEngine.ts
+STATUS: ISOLATED
+TOTAL REFERENCES: 0
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+
+------------------------------------------------------------
+ENGINE: EvidenceGraphEngine
+FILE: laboratory\evidence-graph\EvidenceGraphEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: EvidenceSupportEngine
+FILE: laboratory\evidence-support\EvidenceSupportEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-evidence-support.ts
+  - scripts\run-research-analysis.ts
+
+------------------------------------------------------------
+ENGINE: ResearchExtractionEngine
+FILE: laboratory\extraction\ResearchExtractionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 4
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 3
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-knowledge-graph.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-research-extraction.ts
+
+------------------------------------------------------------
+ENGINE: CompositionHypothesisEngine
+FILE: laboratory\hypotheses\CompositionHypothesisEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-hypotheses.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisEngine
+FILE: laboratory\hypothesis\HypothesisEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 4
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\hypotheses\CompositionHypothesisEngine.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composition-hypotheses.ts
+  - scripts\run-hypothesis.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis\HypothesisValidationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 4
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-hypothesis-validation.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisDiscoveryEngine
+FILE: laboratory\hypothesis-discovery\HypothesisDiscoveryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisMergeEngine
+FILE: laboratory\hypothesis-discovery\HypothesisMergeEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisRefinementEngine
+FILE: laboratory\hypothesis-refinement\HypothesisRefinementEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: HypothesisValidationEngine
+FILE: laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 4
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\hypothesis\HypothesisValidationEngine.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-hypothesis-validation.ts
+
+------------------------------------------------------------
+ENGINE: IncrementalKnowledgeEngine
+FILE: laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-incremental-knowledge.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeEvolutionEngine
+FILE: laboratory\incremental-knowledge\KnowledgeEvolutionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 2
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+  - laboratory\scientific-knowledge-evolution\ScientificKnowledgeEvolutionEngine.ts
+
+------------------------------------------------------------
+ENGINE: InferenceEngine
+FILE: laboratory\inference-engine\InferenceEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: CompositionIntelligenceEngine
+FILE: laboratory\intelligence\CompositionIntelligenceEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-intelligence.ts
+
+------------------------------------------------------------
+ENGINE: ResearchKnowledgeEngine
+FILE: laboratory\knowledge\ResearchKnowledgeEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeConsolidationEngine
+FILE: laboratory\knowledge-consolidation\KnowledgeConsolidationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeGainEngine
+FILE: laboratory\knowledge-gain\KnowledgeGainEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeGapEngine
+FILE: laboratory\knowledge-gap\KnowledgeGapEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: MachineReasoningEngine
+FILE: laboratory\machine-reasoning\MachineReasoningEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+
+------------------------------------------------------------
+ENGINE: CompositionMatrixEngine
+FILE: laboratory\matrix\CompositionMatrixEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-matrix.ts
+
+------------------------------------------------------------
+ENGINE: MetricsEngine
+FILE: laboratory\metrics\MetricsEngine.ts
+STATUS: ISOLATED
+TOTAL REFERENCES: 0
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+
+------------------------------------------------------------
+ENGINE: PatternDiscoveryEngine
+FILE: laboratory\patterns\PatternDiscoveryEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-pattern-discovery.ts
+
+------------------------------------------------------------
+ENGINE: PredictionEngine
+FILE: laboratory\prediction-engine\PredictionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: CompositionPropertyEngine
+FILE: laboratory\properties\CompositionPropertyEngine.ts
+STATUS: REFERENCED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\engine\ExperimentExecutor.ts
+
+------------------------------------------------------------
+ENGINE: ProtocolSemanticEngine
+FILE: laboratory\protocol-semantics\ProtocolSemanticEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-knowledge-graph.ts
+  - scripts\run-research-analysis.ts
+
+------------------------------------------------------------
+ENGINE: CompositionQueryEngine
+FILE: laboratory\query\CompositionQueryEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-query.ts
+
+------------------------------------------------------------
+ENGINE: SemanticReasoningEngine
+FILE: laboratory\reasoning\SemanticReasoningEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-semantic-reasoning.ts
+
+------------------------------------------------------------
+ENGINE: CompositionRelationshipEngine
+FILE: laboratory\relationships\CompositionRelationshipEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-relationships.ts
+
+------------------------------------------------------------
+ENGINE: RepositoryIntelligenceEngine
+FILE: laboratory\repository-intelligence\RepositoryIntelligenceEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ProtocolRequirementEngine
+FILE: laboratory\requirements\ProtocolRequirementEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-requirements.ts
+
+------------------------------------------------------------
+ENGINE: ResearchConclusionEngine
+FILE: laboratory\research-conclusions\ResearchConclusionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ResearchEvolutionEngine
+FILE: laboratory\research-evolution\ResearchEvolutionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeEngine
+FILE: laboratory\research-knowledge\KnowledgeEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 6
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 3
+ENGINE REFERENCES: 2
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\incremental-knowledge\IncrementalKnowledgeEngine.ts
+  - laboratory\knowledge\ResearchKnowledgeEngine.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-incremental-knowledge.ts
+  - scripts\run-research-knowledge.ts
+  - scripts\run-research-knowledge-v2.ts
+
+------------------------------------------------------------
+ENGINE: KnowledgeMergeEngine
+FILE: laboratory\research-knowledge\KnowledgeMergeEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+ENGINE: ResearchMemoryEngine
+FILE: laboratory\research-memory\ResearchMemoryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-research-memory.ts
+
+------------------------------------------------------------
+ENGINE: ResearchPlannerEngine
+FILE: laboratory\research-planner\ResearchPlannerEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\orchestration\planning-pipeline\PlanningPipeline.ts
+  - laboratory\orchestration\planning-pipeline\PlanningPipelineResult.ts
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+ENGINE: ResearchQuestionsEngine
+FILE: laboratory\research-questions\ResearchQuestionsEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ResearchReportEngine
+FILE: laboratory\research-report\ResearchReportEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-research-report.ts
+
+------------------------------------------------------------
+ENGINE: ResearchReportV2Engine
+FILE: laboratory\research-report\ResearchReportV2Engine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+ENGINE: ResearchStrategyEngine
+FILE: laboratory\research-strategy\ResearchStrategyEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+  - laboratory\orchestration\intelligence-pipeline\IntelligencePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ScenarioGenerationEngine
+FILE: laboratory\scenario-generation\ScenarioGenerationEngine.ts
+STATUS: SCRIPT_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 1
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-auto-scenario-generation.ts
+
+------------------------------------------------------------
+ENGINE: ScientificConsensusEngine
+FILE: laboratory\scientific-consensus\ScientificConsensusEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ScientificDiscoveryEngine
+FILE: laboratory\scientific-discovery\ScientificDiscoveryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ScientificEvidenceAccumulatorEngine
+FILE: laboratory\scientific-evidence-accumulator\ScientificEvidenceAccumulatorEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExecutionCapabilityEngine
+FILE: laboratory\scientific-execution-capability\ScientificExecutionCapabilityEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExecutionObservationEngine
+FILE: laboratory\scientific-execution-observation\ScientificExecutionObservationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExecutionOutcomeEngine
+FILE: laboratory\scientific-execution-outcome\ScientificExecutionOutcomeEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExecutionPlanEngine
+FILE: laboratory\scientific-execution-plan\ScientificExecutionPlanEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExecutionRuntimeEngine
+FILE: laboratory\scientific-execution-runtime\ScientificExecutionRuntimeEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExperimentExecutionPlannerEngine
+FILE: laboratory\scientific-experiment-execution\ScientificExperimentExecutionPlannerEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificExperimentQueueEngine
+FILE: laboratory\scientific-experiment-queue\ScientificExperimentQueueEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificKnowledgeEvolutionEngine
+FILE: laboratory\scientific-knowledge-evolution\ScientificKnowledgeEvolutionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificMemoryEngine
+FILE: laboratory\scientific-memory\ScientificMemoryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificRetestExperimentEngine
+FILE: laboratory\scientific-retest-experiment\ScientificRetestExperimentEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificRetestPlannerEngine
+FILE: laboratory\scientific-retest-planner\ScientificRetestPlannerEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ScientificRevisionEngine
+FILE: laboratory\scientific-revision\ScientificRevisionEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: ContradictionCritiqueEngine
+FILE: laboratory\scientific-self-critique\ContradictionCritiqueEngine.ts
+STATUS: ENGINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+
+------------------------------------------------------------
+ENGINE: DiscoveryCritiqueEngine
+FILE: laboratory\scientific-self-critique\DiscoveryCritiqueEngine.ts
+STATUS: ENGINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+
+------------------------------------------------------------
+ENGINE: EvidenceCritiqueEngine
+FILE: laboratory\scientific-self-critique\EvidenceCritiqueEngine.ts
+STATUS: ENGINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+
+------------------------------------------------------------
+ENGINE: MemoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\MemoryCritiqueEngine.ts
+STATUS: ENGINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+
+------------------------------------------------------------
+ENGINE: ScientificSelfCritiqueEngine
+FILE: laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: TheoryCritiqueEngine
+FILE: laboratory\scientific-self-critique\TheoryCritiqueEngine.ts
+STATUS: ENGINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\scientific-self-critique\ScientificSelfCritiqueEngine.ts
+
+------------------------------------------------------------
+ENGINE: ScientificValidationEngine
+FILE: laboratory\scientific-validation\ScientificValidationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 1
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+
+------------------------------------------------------------
+ENGINE: SemanticDiscoveryEngine
+FILE: laboratory\semantic-discovery\SemanticDiscoveryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 3
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-semantic-discovery.ts
+
+------------------------------------------------------------
+ENGINE: CampaignStatisticsEngine
+FILE: laboratory\statistics\CampaignStatisticsEngine.ts
+STATUS: ISOLATED
+TOTAL REFERENCES: 0
+PIPELINE REFERENCES: 0
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+
+------------------------------------------------------------
+ENGINE: TheoryEngine
+FILE: laboratory\theory-engine\TheoryEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 2
+PIPELINE REFERENCES: 1
+SCRIPT REFERENCES: 0
+ENGINE REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+  - laboratory\orchestration\knowledge-pipeline\KnowledgePipelineResult.ts
+
+------------------------------------------------------------
+ENGINE: ValidationEngine
+FILE: laboratory\validation\ValidationEngine.ts
+STATUS: PIPELINE_CONNECTED
+TOTAL REFERENCES: 8
+PIPELINE REFERENCES: 2
+SCRIPT REFERENCES: 2
+ENGINE REFERENCES: 3
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\engine\ExperimentExecutor.ts
+  - laboratory\hypothesis\HypothesisValidationEngine.ts
+  - laboratory\hypothesis-validation\HypothesisValidationEngine.ts
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+  - laboratory\pipeline\ResearchPipeline.ts
+  - laboratory\scientific-validation\ScientificValidationEngine.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-hypothesis-validation.ts
+
+
+============================================================
+2. RESULT DIRECTORY DATA FLOW
+============================================================
+
+------------------------------------------------------------
+RESULT DIRECTORY: adaptive-research-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-adaptive-research.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: analysis-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 99
+TOTAL REFERENCES: 7
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composability-evidence.ts
+  - scripts\run-composition-learning.ts
+  - scripts\run-corpus.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-semantic-reasoning.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: architecture-audit-results
+STATUS: UNREFERENCED
+FILES: 6
+TOTAL REFERENCES: 0
+MAIN V2 ORCHESTRATOR: False
+
+------------------------------------------------------------
+RESULT DIRECTORY: autonomous-experiment-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: benchmark-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 5
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-benchmark.ts
+  - scripts\run-evidence-support.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: campaign-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-scenario-batch.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: composability-evidence-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composability-evidence.ts
+  - scripts\run-evidence-support.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: composition-discovery-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-discovery.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: composition-learning-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 4
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composition-learning.ts
+  - scripts\run-hypothesis.ts
+  - scripts\run-research-knowledge-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: confidence-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: contradiction-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: corpus-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-corpus.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: cross-source-pattern-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: discovery-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 4
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-composition-discovery.ts
+  - scripts\run-discovery.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-semantic-discovery.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: emergent-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-emergent.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: evidence-graph-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: evidence-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 3
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composability-evidence.ts
+  - scripts\run-evidence-evaluation.ts
+  - scripts\run-evidence-support.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: evidence-support-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-evidence-support.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: extraction-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-research-extraction.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: github-adapter-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-github-bundle.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: hypothesis-refinement-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: hypothesis-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 3
+TOTAL REFERENCES: 6
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composition-hypotheses.ts
+  - scripts\run-hypothesis.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-hypothesis-validation.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: hypothesis-validation-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 2
+TOTAL REFERENCES: 6
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-auto-scenario-generation.ts
+  - scripts\run-hypothesis-v2-validation.ts
+  - scripts\run-hypothesis-validation.ts
+  - scripts\run-research-knowledge.ts
+  - scripts\run-research-knowledge-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: inference-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: intelligence-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 4
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-composition-hypotheses.ts
+  - scripts\run-composition-intelligence.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: knowledge-consolidation-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: knowledge-gain-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: knowledge-gap-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: knowledge-graph-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 4
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-discovery.ts
+  - scripts\run-discovery.ts
+  - scripts\run-knowledge-graph.ts
+  - scripts\run-semantic-discovery.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: knowledge-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 9
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-adaptive-research.ts
+  - scripts\run-incremental-knowledge.ts
+  - scripts\run-oecl.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-research-knowledge.ts
+  - scripts\run-research-knowledge-v2.ts
+  - scripts\run-research-memory.ts
+  - scripts\run-research-report.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: matrix-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 8
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-composition-hypotheses.ts
+  - scripts\run-composition-intelligence.ts
+  - scripts\run-composition-matrix.ts
+  - scripts\run-evidence-support.ts
+  - scripts\run-query.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: pattern-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 6
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-evidence-support.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-pattern-discovery.ts
+  - scripts\run-research-analysis.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: pipeline-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: prediction-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: reasoning-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-semantic-reasoning.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: relationship-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 3
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-matrix.ts
+  - scripts\run-relationships.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: repository-intelligence-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: requirements-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 3
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-composition-matrix.ts
+  - scripts\run-requirements.ts
+  - scripts\run-research-knowledge.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-conclusion-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-evolution-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-knowledge-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 4
+TOTAL REFERENCES: 5
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-incremental-knowledge.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-research-knowledge-v2.ts
+  - scripts\run-research-memory.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-memory-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 3
+TOTAL REFERENCES: 5
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\pipeline\ResearchPipeline.ts
+  - scripts\run-oecl.ts
+  - scripts\run-oecl-v2.ts
+  - scripts\run-research-knowledge.ts
+  - scripts\run-research-memory.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-planner-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-question-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-report-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: research-strategy-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-consensus-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-discovery-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-evidence-accumulator-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-execution-capability-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-execution-observation-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-execution-outcome-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-execution-plan-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-execution-runtime-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-experiment-execution-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-experiment-queue-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-knowledge-evolution-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-memory-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 2
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - laboratory\scientific-memory\ScientificMemoryEngine.ts
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-retest-experiment-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-retest-planner-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-revision-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-runtime-outcome-adapter-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-self-critique-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: scientific-validation-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: semantic-discovery-results
+STATUS: INDIRECTLY_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: False
+REFERENCED BY:
+  - scripts\run-semantic-discovery.ts
+
+------------------------------------------------------------
+RESULT DIRECTORY: theory-results
+STATUS: MAIN_ORCHESTRATOR_CONNECTED
+FILES: 1
+TOTAL REFERENCES: 1
+MAIN V2 ORCHESTRATOR: True
+REFERENCED BY:
+  - scripts\run-oecl-v2.ts
+
+
+============================================================
+3. PIPELINE INVENTORY
+============================================================
+PIPELINE: laboratory\orchestration\export-pipeline\ExportPipeline.ts
+PIPELINE: laboratory\orchestration\intelligence-pipeline\IntelligencePipeline.ts
+PIPELINE: laboratory\orchestration\knowledge-pipeline\KnowledgePipeline.ts
+PIPELINE: laboratory\orchestration\planning-pipeline\PlanningPipeline.ts
+PIPELINE: laboratory\orchestration\scientific-pipeline\ScientificPipeline.ts
+PIPELINE: laboratory\orchestration\source-pipeline\SourcePipeline.ts
+PIPELINE: laboratory\pipeline\ResearchPipeline.ts
+
+
+============================================================
+4. MASTER SUMMARY
+============================================================
+
+ENGINES DISCOVERED: 79
+PIPELINE CONNECTED ENGINES: 54
+SCRIPT CONNECTED ENGINES: 15
+ENGINE CONNECTED ENGINES: 5
+ISOLATED ENGINES: 4
+
+RESULT DIRECTORIES: 66
+MAIN ORCHESTRATOR RESULTS: 44
+INDIRECTLY CONNECTED RESULTS: 21
+UNREFERENCED RESULTS: 
+EMPTY RESULTS: 0
+
+PIPELINES DISCOVERED: 7
+
+
+============================================================
+5. POSSIBLE ARCHITECTURAL DEAD ENDS
+============================================================
+ISOLATED ENGINE: CompositionEngine -> laboratory\composition\CompositionEngine.ts
+ISOLATED ENGINE: LaboratoryEngine -> laboratory\engine\LaboratoryEngine.ts
+ISOLATED ENGINE: MetricsEngine -> laboratory\metrics\MetricsEngine.ts
+ISOLATED ENGINE: CampaignStatisticsEngine -> laboratory\statistics\CampaignStatisticsEngine.ts
+UNREFERENCED RESULT: architecture-audit-results

@@ -1,0 +1,46 @@
+{
+    "generatedAt": "2026-07-06T18:33:06.424Z",
+    "sourceId": "GITHUB-TEST-0001",
+    "inferences": [
+        {
+            "inferenceId": "MRI-00001",
+            "sourceId": "GITHUB-TEST-0001",
+            "subject": "EmbeddedValue",
+            "relation": "ENABLES",
+            "object": "Reservation",
+            "reason": "A repository that contains both embedded value and reservation capabilities suggests that embedded value can be committed without immediate transfer.",
+            "confidence": 72,
+            "evidence": [
+                "capability:EmbeddedValue",
+                "capability:Reservation"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00002",
+            "sourceId": "GITHUB-TEST-0001",
+            "subject": "Reservation",
+            "relation": "CONSTRAINS",
+            "object": "Accounting",
+            "reason": "Reservation appears to constrain accounting by separating committed value from available value.",
+            "confidence": 76,
+            "evidence": [
+                "capability:Reservation",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00003",
+            "sourceId": "GITHUB-TEST-0001",
+            "subject": "ERC8060",
+            "relation": "ENABLES",
+            "object": "IERC8060Reservable",
+            "reason": "The repository links ERC8060 with IERC8060Reservable, suggesting that reservable accounting extends embedded value behavior.",
+            "confidence": 80,
+            "evidence": [
+                "protocol:ERC8060",
+                "protocol:IERC8060Reservable"
+            ]
+        }
+    ],
+    "errors": []
+}

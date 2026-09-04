@@ -1,0 +1,28 @@
+{
+    "sourceId": "GITHUB-TEST-0001",
+    "success": true,
+    "extraction": {
+        "sourceId": "GITHUB-TEST-0001",
+        "extractedAt": "2026-07-06T18:33:06.423Z",
+        "protocols": [
+            "ERC8060",
+            "IERC8060Reservable"
+        ],
+        "capabilities": [
+            "EmbeddedValue",
+            "Reservation",
+            "Accounting"
+        ],
+        "invariants": [],
+        "relationships": [],
+        "claims": [
+            {
+                "claimId": "GITHUB-TEST-0001-CLAIM-0001",
+                "text": "Reference implementation of reservable accounting for ERC-8060.",
+                "evidence": "https://github.com/ten-io-meta/erc8060-reservable",
+                "confidence": 100
+            }
+        ]
+    },
+    "errors": []
+}

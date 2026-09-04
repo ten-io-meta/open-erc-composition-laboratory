@@ -1,0 +1,22 @@
+{
+    "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+    "evidenceType": "GITHUB_REPOSITORY",
+    "quality": "HIGH",
+    "reproducible": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": true,
+    "hasCoverage": true,
+    "hasCitation": false,
+    "confidenceWeight": 0.85,
+    "observations": [
+        "README: true",
+        "Package metadata: false",
+        "Tests: true",
+        "Contracts/interfaces: true",
+        "Documentation: true",
+        "CI: true",
+        "Citation: false",
+        "Evidence score: 80"
+    ]
+}

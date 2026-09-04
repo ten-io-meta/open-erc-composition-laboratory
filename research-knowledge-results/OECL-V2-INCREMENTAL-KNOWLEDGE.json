@@ -1,8 +1,8 @@
 {
-    "generatedAt": "2026-07-03T15:43:36.912Z",
+    "generatedAt": "2026-09-03T23:18:00.711Z",
     "knowledge": {
-        "knowledgeBaseId": "KB-INCREMENTAL-2026-07-03T13:13:41.035Z",
-        "generatedAt": "2026-07-03T13:13:41.035Z",
+        "knowledgeBaseId": "KB-INCREMENTAL-2026-08-24T21:47:24.181Z",
+        "generatedAt": "2026-08-24T21:47:24.182Z",
         "entries": [
             {
                 "entryId": "KNOW-00001",
@@ -68,17 +68,18 @@
                 "entryId": "KNOW-00005",
                 "relation": "EmbeddedValue->ENABLES->Reservation",
                 "protocolPair": "ERC8060+IERC8060Reservable",
-                "observations": 6,
+                "observations": 7,
                 "averageConfidence": 29,
                 "confirmed": 0,
-                "partial": 6,
+                "partial": 7,
                 "unsupported": 0,
                 "status": "EMERGING",
                 "evidence": [
                     "learning:EmbeddedValue->ENABLES->Reservation",
                     "validation:HYP-00005",
                     "validation:HYP-00001",
-                    "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM"
+                    "evidence-profile:GITHUB-TEN-IO-META-ERC8060-RESERVABLE:MEDIUM",
+                    "evidence-profile:GITHUB-TEST-0001:MEDIUM"
                 ]
             },
             {
@@ -155,12 +156,3034 @@
                     "learning:Eligibility->CONSTRAINS->Settlement",
                     "validation:HYP-00010"
                 ]
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-TEST-0001",
+                "relation": "EmbeddedValue:ENABLES:Reservation",
+                "protocolPair": "EmbeddedValue->Reservation",
+                "observations": 1,
+                "averageConfidence": 61,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:EmbeddedValue:ENABLES:Reservation",
+                    "capability:EmbeddedValue",
+                    "capability:Reservation",
+                    "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-07-06T18:33:06.531Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-TEST-0001",
+                "relation": "Reservation:CONSTRAINS:Accounting",
+                "protocolPair": "Reservation->Accounting",
+                "observations": 6,
+                "averageConfidence": 74,
+                "confirmed": 0,
+                "partial": 6,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:Reservation:CONSTRAINS:Accounting",
+                    "capability:Reservation",
+                    "capability:Accounting",
+                    "evidence-profile:GITHUB-TEST-0001:MEDIUM",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-07-06T18:33:06.531Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-TEST-0001",
+                "relation": "ERC8060:ENABLES:IERC8060Reservable",
+                "protocolPair": "ERC8060->IERC8060Reservable",
+                "observations": 1,
+                "averageConfidence": 68,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:ERC8060:ENABLES:IERC8060Reservable",
+                    "protocol:ERC8060",
+                    "protocol:IERC8060Reservable",
+                    "evidence-profile:GITHUB-TEST-0001:MEDIUM"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-07-06T18:33:06.531Z"
+            },
+            {
+                "entryId": "KNOW-00001",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Standardization->ENABLES->Interoperability",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Standardization->ENABLES->Interoperability",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Authority->CONSTRAINS->Transfer",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Authority->CONSTRAINS->Transfer",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Reservation->CONSTRAINS->Accounting",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->CONSTRAINS->Accounting",
+                    "validation:HYP-00003",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Reservation->BOUNDS->Settlement",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->BOUNDS->Settlement",
+                    "validation:HYP-00004",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "InvariantValidation->VALIDATES->Accounting",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:InvariantValidation->VALIDATES->Accounting",
+                    "validation:HYP-00005",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Burn->ENABLES->Settlement",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Burn->ENABLES->Settlement",
+                    "validation:HYP-00006",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00007",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Ownership->CONSTRAINS->Upgradeability",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Upgradeability",
+                    "validation:HYP-00007",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00008",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC4626->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC4626->SUPPORTS->Standardization",
+                    "validation:HYP-00008",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00009",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC1155->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Standardization",
+                    "validation:HYP-00009",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00010",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC721->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Standardization",
+                    "validation:HYP-00010",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00011",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7821->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7821->SUPPORTS->Standardization",
+                    "validation:HYP-00011",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00012",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP712->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP712->SUPPORTS->Standardization",
+                    "validation:HYP-00012",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00013",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC165->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC165->SUPPORTS->Standardization",
+                    "validation:HYP-00013",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00014",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC4337->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC4337->SUPPORTS->Standardization",
+                    "validation:HYP-00014",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00015",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC6900->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC6900->SUPPORTS->Standardization",
+                    "validation:HYP-00015",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00016",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7579->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7579->SUPPORTS->Standardization",
+                    "validation:HYP-00016",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00017",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC1271->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1271->SUPPORTS->Standardization",
+                    "validation:HYP-00017",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00018",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7739->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7739->SUPPORTS->Standardization",
+                    "validation:HYP-00018",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00019",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC2771->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC2771->SUPPORTS->Standardization",
+                    "validation:HYP-00019",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00020",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP7579->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7579->SUPPORTS->Standardization",
+                    "validation:HYP-00020",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00021",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP7702->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7702->SUPPORTS->Standardization",
+                    "validation:HYP-00021",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00022",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7562->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7562->SUPPORTS->Standardization",
+                    "validation:HYP-00022",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00023",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP7562->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7562->SUPPORTS->Standardization",
+                    "validation:HYP-00023",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00024",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP4337->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP4337->SUPPORTS->Standardization",
+                    "validation:HYP-00024",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00025",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC5267->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC5267->SUPPORTS->Standardization",
+                    "validation:HYP-00025",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00026",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7786->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7786->SUPPORTS->Standardization",
+                    "validation:HYP-00026",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00027",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC7802->SUPPORTS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7802->SUPPORTS->Standardization",
+                    "validation:HYP-00027",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00028",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC20->ENABLES->FungibleAccounting",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->ENABLES->FungibleAccounting",
+                    "validation:HYP-00028",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00029",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC20->SUPPORTS->Transfer",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Transfer",
+                    "validation:HYP-00029",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00030",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC1155->ENABLES->MultiAssetAccounting",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->ENABLES->MultiAssetAccounting",
+                    "validation:HYP-00030",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00031",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "ERC1155->SUPPORTS->Transfer",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Transfer",
+                    "validation:HYP-00031",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00032",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Ownership->CONSTRAINS->Authority",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Authority",
+                    "validation:HYP-00032",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00033",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "SignatureAuthorization->ENABLES->Authority",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SignatureAuthorization->ENABLES->Authority",
+                    "validation:HYP-00033",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00034",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "EIP712->SUPPORTS->SignatureAuthorization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP712->SUPPORTS->SignatureAuthorization",
+                    "validation:HYP-00034",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00035",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "NegativeTesting->SUPPORTS->SafetyConstraint",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:NegativeTesting->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00035",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00036",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Interoperability->SUPPORTS->Composition",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Interoperability->SUPPORTS->Composition",
+                    "validation:HYP-00036",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00037",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Specification->ENABLES->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Specification->ENABLES->Standardization",
+                    "validation:HYP-00037",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00038",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "SecurityConsiderations->CONSTRAINS->Standardization",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                    "validation:HYP-00038",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00039",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "AuditEvidence->SUPPORTS->SafetyConstraint",
+                "protocolPair": "ERC1155+ERC4626",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:AuditEvidence->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00039",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00041",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "Reservation:BOUNDS:Settlement",
+                "protocolPair": "Reservation->Settlement",
+                "observations": 2,
+                "averageConfidence": 74,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:Reservation:BOUNDS:Settlement",
+                    "capability:Reservation",
+                    "capability:Settlement",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00042",
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "relation": "InvariantValidation:VALIDATES:Accounting",
+                "protocolPair": "InvariantValidation->Accounting",
+                "observations": 6,
+                "averageConfidence": 78,
+                "confirmed": 0,
+                "partial": 6,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:InvariantValidation:VALIDATES:Accounting",
+                    "capability:InvariantValidation",
+                    "capability:Accounting",
+                    "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:HIGH",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-07-06T19:57:21.323Z"
+            },
+            {
+                "entryId": "KNOW-00001",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Standardization->ENABLES->Interoperability",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Standardization->ENABLES->Interoperability",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Authority->CONSTRAINS->Transfer",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Authority->CONSTRAINS->Transfer",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Reservation->CONSTRAINS->Accounting",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->CONSTRAINS->Accounting",
+                    "validation:HYP-00003",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "InvariantValidation->VALIDATES->Accounting",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:InvariantValidation->VALIDATES->Accounting",
+                    "validation:HYP-00004",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Ownership->CONSTRAINS->Upgradeability",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Upgradeability",
+                    "validation:HYP-00005",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP2612->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP2612->SUPPORTS->Standardization",
+                    "validation:HYP-00006",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00003",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00007",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC721->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Standardization",
+                    "validation:HYP-00007",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00004",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00008",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC223->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC223->SUPPORTS->Standardization",
+                    "validation:HYP-00008",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00009",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC777->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC777->SUPPORTS->Standardization",
+                    "validation:HYP-00009",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00010",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP777->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP777->SUPPORTS->Standardization",
+                    "validation:HYP-00010",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00011",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP721->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP721->SUPPORTS->Standardization",
+                    "validation:HYP-00011",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00012",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC165->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC165->SUPPORTS->Standardization",
+                    "validation:HYP-00012",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00008",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00013",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP165->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP165->SUPPORTS->Standardization",
+                    "validation:HYP-00013",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00014",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC1155->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Standardization",
+                    "validation:HYP-00014",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00005",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00015",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP1155->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP1155->SUPPORTS->Standardization",
+                    "validation:HYP-00015",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00016",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC1820->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1820->SUPPORTS->Standardization",
+                    "validation:HYP-00016",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00017",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP1820->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP1820->SUPPORTS->Standardization",
+                    "validation:HYP-00017",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00018",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC4524->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC4524->SUPPORTS->Standardization",
+                    "validation:HYP-00018",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00019",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP4524->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP4524->SUPPORTS->Standardization",
+                    "validation:HYP-00019",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00020",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC1363->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1363->SUPPORTS->Standardization",
+                    "validation:HYP-00020",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00021",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP1363->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP1363->SUPPORTS->Standardization",
+                    "validation:HYP-00021",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00022",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC2612->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC2612->SUPPORTS->Standardization",
+                    "validation:HYP-00022",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00023",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC4626->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC4626->SUPPORTS->Standardization",
+                    "validation:HYP-00023",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00006",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00024",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP4626->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP4626->SUPPORTS->Standardization",
+                    "validation:HYP-00024",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00025",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC20->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Standardization",
+                    "validation:HYP-00025",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00009",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00026",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC20->ENABLES->FungibleAccounting",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->ENABLES->FungibleAccounting",
+                    "validation:HYP-00026",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00010",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00027",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC20->SUPPORTS->Transfer",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Transfer",
+                    "validation:HYP-00027",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00011",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00028",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC721->ENABLES->Ownership",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->ENABLES->Ownership",
+                    "validation:HYP-00028",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00012",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00029",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "ERC721->SUPPORTS->Transfer",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Transfer",
+                    "validation:HYP-00029",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00013",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00030",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Mint->ENABLES->Supply",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Mint->ENABLES->Supply",
+                    "validation:HYP-00030",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00018",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00031",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "SignatureAuthorization->ENABLES->Authority",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SignatureAuthorization->ENABLES->Authority",
+                    "validation:HYP-00031",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00019",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00032",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "EIP712->SUPPORTS->SignatureAuthorization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP712->SUPPORTS->SignatureAuthorization",
+                    "validation:HYP-00032",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00020",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00033",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Interoperability->SUPPORTS->Composition",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Interoperability->SUPPORTS->Composition",
+                    "validation:HYP-00033",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00034",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "Specification->ENABLES->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Specification->ENABLES->Standardization",
+                    "validation:HYP-00034",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00023",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00035",
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "relation": "SecurityConsiderations->CONSTRAINS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 2,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 2,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                    "validation:HYP-00035",
+                    "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                    "validation:HYP-00024",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T22:26:58.735Z"
+            },
+            {
+                "entryId": "KNOW-00001",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Standardization->ENABLES->Interoperability",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Standardization->ENABLES->Interoperability",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Authority->CONSTRAINS->Transfer",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Authority->CONSTRAINS->Transfer",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Reservation->CONSTRAINS->Accounting",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->CONSTRAINS->Accounting",
+                    "validation:HYP-00003",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "InvariantValidation->VALIDATES->Accounting",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:InvariantValidation->VALIDATES->Accounting",
+                    "validation:HYP-00004",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Ownership->CONSTRAINS->Upgradeability",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Upgradeability",
+                    "validation:HYP-00005",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP7702->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7702->SUPPORTS->Standardization",
+                    "validation:HYP-00006",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00007",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC1967->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1967->SUPPORTS->Standardization",
+                    "validation:HYP-00007",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00008",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP1967->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP1967->SUPPORTS->Standardization",
+                    "validation:HYP-00008",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00009",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC1271->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1271->SUPPORTS->Standardization",
+                    "validation:HYP-00009",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00010",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP712->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP712->SUPPORTS->Standardization",
+                    "validation:HYP-00010",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00011",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP1271->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP1271->SUPPORTS->Standardization",
+                    "validation:HYP-00011",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00012",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC4337->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC4337->SUPPORTS->Standardization",
+                    "validation:HYP-00012",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00013",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC7739->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7739->SUPPORTS->Standardization",
+                    "validation:HYP-00013",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00014",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC6551->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC6551->SUPPORTS->Standardization",
+                    "validation:HYP-00014",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00015",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC7562->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7562->SUPPORTS->Standardization",
+                    "validation:HYP-00015",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00016",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP7562->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7562->SUPPORTS->Standardization",
+                    "validation:HYP-00016",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00017",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC165->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC165->SUPPORTS->Standardization",
+                    "validation:HYP-00017",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00018",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP165->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP165->SUPPORTS->Standardization",
+                    "validation:HYP-00018",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00019",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC721->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Standardization",
+                    "validation:HYP-00019",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00020",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC7821->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7821->SUPPORTS->Standardization",
+                    "validation:HYP-00020",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00021",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP7579->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP7579->SUPPORTS->Standardization",
+                    "validation:HYP-00021",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00022",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC7579->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7579->SUPPORTS->Standardization",
+                    "validation:HYP-00022",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00023",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC1155->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Standardization",
+                    "validation:HYP-00023",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00024",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP173->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP173->SUPPORTS->Standardization",
+                    "validation:HYP-00024",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00025",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC2981->SUPPORTS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC2981->SUPPORTS->Standardization",
+                    "validation:HYP-00025",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00026",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC20->ENABLES->FungibleAccounting",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->ENABLES->FungibleAccounting",
+                    "validation:HYP-00026",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00027",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC20->SUPPORTS->Transfer",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Transfer",
+                    "validation:HYP-00027",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00028",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC721->ENABLES->Ownership",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->ENABLES->Ownership",
+                    "validation:HYP-00028",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00029",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC721->SUPPORTS->Transfer",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Transfer",
+                    "validation:HYP-00029",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00030",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC1155->ENABLES->MultiAssetAccounting",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->ENABLES->MultiAssetAccounting",
+                    "validation:HYP-00030",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00031",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ERC1155->SUPPORTS->Transfer",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Transfer",
+                    "validation:HYP-00031",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00032",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Ownership->CONSTRAINS->Authority",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Authority",
+                    "validation:HYP-00032",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00033",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EmergencyControl->CONSTRAINS->Transfer",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EmergencyControl->CONSTRAINS->Transfer",
+                    "validation:HYP-00033",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00034",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "ReentrancyGuard->CONSTRAINS->Settlement",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ReentrancyGuard->CONSTRAINS->Settlement",
+                    "validation:HYP-00034",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00035",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Burn->CONSTRAINS->Supply",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Burn->CONSTRAINS->Supply",
+                    "validation:HYP-00035",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00036",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Mint->ENABLES->Supply",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Mint->ENABLES->Supply",
+                    "validation:HYP-00036",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00037",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "SignatureAuthorization->ENABLES->Authority",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SignatureAuthorization->ENABLES->Authority",
+                    "validation:HYP-00037",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00038",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "EIP712->SUPPORTS->SignatureAuthorization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP712->SUPPORTS->SignatureAuthorization",
+                    "validation:HYP-00038",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00039",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Testing->SUPPORTS->InvariantValidation",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Testing->SUPPORTS->InvariantValidation",
+                    "validation:HYP-00039",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00040",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "NegativeTesting->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:NegativeTesting->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00040",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00041",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "Specification->ENABLES->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Specification->ENABLES->Standardization",
+                    "validation:HYP-00041",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00042",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "SecurityConsiderations->CONSTRAINS->Standardization",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                    "validation:HYP-00042",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00043",
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "relation": "AuditEvidence->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP7702+ERC1967",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:AuditEvidence->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00043",
+                    "evidence-profile:GITHUB-VECTORIZED-SOLADY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-06T23:37:07.647Z"
+            },
+            {
+                "entryId": "KNOW-00007",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "ERC6909->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC6909->SUPPORTS->Standardization",
+                    "validation:HYP-00007",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00014",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "ERC1155->ENABLES->MultiAssetAccounting",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->ENABLES->MultiAssetAccounting",
+                    "validation:HYP-00014",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00015",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "ERC1155->SUPPORTS->Transfer",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Transfer",
+                    "validation:HYP-00015",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00016",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "ReentrancyGuard->CONSTRAINS->Settlement",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ReentrancyGuard->CONSTRAINS->Settlement",
+                    "validation:HYP-00016",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00017",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "Burn->CONSTRAINS->Supply",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Burn->CONSTRAINS->Supply",
+                    "validation:HYP-00017",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00021",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "Testing->SUPPORTS->InvariantValidation",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Testing->SUPPORTS->InvariantValidation",
+                    "validation:HYP-00021",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00022",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "NegativeTesting->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:NegativeTesting->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00022",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00025",
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "relation": "AuditEvidence->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP2612+ERC721",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:AuditEvidence->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00025",
+                    "evidence-profile:GITHUB-TRANSMISSIONS11-SOLMATE:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-09T18:14:06.189Z"
+            },
+            {
+                "entryId": "KNOW-00001",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Standardization->ENABLES->Interoperability",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Standardization->ENABLES->Interoperability",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Authority->CONSTRAINS->Transfer",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Authority->CONSTRAINS->Transfer",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00003",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Reservation->CONSTRAINS->Accounting",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->CONSTRAINS->Accounting",
+                    "validation:HYP-00003",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00004",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Reservation->BOUNDS->Settlement",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Reservation->BOUNDS->Settlement",
+                    "validation:HYP-00004",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "InvariantValidation->VALIDATES->Accounting",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:InvariantValidation->VALIDATES->Accounting",
+                    "validation:HYP-00005",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Burn->ENABLES->Settlement",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 36,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Burn->ENABLES->Settlement",
+                    "validation:HYP-00006",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00007",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Ownership->CONSTRAINS->Upgradeability",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Upgradeability",
+                    "validation:HYP-00007",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00008",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "EIP3156->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP3156->SUPPORTS->Standardization",
+                    "validation:HYP-00008",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00009",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "EIP2612->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:EIP2612->SUPPORTS->Standardization",
+                    "validation:HYP-00009",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00010",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC1155->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC1155->SUPPORTS->Standardization",
+                    "validation:HYP-00010",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00011",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC7201->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC7201->SUPPORTS->Standardization",
+                    "validation:HYP-00011",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00012",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC20->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Standardization",
+                    "validation:HYP-00012",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00013",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC721->SUPPORTS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC721->SUPPORTS->Standardization",
+                    "validation:HYP-00013",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00014",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC20->ENABLES->FungibleAccounting",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->ENABLES->FungibleAccounting",
+                    "validation:HYP-00014",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00015",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "ERC20->SUPPORTS->Transfer",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:ERC20->SUPPORTS->Transfer",
+                    "validation:HYP-00015",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00016",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Ownership->CONSTRAINS->Authority",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Ownership->CONSTRAINS->Authority",
+                    "validation:HYP-00016",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00017",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Burn->CONSTRAINS->Supply",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Burn->CONSTRAINS->Supply",
+                    "validation:HYP-00017",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00018",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Mint->ENABLES->Supply",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Mint->ENABLES->Supply",
+                    "validation:HYP-00018",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00019",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "NegativeTesting->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:NegativeTesting->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00019",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00020",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "Specification->ENABLES->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Specification->ENABLES->Standardization",
+                    "validation:HYP-00020",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00021",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "SecurityConsiderations->CONSTRAINS->Standardization",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                    "validation:HYP-00021",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00022",
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "relation": "AuditEvidence->SUPPORTS->SafetyConstraint",
+                "protocolPair": "EIP2612+EIP3156",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:AuditEvidence->SUPPORTS->SafetyConstraint",
+                    "validation:HYP-00022",
+                    "evidence-profile:GITHUB-FOUNDRY-RS-FOUNDRY:HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-07-13T16:29:48.820Z"
+            },
+            {
+                "entryId": "KNOW-00001",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "protocolPair": "ERC1155+ERC20",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                    "validation:HYP-00001",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-08-24T21:47:24.169Z"
+            },
+            {
+                "entryId": "KNOW-00002",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "protocolPair": "ERC1155+ERC20",
+                "observations": 1,
+                "averageConfidence": 25,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                    "validation:HYP-00002",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "LEARNING",
+                "timestamp": "2026-08-24T21:47:24.169Z"
+            },
+            {
+                "entryId": "KNOW-00005",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "Testing:SUPPORTS:InvariantValidation",
+                "protocolPair": "Testing->InvariantValidation",
+                "observations": 1,
+                "averageConfidence": 70,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:Testing:SUPPORTS:InvariantValidation",
+                    "capability:Testing",
+                    "capability:InvariantValidation",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-08-24T21:47:24.169Z"
+            },
+            {
+                "entryId": "KNOW-00006",
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+                "protocolPair": "InvariantLanguage->SafetyConstraint",
+                "observations": 1,
+                "averageConfidence": 64,
+                "confirmed": 0,
+                "partial": 1,
+                "unsupported": 0,
+                "status": "EMERGING",
+                "evidence": [
+                    "machine-reasoning",
+                    "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                    "claim:normative-language",
+                    "evidence-profile:GITHUB-THIRDWEB-DEV-CONTRACTS:VERY_HIGH"
+                ],
+                "generatedBy": "MACHINE_REASONING",
+                "timestamp": "2026-08-24T21:47:24.169Z"
             }
         ],
         "statistics": {
-            "entries": 10,
-            "totalObservations": 51,
-            "emerging": 6,
+            "entries": 166,
+            "totalObservations": 236,
+            "emerging": 162,
             "supported": 4,
             "validated": 0,
             "canonical": 0,
@@ -178,6 +3201,38 @@
             {
                 "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
                 "processedAt": "2026-07-03T13:13:41.035Z"
+            },
+            {
+                "sourceId": "GITHUB-TEST-0001",
+                "processedAt": "2026-07-06T18:33:06.563Z"
+            },
+            {
+                "sourceId": "GITHUB-ETHEREUM-EIPS",
+                "processedAt": "2026-07-06T18:41:18.787Z"
+            },
+            {
+                "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+                "processedAt": "2026-07-06T19:57:21.358Z"
+            },
+            {
+                "sourceId": "GITHUB-CRYTIC-SLITHER",
+                "processedAt": "2026-07-06T22:26:58.798Z"
+            },
+            {
+                "sourceId": "GITHUB-VECTORIZED-SOLADY",
+                "processedAt": "2026-07-06T23:37:07.680Z"
+            },
+            {
+                "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "processedAt": "2026-07-09T18:14:06.229Z"
+            },
+            {
+                "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "processedAt": "2026-07-13T16:29:48.857Z"
+            },
+            {
+                "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+                "processedAt": "2026-08-24T21:47:24.182Z"
             }
         ]
     },
