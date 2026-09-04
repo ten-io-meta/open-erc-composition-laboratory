@@ -27,6 +27,14 @@ import {
 } from "../laboratory/research-planner/ResearchPlannerEvaluator.js";
 
 import {
+    CandidateSourceAcquisitionEngine
+} from "../laboratory/candidate-source-acquisition/CandidateSourceAcquisitionEngine.js";
+
+import {
+    GitHubCandidateRepositoryAcquirer
+} from "../laboratory/candidate-source-acquisition/GitHubCandidateRepositoryAcquirer.js";
+
+import {
     ResearchReportV2Engine
 } from "../laboratory/research-report/ResearchReportV2Engine.js";
 
@@ -337,6 +345,59 @@ const scientificProvenanceClosure =
     const evaluatedResearchPlan =
         new ResearchPlannerEvaluator().evaluate(
             researchPlan
+        );
+
+    /*
+     * ==================================================
+     * 6.1 CANDIDATE SOURCE ACQUISITION
+     * ==================================================
+     *
+     * Recommended repositories may be operationally
+     * acquired here, but acquisition never constitutes
+     * scientific source admission.
+     *
+     * The scientific corpus for this campaign was already
+     * fixed by SourcePipeline. Newly acquired bundles remain
+     * disabled and can only affect a later campaign after
+     * an explicit admission decision.
+     */
+
+    const registeredRepositories: string[] = [];
+
+    for (const entry of source.manifest.sources) {
+
+        try {
+
+            const registeredSource =
+                await researchSourceLoader.load(
+                    entry.path
+                );
+
+            if (
+                typeof registeredSource.repository === "string" &&
+                registeredSource.repository.trim().length > 0
+            ) {
+                registeredRepositories.push(
+                    registeredSource.repository
+                );
+            }
+
+        } catch {
+            /*
+             * A manifest entry whose source artifact cannot
+             * be loaded cannot establish repository identity.
+             * It is therefore excluded from acquisition dedupe
+             * without altering the scientific source manifest.
+             */
+        }
+    }
+
+    const candidateSourceAcquisition =
+        await new CandidateSourceAcquisitionEngine(
+            new GitHubCandidateRepositoryAcquirer()
+        ).acquire(
+            evaluatedResearchPlan,
+            registeredRepositories
         );
 
     /*
@@ -1280,6 +1341,8 @@ scientificRuntimeOutcomeAdapterSkippedIgnored:
          */
         scientificPostExecutionReferentialIntegrity:
             scientific.scientificPostExecutionReferentialIntegrity,
+
+        candidateSourceAcquisition,
 
         intelligenceSummary: {
 
