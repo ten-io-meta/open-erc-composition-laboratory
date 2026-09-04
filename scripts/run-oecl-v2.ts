@@ -305,7 +305,19 @@ const scientificProvenanceClosure =
 
     /*
      * ==================================================
-     * 5. RESEARCH PLANNING
+     * 5. PREVIOUS RESEARCH STATE
+     * ==================================================
+     */
+
+    const researchHistoryManager =
+        new ResearchHistoryManager();
+
+    const previousResearchState =
+        await researchHistoryManager.load();
+
+    /*
+     * ==================================================
+     * 6. RESEARCH PLANNING
      * ==================================================
      */
 
@@ -318,25 +330,14 @@ const scientificProvenanceClosure =
     const researchPlan =
         new ResearchPlannerEngine().build(
             knowledge.crossSourcePatterns,
-            existingRepositories
+            existingRepositories,
+            previousResearchState?.researchStrategy
         );
 
     const evaluatedResearchPlan =
         new ResearchPlannerEvaluator().evaluate(
             researchPlan
         );
-
-    /*
-     * ==================================================
-     * 6. PREVIOUS RESEARCH STATE
-     * ==================================================
-     */
-
-    const researchHistoryManager =
-        new ResearchHistoryManager();
-
-    const previousResearchState =
-        await researchHistoryManager.load();
 
     /*
      * ==================================================
@@ -429,7 +430,10 @@ const scientificProvenanceClosure =
         knowledge.researchConclusions,
 
     researchEvolution:
-        intelligence.researchEvolution
+        intelligence.researchEvolution,
+
+    researchStrategy:
+        intelligence.researchStrategy
 
 });
 

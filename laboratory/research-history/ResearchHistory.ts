@@ -2,6 +2,8 @@ import type {
     ResearchEvolutionResult
 } from "../research-evolution/ResearchEvolutionResult.js";
 
+import type { ResearchStrategyResult } from "../research-strategy/ResearchStrategyResult.js";
+
 export interface ResearchHistory {
 
     generatedAt: string;
@@ -15,4 +17,6 @@ export interface ResearchHistory {
     researchEvolution?:
         ResearchEvolutionResult;
 
+
+    researchStrategy?: ResearchStrategyResult;
 }

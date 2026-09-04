@@ -1,4 +1,6 @@
 import type { CrossSourcePatternResult } from "../cross-source-patterns/CrossSourcePatternResult.js";
+import type { ResearchStrategyResult } from "../research-strategy/ResearchStrategyResult.js";
+
 import type { ResearchPlan } from "./ResearchPlan.js";
 import type { ResearchTask } from "./ResearchTask.js";
 
@@ -6,7 +8,8 @@ export class ResearchPlannerEngine {
 
     build(
         patterns: CrossSourcePatternResult,
-        existingRepositories: string[] = []
+        existingRepositories: string[] = [],
+        previousResearchStrategy?: ResearchStrategyResult | null
     ): ResearchPlan {
 
         const tasks: ResearchTask[] = [];
@@ -29,7 +32,7 @@ export class ResearchPlannerEngine {
             }
 
             tasks.push({
-                taskId: `TASK-${String(counter).padStart(5, "0")}`,
+                taskId: `TASK-${String(counter++).padStart(5, "0")}`,
 
                 priority:
                     pattern.confidence < 40
@@ -45,7 +48,43 @@ export class ResearchPlannerEngine {
                     repositories
             });
 
-            counter++;
+        }
+
+        /*
+         * Carry forward actionable strategy from the
+         * previous campaign without replacing tasks
+         * derived from current evidence.
+         */
+        for (
+            const strategy of
+            previousResearchStrategy?.strategies ?? []
+        ) {
+
+            const repositories =
+                strategy.targetRepositories.filter(repository =>
+                    !this.isAlreadyUsed(
+                        repository,
+                        existingRepositories
+                    )
+                );
+
+            if (repositories.length === 0) {
+                continue;
+            }
+
+            tasks.push({
+                taskId:
+                    `TASK-${String(counter++).padStart(5, "0")}`,
+
+                priority:
+                    strategy.priority,
+
+                reason:
+                    `Previous research strategy: ${strategy.objective}`,
+
+                recommendedRepositories:
+                    repositories
+            });
 
         }
 
