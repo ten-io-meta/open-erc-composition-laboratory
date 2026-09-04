@@ -61,6 +61,7 @@ export class ComposabilityEvidenceEngine {
 
             const structuredClaims = this.extractStructuredClaims(
                 extraction,
+                semantics,
                 counter
             );
 
@@ -92,15 +93,13 @@ export class ComposabilityEvidenceEngine {
 
     private extractStructuredClaims(
         extraction: any,
+        semantics: ProtocolSemanticResult,
         startCounter: number
     ): ComposabilityEvidenceClaim[] {
 
         if (!extraction?.claims) {
             return [];
         }
-
-        const protocols = extraction.protocols ?? [];
-        const sourceId = extraction.sourceId ?? "UNKNOWN-SOURCE";
 
         const supportedRelations = [
             "ENABLES",
@@ -131,16 +130,28 @@ export class ComposabilityEvidenceEngine {
             if (!matchedRelation) {
                 continue;
             }
-const [capabilityA, capabilityB] = cleanText
-    .split(` ${matchedRelation} `)
-    .map((part: string) => part.trim());
+
+            const [capabilityA, capabilityB] = cleanText
+                .split(` ${matchedRelation} `)
+                .map((part: string) => part.trim());
 
             if (!capabilityA || !capabilityB) {
                 continue;
             }
 
-            const protocolA = protocols[0] ?? sourceId;
-            const protocolB = protocols[1] ?? protocolA;
+            const protocolA = semantics.semantics.find(
+                semantic =>
+                    semantic.capabilities.includes(capabilityA)
+            )?.protocolId;
+
+            const protocolB = semantics.semantics.find(
+                semantic =>
+                    semantic.capabilities.includes(capabilityB)
+            )?.protocolId;
+
+            if (!protocolA || !protocolB || protocolA === protocolB) {
+                continue;
+            }
 
             claims.push(
                 this.createClaim(
