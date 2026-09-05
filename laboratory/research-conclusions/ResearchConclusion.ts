@@ -6,6 +6,8 @@ export interface ResearchConclusion {
 
     sourcePatternRelation: string;
 
+    protocolPair?: string;
+
     subject: string;
 
     relation: string;
@@ -18,7 +20,10 @@ export interface ResearchConclusion {
 
     confidence: number;
 
-    status: "PRELIMINARY" | "SUPPORTED" | "ESTABLISHED";
+    status:
+        "PRELIMINARY" |
+        "SUPPORTED" |
+        "ESTABLISHED";
 
     evidence: string[];
 

@@ -73,9 +73,10 @@ export class KnowledgePipeline {
          */
 
         const crossSourcePatterns =
-            new CrossSourcePatternEngine().discover(
-                mergedKnowledge
-            );
+    new CrossSourcePatternEngine().discover(
+        mergedKnowledge,
+        sourceIndependenceAssessments
+    );
 
         /*
          * Research conclusions

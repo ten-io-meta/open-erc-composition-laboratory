@@ -6,6 +6,8 @@ export interface CrossSourcePattern {
 
     normalizedRelation: string;
 
+    protocolPair?: string;
+
     sources: string[];
 
     occurrences: number;

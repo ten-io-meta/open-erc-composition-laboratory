@@ -39,6 +39,12 @@ sourcePatternRelation:
         pattern.relation ??
         ""
     ),
+    protocolPair:
+    pattern.protocolPair
+        ? String(
+            pattern.protocolPair
+        )
+        : undefined,
                         statement,
                         supportedBy:
     [

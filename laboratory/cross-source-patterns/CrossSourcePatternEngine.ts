@@ -1,9 +1,21 @@
+import type {
+    SourceIndependenceAssessment
+} from "../source-independence/SourceIndependenceAssessment.js";
+
+import {
+    SourceIndependenceSetAssessmentEngine
+} from "../source-independence/SourceIndependenceSetAssessmentEngine.js";
+
 import type { CrossSourcePattern } from "./CrossSourcePattern.js";
 import type { CrossSourcePatternResult } from "./CrossSourcePatternResult.js";
 
 export class CrossSourcePatternEngine {
 
-    discover(mergedKnowledge: any): CrossSourcePatternResult {
+    discover(
+        mergedKnowledge: any,
+        sourceIndependenceAssessments:
+            SourceIndependenceAssessment[] = []
+    ): CrossSourcePatternResult {
 
         try {
 
@@ -21,56 +33,93 @@ export class CrossSourcePatternEngine {
                 }
 
                 const normalizedRelation = this.normalizeRelation(relation);
+                const protocolPair = this.extractProtocolPair(entry);
 
-                if (!grouped.has(normalizedRelation)) {
-                    grouped.set(normalizedRelation, []);
+                const identity = this.patternIdentity(
+                    normalizedRelation,
+                    protocolPair
+                );
+
+                if (!grouped.has(identity)) {
+                    grouped.set(identity, []);
                 }
 
-                grouped.get(normalizedRelation)?.push(entry);
+                grouped.get(identity)?.push(entry);
             }
 
             const patterns: CrossSourcePattern[] = [];
+            const independenceEngine =
+                new SourceIndependenceSetAssessmentEngine();
 
-            Array.from(grouped.entries()).forEach(([normalizedRelation, group], index) => {
+            Array.from(grouped.values()).forEach((group, index) => {
+
+                const firstEntry = group[0];
+
+                const normalizedRelation =
+                    this.normalizeRelation(
+                        String(firstEntry?.relation ?? "")
+                    );
+
+                const protocolPair =
+                    this.extractProtocolPair(firstEntry);
 
                 const sources = Array.from(
                     new Set(
-                        group.map(entry => this.extractSource(entry))
+                        group.flatMap(entry =>
+                            this.extractSources(entry)
+                        )
                     )
                 ).filter(source => source !== "UNKNOWN");
 
                 const confidence = Math.round(
                     group.reduce(
                         (sum, entry) =>
-                            sum + Number(entry.averageConfidence ?? entry.confidence ?? 0),
+                            sum + Number(
+                                entry.averageConfidence
+                                ?? entry.confidence
+                                ?? 0
+                            ),
                         0
                     ) / Math.max(group.length, 1)
                 );
 
-                const status =
-                    sources.length >= 3
+                const independence =
+                    independenceEngine.build(
+                        sources,
+                        sourceIndependenceAssessments
+                    );
+
+                const independentSources =
+                    independence.establishedIndependentSources;
+
+                const status: CrossSourcePattern["status"] =
+                    independentSources >= 3
                         ? "SUPPORTED"
-                        : sources.length >= 2
+                        : independentSources >= 2
                             ? "EMERGING"
                             : "CANDIDATE";
 
                 patterns.push({
                     patternId: `CROSS-PATTERN-${String(index + 1).padStart(5, "0")}`,
-                    relation: String(group[0].relation),
+                    relation: String(firstEntry?.relation ?? ""),
                     normalizedRelation,
+                    protocolPair:
+                        protocolPair === "UNKNOWN_PROTOCOL_PAIR"
+                            ? undefined
+                            : protocolPair,
                     sources,
                     occurrences: group.length,
                     confidence,
                     status,
                     evidence: Array.from(
-    new Set(
-        group.flatMap(entry =>
-            Array.isArray(entry.evidence)
-                ? entry.evidence.map(String)
-                : []
-        )
-    )
-)
+                        new Set(
+                            group.flatMap(entry =>
+                                Array.isArray(entry.evidence)
+                                    ? entry.evidence.map(String)
+                                    : []
+                            )
+                        )
+                    )
                 });
 
             });
@@ -122,16 +171,52 @@ export class CrossSourcePatternEngine {
             .toUpperCase();
     }
 
-    private extractSource(entry: any): string {
-        return entry.sourceId
-            ? String(entry.sourceId)
-            : "UNKNOWN";
+    private extractProtocolPair(entry: any): string {
+        const protocolPair =
+            String(entry?.protocolPair ?? "").trim();
+
+        return protocolPair || "UNKNOWN_PROTOCOL_PAIR";
+    }
+
+    private patternIdentity(
+        normalizedRelation: string,
+        protocolPair: string
+    ): string {
+        return `${normalizedRelation}|${protocolPair}`;
+    }
+
+    private extractSources(entry: any): string[] {
+        const sources = new Set<string>();
+
+        if (Array.isArray(entry?.sources)) {
+            for (const source of entry.sources) {
+                const normalized =
+                    String(source ?? "").trim();
+
+                if (normalized) {
+                    sources.add(normalized);
+                }
+            }
+        }
+
+        if (entry?.sourceId) {
+            const primarySource =
+                String(entry.sourceId).trim();
+
+            if (primarySource) {
+                sources.add(primarySource);
+            }
+        }
+
+        return sources.size > 0
+            ? [...sources]
+            : ["UNKNOWN"];
     }
 
     private countSources(entries: any[]): number {
         return new Set(
             entries
-                .map(entry => this.extractSource(entry))
+                .flatMap(entry => this.extractSources(entry))
                 .filter(source => source !== "UNKNOWN")
         ).size;
     }
