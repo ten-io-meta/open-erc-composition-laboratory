@@ -5,6 +5,8 @@
     "repository": "erc-8004/erc-8004-contracts",
     "localPath": "./external/github/erc-8004/erc-8004-contracts",
     "url": "https://github.com/erc-8004/erc-8004-contracts",
+    "commitSha": "b9e466c250744a7e06b13dff9d3c2844ed64f825",
+    "worktreeClean": true,
     "description": "Automatically generated OECL research bundle from GitHub repository erc-8004/erc-8004-contracts.",
     "toolchain": "HARDHAT",
     "protocols": [

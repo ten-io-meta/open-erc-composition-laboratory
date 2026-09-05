@@ -52,6 +52,12 @@ export class SourceBundleWriter {
                     url:
                         bundle.url,
 
+                    commitSha:
+                        bundle.commitSha ?? null,
+
+                    worktreeClean:
+                        bundle.worktreeClean ?? null,
+
                     description:
                         bundle.description,
 
@@ -108,6 +114,22 @@ export class SourceBundleWriter {
                 ]
             };
 
+        const commitSha =
+            bundle.commitSha?.trim();
+
+        const hasImmutableRevision =
+            /^[0-9a-f]{40}$/i.test(
+                commitSha ?? ""
+            );
+
+        const hasCleanWorktree =
+            bundle.worktreeClean === true;
+
+        const reproducible =
+            evidence.reproducible === true &&
+            hasImmutableRevision &&
+            hasCleanWorktree;
+
         await writeFile(
             `${bundlePath}/evidence.json`,
             JSON.stringify(
@@ -121,8 +143,13 @@ export class SourceBundleWriter {
                     quality:
                         evidence.quality,
 
-                    reproducible:
-                        evidence.reproducible,
+                    reproducible,
+
+                    commitSha:
+                        commitSha ?? null,
+
+                    worktreeClean:
+                        bundle.worktreeClean ?? null,
 
                     hasImplementation:
                         evidence.hasImplementation,

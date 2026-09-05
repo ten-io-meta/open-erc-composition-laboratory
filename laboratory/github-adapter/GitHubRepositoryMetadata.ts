@@ -4,4 +4,6 @@ export interface GitHubRepositoryMetadata {
     url: string;
     localPath: string;
     defaultBranch?: string;
+    commitSha?: string;
+    worktreeClean?: boolean;
 }

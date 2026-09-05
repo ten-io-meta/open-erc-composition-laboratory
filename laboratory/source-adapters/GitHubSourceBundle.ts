@@ -16,6 +16,12 @@ export interface GitHubSourceBundle {
     url:
         string;
 
+    commitSha?:
+        string;
+
+    worktreeClean?:
+        boolean;
+
     title:
         string;
 

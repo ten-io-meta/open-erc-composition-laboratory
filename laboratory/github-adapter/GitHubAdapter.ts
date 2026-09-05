@@ -157,20 +157,26 @@ export class GitHubAdapter {
             );
 
             await writer.write({
-                sourceId:
-                    bundle.sourceId,
+    sourceId:
+        bundle.sourceId,
 
-                repository:
-                    bundle.repository,
+    repository:
+        bundle.repository,
 
-                localPath:
-                    repository.localPath,
+    localPath:
+        repository.localPath,
 
-                url:
-                    bundle.url,
+    url:
+        bundle.url,
 
-                title:
-                    bundle.title,
+    commitSha:
+        repository.commitSha,
+
+worktreeClean:
+    repository.worktreeClean,
+
+title:
+    bundle.title,
 
                 description:
                     bundle.description,
