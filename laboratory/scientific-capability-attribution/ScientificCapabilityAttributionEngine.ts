@@ -630,16 +630,23 @@ export class ScientificCapabilityAttributionEngine {
             AttributionAccumulator
     ): string {
 
-        const revision =
+        const revisionPresence =
+            input.derivation.sourceRevision ===
+                undefined
+                ? "REVISION-ABSENT"
+                : "REVISION-PRESENT";
+
+        const revisionValue =
             input.derivation.sourceRevision ??
-            "UNVERSIONED";
+            "";
 
 
         const identityComponents =
             [
                 "ATTRIBUTION",
                 input.derivation.sourceId,
-                revision,
+                revisionPresence,
+                revisionValue,
                 accumulator.observationId,
                 accumulator.containerKind,
                 accumulator.containerSymbol,
