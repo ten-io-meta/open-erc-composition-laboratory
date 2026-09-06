@@ -6,7 +6,9 @@ export interface ResearchMemoryEvent {
 
     relation: string;
 
-    protocolPair: string;
+    protocolPair?: string;
+
+    capabilityPair?: string;
 
     confidence: number;
 

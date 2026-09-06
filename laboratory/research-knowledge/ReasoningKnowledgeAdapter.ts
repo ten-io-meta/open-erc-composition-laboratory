@@ -52,8 +52,9 @@ export class ReasoningKnowledgeAdapter {
                 return {
                     entryId: `KNOW-${String(startIndex + index +1).padStart(5, "0")}`,
                     sourceId,
-                    relation: `${subject}:${relation}:${object}`,
-                    protocolPair: `${subject}->${object}`,
+                    relation,
+                    protocolPair: undefined,
+                    capabilityPair: `${subject}->${object}`,
                     observations: 1,
                     averageConfidence: confidence,
                     confirmed: 0,

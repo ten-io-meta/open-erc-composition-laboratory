@@ -13,7 +13,20 @@ export interface KnowledgeEntry {
 
     relation: string;
 
-    protocolPair: string;
+    /*
+     * Real protocol identity only.
+     *
+     * Absence means this knowledge entry does not carry
+     * attributable protocol-pair information.
+     */
+    protocolPair?: string;
+
+    /*
+     * Semantic capability identity.
+     *
+     * This must never be promoted into protocolPair.
+     */
+    capabilityPair?: string;
 
     observations: number;
 

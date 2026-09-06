@@ -4,7 +4,9 @@ export interface ResearchMemoryTimeline {
 
     relation: string;
 
-    protocolPair: string;
+    protocolPair?: string;
+
+    capabilityPair?: string;
 
     events: ResearchMemoryEvent[];
 

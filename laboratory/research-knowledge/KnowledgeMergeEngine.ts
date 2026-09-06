@@ -450,7 +450,13 @@ export class KnowledgeMergeEngine {
             ),
 
             this.normalizeValue(
-                entry.protocolPair
+                entry.protocolPair ??
+                ""
+            ),
+
+            this.normalizeValue(
+                entry.capabilityPair ??
+                ""
             ),
 
             entry.generatedBy ??

@@ -113,7 +113,11 @@ export class IncrementalKnowledgeBuilder {
     }
 
     private key(entry: KnowledgeEntry): string {
-        return `${entry.relation}|${entry.protocolPair}`;
+        return [
+            entry.relation,
+            `PROTOCOL:${entry.protocolPair ?? ""}`,
+            `CAPABILITY:${entry.capabilityPair ?? ""}`
+        ].join("|");
     }
 
 }

@@ -78,6 +78,7 @@ export class ResearchMemoryEngine {
             sourceId,
             relation: entry.relation,
             protocolPair: entry.protocolPair,
+            capabilityPair: entry.capabilityPair,
             confidence: entry.averageConfidence,
             status: entry.status,
             observedAt: new Date().toISOString(),
@@ -92,7 +93,8 @@ export class ResearchMemoryEngine {
         return existingEvents.some(existing =>
             existing.sourceId === event.sourceId &&
             existing.relation === event.relation &&
-            existing.protocolPair === event.protocolPair
+            existing.protocolPair === event.protocolPair &&
+            existing.capabilityPair === event.capabilityPair
         );
     }
 
@@ -102,18 +104,24 @@ export class ResearchMemoryEngine {
         const groups = new Map<string, ResearchMemoryEvent[]>();
 
         for (const event of events) {
-            const key = `${event.relation}|${event.protocolPair}`;
+            const key = JSON.stringify([
+                event.relation,
+                event.protocolPair ?? null,
+                event.capabilityPair ?? null
+            ]);
+
             const existing = groups.get(key) ?? [];
             existing.push(event);
             groups.set(key, existing);
         }
 
-        return [...groups.entries()].map(([key, group]) => {
-            const [relation, protocolPair] = key.split("|");
+        return [...groups.values()].map(group => {
+            const first = group[0];
 
             return {
-                relation,
-                protocolPair,
+                relation: first.relation,
+                protocolPair: first.protocolPair,
+                capabilityPair: first.capabilityPair,
                 events: group
             };
         });

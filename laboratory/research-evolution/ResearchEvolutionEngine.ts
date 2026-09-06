@@ -654,8 +654,10 @@ export class ResearchEvolutionEngine {
                             entry.id ??
                             `${
                                 entry.relation ?? statement
-                            }|${
+                            }|PROTOCOL:${
                                 entry.protocolPair ?? ""
+                            }|CAPABILITY:${
+                                entry.capabilityPair ?? ""
                             }`
                         ),
 

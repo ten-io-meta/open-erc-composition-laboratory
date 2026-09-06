@@ -70,7 +70,8 @@ export class KnowledgeConflictDetector {
         b: KnowledgeEntry
     ): boolean {
         return a.relation === b.relation &&
-            a.protocolPair === b.protocolPair;
+            a.protocolPair === b.protocolPair &&
+            a.capabilityPair === b.capabilityPair;
     }
 
     private isPositive(status: string): boolean {
