@@ -80,6 +80,38 @@ export class SourceBundleWriter {
                 4
             )
         );
+        if (
+            bundle.sourceObservations !==
+            undefined
+        ) {
+
+            await writeFile(
+                `${bundlePath}/scientific-source-observations.json`,
+                JSON.stringify(
+                    bundle.sourceObservations,
+                    null,
+                    4
+                )
+            );
+
+        }
+
+
+        if (
+            bundle.sourceFacts !==
+            undefined
+        ) {
+
+            await writeFile(
+                `${bundlePath}/scientific-source-facts.json`,
+                JSON.stringify(
+                    bundle.sourceFacts,
+                    null,
+                    4
+                )
+            );
+
+        }
 
         const evidence =
             bundle.evidence ?? {

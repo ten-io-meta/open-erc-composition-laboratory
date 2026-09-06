@@ -2,16 +2,28 @@ import type {
     GitHubRepositoryIntelligenceResult
 } from "./GitHubRepositoryIntelligence.js";
 
-import type { GitHubRepositoryMetadata } from "./GitHubRepositoryMetadata.js";
+import type {
+    GitHubRepositoryMetadata
+} from "./GitHubRepositoryMetadata.js";
+
+import type {
+    ScientificSourceObservation
+} from "../scientific-source-observation/ScientificSourceObservation.js";
+
+import type {
+    ScientificSourceFact
+} from "../scientific-source-fact/ScientificSourceFact.js";
+
 
 export interface GitHubAdapterResult {
 
     generatedAt: string;
 
-    repository: GitHubRepositoryMetadata;
+    repository:
+        GitHubRepositoryMetadata;
 
     intelligence:
-    GitHubRepositoryIntelligenceResult;
+        GitHubRepositoryIntelligenceResult;
 
     sourceId: string;
 
@@ -22,6 +34,12 @@ export interface GitHubAdapterResult {
     capabilities: string[];
 
     claims: string[];
+
+    sourceObservations:
+        ScientificSourceObservation[];
+
+    sourceFacts:
+        ScientificSourceFact[];
 
     evidenceQuality: string;
 

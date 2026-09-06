@@ -2,6 +2,15 @@ import type {
     GitHubExecutableTarget
 } from "../github-adapter/GitHubExecutableTargetExtractor.js";
 
+import type {
+    ScientificSourceObservation
+} from "../scientific-source-observation/ScientificSourceObservation.js";
+
+import type {
+    ScientificSourceFact
+} from "../scientific-source-fact/ScientificSourceFact.js";
+
+
 export interface GitHubSourceBundle {
 
     sourceId:
@@ -54,6 +63,26 @@ export interface GitHubSourceBundle {
      */
     executableTargets:
         GitHubExecutableTarget[];
+
+    /*
+     * Pre-reasoning observations extracted directly
+     * from source material.
+     *
+     * Optional for compatibility with legacy bundle
+     * producers. The scientific GitHub adapter should
+     * populate these when available.
+     */
+    sourceObservations?:
+        ScientificSourceObservation[];
+
+    /*
+     * Structural facts derived only from concrete
+     * scientific source observations.
+     *
+     * These facts must not encode composition answers.
+     */
+    sourceFacts?:
+        ScientificSourceFact[];
 
     evidence?: {
 

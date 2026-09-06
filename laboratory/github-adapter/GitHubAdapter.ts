@@ -5,6 +5,8 @@ import { GitHubClaimExtractor } from "./GitHubClaimExtractor.js";
 import { GitHubEvidenceExtractor } from "./GitHubEvidenceExtractor.js";
 import { GitHubRepositoryIntelligence } from "./GitHubRepositoryIntelligence.js";
 import { GitHubBundleBuilder } from "./GitHubBundleBuilder.js";
+import { GitHubScientificSourceObservationExtractor } from "./GitHubScientificSourceObservationExtractor.js";
+import { SolidityScientificSourceFactExtractor } from "../scientific-source-fact/SolidityScientificSourceFactExtractor.js";
 import { SourceBundleWriter } from "../source-adapters/SourceBundleWriter.js";
 
 import type {
@@ -41,6 +43,12 @@ export class GitHubAdapter {
 
             const bundleBuilder =
                 new GitHubBundleBuilder();
+
+            const scientificSourceObservationExtractor =
+                new GitHubScientificSourceObservationExtractor();
+
+            const solidityScientificSourceFactExtractor =
+                new SolidityScientificSourceFactExtractor();
 
             const writer =
                 new SourceBundleWriter();
@@ -147,6 +155,28 @@ export class GitHubAdapter {
                     claims,
                     evidence
                 });
+            const sourceObservations =
+                scientificSourceObservationExtractor.extract({
+                    sourceId:
+                        bundle.sourceId,
+
+                    sourceRevision:
+                        repository.commitSha,
+
+                    sourceLocation:
+                        bundle.url,
+
+                    files:
+                        files
+                });
+
+            const sourceFacts =
+                sourceObservations.flatMap(
+                    observation =>
+                        solidityScientificSourceFactExtractor.extract(
+                            observation
+                        )
+                );
 
             console.log(
                 `[GitHubAdapter] bundle built: ${bundle.sourceId}`
@@ -194,9 +224,13 @@ title:
     bundle.claims,
 
 executableTargets:
-    intelligence.executableTargets,
+        intelligence.executableTargets,
 
-evidence
+    sourceObservations,
+
+    sourceFacts,
+
+    evidence
 });
 
             console.log(
@@ -223,6 +257,10 @@ evidence
                 capabilities,
 
                 claims,
+
+                sourceObservations,
+
+                sourceFacts,
 
                 evidenceQuality:
                     evidence.quality,
@@ -294,6 +332,12 @@ evidence
                     [],
 
                 claims:
+                    [],
+
+                sourceObservations:
+                    [],
+
+                sourceFacts:
                     [],
 
                 evidenceQuality:
