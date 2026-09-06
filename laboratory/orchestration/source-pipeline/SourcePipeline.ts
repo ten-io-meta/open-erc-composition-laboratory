@@ -15,24 +15,25 @@ import type {
 } from "../../research-knowledge/ResearchKnowledge.js";
 
 import type {
+    SemanticDiscoveryResult
+} from "../../semantic-discovery/SemanticDiscoveryResult.js";
+
+import type {
+    AttributedSemanticModel,
     SourceExecutionResult,
     SourcePipelineResult
 } from "./SourcePipelineResult.js";
 
 export interface SourcePipelineOptions {
-
     manifestPath?: string;
 
     printSourceSummary?: boolean;
-
 }
 
 export class SourcePipeline {
-
     async run(
         options: SourcePipelineOptions = {}
     ): Promise<SourcePipelineResult> {
-
         const manifestPath =
             options.manifestPath ??
             "./sources/manifest.json";
@@ -71,9 +72,7 @@ export class SourcePipeline {
             SourceExecutionResult[] = [];
 
         for (const source of sources) {
-
             if (printSourceSummary) {
-
                 console.log("");
                 console.log("------------------------------------");
 
@@ -82,11 +81,9 @@ export class SourcePipeline {
                 );
 
                 console.log("------------------------------------");
-
             }
 
             try {
-
                 const result =
                     await researchPipeline.run(
                         source.sourceId,
@@ -99,15 +96,12 @@ export class SourcePipeline {
                 );
 
                 if (printSourceSummary) {
-
                     this.printResult(
                         result
                     );
-
                 }
 
             } catch (error) {
-
                 const message =
                     error instanceof Error
                         ? error.message
@@ -118,6 +112,7 @@ export class SourcePipeline {
                 );
 
                 console.error("");
+
                 console.error(
                     `Source failed: ${source.sourceId}`
                 );
@@ -125,21 +120,18 @@ export class SourcePipeline {
                 console.error(
                     message
                 );
-
             }
-
         }
 
         /*
          * Load partial knowledge produced
-         * by successful source executions
+         * by successful source executions.
          */
 
         const partialKnowledgeBases:
             ResearchKnowledge[] = [];
 
         for (const result of sourceResults) {
-
             if (
                 !result.partialKnowledgePath ||
                 result.errors.length > 0
@@ -148,7 +140,6 @@ export class SourcePipeline {
             }
 
             try {
-
                 const content =
                     await readFile(
                         result.partialKnowledgePath,
@@ -165,7 +156,6 @@ export class SourcePipeline {
                 );
 
             } catch (error) {
-
                 const message =
                     error instanceof Error
                         ? error.message
@@ -174,9 +164,52 @@ export class SourcePipeline {
                 errors.push(
                     `${result.sourceId}: ${message}`
                 );
+            }
+        }
 
+        /*
+         * Load each source's semantic model while preserving
+         * the source identity that produced it.
+         */
+
+        const attributedSemanticModels:
+            AttributedSemanticModel[] = [];
+
+        for (const result of sourceResults) {
+            if (
+                !result.analysisPath ||
+                result.errors.length > 0
+            ) {
+                continue;
             }
 
+            try {
+                const content =
+                    await readFile(
+                        `${result.analysisPath}/semantic-model.json`,
+                        "utf8"
+                    );
+
+                const semanticDiscoveryResult =
+                    JSON.parse(
+                        content
+                    ) as SemanticDiscoveryResult;
+
+                attributedSemanticModels.push({
+                    sourceId: result.sourceId,
+                    model: semanticDiscoveryResult.model
+                });
+
+            } catch (error) {
+                const message =
+                    error instanceof Error
+                        ? error.message
+                        : "Unknown semantic model loading error";
+
+                errors.push(
+                    `${result.sourceId}: ${message}`
+                );
+            }
         }
 
         const successfulSources =
@@ -190,7 +223,6 @@ export class SourcePipeline {
             successfulSources;
 
         return {
-
             manifest,
 
             sources,
@@ -199,8 +231,9 @@ export class SourcePipeline {
 
             partialKnowledgeBases,
 
-            statistics: {
+            attributedSemanticModels,
 
+            statistics: {
                 configuredSources:
                     manifest.sources.length,
 
@@ -215,20 +248,19 @@ export class SourcePipeline {
                 failedSources,
 
                 partialKnowledgeBases:
-                    partialKnowledgeBases.length
+                    partialKnowledgeBases.length,
 
+                attributedSemanticModels:
+                    attributedSemanticModels.length
             },
 
             errors
-
         };
-
     }
 
     private printResult(
         result: SourceExecutionResult
     ): void {
-
         console.log("");
 
         console.log(
@@ -280,21 +312,15 @@ export class SourcePipeline {
         );
 
         if (result.errors.length > 0) {
-
             console.log(
                 `Source errors: ${result.errors.length}`
             );
 
             for (const error of result.errors) {
-
                 console.log(
                     `- ${error}`
                 );
-
             }
-
         }
-
     }
-
 }

@@ -10,6 +10,10 @@ import type {
     ResearchKnowledge
 } from "../../research-knowledge/ResearchKnowledge.js";
 
+import type {
+    SemanticModel
+} from "../../semantic-discovery/SemanticModel.js";
+
 export type LoadedSourceManifest =
     Awaited<
         ReturnType<
@@ -29,8 +33,13 @@ export type SourceExecutionResult =
         >
     >;
 
-export interface SourcePipelineResult {
+export interface AttributedSemanticModel {
+    sourceId: string;
 
+    model: SemanticModel;
+}
+
+export interface SourcePipelineResult {
     manifest:
         LoadedSourceManifest;
 
@@ -43,8 +52,10 @@ export interface SourcePipelineResult {
     partialKnowledgeBases:
         ResearchKnowledge[];
 
-    statistics: {
+    attributedSemanticModels:
+        AttributedSemanticModel[];
 
+    statistics: {
         configuredSources: number;
 
         enabledSources: number;
@@ -57,8 +68,8 @@ export interface SourcePipelineResult {
 
         partialKnowledgeBases: number;
 
+        attributedSemanticModels: number;
     };
 
     errors: string[];
-
 }
