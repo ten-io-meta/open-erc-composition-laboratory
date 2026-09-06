@@ -15,6 +15,11 @@ export type ScientificSourceFactKind =
     | "OTHER";
 
 
+export type ScientificSourceFactContainerKind =
+    | "INTERFACE"
+    | "CONTRACT";
+
+
 export interface ScientificSourceFact {
 
     /*
@@ -57,6 +62,23 @@ export interface ScientificSourceFact {
      * state variable name.
      */
     symbol?: string;
+
+    /*
+     * Immediate Solidity structural container when directly
+     * observable from lexical source scope.
+     *
+     * This records syntax only. It does not establish protocol
+     * identity, ownership semantics, or composition meaning.
+     */
+    containerKind?:
+        ScientificSourceFactContainerKind;
+
+    /*
+     * Exact observed interface or contract symbol containing
+     * this fact.
+     */
+    containerSymbol?:
+        string;
 
     /*
      * Exact source location inherited from the observation.

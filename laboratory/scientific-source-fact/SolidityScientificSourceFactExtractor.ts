@@ -4,6 +4,7 @@ import type {
 
 import type {
     ScientificSourceFact,
+    ScientificSourceFactContainerKind,
     ScientificSourceFactKind
 } from "./ScientificSourceFact.js";
 
@@ -14,6 +15,12 @@ interface PendingFact {
         ScientificSourceFactKind;
 
     symbol?:
+        string;
+
+    containerKind?:
+        ScientificSourceFactContainerKind;
+
+    containerSymbol?:
         string;
 
     line:
@@ -70,6 +77,18 @@ export class SolidityScientificSourceFactExtractor {
         let inBlockComment =
             false;
 
+        let activeContainerKind:
+            ScientificSourceFactContainerKind | undefined;
+
+        let activeContainerSymbol:
+            string | undefined;
+
+        let pendingContainerKind:
+            ScientificSourceFactContainerKind | undefined;
+
+        let pendingContainerSymbol:
+            string | undefined;
+
 
         for (
             let index = 0;
@@ -115,6 +134,50 @@ export class SolidityScientificSourceFactExtractor {
             }
 
 
+            const interfaceContainerMatch =
+                /\binterface\s+([A-Za-z_][A-Za-z0-9_]*)\b/.exec(
+                    clean
+                );
+
+            const contractContainerMatch =
+                /\bcontract\s+([A-Za-z_][A-Za-z0-9_]*)\b/.exec(
+                    clean
+                );
+
+
+            const declaredContainerKind:
+                ScientificSourceFactContainerKind | undefined =
+                interfaceContainerMatch
+                    ? "INTERFACE"
+                    : contractContainerMatch
+                        ? "CONTRACT"
+                        : undefined;
+
+            const declaredContainerSymbol =
+                interfaceContainerMatch?.[1] ??
+                contractContainerMatch?.[1];
+
+
+            /*
+             * A declaration may open its body on this line or on
+             * a later line. For facts observed on the same line,
+             * the declared container is already structurally known.
+             */
+            const lineContainerKind =
+                activeContainerKind ??
+                declaredContainerKind ??
+                pendingContainerKind;
+
+            const lineContainerSymbol =
+                activeContainerSymbol ??
+                declaredContainerSymbol ??
+                pendingContainerSymbol;
+
+
+            const firstPendingIndex =
+                pending.length;
+
+
             this.extractDeclarationFacts(
                 clean,
                 rawLine,
@@ -132,10 +195,160 @@ export class SolidityScientificSourceFactExtractor {
             );
 
 
-            braceDepth +=
+            /*
+             * Attach only observable structural containment.
+             *
+             * The container declaration itself remains top-level;
+             * member declarations and statements inherit the
+             * currently observed interface or contract scope.
+             */
+            if (
+                lineContainerKind &&
+                lineContainerSymbol
+            ) {
+
+                for (
+                    let pendingIndex =
+                        firstPendingIndex;
+                    pendingIndex <
+                        pending.length;
+                    pendingIndex++
+                ) {
+
+                    const fact =
+                        pending[pendingIndex];
+
+
+                    if (
+                        fact.kind ===
+                            "INTERFACE_DECLARATION" ||
+                        fact.kind ===
+                            "CONTRACT_DECLARATION"
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    fact.containerKind =
+                        lineContainerKind;
+
+                    fact.containerSymbol =
+                        lineContainerSymbol;
+
+                }
+
+            }
+
+
+            const opensBrace =
+                codeLine.includes(
+                    "{"
+                );
+
+            const lineBraceDelta =
                 this.braceDelta(
                     codeLine
                 );
+
+
+            braceDepth +=
+                lineBraceDelta;
+
+
+            /*
+             * Leaving the top-level Solidity body closes the
+             * active interface or contract scope.
+             */
+            if (
+                activeContainerKind &&
+                braceDepth ===
+                    0
+            ) {
+
+                activeContainerKind =
+                    undefined;
+
+                activeContainerSymbol =
+                    undefined;
+
+            }
+
+
+            /*
+             * A newly observed declaration starts its structural
+             * scope either immediately or when a later opening
+             * brace is encountered.
+             */
+            if (
+                !activeContainerKind &&
+                declaredContainerKind &&
+                declaredContainerSymbol
+            ) {
+
+                if (
+                    opensBrace
+                ) {
+
+                    if (
+                        braceDepth >
+                        0
+                    ) {
+
+                        activeContainerKind =
+                            declaredContainerKind;
+
+                        activeContainerSymbol =
+                            declaredContainerSymbol;
+
+                    }
+
+
+                    pendingContainerKind =
+                        undefined;
+
+                    pendingContainerSymbol =
+                        undefined;
+
+                } else {
+
+                    pendingContainerKind =
+                        declaredContainerKind;
+
+                    pendingContainerSymbol =
+                        declaredContainerSymbol;
+
+                }
+
+            } else if (
+                !activeContainerKind &&
+                pendingContainerKind &&
+                pendingContainerSymbol &&
+                opensBrace
+            ) {
+
+                if (
+                    braceDepth >
+                    0
+                ) {
+
+                    activeContainerKind =
+                        pendingContainerKind;
+
+                    activeContainerSymbol =
+                        pendingContainerSymbol;
+
+                }
+
+
+                pendingContainerKind =
+                    undefined;
+
+                pendingContainerSymbol =
+                    undefined;
+
+            }
 
         }
 
@@ -214,6 +427,21 @@ export class SolidityScientificSourceFactExtractor {
 
                 symbol:
                     fact.symbol,
+
+                ...(
+                    fact.containerKind !==
+                        undefined &&
+                    fact.containerSymbol !==
+                        undefined
+                        ? {
+                            containerKind:
+                                fact.containerKind,
+
+                            containerSymbol:
+                                fact.containerSymbol
+                        }
+                        : {}
+                ),
 
                 locator: {
 
