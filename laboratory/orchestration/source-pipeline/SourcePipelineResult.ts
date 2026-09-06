@@ -34,12 +34,21 @@ export type SourceExecutionResult =
     >;
 
 export interface AttributedSemanticModel {
+
     sourceId: string;
 
+    /*
+     * Exact source revision that produced this semantic model,
+     * when the originating research source provides one.
+     */
+    sourceRevision?: string;
+
     model: SemanticModel;
+
 }
 
 export interface SourcePipelineResult {
+
     manifest:
         LoadedSourceManifest;
 
@@ -56,6 +65,7 @@ export interface SourcePipelineResult {
         AttributedSemanticModel[];
 
     statistics: {
+
         configuredSources: number;
 
         enabledSources: number;
@@ -69,7 +79,9 @@ export interface SourcePipelineResult {
         partialKnowledgeBases: number;
 
         attributedSemanticModels: number;
+
     };
 
     errors: string[];
+
 }

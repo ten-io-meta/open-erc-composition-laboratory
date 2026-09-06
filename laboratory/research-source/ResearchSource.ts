@@ -37,6 +37,7 @@ export interface ResearchSource {
      * May be a DOI, URL, repository, etc.
      */
     location?: string;
+
     /**
      * Repository associated with this source when known.
      *
@@ -52,8 +53,14 @@ export interface ResearchSource {
     branch?: string;
 
     /**
-     * Repository commit from which this source was ingested,
-     * when known.
+     * Canonical GitHub commit SHA persisted by the hardened
+     * GitHub source bundle.
+     */
+    commitSha?: string;
+
+    /**
+     * Legacy repository commit field retained for compatibility
+     * with older research-source representations.
      */
     commit?: string;
 
@@ -62,6 +69,7 @@ export interface ResearchSource {
      * normalized source.
      */
     metadata?: Record<string, string>;
+
     /**
      * Short description.
      */

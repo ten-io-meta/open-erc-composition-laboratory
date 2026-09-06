@@ -3,6 +3,11 @@ import {
 } from "fs/promises";
 
 import {
+    dirname,
+    join
+} from "node:path";
+
+import {
     ResearchPipeline
 } from "../../pipeline/ResearchPipeline.js";
 
@@ -17,6 +22,14 @@ import type {
 import type {
     SemanticDiscoveryResult
 } from "../../semantic-discovery/SemanticDiscoveryResult.js";
+
+import {
+    ScientificSemanticDerivationEngine
+} from "../../scientific-semantic-derivation/ScientificSemanticDerivationEngine.js";
+
+import type {
+    ScientificSourceFact
+} from "../../scientific-source-fact/ScientificSourceFact.js";
 
 import type {
     AttributedSemanticModel,
@@ -171,19 +184,182 @@ export class SourcePipeline {
          * Load each source's semantic model while preserving
          * the source identity that produced it.
          */
-
         const attributedSemanticModels:
             AttributedSemanticModel[] = [];
 
-        for (const result of sourceResults) {
+        const scientificSemanticDerivationEngine =
+            new ScientificSemanticDerivationEngine();
+
+
+        for (
+            const result
+            of sourceResults
+        ) {
+
             if (
                 !result.analysisPath ||
                 result.errors.length > 0
             ) {
+
                 continue;
+
             }
 
+
+            const sourceEntry =
+                sources.find(
+                    source =>
+                        source.sourceId ===
+                        result.sourceId
+                );
+
+
+            if (
+                !sourceEntry
+            ) {
+
+                errors.push(
+                    `${result.sourceId}: source manifest entry not found for semantic attribution`
+                );
+
+                continue;
+
+            }
+
+
+            const scientificFactsPath =
+                join(
+                    dirname(
+                        sourceEntry.path
+                    ),
+                    "scientific-source-facts.json"
+                );
+
+
             try {
+
+                const content =
+                    await readFile(
+                        scientificFactsPath,
+                        "utf8"
+                    );
+
+                const parsed =
+                    JSON.parse(
+                        content
+                    );
+
+
+                if (
+                    !Array.isArray(
+                        parsed
+                    )
+                ) {
+
+                    throw new Error(
+                        "Scientific source facts artifact must contain an array."
+                    );
+
+                }
+
+
+                const scientificFacts =
+                    parsed as ScientificSourceFact[];
+
+
+                const scientificSemanticResult =
+                    scientificSemanticDerivationEngine.derive({
+
+                        sourceId:
+                            result.sourceId,
+
+                        sourceRevision:
+                            result.sourceRevision,
+
+                        facts:
+                            scientificFacts
+
+                    });
+
+
+                if (
+                    scientificSemanticResult.errors.length >
+                    0
+                ) {
+
+                    errors.push(
+                        ...scientificSemanticResult.errors.map(
+                            message =>
+                                `${result.sourceId}: ${message}`
+                        )
+                    );
+
+                    continue;
+
+                }
+
+
+                attributedSemanticModels.push({
+
+                    sourceId:
+                        result.sourceId,
+
+                    sourceRevision:
+                        result.sourceRevision,
+
+                    model:
+                        scientificSemanticResult.model
+
+                });
+
+
+                continue;
+
+            } catch (error) {
+
+                const isMissingScientificFacts =
+                    typeof error ===
+                        "object" &&
+                    error !==
+                        null &&
+                    "code" in
+                        error &&
+                    (
+                        error as {
+                            code?:
+                                string;
+                        }
+                    ).code ===
+                        "ENOENT";
+
+
+                if (
+                    !isMissingScientificFacts
+                ) {
+
+                    const message =
+                        error instanceof Error
+                            ? error.message
+                            : "Unknown scientific semantic derivation error";
+
+                    errors.push(
+                        `${result.sourceId}: ${message}`
+                    );
+
+                    continue;
+
+                }
+
+            }
+
+
+            /*
+             * Legacy semantic-model.json is permitted only when
+             * scientific-source-facts.json does not exist.
+             */
+
+            try {
+
                 const content =
                     await readFile(
                         `${result.analysisPath}/semantic-model.json`,
@@ -195,12 +371,22 @@ export class SourcePipeline {
                         content
                     ) as SemanticDiscoveryResult;
 
+
                 attributedSemanticModels.push({
-                    sourceId: result.sourceId,
-                    model: semanticDiscoveryResult.model
+
+                    sourceId:
+                        result.sourceId,
+
+                    sourceRevision:
+                        result.sourceRevision,
+
+                    model:
+                        semanticDiscoveryResult.model
+
                 });
 
             } catch (error) {
+
                 const message =
                     error instanceof Error
                         ? error.message
@@ -209,8 +395,11 @@ export class SourcePipeline {
                 errors.push(
                     `${result.sourceId}: ${message}`
                 );
+
             }
+
         }
+
 
         const successfulSources =
             sourceResults.filter(

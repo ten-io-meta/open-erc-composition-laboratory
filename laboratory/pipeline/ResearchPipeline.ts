@@ -55,6 +55,10 @@ export class ResearchPipeline {
 
         const historicalStateMode =
             options.historicalStateMode ?? "ISOLATED";
+
+        let sourceRevision:
+            string | undefined;
+
         try {
             const sourceLoader = new ResearchSourceLoader();
             const extractionEngine = new ResearchExtractionEngine();
@@ -66,7 +70,14 @@ export class ResearchPipeline {
             const composabilityEvidenceEngine = new ComposabilityEvidenceEngine();
             const evidenceSupportEngine = new EvidenceSupportEngine();
 const machineReasoningEngine = new MachineReasoningEngine();
-            const source = await sourceLoader.load(sourcePath);
+            const source =
+                await sourceLoader.load(
+                    sourcePath
+                );
+
+            sourceRevision =
+                source.commitSha ??
+                source.commit;
 
 const githubAdapter = new GitHubResearchAdapter();
 
@@ -501,6 +512,8 @@ await writeFile(
                 executedAt,
                 historicalStateMode,
                 sourceId,
+                sourceRevision,
+
                 analysisPath,
                 corpusPath: "./corpus-results/research-corpus.json",
                 learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",
@@ -542,6 +555,8 @@ errors: []
     executedAt,
     historicalStateMode,
     sourceId,
+                sourceRevision,
+
     analysisPath,
     corpusPath: "./corpus-results/research-corpus.json",
     learningPath: "./composition-learning-results/DOI-0001-composition-learning.json",

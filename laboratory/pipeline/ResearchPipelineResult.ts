@@ -12,6 +12,13 @@ export interface ResearchPipelineResult {
 
     sourceId: string;
 
+    /*
+     * Exact source revision when available.
+     *
+     * For GitHub sources this is propagated from commitSha.
+     */
+    sourceRevision?: string;
+
     analysisPath: string;
 
     corpusPath: string;
@@ -45,4 +52,5 @@ export interface ResearchPipelineResult {
     incrementalObservations: number;
 
     errors: string[];
+
 }
