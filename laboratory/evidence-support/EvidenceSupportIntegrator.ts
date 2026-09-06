@@ -1,9 +1,7 @@
 import type { ComposabilityEvidenceClaim } from "../composability-evidence/ComposabilityEvidenceClaim.js";
-
 import { ProtocolRegistry } from "../normalization/ProtocolRegistry.js";
 
 export class EvidenceSupportIntegrator {
-
     private readonly registry = new ProtocolRegistry();
 
     integrate(
@@ -12,36 +10,31 @@ export class EvidenceSupportIntegrator {
         matrix: any[],
         patterns: any[]
     ): ComposabilityEvidenceClaim[] {
-
-        const getMatrixMatch = (claim: ComposabilityEvidenceClaim): any | undefined => {
+        const getMatrixMatch = (
+            claim: ComposabilityEvidenceClaim
+        ): any | undefined => {
             return matrix.find((entry: any) =>
-                this.registry.samePair(
-                    claim.protocolA,
-                    claim.protocolB,
-                    entry.protocolA,
-                    entry.protocolB
+                this.hasClaimSpecificIdentity(
+                    claim,
+                    entry
                 )
             );
         };
 
-        const getRelationshipEvidence = (claim: ComposabilityEvidenceClaim): boolean => {
-            const protocolA = this.registry.normalize(claim.protocolA);
-            const protocolB = this.registry.normalize(claim.protocolB);
-
-            const pairTextA = `${protocolA} + ${protocolB}`;
-            const pairTextB = `${protocolB} + ${protocolA}`;
-
-            const raw = JSON.stringify(patterns);
-
-            return raw.includes(pairTextA) ||
-                raw.includes(pairTextB) ||
-                raw.includes(claim.capabilityA) ||
-                raw.includes(claim.capabilityB);
+        const getRelationshipEvidence = (
+            claim: ComposabilityEvidenceClaim
+        ): boolean => {
+            return patterns.some((entry: any) =>
+                this.hasClaimSpecificIdentity(
+                    claim,
+                    entry
+                )
+            );
         };
 
         return claims.map(claim => {
-
-            const matrixMatch = getMatrixMatch(claim);
+            const matrixMatch =
+                getMatrixMatch(claim);
 
             const experimentalSupport = matrixMatch
                 ? Math.round(
@@ -62,9 +55,10 @@ export class EvidenceSupportIntegrator {
                 )
                 : 0;
 
-            const emergentPatternSupport = getRelationshipEvidence(claim)
-                ? 75
-                : 0;
+            const emergentPatternSupport =
+                getRelationshipEvidence(claim)
+                    ? 75
+                    : 0;
 
             const overallConfidence = Math.round(
                 claim.semanticConfidence * 0.35 +
@@ -84,8 +78,14 @@ export class EvidenceSupportIntegrator {
                 ...claim,
                 evidence: [
                     ...claim.evidence,
-                    ...(matrixMatch ? [`matrix:${matrixMatch.protocolA}+${matrixMatch.protocolB}`] : []),
-                    ...(emergentPatternSupport > 0 ? ["emergent-patterns"] : [])
+                    ...(matrixMatch
+                        ? [
+                            `matrix:${matrixMatch.protocolA}+${matrixMatch.protocolB}`
+                        ]
+                        : []),
+                    ...(emergentPatternSupport > 0
+                        ? ["emergent-patterns"]
+                        : [])
                 ],
                 experimentalSupport,
                 statisticalSupport,
@@ -93,9 +93,88 @@ export class EvidenceSupportIntegrator {
                 overallConfidence,
                 status
             };
-
         });
-
     }
 
+    private hasClaimSpecificIdentity(
+        claim: ComposabilityEvidenceClaim,
+        evidence: any
+    ): boolean {
+        if (!evidence) {
+            return false;
+        }
+
+        if (
+            evidence.claimId &&
+            String(evidence.claimId) === claim.claimId
+        ) {
+            return true;
+        }
+
+        if (
+            !evidence.protocolA ||
+            !evidence.protocolB ||
+            !evidence.capabilityA ||
+            !evidence.capabilityB ||
+            !evidence.relation
+        ) {
+            return false;
+        }
+
+        const protocolAMatches =
+            this.registry.normalize(
+                String(evidence.protocolA)
+            ) ===
+            this.registry.normalize(
+                claim.protocolA
+            );
+
+        const protocolBMatches =
+            this.registry.normalize(
+                String(evidence.protocolB)
+            ) ===
+            this.registry.normalize(
+                claim.protocolB
+            );
+
+        const capabilityAMatches =
+            this.normalizeIdentity(
+                evidence.capabilityA
+            ) ===
+            this.normalizeIdentity(
+                claim.capabilityA
+            );
+
+        const capabilityBMatches =
+            this.normalizeIdentity(
+                evidence.capabilityB
+            ) ===
+            this.normalizeIdentity(
+                claim.capabilityB
+            );
+
+        const relationMatches =
+            this.normalizeIdentity(
+                evidence.relation
+            ) ===
+            this.normalizeIdentity(
+                claim.relation
+            );
+
+        return (
+            protocolAMatches &&
+            protocolBMatches &&
+            capabilityAMatches &&
+            capabilityBMatches &&
+            relationMatches
+        );
+    }
+
+    private normalizeIdentity(
+        value: unknown
+    ): string {
+        return String(value ?? "")
+            .trim()
+            .toUpperCase();
+    }
 }

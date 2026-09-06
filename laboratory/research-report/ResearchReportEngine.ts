@@ -75,7 +75,7 @@ export class ResearchReportEngine {
             "## 6. Composition Matrix Highlights",
             "",
             ...matrix.map((entry: any) =>
-                `- ${entry.protocolA} + ${entry.protocolB}: compatibility ${entry.compatibility}%, safety ${entry.safetyScore}%, stability ${entry.stabilityScore}%, risk ${entry.risk}`
+                `- ${entry.protocolA} + ${entry.protocolB}: compatibility ${formatMetric(entry.compatibility)}, safety ${formatMetric(entry.safetyScore)}, stability ${formatMetric(entry.stabilityScore)}, risk ${entry.risk ?? "Unknown"}`
             ),
             "",
             "",
@@ -86,10 +86,10 @@ export class ResearchReportEngine {
                 "",
                 `- Observations: ${protocol.observations}`,
                 `- Successful compositions: ${protocol.successfulCompositions}`,
-                `- Average compatibility: ${protocol.averageCompatibility}%`,
-                `- Average stability: ${protocol.averageStability}%`,
-                `- Average safety: ${protocol.averageSafety}%`,
-                `- Average risk: ${protocol.averageRisk}`,
+                `- Average compatibility: ${formatMetric(protocol.averageCompatibility)}`,
+                `- Average stability: ${formatMetric(protocol.averageStability)}`,
+                `- Average safety: ${formatMetric(protocol.averageSafety)}`,
+                `- Average risk: ${protocol.averageRisk ?? "Unknown"}`,
                 `- Eligible relationships: ${protocol.eligibleRelationships}`,
                 `- Strongest partner: ${protocol.strongestPartner ?? "N/A"}`,
                 `- Weakest partner: ${protocol.weakestPartner ?? "N/A"}`,
@@ -166,4 +166,14 @@ export class ResearchReportEngine {
             ""
         ].join("\n");
     }
+}
+
+function isMeasuredNumber(value: unknown): value is number {
+    return typeof value === "number" && Number.isFinite(value);
+}
+
+function formatMetric(value: unknown): string {
+    return isMeasuredNumber(value)
+        ? `${value}%`
+        : "Not measured";
 }

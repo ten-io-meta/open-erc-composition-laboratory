@@ -1,70 +1,57 @@
+import type { ProtocolRelationship } from "../relationships/ProtocolRelationship.js";
 import type { CompositionMatrixEntry } from "./CompositionMatrixEntry.js";
 
 export class CompositionMatrixEngine {
-
     build(
-        relationships: any[],
+        relationships: ProtocolRelationship[],
         requirements: any[]
     ): CompositionMatrixEntry[] {
-
         return relationships.map(relationship => {
-
             const protocolAEligible =
                 requirements.find(
-                    r => r.protocolId === relationship.from
+                    (requirement: any) =>
+                        requirement.protocolId === relationship.from
                 )?.eligibility === "Eligible";
 
             const protocolBEligible =
                 requirements.find(
-                    r => r.protocolId === relationship.to
+                    (requirement: any) =>
+                        requirement.protocolId === relationship.to
                 )?.eligibility === "Eligible";
 
-            const confidence = relationship.confidence;
+            const experimentIds = Array.from(
+                new Set<string>(
+                    (relationship.experimentIds ?? [])
+                        .map(experimentId =>
+                            String(experimentId).trim()
+                        )
+                        .filter(Boolean)
+                )
+            );
 
             return {
-
                 protocolA: relationship.from,
-
                 protocolB: relationship.to,
-
                 occurrences: relationship.occurrences,
-
                 successfulCompositions:
                     relationship.successfulCompositions,
+                experimentIds,
 
-                compatibility:
-                    confidence,
+                relationshipConfidence:
+                    relationship.confidence,
+
+                compatibility: null,
+                stabilityScore: null,
+                safetyScore: null,
+                risk: "Unknown",
 
                 eligibility:
                     protocolAEligible &&
                     protocolBEligible,
 
-                relationshipConfidence:
-                    confidence,
-
                 evidence:
-                    relationship.occurrences,
-
-                stabilityScore:
-                    confidence,
-
-                safetyScore:
-                    confidence,
-
-                risk:
-
-                    confidence >= 90
-                        ? "Low"
-
-                    : confidence >= 70
-                        ? "Medium"
-
-                        : "High"
-
+                    relationship.occurrences
             };
-
         });
-
     }
-
 }

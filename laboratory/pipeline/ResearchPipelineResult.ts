@@ -4,6 +4,10 @@ export interface ResearchPipelineResult {
 
     executedAt: string;
 
+    historicalStateMode:
+        | "ISOLATED"
+        | "PERSISTENT";
+
     partialKnowledgePath: string;
 
     sourceId: string;
@@ -41,5 +45,4 @@ export interface ResearchPipelineResult {
     incrementalObservations: number;
 
     errors: string[];
-
 }

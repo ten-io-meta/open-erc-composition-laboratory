@@ -30,12 +30,16 @@ export class CompositionHypothesisEngine {
                     "Run additional eligible high-risk scenarios and measure whether the observed risk decreases with broader evidence.",
                 supportingEvidence: highRiskEligible.map(
                     (row: any) =>
-                        `${row.protocolA} + ${row.protocolB}: compatibility ${row.compatibility}%, safety ${row.safetyScore}%, stability ${row.stabilityScore}%, risk ${row.risk}`
+                        `${row.protocolA} + ${row.protocolB}: compatibility ${formatMetric(row.compatibility)}, safety ${formatMetric(row.safetyScore)}, stability ${formatMetric(row.stabilityScore)}, risk ${row.risk}`
                 )
             });
         }
 
-        const strongestComposition = [...eligibleCompositions].sort(
+        const measuredEligibleCompositions = eligibleCompositions.filter(
+            (row: any) => isMeasuredNumber(row.compatibility)
+        );
+
+        const strongestComposition = [...measuredEligibleCompositions].sort(
             (a: any, b: any) => b.compatibility - a.compatibility
         )[0];
 
@@ -53,12 +57,16 @@ export class CompositionHypothesisEngine {
                 validationTarget:
                     "Expand the strongest eligible pair into higher-order compositions and verify whether it remains the strongest baseline.",
                 supportingEvidence: [
-                    `${strongestComposition.protocolA} + ${strongestComposition.protocolB}: compatibility ${strongestComposition.compatibility}%, safety ${strongestComposition.safetyScore}%, stability ${strongestComposition.stabilityScore}%, risk ${strongestComposition.risk}`
+                    `${strongestComposition.protocolA} + ${strongestComposition.protocolB}: compatibility ${formatMetric(strongestComposition.compatibility)}, safety ${formatMetric(strongestComposition.safetyScore)}, stability ${formatMetric(strongestComposition.stabilityScore)}, risk ${strongestComposition.risk}`
                 ]
             });
         }
 
-        const mostObservedProtocol = [...intelligence].sort(
+        const intelligenceWithMeasuredCompatibility = intelligence.filter(
+            (entry: any) => isMeasuredNumber(entry.averageCompatibility)
+        );
+
+        const mostObservedProtocol = [...intelligenceWithMeasuredCompatibility].sort(
             (a: any, b: any) => b.observations - a.observations
         )[0];
 
@@ -77,9 +85,9 @@ export class CompositionHypothesisEngine {
                     "Run additional compositions around the most observed protocol and verify whether it remains central as the dataset grows.",
                 supportingEvidence: [
                     `Observed relationships: ${mostObservedProtocol.observations}`,
-                    `Average compatibility: ${mostObservedProtocol.averageCompatibility}%`,
-                    `Average safety: ${mostObservedProtocol.averageSafety}%`,
-                    `Average stability: ${mostObservedProtocol.averageStability}%`,
+                    `Average compatibility: ${formatMetric(mostObservedProtocol.averageCompatibility)}`,
+                    `Average safety: ${formatMetric(mostObservedProtocol.averageSafety)}`,
+                    `Average stability: ${formatMetric(mostObservedProtocol.averageStability)}`,
                     `Average risk: ${mostObservedProtocol.averageRisk}`
                 ]
             });
@@ -87,4 +95,14 @@ export class CompositionHypothesisEngine {
 
         return hypotheses;
     }
+}
+
+function isMeasuredNumber(value: unknown): value is number {
+    return typeof value === "number" && Number.isFinite(value);
+}
+
+function formatMetric(value: unknown): string {
+    return isMeasuredNumber(value)
+        ? `${value}%`
+        : "Not measured";
 }

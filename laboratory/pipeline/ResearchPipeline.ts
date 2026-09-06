@@ -33,17 +33,28 @@ async function readJson(path: string): Promise<any> {
     return JSON.parse(await readFile(path, "utf8"));
 }
 
+export interface ResearchPipelineOptions {
+
+    historicalStateMode?:
+        | "ISOLATED"
+        | "PERSISTENT";
+
+}
+
 export class ResearchPipeline {
 
     async run(
     sourceId = "DOI-0001",
     sourcePath = `./sources/research/${sourceId}/source.json`,
-    evidencePath = `./sources/research/${sourceId}/evidence.json`
+    evidencePath = `./sources/research/${sourceId}/evidence.json`,
+    options: ResearchPipelineOptions = {}
 ): Promise<ResearchPipelineResult> {
 
         const executedAt = new Date().toISOString();
         const analysisPath = `./analysis-results/${sourceId}`;
 
+        const historicalStateMode =
+            options.historicalStateMode ?? "ISOLATED";
         try {
             const sourceLoader = new ResearchSourceLoader();
             const extractionEngine = new ResearchExtractionEngine();
@@ -150,15 +161,8 @@ const machineReasoningResult =
     extractionResult.extraction
 );
 
-            const benchmark = await readJson("./benchmark-results/benchmark.json");
-            const matrix = await readJson("./matrix-results/composition-matrix.json");
-            const patterns = await readJson("./pattern-results/patterns.json");
-
             const supportedComposabilityEvidenceResult = evidenceSupportEngine.build(
-                composabilityEvidenceResult.claims,
-                benchmark,
-                matrix,
-                patterns
+                composabilityEvidenceResult.claims
             );
 
             await mkdir(analysisPath, { recursive: true });
@@ -175,7 +179,13 @@ const machineReasoningResult =
             const corpusLoader = new CorpusLoader();
             const corpusBuilder = new CorpusBuilder();
 
-            const sourceIds = await corpusLoader.listAnalysisSources("./analysis-results");
+            const sourceIds =
+
+                historicalStateMode === "PERSISTENT"
+
+                    ? await corpusLoader.listAnalysisSources("./analysis-results")
+
+                    : [sourceId];
             const entries: ResearchCorpusEntry[] = [];
 
             for (const currentSourceId of sourceIds) {
@@ -350,84 +360,146 @@ await writeFile(
     `${analysisPath}/machine-reasoning.json`,
     JSON.stringify(machineReasoningResult, null, 4)
 );
-const incrementalEngine = new IncrementalKnowledgeEngine();
+            let incrementalKnowledgePath = "";
+            let incrementalObservations = 0;
 
-const persistentKnowledgePath =
-    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json";
+            let memoryPath = "";
+            let memoryEvents = 0;
 
-let previousKnowledge = null;
+            if (
+                historicalStateMode === "PERSISTENT"
+            ) {
 
-try {
-    previousKnowledge = await readJson(persistentKnowledgePath);
-} catch {
-    previousKnowledge = null;
-}
-const incrementalResult = incrementalEngine.build(
-    previousKnowledge,
-    knowledgeResult.knowledge,
-    sourceId
-);
+                const incrementalEngine =
+                    new IncrementalKnowledgeEngine();
 
-await writeFile(
-    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
-    JSON.stringify(
-        incrementalResult.knowledge,
-        null,
-        4
-    )
-);
+                const persistentKnowledgePath =
+                    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json";
 
-await writeFile(
-    "./research-knowledge-results/OECL-V2-INCREMENTAL-KNOWLEDGE.json",
-    JSON.stringify(
-        incrementalResult,
-        null,
-        4
-    )
-);
-const memoryPath =
-    "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json";
+                let previousKnowledge = null;
 
-const memoryLoader = new ResearchMemoryLoader();
+                try {
 
-const previousMemory = await memoryLoader.load(memoryPath);
+                    previousKnowledge =
+                        await readJson(
+                            persistentKnowledgePath
+                        );
 
-const memoryEngine = new ResearchMemoryEngine();
+                } catch {
 
-const memoryResult = memoryEngine.update(
-    previousMemory,
-    knowledgeResult.knowledge,
-    sourceId
-);
+                    previousKnowledge =
+                        null;
 
-await mkdir("./research-memory-results", { recursive: true });
+                }
 
-await writeFile(
-    memoryPath,
-    JSON.stringify(memoryResult.memory, null, 4)
-);
+                const incrementalResult =
+                    incrementalEngine.build(
+                        previousKnowledge,
+                        knowledgeResult.knowledge,
+                        sourceId
+                    );
 
-await writeFile(
-    "./research-memory-results/OECL-V2-RESEARCH-MEMORY-RESULT.json",
-    JSON.stringify(memoryResult, null, 4)
-);
-const knowledgeAggregator =
-    new ResearchKnowledgeAggregator();
+                await writeFile(
+                    persistentKnowledgePath,
+                    JSON.stringify(
+                        incrementalResult.knowledge,
+                        null,
+                        4
+                    )
+                );
 
-const aggregatedKnowledge =
-    await knowledgeAggregator.aggregate();
+                await writeFile(
+                    "./research-knowledge-results/OECL-V2-INCREMENTAL-KNOWLEDGE.json",
+                    JSON.stringify(
+                        incrementalResult,
+                        null,
+                        4
+                    )
+                );
 
-await writeFile(
-    "./research-knowledge-results/OECL-V2-AGGREGATED-KNOWLEDGE.json",
-    JSON.stringify(
-        aggregatedKnowledge,
-        null,
-        4
-    )
-);
+                incrementalKnowledgePath =
+                    persistentKnowledgePath;
+
+                incrementalObservations =
+                    incrementalResult
+                        .knowledge
+                        .statistics
+                        .totalObservations;
+
+                const persistentMemoryPath =
+                    "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json";
+
+                const memoryLoader =
+                    new ResearchMemoryLoader();
+
+                const previousMemory =
+                    await memoryLoader.load(
+                        persistentMemoryPath
+                    );
+
+                const memoryEngine =
+                    new ResearchMemoryEngine();
+
+                const memoryResult =
+                    memoryEngine.update(
+                        previousMemory,
+                        knowledgeResult.knowledge,
+                        sourceId
+                    );
+
+                await mkdir(
+                    "./research-memory-results",
+                    {
+                        recursive: true
+                    }
+                );
+
+                await writeFile(
+                    persistentMemoryPath,
+                    JSON.stringify(
+                        memoryResult.memory,
+                        null,
+                        4
+                    )
+                );
+
+                await writeFile(
+                    "./research-memory-results/OECL-V2-RESEARCH-MEMORY-RESULT.json",
+                    JSON.stringify(
+                        memoryResult,
+                        null,
+                        4
+                    )
+                );
+
+                memoryPath =
+                    persistentMemoryPath;
+
+                memoryEvents =
+                    memoryResult
+                        .memory
+                        .statistics
+                        .events;
+
+                const knowledgeAggregator =
+                    new ResearchKnowledgeAggregator();
+
+                const aggregatedKnowledge =
+                    await knowledgeAggregator.aggregate();
+
+                await writeFile(
+                    "./research-knowledge-results/OECL-V2-AGGREGATED-KNOWLEDGE.json",
+                    JSON.stringify(
+                        aggregatedKnowledge,
+                        null,
+                        4
+                    )
+                );
+            }
             return {
                 pipelineId: `PIPELINE-${sourceId}`,
                 executedAt,
+                historicalStateMode,
                 sourceId,
                 analysisPath,
                 corpusPath: "./corpus-results/research-corpus.json",
@@ -452,16 +524,12 @@ supportedKnowledge:
 emergingKnowledge:
     knowledgeResult.knowledge.statistics.emerging,
 
-incrementalKnowledgePath:
-    "./research-knowledge-results/OECL-V2-KNOWLEDGE-BASE.json",
+incrementalKnowledgePath,
 
-incrementalObservations:
-    incrementalResult.knowledge.statistics.totalObservations,
-    memoryPath:
-    "./research-memory-results/OECL-V2-RESEARCH-MEMORY.json",
+incrementalObservations,
+    memoryPath,
 
-memoryEvents:
-    memoryResult.memory.statistics.events,
+memoryEvents,
     partialKnowledgePath:
     `${analysisPath}/research-knowledge.json`,
 
@@ -472,6 +540,7 @@ errors: []
            return {
     pipelineId: `PIPELINE-${sourceId}`,
     executedAt,
+    historicalStateMode,
     sourceId,
     analysisPath,
     corpusPath: "./corpus-results/research-corpus.json",

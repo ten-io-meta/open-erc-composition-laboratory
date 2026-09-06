@@ -6,16 +6,21 @@ import { EvidenceSupportIntegrator } from "./EvidenceSupportIntegrator.js";
 export class EvidenceSupportEngine {
     build(
         claims: ComposabilityEvidenceClaim[],
-        benchmark: any,
-        matrix: any[],
-        patterns: any[]
+        benchmark: any = {},
+        matrix: any[] = [],
+        patterns: any[] = []
     ): EvidenceSupportResult {
         try {
             const integrator = new EvidenceSupportIntegrator();
 
             return {
                 generatedAt: new Date().toISOString(),
-                claims: integrator.integrate(claims, benchmark, matrix, patterns),
+                claims: integrator.integrate(
+                    claims,
+                    benchmark,
+                    matrix,
+                    patterns
+                ),
                 errors: []
             };
         } catch (error) {
