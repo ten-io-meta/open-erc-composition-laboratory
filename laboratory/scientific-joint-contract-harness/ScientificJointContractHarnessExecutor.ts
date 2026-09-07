@@ -249,15 +249,20 @@ export class ScientificJointContractHarnessExecutor {
                         : participantB;
 
 
+                const invocation =
+                    this.commandInvocation(
+                        step.command,
+                        step.args
+                    );
+
+
                 const {
                     stdout,
                     stderr
                 } =
                     await execFileAsync(
-                        step.command,
-                        [
-                            ...step.args
-                        ],
+                        invocation.command,
+                        invocation.args,
                         {
                             cwd:
                                 participant.localPath,
@@ -611,6 +616,65 @@ export class ScientificJointContractHarnessExecutor {
             }
 
         }
+
+    }
+
+
+    private commandInvocation(
+        command: string,
+        args: string[]
+    ): {
+        command: string;
+        args: string[];
+    } {
+
+        /*
+         * Windows .cmd/.bat files are command-shell scripts rather
+         * than native executables. child_process.execFile cannot
+         * reliably spawn them directly and may return EINVAL.
+         *
+         * Route only those script types through the platform command
+         * processor. Native executables remain shell-free.
+         *
+         * This is operational portability only; it does not alter
+         * participant identity, recipe semantics or scientific
+         * evidence.
+         */
+        if (
+            process.platform ===
+                "win32" &&
+            /\.(?:cmd|bat)$/i.test(
+                command
+            )
+        ) {
+
+            return {
+
+                command:
+                    process.env.ComSpec ??
+                    "cmd.exe",
+
+                args: [
+                    "/d",
+                    "/c",
+                    command,
+                    ...args
+                ]
+
+            };
+
+        }
+
+
+        return {
+
+            command,
+
+            args: [
+                ...args
+            ]
+
+        };
 
     }
 
