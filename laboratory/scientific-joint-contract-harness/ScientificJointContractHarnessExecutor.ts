@@ -23,6 +23,10 @@ import type {
 } from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterialization.js";
 
 import type {
+    ScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+
+import type {
     ScientificJointContractHarnessDriverParticipantReport,
     ScientificJointContractHarnessDriverReport,
     ScientificJointContractHarnessExecution,
@@ -50,14 +54,23 @@ export class ScientificJointContractHarnessExecutor {
 
             recipe:
                 ScientificJointContractHarnessRecipe;
+
+            requirement?:
+                ScientificCompositionExecutionRequirement;
         }
     ): Promise<ScientificJointContractHarnessExecution> {
 
         const {
             workspace,
-            recipe
+            recipe,
+            requirement
         } =
             params;
+
+
+        let requirementPath:
+            string | null =
+            null;
 
 
         /*
@@ -352,6 +365,29 @@ export class ScientificJointContractHarnessExecutor {
             );
 
 
+            if (
+                requirement !==
+                undefined
+            ) {
+
+                requirementPath =
+                    join(
+                        driverRuntimeDirectory,
+                        "composition-execution-requirement.json"
+                    );
+
+
+                await writeFile(
+                    requirementPath,
+                    JSON.stringify(
+                        requirement
+                    ),
+                    "utf8"
+                );
+
+            }
+
+
             driverPath =
                 join(
                     driverRuntimeDirectory,
@@ -384,6 +420,8 @@ export class ScientificJointContractHarnessExecutor {
                         env: {
                             ...process.env,
 
+                            ...(recipe.driver.env ?? {}),
+
                             OECL_JOINT_WORKSPACE_ROOT:
                                 workspace.workspacePath,
 
@@ -393,7 +431,15 @@ export class ScientificJointContractHarnessExecutor {
                             OECL_PARTICIPANT_B_ROOT:
                                 participantB.localPath,
 
-                            ...(recipe.driver.env ?? {})
+                            ...(
+                                requirementPath ===
+                                    null
+                                    ? {}
+                                    : {
+                                        OECL_COMPOSITION_EXECUTION_REQUIREMENT_PATH:
+                                            requirementPath
+                                    }
+                            )
                         },
 
                         encoding:
@@ -598,6 +644,23 @@ export class ScientificJointContractHarnessExecutor {
             };
 
         } finally {
+
+            if (
+                requirementPath !==
+                null
+            ) {
+
+                await rm(
+                    requirementPath,
+                    {
+                        force: true
+                    }
+                ).catch(
+                    () => undefined
+                );
+
+            }
+
 
             if (
                 driverPath !==

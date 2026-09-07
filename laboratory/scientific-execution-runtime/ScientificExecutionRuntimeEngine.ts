@@ -1018,7 +1018,9 @@ if (
                                     recipe:
                                         selection
                                             .selectedRegistration
-                                            .buildRecipe()
+                                            .buildRecipe(),
+
+                                    requirement
                                 }
                             );
 

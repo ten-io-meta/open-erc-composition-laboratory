@@ -23,6 +23,10 @@ import type {
     ScientificJointContractHarnessRecipe
 } from "../laboratory/scientific-joint-contract-harness/ScientificJointContractHarness.js";
 
+import type {
+    ScientificCompositionExecutionRequirement
+} from "../laboratory/scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+
 import {
     ScientificJointContractHarnessExecutor
 } from "../laboratory/scientific-joint-contract-harness/ScientificJointContractHarnessExecutor.js";
@@ -224,9 +228,37 @@ try {
         };
 
 
+    const requirement = {
+
+        requirementId:
+            "REQUIREMENT-CHANNEL-FIXTURE",
+
+        evaluationSpecificationId:
+            "SPECIFICATION-CHANNEL-FIXTURE",
+
+        candidate: {
+            candidateId:
+                "CANDIDATE-CHANNEL-FIXTURE"
+        },
+
+        constraints: [
+            {
+                constraintId:
+                    "CONSTRAINT-A-CHANNEL-FIXTURE"
+            },
+            {
+                constraintId:
+                    "CONSTRAINT-B-CHANNEL-FIXTURE"
+            }
+        ]
+
+    } as unknown as ScientificCompositionExecutionRequirement;
+
+
     const driverSource = `
 import {
-    existsSync
+    existsSync,
+    readFileSync
 } from "node:fs";
 
 import {
@@ -239,6 +271,33 @@ const participantA =
 
 const participantB =
     process.env.OECL_PARTICIPANT_B_ROOT;
+
+
+const requirementPath =
+    process.env.OECL_COMPOSITION_EXECUTION_REQUIREMENT_PATH;
+
+
+if (
+    !requirementPath ||
+    !existsSync(
+        requirementPath
+    )
+) {
+
+    throw new Error(
+        "Composition execution requirement path was not supplied by OECL."
+    );
+
+}
+
+
+const requirement =
+    JSON.parse(
+        readFileSync(
+            requirementPath,
+            "utf8"
+        )
+    );
 
 
 if (
@@ -323,7 +382,25 @@ const report = {
     observations: [
         "Fixture participant A executed.",
         "Fixture participant B executed.",
-        "Both participants used one runtime."
+        "Both participants used one runtime.",
+        (
+            "Fixture requirement ID:" +
+            requirement.requirementId
+        ),
+        (
+            "Fixture candidate ID:" +
+            requirement.candidate.candidateId
+        ),
+        (
+            "Fixture constraint IDs:" +
+            requirement.constraints
+                .map(
+                    constraint =>
+                        constraint.constraintId
+                )
+                .join(",")
+        ),
+        "Fixture requirement path authority:OECL"
     ],
 
     scientificPolarity:
@@ -401,7 +478,12 @@ console.log(
                     "oecl-joint-driver.mjs",
 
                 source:
-                    driverSource
+                    driverSource,
+
+                env: {
+                    OECL_COMPOSITION_EXECUTION_REQUIREMENT_PATH:
+                        "__RECIPE_MUST_NOT_OVERRIDE_REQUIREMENT_PATH__"
+                }
 
             }
 
@@ -452,7 +534,9 @@ console.log(
                 workspace:
                     materializedWorkspace,
 
-                recipe
+                recipe,
+
+                requirement
             }
         );
 
@@ -556,6 +640,87 @@ console.log(
                 executed.driverReport
                     ?.sharedRuntime,
                 true
+            );
+
+        }
+    );
+
+
+    await check(
+        "GENERIC EXECUTOR RECEIVES EXACT RUNTIME COMPOSITION REQUIREMENT",
+        () => {
+
+            const observations =
+                executed
+                    .driverReport
+                    ?.observations ??
+                [];
+
+
+            assert.ok(
+                observations.includes(
+                    "Fixture requirement ID:REQUIREMENT-CHANNEL-FIXTURE"
+                )
+            );
+
+
+            assert.ok(
+                observations.includes(
+                    "Fixture candidate ID:CANDIDATE-CHANNEL-FIXTURE"
+                )
+            );
+
+
+            assert.ok(
+                observations.includes(
+                    (
+                        "Fixture constraint IDs:" +
+                        "CONSTRAINT-A-CHANNEL-FIXTURE," +
+                        "CONSTRAINT-B-CHANNEL-FIXTURE"
+                    )
+                )
+            );
+
+        }
+    );
+
+
+    await check(
+        "RECIPE CANNOT OVERRIDE OECL COMPOSITION REQUIREMENT PATH",
+        () => {
+
+            assert.equal(
+                executed.status,
+                "EXECUTED"
+            );
+
+
+            assert.ok(
+                executed
+                    .driverReport
+                    ?.observations
+                    .includes(
+                        "Fixture requirement path authority:OECL"
+                    )
+            );
+
+        }
+    );
+
+
+    await check(
+        "TEMPORARY COMPOSITION REQUIREMENT FILE IS REMOVED AFTER EXECUTION",
+        async () => {
+
+            await assert.rejects(
+                access(
+                    join(
+                        participantAPath,
+                        ".git",
+                        "oecl-joint-runtime",
+                        "composition-execution-requirement.json"
+                    )
+                )
             );
 
         }
