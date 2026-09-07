@@ -31,6 +31,10 @@ import type {
 } from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintObservation.js";
 
 import type {
+    ScientificCrossProtocolInteractionObservation
+} from "./ScientificCrossProtocolInteractionObservation.js";
+
+import type {
     ScientificJointContractHarnessDriverParticipantReport,
     ScientificJointContractHarnessDriverReport,
     ScientificJointContractHarnessExecution,
@@ -987,6 +991,11 @@ export class ScientificJointContractHarnessExecutor {
                 parsed.constraintObservations
             );
 
+        const crossProtocolInteractionObservations =
+            this.parseCrossProtocolInteractionObservations(
+                parsed.crossProtocolInteractionObservations
+            );
+
 
         if (
             parsed.scientificPolarity !==
@@ -1037,6 +1046,17 @@ export class ScientificJointContractHarnessExecutor {
 
             constraintObservations:
                 constraintObservations.map(
+                    observation => ({
+                        ...observation,
+
+                        evidence: [
+                            ...observation.evidence
+                        ]
+                    })
+                ),
+
+            crossProtocolInteractionObservations:
+                crossProtocolInteractionObservations.map(
                     observation => ({
                         ...observation,
 
@@ -1219,6 +1239,247 @@ export class ScientificJointContractHarnessExecutor {
                         ...observation.evidence
                     ]
 
+                };
+
+            }
+        );
+
+    }
+
+
+    private parseCrossProtocolInteractionObservations(
+        value:
+            unknown
+    ): ScientificCrossProtocolInteractionObservation[] {
+
+        if (
+            value ===
+            undefined
+        ) {
+
+            return [];
+
+        }
+
+
+        if (
+            !Array.isArray(
+                value
+            )
+        ) {
+
+            throw new Error(
+                "Joint harness cross-protocol interaction observations are not an array."
+            );
+
+        }
+
+
+        const addressPattern =
+            /^0x[0-9a-fA-F]{40}$/;
+
+
+        return value.map(
+            (
+                observation,
+                index
+            ) => {
+
+                if (
+                    !this.isRecord(
+                        observation
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} is not an object.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.observationId !==
+                        "string" ||
+                    observation.observationId
+                        .trim()
+                        .length ===
+                        0
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has no observation identity.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.candidateId !==
+                        "string" ||
+                    observation.candidateId
+                        .trim()
+                        .length ===
+                        0
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has no candidate identity.`
+                    );
+
+                }
+
+
+                if (
+                    observation.sourceSide !==
+                        "A" &&
+                    observation.sourceSide !==
+                        "B"
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid source side.`
+                    );
+
+                }
+
+
+                if (
+                    observation.targetSide !==
+                        "A" &&
+                    observation.targetSide !==
+                        "B"
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid target side.`
+                    );
+
+                }
+
+
+                if (
+                    observation.sourceSide ===
+                    observation.targetSide
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} does not cross participant sides.`
+                    );
+
+                }
+
+
+                if (
+                    observation.callKind !==
+                        "CALL" &&
+                    observation.callKind !==
+                        "STATICCALL" &&
+                    observation.callKind !==
+                        "DELEGATECALL"
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid call kind.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.sourceAddress !==
+                        "string" ||
+                    !addressPattern.test(
+                        observation.sourceAddress
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid source address.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.targetAddress !==
+                        "string" ||
+                    !addressPattern.test(
+                        observation.targetAddress
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid target address.`
+                    );
+
+                }
+
+
+                if (
+                    observation.status !==
+                    "OBSERVED"
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid observation status.`
+                    );
+
+                }
+
+
+                if (
+                    !Array.isArray(
+                        observation.evidence
+                    ) ||
+                    observation.evidence.length ===
+                        0 ||
+                    !observation.evidence.every(
+                        evidence =>
+                            typeof evidence ===
+                                "string" &&
+                            evidence
+                                .trim()
+                                .length >
+                                0
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness cross-protocol interaction observation ${index} has invalid evidence.`
+                    );
+
+                }
+
+
+                return {
+                    observationId:
+                        observation.observationId,
+
+                    candidateId:
+                        observation.candidateId,
+
+                    sourceSide:
+                        observation.sourceSide,
+
+                    targetSide:
+                        observation.targetSide,
+
+                    callKind:
+                        observation.callKind,
+
+                    sourceAddress:
+                        observation.sourceAddress,
+
+                    targetAddress:
+                        observation.targetAddress,
+
+                    status:
+                        "OBSERVED",
+
+                    evidence: [
+                        ...observation.evidence
+                    ]
                 };
 
             }
@@ -1473,6 +1734,20 @@ export class ScientificJointContractHarnessExecutor {
             constraintObservations:
                 (
                     report.constraintObservations ??
+                    []
+                ).map(
+                    observation => ({
+                        ...observation,
+
+                        evidence: [
+                            ...observation.evidence
+                        ]
+                    })
+                ),
+
+            crossProtocolInteractionObservations:
+                (
+                    report.crossProtocolInteractionObservations ??
                     []
                 ).map(
                     observation => ({

@@ -6,6 +6,10 @@ import type {
     ScientificCompositionConstraintObservation
 } from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintObservation.js";
 
+import type {
+    ScientificCrossProtocolInteractionObservation
+} from "./ScientificCrossProtocolInteractionObservation.js";
+
 
 export type ScientificJointContractHarnessParticipantSide =
     "A" | "B";
@@ -102,6 +106,14 @@ export interface ScientificJointContractHarnessDriverReport {
      */
     constraintObservations?:
         ScientificCompositionConstraintObservation[];
+
+    /*
+     * Physical EVM calls observed from one composition
+     * participant to the other. Presence alone does not
+     * establish compatibility or composition polarity.
+     */
+    crossProtocolInteractionObservations?:
+        ScientificCrossProtocolInteractionObservation[];
 
     scientificPolarity:
         "NEUTRAL";
