@@ -225,6 +225,30 @@ const challengeCondition =
                 "NOT_EVALUATED";
 
         } else if (
+            outcome.targetType ===
+                "COMPOSITION_CANDIDATE"
+        ) {
+
+            /*
+             * Scientific composition execution safety boundary.
+             *
+             * OECL currently has no validated joint-composition
+             * runtime. Existing executable paths resolve and execute
+             * individual repository targets and therefore cannot
+             * establish scientific support or challenge for a
+             * composition candidate.
+             *
+             * Until an explicit validated joint-composition execution
+             * path exists, every executed COMPOSITION_CANDIDATE
+             * outcome remains scientifically inconclusive.
+             *
+             * NOT_EXECUTED and BLOCKED are handled immediately above
+             * and remain NOT_EVALUATED.
+             */
+            scientificResult =
+                "INCONCLUSIVE";
+
+        } else if (
             hasScientificChallengeSignal
         ) {
 
