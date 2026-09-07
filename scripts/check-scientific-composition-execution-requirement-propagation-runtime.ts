@@ -1,4 +1,7 @@
 import {
+    ScientificExecutionRuntimeEngine
+} from "../laboratory/scientific-execution-runtime/ScientificExecutionRuntimeEngine.js";
+import {
     ScientificExecutionSpecificationEngine
 } from "../laboratory/scientific-execution-specification/ScientificExecutionSpecificationEngine.js";
 import assert from "node:assert/strict";
@@ -474,6 +477,57 @@ const compositionSpecification =
     compositionSpecifications[0] as any;
 
 
+/*
+ * Runtime regression isolation:
+ *
+ * Execute only the dedicated composition step. Source reingestion is
+ * intentionally excluded so this test performs no repository/network
+ * work.
+ */
+const compositionOnlyPlanResult = {
+
+    ...plans,
+
+    plans: [
+        {
+            ...plan,
+
+            steps:
+                plan.steps.filter(
+                    step =>
+                        step.stepType ===
+                        "COMPOSITION_EXECUTION"
+                )
+        }
+    ]
+
+};
+
+
+const compositionOnlySpecificationResult = {
+
+    ...executionSpecifications,
+
+    specifications:
+        compositionSpecifications
+
+};
+
+
+const compositionRuntimeResult =
+    await new ScientificExecutionRuntimeEngine()
+        .build(
+            "CAMPAIGN-COMPOSITION-RUNTIME",
+            compositionOnlyPlanResult,
+            compositionOnlySpecificationResult
+        );
+
+
+const compositionRuntimeExecution =
+    compositionRuntimeResult
+        .executions[0] as any;
+
+
 console.log("");
 console.log(
     "SCIENTIFIC COMPOSITION EXECUTION REQUIREMENT PROPAGATION"
@@ -890,6 +944,121 @@ await check(
             compositionSpecification
                 .resolutionStatus,
             "EXECUTABLE"
+        );
+
+    }
+);
+
+await check(
+    "COMPOSITION RUNTIME MATERIALIZES ONE JOINT RUNTIME RECORD",
+    () => {
+
+        assert.equal(
+            compositionRuntimeResult.errors.length,
+            0
+        );
+
+        assert.equal(
+            compositionRuntimeResult.executions.length,
+            1
+        );
+
+        assert.ok(
+            compositionRuntimeExecution
+        );
+
+        assert.equal(
+            compositionRuntimeExecution.stepType,
+            "COMPOSITION_EXECUTION"
+        );
+
+    }
+);
+
+
+await check(
+    "COMPOSITION RUNTIME PRESERVES STRUCTURED JOINT REQUIREMENT",
+    () => {
+
+        const requirement =
+            compositionRuntimeExecution
+                .compositionExecutionRequirement;
+
+        assert.ok(
+            requirement
+        );
+
+        assert.equal(
+            requirement.candidate.candidateId,
+            "CANDIDATE-JOINT-101-202"
+        );
+
+        assert.equal(
+            requirement.participantSources.length,
+            2
+        );
+
+        assert.deepEqual(
+            requirement
+                .participantAConstraintIds,
+            [
+                "CONSTRAINT-A"
+            ]
+        );
+
+        assert.deepEqual(
+            requirement
+                .participantBConstraintIds,
+            [
+                "CONSTRAINT-B"
+            ]
+        );
+
+    }
+);
+
+
+await check(
+    "COMPOSITION RUNTIME ADMISSION DOES NOT CLAIM CONTRACT EXECUTION",
+    () => {
+
+        assert.equal(
+            compositionRuntimeExecution.runtime,
+            "OECL_NATIVE_COMPOSITION_REQUIREMENT_ADMISSION"
+        );
+
+        assert.equal(
+            compositionRuntimeExecution.status,
+            "INCONCLUSIVE"
+        );
+
+        assert.equal(
+            compositionRuntimeExecution.repository,
+            null
+        );
+
+        assert.equal(
+            compositionRuntimeExecution
+                .selectedExecutableTarget,
+            null
+        );
+
+        assert.equal(
+            compositionRuntimeExecution
+                .evidence
+                .includes(
+                    "COMPOSITION_REQUIREMENT_ADMITTED"
+                ),
+            true
+        );
+
+        assert.equal(
+            compositionRuntimeExecution
+                .observations
+                .includes(
+                    "No participant contracts were executed by this runtime admission step."
+                ),
+            true
         );
 
     }

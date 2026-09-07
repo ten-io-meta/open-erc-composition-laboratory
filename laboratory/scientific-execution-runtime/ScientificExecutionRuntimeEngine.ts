@@ -1,4 +1,7 @@
 import {
+    cloneScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+import {
     ResearchPipeline
 } from "../pipeline/ResearchPipeline.js";
 import {
@@ -467,8 +470,11 @@ if (
 
             case "COMPOSITION_EXECUTION":
 
-                throw new Error(
-                    "COMPOSITION_EXECUTION requires the dedicated joint composition runtime and cannot be executed by an individual execution path."
+                return this.executeCompositionExecution(
+                    index,
+                    plan,
+                    step,
+                    specification
                 );
 
 
@@ -510,6 +516,449 @@ if (
         }
 
     }
+
+    private executeCompositionExecution(
+        index: number,
+        plan:
+            ScientificExecutionPlan,
+        step:
+            ScientificExecutionStep,
+        specification?:
+            ScientificExecutionSpecification
+    ): ScientificRuntimeExecution {
+
+        const now =
+            new Date().toISOString();
+
+        const planRequirement =
+            plan.compositionExecutionRequirement;
+
+        const specificationRequirement =
+            specification
+                ?.compositionExecutionRequirement;
+
+
+        const admissionErrors:
+            string[] = [];
+
+
+        if (
+            specification ===
+            undefined
+        ) {
+
+            admissionErrors.push(
+                "No scientific execution specification is available for the composition execution step."
+            );
+
+        } else {
+
+            if (
+                specification.specificationType !==
+                "COMPOSITION_EXECUTION"
+            ) {
+
+                admissionErrors.push(
+                    "The scientific execution specification is not a composition execution specification."
+                );
+
+            }
+
+            if (
+                specification.resolutionStatus !==
+                "EXECUTABLE"
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution specification is not executable."
+                );
+
+            }
+
+            /*
+             * Joint execution must remain detached from individual
+             * repository/target command identity.
+             */
+            if (
+                specification.repository !==
+                    null ||
+                specification.selectedExecutableTarget !==
+                    null ||
+                specification.workingDirectory !==
+                    null ||
+                specification.command !==
+                    null ||
+                specification.testSelector !==
+                    null ||
+                specification.invariantSelector !==
+                    null
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution specification contains individual executable identity."
+                );
+
+            }
+
+        }
+
+
+        if (
+            planRequirement ===
+            undefined
+        ) {
+
+            admissionErrors.push(
+                "The execution plan has no structured composition execution requirement."
+            );
+
+        }
+
+
+        if (
+            specificationRequirement ===
+            undefined
+        ) {
+
+            admissionErrors.push(
+                "The execution specification has no structured composition execution requirement."
+            );
+
+        }
+
+
+        if (
+            planRequirement !==
+                undefined &&
+            specificationRequirement !==
+                undefined
+        ) {
+
+            if (
+                planRequirement.requirementId !==
+                specificationRequirement.requirementId
+            ) {
+
+                admissionErrors.push(
+                    "The plan and specification composition requirement identities diverge."
+                );
+
+            }
+
+            if (
+                planRequirement.candidate.candidateId !==
+                specificationRequirement.candidate.candidateId
+            ) {
+
+                admissionErrors.push(
+                    "The plan and specification composition candidate identities diverge."
+                );
+
+            }
+
+        }
+
+
+        const requirement =
+            specificationRequirement;
+
+
+        if (
+            requirement !==
+            undefined
+        ) {
+
+            if (
+                requirement.participantAConstraintIds.length ===
+                0
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution requirement has no participant A constraints."
+                );
+
+            }
+
+            if (
+                requirement.participantBConstraintIds.length ===
+                0
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution requirement has no participant B constraints."
+                );
+
+            }
+
+
+            const participantASources =
+                requirement.participantSources.filter(
+                    source =>
+                        source.participantSide ===
+                        "A"
+                );
+
+            const participantBSources =
+                requirement.participantSources.filter(
+                    source =>
+                        source.participantSide ===
+                        "B"
+                );
+
+
+            if (
+                participantASources.length ===
+                0
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution requirement has no participant A source binding."
+                );
+
+            }
+
+
+            if (
+                participantBSources.length ===
+                0
+            ) {
+
+                admissionErrors.push(
+                    "The composition execution requirement has no participant B source binding."
+                );
+
+            }
+
+
+            for (
+                const source
+                of requirement.participantSources
+            ) {
+
+                if (
+                    source.sourceRevision.trim().length ===
+                        0 ||
+                    source.repository.trim().length ===
+                        0
+                ) {
+
+                    admissionErrors.push(
+                        `Composition participant ${source.participantSide} has an incomplete pinned source binding.`
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        if (
+            admissionErrors.length >
+            0
+        ) {
+
+            return {
+
+                runtimeExecutionId:
+                    this.executionId(
+                        index
+                    ),
+
+                executionPlanId:
+                    plan.executionPlanId,
+
+                executionTaskId:
+                    plan.executionTaskId,
+
+                experimentId:
+                    plan.experimentId,
+
+                targetId:
+                    plan.targetId,
+
+                sourceConclusionId:
+                    plan.sourceConclusionId,
+
+                sourceIds:
+                    [
+                        ...(plan.sourceIds ?? [])
+                    ],
+
+                targetEvidenceIds:
+                    [
+                        ...(plan.targetEvidenceIds ?? [])
+                    ],
+
+                stepId:
+                    step.stepId,
+
+                stepType:
+                    step.stepType,
+
+                status:
+                    "UNSUPPORTED",
+
+                runtime:
+                    "INVALID_COMPOSITION_EXECUTION_REQUIREMENT",
+
+                repository:
+                    null,
+
+                selectedExecutableTarget:
+                    null,
+
+                startedAt:
+                    null,
+
+                finishedAt:
+                    null,
+
+                evidence: [],
+
+                observations: [
+                    "Joint composition execution was rejected before any participant contract execution."
+                ],
+
+                errors:
+                    admissionErrors,
+
+                explanation:
+                    "The dedicated composition runtime rejected an incomplete or divergent joint execution requirement."
+
+            };
+
+        }
+
+
+        if (
+            requirement ===
+            undefined
+        ) {
+
+            /*
+             * Defensive exhaustiveness. The admission error branch
+             * above already handles this case.
+             */
+            throw new Error(
+                "Composition requirement admission reached an impossible undefined requirement state."
+            );
+
+        }
+
+
+        return {
+
+            runtimeExecutionId:
+                this.executionId(
+                    index
+                ),
+
+            executionPlanId:
+                plan.executionPlanId,
+
+            executionTaskId:
+                plan.executionTaskId,
+
+            experimentId:
+                plan.experimentId,
+
+            targetId:
+                plan.targetId,
+
+            sourceConclusionId:
+                plan.sourceConclusionId,
+
+            sourceIds:
+                [
+                    ...(plan.sourceIds ?? [])
+                ],
+
+            targetEvidenceIds:
+                [
+                    ...(plan.targetEvidenceIds ?? [])
+                ],
+
+            stepId:
+                step.stepId,
+
+            stepType:
+                step.stepType,
+
+            /*
+             * Admission is intentionally INCONCLUSIVE.
+             *
+             * This proves only that the runtime received a valid
+             * bilateral execution requirement. No participant
+             * contracts are executed at this stage.
+             */
+            status:
+                "INCONCLUSIVE",
+
+            runtime:
+                "OECL_NATIVE_COMPOSITION_REQUIREMENT_ADMISSION",
+
+            compositionExecutionRequirement:
+                cloneScientificCompositionExecutionRequirement(
+                    requirement
+                ),
+
+            repository:
+                null,
+
+            selectedExecutableTarget:
+                null,
+
+            startedAt:
+                now,
+
+            finishedAt:
+                now,
+
+            evidence: [
+                "COMPOSITION_REQUIREMENT_ADMITTED",
+                `COMPOSITION_REQUIREMENT_ID:${requirement.requirementId}`,
+                `COMPOSITION_CANDIDATE_ID:${requirement.candidate.candidateId}`,
+                ...requirement
+                    .participantAConstraintIds
+                    .map(
+                        constraintId =>
+                            `PARTICIPANT_A_CONSTRAINT:${constraintId}`
+                    ),
+                ...requirement
+                    .participantBConstraintIds
+                    .map(
+                        constraintId =>
+                            `PARTICIPANT_B_CONSTRAINT:${constraintId}`
+                    ),
+                ...requirement
+                    .participantSources
+                    .map(
+                        source =>
+                            [
+                                "PARTICIPANT_SOURCE",
+                                source.participantSide,
+                                source.sourceId,
+                                source.sourceRevision,
+                                source.repository
+                            ].join(":")
+                    )
+            ],
+
+            observations: [
+                "Structured bilateral composition execution requirement was admitted by the dedicated runtime boundary.",
+                "No participant contracts were executed by this runtime admission step."
+            ],
+
+            errors: [],
+
+            explanation:
+                "The dedicated composition runtime verified and preserved the joint A+B execution requirement without collapsing it to an individual repository or executable target. Contract execution remains pending."
+
+        };
+
+    }
+
 
     private async executeTestExecution(
         index: number,
