@@ -57,6 +57,21 @@ if (
 }
 
 
+const requirementPath =
+    process.env.OECL_COMPOSITION_EXECUTION_REQUIREMENT_PATH;
+
+
+const requirement =
+    requirementPath
+        ? JSON.parse(
+            await readFile(
+                requirementPath,
+                "utf8"
+            )
+        )
+        : null;
+
+
 const artifact8060Path =
     join(
         participantBRoot,
@@ -133,9 +148,9 @@ function encodeInitializeWithAddress(
  * ERC-8004 repository:
  *
  * HardhatMinimalUUPS
- * â†’ ERC1967Proxy
- * â†’ IdentityRegistryUpgradeable
- * â†’ upgradeToAndCall(initialize())
+ * Ã¢â€ â€™ ERC1967Proxy
+ * Ã¢â€ â€™ IdentityRegistryUpgradeable
+ * Ã¢â€ â€™ upgradeToAndCall(initialize())
  */
 
 const minimalImpl =
@@ -316,6 +331,47 @@ const redeemValue =
         .REDEEM_VALUE();
 
 
+const mintPriceConstraint =
+    requirement ===
+        null
+        ? null
+        : (() => {
+
+            const matches =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        typeof constraint.rawText ===
+                            "string" &&
+                        constraint.rawText.includes(
+                            "msg.value"
+                        ) &&
+                        constraint.rawText.includes(
+                            "MINT_PRICE"
+                        )
+                );
+
+
+            if (
+                matches.length !==
+                1
+            ) {
+
+                throw new Error(
+                    "Expected exactly one discovered ERC-8060 exact mint-price constraint."
+                );
+
+            }
+
+
+            return matches[0];
+
+        })();
+
+
 const uriB =
     "ipfs://oecl/control/erc8060-value";
 
@@ -342,6 +398,116 @@ const receiptB =
                     txB
             }
         );
+
+
+let incorrectMintPriceRevertReasonConfirmed =
+    false;
+
+
+if (
+    mintPriceConstraint !==
+    null
+) {
+
+    const incorrectMintPrice =
+        mintPrice +
+        1n;
+
+
+    try {
+
+        await publicClient
+            .simulateContract(
+                {
+                    address:
+                        deploy8060Receipt.contractAddress,
+
+                    abi:
+                        artifact8060.abi,
+
+                    functionName:
+                        "mint",
+
+                    args: [
+                        "ipfs://oecl/control/erc8060-invalid-price"
+                    ],
+
+                    account:
+                        owner.account,
+
+                    value:
+                        incorrectMintPrice
+                }
+            );
+
+    } catch (error) {
+
+        const errorText =
+            [
+                String(error),
+
+                String(
+                    error?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.reason ??
+                    ""
+                )
+            ].join(
+                "\n"
+            );
+
+
+        incorrectMintPriceRevertReasonConfirmed =
+            errorText.includes(
+                "Incorrect ETH amount"
+            );
+
+
+        if (
+            !incorrectMintPriceRevertReasonConfirmed
+        ) {
+
+            throw error;
+
+        }
+
+    }
+
+
+    if (
+        !incorrectMintPriceRevertReasonConfirmed
+    ) {
+
+        throw new Error(
+            "ERC-8060 incorrect mint-price counterfactual did not revert with the observed guard reason."
+        );
+
+    }
+
+}
 
 
 /*
@@ -604,6 +770,43 @@ if (
 }
 
 
+const constraintObservations =
+    mintPriceConstraint ===
+        null
+        ? []
+        : [
+
+            {
+                observationId:
+                    (
+                        "REAL-CONTROL-MINT-PRICE-" +
+                        mintPriceConstraint.constraintId
+                    ),
+
+                candidateId:
+                    mintPriceConstraint.candidateId,
+
+                constraintId:
+                    mintPriceConstraint.constraintId,
+
+                participantSide:
+                    mintPriceConstraint.participantSide,
+
+                verdict:
+                    "PRESERVED",
+
+                evidence: [
+                    (
+                        "ERC8060_EXACT_MINT_PRICE_ACCEPTED_TX:" +
+                        txB
+                    ),
+                    "ERC8060_INCORRECT_MINT_PRICE_REVERT_REASON_CONFIRMED:Incorrect ETH amount"
+                ]
+            }
+
+        ];
+
+
 const report = {
 
     executionKind:
@@ -653,6 +856,8 @@ const report = {
         "ERC721_SHARED_FOUNDATION_PROBE_PASSED",
         "ERC8060_REDEEMABLE_VALUE_PRESERVED"
     ],
+
+    constraintObservations,
 
     scientificPolarity:
         "NEUTRAL",

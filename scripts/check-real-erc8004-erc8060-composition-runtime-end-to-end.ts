@@ -927,7 +927,7 @@ try {
 
 
     await check(
-        "REAL CONTROL LEAVES UNOPERATIONALIZED CONSTRAINTS UNEVALUATED",
+        "REAL CONTROL OPERATIONALIZES EXACT ERC8060 MINT PRICE CONSTRAINT",
         () => {
 
             const evaluation =
@@ -961,13 +961,13 @@ try {
                         17,
 
                     preserved:
-                        0,
+                        1,
 
                     violated:
                         0,
 
                     unevaluated:
-                        17
+                        16
                 }
             );
 
@@ -979,18 +979,50 @@ try {
 
 
             assert.equal(
-                evaluation.evaluations.every(
+                evaluation.evaluations.filter(
+                    item =>
+                        item.status ===
+                        "PRESERVED"
+                ).length,
+                1
+            );
+
+
+            assert.equal(
+                evaluation.evaluations.filter(
                     item =>
                         item.status ===
                         "UNEVALUATED"
-                ),
-                true
+                ).length,
+                16
             );
 
 
             assert.deepEqual(
                 evaluation.errors,
                 []
+            );
+
+
+            const expectedConstraints =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        constraint.rawText.includes(
+                            "msg.value"
+                        ) &&
+                        constraint.rawText.includes(
+                            "MINT_PRICE"
+                        )
+                );
+
+
+            assert.equal(
+                expectedConstraints.length,
+                1
             );
 
 
@@ -1004,7 +1036,44 @@ try {
 
             assert.equal(
                 constraintObservations.length,
-                0
+                1
+            );
+
+
+            assert.equal(
+                constraintObservations[0].constraintId,
+                expectedConstraints[0].constraintId
+            );
+
+
+            assert.equal(
+                constraintObservations[0].participantSide,
+                "B"
+            );
+
+
+            assert.equal(
+                constraintObservations[0].verdict,
+                "PRESERVED"
+            );
+
+
+            assert.equal(
+                constraintObservations[0].evidence.some(
+                    evidence =>
+                        evidence.startsWith(
+                            "ERC8060_EXACT_MINT_PRICE_ACCEPTED_TX:"
+                        )
+                ),
+                true
+            );
+
+
+            assert.equal(
+                constraintObservations[0].evidence.includes(
+                    "ERC8060_INCORRECT_MINT_PRICE_REVERT_REASON_CONFIRMED:Incorrect ETH amount"
+                ),
+                true
             );
 
         }
