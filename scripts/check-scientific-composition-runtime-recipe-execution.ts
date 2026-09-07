@@ -598,13 +598,22 @@ function runtimeInputs(
 function registration(
     registrationId: string,
     revisionA: string,
-    revisionB: string
+    revisionB: string,
+    observationMode:
+        | "SUPPORT"
+        | "CHALLENGE"
+        | "PARTIAL" =
+        "SUPPORT"
 ): ScientificJointContractHarnessRecipeRegistration {
 
     const driverSource = `
 import {
     readFileSync
 } from "node:fs";
+
+
+const observationMode =
+    ${JSON.stringify(observationMode)};
 
 
 const requirementPath =
@@ -629,6 +638,74 @@ const requirement =
             "utf8"
         )
     );
+
+
+const observationA = {
+
+    observationId:
+        "OBSERVATION-RUNTIME-CONSTRAINT-A",
+
+    candidateId:
+        requirement.candidate.candidateId,
+
+    constraintId:
+        requirement
+            .participantAConstraintIds[0],
+
+    participantSide:
+        "A",
+
+    verdict:
+        "PRESERVED",
+
+    evidence: [
+        "FIXTURE_RUNTIME_ASSERTION_A_PRESERVED"
+    ]
+
+};
+
+
+const observationB = {
+
+    observationId:
+        "OBSERVATION-RUNTIME-CONSTRAINT-B",
+
+    candidateId:
+        requirement.candidate.candidateId,
+
+    constraintId:
+        requirement
+            .participantBConstraintIds[0],
+
+    participantSide:
+        "B",
+
+    verdict:
+        observationMode ===
+            "CHALLENGE"
+            ? "VIOLATED"
+            : "PRESERVED",
+
+    evidence: [
+        observationMode ===
+            "CHALLENGE"
+            ? "FIXTURE_RUNTIME_ASSERTION_B_VIOLATED"
+            : "FIXTURE_RUNTIME_ASSERTION_B_PRESERVED"
+    ]
+
+};
+
+
+const constraintObservations =
+    observationMode ===
+        "PARTIAL"
+        ? [
+            observationA
+        ]
+        : [
+            observationA,
+            observationB
+        ];
 
 
 const report = {
@@ -677,53 +754,7 @@ const report = {
         "FIXTURE_BILATERAL_EXECUTION_OBSERVED"
     ],
 
-    constraintObservations: [
-
-        {
-            observationId:
-                "OBSERVATION-RUNTIME-CONSTRAINT-A",
-
-            candidateId:
-                requirement.candidate.candidateId,
-
-            constraintId:
-                requirement
-                    .participantAConstraintIds[0],
-
-            participantSide:
-                "A",
-
-            verdict:
-                "PRESERVED",
-
-            evidence: [
-                "FIXTURE_RUNTIME_ASSERTION_A_PRESERVED"
-            ]
-        },
-
-        {
-            observationId:
-                "OBSERVATION-RUNTIME-CONSTRAINT-B",
-
-            candidateId:
-                requirement.candidate.candidateId,
-
-            constraintId:
-                requirement
-                    .participantBConstraintIds[0],
-
-            participantSide:
-                "B",
-
-            verdict:
-                "PRESERVED",
-
-            evidence: [
-                "FIXTURE_RUNTIME_ASSERTION_B_PRESERVED"
-            ]
-        }
-
-    ],
+    constraintObservations,
 
     scientificPolarity:
         "NEUTRAL",
@@ -1248,6 +1279,253 @@ try {
                             "PRESERVED"
                     }
                 ]
+            );
+
+        }
+    );
+
+    /*
+     * ============================================================
+     * COMPLETE COVERAGE WITH ONE VIOLATION
+     * ============================================================
+     */
+    const challengeResult =
+        await new ScientificExecutionRuntimeEngine()
+            .build(
+                "CAMPAIGN-RUNTIME-RECIPE-CHALLENGE",
+                inputs.plans,
+                inputs.specifications,
+                {
+                    ...baseOptions,
+
+                    compositionRecipeRegistrations: [
+                        registration(
+                            "CHALLENGE",
+                            repositoryA.revision,
+                            repositoryB.revision,
+                            "CHALLENGE"
+                        )
+                    ]
+
+                } as any
+            );
+
+
+    const challengeExecution =
+        challengeResult.executions[0] as any;
+
+
+    await check(
+        "RUNTIME DERIVES CHALLENGE WHEN ANY OBSERVED CONSTRAINT IS VIOLATED",
+        () => {
+
+            const evaluation =
+                challengeExecution
+                    .compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+            assert.equal(
+                challengeResult.errors.length,
+                0
+            );
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "CHALLENGE"
+            );
+
+            assert.deepEqual(
+                evaluation.statistics,
+                {
+                    total:
+                        2,
+
+                    preserved:
+                        1,
+
+                    violated:
+                        1,
+
+                    unevaluated:
+                        0
+                }
+            );
+
+            assert.deepEqual(
+                evaluation.evaluations.map(
+                    item => ({
+                        constraintId:
+                            item.constraintId,
+
+                        status:
+                            item.status
+                    })
+                ),
+                [
+                    {
+                        constraintId:
+                            "CONSTRAINT-A",
+
+                        status:
+                            "PRESERVED"
+                    },
+
+                    {
+                        constraintId:
+                            "CONSTRAINT-B",
+
+                        status:
+                            "VIOLATED"
+                    }
+                ]
+            );
+
+            assert.equal(
+                challengeExecution
+                    .jointContractHarnessExecution
+                    .scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                challengeExecution
+                    .jointContractHarnessExecution
+                    .driverReport
+                    .scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                challengeExecution.status,
+                "INCONCLUSIVE"
+            );
+
+        }
+    );
+
+
+    /*
+     * ============================================================
+     * PARTIAL CONSTRAINT COVERAGE
+     * ============================================================
+     */
+    const partialResult =
+        await new ScientificExecutionRuntimeEngine()
+            .build(
+                "CAMPAIGN-RUNTIME-RECIPE-PARTIAL",
+                inputs.plans,
+                inputs.specifications,
+                {
+                    ...baseOptions,
+
+                    compositionRecipeRegistrations: [
+                        registration(
+                            "PARTIAL",
+                            repositoryA.revision,
+                            repositoryB.revision,
+                            "PARTIAL"
+                        )
+                    ]
+
+                } as any
+            );
+
+
+    const partialExecution =
+        partialResult.executions[0] as any;
+
+
+    await check(
+        "RUNTIME REMAINS INCONCLUSIVE WHEN CONSTRAINT COVERAGE IS PARTIAL",
+        () => {
+
+            const evaluation =
+                partialExecution
+                    .compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+            assert.equal(
+                partialResult.errors.length,
+                0
+            );
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "INCONCLUSIVE"
+            );
+
+            assert.deepEqual(
+                evaluation.statistics,
+                {
+                    total:
+                        2,
+
+                    preserved:
+                        1,
+
+                    violated:
+                        0,
+
+                    unevaluated:
+                        1
+                }
+            );
+
+            assert.deepEqual(
+                evaluation.evaluations.map(
+                    item => ({
+                        constraintId:
+                            item.constraintId,
+
+                        status:
+                            item.status
+                    })
+                ),
+                [
+                    {
+                        constraintId:
+                            "CONSTRAINT-A",
+
+                        status:
+                            "PRESERVED"
+                    },
+
+                    {
+                        constraintId:
+                            "CONSTRAINT-B",
+
+                        status:
+                            "UNEVALUATED"
+                    }
+                ]
+            );
+
+            assert.equal(
+                partialExecution
+                    .jointContractHarnessExecution
+                    .scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                partialExecution
+                    .jointContractHarnessExecution
+                    .driverReport
+                    .scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                partialExecution.status,
+                "INCONCLUSIVE"
             );
 
         }
