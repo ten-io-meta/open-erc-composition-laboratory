@@ -635,6 +635,64 @@ await check(
 );
 
 
+await check(
+    "COMPOSITION PLAN USES DEDICATED JOINT EXECUTION STEP",
+    () => {
+
+        assert.deepEqual(
+            plan.steps.map(
+                step =>
+                    step.stepType
+            ),
+            [
+                "SOURCE_REINGESTION",
+                "COMPOSITION_EXECUTION",
+                "EVIDENCE_COLLECTION"
+            ]
+        );
+
+    }
+);
+
+
+await check(
+    "COMPOSITION EXECUTION STEP REFERENCES STRUCTURED REQUIREMENT AND BILATERAL CONSTRAINTS",
+    () => {
+
+        const step =
+            plan.steps.find(
+                item =>
+                    item.stepType ===
+                    "COMPOSITION_EXECUTION"
+            );
+
+        assert.ok(
+            step
+        );
+
+        assert.deepEqual(
+            step.requiredInputs,
+            [
+                "SCIENTIFIC-COMPOSITION-EXECUTION-REQUIREMENT-SPECIFICATION-JOINT-101-202",
+                "CONSTRAINT-A",
+                "CONSTRAINT-B"
+            ]
+        );
+
+        assert.equal(
+            plan.steps.some(
+                item =>
+                    item.stepType ===
+                        "TEST_EXECUTION" ||
+                    item.stepType ===
+                        "INVARIANT_VALIDATION"
+            ),
+            false
+        );
+
+    }
+);
+
 /*
  * Fail-closed controls.
  */

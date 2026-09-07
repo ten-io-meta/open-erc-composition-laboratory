@@ -331,7 +331,28 @@ origin:
          * Add execution-specific steps.
          */
 
+        const isCompositionCandidate =
+            task.targetType ===
+            "COMPOSITION_CANDIDATE";
+
+
         if (
+            isCompositionCandidate
+        ) {
+
+            steps.push(
+                this.createStep(
+                    task,
+                    order++,
+                    "COMPOSITION_EXECUTION"
+                )
+            );
+
+        }
+
+
+        if (
+            !isCompositionCandidate &&
             primaryCapability ===
             "STATIC_ANALYSIS"
         ) {
@@ -347,6 +368,7 @@ origin:
         }
 
         if (
+            !isCompositionCandidate &&
             primaryCapability ===
             "TEST_EXECUTION"
         ) {
@@ -362,6 +384,7 @@ origin:
         }
 
         if (
+            !isCompositionCandidate &&
             primaryCapability ===
             "INVARIANT_VALIDATION"
         ) {
@@ -377,6 +400,7 @@ origin:
         }
 
         if (
+            !isCompositionCandidate &&
             primaryCapability ===
             "MANUAL_REVIEW"
         ) {
@@ -398,6 +422,7 @@ origin:
          */
 
         if (
+            !isCompositionCandidate &&
             task.origin ===
             "RETEST" &&
             !steps.some(
@@ -596,6 +621,29 @@ origin:
 
                 };
 
+            case "COMPOSITION_EXECUTION":
+
+                return {
+
+                    title:
+                        "Execute joint composition experiment",
+
+                    objective:
+                        "Execute both scientific composition participants within one controlled joint experiment while evaluating their observed constraints.",
+
+                    tools: [
+                        "OECL Joint Composition Runtime"
+                    ],
+
+                    expectedOutputs: [
+                        "Joint participant execution evidence",
+                        "Observed bilateral constraint outcomes",
+                        "Composition scientific polarity evidence"
+                    ]
+
+                };
+
+
             case "EVIDENCE_COLLECTION":
 
                 return {
@@ -668,6 +716,29 @@ origin:
                     task.targetId,
                     ...task.requiredEvidence
                 ];
+
+            case "COMPOSITION_EXECUTION": {
+
+                const requirement =
+                    task.compositionExecutionRequirement;
+
+                if (
+                    requirement ===
+                    undefined
+                ) {
+
+                    return [];
+
+                }
+
+                return [
+                    requirement.requirementId,
+                    ...requirement.participantAConstraintIds,
+                    ...requirement.participantBConstraintIds
+                ];
+
+            }
+
 
             case "EVIDENCE_COLLECTION":
 

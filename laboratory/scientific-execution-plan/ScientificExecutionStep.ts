@@ -3,6 +3,7 @@ export type ScientificExecutionStepType =
     | "STATIC_ANALYSIS"
     | "TEST_EXECUTION"
     | "INVARIANT_VALIDATION"
+    | "COMPOSITION_EXECUTION"
     | "EVIDENCE_COLLECTION"
     | "MANUAL_REVIEW";
 

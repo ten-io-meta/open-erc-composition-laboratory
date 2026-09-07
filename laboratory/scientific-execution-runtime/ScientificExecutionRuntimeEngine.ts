@@ -1,4 +1,4 @@
-﻿import {
+import {
     ResearchPipeline
 } from "../pipeline/ResearchPipeline.js";
 import {
@@ -464,6 +464,13 @@ if (
                     step,
                     completedExecutions
                 );
+
+            case "COMPOSITION_EXECUTION":
+
+                throw new Error(
+                    "COMPOSITION_EXECUTION requires the dedicated joint composition runtime and cannot be executed by an individual execution path."
+                );
+
 
             case "STATIC_ANALYSIS":
 
