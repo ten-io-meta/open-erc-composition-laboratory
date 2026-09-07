@@ -961,13 +961,13 @@ try {
                         17,
 
                     preserved:
-                        1,
+                        2,
 
                     violated:
                         0,
 
                     unevaluated:
-                        16
+                        15
                 }
             );
 
@@ -984,7 +984,7 @@ try {
                         item.status ===
                         "PRESERVED"
                 ).length,
-                1
+                2
             );
 
 
@@ -994,7 +994,7 @@ try {
                         item.status ===
                         "UNEVALUATED"
                 ).length,
-                16
+                15
             );
 
 
@@ -1036,7 +1036,7 @@ try {
 
             assert.equal(
                 constraintObservations.length,
-                1
+                2
             );
 
 
@@ -1079,6 +1079,116 @@ try {
         }
     );
 
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES ERC8060 NONEXISTENT TOKEN CONSTRAINT",
+        () => {
+
+            const expectedConstraints =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        constraint.rawText.includes(
+                            "_exists(tokenId)"
+                        ) &&
+                        constraint.rawText.includes(
+                            "Nonexistent token"
+                        )
+                );
+
+
+            assert.equal(
+                expectedConstraints.length,
+                1
+            );
+
+
+            const expectedConstraint =
+                expectedConstraints[0];
+
+
+            const constraintObservations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const observation =
+                constraintObservations.find(
+                    item =>
+                        item.constraintId ===
+                        expectedConstraint.constraintId
+                );
+
+
+            assert.ok(
+                observation
+            );
+
+
+            assert.equal(
+                observation.participantSide,
+                "B"
+            );
+
+
+            assert.equal(
+                observation.verdict,
+                "PRESERVED"
+            );
+
+
+            assert.equal(
+                observation.evidence.includes(
+                    "ERC8060_EXISTING_TOKEN_VALUE_CONFIRMED:1"
+                ),
+                true
+            );
+
+
+            assert.equal(
+                observation.evidence.includes(
+                    "ERC8060_NONEXISTENT_TOKEN_REVERT_REASON_CONFIRMED:Nonexistent token"
+                ),
+                true
+            );
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            const constraintEvaluation =
+                evaluation.evaluations.find(
+                    item =>
+                        item.constraintId ===
+                        expectedConstraint.constraintId
+                );
+
+
+            assert.ok(
+                constraintEvaluation
+            );
+
+
+            assert.equal(
+                constraintEvaluation.status,
+                "PRESERVED"
+            );
+
+        }
+    );
 
     await check(
         "END TO END REAL EXECUTION CANNOT YET CLAIM COMPOSITION POLARITY",

@@ -148,9 +148,9 @@ function encodeInitializeWithAddress(
  * ERC-8004 repository:
  *
  * HardhatMinimalUUPS
- * Ã¢â€ â€™ ERC1967Proxy
- * Ã¢â€ â€™ IdentityRegistryUpgradeable
- * Ã¢â€ â€™ upgradeToAndCall(initialize())
+ * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ ERC1967Proxy
+ * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ IdentityRegistryUpgradeable
+ * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ upgradeToAndCall(initialize())
  */
 
 const minimalImpl =
@@ -372,6 +372,47 @@ const mintPriceConstraint =
         })();
 
 
+const nonexistentTokenConstraint =
+    requirement ===
+        null
+        ? null
+        : (() => {
+
+            const matches =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        typeof constraint.rawText ===
+                            "string" &&
+                        constraint.rawText.includes(
+                            "_exists(tokenId)"
+                        ) &&
+                        constraint.rawText.includes(
+                            "Nonexistent token"
+                        )
+                );
+
+
+            if (
+                matches.length !==
+                1
+            ) {
+
+                throw new Error(
+                    "Expected exactly one discovered ERC-8060 nonexistent-token constraint."
+                );
+
+            }
+
+
+            return matches[0];
+
+        })();
+
+
 const uriB =
     "ipfs://oecl/control/erc8060-value";
 
@@ -503,6 +544,99 @@ if (
 
         throw new Error(
             "ERC-8060 incorrect mint-price counterfactual did not revert with the observed guard reason."
+        );
+
+    }
+
+}
+
+
+let nonexistentTokenRevertReasonConfirmed =
+    false;
+
+
+if (
+    nonexistentTokenConstraint !==
+    null
+) {
+
+    const nonexistentTokenId =
+        2n;
+
+
+    try {
+
+        await erc8060
+            .read
+            .valueOf(
+                [
+                    nonexistentTokenId
+                ]
+            );
+
+    } catch (error) {
+
+        const errorText =
+            [
+                String(error),
+
+                String(
+                    error?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.reason ??
+                    ""
+                )
+            ].join(
+                "\n"
+            );
+
+
+        nonexistentTokenRevertReasonConfirmed =
+            errorText.includes(
+                "Nonexistent token"
+            );
+
+
+        if (
+            !nonexistentTokenRevertReasonConfirmed
+        ) {
+
+            throw error;
+
+        }
+
+    }
+
+
+    if (
+        !nonexistentTokenRevertReasonConfirmed
+    ) {
+
+        throw new Error(
+            "ERC-8060 nonexistent-token counterfactual did not revert with the observed guard reason."
         );
 
     }
@@ -770,41 +904,80 @@ if (
 }
 
 
-const constraintObservations =
-    mintPriceConstraint ===
-        null
-        ? []
-        : [
+const constraintObservations = [
 
-            {
-                observationId:
-                    (
-                        "REAL-CONTROL-MINT-PRICE-" +
-                        mintPriceConstraint.constraintId
-                    ),
+    ...(
+        mintPriceConstraint ===
+            null
+            ? []
+            : [
 
-                candidateId:
-                    mintPriceConstraint.candidateId,
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-MINT-PRICE-" +
+                            mintPriceConstraint.constraintId
+                        ),
 
-                constraintId:
-                    mintPriceConstraint.constraintId,
+                    candidateId:
+                        mintPriceConstraint.candidateId,
 
-                participantSide:
-                    mintPriceConstraint.participantSide,
+                    constraintId:
+                        mintPriceConstraint.constraintId,
 
-                verdict:
-                    "PRESERVED",
+                    participantSide:
+                        mintPriceConstraint.participantSide,
 
-                evidence: [
-                    (
-                        "ERC8060_EXACT_MINT_PRICE_ACCEPTED_TX:" +
-                        txB
-                    ),
-                    "ERC8060_INCORRECT_MINT_PRICE_REVERT_REASON_CONFIRMED:Incorrect ETH amount"
-                ]
-            }
+                    verdict:
+                        "PRESERVED",
 
-        ];
+                    evidence: [
+                        (
+                            "ERC8060_EXACT_MINT_PRICE_ACCEPTED_TX:" +
+                            txB
+                        ),
+                        "ERC8060_INCORRECT_MINT_PRICE_REVERT_REASON_CONFIRMED:Incorrect ETH amount"
+                    ]
+                }
+
+            ]
+    ),
+
+    ...(
+        nonexistentTokenConstraint ===
+            null
+            ? []
+            : [
+
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-NONEXISTENT-TOKEN-" +
+                            nonexistentTokenConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        nonexistentTokenConstraint.candidateId,
+
+                    constraintId:
+                        nonexistentTokenConstraint.constraintId,
+
+                    participantSide:
+                        nonexistentTokenConstraint.participantSide,
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8060_EXISTING_TOKEN_VALUE_CONFIRMED:1",
+                        "ERC8060_NONEXISTENT_TOKEN_REVERT_REASON_CONFIRMED:Nonexistent token"
+                    ]
+                }
+
+            ]
+    )
+
+];
 
 
 const report = {
