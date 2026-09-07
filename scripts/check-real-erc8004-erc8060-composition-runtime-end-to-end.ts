@@ -961,13 +961,13 @@ try {
                         17,
 
                     preserved:
-                        3,
+                        9,
 
                     violated:
                         0,
 
                     unevaluated:
-                        14
+                        8
                 }
             );
 
@@ -984,7 +984,7 @@ try {
                         item.status ===
                         "PRESERVED"
                 ).length,
-                3
+                9
             );
 
 
@@ -994,7 +994,7 @@ try {
                         item.status ===
                         "UNEVALUATED"
                 ).length,
-                14
+                8
             );
 
 
@@ -1036,7 +1036,7 @@ try {
 
             assert.equal(
                 constraintObservations.length,
-                3
+                9
             );
 
 
@@ -1298,6 +1298,324 @@ try {
             assert.equal(
                 constraintEvaluation.status,
                 "PRESERVED"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES FOUR UNIQUE ERC8004 WALLET CONSTRAINTS",
+        () => {
+
+            const walletGuards = [
+
+                {
+                    fragments: [
+                        "newWallet != address(0)",
+                        "bad wallet"
+                    ],
+
+                    evidence:
+                        "ERC8004_ZERO_WALLET_REVERT_REASON_CONFIRMED:bad wallet"
+                },
+
+                {
+                    fragments: [
+                        "block.timestamp <= deadline",
+                        "expired"
+                    ],
+
+                    evidence:
+                        "ERC8004_EXPIRED_DEADLINE_REVERT_REASON_CONFIRMED:expired"
+                },
+
+                {
+                    fragments: [
+                        "MAX_DEADLINE_DELAY",
+                        "deadline too far"
+                    ],
+
+                    evidence:
+                        "ERC8004_EXCESSIVE_DEADLINE_REVERT_REASON_CONFIRMED:deadline too far"
+                },
+
+                {
+                    fragments: [
+                        "ERC1271_MAGICVALUE",
+                        "invalid wallet sig"
+                    ],
+
+                    evidence:
+                        "ERC8004_INVALID_WALLET_SIGNATURE_REVERT_REASON_CONFIRMED:invalid wallet sig"
+                }
+
+            ];
+
+
+            const constraintObservations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            for (
+                const guard
+                of walletGuards
+            ) {
+
+                const matches =
+                    requirement.constraints.filter(
+                        constraint =>
+                            constraint.participantSide ===
+                                "A" &&
+                            constraint.basis ===
+                                "SOLIDITY_REQUIRE_STATEMENT" &&
+                            guard.fragments.every(
+                                fragment =>
+                                    constraint.rawText.includes(
+                                        fragment
+                                    )
+                            )
+                    );
+
+
+                assert.equal(
+                    matches.length,
+                    1
+                );
+
+
+                const expectedConstraint =
+                    matches[0];
+
+
+                const observation =
+                    constraintObservations.find(
+                        item =>
+                            item.constraintId ===
+                            expectedConstraint.constraintId
+                    );
+
+
+                assert.ok(
+                    observation
+                );
+
+
+                assert.equal(
+                    observation.participantSide,
+                    "A"
+                );
+
+
+                assert.equal(
+                    observation.verdict,
+                    "PRESERVED"
+                );
+
+
+                assert.equal(
+                    observation.evidence.includes(
+                        guard.evidence
+                    ),
+                    true
+                );
+
+
+                const constraintEvaluation =
+                    evaluation.evaluations.find(
+                        item =>
+                            item.constraintId ===
+                            expectedConstraint.constraintId
+                    );
+
+
+                assert.ok(
+                    constraintEvaluation
+                );
+
+
+                assert.equal(
+                    constraintEvaluation.status,
+                    "PRESERVED"
+                );
+
+            }
+
+
+            assert.equal(
+                evaluation.statistics.preserved,
+                9
+            );
+
+
+            assert.equal(
+                evaluation.statistics.unevaluated,
+                8
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "INCONCLUSIVE"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES TWO ERC8004 RESERVED KEY CONSTRAINTS",
+        () => {
+
+            const cases = [
+
+                {
+                    fragments: [
+                        "metadata[i].metadataKey",
+                        "RESERVED_AGENT_WALLET_KEY_HASH",
+                        "reserved key"
+                    ],
+
+                    evidence:
+                        "ERC8004_RESERVED_REGISTRATION_METADATA_REVERT_REASON_CONFIRMED:reserved key"
+                },
+
+                {
+                    fragments: [
+                        "bytes(metadataKey)",
+                        "RESERVED_AGENT_WALLET_KEY_HASH",
+                        "reserved key"
+                    ],
+
+                    evidence:
+                        "ERC8004_RESERVED_SETMETADATA_REVERT_REASON_CONFIRMED:reserved key"
+                }
+
+            ];
+
+
+            const observations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            for (
+                const entry
+                of cases
+            ) {
+
+                const matches =
+                    requirement.constraints.filter(
+                        constraint =>
+                            constraint.participantSide ===
+                                "A" &&
+                            entry.fragments.every(
+                                fragment =>
+                                    constraint.rawText.includes(
+                                        fragment
+                                    )
+                            )
+                    );
+
+
+                assert.equal(
+                    matches.length,
+                    1
+                );
+
+
+                const expected =
+                    matches[0];
+
+
+                const observation =
+                    observations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    observation
+                );
+
+
+                assert.equal(
+                    observation.verdict,
+                    "PRESERVED"
+                );
+
+
+                assert.equal(
+                    observation.evidence.includes(
+                        entry.evidence
+                    ),
+                    true
+                );
+
+
+                const evaluated =
+                    evaluation.evaluations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    evaluated
+                );
+
+
+                assert.equal(
+                    evaluated.status,
+                    "PRESERVED"
+                );
+
+            }
+
+
+            assert.equal(
+                evaluation.statistics.preserved,
+                9
+            );
+
+
+            assert.equal(
+                evaluation.statistics.unevaluated,
+                8
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "INCONCLUSIVE"
             );
 
         }

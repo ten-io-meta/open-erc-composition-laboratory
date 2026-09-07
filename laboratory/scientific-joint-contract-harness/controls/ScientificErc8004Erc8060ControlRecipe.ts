@@ -140,6 +140,135 @@ const zeroAddress =
     "0x0000000000000000000000000000000000000000";
 
 
+function resolveUniqueRequirementConstraint(
+    participantSide,
+    requiredFragments,
+    label
+) {
+
+    if (
+        requirement ===
+        null
+    ) {
+
+        return null;
+
+    }
+
+
+    const matches =
+        requirement.constraints.filter(
+            constraint =>
+                constraint.participantSide ===
+                    participantSide &&
+                constraint.basis ===
+                    "SOLIDITY_REQUIRE_STATEMENT" &&
+                typeof constraint.rawText ===
+                    "string" &&
+                requiredFragments.every(
+                    fragment =>
+                        constraint.rawText.includes(
+                            fragment
+                        )
+                )
+        );
+
+
+    if (
+        matches.length !==
+        1
+    ) {
+
+        throw new Error(
+            "Expected exactly one discovered constraint for " +
+            label +
+            "."
+        );
+
+    }
+
+
+    return matches[0];
+
+}
+
+
+async function requireObservedRevertReason(
+    operation,
+    expectedReason,
+    label
+) {
+
+    try {
+
+        await operation();
+
+    } catch (error) {
+
+        const errorText =
+            [
+                String(error),
+
+                String(
+                    error?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.reason ??
+                    ""
+                )
+            ].join(
+                "\n"
+            );
+
+
+        if (
+            errorText.includes(
+                expectedReason
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        throw error;
+
+    }
+
+
+    throw new Error(
+        label +
+        " did not revert with observed reason " +
+        expectedReason +
+        "."
+    );
+
+}
+
+
 function encodeInitializeWithAddress(
     identityRegistry
 ) {
@@ -173,9 +302,9 @@ function encodeInitializeWithAddress(
  * ERC-8004 repository:
  *
  * HardhatMinimalUUPS
- * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ERC1967Proxy
- * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ IdentityRegistryUpgradeable
- * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ upgradeToAndCall(initialize())
+ * ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ ERC1967Proxy
+ * ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ IdentityRegistryUpgradeable
+ * ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ upgradeToAndCall(initialize())
  */
 
 const minimalImpl =
@@ -223,6 +352,74 @@ const identityRegistry =
     await viem.getContractAt(
         "IdentityRegistryUpgradeable",
         proxy.address
+    );
+
+
+const badWalletConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "newWallet != address(0)",
+            "bad wallet"
+        ],
+        "ERC-8004 nonzero agent wallet"
+    );
+
+
+const expiredDeadlineConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "block.timestamp <= deadline",
+            "expired"
+        ],
+        "ERC-8004 wallet deadline not expired"
+    );
+
+
+const maximumDeadlineConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "MAX_DEADLINE_DELAY",
+            "deadline too far"
+        ],
+        "ERC-8004 maximum wallet deadline"
+    );
+
+
+const walletSignatureConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "ERC1271_MAGICVALUE",
+            "invalid wallet sig"
+        ],
+        "ERC-8004 wallet signature validation"
+    );
+
+
+const registrationReservedKeyConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "metadata[i].metadataKey",
+            "RESERVED_AGENT_WALLET_KEY_HASH",
+            "reserved key"
+        ],
+        "ERC-8004 registration reserved metadata key"
+    );
+
+
+const setMetadataReservedKeyConstraint =
+    resolveUniqueRequirementConstraint(
+        "A",
+        [
+            "bytes(metadataKey)",
+            "RESERVED_AGENT_WALLET_KEY_HASH",
+            "reserved key"
+        ],
+        "ERC-8004 setMetadata reserved key"
     );
 
 
@@ -282,6 +479,342 @@ const agentId =
     BigInt(
         registeredLog.topics[1]
     );
+
+
+const walletGuardBlock =
+    await publicClient.getBlock();
+
+
+const validWalletDeadline =
+    walletGuardBlock.timestamp +
+    240n;
+
+
+const expiredWalletDeadline =
+    walletGuardBlock.timestamp -
+    1n;
+
+
+const excessiveWalletDeadline =
+    walletGuardBlock.timestamp +
+    600n;
+
+
+const validWalletSignature =
+    await nonOwner.signTypedData(
+        {
+            account:
+                nonOwner.account,
+
+            domain: {
+                name:
+                    "ERC8004IdentityRegistry",
+
+                version:
+                    "1",
+
+                chainId,
+
+                verifyingContract:
+                    proxy.address
+            },
+
+            types: {
+                AgentWalletSet: [
+
+                    {
+                        name:
+                            "agentId",
+
+                        type:
+                            "uint256"
+                    },
+
+                    {
+                        name:
+                            "newWallet",
+
+                        type:
+                            "address"
+                    },
+
+                    {
+                        name:
+                            "owner",
+
+                        type:
+                            "address"
+                    },
+
+                    {
+                        name:
+                            "deadline",
+
+                        type:
+                            "uint256"
+                    }
+
+                ]
+            },
+
+            primaryType:
+                "AgentWalletSet",
+
+            message: {
+                agentId,
+
+                newWallet:
+                    nonOwner.account.address,
+
+                owner:
+                    owner.account.address,
+
+                deadline:
+                    validWalletDeadline
+            }
+        }
+    );
+
+
+if (
+    badWalletConstraint !==
+        null ||
+    expiredDeadlineConstraint !==
+        null ||
+    maximumDeadlineConstraint !==
+        null ||
+    walletSignatureConstraint !==
+        null
+) {
+
+    await identityRegistry
+        .simulate
+        .setAgentWallet(
+            [
+                agentId,
+                nonOwner.account.address,
+                validWalletDeadline,
+                validWalletSignature
+            ],
+            {
+                account:
+                    owner.account
+            }
+        );
+
+}
+
+
+if (
+    badWalletConstraint !==
+    null
+) {
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .setAgentWallet(
+                    [
+                        agentId,
+                        zeroAddress,
+                        validWalletDeadline,
+                        "0x"
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "bad wallet",
+        "ERC-8004 zero-wallet counterfactual"
+    );
+
+}
+
+
+if (
+    expiredDeadlineConstraint !==
+    null
+) {
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .setAgentWallet(
+                    [
+                        agentId,
+                        nonOwner.account.address,
+                        expiredWalletDeadline,
+                        "0x"
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "expired",
+        "ERC-8004 expired-deadline counterfactual"
+    );
+
+}
+
+
+if (
+    maximumDeadlineConstraint !==
+    null
+) {
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .setAgentWallet(
+                    [
+                        agentId,
+                        nonOwner.account.address,
+                        excessiveWalletDeadline,
+                        "0x"
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "deadline too far",
+        "ERC-8004 excessive-deadline counterfactual"
+    );
+
+}
+
+
+if (
+    walletSignatureConstraint !==
+    null
+) {
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .setAgentWallet(
+                    [
+                        agentId,
+                        nonOwner.account.address,
+                        validWalletDeadline,
+                        "0x"
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "invalid wallet sig",
+        "ERC-8004 invalid-wallet-signature counterfactual"
+    );
+
+}
+
+
+if (
+    registrationReservedKeyConstraint !==
+    null
+) {
+
+    await identityRegistry
+        .simulate
+        .register(
+            [
+                "ipfs://oecl/control/erc8004-safe-metadata",
+
+                [
+                    {
+                        metadataKey:
+                            "oecl.safe",
+
+                        metadataValue:
+                            "0x01"
+                    }
+                ]
+            ],
+            {
+                account:
+                    owner.account
+            }
+        );
+
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .register(
+                    [
+                        "ipfs://oecl/control/erc8004-reserved-metadata",
+
+                        [
+                            {
+                                metadataKey:
+                                    "agentWallet",
+
+                                metadataValue:
+                                    "0x01"
+                            }
+                        ]
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "reserved key",
+        "ERC-8004 registration reserved-key counterfactual"
+    );
+
+}
+
+
+if (
+    setMetadataReservedKeyConstraint !==
+    null
+) {
+
+    await identityRegistry
+        .simulate
+        .setMetadata(
+            [
+                agentId,
+                "oecl.safe",
+                "0x01"
+            ],
+            {
+                account:
+                    owner.account
+            }
+        );
+
+
+    await requireObservedRevertReason(
+        () =>
+            identityRegistry
+                .simulate
+                .setMetadata(
+                    [
+                        agentId,
+                        "agentWallet",
+                        "0x01"
+                    ],
+                    {
+                        account:
+                            owner.account
+                    }
+                ),
+        "reserved key",
+        "ERC-8004 setMetadata reserved-key counterfactual"
+    );
+
+}
 
 
 /*
@@ -1181,7 +1714,199 @@ const constraintObservations = [
 
             ]
     )
+,
 
+    ...(
+        badWalletConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-BAD-WALLET-" +
+                            badWalletConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        badWalletConstraint.candidateId,
+
+                    constraintId:
+                        badWalletConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_VALID_WALLET_SET_SIMULATION_CONFIRMED",
+                        "ERC8004_ZERO_WALLET_REVERT_REASON_CONFIRMED:bad wallet"
+                    ]
+                }
+            ]
+    ),
+
+    ...(
+        expiredDeadlineConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-EXPIRED-DEADLINE-" +
+                            expiredDeadlineConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        expiredDeadlineConstraint.candidateId,
+
+                    constraintId:
+                        expiredDeadlineConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_VALID_WALLET_SET_SIMULATION_CONFIRMED",
+                        "ERC8004_EXPIRED_DEADLINE_REVERT_REASON_CONFIRMED:expired"
+                    ]
+                }
+            ]
+    ),
+
+    ...(
+        maximumDeadlineConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-MAX-DEADLINE-" +
+                            maximumDeadlineConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        maximumDeadlineConstraint.candidateId,
+
+                    constraintId:
+                        maximumDeadlineConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_VALID_WALLET_SET_SIMULATION_CONFIRMED",
+                        "ERC8004_EXCESSIVE_DEADLINE_REVERT_REASON_CONFIRMED:deadline too far"
+                    ]
+                }
+            ]
+    ),
+
+    ...(
+        walletSignatureConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-WALLET-SIGNATURE-" +
+                            walletSignatureConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        walletSignatureConstraint.candidateId,
+
+                    constraintId:
+                        walletSignatureConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_VALID_WALLET_SIGNATURE_SIMULATION_CONFIRMED",
+                        "ERC8004_INVALID_WALLET_SIGNATURE_REVERT_REASON_CONFIRMED:invalid wallet sig"
+                    ]
+                }
+            ]
+    ),
+
+    ...(
+        registrationReservedKeyConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-REGISTER-RESERVED-KEY-" +
+                            registrationReservedKeyConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        registrationReservedKeyConstraint.candidateId,
+
+                    constraintId:
+                        registrationReservedKeyConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_SAFE_REGISTRATION_METADATA_SIMULATION_CONFIRMED",
+                        "ERC8004_RESERVED_REGISTRATION_METADATA_REVERT_REASON_CONFIRMED:reserved key"
+                    ]
+                }
+            ]
+    ),
+
+    ...(
+        setMetadataReservedKeyConstraint ===
+            null
+            ? []
+            : [
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-ERC8004-SETMETADATA-RESERVED-KEY-" +
+                            setMetadataReservedKeyConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        setMetadataReservedKeyConstraint.candidateId,
+
+                    constraintId:
+                        setMetadataReservedKeyConstraint.constraintId,
+
+                    participantSide:
+                        "A",
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8004_SAFE_SETMETADATA_SIMULATION_CONFIRMED",
+                        "ERC8004_RESERVED_SETMETADATA_REVERT_REASON_CONFIRMED:reserved key"
+                    ]
+                }
+            ]
+    )
 ];
 
 
