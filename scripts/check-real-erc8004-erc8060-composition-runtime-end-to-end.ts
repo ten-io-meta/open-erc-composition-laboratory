@@ -2174,7 +2174,7 @@ try {
 
             assert.equal(
                 interactions.length,
-                1
+                2
             );
 
 
@@ -2312,6 +2312,202 @@ try {
              */
             assert.equal(
                 joint.scientificPolarity,
+                "NEUTRAL"
+            );
+
+
+            assert.equal(
+                execution?.status,
+                "INCONCLUSIVE"
+            );
+
+
+            assert.equal(
+                execution
+                    ?.compositionConstraintEvaluation
+                    ?.scientificPolarity,
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OBSERVES DIRECT ERC8060 TO ERC8004 ERC721 RECEIVER CALL",
+        () => {
+
+            const joint =
+                execution
+                    ?.jointContractHarnessExecution;
+
+
+            assert.ok(
+                joint
+            );
+
+
+            const driverReport =
+                joint.driverReport;
+
+
+            assert.ok(
+                driverReport
+            );
+
+
+            const interactions =
+                driverReport
+                    .crossProtocolInteractionObservations ??
+                [];
+
+
+            assert.equal(
+                interactions.length,
+                2
+            );
+
+
+            const bToAInteractions =
+                interactions.filter(
+                    interaction =>
+                        interaction.sourceSide ===
+                            "B" &&
+                        interaction.targetSide ===
+                            "A"
+                );
+
+
+            assert.equal(
+                bToAInteractions.length,
+                1
+            );
+
+
+            const interaction =
+                bToAInteractions[0];
+
+
+            assert.equal(
+                interaction.observationId,
+                "REAL-CONTROL-DIRECT-B-TO-A-CALL"
+            );
+
+
+            assert.equal(
+                interaction.callKind,
+                "CALL"
+            );
+
+
+            assert.equal(
+                interaction.status,
+                "OBSERVED"
+            );
+
+
+            const participantAAddress =
+                driverReport
+                    .participantA
+                    .contractAddresses[0];
+
+
+            const participantBAddress =
+                driverReport
+                    .participantB
+                    .contractAddresses[0];
+
+
+            assert.ok(
+                participantAAddress
+            );
+
+
+            assert.ok(
+                participantBAddress
+            );
+
+
+            assert.equal(
+                interaction
+                    .sourceAddress
+                    .toLowerCase(),
+                participantBAddress
+                    .toLowerCase()
+            );
+
+
+            assert.equal(
+                interaction
+                    .targetAddress
+                    .toLowerCase(),
+                participantAAddress
+                    .toLowerCase()
+            );
+
+
+            const candidateIds =
+                [
+                    ...new Set(
+                        requirement.constraints.map(
+                            constraint =>
+                                constraint.candidateId
+                        )
+                    )
+                ];
+
+
+            assert.equal(
+                candidateIds.length,
+                1
+            );
+
+
+            assert.equal(
+                interaction.candidateId,
+                candidateIds[0]
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    (
+                        "ERC8004_CALL_TARGET_CONFIRMED:" +
+                        participantAAddress.toLowerCase()
+                    )
+                ),
+                true
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    "ERC8060_INHERITED_ERC721_CALL_SITE_CONFIRMED:IERC721Receiver.onERC721Received"
+                ),
+                true
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    "ERC8060_SAFETRANSFER_REVERT_REASON_CONFIRMED:ERC721: transfer to non ERC721Receiver implementer"
+                ),
+                true
+            );
+
+
+            /*
+             * Both physical directions may now be observed,
+             * but neither incompatible interface route is
+             * elevated into composition polarity.
+             */
+            assert.equal(
+                joint.scientificPolarity,
+                "NEUTRAL"
+            );
+
+
+            assert.equal(
+                driverReport.scientificPolarity,
                 "NEUTRAL"
             );
 
