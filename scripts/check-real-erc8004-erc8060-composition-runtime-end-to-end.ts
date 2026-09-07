@@ -927,6 +927,91 @@ try {
 
 
     await check(
+        "REAL CONTROL LEAVES UNOPERATIONALIZED CONSTRAINTS UNEVALUATED",
+        () => {
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            assert.equal(
+                evaluation.candidateId,
+                requirement
+                    .candidate
+                    .candidateId
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "INCONCLUSIVE"
+            );
+
+
+            assert.deepEqual(
+                evaluation.statistics,
+                {
+                    total:
+                        17,
+
+                    preserved:
+                        0,
+
+                    violated:
+                        0,
+
+                    unevaluated:
+                        17
+                }
+            );
+
+
+            assert.equal(
+                evaluation.evaluations.length,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.evaluations.every(
+                    item =>
+                        item.status ===
+                        "UNEVALUATED"
+                ),
+                true
+            );
+
+
+            assert.deepEqual(
+                evaluation.errors,
+                []
+            );
+
+
+            const constraintObservations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            assert.equal(
+                constraintObservations.length,
+                0
+            );
+
+        }
+    );
+
+
+    await check(
         "END TO END REAL EXECUTION CANNOT YET CLAIM COMPOSITION POLARITY",
         () => {
 
