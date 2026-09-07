@@ -20,6 +20,10 @@ import type {
 } from "../scientific-protocol-relation-evidence/ScientificProtocolRelationEvidenceResult.js";
 
 import type {
+    ScientificStructuralProtocolRelationEvidenceResult
+} from "../scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidenceResult.js";
+
+import type {
     ScientificCompositionConstraint
 } from "./ScientificCompositionConstraint.js";
 
@@ -45,6 +49,15 @@ export interface ScientificCompositionEvaluationSpecificationInput {
 
     protocolRelationEvidenceResults:
         ScientificProtocolRelationEvidenceResult[];
+
+    /*
+     * Independently observed Solidity structural protocol
+     * dependencies.
+     *
+     * Optional so existing evaluation callers remain valid.
+     */
+    structuralProtocolRelationEvidenceResults?:
+        ScientificStructuralProtocolRelationEvidenceResult[];
 
 }
 
@@ -151,6 +164,28 @@ export class ScientificCompositionEvaluationSpecificationEngine {
 
         }
 
+
+        for (
+            const result
+            of input.structuralProtocolRelationEvidenceResults ??
+                []
+        ) {
+
+            if (
+                result.errors.length >
+                0
+            ) {
+
+                errors.push(
+                    ...result.errors.map(
+                        error =>
+                            `Structural protocol relation evidence error for ${result.sourceId}: ${error}`
+                    )
+                );
+
+            }
+
+        }
 
         const factById =
             new Map<
@@ -289,6 +324,168 @@ export class ScientificCompositionEvaluationSpecificationEngine {
 
         }
 
+
+        const structuralRelationByEvidenceId =
+            new Map<
+                string,
+                {
+                    result:
+                        ScientificStructuralProtocolRelationEvidenceResult;
+
+                    relation:
+                        ScientificStructuralProtocolRelationEvidenceResult[
+                            "relations"
+                        ][number];
+                }
+            >();
+
+
+        for (
+            const result
+            of input.structuralProtocolRelationEvidenceResults ??
+                []
+        ) {
+
+            for (
+                const relation
+                of result.relations
+            ) {
+
+                if (
+                    structuralRelationByEvidenceId.has(
+                        relation.relationEvidenceId
+                    )
+                ) {
+
+                    errors.push(
+                        `Duplicate structural protocol relation evidence id: ${relation.relationEvidenceId}.`
+                    );
+
+                    continue;
+
+                }
+
+
+                if (
+                    relation.sourceId !==
+                    result.sourceId
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation ${relation.relationEvidenceId} source does not match its result source.`
+                    );
+
+                }
+
+
+                if (
+                    !this.sameRevision(
+                        relation.sourceRevision,
+                        result.sourceRevision
+                    )
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation ${relation.relationEvidenceId} revision does not match its result revision.`
+                    );
+
+                }
+
+
+                const declarationFact =
+                    factById.get(
+                        relation.factId
+                    );
+
+
+                if (
+                    declarationFact ===
+                    undefined
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation ${relation.relationEvidenceId} references missing declaration fact ${relation.factId}.`
+                    );
+
+                } else {
+
+                    if (
+                        declarationFact.sourceId !==
+                        result.sourceId
+                    ) {
+
+                        errors.push(
+                            `Structural protocol relation ${relation.relationEvidenceId} declaration fact source mismatch.`
+                        );
+
+                    }
+
+
+                    if (
+                        !this.sameRevision(
+                            declarationFact.sourceRevision,
+                            result.sourceRevision
+                        )
+                    ) {
+
+                        errors.push(
+                            `Structural protocol relation ${relation.relationEvidenceId} declaration fact revision mismatch.`
+                        );
+
+                    }
+
+
+                    if (
+                        declarationFact.observationId !==
+                        relation.observationId
+                    ) {
+
+                        errors.push(
+                            `Structural protocol relation ${relation.relationEvidenceId} declaration observation mismatch.`
+                        );
+
+                    }
+
+
+                    if (
+                        declarationFact.kind !==
+                            "CONTRACT_DECLARATION" &&
+                        declarationFact.kind !==
+                            "INTERFACE_DECLARATION"
+                    ) {
+
+                        errors.push(
+                            `Structural protocol relation ${relation.relationEvidenceId} does not reference a declaration fact.`
+                        );
+
+                    }
+
+
+                    if (
+                        declarationFact.symbol !==
+                        relation.subjectContainerSymbol
+                    ) {
+
+                        errors.push(
+                            `Structural protocol relation ${relation.relationEvidenceId} subject container does not match its declaration fact.`
+                        );
+
+                    }
+
+                }
+
+
+                structuralRelationByEvidenceId.set(
+                    relation.relationEvidenceId,
+                    {
+                        result,
+                        relation
+                    }
+                );
+
+            }
+
+        }
 
         const candidateIds =
             new Set<string>();
@@ -438,6 +635,121 @@ export class ScientificCompositionEvaluationSpecificationEngine {
 
                         errors.push(
                             `Candidate ${candidate.candidateId} protocol relation ${provenance.evidenceId} revision mismatch.`
+                        );
+
+                    }
+
+                } else if (
+                    provenance.kind ===
+                    "STRUCTURAL_PROTOCOL_RELATION"
+                ) {
+
+                    const resolved =
+                        structuralRelationByEvidenceId.get(
+                            provenance.evidenceId
+                        );
+
+
+                    if (
+                        resolved ===
+                        undefined
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} references missing structural protocol relation ${provenance.evidenceId}.`
+                        );
+
+                        continue;
+
+                    }
+
+
+                    if (
+                        candidate.mechanism !==
+                        "SHARED_PROTOCOL_FOUNDATION"
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} uses structural protocol relation provenance without SHARED_PROTOCOL_FOUNDATION mechanism.`
+                        );
+
+                    }
+
+
+                    if (
+                        candidate.foundationProtocolId ===
+                        undefined
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} has no shared foundation protocol identity.`
+                        );
+
+                    } else if (
+                        resolved.relation.objectProtocolId !==
+                        candidate.foundationProtocolId
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} foundation ${candidate.foundationProtocolId} does not match structural relation object ${resolved.relation.objectProtocolId}.`
+                        );
+
+                    }
+
+
+                    if (
+                        resolved.result.sourceId !==
+                            provenance.sourceId ||
+                        resolved.relation.sourceId !==
+                            provenance.sourceId
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} structural protocol relation ${provenance.evidenceId} source mismatch.`
+                        );
+
+                    }
+
+
+                    if (
+                        !this.sameRevision(
+                            resolved.result.sourceRevision,
+                            provenance.sourceRevision
+                        ) ||
+                        !this.sameRevision(
+                            resolved.relation.sourceRevision,
+                            provenance.sourceRevision
+                        )
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} structural protocol relation ${provenance.evidenceId} revision mismatch.`
+                        );
+
+                    }
+
+
+                    const subjectMatchesParticipant =
+                        (
+                            candidate.participantA.kind ===
+                                "PROTOCOL" &&
+                            candidate.participantA.id ===
+                                resolved.relation.subjectProtocolId
+                        ) ||
+                        (
+                            candidate.participantB.kind ===
+                                "PROTOCOL" &&
+                            candidate.participantB.id ===
+                                resolved.relation.subjectProtocolId
+                        );
+
+
+                    if (
+                        !subjectMatchesParticipant
+                    ) {
+
+                        errors.push(
+                            `Candidate ${candidate.candidateId} structural relation subject ${resolved.relation.subjectProtocolId} is not a candidate participant.`
                         );
 
                     }
@@ -600,6 +912,46 @@ export class ScientificCompositionEvaluationSpecificationEngine {
 
 
                     this.applyProtocolRelationScope(
+                        candidate,
+                        participantB,
+                        resolved.result,
+                        resolved.relation,
+                        input.facts,
+                        errors
+                    );
+
+                } else if (
+                    provenance.kind ===
+                    "STRUCTURAL_PROTOCOL_RELATION"
+                ) {
+
+                    const resolved =
+                        structuralRelationByEvidenceId.get(
+                            provenance.evidenceId
+                        );
+
+
+                    if (
+                        resolved ===
+                        undefined
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    this.applyStructuralProtocolRelationScope(
+                        candidate,
+                        participantA,
+                        resolved.result,
+                        resolved.relation,
+                        input.facts,
+                        errors
+                    );
+
+
+                    this.applyStructuralProtocolRelationScope(
                         candidate,
                         participantB,
                         resolved.result,
@@ -949,6 +1301,143 @@ export class ScientificCompositionEvaluationSpecificationEngine {
 
     }
 
+
+    private applyStructuralProtocolRelationScope(
+        candidate:
+            ScientificCompositionCandidate,
+        scope:
+            ParticipantFactScope,
+        result:
+            ScientificStructuralProtocolRelationEvidenceResult,
+        relation:
+            ScientificStructuralProtocolRelationEvidenceResult[
+                "relations"
+            ][number],
+        facts:
+            ScientificSourceFact[],
+        errors:
+            string[]
+    ): void {
+
+        if (
+            candidate.mechanism !==
+            "SHARED_PROTOCOL_FOUNDATION"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            candidate.foundationProtocolId ===
+            undefined
+        ) {
+
+            errors.push(
+                `Candidate ${candidate.candidateId} has no foundation protocol identity during structural scope evaluation.`
+            );
+
+            return;
+
+        }
+
+
+        if (
+            relation.objectProtocolId !==
+            candidate.foundationProtocolId
+        ) {
+
+            errors.push(
+                `Candidate ${candidate.candidateId} foundation protocol does not match structural evidence ${relation.relationEvidenceId}.`
+            );
+
+            return;
+
+        }
+
+
+        if (
+            scope.participant.kind !==
+            "PROTOCOL"
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * The same provenance set is applied to both participant
+         * scopes. A relation only scopes the participant whose
+         * independently established protocol identity is its
+         * structural subject.
+         */
+        if (
+            scope.participant.id !==
+            relation.subjectProtocolId
+        ) {
+
+            return;
+
+        }
+
+
+        this.addSourceScope(
+            scope,
+            result.sourceId,
+            result.sourceRevision
+        );
+
+
+        for (
+            const fact
+            of facts
+        ) {
+
+            if (
+                fact.sourceId !==
+                result.sourceId
+            ) {
+
+                continue;
+
+            }
+
+
+            if (
+                !this.sameRevision(
+                    fact.sourceRevision,
+                    result.sourceRevision
+                )
+            ) {
+
+                continue;
+
+            }
+
+
+            if (
+                fact.containerSymbol !==
+                relation.subjectContainerSymbol
+            ) {
+
+                continue;
+
+            }
+
+
+            scope.factIds.add(
+                fact.factId
+            );
+
+            scope.containerSymbols.add(
+                relation.subjectContainerSymbol
+            );
+
+        }
+
+    }
 
     private applyProtocolRelationScope(
         candidate:

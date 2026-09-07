@@ -26,6 +26,15 @@ interface PendingFact {
     line:
         number;
 
+    /*
+     * Declaration facts may span multiple source lines.
+     *
+     * Non-declaration facts remain single-line and therefore leave
+     * this absent.
+     */
+    endLine?:
+        number;
+
     rawText:
         string;
 
@@ -353,6 +362,62 @@ export class SolidityScientificSourceFactExtractor {
         }
 
 
+        /*
+         * Preserve the complete observable Solidity declaration
+         * header through its structural opening brace.
+         *
+         * Declaration detection remains line-local. This enrichment
+         * only expands raw provenance for declarations that were
+         * already independently observed.
+         */
+        for (
+            const fact
+            of pending
+        ) {
+
+            if (
+                fact.kind !==
+                    "INTERFACE_DECLARATION" &&
+                fact.kind !==
+                    "CONTRACT_DECLARATION"
+            ) {
+
+                continue;
+
+            }
+
+
+            const declarationHeader =
+                this.completeDeclarationHeader(
+                    lines,
+                    baseLine,
+                    fact.line
+                );
+
+
+            if (
+                declarationHeader ===
+                undefined
+            ) {
+
+                /*
+                 * Fail closed: retain the original line-local fact
+                 * rather than manufacture a multiline fragment when
+                 * no structural opening brace can be observed.
+                 */
+                continue;
+
+            }
+
+
+            fact.rawText =
+                declarationHeader.rawText;
+
+            fact.endLine =
+                declarationHeader.endLine;
+
+        }
+
         pending.sort(
             (
                 a,
@@ -459,6 +524,7 @@ export class SolidityScientificSourceFactExtractor {
                         fact.line,
 
                     endLine:
+                        fact.endLine ??
                         fact.line
 
                 },
@@ -471,6 +537,133 @@ export class SolidityScientificSourceFactExtractor {
 
     }
 
+
+    private completeDeclarationHeader(
+        lines:
+            string[],
+        baseLine:
+            number,
+        startLine:
+            number
+    ): {
+        rawText:
+            string;
+
+        endLine:
+            number;
+    } | undefined {
+
+        const startIndex =
+            startLine -
+            baseLine;
+
+
+        if (
+            startIndex <
+                0 ||
+            startIndex >=
+                lines.length
+        ) {
+
+            return undefined;
+
+        }
+
+
+        const fragments:
+            string[] =
+            [];
+
+        let inBlockComment =
+            false;
+
+
+        for (
+            let index =
+                startIndex;
+            index <
+                lines.length;
+            index++
+        ) {
+
+            const rawLine =
+                lines[index];
+
+            const sanitized =
+                this.sanitizeLine(
+                    rawLine,
+                    inBlockComment
+                );
+
+
+            inBlockComment =
+                sanitized.inBlockComment;
+
+
+            const openingBraceIndex =
+                sanitized.code.indexOf(
+                    "{"
+                );
+
+
+            if (
+                openingBraceIndex >=
+                0
+            ) {
+
+                /*
+                 * sanitizeLine is used as the lexical authority for
+                 * whether a brace belongs to Solidity code rather
+                 * than a comment or string.
+                 *
+                 * Its code representation is position-preserving for
+                 * structural characters; refuse expansion otherwise.
+                 */
+                if (
+                    sanitized.code.length !==
+                    rawLine.length
+                ) {
+
+                    return undefined;
+
+                }
+
+
+                fragments.push(
+                    rawLine.slice(
+                        0,
+                        openingBraceIndex +
+                        1
+                    )
+                );
+
+
+                return {
+
+                    rawText:
+                        fragments.join(
+                            "\n"
+                        ),
+
+                    endLine:
+                        baseLine +
+                        index
+
+                };
+
+            }
+
+
+            fragments.push(
+                rawLine
+            );
+
+        }
+
+
+        return undefined;
+
+    }
 
     private extractDeclarationFacts(
         clean:

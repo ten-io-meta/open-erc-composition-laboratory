@@ -16,12 +16,14 @@ export interface ScientificCompositionParticipant {
 
 export type ScientificCompositionMechanism =
     | "EXPLICIT_EXTENSION_FOR"
-    | "SHARED_RECURRENT_CONCEPT";
+    | "SHARED_RECURRENT_CONCEPT"
+    | "SHARED_PROTOCOL_FOUNDATION";
 
 
 export type ScientificCompositionProvenanceKind =
     | "PROTOCOL_CONCEPT"
-    | "PROTOCOL_RELATION";
+    | "PROTOCOL_RELATION"
+    | "STRUCTURAL_PROTOCOL_RELATION";
 
 
 export interface ScientificCompositionProvenance {
@@ -73,10 +75,22 @@ export interface ScientificCompositionCandidate {
         string;
 
     /*
+     * Present only when two distinct protocols have independently
+     * observed structural dependency on the same ERC-family
+     * protocol.
+     *
+     * This is evidence for opening a hypothesis. It is not a
+     * feasibility or compatibility conclusion.
+     */
+    foundationProtocolId?:
+        string;
+
+    /*
      * Protocol-local lexical capabilities supporting each side.
      *
-     * Explicit documentary extension evidence may legitimately
-     * produce a candidate before capability support is joined.
+     * Explicit documentary extension evidence and structural
+     * foundation evidence may legitimately produce a candidate
+     * before direct capability support is joined.
      */
     supportingCapabilityIdsA:
         string[];

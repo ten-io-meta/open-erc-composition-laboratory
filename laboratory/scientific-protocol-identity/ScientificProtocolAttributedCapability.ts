@@ -4,7 +4,9 @@ import type {
 
 
 export type ScientificProtocolIdentityBasis =
-    "EXACT_ERC_CONTAINER_SYMBOL";
+    | "EXACT_ERC_CONTAINER_SYMBOL"
+    | "EXACT_ERC_REFERENCE_CONTAINER_SYMBOL"
+    | "EXPLICIT_ERC_STORAGE_NAMESPACE";
 
 
 export interface ScientificProtocolAttributedCapability {
@@ -17,14 +19,21 @@ export interface ScientificProtocolAttributedCapability {
         string;
 
     /*
-     * Canonicalized ERC identifier observed explicitly in the
-     * structural container symbol.
+     * Canonicalized ERC identifier established through direct
+     * structural evidence.
      *
-     * Example:
-     * IERC165 -> ERC-165
+     * Examples:
      *
-     * This records explicit structural self-identification.
-     * It does not by itself establish repository authority or
+     * IERC165
+     *     -> ERC-165
+     *     via EXACT_ERC_CONTAINER_SYMBOL
+     *
+     * @custom:storage-location erc7201:erc8004.identity.registry
+     *     -> ERC-8004
+     *     via EXPLICIT_ERC_STORAGE_NAMESPACE
+     *
+     * These bases record explicit structural protocol identity
+     * evidence. They do not establish repository authority or
      * canonical implementation status.
      */
     protocolId:
@@ -50,14 +59,15 @@ export interface ScientificProtocolAttributedCapability {
         string;
 
     /*
-     * Original lexical capability label.
+     * Original observed lexical label.
      */
     label:
         string;
 
     /*
      * Exact source observation containing the structural
-     * container.
+     * attribution and, when applicable, the explicit ERC storage
+     * namespace.
      */
     observationId:
         string;
@@ -70,13 +80,16 @@ export interface ScientificProtocolAttributedCapability {
 
     /*
      * Exact directly observed structural container symbol.
+     *
+     * The symbol itself does not need to encode an ERC number when
+     * identityBasis is EXPLICIT_ERC_STORAGE_NAMESPACE.
      */
     containerSymbol:
         string;
 
     /*
-     * Original fact evidence preserved from structural
-     * capability attribution.
+     * Original fact evidence preserved from structural capability
+     * attribution.
      */
     evidence:
         string[];

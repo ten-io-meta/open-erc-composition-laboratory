@@ -15,6 +15,14 @@ import type {
 } from "../scientific-protocol-relation-evidence/ScientificProtocolRelationEvidenceResult.js";
 
 import type {
+    ScientificStructuralProtocolRelationEvidence
+} from "../scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidence.js";
+
+import type {
+    ScientificStructuralProtocolRelationEvidenceResult
+} from "../scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidenceResult.js";
+
+import type {
     ScientificCompositionCandidate,
     ScientificCompositionParticipant,
     ScientificCompositionProvenance
@@ -40,6 +48,16 @@ export interface CrossProtocolCompositionInput {
      */
     protocolRelationEvidenceResults:
         ScientificProtocolRelationEvidenceResult[];
+
+    /*
+     * Independently observed Solidity structural protocol
+     * dependencies.
+     *
+     * Optional for backward compatibility with existing scientific
+     * discovery callers.
+     */
+    structuralProtocolRelationEvidenceResults?:
+        ScientificStructuralProtocolRelationEvidenceResult[];
 
 }
 
@@ -72,6 +90,20 @@ interface SourcedProtocolRelation {
 }
 
 
+interface SourcedStructuralProtocolRelation {
+
+    sourceId:
+        string;
+
+    sourceRevision?:
+        string;
+
+    relation:
+        ScientificStructuralProtocolRelationEvidence;
+
+}
+
+
 interface CandidateAccumulator {
 
     candidateId:
@@ -85,9 +117,13 @@ interface CandidateAccumulator {
 
     mechanism:
         "EXPLICIT_EXTENSION_FOR"
-        | "SHARED_RECURRENT_CONCEPT";
+        | "SHARED_RECURRENT_CONCEPT"
+        | "SHARED_PROTOCOL_FOUNDATION";
 
     conceptId?:
+        string;
+
+    foundationProtocolId?:
         string;
 
     supportingCapabilityIdsA:
@@ -291,6 +327,328 @@ export class CrossProtocolCompositionEngine {
 
         }
 
+
+        /*
+         * ---------------------------------------------------------
+         * SHARED STRUCTURAL PROTOCOL FOUNDATION
+         *
+         * Two distinct, independently identified protocols may open
+         * a candidate when Solidity establishes that both structurally
+         * depend on the same external ERC-family protocol.
+         *
+         * Example:
+         *
+         * ERC-8004 -> ERC-721
+         * ERC-8060 -> ERC-721
+         *
+         * This opens an UNEVALUATED candidate. It does not claim
+         * compatibility or successful composition.
+         * ---------------------------------------------------------
+         */
+
+        const sourcedStructuralRelations =
+            this.sourcedStructuralRelations(
+                input.structuralProtocolRelationEvidenceResults ??
+                    []
+            );
+
+
+        const structuralFoundations =
+            new Map<
+                string,
+                Map<
+                    string,
+                    Map<
+                        string,
+                        ScientificCompositionProvenance
+                    >
+                >
+            >();
+
+
+        for (
+            const sourcedRelation
+            of sourcedStructuralRelations
+        ) {
+
+            const relation =
+                sourcedRelation.relation;
+
+
+            if (
+                relation.relation !==
+                "DEPENDS_ON"
+            ) {
+
+                continue;
+
+            }
+
+
+            let protocols =
+                structuralFoundations.get(
+                    relation.objectProtocolId
+                );
+
+
+            if (
+                !protocols
+            ) {
+
+                protocols =
+                    new Map<
+                        string,
+                        Map<
+                            string,
+                            ScientificCompositionProvenance
+                        >
+                    >();
+
+                structuralFoundations.set(
+                    relation.objectProtocolId,
+                    protocols
+                );
+
+            }
+
+
+            let provenanceByKey =
+                protocols.get(
+                    relation.subjectProtocolId
+                );
+
+
+            if (
+                !provenanceByKey
+            ) {
+
+                provenanceByKey =
+                    new Map<
+                        string,
+                        ScientificCompositionProvenance
+                    >();
+
+                protocols.set(
+                    relation.subjectProtocolId,
+                    provenanceByKey
+                );
+
+            }
+
+
+            const provenance:
+                ScientificCompositionProvenance = {
+
+                kind:
+                    "STRUCTURAL_PROTOCOL_RELATION",
+
+                sourceId:
+                    sourcedRelation.sourceId,
+
+                sourceRevision:
+                    sourcedRelation.sourceRevision,
+
+                evidenceId:
+                    relation.relationEvidenceId
+
+            };
+
+
+            provenanceByKey.set(
+                this.provenanceKey(
+                    provenance
+                ),
+                provenance
+            );
+
+        }
+
+
+        for (
+            const [
+                foundationProtocolId,
+                protocols
+            ]
+            of [
+                ...structuralFoundations.entries()
+            ].sort(
+                (
+                    a,
+                    b
+                ) =>
+                    a[0].localeCompare(
+                        b[0]
+                    )
+            )
+        ) {
+
+            const protocolEntries =
+                [
+                    ...protocols.entries()
+                ].sort(
+                    (
+                        a,
+                        b
+                    ) =>
+                        a[0].localeCompare(
+                            b[0]
+                        )
+                );
+
+
+            for (
+                let i =
+                    0;
+                i <
+                    protocolEntries.length;
+                i++
+            ) {
+
+                for (
+                    let j =
+                        i + 1;
+                    j <
+                        protocolEntries.length;
+                    j++
+                ) {
+
+                    const [
+                        protocolA,
+                        provenanceA
+                    ] =
+                        protocolEntries[i];
+
+                    const [
+                        protocolB,
+                        provenanceB
+                    ] =
+                        protocolEntries[j];
+
+
+                    if (
+                        protocolA ===
+                        protocolB
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    const participantA:
+                        ScientificCompositionParticipant = {
+
+                        kind:
+                            "PROTOCOL",
+
+                        id:
+                            protocolA
+
+                    };
+
+
+                    const participantB:
+                        ScientificCompositionParticipant = {
+
+                        kind:
+                            "PROTOCOL",
+
+                        id:
+                            protocolB
+
+                    };
+
+
+                    const candidateId =
+                        this.candidateId(
+                            "SHARED_PROTOCOL_FOUNDATION",
+                            participantA,
+                            participantB,
+                            undefined,
+                            foundationProtocolId
+                        );
+
+
+                    let accumulator =
+                        candidateAccumulators.get(
+                            candidateId
+                        );
+
+
+                    if (
+                        !accumulator
+                    ) {
+
+                        accumulator = {
+
+                            candidateId,
+
+                            participantA,
+
+                            participantB,
+
+                            mechanism:
+                                "SHARED_PROTOCOL_FOUNDATION",
+
+                            foundationProtocolId,
+
+                            supportingCapabilityIdsA:
+                                new Set<string>(),
+
+                            supportingCapabilityIdsB:
+                                new Set<string>(),
+
+                            provenance:
+                                new Map<
+                                    string,
+                                    ScientificCompositionProvenance
+                                >()
+
+                        };
+
+
+                        candidateAccumulators.set(
+                            candidateId,
+                            accumulator
+                        );
+
+                    }
+
+
+                    for (
+                        const provenance
+                        of provenanceA.values()
+                    ) {
+
+                        accumulator.provenance.set(
+                            this.provenanceKey(
+                                provenance
+                            ),
+                            provenance
+                        );
+
+                    }
+
+
+                    for (
+                        const provenance
+                        of provenanceB.values()
+                    ) {
+
+                        accumulator.provenance.set(
+                            this.provenanceKey(
+                                provenance
+                            ),
+                            provenance
+                        );
+
+                    }
+
+                }
+
+            }
+
+        }
 
         const sourcedConcepts =
             this.sourcedConcepts(
@@ -714,6 +1072,23 @@ export class CrossProtocolCompositionEngine {
                     }
 
 
+                    if (
+                        accumulator.foundationProtocolId !==
+                        undefined
+                    ) {
+
+                        return {
+
+                            ...base,
+
+                            foundationProtocolId:
+                                accumulator.foundationProtocolId
+
+                        };
+
+                    }
+
+
                     return base;
 
                 }
@@ -883,6 +1258,58 @@ export class CrossProtocolCompositionEngine {
 
     }
 
+
+    private sourcedStructuralRelations(
+        results:
+            ScientificStructuralProtocolRelationEvidenceResult[]
+    ): SourcedStructuralProtocolRelation[] {
+
+        const sourced:
+            SourcedStructuralProtocolRelation[] =
+            [];
+
+
+        for (
+            const result
+            of results
+        ) {
+
+            for (
+                const relation
+                of result.relations
+            ) {
+
+                sourced.push({
+
+                    sourceId:
+                        result.sourceId,
+
+                    sourceRevision:
+                        result.sourceRevision,
+
+                    relation
+
+                });
+
+            }
+
+        }
+
+
+        sourced.sort(
+            (
+                a,
+                b
+            ) =>
+                a.relation.relationEvidenceId.localeCompare(
+                    b.relation.relationEvidenceId
+                )
+        );
+
+
+        return sourced;
+
+    }
 
     private boundaryErrors(
         input:
@@ -1219,6 +1646,190 @@ export class CrossProtocolCompositionEngine {
         }
 
 
+        const structuralRelationEvidenceIds =
+            new Set<string>();
+
+
+        for (
+            const result
+            of input.structuralProtocolRelationEvidenceResults ??
+                []
+        ) {
+
+            if (
+                result.errors.length >
+                0
+            ) {
+
+                errors.push(
+                    ...result.errors
+                );
+
+            }
+
+
+            if (
+                result.sourceId.trim().length ===
+                0
+            ) {
+
+                errors.push(
+                    "Cross-protocol discovery received a structural protocol relation result with an empty source identity."
+                );
+
+            }
+
+
+            for (
+                const relation
+                of result.relations
+            ) {
+
+                if (
+                    structuralRelationEvidenceIds.has(
+                        relation.relationEvidenceId
+                    )
+                ) {
+
+                    errors.push(
+                        `Duplicate structural protocol relation evidence identity ${relation.relationEvidenceId}.`
+                    );
+
+                    continue;
+
+                }
+
+
+                structuralRelationEvidenceIds.add(
+                    relation.relationEvidenceId
+                );
+
+
+                if (
+                    relation.relationEvidenceId.trim().length ===
+                    0
+                ) {
+
+                    errors.push(
+                        "Cross-protocol discovery received an empty structural protocol relation evidence identity."
+                    );
+
+                }
+
+
+                if (
+                    relation.sourceId !==
+                    result.sourceId
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} source does not match its result source.`
+                    );
+
+                }
+
+
+                if (
+                    relation.sourceRevision !==
+                    result.sourceRevision
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} revision does not match its result revision.`
+                    );
+
+                }
+
+
+                if (
+                    !/^ERC-[1-9][0-9]*$/.test(
+                        relation.subjectProtocolId
+                    )
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} has unsupported subject protocol identity ${relation.subjectProtocolId}.`
+                    );
+
+                }
+
+
+                if (
+                    !/^ERC-[1-9][0-9]*$/.test(
+                        relation.objectProtocolId
+                    )
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} has unsupported object protocol identity ${relation.objectProtocolId}.`
+                    );
+
+                }
+
+
+                if (
+                    relation.subjectProtocolId ===
+                    relation.objectProtocolId
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} cannot depend on its own protocol identity.`
+                    );
+
+                }
+
+
+                if (
+                    relation.relation !==
+                    "DEPENDS_ON"
+                ) {
+
+                    errors.push(
+                        `Unsupported structural protocol relation ${relation.relation} in evidence ${relation.relationEvidenceId}.`
+                    );
+
+                }
+
+
+                if (
+                    relation.evidenceBasis !==
+                    "SOLIDITY_INHERITANCE_ERC_FAMILY"
+                ) {
+
+                    errors.push(
+                        `Unsupported structural protocol relation evidence basis ${relation.evidenceBasis} in evidence ${relation.relationEvidenceId}.`
+                    );
+
+                }
+
+
+                if (
+                    relation.subjectContainerSymbol.trim().length ===
+                    0
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} has an empty subject container symbol.`
+                    );
+
+                }
+
+
+                if (
+                    relation.inheritedSymbol.trim().length ===
+                    0
+                ) {
+
+                    errors.push(
+                        `Structural protocol relation evidence ${relation.relationEvidenceId} has an empty inherited symbol.`
+                    );
+
+                }
+
+            }
+
+        }
+
         return errors;
 
     }
@@ -1227,15 +1838,58 @@ export class CrossProtocolCompositionEngine {
     private candidateId(
         mechanism:
             "EXPLICIT_EXTENSION_FOR"
-            | "SHARED_RECURRENT_CONCEPT",
+            | "SHARED_RECURRENT_CONCEPT"
+            | "SHARED_PROTOCOL_FOUNDATION",
         participantA:
             ScientificCompositionParticipant,
         participantB:
             ScientificCompositionParticipant,
         conceptId:
             string
-            | undefined
+            | undefined,
+        foundationProtocolId:
+            string
+            | undefined =
+                undefined
     ): string {
+
+        /*
+         * Preserve the established semantic identity format for
+         * pre-existing mechanisms.
+         */
+        if (
+            mechanism !==
+            "SHARED_PROTOCOL_FOUNDATION"
+        ) {
+
+            const identityComponents =
+                [
+                    "SCIENTIFIC-COMPOSITION-CANDIDATE",
+                    mechanism,
+                    participantA.kind,
+                    participantA.id,
+                    participantB.kind,
+                    participantB.id,
+                    conceptId ===
+                        undefined
+                        ? "CONCEPT-ABSENT"
+                        : "CONCEPT-PRESENT",
+                    conceptId ??
+                        ""
+                ];
+
+
+            return identityComponents
+                .map(
+                    component =>
+                        `${component.length}:${component}`
+                )
+                .join(
+                    "|"
+                );
+
+        }
+
 
         const identityComponents =
             [
@@ -1245,11 +1899,8 @@ export class CrossProtocolCompositionEngine {
                 participantA.id,
                 participantB.kind,
                 participantB.id,
-                conceptId ===
-                    undefined
-                    ? "CONCEPT-ABSENT"
-                    : "CONCEPT-PRESENT",
-                conceptId ??
+                "FOUNDATION-PRESENT",
+                foundationProtocolId ??
                     ""
             ];
 
@@ -1264,7 +1915,6 @@ export class CrossProtocolCompositionEngine {
             );
 
     }
-
 
     private provenanceKey(
         provenance:
