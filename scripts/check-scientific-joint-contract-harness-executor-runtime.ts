@@ -403,6 +403,52 @@ const report = {
         "Fixture requirement path authority:OECL"
     ],
 
+    constraintObservations: [
+
+        {
+            observationId:
+                "OBSERVATION-A-CHANNEL-FIXTURE",
+
+            candidateId:
+                requirement.candidate.candidateId,
+
+            constraintId:
+                requirement.constraints[0].constraintId,
+
+            participantSide:
+                "A",
+
+            verdict:
+                "PRESERVED",
+
+            evidence: [
+                "FIXTURE-A-CONSTRAINT-PRESERVED"
+            ]
+        },
+
+        {
+            observationId:
+                "OBSERVATION-B-CHANNEL-FIXTURE",
+
+            candidateId:
+                requirement.candidate.candidateId,
+
+            constraintId:
+                requirement.constraints[1].constraintId,
+
+            participantSide:
+                "B",
+
+            verdict:
+                "VIOLATED",
+
+            evidence: [
+                "FIXTURE-B-CONSTRAINT-VIOLATED"
+            ]
+        }
+
+    ],
+
     scientificPolarity:
         "NEUTRAL",
 
@@ -721,6 +767,78 @@ console.log(
                         "composition-execution-requirement.json"
                     )
                 )
+            );
+
+        }
+    );
+
+
+    await check(
+        "GENERIC EXECUTOR PRESERVES STRUCTURED CONSTRAINT OBSERVATIONS",
+        () => {
+
+            const observations =
+                executed
+                    .driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            assert.equal(
+                observations.length,
+                2
+            );
+
+
+            assert.equal(
+                observations[0].constraintId,
+                "CONSTRAINT-A-CHANNEL-FIXTURE"
+            );
+
+            assert.equal(
+                observations[0].participantSide,
+                "A"
+            );
+
+            assert.equal(
+                observations[0].verdict,
+                "PRESERVED"
+            );
+
+
+            assert.equal(
+                observations[1].constraintId,
+                "CONSTRAINT-B-CHANNEL-FIXTURE"
+            );
+
+            assert.equal(
+                observations[1].participantSide,
+                "B"
+            );
+
+            assert.equal(
+                observations[1].verdict,
+                "VIOLATED"
+            );
+
+        }
+    );
+
+
+    await check(
+        "STRUCTURED CONSTRAINT OBSERVATIONS CANNOT SET HARNESS POLARITY",
+        () => {
+
+            assert.equal(
+                executed.scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                executed
+                    .driverReport
+                    ?.scientificPolarity,
+                "NEUTRAL"
             );
 
         }

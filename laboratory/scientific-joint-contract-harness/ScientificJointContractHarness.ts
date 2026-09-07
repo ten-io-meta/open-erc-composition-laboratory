@@ -2,6 +2,10 @@ import type {
     ScientificCompositionWorkspaceSourceMaterialization
 } from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterialization.js";
 
+import type {
+    ScientificCompositionConstraintObservation
+} from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintObservation.js";
+
 
 export type ScientificJointContractHarnessParticipantSide =
     "A" | "B";
@@ -91,6 +95,13 @@ export interface ScientificJointContractHarnessDriverReport {
 
     observations:
         string[];
+
+    /*
+     * Structured runtime evidence attributed to exact composition
+     * constraints. Presence alone cannot establish polarity.
+     */
+    constraintObservations?:
+        ScientificCompositionConstraintObservation[];
 
     scientificPolarity:
         "NEUTRAL";

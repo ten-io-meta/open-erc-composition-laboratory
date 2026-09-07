@@ -27,6 +27,10 @@ import type {
 } from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 
 import type {
+    ScientificCompositionConstraintObservation
+} from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintObservation.js";
+
+import type {
     ScientificJointContractHarnessDriverParticipantReport,
     ScientificJointContractHarnessDriverReport,
     ScientificJointContractHarnessExecution,
@@ -978,6 +982,12 @@ export class ScientificJointContractHarnessExecutor {
         }
 
 
+        const constraintObservations =
+            this.parseConstraintObservations(
+                parsed.constraintObservations
+            );
+
+
         if (
             parsed.scientificPolarity !==
             "NEUTRAL"
@@ -1025,6 +1035,17 @@ export class ScientificJointContractHarnessExecutor {
                 ...parsed.observations
             ],
 
+            constraintObservations:
+                constraintObservations.map(
+                    observation => ({
+                        ...observation,
+
+                        evidence: [
+                            ...observation.evidence
+                        ]
+                    })
+                ),
+
             scientificPolarity:
                 "NEUTRAL",
 
@@ -1032,6 +1053,176 @@ export class ScientificJointContractHarnessExecutor {
                 parsed.conclusion
 
         };
+
+    }
+
+
+    private parseConstraintObservations(
+        value:
+            unknown
+    ): ScientificCompositionConstraintObservation[] {
+
+        if (
+            value ===
+            undefined
+        ) {
+
+            return [];
+
+        }
+
+
+        if (
+            !Array.isArray(
+                value
+            )
+        ) {
+
+            throw new Error(
+                "Joint harness constraint observations are not an array."
+            );
+
+        }
+
+
+        return value.map(
+            (
+                observation,
+                index
+            ) => {
+
+                if (
+                    !this.isRecord(
+                        observation
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} is not an object.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.observationId !==
+                        "string" ||
+                    observation.observationId
+                        .trim()
+                        .length ===
+                        0
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has no observation identity.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.candidateId !==
+                        "string" ||
+                    observation.candidateId
+                        .trim()
+                        .length ===
+                        0
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has no candidate identity.`
+                    );
+
+                }
+
+
+                if (
+                    typeof observation.constraintId !==
+                        "string" ||
+                    observation.constraintId
+                        .trim()
+                        .length ===
+                        0
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has no constraint identity.`
+                    );
+
+                }
+
+
+                if (
+                    observation.participantSide !==
+                        "A" &&
+                    observation.participantSide !==
+                        "B"
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has invalid participant side.`
+                    );
+
+                }
+
+
+                if (
+                    observation.verdict !==
+                        "PRESERVED" &&
+                    observation.verdict !==
+                        "VIOLATED"
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has invalid verdict.`
+                    );
+
+                }
+
+
+                if (
+                    !Array.isArray(
+                        observation.evidence
+                    ) ||
+                    !observation.evidence.every(
+                        evidence =>
+                            typeof evidence ===
+                            "string"
+                    )
+                ) {
+
+                    throw new Error(
+                        `Joint harness constraint observation ${index} has invalid evidence.`
+                    );
+
+                }
+
+
+                return {
+
+                    observationId:
+                        observation.observationId,
+
+                    candidateId:
+                        observation.candidateId,
+
+                    constraintId:
+                        observation.constraintId,
+
+                    participantSide:
+                        observation.participantSide,
+
+                    verdict:
+                        observation.verdict,
+
+                    evidence: [
+                        ...observation.evidence
+                    ]
+
+                };
+
+            }
+        );
 
     }
 
@@ -1278,6 +1469,20 @@ export class ScientificJointContractHarnessExecutor {
             observations: [
                 ...report.observations
             ],
+
+            constraintObservations:
+                (
+                    report.constraintObservations ??
+                    []
+                ).map(
+                    observation => ({
+                        ...observation,
+
+                        evidence: [
+                            ...observation.evidence
+                        ]
+                    })
+                ),
 
             scientificPolarity:
                 "NEUTRAL",
