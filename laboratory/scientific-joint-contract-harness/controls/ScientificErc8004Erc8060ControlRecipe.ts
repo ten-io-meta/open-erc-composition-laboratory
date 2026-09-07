@@ -102,9 +102,34 @@ const publicClient =
 
 
 const [
-    owner
+    owner,
+    nonOwner
 ] =
     await viem.getWalletClients();
+
+
+if (
+    !owner ||
+    !nonOwner
+) {
+
+    throw new Error(
+        "OECL real ERC-8060 owner/non-owner wallets are required."
+    );
+
+}
+
+
+if (
+    owner.account.address.toLowerCase() ===
+    nonOwner.account.address.toLowerCase()
+) {
+
+    throw new Error(
+        "OECL real ERC-8060 owner and non-owner wallets must be distinct."
+    );
+
+}
 
 
 const chainId =
@@ -148,9 +173,9 @@ function encodeInitializeWithAddress(
  * ERC-8004 repository:
  *
  * HardhatMinimalUUPS
- * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ ERC1967Proxy
- * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ IdentityRegistryUpgradeable
- * ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ upgradeToAndCall(initialize())
+ * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ ERC1967Proxy
+ * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ IdentityRegistryUpgradeable
+ * ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ upgradeToAndCall(initialize())
  */
 
 const minimalImpl =
@@ -413,6 +438,50 @@ const nonexistentTokenConstraint =
         })();
 
 
+const nonOwnerBurnConstraint =
+    requirement ===
+        null
+        ? null
+        : (() => {
+
+            const matches =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        typeof constraint.rawText ===
+                            "string" &&
+                        constraint.rawText.includes(
+                            "ownerOf(tokenId)"
+                        ) &&
+                        constraint.rawText.includes(
+                            "msg.sender"
+                        ) &&
+                        constraint.rawText.includes(
+                            "Not token owner"
+                        )
+                );
+
+
+            if (
+                matches.length !==
+                1
+            ) {
+
+                throw new Error(
+                    "Expected exactly one discovered ERC-8060 owner-only burn constraint."
+                );
+
+            }
+
+
+            return matches[0];
+
+        })();
+
+
 const uriB =
     "ipfs://oecl/control/erc8060-value";
 
@@ -637,6 +706,108 @@ if (
 
         throw new Error(
             "ERC-8060 nonexistent-token counterfactual did not revert with the observed guard reason."
+        );
+
+    }
+
+}
+
+
+let nonOwnerBurnRevertReasonConfirmed =
+    false;
+
+
+if (
+    nonOwnerBurnConstraint !==
+    null
+) {
+
+    try {
+
+        await publicClient
+            .simulateContract(
+                {
+                    address:
+                        deploy8060Receipt.contractAddress,
+
+                    abi:
+                        artifact8060.abi,
+
+                    functionName:
+                        "burn",
+
+                    args: [
+                        1n
+                    ],
+
+                    account:
+                        nonOwner.account
+                }
+            );
+
+    } catch (error) {
+
+        const errorText =
+            [
+                String(error),
+
+                String(
+                    error?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.shortMessage ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.details ??
+                    ""
+                ),
+
+                String(
+                    error?.cause?.reason ??
+                    ""
+                )
+            ].join(
+                "\n"
+            );
+
+
+        nonOwnerBurnRevertReasonConfirmed =
+            errorText.includes(
+                "Not token owner"
+            );
+
+
+        if (
+            !nonOwnerBurnRevertReasonConfirmed
+        ) {
+
+            throw error;
+
+        }
+
+    }
+
+
+    if (
+        !nonOwnerBurnRevertReasonConfirmed
+    ) {
+
+        throw new Error(
+            "ERC-8060 non-owner burn counterfactual did not revert with the observed guard reason."
         );
 
     }
@@ -971,6 +1142,40 @@ const constraintObservations = [
                     evidence: [
                         "ERC8060_EXISTING_TOKEN_VALUE_CONFIRMED:1",
                         "ERC8060_NONEXISTENT_TOKEN_REVERT_REASON_CONFIRMED:Nonexistent token"
+                    ]
+                }
+
+            ]
+    ),
+
+    ...(
+        nonOwnerBurnConstraint ===
+            null
+            ? []
+            : [
+
+                {
+                    observationId:
+                        (
+                            "REAL-CONTROL-NONOWNER-BURN-" +
+                            nonOwnerBurnConstraint.constraintId
+                        ),
+
+                    candidateId:
+                        nonOwnerBurnConstraint.candidateId,
+
+                    constraintId:
+                        nonOwnerBurnConstraint.constraintId,
+
+                    participantSide:
+                        nonOwnerBurnConstraint.participantSide,
+
+                    verdict:
+                        "PRESERVED",
+
+                    evidence: [
+                        "ERC8060_TOKEN_OWNER_CONFIRMED:1",
+                        "ERC8060_NONOWNER_BURN_REVERT_REASON_CONFIRMED:Not token owner"
                     ]
                 }
 

@@ -961,13 +961,13 @@ try {
                         17,
 
                     preserved:
-                        2,
+                        3,
 
                     violated:
                         0,
 
                     unevaluated:
-                        15
+                        14
                 }
             );
 
@@ -984,7 +984,7 @@ try {
                         item.status ===
                         "PRESERVED"
                 ).length,
-                2
+                3
             );
 
 
@@ -994,7 +994,7 @@ try {
                         item.status ===
                         "UNEVALUATED"
                 ).length,
-                15
+                14
             );
 
 
@@ -1036,7 +1036,7 @@ try {
 
             assert.equal(
                 constraintObservations.length,
-                2
+                3
             );
 
 
@@ -1154,6 +1154,119 @@ try {
             assert.equal(
                 observation.evidence.includes(
                     "ERC8060_NONEXISTENT_TOKEN_REVERT_REASON_CONFIRMED:Nonexistent token"
+                ),
+                true
+            );
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            const constraintEvaluation =
+                evaluation.evaluations.find(
+                    item =>
+                        item.constraintId ===
+                        expectedConstraint.constraintId
+                );
+
+
+            assert.ok(
+                constraintEvaluation
+            );
+
+
+            assert.equal(
+                constraintEvaluation.status,
+                "PRESERVED"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES ERC8060 NONOWNER BURN CONSTRAINT",
+        () => {
+
+            const expectedConstraints =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "B" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        constraint.rawText.includes(
+                            "ownerOf(tokenId)"
+                        ) &&
+                        constraint.rawText.includes(
+                            "msg.sender"
+                        ) &&
+                        constraint.rawText.includes(
+                            "Not token owner"
+                        )
+                );
+
+
+            assert.equal(
+                expectedConstraints.length,
+                1
+            );
+
+
+            const expectedConstraint =
+                expectedConstraints[0];
+
+
+            const constraintObservations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const observation =
+                constraintObservations.find(
+                    item =>
+                        item.constraintId ===
+                        expectedConstraint.constraintId
+                );
+
+
+            assert.ok(
+                observation
+            );
+
+
+            assert.equal(
+                observation.participantSide,
+                "B"
+            );
+
+
+            assert.equal(
+                observation.verdict,
+                "PRESERVED"
+            );
+
+
+            assert.equal(
+                observation.evidence.includes(
+                    "ERC8060_TOKEN_OWNER_CONFIRMED:1"
+                ),
+                true
+            );
+
+
+            assert.equal(
+                observation.evidence.includes(
+                    "ERC8060_NONOWNER_BURN_REVERT_REASON_CONFIRMED:Not token owner"
                 ),
                 true
             );
