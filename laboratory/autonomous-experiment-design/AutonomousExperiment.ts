@@ -2,6 +2,7 @@ import type {
     GitHubExecutableTarget
 } from "../github-adapter/GitHubExecutableTargetExtractor.js";
 
+
 export interface AutonomousExperiment {
 
     experimentId: string;
@@ -14,7 +15,8 @@ export interface AutonomousExperiment {
         | "THEORY_VALIDATION"
         | "CONTRADICTION_RESOLUTION"
         | "KNOWLEDGE_GAP"
-        | "CONFIDENCE_IMPROVEMENT";
+        | "CONFIDENCE_IMPROVEMENT"
+        | "COMPOSITION_CANDIDATE";
 
     targetId: string;
 

@@ -2,34 +2,49 @@ import type {
     AutonomousExperiment
 } from "./AutonomousExperiment.js";
 
+
 export interface AutonomousExperimentResult {
 
     generatedAt: string;
 
-    experiments: AutonomousExperiment[];
+    experiments:
+        AutonomousExperiment[];
 
     statistics: {
 
-        experiments: number;
+        experiments:
+            number;
 
-        highPriority: number;
+        highPriority:
+            number;
 
-        mediumPriority: number;
+        mediumPriority:
+            number;
 
-        lowPriority: number;
+        lowPriority:
+            number;
 
-        theoryValidation: number;
+        theoryValidation:
+            number;
 
-        contradictionResolution: number;
+        contradictionResolution:
+            number;
 
-        knowledgeGap: number;
+        knowledgeGap:
+            number;
 
-        confidenceImprovement: number;
+        confidenceImprovement:
+            number;
 
-        averageExpectedKnowledgeGain: number;
+        compositionCandidate:
+            number;
+
+        averageExpectedKnowledgeGain:
+            number;
 
     };
 
-    errors: string[];
+    errors:
+        string[];
 
 }

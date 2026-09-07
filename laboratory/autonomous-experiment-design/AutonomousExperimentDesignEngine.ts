@@ -775,6 +775,14 @@ challengeCondition:
                                 "CONFIDENCE_IMPROVEMENT"
                         ).length,
 
+                    compositionCandidate:
+                        prioritized.filter(
+                            item =>
+                                item.targetType ===
+                                "COMPOSITION_CANDIDATE"
+                        ).length,
+
+
                     averageExpectedKnowledgeGain:
                         this.average(
                             prioritized.map(
@@ -807,6 +815,8 @@ challengeCondition:
                     contradictionResolution: 0,
                     knowledgeGap: 0,
                     confidenceImprovement: 0,
+                    compositionCandidate: 0,
+
                     averageExpectedKnowledgeGain: 0
                 },
 
