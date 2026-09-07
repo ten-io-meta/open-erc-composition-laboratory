@@ -2144,6 +2144,195 @@ try {
     );
 
     await check(
+        "REAL CONTROL OBSERVES DIRECT ERC8004 TO ERC8060 STATICCALL",
+        () => {
+
+            const joint =
+                execution
+                    ?.jointContractHarnessExecution;
+
+
+            assert.ok(
+                joint
+            );
+
+
+            const driverReport =
+                joint.driverReport;
+
+
+            assert.ok(
+                driverReport
+            );
+
+
+            const interactions =
+                driverReport
+                    .crossProtocolInteractionObservations ??
+                [];
+
+
+            assert.equal(
+                interactions.length,
+                1
+            );
+
+
+            const interaction =
+                interactions[0];
+
+
+            assert.equal(
+                interaction.observationId,
+                "REAL-CONTROL-DIRECT-A-TO-B-STATICCALL"
+            );
+
+
+            assert.equal(
+                interaction.sourceSide,
+                "A"
+            );
+
+
+            assert.equal(
+                interaction.targetSide,
+                "B"
+            );
+
+
+            assert.equal(
+                interaction.callKind,
+                "STATICCALL"
+            );
+
+
+            assert.equal(
+                interaction.status,
+                "OBSERVED"
+            );
+
+
+            const participantAAddress =
+                driverReport
+                    .participantA
+                    .contractAddresses[0];
+
+
+            const participantBAddress =
+                driverReport
+                    .participantB
+                    .contractAddresses[0];
+
+
+            assert.ok(
+                participantAAddress
+            );
+
+
+            assert.ok(
+                participantBAddress
+            );
+
+
+            assert.equal(
+                interaction
+                    .sourceAddress
+                    .toLowerCase(),
+                participantAAddress
+                    .toLowerCase()
+            );
+
+
+            assert.equal(
+                interaction
+                    .targetAddress
+                    .toLowerCase(),
+                participantBAddress
+                    .toLowerCase()
+            );
+
+
+            const walletSignatureConstraints =
+                requirement.constraints.filter(
+                    constraint =>
+                        constraint.participantSide ===
+                            "A" &&
+                        constraint.basis ===
+                            "SOLIDITY_REQUIRE_STATEMENT" &&
+                        constraint.rawText.includes(
+                            "invalid wallet sig"
+                        )
+                );
+
+
+            assert.equal(
+                walletSignatureConstraints.length,
+                1
+            );
+
+
+            assert.equal(
+                interaction.candidateId,
+                walletSignatureConstraints[0]
+                    .candidateId
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    (
+                        "ERC8060_STATICCALL_TARGET_CONFIRMED:" +
+                        participantBAddress.toLowerCase()
+                    )
+                ),
+                true
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    "ERC8004_CALL_SITE_CONFIRMED:IERC1271.isValidSignature"
+                ),
+                true
+            );
+
+
+            assert.equal(
+                interaction.evidence.includes(
+                    "ERC8004_SETAGENTWALLET_REVERT_REASON_CONFIRMED:invalid wallet sig"
+                ),
+                true
+            );
+
+
+            /*
+             * Physical A -> B interaction is now observed,
+             * but this route does not establish compatible
+             * composition semantics.
+             */
+            assert.equal(
+                joint.scientificPolarity,
+                "NEUTRAL"
+            );
+
+
+            assert.equal(
+                execution?.status,
+                "INCONCLUSIVE"
+            );
+
+
+            assert.equal(
+                execution
+                    ?.compositionConstraintEvaluation
+                    ?.scientificPolarity,
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
         "END TO END REAL EXECUTION CANNOT YET CLAIM COMPOSITION POLARITY",
         () => {
 
