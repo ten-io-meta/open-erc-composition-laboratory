@@ -8,6 +8,10 @@ import {
 } from "node:path";
 
 import {
+    createHash
+} from "node:crypto";
+
+import {
     execFile
 } from "node:child_process";
 
@@ -94,19 +98,26 @@ export class ScientificPinnedRepositoryMaterializer {
         }
 
 
-        const repositoryDirectory =
-            this.safeDirectoryName(
-                repository
+        /*
+         * Physical paths are deliberately compact.
+         *
+         * Repository and revision remain fully preserved and
+         * independently verified in scientific metadata. They do
+         * not need to be encoded verbatim into the filesystem path.
+         *
+         * This avoids platform path-length limits without weakening
+         * revision identity.
+         */
+        const materializationDirectory =
+            this.materializationDirectoryName(
+                repository,
+                requiredRevision
             );
-
-        const revisionDirectory =
-            requiredRevision.toLowerCase();
 
         const localPath =
             join(
                 workspaceRoot,
-                repositoryDirectory,
-                revisionDirectory
+                materializationDirectory
             );
 
 
@@ -396,28 +407,47 @@ export class ScientificPinnedRepositoryMaterializer {
     }
 
 
-    private safeDirectoryName(
-        repository: string
+    private materializationDirectoryName(
+        repository: string,
+        requiredRevision: string
     ): string {
 
-        const normalized =
-            repository
-                .trim()
-                .replace(
-                    /[^a-zA-Z0-9._-]+/g,
-                    "__"
+        /*
+         * This digest is only a compact physical workspace key.
+         *
+         * It is NOT scientific source identity and is never used to
+         * establish revision equality. Exact identity continues to
+         * require:
+         *
+         *     observed HEAD === requiredRevision
+         *
+         * after checkout.
+         */
+        const digest =
+            createHash(
+                "sha256"
+            )
+                .update(
+                    repository,
+                    "utf8"
                 )
-                .replace(
-                    /^_+|_+$/g,
-                    ""
+                .update(
+                    "\0",
+                    "utf8"
+                )
+                .update(
+                    requiredRevision.toLowerCase(),
+                    "utf8"
+                )
+                .digest(
+                    "hex"
+                )
+                .slice(
+                    0,
+                    24
                 );
 
-        return (
-            normalized.length >
-            0
-                ? normalized
-                : "repository"
-        );
+        return `pinned-${digest}`;
 
     }
 

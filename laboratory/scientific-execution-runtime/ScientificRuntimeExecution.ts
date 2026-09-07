@@ -6,6 +6,10 @@ import type {
     ScientificCompositionExecutionRequirement
 } from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 
+import type {
+    ScientificCompositionWorkspaceMaterialization
+} from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterialization.js";
+
 
 export type ScientificRuntimeExecutionStatus =
     | "SUCCESS"
@@ -55,23 +59,32 @@ export interface ScientificRuntimeExecution {
         ScientificCompositionExecutionRequirement;
 
     /*
+     * Physical bilateral workspace materialization.
+     *
+     * Presence proves only that OECL attempted the dedicated
+     * composition workspace boundary. MATERIALIZED means both
+     * participant source revisions were pinned atomically.
+     *
+     * It does not mean participant contracts were executed.
+     */
+    compositionWorkspaceMaterialization?:
+        ScientificCompositionWorkspaceMaterialization;
+
+    /*
      * Concrete repository associated with this runtime
      * execution when one has been operationally resolved.
      *
-     * This identifies execution provenance. It must not be
-     * interpreted by itself as an independent scientific
-     * source or as evidence of increased confidence.
+     * COMPOSITION_EXECUTION deliberately keeps this null because
+     * its physical identity spans multiple participant sources.
      */
     repository:
         string | null;
 
     /*
-     * Exact executable target selected upstream and used
-     * for this runtime execution when one exists.
+     * Exact individual executable target selected upstream when
+     * one exists.
      *
-     * Null is valid for non-target runtime operations such
-     * as source reingestion, evidence collection and joint
-     * composition admission.
+     * Null is required for joint composition execution boundaries.
      */
     selectedExecutableTarget:
         ScientificExecutableTargetIdentity | null;

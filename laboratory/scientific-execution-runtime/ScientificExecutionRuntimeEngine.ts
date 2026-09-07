@@ -1,6 +1,14 @@
 import {
     cloneScientificCompositionExecutionRequirement
 } from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+
+import {
+    ScientificCompositionWorkspaceMaterializer
+} from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterializer.js";
+
+import type {
+    ScientificExecutionRuntimeOptions
+} from "./ScientificExecutionRuntimeOptions.js";
 import {
     ResearchPipeline
 } from "../pipeline/ResearchPipeline.js";
@@ -117,7 +125,9 @@ export class ScientificExecutionRuntimeEngine {
         executionPlans:
             ScientificExecutionPlanResult,
         executionSpecifications:
-            ScientificExecutionSpecificationResult
+            ScientificExecutionSpecificationResult,
+        runtimeOptions:
+            ScientificExecutionRuntimeOptions = {}
     ): Promise<ScientificRuntimeExecutionResult> {
 
         try {
@@ -272,7 +282,8 @@ const execution =
         plan,
         step,
         specification,
-        executions
+        executions,
+        runtimeOptions
     );
 
 executions.push(
@@ -444,7 +455,9 @@ if (
         specification?:
             ScientificExecutionSpecification,
         completedExecutions:
-            ScientificRuntimeExecution[] = []
+            ScientificRuntimeExecution[] = [],
+        runtimeOptions:
+            ScientificExecutionRuntimeOptions = {}
     ): Promise<ScientificRuntimeExecution> {
 
         switch (
@@ -474,7 +487,8 @@ if (
                     index,
                     plan,
                     step,
-                    specification
+                    specification,
+                    runtimeOptions
                 );
 
 
@@ -517,15 +531,17 @@ if (
 
     }
 
-    private executeCompositionExecution(
+    private async executeCompositionExecution(
         index: number,
         plan:
             ScientificExecutionPlan,
         step:
             ScientificExecutionStep,
         specification?:
-            ScientificExecutionSpecification
-    ): ScientificRuntimeExecution {
+            ScientificExecutionSpecification,
+        runtimeOptions:
+            ScientificExecutionRuntimeOptions = {}
+    ): Promise<ScientificRuntimeExecution> {
 
         const now =
             new Date().toISOString();
@@ -843,6 +859,217 @@ if (
             throw new Error(
                 "Composition requirement admission reached an impossible undefined requirement state."
             );
+
+        }
+
+
+        const workspaceMaterializationRequested =
+            runtimeOptions
+                .compositionWorkspaceRoot !==
+                undefined ||
+            runtimeOptions
+                .compositionRemoteUrls !==
+                undefined;
+
+
+        if (
+            workspaceMaterializationRequested
+        ) {
+
+            const workspaceStartedAt =
+                new Date().toISOString();
+
+
+            const workspaceMaterialization =
+                await new ScientificCompositionWorkspaceMaterializer()
+                    .materialize(
+                        {
+                            requirement,
+
+                            ...(
+                                runtimeOptions
+                                    .compositionWorkspaceRoot !==
+                                undefined
+                                    ? {
+                                        workspaceRoot:
+                                            runtimeOptions
+                                                .compositionWorkspaceRoot
+                                    }
+                                    : {}
+                            ),
+
+                            ...(
+                                runtimeOptions
+                                    .compositionRemoteUrls !==
+                                undefined
+                                    ? {
+                                        remoteUrls:
+                                            runtimeOptions
+                                                .compositionRemoteUrls
+                                    }
+                                    : {}
+                            )
+                        }
+                    );
+
+
+            const preservedWorkspace = {
+
+                ...workspaceMaterialization,
+
+                sourceMaterializations:
+                    workspaceMaterialization
+                        .sourceMaterializations
+                        .map(
+                            source => ({
+                                ...source
+                            })
+                        ),
+
+                errors: [
+                    ...workspaceMaterialization.errors
+                ]
+
+            };
+
+
+            const workspaceMaterialized =
+                workspaceMaterialization.status ===
+                "MATERIALIZED";
+
+
+            return {
+
+                runtimeExecutionId:
+                    this.executionId(
+                        index
+                    ),
+
+                executionPlanId:
+                    plan.executionPlanId,
+
+                executionTaskId:
+                    plan.executionTaskId,
+
+                experimentId:
+                    plan.experimentId,
+
+                targetId:
+                    plan.targetId,
+
+                sourceConclusionId:
+                    plan.sourceConclusionId,
+
+                sourceIds:
+                    [
+                        ...(plan.sourceIds ?? [])
+                    ],
+
+                targetEvidenceIds:
+                    [
+                        ...(plan.targetEvidenceIds ?? [])
+                    ],
+
+                stepId:
+                    step.stepId,
+
+                stepType:
+                    step.stepType,
+
+                status:
+                    "INCONCLUSIVE",
+
+                runtime:
+                    "OECL_NATIVE_COMPOSITION_WORKSPACE_MATERIALIZATION",
+
+                compositionExecutionRequirement:
+                    cloneScientificCompositionExecutionRequirement(
+                        requirement
+                    ),
+
+                compositionWorkspaceMaterialization:
+                    preservedWorkspace,
+
+                repository:
+                    null,
+
+                selectedExecutableTarget:
+                    null,
+
+                startedAt:
+                    workspaceStartedAt,
+
+                finishedAt:
+                    new Date().toISOString(),
+
+                evidence: [
+
+                    "COMPOSITION_REQUIREMENT_ADMITTED",
+
+                    (
+                        "COMPOSITION_WORKSPACE_STATUS:" +
+                        workspaceMaterialization.status
+                    ),
+
+                    ...(
+                        workspaceMaterialization
+                            .workspacePath !==
+                        null
+                            ? [
+                                (
+                                    "COMPOSITION_WORKSPACE:" +
+                                    workspaceMaterialization
+                                        .workspacePath
+                                )
+                            ]
+                            : []
+                    ),
+
+                    ...workspaceMaterialization
+                        .sourceMaterializations
+                        .map(
+                            source =>
+                                [
+                                    "COMPOSITION_SOURCE",
+                                    source.participantSide,
+                                    source.participantId,
+                                    source.sourceId,
+                                    source.repository,
+                                    source.requiredRevision,
+                                    source.observedRevision
+                                ].join(":")
+                        )
+
+                ],
+
+                observations:
+                    workspaceMaterialized
+                        ? [
+                            "Atomic bilateral composition workspace was materialized at exact pinned participant revisions.",
+                            "No participant contracts were executed by this runtime workspace materialization step."
+                        ]
+                        : [
+                            "Atomic bilateral composition workspace materialization was rejected before contract execution.",
+                            "No participant contracts were executed by this runtime workspace materialization step."
+                        ],
+
+                errors:
+                    workspaceMaterialized
+                        ? []
+                        : [
+                            ...workspaceMaterialization.errors
+                        ],
+
+                explanation:
+                    workspaceMaterialized
+                        ? (
+                            "OECL physically materialized both composition participants at their exact pinned revisions inside one atomic isolated workspace. This establishes execution readiness only; no participant contracts or joint harness were executed."
+                        )
+                        : (
+                            "OECL rejected the bilateral composition workspace because at least one participant could not be materialized exactly. No partial composition execution was accepted."
+                        )
+
+            };
 
         }
 
