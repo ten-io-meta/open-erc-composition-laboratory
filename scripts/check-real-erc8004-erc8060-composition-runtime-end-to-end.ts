@@ -950,7 +950,7 @@ try {
 
             assert.equal(
                 evaluation.scientificPolarity,
-                "INCONCLUSIVE"
+                "SUPPORT"
             );
 
 
@@ -961,13 +961,13 @@ try {
                         17,
 
                     preserved:
-                        9,
+                        17,
 
                     violated:
                         0,
 
                     unevaluated:
-                        8
+                        0
                 }
             );
 
@@ -984,7 +984,7 @@ try {
                         item.status ===
                         "PRESERVED"
                 ).length,
-                9
+                17
             );
 
 
@@ -994,7 +994,7 @@ try {
                         item.status ===
                         "UNEVALUATED"
                 ).length,
-                8
+                0
             );
 
 
@@ -1036,7 +1036,7 @@ try {
 
             assert.equal(
                 constraintObservations.length,
-                9
+                17
             );
 
 
@@ -1457,19 +1457,19 @@ try {
 
             assert.equal(
                 evaluation.statistics.preserved,
-                9
+                17
             );
 
 
             assert.equal(
                 evaluation.statistics.unevaluated,
-                8
+                0
             );
 
 
             assert.equal(
                 evaluation.scientificPolarity,
-                "INCONCLUSIVE"
+                "SUPPORT"
             );
 
         }
@@ -1603,19 +1603,541 @@ try {
 
             assert.equal(
                 evaluation.statistics.preserved,
-                9
+                17
             );
 
 
             assert.equal(
                 evaluation.statistics.unevaluated,
-                8
+                0
             );
 
 
             assert.equal(
                 evaluation.scientificPolarity,
-                "INCONCLUSIVE"
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES TWO ERC8060 ECONOMIC CONSTRAINTS",
+        () => {
+
+            const cases = [
+
+                {
+                    fragments: [
+                        "address(this).balance >= redeemable",
+                        "Insufficient contract balance"
+                    ],
+
+                    evidence:
+                        "ERC8060_INSUFFICIENT_BALANCE_CONTROLLED_STATE_PERTURBATION_REVERT_REASON_CONFIRMED:Insufficient contract balance"
+                },
+
+                {
+                    fragments: [
+                        "amount <= surplusValue()",
+                        "Exceeds surplus value"
+                    ],
+
+                    evidence:
+                        "ERC8060_EXCESS_SURPLUS_REVERT_REASON_CONFIRMED:Exceeds surplus value"
+                }
+
+            ];
+
+
+            const observations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            for (
+                const entry
+                of cases
+            ) {
+
+                const matches =
+                    requirement.constraints.filter(
+                        constraint =>
+                            constraint.participantSide ===
+                                "B" &&
+                            constraint.basis ===
+                                "SOLIDITY_REQUIRE_STATEMENT" &&
+                            entry.fragments.every(
+                                fragment =>
+                                    constraint.rawText.includes(
+                                        fragment
+                                    )
+                            )
+                    );
+
+
+                assert.equal(
+                    matches.length,
+                    1
+                );
+
+
+                const expected =
+                    matches[0];
+
+
+                const observation =
+                    observations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    observation
+                );
+
+
+                assert.equal(
+                    observation.participantSide,
+                    "B"
+                );
+
+
+                assert.equal(
+                    observation.verdict,
+                    "PRESERVED"
+                );
+
+
+                assert.equal(
+                    observation.evidence.includes(
+                        entry.evidence
+                    ),
+                    true
+                );
+
+
+                const evaluated =
+                    evaluation.evaluations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    evaluated
+                );
+
+
+                assert.equal(
+                    evaluated.status,
+                    "PRESERVED"
+                );
+
+            }
+
+
+            assert.equal(
+                evaluation.statistics.preserved,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.statistics.violated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.statistics.unevaluated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES FOUR LOCATOR-BOUND ERC8004 AUTHORIZATION CONSTRAINTS",
+        () => {
+
+            const cases = [
+
+                {
+                    startLine:
+                        102,
+
+                    endLine:
+                        107,
+
+                    evidence:
+                        "ERC8004_SETMETADATA_UNAUTHORIZED_REVERT_REASON_CONFIRMED:Not authorized"
+                },
+
+                {
+                    startLine:
+                        116,
+
+                    endLine:
+                        121,
+
+                    evidence:
+                        "ERC8004_SETAGENTURI_UNAUTHORIZED_REVERT_REASON_CONFIRMED:Not authorized"
+                },
+
+                {
+                    startLine:
+                        139,
+
+                    endLine:
+                        144,
+
+                    evidence:
+                        "ERC8004_SETAGENTWALLET_UNAUTHORIZED_REVERT_REASON_CONFIRMED:Not authorized"
+                },
+
+                {
+                    startLine:
+                        169,
+
+                    endLine:
+                        174,
+
+                    evidence:
+                        "ERC8004_UNSETAGENTWALLET_UNAUTHORIZED_REVERT_REASON_CONFIRMED:Not authorized"
+                }
+
+            ];
+
+
+            const observations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            for (
+                const entry
+                of cases
+            ) {
+
+                const matches =
+                    requirement.constraints.filter(
+                        constraint =>
+                            constraint.participantSide ===
+                                "A" &&
+                            constraint.basis ===
+                                "SOLIDITY_REQUIRE_STATEMENT" &&
+                            constraint.containerSymbol ===
+                                "IdentityRegistryUpgradeable" &&
+                            constraint.rawText.includes(
+                                "Not authorized"
+                            ) &&
+                            constraint.locator.filePath.endsWith(
+                                "IdentityRegistryUpgradeable.sol"
+                            ) &&
+                            constraint.locator.startLine ===
+                                entry.startLine &&
+                            constraint.locator.endLine ===
+                                entry.endLine
+                    );
+
+
+                assert.equal(
+                    matches.length,
+                    1
+                );
+
+
+                const expected =
+                    matches[0];
+
+
+                const observation =
+                    observations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    observation
+                );
+
+
+                assert.equal(
+                    observation.participantSide,
+                    "A"
+                );
+
+
+                assert.equal(
+                    observation.verdict,
+                    "PRESERVED"
+                );
+
+
+                assert.equal(
+                    observation.evidence.includes(
+                        entry.evidence
+                    ),
+                    true
+                );
+
+
+                const evaluated =
+                    evaluation.evaluations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    evaluated
+                );
+
+
+                assert.equal(
+                    evaluated.status,
+                    "PRESERVED"
+                );
+
+            }
+
+
+            assert.equal(
+                evaluation.statistics.total,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.statistics.preserved,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.statistics.violated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.statistics.unevaluated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL CONTROL OPERATIONALIZES FINAL TWO ERC8060 ETH TRANSFER CONSTRAINTS",
+        () => {
+
+            const cases = [
+
+                {
+                    startLine:
+                        94,
+
+                    evidence:
+                        "ERC8060_BURN_REJECTING_RECIPIENT_CONTROLLED_CODE_PERTURBATION_REVERT_REASON_CONFIRMED:ETH transfer failed"
+                },
+
+                {
+                    startLine:
+                        137,
+
+                    evidence:
+                        "ERC8060_SURPLUS_REJECTING_RECIPIENT_CONTROLLED_CODE_PERTURBATION_REVERT_REASON_CONFIRMED:ETH transfer failed"
+                }
+
+            ];
+
+
+            const observations =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport
+                    ?.constraintObservations ??
+                [];
+
+
+            const evaluation =
+                execution
+                    ?.compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            for (
+                const entry
+                of cases
+            ) {
+
+                const matches =
+                    requirement.constraints.filter(
+                        constraint =>
+                            constraint.participantSide ===
+                                "B" &&
+                            constraint.basis ===
+                                "SOLIDITY_REQUIRE_STATEMENT" &&
+                            constraint.containerSymbol ===
+                                "ERC8060Reference" &&
+                            constraint.rawText.includes(
+                                "ETH transfer failed"
+                            ) &&
+                            constraint.locator.filePath.endsWith(
+                                "ERC8060Reference.sol"
+                            ) &&
+                            constraint.locator.startLine ===
+                                entry.startLine &&
+                            constraint.locator.endLine ===
+                                entry.startLine
+                    );
+
+
+                assert.equal(
+                    matches.length,
+                    1
+                );
+
+
+                const expected =
+                    matches[0];
+
+
+                const observation =
+                    observations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    observation
+                );
+
+
+                assert.equal(
+                    observation.verdict,
+                    "PRESERVED"
+                );
+
+
+                assert.equal(
+                    observation.evidence.includes(
+                        entry.evidence
+                    ),
+                    true
+                );
+
+
+                const evaluated =
+                    evaluation.evaluations.find(
+                        item =>
+                            item.constraintId ===
+                            expected.constraintId
+                    );
+
+
+                assert.ok(
+                    evaluated
+                );
+
+
+                assert.equal(
+                    evaluated.status,
+                    "PRESERVED"
+                );
+
+            }
+
+
+            assert.equal(
+                evaluation.statistics.total,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.statistics.preserved,
+                17
+            );
+
+
+            assert.equal(
+                evaluation.statistics.violated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.statistics.unevaluated,
+                0
+            );
+
+
+            assert.equal(
+                evaluation.evaluations.every(
+                    item =>
+                        item.status ===
+                        "PRESERVED"
+                ),
+                true
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "SUPPORT"
             );
 
         }
