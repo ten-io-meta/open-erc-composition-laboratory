@@ -7,6 +7,10 @@ import {
     join
 } from "node:path";
 
+import {
+    createHash
+} from "node:crypto";
+
 import type {
     ScientificCompositionExecutionRequirement
 } from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
@@ -43,10 +47,41 @@ export class ScientificCompositionWorkspaceMaterializer {
             params.workspaceRoot ??
             "./external/scientific-composition-workspaces";
 
+        /*
+         * Scientific requirement identity can legitimately become
+         * very large because it preserves candidate, constraint,
+         * source and revision identity.
+         *
+         * Never project that complete semantic identity directly
+         * into the filesystem. Windows in particular has practical
+         * path-length limits, while future scientific candidates may
+         * contain even larger evidence sets.
+         *
+         * The full requirementId remains unchanged in every
+         * scientific result. Only its physical workspace locator is
+         * compacted deterministically.
+         */
+        const requirementIdentityHash =
+            createHash(
+                "sha256"
+            )
+                .update(
+                    requirement.requirementId
+                )
+                .digest(
+                    "hex"
+                )
+                .slice(
+                    0,
+                    24
+                );
+
+
         const requirementDirectory =
             this.safeDirectoryName(
-                requirement.requirementId
+                `composition-${requirementIdentityHash}`
             );
+
 
         const workspacePath =
             join(

@@ -660,6 +660,49 @@ async function main(): Promise<void> {
     );
 
 
+    /*
+     * Optional machine-readable bridge for scientific integration
+     * controls.
+     *
+     * The runner still owns discovery/specification/adapter
+     * production. Consumers receive the exact structured execution
+     * requirements produced by that pipeline rather than rebuilding
+     * them independently.
+     */
+    if (
+        process.env
+            .OECL_EMIT_COMPOSITION_EXECUTION_REQUIREMENTS ===
+        "1"
+    ) {
+
+        const executionRequirements =
+            experiments
+                .experiments
+                .flatMap(
+                    experiment =>
+                        experiment
+                            .compositionExecutionRequirement ===
+                        undefined
+                            ? []
+                            : [
+                                experiment
+                                    .compositionExecutionRequirement
+                            ]
+                );
+
+
+        console.log(
+            (
+                "OECL_COMPOSITION_EXECUTION_REQUIREMENTS=" +
+                JSON.stringify(
+                    executionRequirements
+                )
+            )
+        );
+
+    }
+
+
     console.log("");
     console.log(
         "SCIENTIFIC COMPOSITION EXPERIMENTS"
