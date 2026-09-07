@@ -1129,6 +1129,102 @@ export class ScientificCompositionEvaluationSpecificationEngine {
                 mechanism:
                     candidate.mechanism,
 
+                /*
+                 * Preserve the complete candidate identity at the
+                 * evaluation boundary.
+                 *
+                 * Mutable nested structures are cloned and
+                 * set-like evidence collections are canonicalized so
+                 * input ordering cannot alter the resulting
+                 * scientific specification.
+                 */
+                candidateSnapshot: {
+
+                    candidateId:
+                        candidate.candidateId,
+
+                    participantA: {
+                        ...candidate.participantA
+                    },
+
+                    participantB: {
+                        ...candidate.participantB
+                    },
+
+                    mechanism:
+                        candidate.mechanism,
+
+                    ...(
+                        candidate.conceptId !==
+                        undefined
+                            ? {
+                                conceptId:
+                                    candidate.conceptId
+                            }
+                            : {}
+                    ),
+
+                    ...(
+                        candidate.foundationProtocolId !==
+                        undefined
+                            ? {
+                                foundationProtocolId:
+                                    candidate.foundationProtocolId
+                            }
+                            : {}
+                    ),
+
+                    supportingCapabilityIdsA:
+                        [
+                            ...candidate.supportingCapabilityIdsA
+                        ].sort(),
+
+                    supportingCapabilityIdsB:
+                        [
+                            ...candidate.supportingCapabilityIdsB
+                        ].sort(),
+
+                    provenance:
+                        candidate.provenance
+                            .map(
+                                provenance => ({
+                                    ...provenance
+                                })
+                            )
+                            .sort(
+                                (
+                                    left,
+                                    right
+                                ) => {
+
+                                    const leftKey =
+                                        [
+                                            left.kind,
+                                            left.sourceId,
+                                            left.sourceRevision ?? "",
+                                            left.evidenceId
+                                        ].join("|");
+
+                                    const rightKey =
+                                        [
+                                            right.kind,
+                                            right.sourceId,
+                                            right.sourceRevision ?? "",
+                                            right.evidenceId
+                                        ].join("|");
+
+                                    return leftKey.localeCompare(
+                                        rightKey
+                                    );
+
+                                }
+                            ),
+
+                    evaluationStatus:
+                        candidate.evaluationStatus
+
+                },
+
                 status,
 
                 sourceIds,

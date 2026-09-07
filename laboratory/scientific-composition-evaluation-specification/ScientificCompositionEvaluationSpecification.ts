@@ -1,4 +1,5 @@
 import type {
+    ScientificCompositionCandidate,
     ScientificCompositionMechanism
 } from "../scientific-cross-protocol-composition/ScientificCompositionCandidate.js";
 
@@ -20,6 +21,17 @@ export interface ScientificCompositionEvaluationSpecification {
 
     mechanism:
         ScientificCompositionMechanism;
+
+    /*
+     * Complete structural snapshot of the composition candidate
+     * from which this evaluation specification was derived.
+     *
+     * Optional temporarily for compatibility with manually
+     * constructed legacy fixtures. The scientific evaluation
+     * engine emits it for every generated specification.
+     */
+    candidateSnapshot?:
+        ScientificCompositionCandidate;
 
     status:
         ScientificCompositionEvaluationSpecificationStatus;

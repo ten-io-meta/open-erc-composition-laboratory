@@ -911,6 +911,92 @@ const checks: Array<{
 
     {
         name:
+            "SPECIFICATION PRESERVES COMPLETE CANDIDATE SNAPSHOT",
+
+        run: () => {
+
+            const specification =
+                buildShared()
+                    .specifications[0];
+
+
+            assert.deepEqual(
+                specification.candidateSnapshot,
+                {
+                    candidateId:
+                        "CANDIDATE-SHARED-BALANCE",
+
+                    participantA: {
+                        kind:
+                            "PROTOCOL",
+
+                        id:
+                            "ERC-101"
+                    },
+
+                    participantB: {
+                        kind:
+                            "PROTOCOL",
+
+                        id:
+                            "ERC-202"
+                    },
+
+                    mechanism:
+                        "SHARED_RECURRENT_CONCEPT",
+
+                    conceptId:
+                        "CONCEPT-BALANCE",
+
+                    supportingCapabilityIdsA: [
+                        "LEXICAL-ERC-101-A",
+                        "LEXICAL-ERC-101-B"
+                    ],
+
+                    supportingCapabilityIdsB: [
+                        "LEXICAL-ERC-202-A",
+                        "LEXICAL-ERC-202-B"
+                    ],
+
+                    provenance: [
+                        {
+                            kind:
+                                "PROTOCOL_CONCEPT",
+
+                            sourceId:
+                                "SOURCE-A",
+
+                            sourceRevision:
+                                "REV-A",
+
+                            evidenceId:
+                                "PC-A"
+                        },
+                        {
+                            kind:
+                                "PROTOCOL_CONCEPT",
+
+                            sourceId:
+                                "SOURCE-B",
+
+                            sourceRevision:
+                                "REV-B",
+
+                            evidenceId:
+                                "PC-B"
+                        }
+                    ],
+
+                    evaluationStatus:
+                        "UNEVALUATED"
+                }
+            );
+
+        }
+    },
+
+    {
+        name:
             "SPECIFICATION PRESERVES SORTED CANDIDATE EVIDENCE IDS",
 
         run: () => {
