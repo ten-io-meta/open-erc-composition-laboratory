@@ -267,8 +267,113 @@ function buildRequirement(
 
         },
 
-        constraints:
-            [],
+        constraints: [
+
+            {
+                constraintId:
+                    "CONSTRAINT-A",
+
+                candidateId:
+                    "CANDIDATE-RUNTIME-RECIPE-101-202",
+
+                participantSide:
+                    "A",
+
+                participantKind:
+                    "PROTOCOL",
+
+                participantId:
+                    "ERC-101",
+
+                sourceId:
+                    "SOURCE-A",
+
+                sourceRevision:
+                    revisionA,
+
+                factId:
+                    "FACT-CONSTRAINT-A",
+
+                basis:
+                    "SOLIDITY_REQUIRE_STATEMENT",
+
+                containerKind:
+                    "CONTRACT",
+
+                containerSymbol:
+                    "RuntimeFixtureA",
+
+                locator: {
+                    sourceLocation:
+                        "fixture/runtime-repository-a",
+
+                    filePath:
+                        "contracts/RuntimeFixtureA.sol",
+
+                    startLine:
+                        10,
+
+                    endLine:
+                        10
+                },
+
+                rawText:
+                    "require(runtimeConstraintA);"
+            },
+
+            {
+                constraintId:
+                    "CONSTRAINT-B",
+
+                candidateId:
+                    "CANDIDATE-RUNTIME-RECIPE-101-202",
+
+                participantSide:
+                    "B",
+
+                participantKind:
+                    "PROTOCOL",
+
+                participantId:
+                    "ERC-202",
+
+                sourceId:
+                    "SOURCE-B",
+
+                sourceRevision:
+                    revisionB,
+
+                factId:
+                    "FACT-CONSTRAINT-B",
+
+                basis:
+                    "SOLIDITY_REQUIRE_STATEMENT",
+
+                containerKind:
+                    "CONTRACT",
+
+                containerSymbol:
+                    "RuntimeFixtureB",
+
+                locator: {
+                    sourceLocation:
+                        "fixture/runtime-repository-b",
+
+                    filePath:
+                        "contracts/RuntimeFixtureB.sol",
+
+                    startLine:
+                        20,
+
+                    endLine:
+                        20
+                },
+
+                rawText:
+                    "require(runtimeConstraintB);"
+            }
+
+        ],
 
         participantAConstraintIds: [
             "CONSTRAINT-A"
@@ -497,6 +602,35 @@ function registration(
 ): ScientificJointContractHarnessRecipeRegistration {
 
     const driverSource = `
+import {
+    readFileSync
+} from "node:fs";
+
+
+const requirementPath =
+    process.env.OECL_COMPOSITION_EXECUTION_REQUIREMENT_PATH;
+
+
+if (
+    !requirementPath
+) {
+
+    throw new Error(
+        "OECL composition execution requirement path is missing."
+    );
+
+}
+
+
+const requirement =
+    JSON.parse(
+        readFileSync(
+            requirementPath,
+            "utf8"
+        )
+    );
+
+
 const report = {
 
     executionKind:
@@ -541,6 +675,54 @@ const report = {
     observations: [
         "FIXTURE_RUNTIME_RECIPE_SELECTED",
         "FIXTURE_BILATERAL_EXECUTION_OBSERVED"
+    ],
+
+    constraintObservations: [
+
+        {
+            observationId:
+                "OBSERVATION-RUNTIME-CONSTRAINT-A",
+
+            candidateId:
+                requirement.candidate.candidateId,
+
+            constraintId:
+                requirement
+                    .participantAConstraintIds[0],
+
+            participantSide:
+                "A",
+
+            verdict:
+                "PRESERVED",
+
+            evidence: [
+                "FIXTURE_RUNTIME_ASSERTION_A_PRESERVED"
+            ]
+        },
+
+        {
+            observationId:
+                "OBSERVATION-RUNTIME-CONSTRAINT-B",
+
+            candidateId:
+                requirement.candidate.candidateId,
+
+            constraintId:
+                requirement
+                    .participantBConstraintIds[0],
+
+            participantSide:
+                "B",
+
+            verdict:
+                "PRESERVED",
+
+            evidence: [
+                "FIXTURE_RUNTIME_ASSERTION_B_PRESERVED"
+            ]
+        }
+
     ],
 
     scientificPolarity:
@@ -979,6 +1161,97 @@ try {
         }
     );
 
+
+    await check(
+        "RUNTIME DERIVES SUPPORT FROM COMPLETE PRESERVED CONSTRAINT COVERAGE",
+        () => {
+
+            const evaluation =
+                exactExecution
+                    .compositionConstraintEvaluation;
+
+
+            assert.ok(
+                evaluation
+            );
+
+
+            assert.equal(
+                evaluation.candidateId,
+                "CANDIDATE-RUNTIME-RECIPE-101-202"
+            );
+
+
+            assert.equal(
+                evaluation.scientificPolarity,
+                "SUPPORT"
+            );
+
+
+            assert.deepEqual(
+                evaluation.statistics,
+                {
+                    total:
+                        2,
+
+                    preserved:
+                        2,
+
+                    violated:
+                        0,
+
+                    unevaluated:
+                        0
+                }
+            );
+
+
+            assert.deepEqual(
+                evaluation.errors,
+                []
+            );
+
+
+            assert.deepEqual(
+                evaluation.evaluations.map(
+                    item => ({
+                        constraintId:
+                            item.constraintId,
+
+                        participantSide:
+                            item.participantSide,
+
+                        status:
+                            item.status
+                    })
+                ),
+                [
+                    {
+                        constraintId:
+                            "CONSTRAINT-A",
+
+                        participantSide:
+                            "A",
+
+                        status:
+                            "PRESERVED"
+                    },
+
+                    {
+                        constraintId:
+                            "CONSTRAINT-B",
+
+                        participantSide:
+                            "B",
+
+                        status:
+                            "PRESERVED"
+                    }
+                ]
+            );
+
+        }
+    );
 
     await check(
         "RUNTIME RECIPE EXECUTION CANNOT ESTABLISH COMPOSITION POLARITY",

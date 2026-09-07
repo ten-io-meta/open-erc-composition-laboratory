@@ -14,6 +14,10 @@ import type {
     ScientificJointContractHarnessExecution
 } from "../scientific-joint-contract-harness/ScientificJointContractHarness.js";
 
+import type {
+    ScientificCompositionConstraintEvaluationResult
+} from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluationResult.js";
+
 
 export type ScientificRuntimeExecutionStatus =
     | "SUCCESS"
@@ -90,6 +94,16 @@ export interface ScientificRuntimeExecution {
      */
     jointContractHarnessExecution?:
         ScientificJointContractHarnessExecution;
+
+    /*
+     * Scientific interpretation of exact composition constraints
+     * against structured joint-runtime observations.
+     *
+     * This result is deliberately distinct from generic harness
+     * polarity and from the final global execution conclusion.
+     */
+    compositionConstraintEvaluation?:
+        ScientificCompositionConstraintEvaluationResult;
 
     repository:
         string | null;

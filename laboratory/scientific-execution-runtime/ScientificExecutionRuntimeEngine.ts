@@ -3,6 +3,10 @@ import {
 } from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 
 import {
+    ScientificCompositionConstraintEvaluatorEngine
+} from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
+
+import {
     ScientificCompositionWorkspaceMaterializer
 } from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterializer.js";
 
@@ -1095,12 +1099,84 @@ if (
                                         ...jointExecution
                                             .driverReport
                                             .observations
-                                    ]
+                                    ],
+
+                                    constraintObservations:
+                                        (
+                                            jointExecution
+                                                .driverReport
+                                                .constraintObservations ??
+                                            []
+                                        ).map(
+                                            observation => ({
+                                                ...observation,
+
+                                                evidence: [
+                                                    ...observation.evidence
+                                                ]
+                                            })
+                                        )
 
                                 },
 
                         errors: [
                             ...jointExecution.errors
+                        ]
+
+                    };
+
+
+                    const compositionConstraintEvaluation =
+                        new ScientificCompositionConstraintEvaluatorEngine()
+                            .evaluate(
+                                requirement.constraints,
+                                (
+                                    jointExecution.status ===
+                                        "EXECUTED" &&
+                                    preservedJointExecution
+                                        .driverReport !==
+                                        null
+                                )
+                                    ? (
+                                        preservedJointExecution
+                                            .driverReport
+                                            .constraintObservations ??
+                                        []
+                                    )
+                                    : []
+                            );
+
+
+                    const preservedCompositionConstraintEvaluation = {
+
+                        ...compositionConstraintEvaluation,
+
+                        evaluations:
+                            compositionConstraintEvaluation
+                                .evaluations
+                                .map(
+                                    evaluation => ({
+                                        ...evaluation,
+
+                                        observationIds: [
+                                            ...evaluation
+                                                .observationIds
+                                        ],
+
+                                        evidence: [
+                                            ...evaluation.evidence
+                                        ]
+                                    })
+                                ),
+
+                        statistics: {
+                            ...compositionConstraintEvaluation
+                                .statistics
+                        },
+
+                        errors: [
+                            ...compositionConstraintEvaluation
+                                .errors
                         ]
 
                     };
@@ -1165,6 +1241,9 @@ if (
 
                         jointContractHarnessExecution:
                             preservedJointExecution,
+
+                        compositionConstraintEvaluation:
+                            preservedCompositionConstraintEvaluation,
 
                         repository:
                             null,
