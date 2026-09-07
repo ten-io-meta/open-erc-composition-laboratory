@@ -1,4 +1,7 @@
 import type {
+    ScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+import type {
     GitHubExecutableTarget
 } from "../github-adapter/GitHubExecutableTargetExtractor.js";
 
@@ -56,6 +59,12 @@ export interface AutonomousExperiment {
 
     targetEvidenceIds:
         string[];
+
+    /*
+     * Structured execution identity for composition experiments.
+     */
+    compositionExecutionRequirement?:
+        ScientificCompositionExecutionRequirement;
 
     hypothesis:
         string;

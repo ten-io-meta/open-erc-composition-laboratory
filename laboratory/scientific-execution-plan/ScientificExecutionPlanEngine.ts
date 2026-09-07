@@ -1,3 +1,6 @@
+import {
+    cloneScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 import type {
     ScientificExperimentExecutionResult
 } from "../scientific-experiment-execution/ScientificExperimentExecutionResult.js";
@@ -95,6 +98,16 @@ sourceIds:
 
 targetEvidenceIds:
     [...(task.targetEvidenceIds ?? [])],
+
+...(task.compositionExecutionRequirement !==
+    undefined
+        ? {
+            compositionExecutionRequirement:
+                cloneScientificCompositionExecutionRequirement(
+                    task.compositionExecutionRequirement
+                )
+        }
+        : {}),
 
 supportCondition:
     task.supportCondition,

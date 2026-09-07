@@ -209,6 +209,73 @@ function readySpecification(
         mechanism:
             "SHARED_RECURRENT_CONCEPT",
 
+        candidateSnapshot: {
+
+            candidateId:
+                "CANDIDATE-1",
+
+            participantA: {
+                kind:
+                    "PROTOCOL",
+
+                id:
+                    "PROTOCOL-A"
+            },
+
+            participantB: {
+                kind:
+                    "PROTOCOL",
+
+                id:
+                    "PROTOCOL-B"
+            },
+
+            mechanism:
+                "SHARED_RECURRENT_CONCEPT",
+
+            conceptId:
+                "CONCEPT-1",
+
+            supportingCapabilityIdsA:
+                [],
+
+            supportingCapabilityIdsB:
+                [],
+
+            provenance: [
+                {
+                    kind:
+                        "PROTOCOL_CONCEPT",
+
+                    sourceId:
+                        "SOURCE-A",
+
+                    sourceRevision:
+                        "REV-A",
+
+                    evidenceId:
+                        "EVIDENCE-A"
+                },
+                {
+                    kind:
+                        "PROTOCOL_CONCEPT",
+
+                    sourceId:
+                        "SOURCE-B",
+
+                    sourceRevision:
+                        "REV-B",
+
+                    evidenceId:
+                        "EVIDENCE-B"
+                }
+            ],
+
+            evaluationStatus:
+                "UNEVALUATED"
+
+        },
+
         status:
             "READY",
 
@@ -223,8 +290,18 @@ function readySpecification(
         ],
 
         constraints: [
-            constraintA,
-            constraintB
+            {
+                ...constraintA,
+
+                sourceRevision:
+                    "REV-A"
+            },
+            {
+                ...constraintB,
+
+                sourceRevision:
+                    "REV-B"
+            }
         ],
 
         participantAConstraintIds: [

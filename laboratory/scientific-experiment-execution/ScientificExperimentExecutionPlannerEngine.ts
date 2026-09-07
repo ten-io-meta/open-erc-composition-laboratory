@@ -1,3 +1,6 @@
+import {
+    cloneScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 import type {
     ScientificExperimentQueueResult
 } from "../scientific-experiment-queue/ScientificExperimentQueueResult.js";
@@ -229,6 +232,20 @@ export class ScientificExperimentExecutionPlannerEngine {
 
         }
 
+        if (
+            experiment.targetType ===
+                "COMPOSITION_CANDIDATE" &&
+            experiment.compositionExecutionRequirement ===
+                undefined
+        ) {
+
+            blockReasons.push(
+                "Composition candidate has no structured composition execution requirement."
+            );
+
+        }
+
+
         const executionStatus =
             blockReasons.length > 0
                 ? "BLOCKED"
@@ -267,6 +284,16 @@ sourceIds:
 
 targetEvidenceIds:
     [...(experiment.targetEvidenceIds ?? [])],
+
+...(experiment.compositionExecutionRequirement !==
+    undefined
+        ? {
+            compositionExecutionRequirement:
+                cloneScientificCompositionExecutionRequirement(
+                    experiment.compositionExecutionRequirement
+                )
+        }
+        : {}),
 
 title:
     experiment.title,

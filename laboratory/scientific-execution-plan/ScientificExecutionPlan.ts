@@ -1,4 +1,7 @@
 import type {
+    ScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+import type {
     ScientificExecutionStep
 } from "./ScientificExecutionStep.js";
 
@@ -22,6 +25,9 @@ export interface ScientificExecutionPlan {
     sourceIds: string[];
 
     targetEvidenceIds: string[];
+
+    compositionExecutionRequirement?:
+        ScientificCompositionExecutionRequirement;
 
     supportCondition:
     string | null;

@@ -1,3 +1,11 @@
+import {
+    cloneScientificCompositionExecutionRequirement
+} from "./ScientificCompositionExecutionRequirement.js";
+
+import type {
+    ScientificCompositionExecutionRequirement,
+    ScientificCompositionExecutionParticipantSource
+} from "./ScientificCompositionExecutionRequirement.js";
 import type {
     AutonomousExperiment
 } from "../autonomous-experiment-design/AutonomousExperiment.js";
@@ -206,6 +214,17 @@ export class ScientificCompositionExperimentAdapter {
             }
 
 
+            const executionRequirementErrors =
+                this.validateCompositionExecutionRequirement(
+                    specification,
+                    sourceById
+                );
+
+            errors.push(
+                ...executionRequirementErrors
+            );
+
+
             for (
                 const sourceId
                 of specification.sourceIds
@@ -281,6 +300,13 @@ export class ScientificCompositionExperimentAdapter {
                 continue;
 
             }
+
+
+            const compositionExecutionRequirement =
+                this.buildCompositionExecutionRequirement(
+                    specification,
+                    sourceById
+                );
 
 
             const recommendedRepositories =
@@ -384,6 +410,11 @@ export class ScientificCompositionExperimentAdapter {
                         ...specification.targetEvidenceIds
                     ],
 
+                compositionExecutionRequirement:
+                    cloneScientificCompositionExecutionRequirement(
+                        compositionExecutionRequirement
+                    ),
+
                 hypothesis:
                     "The composition candidate preserves all observed participant constraints under executable evaluation.",
 
@@ -458,6 +489,407 @@ export class ScientificCompositionExperimentAdapter {
             errors: []
 
         };
+
+    }
+
+
+    private validateCompositionExecutionRequirement(
+        specification:
+            ScientificCompositionEvaluationSpecification,
+        sourceById:
+            Map<
+                string,
+                ScientificCompositionExperimentSource
+            >
+    ): string[] {
+
+        const errors:
+            string[] = [];
+
+        const candidate =
+            specification.candidateSnapshot;
+
+
+        if (
+            candidate ===
+            undefined
+        ) {
+
+            errors.push(
+                `READY composition specification ${specification.specificationId} has no candidate snapshot.`
+            );
+
+            return errors;
+
+        }
+
+
+        if (
+            candidate.candidateId !==
+            specification.candidateId
+        ) {
+
+            errors.push(
+                `Composition specification ${specification.specificationId} candidate snapshot identity does not match candidate id.`
+            );
+
+        }
+
+
+        if (
+            candidate.mechanism !==
+            specification.mechanism
+        ) {
+
+            errors.push(
+                `Composition specification ${specification.specificationId} candidate snapshot mechanism does not match specification mechanism.`
+            );
+
+        }
+
+
+        if (
+            specification.participantAConstraintIds.length ===
+            0
+        ) {
+
+            errors.push(
+                `READY composition specification ${specification.specificationId} has no participant A constraints.`
+            );
+
+        }
+
+
+        if (
+            specification.participantBConstraintIds.length ===
+            0
+        ) {
+
+            errors.push(
+                `READY composition specification ${specification.specificationId} has no participant B constraints.`
+            );
+
+        }
+
+
+        const constraintById =
+            new Map(
+                specification.constraints.map(
+                    constraint => [
+                        constraint.constraintId,
+                        constraint
+                    ] as const
+                )
+            );
+
+
+        if (
+            constraintById.size !==
+            specification.constraints.length
+        ) {
+
+            errors.push(
+                `Composition specification ${specification.specificationId} contains duplicate constraint identities.`
+            );
+
+        }
+
+
+        for (
+            const constraint
+            of specification.constraints
+        ) {
+
+            if (
+                constraint.candidateId !==
+                specification.candidateId
+            ) {
+
+                errors.push(
+                    `Constraint ${constraint.constraintId} does not belong to composition candidate ${specification.candidateId}.`
+                );
+
+            }
+
+
+            if (
+                constraint.sourceRevision ===
+                    undefined ||
+                constraint.sourceRevision.trim().length ===
+                    0
+            ) {
+
+                errors.push(
+                    `Constraint ${constraint.constraintId} has no pinned source revision for composition execution.`
+                );
+
+            }
+
+
+            const expectedParticipant =
+                constraint.participantSide ===
+                    "A"
+                    ? candidate.participantA
+                    : candidate.participantB;
+
+
+            if (
+                constraint.participantKind !==
+                    expectedParticipant.kind ||
+                constraint.participantId !==
+                    expectedParticipant.id
+            ) {
+
+                errors.push(
+                    `Constraint ${constraint.constraintId} participant attribution does not match candidate participant ${constraint.participantSide}.`
+                );
+
+            }
+
+
+            if (
+                !specification.sourceIds.includes(
+                    constraint.sourceId
+                )
+            ) {
+
+                errors.push(
+                    `Constraint ${constraint.constraintId} source ${constraint.sourceId} is not present in the composition specification source set.`
+                );
+
+            }
+
+
+            const source =
+                sourceById.get(
+                    constraint.sourceId
+                );
+
+
+            if (
+                source ===
+                    undefined ||
+                source.repository ===
+                    undefined ||
+                source.repository.trim().length ===
+                    0
+            ) {
+
+                errors.push(
+                    `Constraint ${constraint.constraintId} source ${constraint.sourceId} has no repository attribution for composition execution.`
+                );
+
+            }
+
+        }
+
+
+        for (
+            const constraintId
+            of specification.participantAConstraintIds
+        ) {
+
+            const constraint =
+                constraintById.get(
+                    constraintId
+                );
+
+
+            if (
+                constraint ===
+                    undefined ||
+                constraint.participantSide !==
+                    "A"
+            ) {
+
+                errors.push(
+                    `Participant A constraint identity ${constraintId} is not backed by an exact participant A constraint.`
+                );
+
+            }
+
+        }
+
+
+        for (
+            const constraintId
+            of specification.participantBConstraintIds
+        ) {
+
+            const constraint =
+                constraintById.get(
+                    constraintId
+                );
+
+
+            if (
+                constraint ===
+                    undefined ||
+                constraint.participantSide !==
+                    "B"
+            ) {
+
+                errors.push(
+                    `Participant B constraint identity ${constraintId} is not backed by an exact participant B constraint.`
+                );
+
+            }
+
+        }
+
+
+        return errors;
+
+    }
+
+
+    private buildCompositionExecutionRequirement(
+        specification:
+            ScientificCompositionEvaluationSpecification,
+        sourceById:
+            Map<
+                string,
+                ScientificCompositionExperimentSource
+            >
+    ): ScientificCompositionExecutionRequirement {
+
+        const candidate =
+            specification.candidateSnapshot;
+
+
+        if (
+            candidate ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Composition specification ${specification.specificationId} has no candidate snapshot.`
+            );
+
+        }
+
+
+        const participantSources =
+            new Map<
+                string,
+                ScientificCompositionExecutionParticipantSource
+            >();
+
+
+        for (
+            const constraint
+            of specification.constraints
+        ) {
+
+            const sourceRevision =
+                constraint.sourceRevision;
+
+            const source =
+                sourceById.get(
+                    constraint.sourceId
+                );
+
+
+            if (
+                sourceRevision ===
+                    undefined ||
+                sourceRevision.trim().length ===
+                    0
+            ) {
+
+                throw new Error(
+                    `Constraint ${constraint.constraintId} has no pinned source revision.`
+                );
+
+            }
+
+
+            if (
+                source ===
+                    undefined ||
+                source.repository ===
+                    undefined ||
+                source.repository.trim().length ===
+                    0
+            ) {
+
+                throw new Error(
+                    `Constraint ${constraint.constraintId} has no repository attribution.`
+                );
+
+            }
+
+
+            const binding:
+                ScientificCompositionExecutionParticipantSource = {
+
+                    participantSide:
+                        constraint.participantSide,
+
+                    participantKind:
+                        constraint.participantKind,
+
+                    participantId:
+                        constraint.participantId,
+
+                    sourceId:
+                        constraint.sourceId,
+
+                    sourceRevision,
+
+                    repository:
+                        source.repository
+
+                };
+
+
+            const key =
+                [
+                    binding.participantSide,
+                    binding.participantKind,
+                    binding.participantId,
+                    binding.sourceId,
+                    binding.sourceRevision,
+                    binding.repository
+                ].join("|");
+
+
+            participantSources.set(
+                key,
+                binding
+            );
+
+        }
+
+
+        return cloneScientificCompositionExecutionRequirement({
+
+            requirementId:
+                `SCIENTIFIC-COMPOSITION-EXECUTION-REQUIREMENT-${specification.specificationId}`,
+
+            evaluationSpecificationId:
+                specification.specificationId,
+
+            candidate,
+
+            constraints:
+                specification.constraints,
+
+            participantAConstraintIds:
+                specification.participantAConstraintIds,
+
+            participantBConstraintIds:
+                specification.participantBConstraintIds,
+
+            unresolvedGuardFactIds:
+                specification.unresolvedGuardFactIds,
+
+            participantSources:
+                [
+                    ...participantSources.values()
+                ]
+
+        });
 
     }
 

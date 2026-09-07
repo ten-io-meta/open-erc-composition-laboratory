@@ -1,4 +1,7 @@
 import type {
+    ScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+import type {
     ScientificExperimentOrigin
 } from "../scientific-experiment-queue/ScientificExperimentQueueItem.js";
 
@@ -25,6 +28,9 @@ export interface ScientificExperimentExecutionTask {
     sourceIds: string[];
 
     targetEvidenceIds: string[];
+
+    compositionExecutionRequirement?:
+        ScientificCompositionExecutionRequirement;
 
     title: string;
 
