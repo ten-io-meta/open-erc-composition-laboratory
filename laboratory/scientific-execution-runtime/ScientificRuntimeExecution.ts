@@ -10,6 +10,10 @@ import type {
     ScientificCompositionWorkspaceMaterialization
 } from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterialization.js";
 
+import type {
+    ScientificJointContractHarnessExecution
+} from "../scientific-joint-contract-harness/ScientificJointContractHarness.js";
+
 
 export type ScientificRuntimeExecutionStatus =
     | "SUCCESS"
@@ -17,6 +21,23 @@ export type ScientificRuntimeExecutionStatus =
     | "INCONCLUSIVE"
     | "UNSUPPORTED"
     | "SKIPPED";
+
+
+export interface ScientificCompositionRecipeSelectionSnapshot {
+
+    status:
+        "SELECTED" | "NO_MATCH" | "AMBIGUOUS";
+
+    selectedRegistrationId:
+        string | null;
+
+    matchingRegistrationIds:
+        string[];
+
+    reasons:
+        string[];
+
+}
 
 
 export interface ScientificRuntimeExecution {
@@ -47,45 +68,32 @@ export interface ScientificRuntimeExecution {
     runtime:
         string;
 
-    /*
-     * Joint scientific execution identity.
-     *
-     * Present for COMPOSITION_EXECUTION runtime records.
-     * It is deliberately separate from repository and executable
-     * target identity because a composition is not one repository
-     * or one selected test.
-     */
     compositionExecutionRequirement?:
         ScientificCompositionExecutionRequirement;
 
-    /*
-     * Physical bilateral workspace materialization.
-     *
-     * Presence proves only that OECL attempted the dedicated
-     * composition workspace boundary. MATERIALIZED means both
-     * participant source revisions were pinned atomically.
-     *
-     * It does not mean participant contracts were executed.
-     */
     compositionWorkspaceMaterialization?:
         ScientificCompositionWorkspaceMaterialization;
 
     /*
-     * Concrete repository associated with this runtime
-     * execution when one has been operationally resolved.
+     * Serializable post-discovery operational selection.
      *
-     * COMPOSITION_EXECUTION deliberately keeps this null because
-     * its physical identity spans multiple participant sources.
+     * No buildRecipe function is preserved here.
      */
+    compositionRecipeSelection?:
+        ScientificCompositionRecipeSelectionSnapshot;
+
+    /*
+     * Structured bilateral contract execution evidence.
+     *
+     * Presence proves that a selected recipe entered the generic
+     * joint executor. It does not establish composition polarity.
+     */
+    jointContractHarnessExecution?:
+        ScientificJointContractHarnessExecution;
+
     repository:
         string | null;
 
-    /*
-     * Exact individual executable target selected upstream when
-     * one exists.
-     *
-     * Null is required for joint composition execution boundaries.
-     */
     selectedExecutableTarget:
         ScientificExecutableTargetIdentity | null;
 

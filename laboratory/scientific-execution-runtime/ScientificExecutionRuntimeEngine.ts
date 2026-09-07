@@ -6,6 +6,14 @@ import {
     ScientificCompositionWorkspaceMaterializer
 } from "../scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterializer.js";
 
+import {
+    ScientificJointContractHarnessRecipeSelector
+} from "../scientific-joint-contract-harness/ScientificJointContractHarnessRecipeSelector.js";
+
+import {
+    ScientificJointContractHarnessExecutor
+} from "../scientific-joint-contract-harness/ScientificJointContractHarnessExecutor.js";
+
 import type {
     ScientificExecutionRuntimeOptions
 } from "./ScientificExecutionRuntimeOptions.js";
@@ -936,6 +944,513 @@ if (
             const workspaceMaterialized =
                 workspaceMaterialization.status ===
                 "MATERIALIZED";
+
+
+            /*
+             * =====================================================
+             * POST-DISCOVERY RECIPE SELECTION
+             * =====================================================
+             *
+             * Recipe registration is deliberately external to the
+             * runtime. The candidate and requirement already exist.
+             *
+             * Undefined registrations preserve the historical
+             * workspace-materialization-only behavior.
+             */
+            if (
+                workspaceMaterialized &&
+                runtimeOptions
+                    .compositionRecipeRegistrations !==
+                    undefined
+            ) {
+
+                const selection =
+                    new ScientificJointContractHarnessRecipeSelector()
+                        .select(
+                            requirement,
+                            runtimeOptions
+                                .compositionRecipeRegistrations
+                        );
+
+
+                const selectionSnapshot = {
+
+                    status:
+                        selection.status,
+
+                    selectedRegistrationId:
+                        selection
+                            .selectedRegistration
+                            ?.registrationId ??
+                        null,
+
+                    matchingRegistrationIds: [
+                        ...selection
+                            .matchingRegistrationIds
+                    ],
+
+                    reasons: [
+                        ...selection.reasons
+                    ]
+
+                };
+
+
+                /*
+                 * -------------------------------------------------
+                 * EXACTLY ONE RECIPE
+                 * -------------------------------------------------
+                 */
+                if (
+                    selection.status ===
+                        "SELECTED" &&
+                    selection.selectedRegistration !==
+                        null
+                ) {
+
+                    const jointExecution =
+                        await new ScientificJointContractHarnessExecutor()
+                            .execute(
+                                {
+                                    workspace:
+                                        preservedWorkspace,
+
+                                    recipe:
+                                        selection
+                                            .selectedRegistration
+                                            .buildRecipe()
+                                }
+                            );
+
+
+                    const preservedJointExecution = {
+
+                        ...jointExecution,
+
+                        participantSources:
+                            jointExecution
+                                .participantSources
+                                .map(
+                                    source => ({
+                                        ...source
+                                    })
+                                ),
+
+                        driverReport:
+                            jointExecution.driverReport ===
+                            null
+                                ? null
+                                : {
+
+                                    ...jointExecution
+                                        .driverReport,
+
+                                    participantA: {
+
+                                        ...jointExecution
+                                            .driverReport
+                                            .participantA,
+
+                                        contractAddresses: [
+                                            ...jointExecution
+                                                .driverReport
+                                                .participantA
+                                                .contractAddresses
+                                        ],
+
+                                        transactionHashes: [
+                                            ...jointExecution
+                                                .driverReport
+                                                .participantA
+                                                .transactionHashes
+                                        ]
+
+                                    },
+
+                                    participantB: {
+
+                                        ...jointExecution
+                                            .driverReport
+                                            .participantB,
+
+                                        contractAddresses: [
+                                            ...jointExecution
+                                                .driverReport
+                                                .participantB
+                                                .contractAddresses
+                                        ],
+
+                                        transactionHashes: [
+                                            ...jointExecution
+                                                .driverReport
+                                                .participantB
+                                                .transactionHashes
+                                        ]
+
+                                    },
+
+                                    observations: [
+                                        ...jointExecution
+                                            .driverReport
+                                            .observations
+                                    ]
+
+                                },
+
+                        errors: [
+                            ...jointExecution.errors
+                        ]
+
+                    };
+
+
+                    return {
+
+                        runtimeExecutionId:
+                            this.executionId(
+                                index
+                            ),
+
+                        executionPlanId:
+                            plan.executionPlanId,
+
+                        executionTaskId:
+                            plan.executionTaskId,
+
+                        experimentId:
+                            plan.experimentId,
+
+                        targetId:
+                            plan.targetId,
+
+                        sourceConclusionId:
+                            plan.sourceConclusionId,
+
+                        sourceIds: [
+                            ...(plan.sourceIds ?? [])
+                        ],
+
+                        targetEvidenceIds: [
+                            ...(plan.targetEvidenceIds ?? [])
+                        ],
+
+                        stepId:
+                            step.stepId,
+
+                        stepType:
+                            step.stepType,
+
+                        /*
+                         * Even successful bilateral contract
+                         * execution is not yet composition polarity.
+                         */
+                        status:
+                            "INCONCLUSIVE",
+
+                        runtime:
+                            "OECL_NATIVE_COMPOSITION_JOINT_CONTRACT_EXECUTION",
+
+                        compositionExecutionRequirement:
+                            cloneScientificCompositionExecutionRequirement(
+                                requirement
+                            ),
+
+                        compositionWorkspaceMaterialization:
+                            preservedWorkspace,
+
+                        compositionRecipeSelection:
+                            selectionSnapshot,
+
+                        jointContractHarnessExecution:
+                            preservedJointExecution,
+
+                        repository:
+                            null,
+
+                        selectedExecutableTarget:
+                            null,
+
+                        startedAt:
+                            workspaceStartedAt,
+
+                        finishedAt:
+                            new Date().toISOString(),
+
+                        evidence: [
+
+                            "COMPOSITION_REQUIREMENT_ADMITTED",
+
+                            "COMPOSITION_WORKSPACE_STATUS:MATERIALIZED",
+
+                            (
+                                "COMPOSITION_RECIPE_SELECTION:SELECTED"
+                            ),
+
+                            (
+                                "COMPOSITION_RECIPE_REGISTRATION:" +
+                                selection
+                                    .selectedRegistration
+                                    .registrationId
+                            ),
+
+                            (
+                                "JOINT_CONTRACT_HARNESS_STATUS:" +
+                                jointExecution.status
+                            ),
+
+                            ...(
+                                jointExecution
+                                    .driverReport ===
+                                null
+                                    ? []
+                                    : jointExecution
+                                        .driverReport
+                                        .observations
+                                        .map(
+                                            observation =>
+                                                (
+                                                    "JOINT_OBSERVATION:" +
+                                                    observation
+                                                )
+                                        )
+                            )
+
+                        ],
+
+                        observations:
+                            jointExecution.status ===
+                            "EXECUTED"
+                                ? [
+                                    "Atomic bilateral composition workspace was materialized at exact pinned participant revisions.",
+                                    "Exactly one post-discovery operational recipe was selected.",
+                                    "Both composition participants entered the generic joint contract harness executor.",
+                                    "Bilateral contract execution does not establish composition scientific polarity."
+                                ]
+                                : [
+                                    "Atomic bilateral composition workspace was materialized at exact pinned participant revisions.",
+                                    "Exactly one post-discovery operational recipe was selected.",
+                                    "The selected joint contract harness was rejected before composition polarity evaluation."
+                                ],
+
+                        errors:
+                            jointExecution.status ===
+                            "EXECUTED"
+                                ? []
+                                : [
+                                    ...jointExecution.errors
+                                ],
+
+                        explanation:
+                            jointExecution.status ===
+                            "EXECUTED"
+                                ? (
+                                    "OECL selected exactly one post-discovery operational recipe and executed both composition participants through the generic joint contract harness. The runtime preserves bilateral execution evidence but remains scientifically inconclusive until explicit composition constraints are evaluated."
+                                )
+                                : (
+                                    "OECL selected exactly one post-discovery operational recipe, but the generic joint contract harness rejected execution. No composition polarity was established."
+                                )
+
+                    };
+
+                }
+
+
+                /*
+                 * -------------------------------------------------
+                 * NO EXACT RECIPE
+                 * -------------------------------------------------
+                 *
+                 * This is not a scientific failure. The candidate
+                 * remains valid but currently lacks an executable
+                 * operational recipe.
+                 */
+                if (
+                    selection.status ===
+                    "NO_MATCH"
+                ) {
+
+                    return {
+
+                        runtimeExecutionId:
+                            this.executionId(
+                                index
+                            ),
+
+                        executionPlanId:
+                            plan.executionPlanId,
+
+                        executionTaskId:
+                            plan.executionTaskId,
+
+                        experimentId:
+                            plan.experimentId,
+
+                        targetId:
+                            plan.targetId,
+
+                        sourceConclusionId:
+                            plan.sourceConclusionId,
+
+                        sourceIds: [
+                            ...(plan.sourceIds ?? [])
+                        ],
+
+                        targetEvidenceIds: [
+                            ...(plan.targetEvidenceIds ?? [])
+                        ],
+
+                        stepId:
+                            step.stepId,
+
+                        stepType:
+                            step.stepType,
+
+                        status:
+                            "INCONCLUSIVE",
+
+                        runtime:
+                            "OECL_NATIVE_COMPOSITION_WORKSPACE_MATERIALIZATION",
+
+                        compositionExecutionRequirement:
+                            cloneScientificCompositionExecutionRequirement(
+                                requirement
+                            ),
+
+                        compositionWorkspaceMaterialization:
+                            preservedWorkspace,
+
+                        compositionRecipeSelection:
+                            selectionSnapshot,
+
+                        repository:
+                            null,
+
+                        selectedExecutableTarget:
+                            null,
+
+                        startedAt:
+                            workspaceStartedAt,
+
+                        finishedAt:
+                            new Date().toISOString(),
+
+                        evidence: [
+                            "COMPOSITION_REQUIREMENT_ADMITTED",
+                            "COMPOSITION_WORKSPACE_STATUS:MATERIALIZED",
+                            "COMPOSITION_RECIPE_SELECTION:NO_MATCH"
+                        ],
+
+                        observations: [
+                            "Atomic bilateral composition workspace was materialized at exact pinned participant revisions.",
+                            "No registered operational recipe exactly matched the discovered composition requirement.",
+                            "No participant contracts were executed by a joint recipe."
+                        ],
+
+                        errors:
+                            [],
+
+                        explanation:
+                            "OECL materialized the discovered composition exactly, but no registered post-discovery operational recipe matched it. The result remains scientifically inconclusive."
+
+                    };
+
+                }
+
+
+                /*
+                 * -------------------------------------------------
+                 * AMBIGUOUS RECIPE SET
+                 * -------------------------------------------------
+                 *
+                 * Never pick a recipe by registration order.
+                 */
+                return {
+
+                    runtimeExecutionId:
+                        this.executionId(
+                            index
+                        ),
+
+                    executionPlanId:
+                        plan.executionPlanId,
+
+                    executionTaskId:
+                        plan.executionTaskId,
+
+                    experimentId:
+                        plan.experimentId,
+
+                    targetId:
+                        plan.targetId,
+
+                    sourceConclusionId:
+                        plan.sourceConclusionId,
+
+                    sourceIds: [
+                        ...(plan.sourceIds ?? [])
+                    ],
+
+                    targetEvidenceIds: [
+                        ...(plan.targetEvidenceIds ?? [])
+                    ],
+
+                    stepId:
+                        step.stepId,
+
+                    stepType:
+                        step.stepType,
+
+                    status:
+                        "INCONCLUSIVE",
+
+                    runtime:
+                        "OECL_NATIVE_COMPOSITION_WORKSPACE_MATERIALIZATION",
+
+                    compositionExecutionRequirement:
+                        cloneScientificCompositionExecutionRequirement(
+                            requirement
+                        ),
+
+                    compositionWorkspaceMaterialization:
+                        preservedWorkspace,
+
+                    compositionRecipeSelection:
+                        selectionSnapshot,
+
+                    repository:
+                        null,
+
+                    selectedExecutableTarget:
+                        null,
+
+                    startedAt:
+                        workspaceStartedAt,
+
+                    finishedAt:
+                        new Date().toISOString(),
+
+                    evidence: [
+                        "COMPOSITION_REQUIREMENT_ADMITTED",
+                        "COMPOSITION_WORKSPACE_STATUS:MATERIALIZED",
+                        "COMPOSITION_RECIPE_SELECTION:AMBIGUOUS"
+                    ],
+
+                    observations: [
+                        "Atomic bilateral composition workspace was materialized at exact pinned participant revisions.",
+                        "Multiple operational recipes exactly matched the discovered composition requirement.",
+                        "No recipe was selected and no joint contract harness was executed."
+                    ],
+
+                    errors: [
+                        ...selection.reasons
+                    ],
+
+                    explanation:
+                        "OECL failed closed because multiple post-discovery operational recipes matched the same composition requirement. No arbitrary recipe ordering was used and no composition polarity was established."
+
+                };
+
+            }
 
 
             return {
