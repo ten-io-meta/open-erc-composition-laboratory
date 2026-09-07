@@ -27,10 +27,10 @@ interface PendingFact {
         number;
 
     /*
-     * Declaration facts may span multiple source lines.
+     * Structural facts may span multiple source lines.
      *
-     * Non-declaration facts remain single-line and therefore leave
-     * this absent.
+     * This is used when the complete observable source fragment
+     * extends beyond the line on which the fact begins.
      */
     endLine?:
         number;
@@ -200,6 +200,8 @@ export class SolidityScientificSourceFactExtractor {
                 clean,
                 rawLine,
                 lineNumber,
+                lines,
+                baseLine,
                 pending
             );
 
@@ -812,12 +814,274 @@ export class SolidityScientificSourceFactExtractor {
     }
 
 
+    /*
+     * Recover the complete lexical source fragment for one Solidity
+     * require(...) statement.
+     *
+     * Parenthesis depth is calculated from the sanitized lexical
+     * view so parentheses and semicolons inside comments or quoted
+     * literals cannot terminate the fact prematurely.
+     *
+     * The original unsanitized lines remain the scientific rawText.
+     */
+    private completeRequireStatement(
+        lines:
+            string[],
+        baseLine:
+            number,
+        startLine:
+            number
+    ): {
+        rawText:
+            string;
+
+        endLine:
+            number;
+    } | undefined {
+
+        const startIndex =
+            startLine -
+            baseLine;
+
+
+        if (
+            startIndex <
+                0 ||
+            startIndex >=
+                lines.length
+        ) {
+
+            return undefined;
+
+        }
+
+
+        /*
+         * Reconstruct block-comment state at the exact starting
+         * source line. This makes the helper independent of caller
+         * state while preserving the same lexical rules used by the
+         * main extractor.
+         */
+        let inBlockComment =
+            false;
+
+
+        for (
+            let index =
+                0;
+            index <
+                startIndex;
+            index++
+        ) {
+
+            inBlockComment =
+                this.sanitizeLine(
+                    lines[index],
+                    inBlockComment
+                ).inBlockComment;
+
+        }
+
+
+        const fragments:
+            string[] = [];
+
+        let requireOpened =
+            false;
+
+        let parenthesisDepth =
+            0;
+
+        let callClosed =
+            false;
+
+
+        for (
+            let index =
+                startIndex;
+            index <
+                lines.length;
+            index++
+        ) {
+
+            const rawLine =
+                lines[index];
+
+            fragments.push(
+                rawLine
+            );
+
+
+            const sanitized =
+                this.sanitizeLine(
+                    rawLine,
+                    inBlockComment
+                );
+
+            inBlockComment =
+                sanitized.inBlockComment;
+
+            const code =
+                sanitized.code;
+
+
+            let scanStart =
+                0;
+
+
+            if (
+                !requireOpened
+            ) {
+
+                const requireMatch =
+                    /\brequire\s*\(/.exec(
+                        code
+                    );
+
+
+                if (
+                    !requireMatch
+                ) {
+
+                    return undefined;
+
+                }
+
+
+                scanStart =
+                    requireMatch.index;
+
+            }
+
+
+            for (
+                let characterIndex =
+                    scanStart;
+                characterIndex <
+                    code.length;
+                characterIndex++
+            ) {
+
+                const character =
+                    code[
+                        characterIndex
+                    ];
+
+
+                if (
+                    !requireOpened
+                ) {
+
+                    if (
+                        character ===
+                        "("
+                    ) {
+
+                        requireOpened =
+                            true;
+
+                        parenthesisDepth =
+                            1;
+
+                    }
+
+
+                    continue;
+
+                }
+
+
+                if (
+                    callClosed
+                ) {
+
+                    if (
+                        character ===
+                        ";"
+                    ) {
+
+                        return {
+
+                            rawText:
+                                fragments.join(
+                                    "\n"
+                                ),
+
+                            endLine:
+                                baseLine +
+                                index
+
+                        };
+
+                    }
+
+
+                    continue;
+
+                }
+
+
+                if (
+                    character ===
+                    "("
+                ) {
+
+                    parenthesisDepth++;
+
+                    continue;
+
+                }
+
+
+                if (
+                    character ===
+                    ")"
+                ) {
+
+                    parenthesisDepth--;
+
+
+                    if (
+                        parenthesisDepth <
+                        0
+                    ) {
+
+                        return undefined;
+
+                    }
+
+
+                    if (
+                        parenthesisDepth ===
+                        0
+                    ) {
+
+                        callClosed =
+                            true;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        return undefined;
+
+    }
+
     private extractStatementFacts(
         clean:
             string,
         rawLine:
             string,
         lineNumber:
+            number,
+        lines:
+            string[],
+        baseLine:
             number,
         pending:
             PendingFact[]
@@ -829,12 +1093,22 @@ export class SolidityScientificSourceFactExtractor {
             )
         ) {
 
+            const complete =
+                this.completeRequireStatement(
+                    lines,
+                    baseLine,
+                    lineNumber
+                );
+
+
             this.add(
                 pending,
                 "REQUIRE_STATEMENT",
                 undefined,
                 lineNumber,
-                rawLine
+                complete?.rawText ??
+                    rawLine,
+                complete?.endLine
             );
 
         }
@@ -869,7 +1143,9 @@ export class SolidityScientificSourceFactExtractor {
         line:
             number,
         rawText:
-            string
+            string,
+        endLine?:
+            number
     ): void {
 
         pending.push({
@@ -879,6 +1155,15 @@ export class SolidityScientificSourceFactExtractor {
             symbol,
 
             line,
+
+            ...(
+                endLine !==
+                    undefined
+                    ? {
+                        endLine
+                    }
+                    : {}
+            ),
 
             rawText
 
