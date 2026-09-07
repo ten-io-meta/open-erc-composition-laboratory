@@ -1,3 +1,6 @@
+import {
+    ScientificExecutionSpecificationEngine
+} from "../laboratory/scientific-execution-specification/ScientificExecutionSpecificationEngine.js";
 import assert from "node:assert/strict";
 
 import {
@@ -390,6 +393,87 @@ const plan =
     plans.plans[0];
 
 
+/*
+ * Deliberately provide an individual resolved test target and
+ * executable repository paths.
+ *
+ * A composition specification must ignore all of this and preserve
+ * the structured joint requirement instead.
+ */
+const executionSpecifications =
+    new ScientificExecutionSpecificationEngine()
+        .build(
+            "CAMPAIGN-COMPOSITION-REQUIREMENT",
+            plans,
+            {
+                resolutions: [
+                    {
+                        executionTaskId:
+                            plan.executionTaskId,
+
+                        experimentId:
+                            plan.experimentId,
+
+                        resolutionStatus:
+                            "RESOLVED",
+
+                        repository:
+                            "example/repository-a",
+
+                        selectedExecutableTarget: {
+                            repository:
+                                "example/repository-a",
+
+                            filePath:
+                                "test/IndividualA.t.sol",
+
+                            selector:
+                                "testIndividualA",
+
+                            type:
+                                "TEST",
+
+                            framework:
+                                "FOUNDRY"
+                        },
+
+                        scientificPolarity:
+                            "SUPPORT"
+                    }
+                ]
+            } as any,
+            {
+                "example/repository-a":
+                    "FOUNDRY",
+
+                "example/repository-b":
+                    "HARDHAT"
+            },
+            {
+                "example/repository-a":
+                    "C:/oecl/repository-a",
+
+                "example/repository-b":
+                    "C:/oecl/repository-b"
+            }
+        );
+
+
+const compositionSpecifications =
+    executionSpecifications
+        .specifications
+        .filter(
+            item =>
+                (item as any)
+                    .specificationType ===
+                "COMPOSITION_EXECUTION"
+        );
+
+
+const compositionSpecification =
+    compositionSpecifications[0] as any;
+
+
 console.log("");
 console.log(
     "SCIENTIFIC COMPOSITION EXECUTION REQUIREMENT PROPAGATION"
@@ -688,6 +772,124 @@ await check(
                         "INVARIANT_VALIDATION"
             ),
             false
+        );
+
+    }
+);
+
+await check(
+    "COMPOSITION PLAN MATERIALIZES ONE DEDICATED EXECUTION SPECIFICATION",
+    () => {
+
+        assert.equal(
+            executionSpecifications.errors.length,
+            0
+        );
+
+        assert.equal(
+            compositionSpecifications.length,
+            1
+        );
+
+    }
+);
+
+
+await check(
+    "COMPOSITION SPECIFICATION PRESERVES JOINT REQUIREMENT",
+    () => {
+
+        assert.ok(
+            compositionSpecification
+                .compositionExecutionRequirement
+        );
+
+        assert.equal(
+            compositionSpecification
+                .compositionExecutionRequirement
+                .candidate
+                .candidateId,
+            "CANDIDATE-JOINT-101-202"
+        );
+
+        assert.equal(
+            compositionSpecification
+                .compositionExecutionRequirement
+                .candidate
+                .participantA
+                .id,
+            "ERC-101"
+        );
+
+        assert.equal(
+            compositionSpecification
+                .compositionExecutionRequirement
+                .candidate
+                .participantB
+                .id,
+            "ERC-202"
+        );
+
+        assert.equal(
+            compositionSpecification
+                .compositionExecutionRequirement
+                .candidate
+                .foundationProtocolId,
+            "ERC-721"
+        );
+
+    }
+);
+
+
+await check(
+    "COMPOSITION SPECIFICATION CANNOT COLLAPSE TO INDIVIDUAL EXECUTABLE TARGET",
+    () => {
+
+        assert.equal(
+            compositionSpecification.repository,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification
+                .selectedExecutableTarget,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification
+                .workingDirectory,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification.command,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification
+                .testSelector,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification
+                .invariantSelector,
+            null
+        );
+
+        assert.equal(
+            compositionSpecification
+                .scientificPolarity,
+            "NEUTRAL"
+        );
+
+        assert.equal(
+            compositionSpecification
+                .resolutionStatus,
+            "EXECUTABLE"
         );
 
     }

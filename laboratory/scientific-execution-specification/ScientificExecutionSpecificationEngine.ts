@@ -1,3 +1,6 @@
+import {
+    cloneScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 import type {
     ScientificExecutionTargetResolutionResult
 } from "../scientific-execution-target-resolution/ScientificExecutionTargetResolutionResult.js";
@@ -62,10 +65,143 @@ export class ScientificExecutionSpecificationEngine {
                     if (
                         step.stepType !== "TEST_EXECUTION" &&
                         step.stepType !== "INVARIANT_VALIDATION" &&
-                        step.stepType !== "STATIC_ANALYSIS"
+                        step.stepType !== "STATIC_ANALYSIS" &&
+                        step.stepType !== "COMPOSITION_EXECUTION"
                     ) {
                         continue;
                     }
+
+                    /*
+                     * Composition execution has no single executable
+                     * repository or target. Its physical identity is
+                     * the structured joint requirement already
+                     * established by scientific planning.
+                     *
+                     * Deliberately branch before individual target
+                     * resolution so an available test from participant
+                     * A or B cannot collapse the composition into a
+                     * single-repository execution.
+                     */
+                    if (
+                        step.stepType ===
+                        "COMPOSITION_EXECUTION"
+                    ) {
+
+                        const requirement =
+                            plan.compositionExecutionRequirement;
+
+                        const unresolvedReasons:
+                            string[] =
+                                requirement ===
+                                undefined
+                                    ? [
+                                        "The composition execution plan has no structured joint execution requirement."
+                                    ]
+                                    : [];
+
+
+                        specifications.push({
+
+                            specificationId:
+                                `SCIENTIFIC-EXECUTION-SPECIFICATION-${String(
+                                    counter++
+                                ).padStart(5, "0")}`,
+
+                            experimentId:
+                                plan.experimentId,
+
+                            executionTaskId:
+                                plan.executionTaskId,
+
+                            executionPlanId:
+                                plan.executionPlanId,
+
+                            stepId:
+                                step.stepId,
+
+                            specificationType:
+                                "COMPOSITION_EXECUTION",
+
+                            ...(
+                                requirement !==
+                                undefined
+                                    ? {
+                                        compositionExecutionRequirement:
+                                            cloneScientificCompositionExecutionRequirement(
+                                                requirement
+                                            )
+                                    }
+                                    : {}
+                            ),
+
+                            repository:
+                                null,
+
+                            selectedExecutableTarget:
+                                null,
+
+                            workingDirectory:
+                                null,
+
+                            command:
+                                null,
+
+                            testSelector:
+                                null,
+
+                            invariantSelector:
+                                null,
+
+                            supportCondition:
+                                plan.supportCondition,
+
+                            challengeCondition:
+                                plan.challengeCondition,
+
+                            scientificCriteria:
+                                plan.scientificCriteria,
+
+                            /*
+                             * Planning alone cannot supply scientific
+                             * support or challenge polarity.
+                             *
+                             * Only the dedicated joint runtime may
+                             * later produce explicit composition
+                             * polarity evidence.
+                             */
+                            scientificPolarity:
+                                "NEUTRAL",
+
+                            expectedExitCode:
+                                null,
+
+                            resolutionStatus:
+                                unresolvedReasons.length ===
+                                    0
+                                    ? "EXECUTABLE"
+                                    : "UNRESOLVED",
+
+                            unresolvedReasons,
+
+                            successCriteria:
+                                [
+                                    ...(plan.successCriteria ?? [])
+                                ],
+
+                            failureCriteria:
+                                [
+                                    ...(plan.failureCriteria ?? [])
+                                ],
+
+                            generatedAt:
+                                new Date().toISOString()
+
+                        });
+
+                        continue;
+
+                    }
+
 
                     const unresolvedReasons:
                         string[] = [];
@@ -535,6 +671,15 @@ export class ScientificExecutionSpecificationEngine {
                         return null;
 
                 }
+
+            case "COMPOSITION_EXECUTION":
+
+                /*
+                 * Joint composition execution is not represented by
+                 * one repository command.
+                 */
+                return null;
+
 
             case "STATIC_ANALYSIS":
 

@@ -2,11 +2,16 @@ import type {
     ScientificExecutableTargetIdentity
 } from "../scientific-execution-target-resolution/ScientificExecutableTargetIdentity.js";
 
+import type {
+    ScientificCompositionExecutionRequirement
+} from "../scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
+
 
 export type ScientificExecutionSpecificationType =
     | "TEST_EXECUTION"
     | "INVARIANT_VALIDATION"
-    | "STATIC_ANALYSIS";
+    | "STATIC_ANALYSIS"
+    | "COMPOSITION_EXECUTION";
 
 
 export type ScientificExecutionSpecificationResolutionStatus =
@@ -29,6 +34,15 @@ export interface ScientificExecutionSpecification {
     specificationType:
         ScientificExecutionSpecificationType;
 
+    /*
+     * Joint scientific execution identity.
+     *
+     * Present only for composition execution specifications.
+     * Individual executable identity must never substitute for it.
+     */
+    compositionExecutionRequirement?:
+        ScientificCompositionExecutionRequirement;
+
     repository:
         string | null;
 
@@ -38,6 +52,8 @@ export interface ScientificExecutionSpecification {
      * When present, its repository is authoritative for
      * execution. The scientific targetId remains a separate
      * research identity.
+     *
+     * COMPOSITION_EXECUTION deliberately leaves this null.
      */
     selectedExecutableTarget:
         ScientificExecutableTargetIdentity | null;
@@ -55,10 +71,10 @@ export interface ScientificExecutionSpecification {
         string | null;
 
     supportCondition:
-    string | null;
+        string | null;
 
-challengeCondition:
-    string | null;
+    challengeCondition:
+        string | null;
 
     scientificCriteria?: {
         relation: string;
