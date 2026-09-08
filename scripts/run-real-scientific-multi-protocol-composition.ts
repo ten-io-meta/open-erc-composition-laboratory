@@ -43,6 +43,10 @@ import {
 } from "../laboratory/scientific-composition-participant-expansion/ScientificCompositionParticipantExpansionEngine.js";
 
 import {
+    ScientificCompositionCandidateSetEngine
+} from "../laboratory/scientific-composition-candidate-set/ScientificCompositionCandidateSetEngine.js";
+
+import {
     ScientificDocumentaryCompositionCandidateEngine
 } from "../laboratory/scientific-documentary-composition-candidate/ScientificDocumentaryCompositionCandidateEngine.js";
 
@@ -1169,6 +1173,98 @@ async function main(): Promise<void> {
         "Real N-protocol complementarity",
         complementarity.errors
     );
+
+
+    const compositionCandidateSet =
+        new ScientificCompositionCandidateSetEngine()
+            .build({
+
+                participantIds:
+                    profiles
+                        .map(
+                            profile =>
+                                profile.protocolId
+                        ),
+
+                functionalMatches:
+                    complementarity.matches,
+
+                documentaryCandidates:
+                    documentaryCandidates.candidates
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition candidate set",
+        compositionCandidateSet.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE SET"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `participants:             ${profiles.length}`
+    );
+
+    console.log(
+        `functional candidates:    ${
+            compositionCandidateSet.candidates.filter(
+                candidate =>
+                    candidate.kind ===
+                    "FUNCTIONAL_COMPLEMENTARITY"
+            ).length
+        }`
+    );
+
+    console.log(
+        `documentary candidates:   ${
+            compositionCandidateSet.candidates.filter(
+                candidate =>
+                    candidate.kind ===
+                    "DOCUMENTARY_COMPOSITION"
+            ).length
+        }`
+    );
+
+    console.log(
+        `total candidates:         ${compositionCandidateSet.candidates.length}`
+    );
+
+
+    for (
+        const candidate
+        of compositionCandidateSet.candidates
+    ) {
+
+        if (
+            candidate.kind ===
+            "FUNCTIONAL_COMPLEMENTARITY"
+        ) {
+
+            console.log(
+                `  CANDIDATE ${candidate.sourceParticipantId} -> ${candidate.targetParticipantId} kind=${candidate.kind} need=${candidate.needId} contribution=${candidate.contributionId} evidence=${candidate.evidenceIds.length} status=${candidate.evaluationStatus}`
+            );
+
+        }
+        else {
+
+            console.log(
+                `  CANDIDATE ${candidate.sourceParticipantId} -> ${candidate.targetParticipantId} kind=${candidate.kind} relation=${candidate.relation} evidence=${candidate.evidenceIds.length} status=${candidate.evaluationStatus}`
+            );
+
+        }
+
+    }
 
 
     console.log("");
