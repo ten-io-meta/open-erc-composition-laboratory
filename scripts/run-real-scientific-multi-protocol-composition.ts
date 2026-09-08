@@ -71,6 +71,10 @@ import {
 } from "../laboratory/scientific-n-protocol-composition-solver/ScientificNProtocolCompositionSolverEngine.js";
 
 import {
+    ScientificCompositionVisualizationEngine
+} from "../laboratory/scientific-composition-visualization/ScientificCompositionVisualizationEngine.js";
+
+import {
     ScientificCompositionHarmonyAssessmentEngine
 } from "../laboratory/scientific-composition-harmony/ScientificCompositionHarmonyAssessmentEngine.js";
 
@@ -2055,6 +2059,159 @@ async function main(): Promise<void> {
         candidateEvidenceGaps.errors
     );
 
+
+    const compositionVisualization =
+        new ScientificCompositionVisualizationEngine()
+            .project({
+
+                envelopes:
+                    compositionEnvelopes,
+
+                candidateEvaluationGraph:
+                    candidateEvaluationGraph,
+
+                evidenceGaps:
+                    candidateEvidenceGaps,
+
+                solver:
+                    nProtocolCompositionSolutions,
+
+                globalEvidenceBindings,
+
+                harmony:
+                    compositionHarmony
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition visualization",
+        compositionVisualization.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION VISUALIZATION MODEL"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `visualizations:        ${compositionVisualization.visualizations.length}`
+    );
+
+    console.log(
+        `isolated participants: ${compositionVisualization.isolatedParticipantIds.length}`
+    );
+
+
+    for (
+        const visualization
+        of compositionVisualization.visualizations
+    ) {
+
+        console.log(
+            `  VISUALIZATION ${visualization.projectionStatus}`
+        );
+
+        console.log(
+            `    harmony:        ${visualization.harmonyStatus}`
+        );
+
+        console.log(
+            `    participants:   ${visualization.nodes.map(node => node.participantId).join(", ")}`
+        );
+
+        console.log(
+            `    nodes:          ${visualization.nodes.length}`
+        );
+
+        console.log(
+            `    relations:      ${visualization.relations.length}`
+        );
+
+        console.log(
+            `    configurations: ${visualization.configurations.length}`
+        );
+
+        console.log(
+            `    unresolved needs: ${visualization.unresolvedNeedIds.length}`
+        );
+
+        console.log(
+            `    model basis: ${visualization.modelBasis}`
+        );
+
+
+        for (
+            const relation
+            of visualization.relations
+        ) {
+
+            console.log(
+                `    RELATION ${relation.sourceParticipantId} -> ${relation.targetParticipantId}`
+            );
+
+            console.log(
+                `      kind:          ${relation.kind}`
+            );
+
+            console.log(
+                `      compatibility: ${relation.compatibilityPolarity}`
+            );
+
+            console.log(
+                `      gaps:          ${relation.gapIds.length}`
+            );
+
+            console.log(
+                `      resolution:    ${relation.evidenceResolution}`
+            );
+
+        }
+
+
+        for (
+            const configuration
+            of visualization.configurations
+        ) {
+
+            console.log(
+                `    CONFIGURATION ${configuration.configurationId}`
+            );
+
+            console.log(
+                `      kind:       ${configuration.kind}`
+            );
+
+            console.log(
+                `      readiness:  ${configuration.readiness}`
+            );
+
+            console.log(
+                `      global:     ${configuration.globalStatus}`
+            );
+
+        }
+
+    }
+
+
+    if (
+        compositionVisualization.isolatedParticipantIds.length >
+        0
+    ) {
+
+        console.log(
+            `  ISOLATED: ${compositionVisualization.isolatedParticipantIds.join(", ")}`
+        );
+
+    }
 
     const candidateEvidenceRequirements =
         new ScientificCompositionCandidateEvidenceRequirementEngine()
