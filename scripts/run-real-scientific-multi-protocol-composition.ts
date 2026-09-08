@@ -1,4 +1,16 @@
 import {
+    ScientificTheGraphGatewayProvider
+} from "../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";
+
+import {
+    AGENT0_BASE_MAINNET_SUBGRAPH_ID,
+    ScientificAgent0Erc8004Adapter
+} from "../laboratory/scientific-the-graph-agent0/ScientificAgent0Erc8004Adapter.js";
+
+import {
+    ScientificGitHubTheGraphEvidenceBindingEngine
+} from "../laboratory/scientific-github-the-graph-binding/ScientificGitHubTheGraphEvidenceBindingEngine.js";
+import {
     GitHubAdapter
 } from "../laboratory/github-adapter/GitHubAdapter.js";
 
@@ -2791,6 +2803,410 @@ async function main(): Promise<void> {
 
     const scientificDecisionTraceWithLineage =
         realDecisionTraceLineageBinding.trace;
+
+    /*
+     * =========================================================
+     * REAL ERC-8004 GITHUB <-> THE GRAPH EVIDENCE BINDING
+     * =========================================================
+     *
+     * GitHub remains the normative/source plane.
+     * The Graph supplies live indexed runtime evidence.
+     *
+     * BOUND is operational provenance only.
+     * It does not establish compatibility, SUPPORT, composition
+     * or harmony.
+     */
+
+
+    const theGraphApiKey =
+        process.env.THE_GRAPH_API_KEY
+            ?.trim();
+
+
+    if (
+        theGraphApiKey ===
+            undefined ||
+        theGraphApiKey.length ===
+            0
+    ) {
+
+        throw new Error(
+            "THE_GRAPH_API_KEY is required for real GitHub <-> The Graph evidence binding."
+        );
+
+    }
+
+
+    const erc8004Profiles =
+        profiles.filter(
+            profile =>
+                profile.protocolId ===
+                "ERC-8004"
+        );
+
+
+    if (
+        erc8004Profiles.length !==
+        1
+    ) {
+
+        throw new Error(
+            `Expected exactly one real ERC-8004 profile, found ${erc8004Profiles.length}.`
+        );
+
+    }
+
+
+    const realErc8004Profile =
+        erc8004Profiles[0];
+
+
+    if (
+        realErc8004Profile.sourceRevision ===
+        undefined
+    ) {
+
+        throw new Error(
+            "Real ERC-8004 profile has no pinned GitHub revision."
+        );
+
+    }
+
+
+    const erc8004NormativeSources =
+        sources.filter(
+            source =>
+                source.sourceId ===
+                    realErc8004Profile.sourceId &&
+                source.sourceRevision ===
+                    realErc8004Profile.sourceRevision
+        );
+
+
+    if (
+        erc8004NormativeSources.length !==
+        1
+    ) {
+
+        throw new Error(
+            `Expected exactly one exact ERC-8004 normative source, found ${erc8004NormativeSources.length}.`
+        );
+
+    }
+
+
+    const realAgent0Query =
+        await new ScientificTheGraphGatewayProvider()
+            .query({
+
+                subgraphId:
+                    AGENT0_BASE_MAINNET_SUBGRAPH_ID,
+
+                network:
+                    "base",
+
+                chainId:
+                    "8453",
+
+                apiKey:
+                    theGraphApiKey,
+
+                document:
+                    `
+                    query OECLRealErc8004Binding {
+                        agents(first: 5) {
+                            id
+                            chainId
+                            agentId
+                            owner
+                            agentURI
+                            createdAt
+                            updatedAt
+                            totalFeedback
+                            lastActivity
+                        }
+
+                        _meta {
+                            block {
+                                number
+                                hash
+                            }
+
+                            deployment
+                            hasIndexingErrors
+                        }
+                    }
+                    `,
+
+                variables:
+                    {},
+
+                schemaId:
+                    "AGENT0-ERC8004",
+
+                timeoutMs:
+                    30_000
+
+            });
+
+
+    requireNoErrors(
+        "Real Agent0 The Graph query",
+        realAgent0Query.errors
+    );
+
+
+    if (
+        realAgent0Query.providerMode !==
+        "LIVE"
+    ) {
+
+        throw new Error(
+            "Real Agent0 query did not use LIVE provider mode."
+        );
+
+    }
+
+
+    const realAgent0Evidence =
+        new ScientificAgent0Erc8004Adapter()
+            .adapt(
+                realAgent0Query
+            );
+
+
+    requireNoErrors(
+        "Real Agent0 ERC-8004 adapter",
+        realAgent0Evidence.errors
+    );
+
+
+    if (
+        realAgent0Evidence.graphEvidence ===
+        null
+    ) {
+
+        throw new Error(
+            "Real Agent0 adapter produced no Graph evidence."
+        );
+
+    }
+
+
+    if (
+        realAgent0Evidence.graphEvidence.source
+            ?.providerMode !==
+        "LIVE"
+    ) {
+
+        throw new Error(
+            "Real Agent0 scientific evidence is not marked LIVE."
+        );
+
+    }
+
+
+    if (
+        realAgent0Evidence.graphEvidence.evidence.length ===
+        0
+    ) {
+
+        throw new Error(
+            "Real Agent0 scientific evidence contains zero observations."
+        );
+
+    }
+
+
+    const realGitHubTheGraphBinding =
+        new ScientificGitHubTheGraphEvidenceBindingEngine()
+            .bind({
+
+                profile:
+                    realErc8004Profile,
+
+                normativeSource: {
+
+                    sourceType:
+                        "GITHUB",
+
+                    sourceId:
+                        erc8004NormativeSources[0]
+                            .sourceId,
+
+                    sourceRevision:
+                        erc8004NormativeSources[0]
+                            .sourceRevision
+
+                },
+
+                graphEvidence:
+                    realAgent0Evidence.graphEvidence,
+
+                attribution: {
+
+                    attributionId:
+                        "AGENT0-BASE-MAINNET-ERC8004",
+
+                    adapterId:
+                        "ScientificAgent0Erc8004Adapter",
+
+                    protocolId:
+                        "ERC-8004",
+
+                    attributionBasis:
+                        "EXPLICIT_PROVIDER_ADAPTER_PROTOCOL_ATTRIBUTION",
+
+                    graphProductId:
+                        AGENT0_BASE_MAINNET_SUBGRAPH_ID,
+
+                    network:
+                        "base",
+
+                    chainId:
+                        "8453",
+
+                    requiredProviderMode:
+                        "LIVE"
+
+                }
+
+            });
+
+
+    requireNoErrors(
+        "Real GitHub <-> The Graph ERC-8004 binding",
+        realGitHubTheGraphBinding.errors
+    );
+
+
+    if (
+        realGitHubTheGraphBinding.bindings.length !==
+        1
+    ) {
+
+        throw new Error(
+            `Expected exactly one real GitHub <-> The Graph binding, found ${realGitHubTheGraphBinding.bindings.length}.`
+        );
+
+    }
+
+
+    const realCrossPlaneBinding =
+        realGitHubTheGraphBinding.bindings[0];
+
+
+    if (
+        realCrossPlaneBinding.status !==
+        "BOUND"
+    ) {
+
+        throw new Error(
+            "Real GitHub <-> The Graph evidence was not BOUND."
+        );
+
+    }
+
+
+    if (
+        realCrossPlaneBinding.protocolId !==
+        "ERC-8004"
+    ) {
+
+        throw new Error(
+            "Real cross-plane binding changed protocol identity."
+        );
+
+    }
+
+
+    if (
+        realCrossPlaneBinding.providerMode !==
+        "LIVE"
+    ) {
+
+        throw new Error(
+            "Real cross-plane binding is not backed by LIVE Graph evidence."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL ERC-8004 GITHUB <-> THE GRAPH EVIDENCE BINDING"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `status:               ${realCrossPlaneBinding.status}`
+    );
+
+    console.log(
+        `protocol:             ${realCrossPlaneBinding.protocolId}`
+    );
+
+    console.log(
+        `GitHub source:        ${realCrossPlaneBinding.normativeSourceId}`
+    );
+
+    console.log(
+        `GitHub revision:      ${realCrossPlaneBinding.normativeSourceRevision}`
+    );
+
+    console.log(
+        `Graph product:        ${realCrossPlaneBinding.graphProductId}`
+    );
+
+    console.log(
+        `Graph network:        ${realCrossPlaneBinding.graphNetwork}`
+    );
+
+    console.log(
+        `Graph chainId:        ${realCrossPlaneBinding.graphChainId}`
+    );
+
+    console.log(
+        `Graph provider mode:  ${realCrossPlaneBinding.providerMode}`
+    );
+
+    console.log(
+        `Graph deployment:     ${realCrossPlaneBinding.graphDeploymentId ?? "NOT_EXPOSED"}`
+    );
+
+    console.log(
+        `indexed block:        ${realCrossPlaneBinding.indexedBlockNumber}`
+    );
+
+    console.log(
+        `Graph evidence items: ${realCrossPlaneBinding.evidenceIds.length}`
+    );
+
+    console.log(
+        `binding basis:        ${realCrossPlaneBinding.bindingBasis}`
+    );
+
+
+    console.log("");
+    console.log(
+        "SCIENTIFIC INTERPRETATION"
+    );
+    console.log(
+        "-------------------------"
+    );
+    console.log(
+        "ERC-8004 normative GitHub evidence is now explicitly bound to live indexed Agent0 evidence from The Graph."
+    );
+    console.log(
+        "BOUND is provenance connectivity only; no compatibility, composition, SUPPORT or harmony result is inferred."
+    );
+
+
 
 
     const resolvedLineageCount =
