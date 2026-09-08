@@ -59,6 +59,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
 import {
+    ScientificNProtocolGlobalEvaluationBridgeEngine
+} from "../laboratory/scientific-n-protocol-global-evaluation-bridge/ScientificNProtocolGlobalEvaluationBridgeEngine.js";
+
+import {
     ScientificNProtocolCompositionSolverEngine
 } from "../laboratory/scientific-n-protocol-composition-solver/ScientificNProtocolCompositionSolverEngine.js";
 
@@ -1770,6 +1774,92 @@ async function main(): Promise<void> {
             );
 
         }
+
+    }
+
+    const globalEvaluationTargets =
+        new ScientificNProtocolGlobalEvaluationBridgeEngine()
+            .build({
+
+                solver:
+                    nProtocolCompositionSolutions,
+
+                envelopes:
+                    compositionEnvelopes
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific N-protocol global evaluation bridge",
+        globalEvaluationTargets.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL GLOBAL EVALUATION BRIDGE"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `targets:                ${globalEvaluationTargets.targets.length}`
+    );
+
+    console.log(
+        `blocked configurations: ${globalEvaluationTargets.blockedConfigurationIds.length}`
+    );
+
+
+    for (
+        const target
+        of globalEvaluationTargets.targets
+    ) {
+
+        console.log(
+            `  TARGET ${target.status}`
+        );
+
+        console.log(
+            `    configuration: ${target.configurationId}`
+        );
+
+        console.log(
+            `    participants:  ${target.graph.nodes.map(node => node.participantId).join(", ")}`
+        );
+
+        console.log(
+            `    edges:         ${target.graph.edges.length}`
+        );
+
+        console.log(
+            `    unresolved needs: ${target.graph.unresolvedNeedIds.length}`
+        );
+
+        console.log(
+            `    unresolved objective subjects: ${target.graph.statistics.unresolvedObjectiveSubjects}`
+        );
+
+        console.log(
+            `    graph polarity: ${target.graph.scientificPolarity}`
+        );
+
+    }
+
+
+    for (
+        const configurationId
+        of globalEvaluationTargets.blockedConfigurationIds
+    ) {
+
+        console.log(
+            `  BLOCKED ${configurationId}`
+        );
 
     }
 
