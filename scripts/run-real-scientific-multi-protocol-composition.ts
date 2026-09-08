@@ -63,6 +63,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evaluation-graph/ScientificCompositionCandidateEvaluationGraphEngine.js";
 
 import {
+    ScientificNProtocolCompositionSetEngine
+} from "../laboratory/scientific-n-protocol-composition-set/ScientificNProtocolCompositionSetEngine.js";
+
+import {
     ScientificCompositionCandidateGraphEngine
 } from "../laboratory/scientific-composition-candidate-graph/ScientificCompositionCandidateGraphEngine.js";
 
@@ -1382,6 +1386,98 @@ async function main(): Promise<void> {
 
         throw new Error(
             "Real scientific composition candidate graph unexpectedly returned null."
+        );
+
+    }
+
+
+    const nProtocolCompositionSets =
+        new ScientificNProtocolCompositionSetEngine()
+            .build({
+
+                candidateGraph:
+                    compositionCandidateGraph
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific N-protocol composition sets",
+        nProtocolCompositionSets.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL COMPOSITION SETS"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `candidate graph participants: ${nProtocolCompositionSets.statistics.candidateGraphParticipants}`
+    );
+
+    console.log(
+        `candidate graph relations:    ${nProtocolCompositionSets.statistics.candidateGraphRelations}`
+    );
+
+    console.log(
+        `composition sets:             ${nProtocolCompositionSets.statistics.compositionSets}`
+    );
+
+    console.log(
+        `participants in sets:         ${nProtocolCompositionSets.statistics.participantsInCompositionSets}`
+    );
+
+    console.log(
+        `isolated participants:        ${nProtocolCompositionSets.statistics.isolatedParticipants}`
+    );
+
+    console.log(
+        `largest composition set:      ${nProtocolCompositionSets.statistics.largestCompositionSet}`
+    );
+
+
+    for (
+        const set
+        of nProtocolCompositionSets.sets
+    ) {
+
+        console.log(
+            `  SET participants=${set.participantIds.length} relations=${set.relations.length} status=${set.status}`
+        );
+
+        console.log(
+            `    participants: ${set.participantIds.join(", ")}`
+        );
+
+
+        for (
+            const relation
+            of set.relations
+        ) {
+
+            console.log(
+                `    RELATION ${relation.sourceParticipantId} -> ${relation.targetParticipantId} kind=${relation.kind} evidence=${relation.evidenceIds.length}`
+            );
+
+        }
+
+    }
+
+
+    if (
+        nProtocolCompositionSets.isolatedParticipantIds.length >
+        0
+    ) {
+
+        console.log(
+            `  ISOLATED: ${nProtocolCompositionSets.isolatedParticipantIds.join(", ")}`
         );
 
     }
