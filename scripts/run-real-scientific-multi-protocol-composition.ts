@@ -71,6 +71,10 @@ import {
 } from "../laboratory/scientific-n-protocol-composition-solver/ScientificNProtocolCompositionSolverEngine.js";
 
 import {
+    ScientificDecisionTraceEngine
+} from "../laboratory/scientific-decision-trace/ScientificDecisionTraceEngine.js";
+
+import {
     ScientificCompositionVisualizationEngine
 } from "../laboratory/scientific-composition-visualization/ScientificCompositionVisualizationEngine.js";
 
@@ -2210,6 +2214,269 @@ async function main(): Promise<void> {
         console.log(
             `  ISOLATED: ${compositionVisualization.isolatedParticipantIds.join(", ")}`
         );
+
+    }
+
+    const scientificDecisionTrace =
+        new ScientificDecisionTraceEngine()
+            .trace({
+
+                observations:
+                    sources.flatMap(
+                        source =>
+                            source.github.sourceObservations
+                    ),
+
+                facts:
+                    sources.flatMap(
+                        source =>
+                            source.github.sourceFacts
+                    ),
+
+                protocolRelationEvidence:
+                    documentaryRelations,
+
+                profiles,
+
+                candidateEvaluationGraph,
+
+                evidenceGaps:
+                    candidateEvidenceGaps,
+
+                solver:
+                    nProtocolCompositionSolutions,
+
+                globalEvidenceBindings,
+
+                harmony:
+                    compositionHarmony
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific decision trace",
+        scientificDecisionTrace.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC DECISION TRACE"
+    );
+    console.log(
+        "============================================================"
+    );
+
+
+    const githubTraceEvidence =
+        scientificDecisionTrace.evidenceCatalog
+            .filter(
+                evidence =>
+                    evidence.sourceType
+                        .toUpperCase()
+                        .includes(
+                            "GITHUB"
+                        )
+            );
+
+
+    console.log(
+        `source evidence catalog: ${scientificDecisionTrace.evidenceCatalog.length}`
+    );
+
+    console.log(
+        `GitHub provenance:       ${githubTraceEvidence.length}`
+    );
+
+    console.log(
+        `participant artifacts:   ${scientificDecisionTrace.participantArtifacts.length}`
+    );
+
+    console.log(
+        `candidate traces:        ${scientificDecisionTrace.candidateTraces.length}`
+    );
+
+    console.log(
+        `composition traces:      ${scientificDecisionTrace.compositionTraces.length}`
+    );
+
+    console.log(
+        `unresolved evidence:     ${scientificDecisionTrace.unresolvedEvidenceIds.length}`
+    );
+
+
+    for (
+        const candidateTrace
+        of scientificDecisionTrace.candidateTraces
+    ) {
+
+        console.log("");
+        console.log(
+            `  CANDIDATE ${candidateTrace.sourceParticipantId} -> ${candidateTrace.targetParticipantId}`
+        );
+
+        console.log(
+            `    kind:          ${candidateTrace.candidateKind}`
+        );
+
+        console.log(
+            `    compatibility: ${candidateTrace.compatibilityPolarity}`
+        );
+
+        console.log(
+            `    known boundaries: ${candidateTrace.knownBoundaryIds.length}`
+        );
+
+        console.log(
+            `    observed boundaries: ${candidateTrace.observedBoundaryIds.length}`
+        );
+
+        console.log(
+            `    gaps: ${candidateTrace.gapIds.length}`
+        );
+
+        console.log(
+            `    resolved evidence: ${candidateTrace.resolvedEvidenceIds.length}`
+        );
+
+        console.log(
+            `    unresolved evidence: ${candidateTrace.unresolvedEvidenceIds.length}`
+        );
+
+        console.log(
+            `    why: ${candidateTrace.reasonCodes.join(", ")}`
+        );
+
+
+        const discoveryEvidence =
+            candidateTrace.discoveryEvidenceIds
+                .map(
+                    evidenceId =>
+                        scientificDecisionTrace.evidenceCatalog
+                            .find(
+                                evidence =>
+                                    evidence.evidenceId ===
+                                    evidenceId
+                            )
+                )
+                .filter(
+                    evidence =>
+                        evidence !==
+                        undefined
+                );
+
+
+        for (
+            const evidence
+            of discoveryEvidence
+        ) {
+
+            console.log(
+                `    SOURCE ${evidence!.sourceType}`
+            );
+
+            console.log(
+                `      source:   ${evidence!.sourceLocation}`
+            );
+
+            console.log(
+                `      revision: ${evidence!.sourceRevision ?? "NONE"}`
+            );
+
+            console.log(
+                `      file:     ${evidence!.filePath ?? "NONE"}`
+            );
+
+            console.log(
+                `      lines:    ${
+                    evidence!.startLine !== undefined
+                        ? `${evidence!.startLine}-${evidence!.endLine ?? evidence!.startLine}`
+                        : "NONE"
+                }`
+            );
+
+            console.log(
+                `      evidence: ${evidence!.evidenceId}`
+            );
+
+        }
+
+    }
+
+
+    for (
+        const compositionTrace
+        of scientificDecisionTrace.compositionTraces
+    ) {
+
+        console.log("");
+        console.log(
+            `  COMPOSITION ${compositionTrace.harmonyStatus}`
+        );
+
+        console.log(
+            `    participants: ${compositionTrace.participantIds.join(", ")}`
+        );
+
+        console.log(
+            `    solver: ${compositionTrace.solverResolutionStatus}`
+        );
+
+        console.log(
+            `    configurations: ${compositionTrace.configurations.length}`
+        );
+
+        console.log(
+            `    why: ${compositionTrace.reasonCodes.join(", ")}`
+        );
+
+        console.log(
+            `    basis: ${compositionTrace.decisionBasis}`
+        );
+
+    }
+
+
+    if (
+        scientificDecisionTrace.unresolvedEvidenceIds.length >
+        0
+    ) {
+
+        console.log("");
+        console.log(
+            "  UNRESOLVED PROVENANCE"
+        );
+
+        for (
+            const evidenceId
+            of scientificDecisionTrace.unresolvedEvidenceIds
+                .slice(
+                    0,
+                    20
+                )
+        ) {
+
+            console.log(
+                `    ${evidenceId}`
+            );
+
+        }
+
+
+        if (
+            scientificDecisionTrace.unresolvedEvidenceIds.length >
+            20
+        ) {
+
+            console.log(
+                `    ... ${scientificDecisionTrace.unresolvedEvidenceIds.length - 20} more`
+            );
+
+        }
 
     }
 
