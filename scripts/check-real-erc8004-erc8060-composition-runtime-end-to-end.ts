@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 
 import {
     mkdtemp,
+    readFile,
     rm
 } from "node:fs/promises";
 
@@ -28,6 +29,8 @@ import type {
 import {
     ScientificExecutionRuntimeEngine
 } from "../laboratory/scientific-execution-runtime/ScientificExecutionRuntimeEngine.js";
+
+import type {     ScientificSourceObservation } from "../laboratory/scientific-source-observation/ScientificSourceObservation.js";  import {     SolidityScientificSourceFactExtractor } from "../laboratory/scientific-source-fact/SolidityScientificSourceFactExtractor.js";  import {     ScientificSemanticDerivationEngine } from "../laboratory/scientific-semantic-derivation/ScientificSemanticDerivationEngine.js";  import {     ScientificCapabilityAttributionEngine } from "../laboratory/scientific-capability-attribution/ScientificCapabilityAttributionEngine.js";  import {     ScientificProtocolIdentityAttributionEngine } from "../laboratory/scientific-protocol-identity/ScientificProtocolIdentityAttributionEngine.js";  import {     ScientificProtocolExternalCallAttributionEngine } from "../laboratory/scientific-protocol-identity/ScientificProtocolExternalCallAttributionEngine.js";  import {     ScientificStructuralProtocolRelationEvidenceEngine } from "../laboratory/scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidenceEngine.js";  import {     ScientificSolidityInheritanceGraphEngine } from "../laboratory/scientific-solidity-inheritance/ScientificSolidityInheritanceGraphEngine.js";  import {     ScientificProtocolBehaviorReachabilityEngine } from "../laboratory/scientific-protocol-behavior-reachability/ScientificProtocolBehaviorReachabilityEngine.js";  import {     ScientificCrossProtocolInteractionHypothesisEngine } from "../laboratory/scientific-cross-protocol-interaction-hypothesis/ScientificCrossProtocolInteractionHypothesisEngine.js";  import {     ScientificInteractionShadowValidationEngine } from "../laboratory/scientific-interaction-shadow-validation/ScientificInteractionShadowValidationEngine.js";
 
 import {
     buildErc8004Erc8060ControlRegistration,
@@ -88,6 +91,568 @@ async function check(
 
 }
 
+
+async function buildRealSourceInteractionHypotheses(
+    requirement:
+        ScientificCompositionExecutionRequirement,
+    sourceAPath:
+        string,
+    sourceBPath:
+        string
+) {
+
+    const sourceIdA =
+        "GITHUB-ERC-8004-ERC-8004-CONTRACTS";
+
+    const sourceIdB =
+        "GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE";
+
+    const dependencySourceId =
+        "NPM-OPENZEPPELIN-CONTRACTS";
+
+    const dependencyRevision =
+        "4.9.6";
+
+
+    const relativePathA =
+        "contracts/IdentityRegistryUpgradeable.sol";
+
+    const relativePathB =
+        "contracts/ERC8060Reference.sol";
+
+    const uriStorageRelativePath =
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
+    const erc721RelativePath =
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+
+    const absolutePathA =
+        join(
+            sourceAPath,
+            relativePathA
+        );
+
+    const absolutePathB =
+        join(
+            sourceBPath,
+            relativePathB
+        );
+
+    const uriStoragePath =
+        join(
+            sourceBPath,
+            uriStorageRelativePath
+        );
+
+    const erc721Path =
+        join(
+            sourceBPath,
+            erc721RelativePath
+        );
+
+    const dependencyPackagePath =
+        join(
+            sourceBPath,
+            "node_modules",
+            "@openzeppelin",
+            "contracts",
+            "package.json"
+        );
+
+
+    const [
+        sourceA,
+        sourceB,
+        uriStorageSource,
+        erc721Source,
+        dependencyPackageText
+    ] =
+        await Promise.all([
+            readFile(
+                absolutePathA,
+                "utf8"
+            ),
+            readFile(
+                absolutePathB,
+                "utf8"
+            ),
+            readFile(
+                uriStoragePath,
+                "utf8"
+            ),
+            readFile(
+                erc721Path,
+                "utf8"
+            ),
+            readFile(
+                dependencyPackagePath,
+                "utf8"
+            )
+        ]);
+
+
+    const dependencyPackage =
+        JSON.parse(
+            dependencyPackageText
+        ) as {
+            version?:
+                string;
+        };
+
+
+    if (
+        dependencyPackage.version !==
+        dependencyRevision
+    ) {
+
+        throw new Error(
+            `Real source interaction hypothesis control expected OpenZeppelin ${dependencyRevision}, observed ${dependencyPackage.version ?? "UNKNOWN"}.`
+        );
+
+    }
+
+
+    const lineCount =
+        (
+            value:
+                string
+        ): number =>
+            value
+                .replace(
+                    /\r\n/g,
+                    "\n"
+                )
+                .split(
+                    "\n"
+                )
+                .length;
+
+
+    const makeObservation =
+        (
+            observationId:
+                string,
+            sourceId:
+                string,
+            sourceRevision:
+                string,
+            sourceType:
+                string,
+            sourceLocation:
+                string,
+            filePath:
+                string,
+            rawText:
+                string
+        ): ScientificSourceObservation => ({
+
+            observationId,
+
+            sourceId,
+
+            sourceType,
+
+            sourceRevision,
+
+            kind:
+                "CONTRACT_SOURCE",
+
+            locator: {
+
+                sourceLocation,
+
+                filePath,
+
+                startLine:
+                    1,
+
+                endLine:
+                    lineCount(
+                        rawText
+                    )
+
+            },
+
+            rawText
+
+        });
+
+
+    const observationA =
+        makeObservation(
+            "REAL-E2E-SOURCE-HYPOTHESIS-ERC8004",
+            sourceIdA,
+            ERC8004_CONTROL_REVISION,
+            "GITHUB",
+            absolutePathA,
+            relativePathA,
+            sourceA
+        );
+
+    const observationB =
+        makeObservation(
+            "REAL-E2E-SOURCE-HYPOTHESIS-ERC8060",
+            sourceIdB,
+            ERC8060_CONTROL_REVISION,
+            "GITHUB",
+            absolutePathB,
+            relativePathB,
+            sourceB
+        );
+
+    const uriStorageObservation =
+        makeObservation(
+            "REAL-E2E-SOURCE-HYPOTHESIS-OZ-URI-STORAGE",
+            dependencySourceId,
+            dependencyRevision,
+            "NPM_PACKAGE",
+            uriStoragePath,
+            uriStorageRelativePath,
+            uriStorageSource
+        );
+
+    const erc721Observation =
+        makeObservation(
+            "REAL-E2E-SOURCE-HYPOTHESIS-OZ-ERC721",
+            dependencySourceId,
+            dependencyRevision,
+            "NPM_PACKAGE",
+            erc721Path,
+            erc721RelativePath,
+            erc721Source
+        );
+
+
+    const extractor =
+        new SolidityScientificSourceFactExtractor();
+
+
+    const factsA =
+        extractor.extract(
+            observationA
+        );
+
+    const factsB =
+        extractor.extract(
+            observationB
+        );
+
+    const uriStorageFacts =
+        extractor.extract(
+            uriStorageObservation
+        );
+
+    const erc721Facts =
+        extractor.extract(
+            erc721Observation
+        );
+
+
+    const callsA =
+        new ScientificProtocolExternalCallAttributionEngine()
+            .attribute({
+
+                sourceId:
+                    sourceIdA,
+
+                sourceRevision:
+                    ERC8004_CONTROL_REVISION,
+
+                facts:
+                    factsA,
+
+                observations: [
+                    observationA
+                ]
+
+            });
+
+
+    if (
+        callsA.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E ERC8004 external call attribution failed:",
+                ...callsA.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    /*
+     * Participant B protocol identity is independently reconstructed
+     * from its own pinned source. This is required before its exact
+     * structural ERC-family dependency can be used as reachability
+     * evidence.
+     */
+    const semanticB =
+        new ScientificSemanticDerivationEngine()
+            .derive({
+
+                sourceId:
+                    sourceIdB,
+
+                sourceRevision:
+                    ERC8060_CONTROL_REVISION,
+
+                facts:
+                    factsB
+
+            });
+
+
+    const capabilityAttributionB =
+        new ScientificCapabilityAttributionEngine()
+            .attribute({
+
+                derivation:
+                    semanticB,
+
+                facts:
+                    factsB
+
+            });
+
+
+    const identityB =
+        new ScientificProtocolIdentityAttributionEngine()
+            .attribute({
+
+                attribution:
+                    capabilityAttributionB,
+
+                observations: [
+                    observationB
+                ]
+
+            });
+
+
+    const pipelineErrorsB =
+        [
+            ...semanticB.errors,
+            ...capabilityAttributionB.errors,
+            ...identityB.errors
+        ];
+
+
+    if (
+        pipelineErrorsB.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E ERC8060 protocol identity pipeline failed:",
+                ...pipelineErrorsB
+            ].join("\n")
+        );
+
+    }
+
+
+    const structuralRelationsB =
+        new ScientificStructuralProtocolRelationEvidenceEngine()
+            .extract({
+
+                sourceId:
+                    sourceIdB,
+
+                sourceRevision:
+                    ERC8060_CONTROL_REVISION,
+
+                facts:
+                    factsB,
+
+                protocolAttributedCapabilities:
+                    identityB.protocolAttributedCapabilities
+
+            });
+
+
+    if (
+        structuralRelationsB.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E ERC8060 structural relation extraction failed:",
+                ...structuralRelationsB.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    const uriStorageRelations =
+        structuralRelationsB
+            .relations
+            .filter(
+                relation =>
+                    relation.subjectProtocolId ===
+                        "ERC-8060" &&
+                    relation.relation ===
+                        "DEPENDS_ON" &&
+                    relation.objectProtocolId ===
+                        "ERC-721" &&
+                    relation.inheritedSymbol ===
+                        "ERC721URIStorage"
+            );
+
+
+    if (
+        uriStorageRelations.length !==
+        1
+    ) {
+
+        throw new Error(
+            `Real E2E expected exactly one ERC8060 -> ERC721 dependency anchored by ERC721URIStorage; observed ${uriStorageRelations.length}.`
+        );
+
+    }
+
+
+    const dependencyCalls =
+        new ScientificProtocolExternalCallAttributionEngine()
+            .attribute({
+
+                sourceId:
+                    dependencySourceId,
+
+                sourceRevision:
+                    dependencyRevision,
+
+                facts:
+                    erc721Facts,
+
+                observations: [
+                    erc721Observation
+                ]
+
+            });
+
+
+    if (
+        dependencyCalls.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E ERC721 external call attribution failed:",
+                ...dependencyCalls.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    const inheritanceGraph =
+        new ScientificSolidityInheritanceGraphEngine()
+            .build({
+
+                facts: [
+                    ...factsB,
+                    ...uriStorageFacts,
+                    ...erc721Facts
+                ]
+
+            });
+
+
+    if (
+        inheritanceGraph.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E Solidity inheritance graph failed:",
+                ...inheritanceGraph.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    const reachableB =
+        new ScientificProtocolBehaviorReachabilityEngine()
+            .evaluate({
+
+                inheritanceGraph,
+
+                structuralRelations:
+                    uriStorageRelations,
+
+                protocolAttributedExternalCalls:
+                    dependencyCalls.protocolAttributedExternalCalls
+
+            });
+
+
+    if (
+        reachableB.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E ERC8060 behavior reachability failed:",
+                ...reachableB.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    const hypotheses =
+        new ScientificCrossProtocolInteractionHypothesisEngine()
+            .generate({
+
+                /*
+                 * This is the candidate emitted by the real autonomous
+                 * cross-protocol discovery runner used to build the
+                 * execution requirement. No pair is constructed here.
+                 */
+                candidates: [
+                    requirement.candidate
+                ],
+
+                protocolAttributedExternalCalls: [
+                    ...callsA.protocolAttributedExternalCalls,
+                    ...dependencyCalls.protocolAttributedExternalCalls
+                ],
+
+                reachableBehaviors:
+                    reachableB.reachableBehaviors
+
+            });
+
+
+    if (
+        hypotheses.errors.length >
+        0
+    ) {
+
+        throw new Error(
+            [
+                "Real E2E interaction hypothesis generation failed:",
+                ...hypotheses.errors
+            ].join("\n")
+        );
+
+    }
+
+
+    return hypotheses;
+
+}
 
 async function loadRealRequirement():
     Promise<ScientificCompositionExecutionRequirement> {
@@ -477,6 +1042,8 @@ try {
 
     const requirement =
         await loadRealRequirement();
+
+    const sourceHypothesisResult =         await buildRealSourceInteractionHypotheses(             requirement,             sourceAPath,             sourceBPath         );
 
 
     await check(
@@ -2137,6 +2704,226 @@ try {
 
             assert.equal(
                 evaluation.scientificPolarity,
+                "SUPPORT"
+            );
+
+        }
+    );
+
+    await check(
+        "REAL AUTONOMOUS SOURCE HYPOTHESES MATCH PHYSICAL BIDIRECTIONAL RUNTIME",
+        () => {
+
+            assert.deepEqual(
+                sourceHypothesisResult.errors,
+                []
+            );
+
+
+            assert.equal(
+                sourceHypothesisResult.hypotheses.length,
+                2
+            );
+
+
+            const aToB =
+                sourceHypothesisResult
+                    .hypotheses
+                    .find(
+                        hypothesis =>
+                            hypothesis.sourceParticipantProtocolId ===
+                                "ERC-8004" &&
+                            hypothesis.hypothesizedTargetParticipantProtocolId ===
+                                "ERC-8060"
+                    );
+
+
+            const bToA =
+                sourceHypothesisResult
+                    .hypotheses
+                    .find(
+                        hypothesis =>
+                            hypothesis.sourceParticipantProtocolId ===
+                                "ERC-8060" &&
+                            hypothesis.hypothesizedTargetParticipantProtocolId ===
+                                "ERC-8004"
+                    );
+
+
+            assert.ok(
+                aToB
+            );
+
+            assert.ok(
+                bToA
+            );
+
+
+            assert.equal(
+                aToB.externalCall.callForm,
+                "LOW_LEVEL_STATICCALL"
+            );
+
+
+            assert.equal(
+                bToA.externalCall.callForm,
+                "CAST_MEMBER_CALL"
+            );
+
+
+            const driverReport =
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.driverReport;
+
+
+            assert.ok(
+                driverReport
+            );
+
+
+            const runtimeInteractions =
+                driverReport
+                    .crossProtocolInteractionObservations ??
+                [];
+
+
+            assert.equal(
+                runtimeInteractions.length,
+                2
+            );
+
+
+            const shadow =
+                new ScientificInteractionShadowValidationEngine()
+                    .validate({
+
+                        hypotheses:
+                            sourceHypothesisResult.hypotheses,
+
+                        observations:
+                            runtimeInteractions
+
+                    });
+
+
+            assert.deepEqual(
+                shadow.errors,
+                []
+            );
+
+            assert.equal(
+                shadow.validations.length,
+                2
+            );
+
+            assert.deepEqual(
+                shadow.unmatchedHypothesisIds,
+                []
+            );
+
+            assert.deepEqual(
+                shadow.unmatchedObservationIds,
+                []
+            );
+
+            assert.deepEqual(
+                shadow.ambiguousDirectionKeys,
+                []
+            );
+
+
+            const validatedAToB =
+                shadow.validations.find(
+                    validation =>
+                        validation.hypothesisId ===
+                            aToB.hypothesisId
+                );
+
+
+            const validatedBToA =
+                shadow.validations.find(
+                    validation =>
+                        validation.hypothesisId ===
+                            bToA.hypothesisId
+                );
+
+
+            assert.ok(
+                validatedAToB
+            );
+
+            assert.ok(
+                validatedBToA
+            );
+
+
+            assert.equal(
+                validatedAToB.directionStatus,
+                "OBSERVED"
+            );
+
+            assert.equal(
+                validatedAToB.predictedCallKind,
+                "STATICCALL"
+            );
+
+            assert.equal(
+                validatedAToB.observedCallKind,
+                "STATICCALL"
+            );
+
+            assert.equal(
+                validatedAToB.callKindAssessment,
+                "CONFIRMED"
+            );
+
+
+            assert.equal(
+                validatedBToA.directionStatus,
+                "OBSERVED"
+            );
+
+            /*
+             * CAST_MEMBER_CALL deliberately does not claim an EVM
+             * opcode from source syntax.
+             */
+            assert.equal(
+                validatedBToA.predictedCallKind,
+                undefined
+            );
+
+            assert.equal(
+                validatedBToA.observedCallKind,
+                "CALL"
+            );
+
+            assert.equal(
+                validatedBToA.callKindAssessment,
+                "SOURCE_CALL_KIND_NOT_DETERMINED"
+            );
+
+
+            /*
+             * Matching source hypotheses to physical runtime does not
+             * change the global scientific conclusion.
+             */
+            assert.equal(
+                execution
+                    ?.jointContractHarnessExecution
+                    ?.scientificPolarity,
+                "NEUTRAL"
+            );
+
+            assert.equal(
+                execution?.status,
+                "INCONCLUSIVE"
+            );
+
+            assert.equal(
+                execution
+                    ?.compositionConstraintEvaluation
+                    ?.scientificPolarity,
                 "SUPPORT"
             );
 
