@@ -75,6 +75,18 @@ import {
 } from "../laboratory/scientific-decision-trace/ScientificDecisionTraceEngine.js";
 
 import {
+    ScientificDecisionTraceLineageBindingEngine
+} from "../laboratory/scientific-decision-trace/ScientificDecisionTraceLineageBindingEngine.js";
+
+import {
+    ScientificEvidenceLineageEngine
+} from "../laboratory/scientific-evidence-lineage/ScientificEvidenceLineageEngine.js";
+
+import type {
+    ScientificEvidenceLineageDerivedLink
+} from "../laboratory/scientific-evidence-lineage/ScientificEvidenceLineage.js";
+
+import {
     ScientificCompositionVisualizationEngine
 } from "../laboratory/scientific-composition-visualization/ScientificCompositionVisualizationEngine.js";
 
@@ -2474,6 +2486,426 @@ async function main(): Promise<void> {
 
             console.log(
                 `    ... ${scientificDecisionTrace.unresolvedEvidenceIds.length - 20} more`
+            );
+
+        }
+
+    }
+
+    /*
+     * ---------------------------------------------------------
+     * REAL STRUCTURED EVIDENCE LINEAGE
+     * ---------------------------------------------------------
+     *
+     * This layer does not derive scientific polarity.
+     * It resolves derivation identities back to source evidence
+     * using explicit structured parent references only.
+     */
+
+    const derivedEvidenceLinks:
+        ScientificEvidenceLineageDerivedLink[] =
+        sources.flatMap(
+            source => [
+
+                ...source.semantic.model.capabilities
+                    .map(
+                        capability => ({
+
+                            evidenceId:
+                                capability.capabilityId,
+
+                            kind:
+                                "SEMANTIC_CAPABILITY" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds:
+                                [...capability.evidence]
+
+                        })
+                    ),
+
+                ...source.capabilityAttribution
+                    .attributedCapabilities
+                    .map(
+                        attribution => ({
+
+                            evidenceId:
+                                attribution.attributionId,
+
+                            kind:
+                                "CAPABILITY_ATTRIBUTION" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds: [
+                                attribution.capabilityId,
+                                attribution.observationId,
+                                ...attribution.evidence
+                            ]
+
+                        })
+                    ),
+
+                ...source.protocolIdentity
+                    .protocolAttributedCapabilities
+                    .map(
+                        attribution => ({
+
+                            evidenceId:
+                                attribution.protocolAttributionId,
+
+                            kind:
+                                "PROTOCOL_ATTRIBUTION" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds: [
+                                attribution.capabilityAttributionId,
+                                attribution.capabilityId,
+                                attribution.observationId,
+                                ...attribution.evidence
+                            ]
+
+                        })
+                    ),
+
+                ...source.protocolConcepts
+                    .protocolConcepts
+                    .map(
+                        concept => ({
+
+                            evidenceId:
+                                concept.protocolConceptId,
+
+                            kind:
+                                "PROTOCOL_CONCEPT" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds: [
+                                ...concept.protocolAttributionIds,
+                                ...concept.lexicalCapabilityIds,
+                                ...concept.evidence
+                            ]
+
+                        })
+                    ),
+
+                ...source.structuralRelations
+                    .relations
+                    .map(
+                        relation => ({
+
+                            evidenceId:
+                                relation.relationEvidenceId,
+
+                            kind:
+                                "STRUCTURAL_PROTOCOL_RELATION" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds: [
+                                relation.factId,
+                                relation.observationId
+                            ]
+
+                        })
+                    ),
+
+                ...source.externalCalls
+                    .protocolAttributedExternalCalls
+                    .map(
+                        call => ({
+
+                            evidenceId:
+                                call.protocolCallAttributionId,
+
+                            kind:
+                                "PROTOCOL_EXTERNAL_CALL_ATTRIBUTION" as const,
+
+                            sourceId:
+                                source.sourceId,
+
+                            ...(
+                                source.sourceRevision !==
+                                undefined
+                                    ? {
+                                        sourceRevision:
+                                            source.sourceRevision
+                                    }
+                                    : {}
+                            ),
+
+                            parentEvidenceIds: [
+                                call.sourceFactId,
+                                call.observationId
+                            ]
+
+                        })
+                    )
+
+            ]
+        );
+
+
+    const realEvidenceLineage =
+        new ScientificEvidenceLineageEngine()
+            .resolve({
+
+                observations:
+                    sources.flatMap(
+                        source =>
+                            source.github.sourceObservations
+                    ),
+
+                facts:
+                    sources.flatMap(
+                        source =>
+                            source.github.sourceFacts
+                    ),
+
+                protocolRelationEvidence:
+                    documentaryRelations,
+
+                derivedLinks:
+                    derivedEvidenceLinks,
+
+                requestedEvidenceRefs:
+                    scientificDecisionTrace
+                        .participantArtifacts
+                        .flatMap(
+                            artifact =>
+                                artifact.unresolvedEvidenceIds
+                                    .map(
+                                        evidenceId => ({
+
+                                            evidenceId,
+
+                                            sourceId:
+                                                artifact.sourceId,
+
+                                            ...(
+                                                artifact.sourceRevision !==
+                                                undefined
+                                                    ? {
+                                                        sourceRevision:
+                                                            artifact.sourceRevision
+                                                    }
+                                                    : {}
+                                            )
+
+                                        })
+                                    )
+                        )
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific evidence lineage",
+        realEvidenceLineage.errors
+    );
+
+
+    const realDecisionTraceLineageBinding =
+        new ScientificDecisionTraceLineageBindingEngine()
+            .bind(
+                scientificDecisionTrace,
+                realEvidenceLineage
+            );
+
+
+    requireNoErrors(
+        "Real scientific Decision Trace lineage binding",
+        realDecisionTraceLineageBinding.errors
+    );
+
+
+    if (
+        realDecisionTraceLineageBinding.trace ===
+        null
+    ) {
+
+        throw new Error(
+            "Real scientific Decision Trace lineage binding returned null trace."
+        );
+
+    }
+
+
+    const scientificDecisionTraceWithLineage =
+        realDecisionTraceLineageBinding.trace;
+
+
+    const resolvedLineageCount =
+        realEvidenceLineage.resolutions
+            .filter(
+                resolution =>
+                    resolution.status ===
+                    "RESOLVED"
+            )
+            .length;
+
+
+    const unresolvedLineageCount =
+        realEvidenceLineage.resolutions
+            .filter(
+                resolution =>
+                    resolution.status ===
+                    "UNRESOLVED"
+            )
+            .length;
+
+
+    const unresolvedLineageLeaves =
+        [
+            ...new Set(
+                realEvidenceLineage.resolutions
+                    .flatMap(
+                        resolution =>
+                            resolution.unresolvedLeafIds
+                                .map(
+                                    evidenceId =>
+                                        `${resolution.sourceId}@${resolution.sourceRevision ?? "UNVERSIONED"} :: ${evidenceId}`
+                                )
+                    )
+            )
+        ].sort();
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC EVIDENCE LINEAGE"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `raw unresolved evidence:      ${scientificDecisionTrace.unresolvedEvidenceIds.length}`
+    );
+
+    console.log(
+        `structured derived links:     ${derivedEvidenceLinks.length}`
+    );
+
+    console.log(
+        `lineage requests:             ${realEvidenceLineage.resolutions.length}`
+    );
+
+    console.log(
+        `resolved through lineage:     ${resolvedLineageCount}`
+    );
+
+    console.log(
+        `unresolved through lineage:   ${unresolvedLineageCount}`
+    );
+
+    console.log(
+        `source terminals reached:     ${realEvidenceLineage.terminalEvidenceCatalog.length}`
+    );
+
+    console.log(
+        `trace unresolved after bind:  ${scientificDecisionTraceWithLineage.unresolvedEvidenceIds.length}`
+    );
+
+    console.log(
+        `unresolved terminal leaves:   ${unresolvedLineageLeaves.length}`
+    );
+
+
+    if (
+        unresolvedLineageLeaves.length >
+        0
+    ) {
+
+        console.log("");
+        console.log(
+            "  REMAINING UNRESOLVED LEAVES"
+        );
+
+
+        for (
+            const evidenceId
+            of unresolvedLineageLeaves.slice(
+                0,
+                30
+            )
+        ) {
+
+            console.log(
+                `    ${evidenceId}`
+            );
+
+        }
+
+
+        if (
+            unresolvedLineageLeaves.length >
+            30
+        ) {
+
+            console.log(
+                `    ... ${unresolvedLineageLeaves.length - 30} more`
             );
 
         }
