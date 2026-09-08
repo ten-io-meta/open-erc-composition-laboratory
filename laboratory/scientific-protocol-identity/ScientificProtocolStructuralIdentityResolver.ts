@@ -127,6 +127,32 @@ export class ScientificProtocolStructuralIdentityResolver {
         }
 
 
+
+        const sourcePathProtocolId =
+            this.protocolIdFromExplicitSourcePathSegment(
+                subject.observationId,
+                observationsById
+            );
+
+
+        if (
+            sourcePathProtocolId !==
+            undefined
+        ) {
+
+            return {
+
+                protocolId:
+                    sourcePathProtocolId,
+
+                identityBasis:
+                    "EXPLICIT_ERC_SOURCE_PATH_SEGMENT"
+
+            };
+
+        }
+
+
         return undefined;
 
     }
@@ -255,6 +281,109 @@ export class ScientificProtocolStructuralIdentityResolver {
         ][0];
 
     }
+    private protocolIdFromExplicitSourcePathSegment(
+        observationId:
+            string,
+        observationsById:
+            Map<
+                string,
+                ScientificSourceObservation
+            >
+    ): string | undefined {
+
+        /*
+         * Explicit structural protocol identity from a complete
+         * source-path segment.
+         *
+         * Accepted:
+         *
+         * contracts/execution/ERC8301/IAgentWorkflow.sol
+         * contracts/metering/ERC8312/IAggregateBudget.sol
+         * contracts/verify/ERC8274/IAgentVerifier.sol
+         *
+         * Rejected:
+         *
+         * MyERC8301
+         * ERC8301Helper
+         * erc8301
+         * ERC0
+         *
+         * Multiple distinct ERC path segments are ambiguous and
+         * therefore fail closed.
+         *
+         * This establishes protocol identity only. It does not
+         * establish semantics, authority, canonical status,
+         * compatibility, or composition.
+         */
+        const observation =
+            observationsById.get(
+                observationId
+            );
+
+
+        if (
+            !observation ||
+            !observation.locator.filePath
+        ) {
+
+            return undefined;
+
+        }
+
+
+        const normalizedPath =
+            observation.locator.filePath
+                .replace(
+                    /\\/g,
+                    "/"
+                );
+
+
+        const protocolIds =
+            new Set<string>();
+
+
+        const pattern =
+            /(?:^|\/)ERC([1-9][0-9]*)(?=\/|$)/g;
+
+
+        let match:
+            RegExpExecArray | null;
+
+
+        while (
+            (
+                match =
+                    pattern.exec(
+                        normalizedPath
+                    )
+            ) !==
+            null
+        ) {
+
+            protocolIds.add(
+                `ERC-${match[1]}`
+            );
+
+        }
+
+
+        if (
+            protocolIds.size !==
+            1
+        ) {
+
+            return undefined;
+
+        }
+
+
+        return [
+            ...protocolIds
+        ][0];
+
+    }
+
 
 
     private protocolIdFromExactContainerSymbol(
