@@ -4,7 +4,7 @@ import type {
 
 import type {
     ScientificProtocolIdentityBasis
-} from "./ScientificProtocolAttributedCapability.js";
+} from "./ScientificProtocolIdentityBasis.js";
 
 
 export interface ScientificProtocolStructuralIdentitySubject {

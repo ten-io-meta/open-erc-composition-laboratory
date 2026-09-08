@@ -2,11 +2,10 @@ import type {
     ScientificSourceFactContainerKind
 } from "../scientific-source-fact/ScientificSourceFact.js";
 
+import type {
+    ScientificProtocolIdentityBasis
+} from "./ScientificProtocolIdentityBasis.js";
 
-export type ScientificProtocolIdentityBasis =
-    | "EXACT_ERC_CONTAINER_SYMBOL"
-    | "EXACT_ERC_REFERENCE_CONTAINER_SYMBOL"
-    | "EXPLICIT_ERC_STORAGE_NAMESPACE";
 
 
 export interface ScientificProtocolAttributedCapability {
