@@ -59,6 +59,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
 import {
+    ScientificNProtocolGlobalEvidenceBindingEngine
+} from "../laboratory/scientific-n-protocol-global-evidence-binding/ScientificNProtocolGlobalEvidenceBindingEngine.js";
+
+import {
     ScientificNProtocolGlobalEvaluationBridgeEngine
 } from "../laboratory/scientific-n-protocol-global-evaluation-bridge/ScientificNProtocolGlobalEvaluationBridgeEngine.js";
 
@@ -1860,6 +1864,89 @@ async function main(): Promise<void> {
         console.log(
             `  BLOCKED ${configurationId}`
         );
+
+    }
+
+    /*
+     * This discovery run manufactures no global observations.
+     *
+     * Real observations must originate independently and preserve
+     * exact graphId + runId + boundaryId provenance.
+     */
+    const globalEvidenceBindings =
+        new ScientificNProtocolGlobalEvidenceBindingEngine()
+            .bindAndEvaluate({
+
+                targets:
+                    globalEvaluationTargets,
+
+                observations:
+                    []
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific N-protocol global evidence binding",
+        globalEvidenceBindings.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL GLOBAL EVIDENCE BINDING"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `bindings: ${globalEvidenceBindings.bindings.length}`
+    );
+
+
+    for (
+        const binding
+        of globalEvidenceBindings.bindings
+    ) {
+
+        console.log(
+            `  BINDING ${binding.status}`
+        );
+
+        console.log(
+            `    configuration: ${binding.configurationId}`
+        );
+
+        console.log(
+            `    graph:         ${binding.graphId}`
+        );
+
+        console.log(
+            `    observations:  ${binding.observationIds.length}`
+        );
+
+        console.log(
+            `    runs:          ${binding.runIds.length}`
+        );
+
+        console.log(
+            `    global polarity: ${binding.evaluation.assessment?.scientificPolarity ?? "NONE"}`
+        );
+
+        if (
+            binding.evaluation.assessment?.supportingRunId !==
+            undefined
+        ) {
+
+            console.log(
+                `    supporting run: ${binding.evaluation.assessment.supportingRunId}`
+            );
+
+        }
 
     }
 
