@@ -25,16 +25,13 @@
   "scripts": {
     "test": "npm run benchmark && npm run requirements",
     "oecl": "tsx scripts/run-oecl.ts",
-
     "experiment": "tsx scripts/run-experiment.ts",
     "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
     "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
-
     "campaign": "tsx scripts/run-campaign.ts",
-
     "benchmark": "tsx scripts/run-benchmark.ts",
     "requirements": "tsx scripts/run-requirements.ts",
     "emergent": "tsx scripts/run-emergent.ts",
@@ -51,7 +48,6 @@
     "adaptive": "tsx scripts/run-adaptive-research.ts",
     "discover": "tsx scripts/run-discovery.ts",
     "query": "tsx scripts/run-query.ts",
-
     "scenario": "tsx scripts/run-scenario.ts",
     "compose:discover": "tsx scripts/run-composition-discovery.ts",
     "semantic": "tsx scripts/run-semantic-discovery.ts",
@@ -90,5 +86,8 @@
     "@types/node": "^26.0.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/client": "2.0.0"
   }
 }
