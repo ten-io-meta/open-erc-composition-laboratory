@@ -8,7 +8,8 @@ import type {
 
 import type {
     ScientificTheGraphProtocolAttributionAssessment,
-    ScientificTheGraphProtocolAttributionResult
+    ScientificTheGraphProtocolAttributionResult,
+    ScientificTheGraphProtocolIdentifierRejectionReason
 } from "./ScientificTheGraphProtocolAttribution.js";
 
 
@@ -162,6 +163,249 @@ function countExactIdentifierOccurrences(
 
 }
 
+
+function protocolIdentifierRejectionReasons(
+    line:
+        string,
+    identifier:
+        string
+): ScientificTheGraphProtocolIdentifierRejectionReason[] {
+
+    const normalizedLine =
+        line
+            .toLowerCase()
+            .replace(
+                /\s+/g,
+                " "
+            )
+            .trim();
+
+
+    const normalizedIdentifier =
+        escapeRegex(
+            identifier.toLowerCase()
+        );
+
+
+    /*
+     * String.raw is required here because these patterns are
+     * constructed dynamically with RegExp().
+     *
+     * Without String.raw, JavaScript template-string escaping
+     * consumes sequences such as \b and \s before the regex
+     * engine receives them.
+     */
+    const explicitNegationPatterns =
+        [
+
+            new RegExp(
+                String.raw`\b(?:does|do|did)\s+not\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:doesn't|doesnt)\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,48}\b(?:is|are)\s+not\s+(?:implemented|indexed|supported|used|represented)\b`
+            ),
+
+            new RegExp(
+                String.raw`\bnot\s+(?:an?\s+)?(?:implementation|indexer|supporter)\s+(?:of|for)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bunrelated\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            )
+
+        ];
+
+
+    const referenceOnlyPatterns =
+        [
+
+            new RegExp(
+                String.raw`\bdocumentation\s+reference\s*:\s*${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bdocs?\s+reference\s*:\s*${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\breference\s+only\s*:?\s*${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bfor\s+reference\s*:?\s*${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bsee(?:\s+also)?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            )
+
+        ];
+
+
+    const reasons:
+        ScientificTheGraphProtocolIdentifierRejectionReason[] =
+        [];
+
+
+    if (
+        explicitNegationPatterns.some(
+            pattern =>
+                pattern.test(
+                    normalizedLine
+                )
+        )
+    ) {
+
+        reasons.push(
+            "EXPLICIT_NEGATION_CONTEXT"
+        );
+
+    }
+
+
+    if (
+        referenceOnlyPatterns.some(
+            pattern =>
+                pattern.test(
+                    normalizedLine
+                )
+        )
+    ) {
+
+        reasons.push(
+            "REFERENCE_ONLY_CONTEXT"
+        );
+
+    }
+
+
+    return [
+        ...new Set(
+            reasons
+        )
+    ].sort();
+
+}
+
+interface ScientificTheGraphProtocolIdentifierAnalysis {
+
+    identifier:
+        string;
+
+    acceptedOccurrenceCount:
+        number;
+
+    rejectedOccurrenceCount:
+        number;
+
+    rejectionReasons:
+        ScientificTheGraphProtocolIdentifierRejectionReason[];
+
+}
+
+
+function analyzeProtocolIdentifier(
+    text:
+        string,
+    identifier:
+        string
+): ScientificTheGraphProtocolIdentifierAnalysis {
+
+    let acceptedOccurrenceCount =
+        0;
+
+    let rejectedOccurrenceCount =
+        0;
+
+    const rejectionReasons =
+        new Set<
+            ScientificTheGraphProtocolIdentifierRejectionReason
+        >();
+
+
+    for (
+        const line
+        of text.split(
+            /\r?\n/
+        )
+    ) {
+
+        const occurrenceCount =
+            countExactIdentifierOccurrences(
+                line,
+                identifier
+            );
+
+
+        if (
+            occurrenceCount ===
+            0
+        ) {
+
+            continue;
+
+        }
+
+
+        const reasons =
+            protocolIdentifierRejectionReasons(
+                line,
+                identifier
+            );
+
+
+        if (
+            reasons.length ===
+            0
+        ) {
+
+            acceptedOccurrenceCount +=
+                occurrenceCount;
+
+            continue;
+
+        }
+
+
+        rejectedOccurrenceCount +=
+            occurrenceCount;
+
+
+        for (
+            const reason
+            of reasons
+        ) {
+
+            rejectionReasons.add(
+                reason
+            );
+
+        }
+
+    }
+
+
+    return {
+
+        identifier,
+
+        acceptedOccurrenceCount,
+
+        rejectedOccurrenceCount,
+
+        rejectionReasons:
+            [
+                ...rejectionReasons
+            ].sort()
+
+    };
+
+}
 
 export class ScientificTheGraphProtocolAttributionEngine {
 
@@ -365,25 +609,56 @@ export class ScientificTheGraphProtocolAttributionEngine {
                 );
 
 
-            const matchedIdentifiers =
-                identifiers
-                    .map(
-                        identifier => ({
+            const identifierAnalyses =
+                identifiers.map(
+                    identifier =>
+                        analyzeProtocolIdentifier(
+                            inspection.schemaObservation.schemaText,
+                            identifier
+                        )
+                );
 
-                            identifier,
+
+            const matchedIdentifiers =
+                identifierAnalyses
+                    .filter(
+                        analysis =>
+                            analysis.acceptedOccurrenceCount >
+                            0
+                    )
+                    .map(
+                        analysis => ({
+
+                            identifier:
+                                analysis.identifier,
 
                             occurrenceCount:
-                                countExactIdentifierOccurrences(
-                                    inspection.schemaObservation.schemaText,
-                                    identifier
-                                )
+                                analysis.acceptedOccurrenceCount
 
                         })
-                    )
+                    );
+
+
+            const rejectedIdentifierOccurrences =
+                identifierAnalyses
                     .filter(
-                        match =>
-                            match.occurrenceCount >
+                        analysis =>
+                            analysis.rejectedOccurrenceCount >
                             0
+                    )
+                    .map(
+                        analysis => ({
+
+                            identifier:
+                                analysis.identifier,
+
+                            occurrenceCount:
+                                analysis.rejectedOccurrenceCount,
+
+                            reasons:
+                                analysis.rejectionReasons
+
+                        })
                     );
 
 
@@ -413,6 +688,15 @@ export class ScientificTheGraphProtocolAttributionEngine {
                             String(
                                 match.occurrenceCount
                             )
+                        ]
+                    ),
+                    ...rejectedIdentifierOccurrences.flatMap(
+                        rejection => [
+                            rejection.identifier,
+                            String(
+                                rejection.occurrenceCount
+                            ),
+                            ...rejection.reasons
                         ]
                     )
                 ]);
@@ -463,6 +747,8 @@ export class ScientificTheGraphProtocolAttributionEngine {
 
                 matchedIdentifiers,
 
+                rejectedIdentifierOccurrences,
+
                 status:
                     attributed
                         ? "ATTRIBUTED"
@@ -471,7 +757,10 @@ export class ScientificTheGraphProtocolAttributionEngine {
                 attributionBasis:
                     attributed
                         ? "EXPLICIT_SCHEMA_PROTOCOL_IDENTIFIER"
-                        : "NO_EXPLICIT_SCHEMA_PROTOCOL_IDENTIFIER",
+                        : rejectedIdentifierOccurrences.length >
+                            0
+                            ? "ONLY_REJECTED_SCHEMA_PROTOCOL_IDENTIFIER_CONTEXT"
+                            : "NO_EXPLICIT_SCHEMA_PROTOCOL_IDENTIFIER",
 
                 nextAction:
                     attributed

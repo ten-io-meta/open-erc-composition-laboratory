@@ -19,6 +19,25 @@ export interface ScientificTheGraphProtocolIdentifierMatch {
 }
 
 
+export type ScientificTheGraphProtocolIdentifierRejectionReason =
+    | "EXPLICIT_NEGATION_CONTEXT"
+    | "REFERENCE_ONLY_CONTEXT";
+
+
+export interface ScientificTheGraphProtocolIdentifierRejectedOccurrence {
+
+    identifier:
+        string;
+
+    occurrenceCount:
+        number;
+
+    reasons:
+        ScientificTheGraphProtocolIdentifierRejectionReason[];
+
+}
+
+
 export interface ScientificTheGraphProtocolAttributionAssessment {
 
     assessmentId:
@@ -57,6 +76,9 @@ export interface ScientificTheGraphProtocolAttributionAssessment {
     matchedIdentifiers:
         ScientificTheGraphProtocolIdentifierMatch[];
 
+    rejectedIdentifierOccurrences:
+        ScientificTheGraphProtocolIdentifierRejectedOccurrence[];
+
     /*
      * ATTRIBUTED means the exact inspected schema contains at
      * least one exact protocol identifier token.
@@ -69,6 +91,7 @@ export interface ScientificTheGraphProtocolAttributionAssessment {
 
     attributionBasis:
         | "EXPLICIT_SCHEMA_PROTOCOL_IDENTIFIER"
+        | "ONLY_REJECTED_SCHEMA_PROTOCOL_IDENTIFIER_CONTEXT"
         | "NO_EXPLICIT_SCHEMA_PROTOCOL_IDENTIFIER";
 
     nextAction:

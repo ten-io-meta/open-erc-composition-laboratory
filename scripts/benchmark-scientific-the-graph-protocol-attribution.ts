@@ -461,7 +461,7 @@ const metrics =
 
 console.log("");
 console.log(
-    "THE GRAPH PROTOCOL ATTRIBUTION PRECISION BASELINE"
+    "THE GRAPH PROTOCOL ATTRIBUTION PRECISION BENCHMARK"
 );
 console.log(
     "================================================="
@@ -547,20 +547,20 @@ console.log(
 
 
 /*
- * This is the frozen baseline expected from the current
- * exact-token attribution engine.
+ * The case corpus and ground-truth labels are unchanged from
+ * Hito 26A.
  *
- * Two adversarial negatives contain the exact ERC identifier
- * in explicitly negative/reference-only context. The current
- * engine sees the token but does not yet interpret that context.
+ * Hito 26B changes only the attribution engine: exact protocol
+ * identifiers found solely in explicit negation or
+ * reference-only context no longer create positive attribution.
  */
-const baselineMatchesCurrentEngine =
+const hardeningMatchesFrozenCorpus =
     metrics.truePositive ===
         4 &&
     metrics.falsePositive ===
-        2 &&
+        0 &&
     metrics.trueNegative ===
-        4 &&
+        6 &&
     metrics.falseNegative ===
         0 &&
     metrics.abstainedPositive ===
@@ -571,37 +571,37 @@ const baselineMatchesCurrentEngine =
 
 console.log("");
 console.log(
-    "BASELINE INTERPRETATION"
+    "HARDENING INTERPRETATION"
 );
 console.log(
-    "-----------------------"
-);
-
-console.log(
-    "Exact token boundaries correctly reject lowercase, embedded, neighboring-number and semantic-only negatives."
+    "------------------------"
 );
 
 console.log(
-    "The current engine still produces false positives when an exact ERC identifier appears only in explicit negation or reference-only context."
+    "The exact Hito 26A corpus and labels are unchanged."
 );
 
 console.log(
-    "The 95% precision objective is therefore not claimed by this baseline."
+    "Explicit negation and documentation-reference-only occurrences are now rejected as attribution evidence."
 );
 
 console.log(
-    "This benchmark is controlled/adversarial evidence, not a real-world population estimate."
+    "The 95% precision target is met on this controlled adversarial corpus."
+);
+
+console.log(
+    "This does not establish 95% real-world OECL precision; broader benchmark coverage is still required."
 );
 
 
 console.log("");
 console.log(
-    `BASELINE CONTRACT: ${baselineMatchesCurrentEngine ? "PASS" : "FAIL"}`
+    `HARDENED CONTRACT: ${hardeningMatchesFrozenCorpus ? "PASS" : "FAIL"}`
 );
 
 
 if (
-    !baselineMatchesCurrentEngine
+    !hardeningMatchesFrozenCorpus
 ) {
 
     process.exitCode =
