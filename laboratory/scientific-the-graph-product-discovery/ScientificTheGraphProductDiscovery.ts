@@ -31,7 +31,8 @@ export interface ScientificTheGraphProductDiscoveryRequest {
         string[];
 
     searchBasis:
-        "PROTOCOL_IDENTITY_ALIASES";
+        | "PROTOCOL_IDENTITY_ALIASES"
+        | "PROTOCOL_IDENTITY_AND_PROFILE_TERMS";
 
     targetProductKind:
         "SUBGRAPH";

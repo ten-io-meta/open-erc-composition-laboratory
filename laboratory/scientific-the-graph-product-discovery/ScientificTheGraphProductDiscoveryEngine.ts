@@ -429,7 +429,9 @@ export class ScientificTheGraphProductDiscoveryEngine {
 
             if (
                 request.searchBasis !==
-                "PROTOCOL_IDENTITY_ALIASES"
+                    "PROTOCOL_IDENTITY_ALIASES" &&
+                request.searchBasis !==
+                    "PROTOCOL_IDENTITY_AND_PROFILE_TERMS"
             ) {
 
                 errors.push(
