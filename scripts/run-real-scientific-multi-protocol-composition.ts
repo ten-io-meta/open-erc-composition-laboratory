@@ -47,6 +47,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
 
 import {
+    ScientificCompositionCandidateEvaluationGraphEngine
+} from "../laboratory/scientific-composition-candidate-evaluation-graph/ScientificCompositionCandidateEvaluationGraphEngine.js";
+
+import {
     ScientificCompositionCandidateGraphEngine
 } from "../laboratory/scientific-composition-candidate-graph/ScientificCompositionCandidateGraphEngine.js";
 
@@ -1367,6 +1371,103 @@ async function main(): Promise<void> {
         throw new Error(
             "Real scientific composition candidate graph unexpectedly returned null."
         );
+
+    }
+
+
+    const candidateEvaluationGraph =
+        new ScientificCompositionCandidateEvaluationGraphEngine()
+            .build({
+
+                candidateGraph:
+                    compositionCandidateGraph,
+
+                compatibility:
+                    candidateCompatibility
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate evaluation graph",
+        candidateEvaluationGraph.errors
+    );
+
+
+    if (
+        candidateEvaluationGraph.graph ===
+        null
+    ) {
+
+        throw new Error(
+            "Real scientific candidate evaluation graph unexpectedly returned null."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE EVALUATION GRAPH"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `nodes:                        ${candidateEvaluationGraph.graph.statistics.nodes}`
+    );
+
+    console.log(
+        `evaluated candidate edges:    ${candidateEvaluationGraph.graph.statistics.evaluatedCandidateEdges}`
+    );
+
+    console.log(
+        `supported candidate edges:    ${candidateEvaluationGraph.graph.statistics.supportedCandidateEdges}`
+    );
+
+    console.log(
+        `challenged candidate edges:   ${candidateEvaluationGraph.graph.statistics.challengedCandidateEdges}`
+    );
+
+    console.log(
+        `inconclusive candidate edges: ${candidateEvaluationGraph.graph.statistics.inconclusiveCandidateEdges}`
+    );
+
+    console.log(
+        `functional candidate edges:   ${candidateEvaluationGraph.graph.statistics.functionalCandidateEdges}`
+    );
+
+    console.log(
+        `documentary candidate edges:  ${candidateEvaluationGraph.graph.statistics.documentaryCandidateEdges}`
+    );
+
+
+    for (
+        const edge
+        of candidateEvaluationGraph.graph.edges
+    ) {
+
+        if (
+            edge.kind ===
+            "FUNCTIONAL_COMPLEMENTARITY"
+        ) {
+
+            console.log(
+                `  EDGE ${edge.sourceParticipantId} -> ${edge.targetParticipantId} kind=${edge.kind} compatibility=${edge.compatibilityPolarity} discoveryEvidence=${edge.discoveryEvidenceIds.length} compatibilityEvidence=${edge.compatibilityEvidenceIds.length} status=${edge.evaluationStatus}`
+            );
+
+        }
+        else {
+
+            console.log(
+                `  EDGE ${edge.sourceParticipantId} -> ${edge.targetParticipantId} kind=${edge.kind} relation=${edge.relation} compatibility=${edge.compatibilityPolarity} discoveryEvidence=${edge.discoveryEvidenceIds.length} compatibilityEvidence=${edge.compatibilityEvidenceIds.length} status=${edge.evaluationStatus}`
+            );
+
+        }
 
     }
 
