@@ -47,6 +47,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
 
 import {
+    ScientificCompositionCandidateEvidenceGapEngine
+} from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
+
+import {
     ScientificCompositionCandidateEvaluationGraphEngine
 } from "../laboratory/scientific-composition-candidate-evaluation-graph/ScientificCompositionCandidateEvaluationGraphEngine.js";
 
@@ -1402,6 +1406,115 @@ async function main(): Promise<void> {
         throw new Error(
             "Real scientific candidate evaluation graph unexpectedly returned null."
         );
+
+    }
+
+
+    const candidateEvidenceGaps =
+        new ScientificCompositionCandidateEvidenceGapEngine()
+            .diagnose({
+
+                evaluationGraph:
+                    candidateEvaluationGraph,
+
+                compatibility:
+                    candidateCompatibility
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate evidence gap diagnosis",
+        candidateEvidenceGaps.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE EVIDENCE GAPS"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `diagnostics: ${candidateEvidenceGaps.diagnostics.length}`
+    );
+
+
+    for (
+        const diagnostic
+        of candidateEvidenceGaps.diagnostics
+    ) {
+
+        console.log(
+            `  CANDIDATE ${diagnostic.sourceParticipantId} -> ${diagnostic.targetParticipantId}`
+        );
+
+        console.log(
+            `    kind:                  ${diagnostic.candidateKind}`
+        );
+
+        console.log(
+            `    compatibility:         ${diagnostic.compatibilityPolarity}`
+        );
+
+        console.log(
+            `    known boundaries:      ${diagnostic.knownBoundaryIds.length}`
+        );
+
+        console.log(
+            `    observed boundaries:   ${diagnostic.observedBoundaryIds.length}`
+        );
+
+        console.log(
+            `    unevaluated boundaries:${diagnostic.unevaluatedBoundaryIds.length}`
+        );
+
+        console.log(
+            `    observations:          ${diagnostic.compatibilityObservationIds.length}`
+        );
+
+        console.log(
+            `    compatibility evidence:${diagnostic.compatibilityEvidenceIds.length}`
+        );
+
+        console.log(
+            `    resolution:            ${diagnostic.resolution}`
+        );
+
+
+        if (
+            diagnostic.gaps.length ===
+            0
+        ) {
+
+            console.log(
+                "    gaps:                  NONE"
+            );
+
+        }
+        else {
+
+            console.log(
+                "    gaps:"
+            );
+
+            for (
+                const gap
+                of diagnostic.gaps
+            ) {
+
+                console.log(
+                    `      ${gap.kind} boundaries=${gap.boundaryIds.length}`
+                );
+
+            }
+
+        }
 
     }
 
