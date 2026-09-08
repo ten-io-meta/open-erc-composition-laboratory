@@ -47,6 +47,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
 
 import {
+    ScientificCompositionCandidateEvidenceRequirementEngine
+} from "../laboratory/scientific-composition-candidate-evidence-requirement/ScientificCompositionCandidateEvidenceRequirementEngine.js";
+
+import {
     ScientificCompositionCandidateEvidenceGapEngine
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
@@ -1429,6 +1433,22 @@ async function main(): Promise<void> {
     );
 
 
+    const candidateEvidenceRequirements =
+        new ScientificCompositionCandidateEvidenceRequirementEngine()
+            .derive({
+
+                diagnosis:
+                    candidateEvidenceGaps
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate evidence requirements",
+        candidateEvidenceRequirements.errors
+    );
+
+
     console.log("");
     console.log(
         "============================================================"
@@ -1513,6 +1533,78 @@ async function main(): Promise<void> {
                 );
 
             }
+
+        }
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE EVIDENCE REQUIREMENTS"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `plans: ${candidateEvidenceRequirements.plans.length}`
+    );
+
+
+    for (
+        const plan
+        of candidateEvidenceRequirements.plans
+    ) {
+
+        console.log(
+            `  CANDIDATE ${plan.sourceParticipantId} -> ${plan.targetParticipantId}`
+        );
+
+        console.log(
+            `    kind:       ${plan.candidateKind}`
+        );
+
+        console.log(
+            `    resolution: ${plan.evidenceResolution}`
+        );
+
+        console.log(
+            `    status:     ${plan.status}`
+        );
+
+        console.log(
+            `    requirements: ${plan.requirements.length}`
+        );
+
+
+        for (
+            const requirement
+            of plan.requirements
+        ) {
+
+            console.log(
+                `      ${requirement.kind}`
+            );
+
+            console.log(
+                `        readiness: ${requirement.readiness}`
+            );
+
+            console.log(
+                `        target boundaries: ${requirement.targetBoundaryIds.length}`
+            );
+
+            console.log(
+                `        triggering gaps: ${requirement.triggeringGapIds.length}`
+            );
+
+            console.log(
+                `        blocking gaps: ${requirement.blockingGapIds.length}`
+            );
 
         }
 
