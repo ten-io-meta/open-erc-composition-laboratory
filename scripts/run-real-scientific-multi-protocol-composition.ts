@@ -1,4 +1,19 @@
 import {
+    ScientificTheGraphProductDiscoveryEngine
+} from "../laboratory/scientific-the-graph-product-discovery/ScientificTheGraphProductDiscoveryEngine.js";
+
+import {
+    ScientificTheGraphProfileDiscoveryEngine
+} from "../laboratory/scientific-the-graph-profile-discovery/ScientificTheGraphProfileDiscoveryEngine.js";
+
+import {
+    ScientificTheGraphSubgraphMcpLiveClient
+} from "../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
+
+import {
+    ScientificTheGraphSubgraphMcpKeywordProvider
+} from "../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpKeywordProvider.js";
+import {
     ScientificTheGraphGatewayProvider
 } from "../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";
 
@@ -1164,6 +1179,443 @@ async function main(): Promise<void> {
             a.protocolId.localeCompare(
                 b.protocolId
             )
+    );
+
+
+    /*
+     * =========================================================
+     * REAL PROFILE-DERIVED THE GRAPH DISCOVERY
+     * =========================================================
+     *
+     * All terms originate from real source-scoped protocol
+     * profiles already produced by OECL.
+     *
+     * ERC-8004 is excluded here because its Agent0 provider is
+     * already integrated and validated independently.
+     *
+     * Returned MCP hits remain discovery observations only.
+     * They are not protocol attribution, compatibility,
+     * composition or scientific polarity.
+     */
+
+
+    const graphDiscoveryProfiles =
+        profiles
+            .filter(
+                profile =>
+                    profile.protocolId !==
+                    "ERC-8004"
+            );
+
+
+    if (
+        graphDiscoveryProfiles.length !==
+        7
+    ) {
+
+        throw new Error(
+            `Expected 7 real non-ERC8004 profiles for Graph discovery, found ${graphDiscoveryProfiles.length}.`
+        );
+
+    }
+
+
+    const graphDiscoveryBasePlan =
+        new ScientificTheGraphProductDiscoveryEngine()
+            .plan(
+                graphDiscoveryProfiles
+            );
+
+
+    requireNoErrors(
+        "Real profile-derived Graph discovery base plan",
+        graphDiscoveryBasePlan.errors
+    );
+
+
+    const graphDiscoveryExpansion =
+        new ScientificTheGraphProfileDiscoveryEngine()
+            .expand(
+                graphDiscoveryProfiles,
+                graphDiscoveryBasePlan.requests,
+                4
+            );
+
+
+    requireNoErrors(
+        "Real profile-derived Graph discovery expansion",
+        graphDiscoveryExpansion.errors
+    );
+
+
+    if (
+        graphDiscoveryExpansion.requests.length !==
+        graphDiscoveryProfiles.length
+    ) {
+
+        throw new Error(
+            `Expected ${graphDiscoveryProfiles.length} expanded Graph discovery requests, found ${graphDiscoveryExpansion.requests.length}.`
+        );
+
+    }
+
+
+    const profileDiscoveryApiKey =
+        process.env.THE_GRAPH_API_KEY
+            ?.trim();
+
+
+    if (
+        profileDiscoveryApiKey ===
+            undefined ||
+        profileDiscoveryApiKey.length ===
+            0
+    ) {
+
+        throw new Error(
+            "THE_GRAPH_API_KEY is required for real profile-derived Graph discovery."
+        );
+
+    }
+
+
+    const profileDiscoveryClient =
+        new ScientificTheGraphSubgraphMcpLiveClient(
+            profileDiscoveryApiKey
+        );
+
+
+    let realProfileGraphDiscovery;
+
+
+    try {
+
+        realProfileGraphDiscovery =
+            await new ScientificTheGraphSubgraphMcpKeywordProvider(
+                profileDiscoveryClient,
+                "LIVE"
+            )
+                .discover(
+                    graphDiscoveryExpansion.requests
+                );
+
+    }
+    finally {
+
+        await profileDiscoveryClient.close();
+
+    }
+
+
+    requireNoErrors(
+        "Real profile-derived Subgraph MCP discovery",
+        realProfileGraphDiscovery.errors
+    );
+
+
+    if (
+        realProfileGraphDiscovery.searches.some(
+            search =>
+                search.providerMode !==
+                "LIVE"
+        )
+    ) {
+
+        throw new Error(
+            "Real profile-derived Graph discovery contains non-LIVE observations."
+        );
+
+    }
+
+
+    const expectedSearchCount =
+        graphDiscoveryExpansion.requests
+            .reduce(
+                (
+                    total,
+                    request
+                ) =>
+                    total +
+                    request.searchTerms.length,
+                0
+            );
+
+
+    if (
+        realProfileGraphDiscovery.searches.length !==
+        expectedSearchCount
+    ) {
+
+        throw new Error(
+            `Expected ${expectedSearchCount} LIVE MCP searches, found ${realProfileGraphDiscovery.searches.length}.`
+        );
+
+    }
+
+
+    const discoverySerialized =
+        JSON.stringify(
+            {
+                expansion:
+                    graphDiscoveryExpansion,
+                discovery:
+                    realProfileGraphDiscovery
+            }
+        );
+
+
+    if (
+        discoverySerialized.includes(
+            profileDiscoveryApiKey
+        )
+    ) {
+
+        throw new Error(
+            "API key leaked into real profile-derived Graph discovery output."
+        );
+
+    }
+
+
+    if (
+        discoverySerialized.includes(
+            "scientificPolarity"
+        ) ||
+        discoverySerialized.includes(
+            "compatibilityPolarity"
+        ) ||
+        discoverySerialized.includes(
+            '"SUPPORT"'
+        ) ||
+        discoverySerialized.includes(
+            '"CHALLENGE"'
+        ) ||
+        discoverySerialized.includes(
+            '"FULL"'
+        ) ||
+        discoverySerialized.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "Profile-derived Graph discovery manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL PROFILE-DERIVED THE GRAPH DISCOVERY"
+    );
+    console.log(
+        "============================================================"
+    );
+
+
+    let rawProfileDiscoveryHits =
+        0;
+
+    const globallyDiscoveredSubgraphIds =
+        new Set<string>();
+
+
+    for (
+        const profile
+        of graphDiscoveryProfiles
+    ) {
+
+        const request =
+            graphDiscoveryExpansion.requests
+                .find(
+                    candidate =>
+                        candidate.profileId ===
+                        profile.profileId
+                );
+
+
+        if (
+            request ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Missing expanded Graph discovery request for real profile ${profile.protocolId}.`
+            );
+
+        }
+
+
+        const searches =
+            realProfileGraphDiscovery.searches
+                .filter(
+                    search =>
+                        search.requestId ===
+                        request.requestId
+                )
+                .sort(
+                    (
+                        a,
+                        b
+                    ) =>
+                        a.searchTerm.localeCompare(
+                            b.searchTerm
+                        )
+                );
+
+
+        const protocolSubgraphIds =
+            new Set<string>();
+
+
+        console.log("");
+        console.log(
+            profile.protocolId
+        );
+
+
+        console.log(
+            `  source:   ${profile.sourceId}`
+        );
+
+        console.log(
+            `  revision: ${profile.sourceRevision ?? "NO-REVISION"}`
+        );
+
+        console.log(
+            `  terms:    ${request.searchTerms.join(", ")}`
+        );
+
+
+        for (
+            const search
+            of searches
+        ) {
+
+            console.log(
+                `  SEARCH ${search.searchTerm}: returned=${search.returned} total=${search.total}`
+            );
+
+
+            rawProfileDiscoveryHits +=
+                search.hits.length;
+
+
+            for (
+                const hit
+                of search.hits
+            ) {
+
+                protocolSubgraphIds.add(
+                    hit.subgraphId
+                );
+
+                globallyDiscoveredSubgraphIds.add(
+                    hit.subgraphId
+                );
+
+            }
+
+
+            for (
+                const hit
+                of search.hits.slice(
+                    0,
+                    3
+                )
+            ) {
+
+                console.log(
+                    `    rank=${hit.providerRank} name=${hit.displayName}`
+                );
+
+                console.log(
+                    `    subgraph=${hit.subgraphId}`
+                );
+
+                console.log(
+                    `    deployment=${hit.ipfsHash}`
+                );
+
+            }
+
+
+            if (
+                search.hits.length >
+                3
+            ) {
+
+                console.log(
+                    `    ... ${search.hits.length - 3} additional hits`
+                );
+
+            }
+
+        }
+
+
+        console.log(
+            `  distinct discovered subgraphs: ${protocolSubgraphIds.size}`
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "REAL PROFILE-DERIVED DISCOVERY SUMMARY"
+    );
+    console.log(
+        "--------------------------------------"
+    );
+
+    console.log(
+        `real profiles searched:       ${graphDiscoveryProfiles.length}`
+    );
+
+    console.log(
+        `profile-derived terms:        ${graphDiscoveryExpansion.terms.length}`
+    );
+
+    console.log(
+        `LIVE MCP searches:            ${realProfileGraphDiscovery.searches.length}`
+    );
+
+    console.log(
+        `raw provider hits:            ${rawProfileDiscoveryHits}`
+    );
+
+    console.log(
+        `distinct discovered subgraphs:${globallyDiscoveredSubgraphIds.size}`
+    );
+
+
+    console.log("");
+    console.log(
+        "SCIENTIFIC INTERPRETATION"
+    );
+    console.log(
+        "-------------------------"
+    );
+
+    console.log(
+        "Search terms were derived from real GitHub-backed OECL protocol profiles."
+    );
+
+    console.log(
+        "A Subgraph MCP hit is discovery evidence only."
+    );
+
+    console.log(
+        "No returned product is attributed to an ERC until exact provider evidence passes the protocol-attribution gate."
+    );
+
+    console.log(
+        "No hit, no match, or unattributed hit is converted into incompatibility."
     );
 
 
