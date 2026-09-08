@@ -47,6 +47,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
 
 import {
+    ScientificCompositionCandidateEvidenceSpecificationEngine
+} from "../laboratory/scientific-composition-candidate-evidence-specification/ScientificCompositionCandidateEvidenceSpecificationEngine.js";
+
+import {
     ScientificCompositionCandidateEvidenceRequirementEngine
 } from "../laboratory/scientific-composition-candidate-evidence-requirement/ScientificCompositionCandidateEvidenceRequirementEngine.js";
 
@@ -1449,6 +1453,22 @@ async function main(): Promise<void> {
     );
 
 
+    const candidateEvidenceSpecifications =
+        new ScientificCompositionCandidateEvidenceSpecificationEngine()
+            .build({
+
+                requirements:
+                    candidateEvidenceRequirements
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate evidence specifications",
+        candidateEvidenceSpecifications.errors
+    );
+
+
     console.log("");
     console.log(
         "============================================================"
@@ -1607,6 +1627,102 @@ async function main(): Promise<void> {
             );
 
         }
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE EVIDENCE SPECIFICATIONS"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `plans: ${candidateEvidenceSpecifications.statistics.plans}`
+    );
+
+    console.log(
+        `specifications: ${candidateEvidenceSpecifications.statistics.specifications}`
+    );
+
+    console.log(
+        `blocked requirements: ${candidateEvidenceSpecifications.statistics.blockedRequirements}`
+    );
+
+    console.log(
+        `boundary acquisition specifications: ${candidateEvidenceSpecifications.statistics.boundaryEvidenceAcquisitionSpecifications}`
+    );
+
+    console.log(
+        `boundary observation specifications: ${candidateEvidenceSpecifications.statistics.candidateBoundaryObservationSpecifications}`
+    );
+
+
+    for (
+        const specification
+        of candidateEvidenceSpecifications.specifications
+    ) {
+
+        console.log(
+            `  SPECIFICATION ${specification.sourceParticipantId} -> ${specification.targetParticipantId}`
+        );
+
+        console.log(
+            `    candidate kind:    ${specification.candidateKind}`
+        );
+
+        console.log(
+            `    requirement kind:  ${specification.requirementKind}`
+        );
+
+        console.log(
+            `    specification kind:${specification.specificationKind}`
+        );
+
+        console.log(
+            `    target boundaries: ${specification.targetBoundaryIds.length}`
+        );
+
+        console.log(
+            `    triggering gaps:   ${specification.triggeringGapIds.length}`
+        );
+
+        console.log(
+            `    status:            ${specification.status}`
+        );
+
+    }
+
+
+    for (
+        const blocked
+        of candidateEvidenceSpecifications.blockedRequirements
+    ) {
+
+        console.log(
+            `  BLOCKED ${blocked.sourceParticipantId} -> ${blocked.targetParticipantId}`
+        );
+
+        console.log(
+            `    requirement kind:  ${blocked.requirementKind}`
+        );
+
+        console.log(
+            `    target boundaries: ${blocked.targetBoundaryIds.length}`
+        );
+
+        console.log(
+            `    blocking gaps:     ${blocked.blockingGapIds.length}`
+        );
+
+        console.log(
+            `    status:            ${blocked.status}`
+        );
 
     }
 
