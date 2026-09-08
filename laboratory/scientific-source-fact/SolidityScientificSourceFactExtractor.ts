@@ -8,6 +8,10 @@ import type {
     ScientificSourceFactKind
 } from "./ScientificSourceFact.js";
 
+import type {
+    ScientificSourceExternalCall
+} from "./ScientificSourceExternalCall.js";
+
 
 interface PendingFact {
 
@@ -22,6 +26,9 @@ interface PendingFact {
 
     containerSymbol?:
         string;
+
+    externalCall?:
+        ScientificSourceExternalCall;
 
     line:
         number;
@@ -202,6 +209,16 @@ export class SolidityScientificSourceFactExtractor {
                 lineNumber,
                 lines,
                 baseLine,
+                pending
+            );
+
+
+            this.extractExternalCallFacts(
+                clean,
+                lineNumber,
+                lines,
+                baseLine,
+                braceDepth,
                 pending
             );
 
@@ -494,6 +511,17 @@ export class SolidityScientificSourceFactExtractor {
 
                 symbol:
                     fact.symbol,
+
+                ...(
+                    fact.externalCall !==
+                        undefined
+                        ? {
+                            externalCall: {
+                                ...fact.externalCall
+                            }
+                        }
+                        : {}
+                ),
 
                 ...(
                     fact.containerKind !==
@@ -1183,6 +1211,558 @@ export class SolidityScientificSourceFactExtractor {
      *
      * Block-comment state is carried across source lines.
      */
+    private extractExternalCallFacts(
+        clean:
+            string,
+        lineNumber:
+            number,
+        lines:
+            string[],
+        baseLine:
+            number,
+        braceDepth:
+            number,
+        pending:
+            PendingFact[]
+    ): void {
+
+        /*
+         * External interactions are meaningful only from inside
+         * an executable Solidity body. Top-level/interface
+         * declarations are therefore outside this observation
+         * boundary.
+         */
+        if (
+            braceDepth <
+            2
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Detection begins only when the call head itself is
+         * observed on this source line.
+         *
+         * Multiline arguments are completed by the helper below.
+         * We intentionally do not manufacture a call whose callee
+         * head begins on an unseen previous line.
+         */
+        const initialHead =
+            this.externalCallHead(
+                clean
+            );
+
+
+        if (
+            initialHead ===
+            undefined
+        ) {
+
+            return;
+
+        }
+
+
+        const complete =
+            this.completeExternalCallExpression(
+                lines,
+                baseLine,
+                lineNumber
+            );
+
+
+        if (
+            complete ===
+            undefined
+        ) {
+
+            /*
+             * Fail closed when balanced call syntax cannot be
+             * completely observed.
+             */
+            return;
+
+        }
+
+
+        pending.push(
+            {
+                kind:
+                    "EXTERNAL_CALL_EXPRESSION",
+
+                line:
+                    lineNumber,
+
+                endLine:
+                    complete.endLine,
+
+                rawText:
+                    complete.rawText,
+
+                externalCall:
+                    complete.externalCall
+            }
+        );
+
+    }
+
+
+    private externalCallHead(
+        code:
+            string
+    ): {
+        startIndex:
+            number;
+        openParenthesisIndex:
+            number;
+        externalCall:
+            ScientificSourceExternalCall;
+    } | undefined {
+
+        /*
+         * Low-level Solidity forms:
+         *
+         * target.call(...)
+         * target.staticcall(...)
+         * target.delegatecall(...)
+         *
+         * A simple cast expression is also retained as the target,
+         * e.g. payable(msg.sender).call{value: amount}(...).
+         */
+        const lowLevelMatch =
+            /\b([A-Za-z_][A-Za-z0-9_.]*(?:\s*\([^()\n]*\))?)\s*\.\s*(call|staticcall|delegatecall)\s*(?:\{[^{}\n]*\})?\s*\(/.exec(
+                code
+            );
+
+
+        /*
+         * Syntactic typed/cast member call:
+         *
+         * SomeType(target).member(...)
+         *
+         * This is deliberately called CAST_MEMBER_CALL rather
+         * than CALL because source syntax alone does not establish
+         * the EVM opcode eventually used at runtime.
+         */
+        const castMemberMatch =
+            /\b([A-Za-z_][A-Za-z0-9_]*)\s*\(\s*([A-Za-z_][A-Za-z0-9_.]*)\s*\)\s*\.\s*([A-Za-z_][A-Za-z0-9_]*)\s*\(/.exec(
+                code
+            );
+
+
+        const useLowLevel =
+            lowLevelMatch !==
+                null &&
+            (
+                castMemberMatch ===
+                    null ||
+                lowLevelMatch.index <=
+                    castMemberMatch.index
+            );
+
+
+        if (
+            useLowLevel &&
+            lowLevelMatch
+        ) {
+
+            const lowLevelForm:
+                ScientificSourceExternalCall["callForm"] =
+                lowLevelMatch[2] ===
+                    "call"
+                    ? "LOW_LEVEL_CALL"
+                    : lowLevelMatch[2] ===
+                        "staticcall"
+                        ? "LOW_LEVEL_STATICCALL"
+                        : "LOW_LEVEL_DELEGATECALL";
+
+
+            const encodedCallMatch =
+                /\babi\s*\.\s*encodeCall\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\.\s*([A-Za-z_][A-Za-z0-9_]*)\s*,/.exec(
+                    code
+                );
+
+
+            return {
+
+                startIndex:
+                    lowLevelMatch.index,
+
+                openParenthesisIndex:
+                    lowLevelMatch.index +
+                    lowLevelMatch[0]
+                        .lastIndexOf(
+                            "("
+                        ),
+
+                externalCall: {
+
+                    callForm:
+                        lowLevelForm,
+
+                    targetExpression:
+                        lowLevelMatch[1]
+                            .replace(
+                                /\s+/g,
+                                " "
+                            )
+                            .trim(),
+
+                    ...(
+                        encodedCallMatch
+                            ? {
+                                encodedCallTypeSymbol:
+                                    encodedCallMatch[1],
+
+                                encodedCallMemberSymbol:
+                                    encodedCallMatch[2]
+                            }
+                            : {}
+                    )
+
+                }
+
+            };
+
+        }
+
+
+        if (
+            castMemberMatch
+        ) {
+
+            return {
+
+                startIndex:
+                    castMemberMatch.index,
+
+                openParenthesisIndex:
+                    castMemberMatch.index +
+                    castMemberMatch[0]
+                        .lastIndexOf(
+                            "("
+                        ),
+
+                externalCall: {
+
+                    callForm:
+                        "CAST_MEMBER_CALL",
+
+                    targetExpression:
+                        castMemberMatch[2],
+
+                    castTypeSymbol:
+                        castMemberMatch[1],
+
+                    memberSymbol:
+                        castMemberMatch[3]
+
+                }
+
+            };
+
+        }
+
+
+        return undefined;
+
+    }
+
+
+    private completeExternalCallExpression(
+        lines:
+            string[],
+        baseLine:
+            number,
+        startLine:
+            number
+    ): {
+        rawText:
+            string;
+        endLine:
+            number;
+        externalCall:
+            ScientificSourceExternalCall;
+    } | undefined {
+
+        const startIndex =
+            startLine -
+            baseLine;
+
+
+        if (
+            startIndex <
+                0 ||
+            startIndex >=
+                lines.length
+        ) {
+
+            return undefined;
+
+        }
+
+
+        /*
+         * Reconstruct block-comment state at the exact call-site
+         * line so completion uses the same lexical boundary as the
+         * main extractor.
+         */
+        let inBlockComment =
+            false;
+
+
+        for (
+            let index =
+                0;
+            index <
+                startIndex;
+            index++
+        ) {
+
+            inBlockComment =
+                this.sanitizeLine(
+                    lines[index],
+                    inBlockComment
+                ).inBlockComment;
+
+        }
+
+
+        const rawFragments:
+            string[] =
+            [];
+
+        const codeFragments:
+            string[] =
+            [];
+
+
+        for (
+            let index =
+                startIndex;
+            index <
+                lines.length;
+            index++
+        ) {
+
+            const rawLine =
+                lines[index];
+
+
+            rawFragments.push(
+                rawLine
+            );
+
+
+            const sanitized =
+                this.sanitizeLine(
+                    rawLine,
+                    inBlockComment
+                );
+
+
+            inBlockComment =
+                sanitized.inBlockComment;
+
+
+            codeFragments.push(
+                sanitized.code
+            );
+
+
+            const combinedCode =
+                codeFragments.join(
+                    "\n"
+                );
+
+
+            const head =
+                this.externalCallHead(
+                    combinedCode
+                );
+
+
+            if (
+                head ===
+                undefined
+            ) {
+
+                continue;
+
+            }
+
+
+            /*
+             * Each fact begins on the line where its own call head
+             * was directly observed.
+             */
+            const firstNewline =
+                combinedCode.indexOf(
+                    "\n"
+                );
+
+            if (
+                firstNewline >=
+                    0 &&
+                head.startIndex >
+                    firstNewline
+            ) {
+
+                return undefined;
+
+            }
+
+
+            if (
+                !this.externalCallParenthesesClosed(
+                    combinedCode,
+                    head.openParenthesisIndex
+                )
+            ) {
+
+                continue;
+
+            }
+
+
+            /*
+             * Re-parse against the complete sanitized expression so
+             * nested abi.encodeCall(...) metadata can be observed
+             * even when it spans multiple lines.
+             */
+            const completeHead =
+                this.externalCallHead(
+                    combinedCode
+                );
+
+
+            if (
+                completeHead ===
+                undefined
+            ) {
+
+                return undefined;
+
+            }
+
+
+            return {
+
+                rawText:
+                    rawFragments.join(
+                        "\n"
+                    ),
+
+                endLine:
+                    baseLine +
+                    index,
+
+                externalCall:
+                    completeHead.externalCall
+
+            };
+
+        }
+
+
+        return undefined;
+
+    }
+
+
+    private externalCallParenthesesClosed(
+        code:
+            string,
+        openParenthesisIndex:
+            number
+    ): boolean {
+
+        if (
+            openParenthesisIndex <
+                0 ||
+            openParenthesisIndex >=
+                code.length ||
+            code[
+                openParenthesisIndex
+            ] !==
+                "("
+        ) {
+
+            return false;
+
+        }
+
+
+        let depth =
+            0;
+
+
+        for (
+            let index =
+                openParenthesisIndex;
+            index <
+                code.length;
+            index++
+        ) {
+
+            const character =
+                code[index];
+
+
+            if (
+                character ===
+                "("
+            ) {
+
+                depth++;
+
+                continue;
+
+            }
+
+
+            if (
+                character !==
+                ")"
+            ) {
+
+                continue;
+
+            }
+
+
+            depth--;
+
+
+            if (
+                depth ===
+                0
+            ) {
+
+                return true;
+
+            }
+
+
+            if (
+                depth <
+                0
+            ) {
+
+                return false;
+
+            }
+
+        }
+
+
+        return false;
+
+    }
+
     private sanitizeLine(
         line:
             string,

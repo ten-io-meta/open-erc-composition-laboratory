@@ -1,4 +1,7 @@
 import type {
+    ScientificSourceExternalCall
+} from "./ScientificSourceExternalCall.js";
+import type {
     ScientificSourceObservationLocator
 } from "../scientific-source-observation/ScientificSourceObservationLocator.js";
 
@@ -10,6 +13,7 @@ export type ScientificSourceFactKind =
     | "STATE_VARIABLE_DECLARATION"
     | "REQUIRE_STATEMENT"
     | "REVERT_STATEMENT"
+    | "EXTERNAL_CALL_EXPRESSION"
     | "INTERFACE_DECLARATION"
     | "CONTRACT_DECLARATION"
     | "OTHER";
@@ -83,6 +87,12 @@ export interface ScientificSourceFact {
     /*
      * Exact source location inherited from the observation.
      */
+    /*
+     * Structured Solidity external-call syntax is present only
+     * for EXTERNAL_CALL_EXPRESSION facts.
+     */
+    externalCall?: ScientificSourceExternalCall;
+
     locator: ScientificSourceObservationLocator;
 
     /*

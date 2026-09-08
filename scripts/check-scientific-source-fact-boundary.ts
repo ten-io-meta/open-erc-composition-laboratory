@@ -3,10 +3,20 @@ import { readFile } from "fs/promises";
 const factPath =
     "./laboratory/scientific-source-fact/ScientificSourceFact.ts";
 
+const externalCallPath =
+    "./laboratory/scientific-source-fact/ScientificSourceExternalCall.ts";
+
 const fact =
     normalize(
         await readFileSafe(
             factPath
+        )
+    );
+
+const externalCall =
+    normalize(
+        await readFileSafe(
+            externalCallPath
         )
     );
 
@@ -130,6 +140,119 @@ const checks: Array<{
         passed:
             fact.includes(
                 '"REVERT_STATEMENT"'
+            )
+    },
+    {
+        name:
+            "FACT KIND SUPPORTS EXTERNAL CALL EXPRESSION",
+        passed:
+            fact.includes(
+                '"EXTERNAL_CALL_EXPRESSION"'
+            )
+    },
+    {
+        name:
+            "SOURCE FACT SUPPORTS STRUCTURED EXTERNAL CALL",
+        passed:
+            fact.includes(
+                "externalCall?: ScientificSourceExternalCall"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL EXISTS",
+        passed:
+            externalCall.length > 0
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL DECLARES CALL FORM",
+        passed:
+            externalCall.includes(
+                "callForm: ScientificSourceExternalCallForm"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL SUPPORTS LOW LEVEL CALL",
+        passed:
+            externalCall.includes(
+                '"LOW_LEVEL_CALL"'
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL SUPPORTS LOW LEVEL STATICCALL",
+        passed:
+            externalCall.includes(
+                '"LOW_LEVEL_STATICCALL"'
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL SUPPORTS LOW LEVEL DELEGATECALL",
+        passed:
+            externalCall.includes(
+                '"LOW_LEVEL_DELEGATECALL"'
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL SUPPORTS CAST MEMBER CALL",
+        passed:
+            externalCall.includes(
+                '"CAST_MEMBER_CALL"'
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL PRESERVES TARGET EXPRESSION",
+        passed:
+            externalCall.includes(
+                "targetExpression: string"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL PRESERVES OPTIONAL CAST TYPE SYMBOL",
+        passed:
+            externalCall.includes(
+                "castTypeSymbol?: string"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL PRESERVES OPTIONAL MEMBER SYMBOL",
+        passed:
+            externalCall.includes(
+                "memberSymbol?: string"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL PRESERVES OPTIONAL ENCODED CALL TYPE SYMBOL",
+        passed:
+            externalCall.includes(
+                "encodedCallTypeSymbol?: string"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL PRESERVES OPTIONAL ENCODED CALL MEMBER SYMBOL",
+        passed:
+            externalCall.includes(
+                "encodedCallMemberSymbol?: string"
+            )
+    },
+    {
+        name:
+            "EXTERNAL CALL MODEL DOES NOT PRECOMPUTE COMPOSITION SEMANTICS",
+        passed:
+            !/\b(protocolPair|capabilityPair|relation|confidence|compositionCandidate|scientificPolarity)\s*:/.test(
+                externalCall
+            ) &&
+            !externalCall.includes(
+                "CompositionCandidate"
             )
     },
     {
