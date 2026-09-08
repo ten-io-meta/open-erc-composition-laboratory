@@ -423,11 +423,69 @@ export class ScientificTheGraphSubgraphMcpKeywordProvider {
             const subgraphId =
                 subgraph.id;
 
+
+            const metadata =
+                subgraph.metadata;
+
+            const metadataRecord =
+                (
+                    metadata !==
+                        null &&
+                    typeof metadata ===
+                        "object" &&
+                    !Array.isArray(
+                        metadata
+                    )
+                )
+                    ? metadata as
+                        Record<string, unknown>
+                    : null;
+
+
+            const currentVersion =
+                subgraph.currentVersion;
+
+            const currentVersionRecord =
+                (
+                    currentVersion !==
+                        null &&
+                    typeof currentVersion ===
+                        "object" &&
+                    !Array.isArray(
+                        currentVersion
+                    )
+                )
+                    ? currentVersion as
+                        Record<string, unknown>
+                    : null;
+
+
+            const subgraphDeployment =
+                currentVersionRecord
+                    ?.subgraphDeployment;
+
+            const deploymentRecord =
+                (
+                    subgraphDeployment !==
+                        null &&
+                    typeof subgraphDeployment ===
+                        "object" &&
+                    !Array.isArray(
+                        subgraphDeployment
+                    )
+                )
+                    ? subgraphDeployment as
+                        Record<string, unknown>
+                    : null;
+
+
             const displayName =
-                subgraph.displayName;
+                metadataRecord
+                    ?.displayName;
 
             const ipfsHash =
-                subgraph.ipfsHash;
+                deploymentRecord
+                    ?.ipfsHash;
 
 
             if (

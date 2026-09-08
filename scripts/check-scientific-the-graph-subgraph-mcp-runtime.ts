@@ -176,22 +176,46 @@ const validClient =
                                             id:
                                                 "SUBGRAPH-A",
 
-                                            displayName:
-                                                "ERC-8301 Alpha",
+                                            currentVersion: {
 
-                                            ipfsHash:
-                                                "Qm11111111111111111111111111111111111111111111"
+                                                subgraphDeployment: {
+
+                                                    ipfsHash:
+                                                        "Qm11111111111111111111111111111111111111111111"
+
+                                                }
+
+                                            },
+
+                                            metadata: {
+
+                                                displayName:
+                                                    "ERC-8301 Alpha"
+
+                                            }
                                         },
 
                                         {
                                             id:
                                                 "SUBGRAPH-B",
 
-                                            displayName:
-                                                "ERC-8301 Beta",
+                                            currentVersion: {
 
-                                            ipfsHash:
-                                                "Qm22222222222222222222222222222222222222222222"
+                                                subgraphDeployment: {
+
+                                                    ipfsHash:
+                                                        "Qm22222222222222222222222222222222222222222222"
+
+                                                }
+
+                                            },
+
+                                            metadata: {
+
+                                                displayName:
+                                                    "ERC-8301 Beta"
+
+                                            }
                                         }
 
                                     ]
@@ -467,6 +491,58 @@ check(
         0
 );
 
+
+const obsoleteFlatShapeClient =
+    new FixtureClient(
+        () => ({
+            isError:
+                false,
+            content: [
+                {
+                    type:
+                        "text",
+                    text:
+                        JSON.stringify({
+                            returned:
+                                1,
+                            total:
+                                1,
+                            subgraphs: [
+                                {
+                                    id:
+                                        "OLD-FLAT-SUBGRAPH",
+                                    displayName:
+                                        "Old flat result",
+                                    ipfsHash:
+                                        "Qm33333333333333333333333333333333333333333333"
+                                }
+                            ]
+                        })
+                }
+            ]
+        })
+    );
+
+
+const obsoleteFlatShapeResult =
+    await new ScientificTheGraphSubgraphMcpKeywordProvider(
+        obsoleteFlatShapeClient,
+        "FIXTURE"
+    )
+        .discover(
+            [
+                plan.requests[0]
+            ]
+        );
+
+
+check(
+    "OBSOLETE FLAT MCP HIT SHAPE FAILS CLOSED",
+    obsoleteFlatShapeResult.errors.length >
+        0 &&
+    obsoleteFlatShapeResult.searches.length ===
+        0
+);
 
 const mismatchClient =
     new FixtureClient(
