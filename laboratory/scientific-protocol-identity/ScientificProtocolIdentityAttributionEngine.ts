@@ -18,6 +18,10 @@ import type {
     ScientificProtocolIdentityAttributionResult
 } from "./ScientificProtocolIdentityAttributionResult.js";
 
+import {
+    ScientificProtocolStructuralIdentityResolver
+} from "./ScientificProtocolStructuralIdentityResolver.js";
+
 
 export interface ScientificProtocolIdentityAttributionInput {
 
@@ -39,6 +43,10 @@ export interface ScientificProtocolIdentityAttributionInput {
 
 
 export class ScientificProtocolIdentityAttributionEngine {
+
+    private readonly structuralIdentityResolver =
+        new ScientificProtocolStructuralIdentityResolver();
+
 
     attribute(
         input:
@@ -126,56 +134,21 @@ export class ScientificProtocolIdentityAttributionEngine {
             of input.attribution.attributedCapabilities
         ) {
 
-            const exactContainerProtocolId =
-                this.protocolIdFromExactContainerSymbol(
-                    attribution
+            const identityResolution =
+                this.structuralIdentityResolver.resolve(
+                    {
+                        observationId:
+                            attribution.observationId,
+
+                        containerSymbol:
+                            attribution.containerSymbol
+                    },
+                    observationsById
                 );
 
 
-            const exactReferenceProtocolId =
-                exactContainerProtocolId ===
-                    undefined
-                    ? this.protocolIdFromExactReferenceContainerSymbol(
-                        attribution
-                    )
-                    : undefined;
-
-
-            const storageNamespaceProtocolId =
-                exactContainerProtocolId ===
-                    undefined &&
-                exactReferenceProtocolId ===
-                    undefined
-                    ? this.protocolIdFromExplicitStorageNamespace(
-                        attribution,
-                        observationsById
-                    )
-                    : undefined;
-
-
-            const protocolId =
-                exactContainerProtocolId ??
-                exactReferenceProtocolId ??
-                storageNamespaceProtocolId;
-
-
-            const identityBasis =
-                exactContainerProtocolId !==
-                    undefined
-                    ? "EXACT_ERC_CONTAINER_SYMBOL"
-                    : exactReferenceProtocolId !==
-                        undefined
-                        ? "EXACT_ERC_REFERENCE_CONTAINER_SYMBOL"
-                        : storageNamespaceProtocolId !==
-                            undefined
-                            ? "EXPLICIT_ERC_STORAGE_NAMESPACE"
-                            : undefined;
-
-
             if (
-                protocolId ===
-                    undefined ||
-                identityBasis ===
+                identityResolution ===
                     undefined
             ) {
 
@@ -186,6 +159,13 @@ export class ScientificProtocolIdentityAttributionEngine {
                 continue;
 
             }
+
+
+            const {
+                protocolId,
+                identityBasis
+            } =
+                identityResolution;
 
 
             protocolAttributedCapabilities.push({
@@ -571,178 +551,6 @@ export class ScientificProtocolIdentityAttributionEngine {
 
 
         return errors;
-
-    }
-
-
-    private protocolIdFromExactReferenceContainerSymbol(
-        attribution:
-            ScientificAttributedCapability
-    ): string | undefined {
-
-        /*
-         * Deliberately narrow structural self-identification.
-         *
-         * Accepted:
-         *
-         * ERC8060Reference
-         * ERC165Reference
-         *
-         * Rejected:
-         *
-         * IERC8060Reference
-         * IERC8060MintBurn
-         * ERC8060ReferenceHelper
-         * MyERC8060Reference
-         * ERC0Reference
-         *
-         * This basis identifies only the exact reference
-         * implementation container. It does not propagate protocol
-         * identity to sibling contracts, interfaces or helpers.
-         */
-        const match =
-            /^ERC([1-9][0-9]*)Reference$/.exec(
-                attribution.containerSymbol
-            );
-
-
-        if (
-            !match
-        ) {
-
-            return undefined;
-
-        }
-
-
-        return `ERC-${match[1]}`;
-
-    }
-
-
-    private protocolIdFromExplicitStorageNamespace(
-        attribution:
-            ScientificAttributedCapability,
-        observationsById:
-            Map<
-                string,
-                ScientificSourceObservation
-            >
-    ): string | undefined {
-
-        /*
-         * Identity from storage namespaces is deliberately narrow.
-         *
-         * Accepted structural form:
-         *
-         * @custom:storage-location erc7201:erc8004.identity.registry
-         *
-         * Rejected as identity evidence:
-         *
-         * repository names
-         * repository URLs
-         * generic ERC co-mentions
-         * arbitrary strings such as "ERC8004IdentityRegistry"
-         * namespaces from another source observation
-         *
-         * Multiple distinct ERC namespace identifiers in the same
-         * observation are ambiguous and therefore fail closed.
-         */
-        const observation =
-            observationsById.get(
-                attribution.observationId
-            );
-
-
-        if (
-            !observation
-        ) {
-
-            return undefined;
-
-        }
-
-
-        const protocolIds =
-            new Set<string>();
-
-
-        const pattern =
-            /@custom:storage-location[ \t]+erc7201:erc([1-9][0-9]*)(?=\.|[ \t\r\n]|$)/g;
-
-
-        let match:
-            RegExpExecArray | null;
-
-
-        while (
-            (
-                match =
-                    pattern.exec(
-                        observation.rawText
-                    )
-            ) !==
-            null
-        ) {
-
-            protocolIds.add(
-                `ERC-${match[1]}`
-            );
-
-        }
-
-
-        if (
-            protocolIds.size !==
-            1
-        ) {
-
-            return undefined;
-
-        }
-
-
-        return [
-            ...protocolIds
-        ][0];
-
-    }
-
-
-    private protocolIdFromExactContainerSymbol(
-        attribution:
-            ScientificAttributedCapability
-    ): string | undefined {
-
-        /*
-         * Deliberately exact and case-sensitive.
-         *
-         * Accepted examples:
-         * IERC165
-         * ERC165
-         *
-         * Rejected examples:
-         * IERC165Metadata
-         * IERC999Extension
-         * MyERC165
-         * ERC0
-         */
-        const match =
-            /^(?:I)?ERC([1-9][0-9]*)$/.exec(
-                attribution.containerSymbol
-            );
-
-
-        if (
-            !match
-        ) {
-
-            return undefined;
-
-        }
-
-
-        return `ERC-${match[1]}`;
 
     }
 

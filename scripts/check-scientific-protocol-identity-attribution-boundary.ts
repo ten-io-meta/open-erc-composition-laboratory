@@ -55,11 +55,22 @@ const engineSource =
         : "";
 
 
+const resolverPath =
+    "./laboratory/scientific-protocol-identity/ScientificProtocolStructuralIdentityResolver.ts";
+
+const resolverSource =
+    readFileSync(
+        resolverPath,
+        "utf8"
+    );
+
+
 const productionSource =
     [
         capabilitySource,
         resultSource,
-        engineSource
+        engineSource,
+        resolverSource
     ].join(
         "\n"
     );
@@ -247,20 +258,20 @@ const checks: Array<{
     },
     {
         name:
-            "ENGINE REQUIRES EXACT ERC IDENTIFIER",
+            "STRUCTURAL RESOLVER REQUIRES EXACT ERC IDENTIFIER",
         passed:
-            engineSource.includes(
+            resolverSource.includes(
                 "^(?:I)?ERC([1-9][0-9]*)$"
             )
     },
     {
         name:
-            "ENGINE DOES NOT ACCEPT ERC PREFIX WITH SUFFIX",
+            "STRUCTURAL RESOLVER DOES NOT ACCEPT ERC PREFIX WITH SUFFIX",
         passed:
-            !engineSource.includes(
+            !resolverSource.includes(
                 "startsWith(\"IERC\")"
             ) &&
-            !engineSource.includes(
+            !resolverSource.includes(
                 "startsWith(\"ERC\")"
             )
     },
