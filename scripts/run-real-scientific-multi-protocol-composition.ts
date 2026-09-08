@@ -43,6 +43,10 @@ import {
 } from "../laboratory/scientific-composition-participant-expansion/ScientificCompositionParticipantExpansionEngine.js";
 
 import {
+    ScientificCompositionCandidateGraphEngine
+} from "../laboratory/scientific-composition-candidate-graph/ScientificCompositionCandidateGraphEngine.js";
+
+import {
     ScientificCompositionCandidateSetEngine
 } from "../laboratory/scientific-composition-candidate-set/ScientificCompositionCandidateSetEngine.js";
 
@@ -1199,6 +1203,120 @@ async function main(): Promise<void> {
         "Real scientific composition candidate set",
         compositionCandidateSet.errors
     );
+
+
+    const compositionCandidateGraph =
+        new ScientificCompositionCandidateGraphEngine()
+            .build({
+
+                objective,
+
+                profiles:
+                    profiles.map(
+                        profile => ({
+
+                            protocolId:
+                                profile.protocolId,
+
+                            profileId:
+                                profile.profileId,
+
+                            sourceId:
+                                profile.sourceId,
+
+                            ...(
+                                profile.sourceRevision !==
+                                    undefined
+                                    ? {
+                                        sourceRevision:
+                                            profile.sourceRevision
+                                    }
+                                    : {}
+                            )
+
+                        })
+                    ),
+
+                candidateSet:
+                    compositionCandidateSet
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition candidate graph",
+        compositionCandidateGraph.errors
+    );
+
+
+    if (
+        compositionCandidateGraph.graph ===
+        null
+    ) {
+
+        throw new Error(
+            "Real scientific composition candidate graph unexpectedly returned null."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC COMPOSITION CANDIDATE GRAPH"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `graphId:                     ${compositionCandidateGraph.graph.graphId}`
+    );
+
+    console.log(
+        `nodes:                       ${compositionCandidateGraph.graph.statistics.nodes}`
+    );
+
+    console.log(
+        `candidate edges:             ${compositionCandidateGraph.graph.statistics.candidateEdges}`
+    );
+
+    console.log(
+        `functional candidate edges:  ${compositionCandidateGraph.graph.statistics.functionalCandidateEdges}`
+    );
+
+    console.log(
+        `documentary candidate edges: ${compositionCandidateGraph.graph.statistics.documentaryCandidateEdges}`
+    );
+
+
+    for (
+        const edge
+        of compositionCandidateGraph.graph.edges
+    ) {
+
+        if (
+            edge.kind ===
+            "FUNCTIONAL_COMPLEMENTARITY"
+        ) {
+
+            console.log(
+                `  EDGE ${edge.sourceParticipantId} -> ${edge.targetParticipantId} kind=${edge.kind} need=${edge.needId} contribution=${edge.contributionId} evidence=${edge.evidenceIds.length} status=${edge.evaluationStatus}`
+            );
+
+        }
+        else {
+
+            console.log(
+                `  EDGE ${edge.sourceParticipantId} -> ${edge.targetParticipantId} kind=${edge.kind} relation=${edge.relation} evidence=${edge.evidenceIds.length} status=${edge.evaluationStatus}`
+            );
+
+        }
+
+    }
 
 
     console.log("");
