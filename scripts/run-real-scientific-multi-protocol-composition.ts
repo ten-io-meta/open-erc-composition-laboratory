@@ -43,6 +43,10 @@ import {
 } from "../laboratory/scientific-composition-participant-expansion/ScientificCompositionParticipantExpansionEngine.js";
 
 import {
+    ScientificCompositionCandidateCompatibilityEngine
+} from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
+
+import {
     ScientificCompositionCandidateGraphEngine
 } from "../laboratory/scientific-composition-candidate-graph/ScientificCompositionCandidateGraphEngine.js";
 
@@ -1203,6 +1207,112 @@ async function main(): Promise<void> {
         "Real scientific composition candidate set",
         compositionCandidateSet.errors
     );
+
+
+    const candidateCompatibility =
+        new ScientificCompositionCandidateCompatibilityEngine()
+            .evaluate({
+
+                profiles:
+                    profiles.map(
+                        profile => ({
+
+                            protocolId:
+                                profile.protocolId,
+
+                            boundaries:
+                                profile.boundaries.map(
+                                    boundary => ({
+
+                                        boundaryId:
+                                            boundary.boundaryId,
+
+                                        participantId:
+                                            boundary.participantId
+
+                                    })
+                                )
+
+                        })
+                    ),
+
+                candidateSet:
+                    compositionCandidateSet,
+
+                /*
+                 * Real candidate discovered from source evidence,
+                 * but no candidate-specific boundary observations
+                 * have been executed yet.
+                 *
+                 * Absence of observations must therefore remain
+                 * INCONCLUSIVE.
+                 */
+                observations:
+                    []
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate compatibility",
+        candidateCompatibility.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC CANDIDATE BOUNDARY COMPATIBILITY"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `assessments: ${candidateCompatibility.assessments.length}`
+    );
+
+
+    for (
+        const assessment
+        of candidateCompatibility.assessments
+    ) {
+
+        console.log(
+            `  CANDIDATE ${assessment.sourceParticipantId} -> ${assessment.targetParticipantId}`
+        );
+
+        console.log(
+            `    kind:        ${assessment.candidateKind}`
+        );
+
+        console.log(
+            `    boundaries:  ${assessment.statistics.total}`
+        );
+
+        console.log(
+            `    preserved:   ${assessment.statistics.preserved}`
+        );
+
+        console.log(
+            `    violated:    ${assessment.statistics.violated}`
+        );
+
+        console.log(
+            `    unevaluated: ${assessment.statistics.unevaluated}`
+        );
+
+        console.log(
+            `    polarity:    ${assessment.scientificPolarity}`
+        );
+
+        console.log(
+            `    basis:       ${assessment.assessmentBasis}`
+        );
+
+    }
 
 
     const compositionCandidateGraph =
