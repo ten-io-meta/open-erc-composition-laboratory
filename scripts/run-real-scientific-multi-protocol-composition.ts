@@ -59,6 +59,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
 import {
+    ScientificNProtocolCompositionSolverEngine
+} from "../laboratory/scientific-n-protocol-composition-solver/ScientificNProtocolCompositionSolverEngine.js";
+
+import {
     ScientificCompositionHarmonyAssessmentEngine
 } from "../laboratory/scientific-composition-harmony/ScientificCompositionHarmonyAssessmentEngine.js";
 
@@ -1646,6 +1650,126 @@ async function main(): Promise<void> {
         console.log(
             `  ISOLATED: ${compositionEnvelopes.isolatedParticipantIds.join(", ")}`
         );
+
+    }
+
+    const nProtocolCompositionSolutions =
+        new ScientificNProtocolCompositionSolverEngine()
+            .solve({
+
+                objective,
+
+                envelopes:
+                    compositionEnvelopes,
+
+                candidateEvaluationGraph,
+
+                complementarity
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific N-protocol composition solver",
+        nProtocolCompositionSolutions.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL COMPOSITION SOLVER"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `solutions: ${nProtocolCompositionSolutions.solutions.length}`
+    );
+
+
+    for (
+        const solution
+        of nProtocolCompositionSolutions.solutions
+    ) {
+
+        console.log(
+            `  SOLUTION ${solution.resolutionStatus}`
+        );
+
+        console.log(
+            `    participants: ${solution.participantIds.join(", ")}`
+        );
+
+        console.log(
+            `    supported functional candidates: ${solution.supportedFunctionalCandidateIds.length}`
+        );
+
+        console.log(
+            `    documentary candidates:          ${solution.documentaryCandidateIds.length}`
+        );
+
+        console.log(
+            `    challenged candidates:           ${solution.challengedCandidateIds.length}`
+        );
+
+        console.log(
+            `    inconclusive candidates:         ${solution.inconclusiveCandidateIds.length}`
+        );
+
+        console.log(
+            `    full configurations:             ${solution.fullConfigurations.length}`
+        );
+
+        console.log(
+            `    subset configurations:           ${solution.subsetConfigurations.length}`
+        );
+
+        console.log(
+            `    ready configurations:            ${solution.statistics.readyConfigurations}`
+        );
+
+        console.log(
+            `    blocked configurations:          ${solution.statistics.blockedConfigurations}`
+        );
+
+
+        for (
+            const configuration
+            of [
+                ...solution.fullConfigurations,
+                ...solution.subsetConfigurations
+            ]
+        ) {
+
+            console.log(
+                `    CONFIGURATION ${configuration.kind} readiness=${configuration.readiness}`
+            );
+
+            console.log(
+                `      participants: ${configuration.participantIds.join(", ")}`
+            );
+
+            console.log(
+                `      functional candidates: ${configuration.selectedFunctionalCandidateIds.length}`
+            );
+
+            console.log(
+                `      unresolved needs: ${configuration.unresolvedNeedIds.length}`
+            );
+
+            console.log(
+                `      unresolved objective subjects: ${configuration.unresolvedObjectiveSubjects.length}`
+            );
+
+            console.log(
+                `      global evaluation: ${configuration.globalEvaluationStatus}`
+            );
+
+        }
 
     }
 
