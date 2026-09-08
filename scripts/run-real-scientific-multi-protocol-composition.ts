@@ -5,6 +5,9 @@ import {
 import {
     ScientificTheGraphProfileDiscoveryEngine
 } from "../laboratory/scientific-the-graph-profile-discovery/ScientificTheGraphProfileDiscoveryEngine.js";
+import {
+    ScientificTheGraphDiscoveryTriageEngine
+} from "../laboratory/scientific-the-graph-discovery-triage/ScientificTheGraphDiscoveryTriageEngine.js";
 
 import {
     ScientificTheGraphSubgraphMcpLiveClient
@@ -1616,6 +1619,246 @@ async function main(): Promise<void> {
 
     console.log(
         "No hit, no match, or unattributed hit is converted into incompatibility."
+    );
+
+
+    /*
+     * =========================================================
+     * REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE
+     * =========================================================
+     *
+     * Keyword discovery is intentionally broad.
+     *
+     * Only exact protocol-identity hits or exact deployments
+     * independently returned by at least two distinct
+     * profile-derived terms are prioritized for schema
+     * inspection.
+     *
+     * This is an operational cost/precision gate only.
+     */
+
+
+    const realGraphDiscoveryTriage =
+        new ScientificTheGraphDiscoveryTriageEngine()
+            .triage({
+
+                requests:
+                    graphDiscoveryExpansion.requests,
+
+                terms:
+                    graphDiscoveryExpansion.terms,
+
+                discovery:
+                    realProfileGraphDiscovery
+
+            });
+
+
+    requireNoErrors(
+        "Real The Graph discovery candidate triage",
+        realGraphDiscoveryTriage.errors
+    );
+
+
+    const triageSerialized =
+        JSON.stringify(
+            realGraphDiscoveryTriage
+        );
+
+
+    if (
+        triageSerialized.includes(
+            "scientificPolarity"
+        ) ||
+        triageSerialized.includes(
+            "compatibilityPolarity"
+        ) ||
+        triageSerialized.includes(
+            '"SUPPORT"'
+        ) ||
+        triageSerialized.includes(
+            '"CHALLENGE"'
+        ) ||
+        triageSerialized.includes(
+            '"FULL"'
+        ) ||
+        triageSerialized.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "The Graph discovery triage manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `raw deployment candidates: ${realGraphDiscoveryTriage.candidates.length}`
+    );
+
+    console.log(
+        `prioritized for inspection:${realGraphDiscoveryTriage.prioritized.length}`
+    );
+
+    console.log(
+        `deferred low-specificity:  ${realGraphDiscoveryTriage.deferred.length}`
+    );
+
+
+    for (
+        const profile
+        of graphDiscoveryProfiles
+    ) {
+
+        const candidates =
+            realGraphDiscoveryTriage.candidates
+                .filter(
+                    candidate =>
+                        candidate.protocolId ===
+                        profile.protocolId
+                );
+
+
+        const prioritized =
+            candidates
+                .filter(
+                    candidate =>
+                        candidate.status ===
+                        "PRIORITIZED_FOR_INSPECTION"
+                )
+                .sort(
+                    (
+                        a,
+                        b
+                    ) =>
+                        (
+                            b.derivedTermCount -
+                            a.derivedTermCount
+                        ) ||
+                        (
+                            b.totalDistinctTermCount -
+                            a.totalDistinctTermCount
+                        ) ||
+                        a.subgraphId.localeCompare(
+                            b.subgraphId
+                        )
+                );
+
+
+        const deferred =
+            candidates.filter(
+                candidate =>
+                    candidate.status ===
+                    "DEFERRED_LOW_SPECIFICITY"
+            );
+
+
+        console.log("");
+        console.log(
+            profile.protocolId
+        );
+
+        console.log(
+            `  candidates:  ${candidates.length}`
+        );
+
+        console.log(
+            `  prioritized: ${prioritized.length}`
+        );
+
+        console.log(
+            `  deferred:    ${deferred.length}`
+        );
+
+
+        for (
+            const candidate
+            of prioritized.slice(
+                0,
+                5
+            )
+        ) {
+
+            console.log(
+                `  PRIORITY ${candidate.displayNames.join(" | ")}`
+            );
+
+            console.log(
+                `    subgraph: ${candidate.subgraphId}`
+            );
+
+            console.log(
+                `    deployment: ${candidate.ipfsHash}`
+            );
+
+            console.log(
+                `    matched terms: ${candidate.matchedTerms.join(", ")}`
+            );
+
+            console.log(
+                `    derived terms: ${candidate.derivedTermCount}`
+            );
+
+            console.log(
+                `    identity match: ${candidate.identityMatch}`
+            );
+
+            console.log(
+                `    basis: ${candidate.triageBasis}`
+            );
+
+        }
+
+
+        if (
+            prioritized.length >
+            5
+        ) {
+
+            console.log(
+                `  ... ${prioritized.length - 5} additional prioritized candidates`
+            );
+
+        }
+
+    }
+
+
+    console.log("");
+    console.log(
+        "TRIAGE INTERPRETATION"
+    );
+
+    console.log(
+        "---------------------"
+    );
+
+    console.log(
+        "Single generic keyword hits remain preserved but are not promoted to expensive schema inspection."
+    );
+
+    console.log(
+        "Priority means only that a candidate has stronger discovery provenance."
+    );
+
+    console.log(
+        "Protocol attribution still requires exact schema evidence through the existing attribution gate."
     );
 
 
