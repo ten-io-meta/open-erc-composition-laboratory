@@ -59,6 +59,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
 import {
+    ScientificCompositionHarmonyAssessmentEngine
+} from "../laboratory/scientific-composition-harmony/ScientificCompositionHarmonyAssessmentEngine.js";
+
+import {
     ScientificCompositionEnvelopeEngine
 } from "../laboratory/scientific-composition-envelope/ScientificCompositionEnvelopeEngine.js";
 
@@ -1641,6 +1645,103 @@ async function main(): Promise<void> {
 
         console.log(
             `  ISOLATED: ${compositionEnvelopes.isolatedParticipantIds.join(", ")}`
+        );
+
+    }
+
+    const compositionHarmony =
+        new ScientificCompositionHarmonyAssessmentEngine()
+            .assess({
+
+                envelopes:
+                    compositionEnvelopes,
+
+                /*
+                 * No exact global configuration evaluation currently
+                 * exists for the discovered ERC-8301/ERC-8354 envelope.
+                 *
+                 * Absence of global evidence is preserved as absence.
+                 * It must not be replaced by pair-level, documentary,
+                 * or candidate compatibility evidence.
+                 */
+                compositionGraphs:
+                    [],
+
+                globalEvaluations:
+                    []
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition harmony",
+        compositionHarmony.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL COMPOSITION HARMONY"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `assessments: ${compositionHarmony.assessments.length}`
+    );
+
+
+    for (
+        const assessment
+        of compositionHarmony.assessments
+    ) {
+
+        console.log(
+            `  HARMONY ${assessment.harmonyStatus}`
+        );
+
+        console.log(
+            `    participants: ${assessment.participantIds.join(", ")}`
+        );
+
+        console.log(
+            `    full configuration evidence: ${assessment.fullConfigurationEvidence.length}`
+        );
+
+        console.log(
+            `    supported subsets:           ${assessment.supportedSubsets.length}`
+        );
+
+        console.log(
+            `    supported candidates:        ${assessment.supportedCandidateIds.length}`
+        );
+
+        console.log(
+            `    challenged candidates:       ${assessment.challengedCandidateIds.length}`
+        );
+
+        console.log(
+            `    inconclusive candidates:     ${assessment.inconclusiveCandidateIds.length}`
+        );
+
+        console.log(
+            `    preserved boundary regions:  ${assessment.preservedBoundaryRegionIds.length}`
+        );
+
+        console.log(
+            `    violated boundary regions:   ${assessment.violatedBoundaryRegionIds.length}`
+        );
+
+        console.log(
+            `    unevaluated boundary regions:${assessment.unevaluatedBoundaryRegionIds.length}`
+        );
+
+        console.log(
+            `    evidence basis: ${assessment.evidenceBasis}`
         );
 
     }
