@@ -1957,22 +1957,12 @@ async function main(): Promise<void> {
                 envelopes:
                     compositionEnvelopes,
 
-                /*
-                 * No exact global configuration evaluation currently
-                 * exists for the discovered ERC-8301/ERC-8354 envelope.
-                 *
-                 * Absence of global evidence is preserved as absence.
-                 * It must not be replaced by pair-level, documentary,
-                 * or candidate compatibility evidence.
-                 */
-                compositionGraphs:
-                    [],
+                solver:
+                    nProtocolCompositionSolutions,
 
-                globalEvaluations:
-                    []
+                globalEvidenceBindings
 
             });
-
 
     requireNoErrors(
         "Real scientific composition harmony",
