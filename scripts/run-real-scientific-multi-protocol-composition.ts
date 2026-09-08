@@ -59,6 +59,10 @@ import {
 } from "../laboratory/scientific-composition-candidate-evidence-gap/ScientificCompositionCandidateEvidenceGapEngine.js";
 
 import {
+    ScientificCompositionEnvelopeEngine
+} from "../laboratory/scientific-composition-envelope/ScientificCompositionEnvelopeEngine.js";
+
+import {
     ScientificCompositionCandidateEvaluationGraphEngine
 } from "../laboratory/scientific-composition-candidate-evaluation-graph/ScientificCompositionCandidateEvaluationGraphEngine.js";
 
@@ -1513,6 +1517,133 @@ async function main(): Promise<void> {
 
     }
 
+
+    const compositionEnvelopes =
+        new ScientificCompositionEnvelopeEngine()
+            .build({
+
+                compositionSets:
+                    nProtocolCompositionSets,
+
+                profiles,
+
+                candidateCompatibility,
+
+                candidateEvaluationGraph,
+
+                complementarity
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition envelopes",
+        compositionEnvelopes.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL COMPOSITION ENVELOPES"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `envelopes:             ${compositionEnvelopes.envelopes.length}`
+    );
+
+    console.log(
+        `isolated participants: ${compositionEnvelopes.isolatedParticipantIds.length}`
+    );
+
+
+    for (
+        const envelope
+        of compositionEnvelopes.envelopes
+    ) {
+
+        console.log(
+            `  ENVELOPE participants=${envelope.statistics.participants} relations=${envelope.statistics.relations} status=${envelope.assemblyStatus}`
+        );
+
+        console.log(
+            `    participants:             ${envelope.participantIds.join(", ")}`
+        );
+
+        console.log(
+            `    contributions:            ${envelope.statistics.contributions}`
+        );
+
+        console.log(
+            `    known boundaries:         ${envelope.statistics.knownBoundaries}`
+        );
+
+        console.log(
+            `    needs:                    ${envelope.statistics.needs}`
+        );
+
+        console.log(
+            `    unresolved needs:         ${envelope.statistics.unresolvedNeeds}`
+        );
+
+        console.log(
+            `    preserved boundary regions:   ${envelope.statistics.preservedBoundaryRegions}`
+        );
+
+        console.log(
+            `    violated boundary regions:    ${envelope.statistics.violatedBoundaryRegions}`
+        );
+
+        console.log(
+            `    unevaluated boundary regions: ${envelope.statistics.unevaluatedBoundaryRegions}`
+        );
+
+        console.log(
+            `    supported relations:      ${envelope.statistics.supportedRelations}`
+        );
+
+        console.log(
+            `    challenged relations:     ${envelope.statistics.challengedRelations}`
+        );
+
+        console.log(
+            `    inconclusive relations:   ${envelope.statistics.inconclusiveRelations}`
+        );
+
+        console.log(
+            `    relations without known boundaries: ${envelope.statistics.relationsWithoutKnownBoundaries}`
+        );
+
+
+        for (
+            const relation
+            of envelope.relations
+        ) {
+
+            console.log(
+                `    RELATION ${relation.sourceParticipantId} -> ${relation.targetParticipantId} kind=${relation.candidateKind} compatibility=${relation.compatibilityPolarity} boundaryCoverage=${relation.boundaryCoverage}`
+            );
+
+        }
+
+    }
+
+
+    if (
+        compositionEnvelopes.isolatedParticipantIds.length >
+        0
+    ) {
+
+        console.log(
+            `  ISOLATED: ${compositionEnvelopes.isolatedParticipantIds.join(", ")}`
+        );
+
+    }
 
     const candidateEvidenceGaps =
         new ScientificCompositionCandidateEvidenceGapEngine()
