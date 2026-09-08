@@ -12,6 +12,15 @@ export type ScientificCompositionHarmonyStatus =
 
 export interface ScientificCompositionHarmonyConfigurationEvidence {
 
+    configurationId:
+        string;
+
+    bindingId:
+        string;
+
+    targetId:
+        string;
+
     graphId:
         string;
 
@@ -24,6 +33,12 @@ export interface ScientificCompositionHarmonyConfigurationEvidence {
     scientificPolarity:
         ScientificCompositionGlobalPolarity;
 
+    observationIds:
+        string[];
+
+    runIds:
+        string[];
+
     supportingRunId?:
         string;
 
@@ -32,6 +47,15 @@ export interface ScientificCompositionHarmonyConfigurationEvidence {
 
 export interface ScientificCompositionHarmonySupportedSubset {
 
+    configurationId:
+        string;
+
+    bindingId:
+        string;
+
+    targetId:
+        string;
+
     graphId:
         string;
 
@@ -39,6 +63,12 @@ export interface ScientificCompositionHarmonySupportedSubset {
         string;
 
     participantIds:
+        string[];
+
+    observationIds:
+        string[];
+
+    runIds:
         string[];
 
     supportingRunId:
@@ -66,16 +96,19 @@ export interface ScientificCompositionHarmonyAssessment {
 
     /*
      * FULL:
-     * at least one exact full-participant configuration has
-     * GLOBAL SUPPORT from one complete scientific run.
+     * at least one exact FULL_SET solver configuration has
+     * GLOBAL SUPPORT from its exact global evidence binding.
      *
      * PARTIAL:
      * no full configuration is globally supported, but at least
-     * one strict participant subset is globally supported.
+     * one STRICT_SUBSET solver configuration has GLOBAL SUPPORT.
      *
      * CHALLENGED:
-     * exact full configurations exist and every one of them is
-     * globally CHALLENGED.
+     * full solver configurations exist, every one is globally
+     * evaluable, and every exact full configuration is CHALLENGE.
+     *
+     * A blocked/unresolved full alternative prevents CHALLENGED
+     * from being claimed because that alternative is not disproved.
      *
      * INCONCLUSIVE:
      * none of the above can currently be established.
@@ -84,22 +117,32 @@ export interface ScientificCompositionHarmonyAssessment {
         ScientificCompositionHarmonyStatus;
 
     /*
-     * Every available exact full-participant global evaluation.
-     * Multiple configurations are preserved independently so a
-     * challenged alternative cannot poison a supported route.
+     * Every exact ready FULL_SET configuration evaluation.
+     *
+     * Different solver configurations remain independent, so a
+     * challenged alternative cannot poison a supported full route.
      */
     fullConfigurationEvidence:
         ScientificCompositionHarmonyConfigurationEvidence[];
 
     /*
-     * Proper participant subsets which have actual GLOBAL SUPPORT.
+     * Strict solver subsets with actual GLOBAL SUPPORT.
      */
     supportedSubsets:
         ScientificCompositionHarmonySupportedSubset[];
 
     /*
-     * Local envelope state is preserved for visualization only.
-     * It does not directly determine FULL.
+     * Configurations blocked before global evaluation remain visible.
+     */
+    blockedFullConfigurationIds:
+        string[];
+
+    blockedSubsetConfigurationIds:
+        string[];
+
+    /*
+     * Local envelope state remains visualization context only.
+     * It never directly establishes FULL/PARTIAL/CHALLENGED.
      */
     supportedCandidateIds:
         string[];
@@ -120,7 +163,7 @@ export interface ScientificCompositionHarmonyAssessment {
         string[];
 
     evidenceBasis:
-        "EXACT_GLOBAL_CONFIGURATION_EVIDENCE";
+        "EXACT_SOLVER_CONFIGURATION_GLOBAL_EVIDENCE";
 
 }
 

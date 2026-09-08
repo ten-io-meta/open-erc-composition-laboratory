@@ -3,7 +3,10 @@ import {
 } from "../laboratory/scientific-composition-harmony/ScientificCompositionHarmonyAssessmentEngine.js";
 
 
-let failures =
+let passed =
+    0;
+
+let failed =
     0;
 
 
@@ -20,20 +23,47 @@ function check(
 
 
     if (
-        !condition
+        condition
     ) {
 
-        failures++;
+        passed++;
+
+    }
+    else {
+
+        failed++;
 
     }
 
 }
 
 
-function node(
+const participantIds = [
+    "ERC-1001",
+    "ERC-1002",
+    "ERC-1003"
+];
+
+
+const boundaryOwner =
+    new Map([
+        [
+            "BOUNDARY-ERC-1001",
+            "ERC-1001"
+        ],
+        [
+            "BOUNDARY-ERC-1002",
+            "ERC-1002"
+        ],
+        [
+            "BOUNDARY-ERC-1003",
+            "ERC-1003"
+        ]
+    ]);
+
+
+function participant(
     participantId:
-        string,
-    boundaryId:
         string
 ): any {
 
@@ -47,290 +77,29 @@ function node(
         sourceId:
             `SOURCE-${participantId}`,
 
-        boundaryIds: [
-            boundaryId
-        ],
-
-        contributionIds:
+        contributions:
             [],
 
-        needIds:
-            []
-
-    };
-
-}
-
-
-function graph(
-    graphId:
-        string,
-    participantIds:
-        string[],
-    polarity:
-        "SUPPORT" |
-        "CHALLENGE" |
-        "INCONCLUSIVE"
-): any {
-
-    const nodes =
-        participantIds.map(
-            participantId =>
-                node(
-                    participantId,
-                    `BOUNDARY-${participantId}`
-                )
-        );
-
-
-    return {
-
-        graph: {
-
-            graphId,
-
-            objectiveId:
-                "OBJECTIVE-HARMONY",
-
-            nodes,
-
-            edges:
-                participantIds.length >
-                    1
-                    ? [
-                        {
-                            edgeId:
-                                `EDGE-${graphId}`,
-
-                            matchId:
-                                `MATCH-${graphId}`,
-
-                            consumerParticipantId:
-                                participantIds[0],
-
-                            providerParticipantId:
-                                participantIds[1],
-
-                            needId:
-                                `NEED-${graphId}`,
-
-                            contributionId:
-                                `CONTRIBUTION-${graphId}`,
-
-                            compatibilityAssessmentId:
-                                `COMPAT-${graphId}`,
-
-                            compatibilityPolarity:
-                                polarity ===
-                                    "SUPPORT"
-                                    ? "SUPPORT"
-                                    : polarity ===
-                                        "CHALLENGE"
-                                        ? "CHALLENGE"
-                                        : "INCONCLUSIVE",
-
-                            boundaryIds:
-                                nodes.flatMap(
-                                    (node: any) =>
-                                        node.boundaryIds
-                                ),
-
-                            evidenceIds:
-                                []
-                        }
-                    ]
-                    : [],
-
-            unresolvedNeedIds:
-                polarity ===
-                    "SUPPORT"
-                    ? []
-                    : [
-                        `UNRESOLVED-${graphId}`
-                    ],
-
-            objectiveCoverage: [
-                {
-                    objectiveSubject:
-                        "OBJECTIVE-SUBJECT",
-
-                    status:
-                        polarity ===
-                            "SUPPORT"
-                            ? "COVERED"
-                            : "UNCOVERED",
-
-                    contributionIds:
-                        []
-                }
-            ],
-
-            statistics: {
-
-                nodes:
-                    nodes.length,
-
-                edges:
-                    participantIds.length >
-                        1
-                        ? 1
-                        : 0,
-
-                supportedEdges:
-                    polarity ===
-                        "SUPPORT"
-                        ? 1
-                        : 0,
-
-                challengedEdges:
-                    polarity ===
-                        "CHALLENGE"
-                        ? 1
-                        : 0,
-
-                inconclusiveEdges:
-                    polarity ===
-                        "INCONCLUSIVE"
-                        ? 1
-                        : 0,
-
-                unresolvedNeeds:
-                    polarity ===
-                        "SUPPORT"
-                        ? 0
-                        : 1,
-
-                unresolvedObjectiveSubjects:
-                    polarity ===
-                        "SUPPORT"
-                        ? 0
-                        : 1
-
-            },
-
-            scientificPolarity:
-                polarity ===
-                    "CHALLENGE"
-                    ? "CHALLENGE"
-                    : "INCONCLUSIVE"
-
-        },
-
-        errors:
-            []
-
-    };
-
-}
-
-
-function globalEvaluation(
-    graphId:
-        string,
-    participantIds:
-        string[],
-    polarity:
-        "SUPPORT" |
-        "CHALLENGE" |
-        "INCONCLUSIVE"
-): any {
-
-    const runId =
-        `RUN-${graphId}`;
-
-
-    const boundaryEvaluations =
-        participantIds.map(
-            participantId => ({
-
+        boundaries: [
+            {
                 boundaryId:
                     `BOUNDARY-${participantId}`,
 
                 participantId,
 
-                status:
-                    polarity ===
-                        "SUPPORT"
-                        ? "PRESERVED"
-                        : polarity ===
-                            "CHALLENGE"
-                            ? "VIOLATED"
-                            : "UNEVALUATED",
+                kind:
+                    "SOURCE_CONSTRAINT",
 
-                observationIds:
-                    polarity ===
-                        "SUPPORT"
-                        ? [
-                            `OBS-${participantId}`
-                        ]
-                        : [],
+                subject:
+                    `BOUNDARY:${participantId}`,
 
-                evidenceIds:
-                    polarity ===
-                        "SUPPORT"
-                        ? [
-                            `EVIDENCE-${participantId}`
-                        ]
-                        : []
+                evidenceIds: [
+                    `BOUNDARY-EVIDENCE-${participantId}`
+                ]
+            }
+        ],
 
-            })
-        );
-
-
-    return {
-
-        assessment: {
-
-            assessmentId:
-                `GLOBAL-${graphId}`,
-
-            graphId,
-
-            runAssessments: [
-                {
-                    runId,
-
-                    boundaryEvaluations,
-
-                    preserved:
-                        polarity ===
-                            "SUPPORT"
-                            ? participantIds.length
-                            : 0,
-
-                    violated:
-                        polarity ===
-                            "CHALLENGE"
-                            ? participantIds.length
-                            : 0,
-
-                    unevaluated:
-                        polarity ===
-                            "INCONCLUSIVE"
-                            ? participantIds.length
-                            : 0,
-
-                    scientificPolarity:
-                        polarity
-                }
-            ],
-
-            scientificPolarity:
-                polarity,
-
-            ...(
-                polarity ===
-                    "SUPPORT"
-                    ? {
-                        supportingRunId:
-                            runId
-                    }
-                    : {}
-            )
-
-        },
-
-        errors:
+        needs:
             []
 
     };
@@ -342,206 +111,80 @@ const envelope:
     any = {
 
         envelopeId:
-            "ENVELOPE-A-B-C",
+            "ENVELOPE-N",
 
         setId:
-            "SET-A-B-C",
+            "SET-N",
 
         candidateGraphId:
-            "CANDIDATE-GRAPH",
+            "CANDIDATE-GRAPH-N",
 
         candidateEvaluationGraphId:
-            "CANDIDATE-EVAL-GRAPH",
+            "CANDIDATE-EVALUATION-GRAPH-N",
 
         objectiveId:
-            "OBJECTIVE-HARMONY",
+            "OBJECTIVE-N",
 
         participants:
-            [],
+            participantIds.map(
+                participant
+            ),
 
-        participantIds: [
-            "ERC-1001",
-            "ERC-1002",
-            "ERC-1003"
-        ],
+        participantIds,
 
         relations: [
-
             {
                 candidateId:
-                    "CANDIDATE-A-B",
-
-                candidateKind:
-                    "FUNCTIONAL_COMPLEMENTARITY",
-
-                sourceParticipantId:
-                    "ERC-1001",
-
-                targetParticipantId:
-                    "ERC-1002",
-
-                discoveryEvidenceIds:
-                    [],
-
-                compatibilityAssessmentId:
-                    "COMPAT-A-B",
-
-                boundaryIds:
-                    [],
-
-                compatibilityEvidenceIds:
-                    [],
+                    "LOCAL-SUPPORT",
 
                 compatibilityPolarity:
-                    "SUPPORT",
-
-                boundaryCoverage:
-                    "KNOWN_BOUNDARIES_PRESENT",
-
-                functionalNeedId:
-                    "NEED-A",
-
-                functionalContributionId:
-                    "CONTRIBUTION-B",
-
-                evaluationStatus:
-                    "EVALUATED"
+                    "SUPPORT"
             },
-
-            /*
-             * Challenged alternative candidate.
-             * It must NOT poison a different globally-supported
-             * complete configuration.
-             */
             {
                 candidateId:
-                    "CANDIDATE-A-C-ALTERNATIVE",
-
-                candidateKind:
-                    "DOCUMENTARY_COMPOSITION",
-
-                sourceParticipantId:
-                    "ERC-1001",
-
-                targetParticipantId:
-                    "ERC-1003",
-
-                discoveryEvidenceIds:
-                    [],
-
-                compatibilityAssessmentId:
-                    "COMPAT-A-C",
-
-                boundaryIds:
-                    [],
-
-                compatibilityEvidenceIds:
-                    [],
+                    "LOCAL-CHALLENGE",
 
                 compatibilityPolarity:
-                    "CHALLENGE",
+                    "CHALLENGE"
+            },
+            {
+                candidateId:
+                    "LOCAL-INCONCLUSIVE",
 
-                boundaryCoverage:
-                    "KNOWN_BOUNDARIES_PRESENT",
-
-                documentaryRelation:
-                    "COMPOSES_WITH",
-
-                evaluationStatus:
-                    "EVALUATED"
+                compatibilityPolarity:
+                    "INCONCLUSIVE"
             }
-
         ],
 
         boundaryRegions: [
-
             {
                 boundaryId:
                     "BOUNDARY-ERC-1001",
 
-                participantId:
-                    "ERC-1001",
-
-                candidateIds:
-                    [],
-
-                candidateEvaluations:
-                    [],
+                candidateEvidenceStatus:
+                    "PRESERVED_IN_CANDIDATE_EVIDENCE"
+            },
+            {
+                boundaryId:
+                    "BOUNDARY-ERC-1002",
 
                 candidateEvidenceStatus:
-                    "PRESERVED_IN_CANDIDATE_EVIDENCE",
-
-                evidenceIds:
-                    []
+                    "VIOLATED_IN_CANDIDATE_EVIDENCE"
             },
-
             {
                 boundaryId:
                     "BOUNDARY-ERC-1003",
 
-                participantId:
-                    "ERC-1003",
-
-                candidateIds:
-                    [],
-
-                candidateEvaluations:
-                    [],
-
                 candidateEvidenceStatus:
-                    "VIOLATED_IN_CANDIDATE_EVIDENCE",
-
-                evidenceIds:
-                    []
+                    "UNEVALUATED_IN_CANDIDATE_EVIDENCE"
             }
-
         ],
 
         unresolvedNeedIds:
             [],
 
-        statistics: {
-
-            participants:
-                3,
-
-            relations:
-                2,
-
-            contributions:
-                0,
-
-            knownBoundaries:
-                2,
-
-            needs:
-                0,
-
-            unresolvedNeeds:
-                0,
-
-            preservedBoundaryRegions:
-                1,
-
-            violatedBoundaryRegions:
-                1,
-
-            unevaluatedBoundaryRegions:
-                0,
-
-            supportedRelations:
-                1,
-
-            challengedRelations:
-                1,
-
-            inconclusiveRelations:
-                0,
-
-            relationsWithoutKnownBoundaries:
-                0
-
-        },
+        statistics:
+            {},
 
         assemblyStatus:
             "ASSEMBLED"
@@ -549,8 +192,8 @@ const envelope:
     };
 
 
-const envelopes =
-    {
+const envelopes:
+    any = {
 
         envelopes: [
             envelope
@@ -565,15 +208,585 @@ const envelopes =
     };
 
 
+function encode(
+    parts:
+        string[]
+): string {
+
+    return parts
+        .map(
+            part =>
+                `${part.length}:${part}`
+        )
+        .join("|");
+
+}
+
+
+function configurationGraphId(
+    configurationId:
+        string
+): string {
+
+    return encode([
+        "SCIENTIFIC-N-PROTOCOL-CONFIGURATION-GRAPH",
+        configurationId
+    ]);
+
+}
+
+
+function evaluationTargetId(
+    configurationId:
+        string,
+    graphId:
+        string
+): string {
+
+    return encode([
+        "SCIENTIFIC-N-PROTOCOL-GLOBAL-EVALUATION-TARGET",
+        configurationId,
+        graphId
+    ]);
+
+}
+
+
+function evidenceBindingId(
+    targetId:
+        string,
+    graphId:
+        string
+): string {
+
+    return encode([
+        "SCIENTIFIC-N-PROTOCOL-GLOBAL-EVIDENCE-BINDING",
+        targetId,
+        graphId
+    ]);
+
+}
+
+
+function knownBoundaryIds(
+    participants:
+        string[]
+): string[] {
+
+    return participants
+        .map(
+            participantId =>
+                `BOUNDARY-${participantId}`
+        )
+        .sort();
+
+}
+
+
+function configuration(
+    configurationId:
+        string,
+    kind:
+        "FULL_SET" |
+        "STRICT_SUBSET",
+    participants:
+        string[],
+    readiness:
+        "READY_FOR_GLOBAL_EVALUATION" |
+        "BLOCKED" =
+        "READY_FOR_GLOBAL_EVALUATION"
+): any {
+
+    const ready =
+        readiness ===
+        "READY_FOR_GLOBAL_EVALUATION";
+
+
+    return {
+
+        configurationId,
+
+        envelopeId:
+            "ENVELOPE-N",
+
+        setId:
+            "SET-N",
+
+        objectiveId:
+            "OBJECTIVE-N",
+
+        kind,
+
+        participantIds:
+            [...participants],
+
+        relations:
+            ready
+                ? [
+                    {
+                        candidateId:
+                            `FUNCTIONAL-${configurationId}`
+                    }
+                ]
+                : [],
+
+        selectedFunctionalCandidateIds:
+            ready
+                ? [
+                    `FUNCTIONAL-${configurationId}`
+                ]
+                : [],
+
+        fulfilledNeedIds:
+            [],
+
+        unresolvedNeedIds:
+            ready
+                ? []
+                : [
+                    `UNRESOLVED-${configurationId}`
+                ],
+
+        objectiveCoverage: [
+            {
+                requiredSubject:
+                    "OBJECTIVE-SUBJECT",
+
+                status:
+                    ready
+                        ? "COVERED"
+                        : "UNRESOLVED",
+
+                providerParticipantIds:
+                    ready
+                        ? [
+                            participants[
+                                participants.length -
+                                1
+                            ]
+                        ]
+                        : [],
+
+                contributionIds:
+                    ready
+                        ? [
+                            `OBJECTIVE-CONTRIBUTION-${configurationId}`
+                        ]
+                        : []
+            }
+        ],
+
+        unresolvedObjectiveSubjects:
+            ready
+                ? []
+                : [
+                    "OBJECTIVE-SUBJECT"
+                ],
+
+        knownBoundaryIds:
+            knownBoundaryIds(
+                participants
+            ),
+
+        blockers:
+            ready
+                ? []
+                : [
+                    "UNRESOLVED_NEEDS"
+                ],
+
+        readiness,
+
+        globalEvaluationStatus:
+            "UNEVALUATED"
+
+    };
+
+}
+
+
+function solution(
+    fullConfigurations:
+        any[],
+    subsetConfigurations:
+        any[]
+): any {
+
+    return {
+
+        solutionId:
+            "SOLUTION-N",
+
+        envelopeId:
+            "ENVELOPE-N",
+
+        setId:
+            "SET-N",
+
+        objectiveId:
+            "OBJECTIVE-N",
+
+        participantIds:
+            [...participantIds],
+
+        fullConfigurations,
+
+        subsetConfigurations,
+
+        supportedFunctionalCandidateIds:
+            [],
+
+        documentaryCandidateIds:
+            [],
+
+        challengedCandidateIds:
+            [],
+
+        inconclusiveCandidateIds:
+            [],
+
+        statistics:
+            {},
+
+        resolutionStatus:
+            fullConfigurations.some(
+                item =>
+                    item.readiness ===
+                    "READY_FOR_GLOBAL_EVALUATION"
+            )
+                ? "READY_FULL_CONFIGURATION"
+                : subsetConfigurations.length >
+                    0
+                    ? "PARTIAL_CONFIGURATION_ONLY"
+                    : "UNRESOLVED_CANDIDATE_TOPOLOGY"
+
+    };
+
+}
+
+
+function solver(
+    fullConfigurations:
+        any[],
+    subsetConfigurations:
+        any[]
+): any {
+
+    return {
+
+        solutions: [
+            solution(
+                fullConfigurations,
+                subsetConfigurations
+            )
+        ],
+
+        errors:
+            []
+
+    };
+
+}
+
+
+function runAssessment(
+    configurationValue:
+        any,
+    runId:
+        string,
+    polarity:
+        "SUPPORT" |
+        "CHALLENGE"
+): any {
+
+    const boundaries =
+        configurationValue.knownBoundaryIds;
+
+
+    const boundaryEvaluations =
+        boundaries.map(
+            (
+                boundaryId:
+                    string,
+                index:
+                    number
+            ) => {
+
+                const violated =
+                    polarity ===
+                        "CHALLENGE" &&
+                    index ===
+                        0;
+
+
+                return {
+
+                    boundaryId,
+
+                    participantId:
+                        boundaryOwner.get(
+                            boundaryId
+                        ),
+
+                    status:
+                        violated
+                            ? "VIOLATED"
+                            : "PRESERVED",
+
+                    observationIds: [
+                        `OBS-${runId}-${boundaryId}`
+                    ],
+
+                    evidenceIds: [
+                        `EVIDENCE-${runId}-${boundaryId}`
+                    ]
+
+                };
+
+            }
+        );
+
+
+    return {
+
+        runId,
+
+        boundaryEvaluations,
+
+        preserved:
+            boundaryEvaluations.filter(
+                (
+                    item:
+                        any
+                ) =>
+                    item.status ===
+                    "PRESERVED"
+            ).length,
+
+        violated:
+            boundaryEvaluations.filter(
+                (
+                    item:
+                        any
+                ) =>
+                    item.status ===
+                    "VIOLATED"
+            ).length,
+
+        unevaluated:
+            0,
+
+        scientificPolarity:
+            polarity
+
+    };
+
+}
+
+
+function binding(
+    configurationValue:
+        any,
+    polarity:
+        "SUPPORT" |
+        "CHALLENGE" |
+        "INCONCLUSIVE"
+): any {
+
+    const graphId =
+        configurationGraphId(
+            configurationValue.configurationId
+        );
+
+    const targetId =
+        evaluationTargetId(
+            configurationValue.configurationId,
+            graphId
+        );
+
+    const bindingId =
+        evidenceBindingId(
+            targetId,
+            graphId
+        );
+
+    const assessmentId =
+        `GLOBAL-ASSESSMENT-${configurationValue.configurationId}`;
+
+
+    if (
+        polarity ===
+        "INCONCLUSIVE"
+    ) {
+
+        return {
+
+            bindingId,
+
+targetId,
+
+            configurationId:
+                configurationValue.configurationId,
+
+            envelopeId:
+                configurationValue.envelopeId,
+
+            setId:
+                configurationValue.setId,
+
+            objectiveId:
+                configurationValue.objectiveId,
+
+            graphId,
+
+            observationIds:
+                [],
+
+            runIds:
+                [],
+
+            evaluation: {
+
+                assessment: {
+
+                    assessmentId,
+
+                    graphId,
+
+                    runAssessments:
+                        [],
+
+                    scientificPolarity:
+                        "INCONCLUSIVE"
+
+                },
+
+                errors:
+                    []
+
+            },
+
+            status:
+                "EVALUATED"
+
+        };
+
+    }
+
+
+    const runId =
+        `RUN-${configurationValue.configurationId}`;
+
+    const run =
+        runAssessment(
+            configurationValue,
+            runId,
+            polarity
+        );
+
+
+    return {
+
+        bindingId,
+
+targetId,
+
+        configurationId:
+            configurationValue.configurationId,
+
+        envelopeId:
+            configurationValue.envelopeId,
+
+        setId:
+            configurationValue.setId,
+
+        objectiveId:
+            configurationValue.objectiveId,
+
+        graphId,
+
+        observationIds:
+            run.boundaryEvaluations
+                .flatMap(
+                    (
+                        item:
+                            any
+                    ) =>
+                        item.observationIds
+                )
+                .sort(),
+
+        runIds: [
+            runId
+        ],
+
+        evaluation: {
+
+            assessment: {
+
+                assessmentId,
+
+                graphId,
+
+                runAssessments: [
+                    run
+                ],
+
+                scientificPolarity:
+                    polarity,
+
+                ...(
+                    polarity ===
+                    "SUPPORT"
+                        ? {
+                            supportingRunId:
+                                runId
+                        }
+                        : {}
+                )
+
+            },
+
+            errors:
+                []
+
+        },
+
+        status:
+            "EVALUATED"
+
+    };
+
+}
+
+
+function bindings(
+    values:
+        any[]
+): any {
+
+    return {
+
+        bindings:
+            values,
+
+        errors:
+            []
+
+    };
+
+}
+
+
 const engine =
     new ScientificCompositionHarmonyAssessmentEngine();
 
 
 console.log(
-    "\nSCIENTIFIC COMPOSITION HARMONY — RUNTIME"
+    "\nSCIENTIFIC COMPOSITION HARMONY â€” SOLVER-AWARE RUNTIME"
 );
 console.log(
-    "-----------------------------------------"
+    "------------------------------------------------------"
 );
 
 
@@ -583,15 +796,11 @@ console.log(
  * ------------------------------------------------------------
  */
 
-const fullGraph =
-    graph(
-        "GRAPH-FULL-SUPPORT",
-        [
-            "ERC-1001",
-            "ERC-1002",
-            "ERC-1003"
-        ],
-        "SUPPORT"
+const fullConfiguration =
+    configuration(
+        "CONFIG-FULL-SUPPORT",
+        "FULL_SET",
+        participantIds
     );
 
 
@@ -600,34 +809,34 @@ const full =
 
         envelopes,
 
-        compositionGraphs: [
-            fullGraph
-        ],
-
-        globalEvaluations: [
-            globalEvaluation(
-                "GRAPH-FULL-SUPPORT",
+        solver:
+            solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    fullConfiguration
                 ],
-                "SUPPORT"
-            )
-        ]
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    fullConfiguration,
+                    "SUPPORT"
+                )
+            ])
 
     });
 
 
 check(
-    "FULL BUILD HAS NO ERRORS",
+    "VALID SOLVER-AWARE HARMONY BUILD HAS NO ERRORS",
     full.errors.length ===
         0
 );
 
 
 check(
-    "EXACT GLOBAL SUPPORT PRODUCES FULL HARMONY",
+    "EXACT SOLVER FULL CONFIGURATION WITH GLOBAL SUPPORT PRODUCES FULL",
     full.assessments[0]
         .harmonyStatus ===
         "FULL"
@@ -635,26 +844,111 @@ check(
 
 
 check(
-    "CHALLENGED ALTERNATIVE CANDIDATE DOES NOT POISON SUPPORTED FULL CONFIGURATION",
+    "FULL PRESERVES EXACT CONFIGURATION ID",
     full.assessments[0]
-        .harmonyStatus ===
-        "FULL" &&
-    JSON.stringify(
-        full.assessments[0]
-            .challengedCandidateIds
-    ) ===
-        JSON.stringify([
-            "CANDIDATE-A-C-ALTERNATIVE"
-        ])
+        .fullConfigurationEvidence[0]
+        .configurationId ===
+        "CONFIG-FULL-SUPPORT"
 );
 
 
 check(
-    "FULL PRESERVES SUPPORTING RUN",
+    "FULL PRESERVES EXACT BINDING GRAPH AND SUPPORTING RUN",
+    full.assessments[0]
+        .fullConfigurationEvidence[0]
+        .graphId ===
+        configurationGraphId(
+            "CONFIG-FULL-SUPPORT"
+        ) &&
+    full.assessments[0]
+        .fullConfigurationEvidence[0]
+        .targetId ===
+        evaluationTargetId(
+            "CONFIG-FULL-SUPPORT",
+            configurationGraphId(
+                "CONFIG-FULL-SUPPORT"
+            )
+        ) &&
+    full.assessments[0]
+        .fullConfigurationEvidence[0]
+        .bindingId ===
+        evidenceBindingId(
+            evaluationTargetId(
+                "CONFIG-FULL-SUPPORT",
+                configurationGraphId(
+                    "CONFIG-FULL-SUPPORT"
+                )
+            ),
+            configurationGraphId(
+                "CONFIG-FULL-SUPPORT"
+            )
+        ) &&
     full.assessments[0]
         .fullConfigurationEvidence[0]
         .supportingRunId ===
-        "RUN-GRAPH-FULL-SUPPORT"
+        "RUN-CONFIG-FULL-SUPPORT"
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * ALTERNATIVE FULL ROUTES
+ * ------------------------------------------------------------
+ */
+
+const challengedAlternative =
+    configuration(
+        "CONFIG-FULL-CHALLENGE",
+        "FULL_SET",
+        participantIds
+    );
+
+
+const alternatives =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    challengedAlternative,
+                    fullConfiguration
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    challengedAlternative,
+                    "CHALLENGE"
+                ),
+                binding(
+                    fullConfiguration,
+                    "SUPPORT"
+                )
+            ])
+
+    });
+
+
+check(
+    "SUPPORTED FULL ROUTE WINS OVER CHALLENGED ALTERNATIVE",
+    alternatives.errors.length ===
+        0 &&
+    alternatives.assessments[0]
+        .harmonyStatus ===
+        "FULL"
+);
+
+
+check(
+    "ALTERNATIVE FULL CONFIGURATIONS REMAIN INDEPENDENT EVIDENCE",
+    alternatives.assessments[0]
+        .fullConfigurationEvidence
+        .length ===
+        2
 );
 
 
@@ -664,62 +958,54 @@ check(
  * ------------------------------------------------------------
  */
 
+const blockedFull =
+    configuration(
+        "CONFIG-FULL-BLOCKED",
+        "FULL_SET",
+        participantIds,
+        "BLOCKED"
+    );
+
+
+const supportedSubset =
+    configuration(
+        "CONFIG-SUBSET-SUPPORT",
+        "STRICT_SUBSET",
+        [
+            "ERC-1001",
+            "ERC-1002"
+        ]
+    );
+
+
 const partial =
     engine.assess({
 
         envelopes,
 
-        compositionGraphs: [
-
-            graph(
-                "GRAPH-FULL-INCONCLUSIVE",
+        solver:
+            solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    blockedFull
                 ],
-                "INCONCLUSIVE"
+                [
+                    supportedSubset
+                ]
             ),
 
-            graph(
-                "GRAPH-SUBSET-A-B",
-                [
-                    "ERC-1001",
-                    "ERC-1002"
-                ],
-                "SUPPORT"
-            )
-
-        ],
-
-        globalEvaluations: [
-
-            globalEvaluation(
-                "GRAPH-FULL-INCONCLUSIVE",
-                [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
-                ],
-                "INCONCLUSIVE"
-            ),
-
-            globalEvaluation(
-                "GRAPH-SUBSET-A-B",
-                [
-                    "ERC-1001",
-                    "ERC-1002"
-                ],
-                "SUPPORT"
-            )
-
-        ]
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    supportedSubset,
+                    "SUPPORT"
+                )
+            ])
 
     });
 
 
 check(
-    "SUPPORTED STRICT SUBSET PRODUCES PARTIAL",
+    "SUPPORTED STRICT SOLVER SUBSET PRODUCES PARTIAL",
     partial.errors.length ===
         0 &&
     partial.assessments[0]
@@ -729,7 +1015,11 @@ check(
 
 
 check(
-    "PARTIAL PRESERVES EXACT SUPPORTED SUBSET",
+    "PARTIAL PRESERVES EXACT SUPPORTED SUBSET CONFIGURATION",
+    partial.assessments[0]
+        .supportedSubsets[0]
+        .configurationId ===
+        "CONFIG-SUBSET-SUPPORT" &&
     JSON.stringify(
         partial.assessments[0]
             .supportedSubsets[0]
@@ -742,50 +1032,70 @@ check(
 );
 
 
+check(
+    "BLOCKED FULL CONFIGURATION REMAINS EXPLICIT",
+    JSON.stringify(
+        partial.assessments[0]
+            .blockedFullConfigurationIds
+    ) ===
+        JSON.stringify([
+            "CONFIG-FULL-BLOCKED"
+        ])
+);
+
+
 /*
  * ------------------------------------------------------------
  * CHALLENGED
  * ------------------------------------------------------------
  */
 
+const challengedFullOne =
+    configuration(
+        "CONFIG-CHALLENGE-ONE",
+        "FULL_SET",
+        participantIds
+    );
+
+const challengedFullTwo =
+    configuration(
+        "CONFIG-CHALLENGE-TWO",
+        "FULL_SET",
+        participantIds
+    );
+
+
 const challenged =
     engine.assess({
 
         envelopes,
 
-        compositionGraphs: [
-
-            graph(
-                "GRAPH-FULL-CHALLENGED",
+        solver:
+            solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    challengedFullOne,
+                    challengedFullTwo
                 ],
-                "CHALLENGE"
-            )
+                []
+            ),
 
-        ],
-
-        globalEvaluations: [
-
-            globalEvaluation(
-                "GRAPH-FULL-CHALLENGED",
-                [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
-                ],
-                "CHALLENGE"
-            )
-
-        ]
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    challengedFullOne,
+                    "CHALLENGE"
+                ),
+                binding(
+                    challengedFullTwo,
+                    "CHALLENGE"
+                )
+            ])
 
     });
 
 
 check(
-    "ONLY FULL CONFIGURATION CHALLENGED PRODUCES CHALLENGED",
+    "ALL EXACT FULL SOLVER CONFIGURATIONS CHALLENGED PRODUCES CHALLENGED",
     challenged.errors.length ===
         0 &&
     challenged.assessments[0]
@@ -795,27 +1105,85 @@ check(
 
 
 /*
+ * A blocked alternative prevents the stronger CHALLENGED claim.
+ */
+
+const challengeWithBlockedAlternative =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    challengedFullOne,
+                    blockedFull
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    challengedFullOne,
+                    "CHALLENGE"
+                )
+            ])
+
+    });
+
+
+check(
+    "BLOCKED FULL ALTERNATIVE PREVENTS GLOBAL CHALLENGED OVERCLAIM",
+    challengeWithBlockedAlternative.errors.length ===
+        0 &&
+    challengeWithBlockedAlternative
+        .assessments[0]
+        .harmonyStatus ===
+        "INCONCLUSIVE"
+);
+
+
+/*
  * ------------------------------------------------------------
- * INCONCLUSIVE
+ * INCONCLUSIVE WITH REAL EMPTY EVIDENCE BINDING
  * ------------------------------------------------------------
  */
+
+const inconclusiveFull =
+    configuration(
+        "CONFIG-FULL-INCONCLUSIVE",
+        "FULL_SET",
+        participantIds
+    );
+
 
 const inconclusive =
     engine.assess({
 
         envelopes,
 
-        compositionGraphs:
-            [],
+        solver:
+            solver(
+                [
+                    inconclusiveFull
+                ],
+                []
+            ),
 
-        globalEvaluations:
-            []
+        globalEvidenceBindings:
+            bindings([
+                binding(
+                    inconclusiveFull,
+                    "INCONCLUSIVE"
+                )
+            ])
 
     });
 
 
 check(
-    "ABSENT GLOBAL CONFIGURATION EVIDENCE REMAINS INCONCLUSIVE",
+    "READY FULL CONFIGURATION WITH NO OBSERVED RUN REMAINS INCONCLUSIVE",
     inconclusive.errors.length ===
         0 &&
     inconclusive.assessments[0]
@@ -825,12 +1193,65 @@ check(
 
 
 check(
-    "LOCAL PAIR SUPPORT DOES NOT BECOME FULL WITHOUT GLOBAL RUN",
+    "INCONCLUSIVE BINDING DOES NOT INVENT RUN OR SUPPORT",
     inconclusive.assessments[0]
-        .supportedCandidateIds
+        .fullConfigurationEvidence[0]
+        .runIds
         .length ===
-        1 &&
+        0 &&
     inconclusive.assessments[0]
+        .fullConfigurationEvidence[0]
+        .scientificPolarity ===
+        "INCONCLUSIVE"
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * REAL-LIKE DOCUMENTARY-ONLY SOLVER STATE
+ * ------------------------------------------------------------
+ */
+
+const noFunctionalConfiguration =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings(
+                []
+            )
+
+    });
+
+
+check(
+    "NO SOLVER CONFIGURATION REMAINS INCONCLUSIVE",
+    noFunctionalConfiguration.errors.length ===
+        0 &&
+    noFunctionalConfiguration
+        .assessments[0]
+        .harmonyStatus ===
+        "INCONCLUSIVE"
+);
+
+
+check(
+    "LOCAL CANDIDATE POLARITY NEVER BECOMES GLOBAL HARMONY",
+    noFunctionalConfiguration
+        .assessments[0]
+        .supportedCandidateIds
+        .includes(
+            "LOCAL-SUPPORT"
+        ) &&
+    noFunctionalConfiguration
+        .assessments[0]
         .harmonyStatus ===
         "INCONCLUSIVE"
 );
@@ -838,77 +1259,37 @@ check(
 
 /*
  * ------------------------------------------------------------
- * ALTERNATIVE FULL CONFIGURATIONS
+ * READY CONFIGURATION MUST HAVE HITO 21 BINDING
  * ------------------------------------------------------------
  */
 
-const alternatives =
+const missingBinding =
     engine.assess({
 
         envelopes,
 
-        compositionGraphs: [
-
-            graph(
-                "GRAPH-ALTERNATIVE-CHALLENGE",
+        solver:
+            solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    fullConfiguration
                 ],
-                "CHALLENGE"
+                []
             ),
 
-            graph(
-                "GRAPH-ALTERNATIVE-SUPPORT",
-                [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
-                ],
-                "SUPPORT"
+        globalEvidenceBindings:
+            bindings(
+                []
             )
-
-        ],
-
-        globalEvaluations: [
-
-            globalEvaluation(
-                "GRAPH-ALTERNATIVE-CHALLENGE",
-                [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
-                ],
-                "CHALLENGE"
-            ),
-
-            globalEvaluation(
-                "GRAPH-ALTERNATIVE-SUPPORT",
-                [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
-                ],
-                "SUPPORT"
-            )
-
-        ]
 
     });
 
 
 check(
-    "SUPPORTED FULL ROUTE WINS OVER CHALLENGED ALTERNATIVE ROUTE",
-    alternatives.errors.length ===
+    "READY SOLVER CONFIGURATION WITHOUT GLOBAL BINDING FAILS CLOSED",
+    missingBinding.errors.length >
         0 &&
-    alternatives.assessments[0]
-        .harmonyStatus ===
-        "FULL" &&
-    alternatives.assessments[0]
-        .fullConfigurationEvidence
-        .length ===
-        2
+    missingBinding.assessments.length ===
+        0
 );
 
 
@@ -918,29 +1299,17 @@ check(
  * ------------------------------------------------------------
  */
 
-const fakeSupportGraph =
-    graph(
-        "GRAPH-FAKE-SUPPORT",
-        [
-            "ERC-1001",
-            "ERC-1002",
-            "ERC-1003"
-        ],
+const fakeSupportBinding =
+    binding(
+        fullConfiguration,
         "SUPPORT"
     );
 
 
-fakeSupportGraph.graph.nodes =
-    fakeSupportGraph.graph.nodes.map(
-        (node: any) => ({
-
-            ...node,
-
-            boundaryIds:
-                []
-
-        })
-    );
+delete fakeSupportBinding
+    .evaluation
+    .assessment
+    .supportingRunId;
 
 
 const fakeSupport =
@@ -948,36 +1317,330 @@ const fakeSupport =
 
         envelopes,
 
-        compositionGraphs: [
-            fakeSupportGraph
-        ],
-
-        globalEvaluations: [
-            globalEvaluation(
-                "GRAPH-FAKE-SUPPORT",
+        solver:
+            solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    fullConfiguration
                 ],
-                "SUPPORT"
-            )
-        ]
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                fakeSupportBinding
+            ])
 
     });
 
 
 check(
-    "MALFORMED GLOBAL SUPPORT IS DETECTED",
+    "GLOBAL SUPPORT WITHOUT SUPPORTING RUN FAILS CLOSED",
     fakeSupport.errors.length >
+        0 &&
+    fakeSupport.assessments.length ===
         0
 );
 
 
+/*
+ * ------------------------------------------------------------
+ * FOREIGN CONFIGURATION FAILS CLOSED
+ * ------------------------------------------------------------
+ */
+
+const foreignBinding =
+    binding(
+        fullConfiguration,
+        "SUPPORT"
+    );
+
+
+foreignBinding.configurationId =
+    "CONFIG-NOT-IN-SOLVER";
+
+
+const foreign =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    fullConfiguration
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                foreignBinding
+            ])
+
+    });
+
+
 check(
-    "MALFORMED GLOBAL SUPPORT FAILS CLOSED",
-    fakeSupport.assessments.length ===
+    "BINDING FOR UNKNOWN SOLVER CONFIGURATION FAILS CLOSED",
+    foreign.errors.length >
+        0 &&
+    foreign.assessments.length ===
         0
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * GRAPH IDENTITY FAILS CLOSED
+ * ------------------------------------------------------------
+ */
+
+const wrongGraphBinding =
+    binding(
+        fullConfiguration,
+        "SUPPORT"
+    );
+
+
+wrongGraphBinding
+    .evaluation
+    .assessment
+    .graphId =
+    "OTHER-GRAPH";
+
+
+const wrongGraph =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    fullConfiguration
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                wrongGraphBinding
+            ])
+
+    });
+
+
+check(
+    "BINDING GRAPH AND GLOBAL ASSESSMENT GRAPH MUST MATCH EXACTLY",
+    wrongGraph.errors.length >
+        0 &&
+    wrongGraph.assessments.length ===
+        0
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * CONFIGURATION -> GRAPH PROVENANCE MUST BE EXACT
+ * ------------------------------------------------------------
+ */
+
+const foreignGraphBinding =
+    binding(
+        fullConfiguration,
+        "SUPPORT"
+    );
+
+
+const foreignButConsistentGraphId =
+    "FOREIGN-GRAPH-ID";
+
+const foreignButConsistentTargetId =
+    evaluationTargetId(
+        fullConfiguration.configurationId,
+        foreignButConsistentGraphId
+    );
+
+const foreignButConsistentBindingId =
+    evidenceBindingId(
+        foreignButConsistentTargetId,
+        foreignButConsistentGraphId
+    );
+
+
+foreignGraphBinding.graphId =
+    foreignButConsistentGraphId;
+
+foreignGraphBinding.targetId =
+    foreignButConsistentTargetId;
+
+foreignGraphBinding.bindingId =
+    foreignButConsistentBindingId;
+
+foreignGraphBinding
+    .evaluation
+    .assessment
+    .graphId =
+    foreignButConsistentGraphId;
+
+
+const foreignGraphProvenance =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    fullConfiguration
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                foreignGraphBinding
+            ])
+
+    });
+
+
+check(
+    "INTERNALLY CONSISTENT FOREIGN GRAPH CANNOT MASQUERADE AS SOLVER CONFIGURATION",
+    foreignGraphProvenance.errors.length >
+        0 &&
+    foreignGraphProvenance.assessments.length ===
+        0
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * SPLIT / INCOMPLETE GLOBAL RUN CANNOT BE FORGED INTO SUPPORT
+ * ------------------------------------------------------------
+ */
+
+const malformedIncomplete =
+    binding(
+        fullConfiguration,
+        "SUPPORT"
+    );
+
+
+malformedIncomplete
+    .evaluation
+    .assessment
+    .runAssessments[0]
+    .boundaryEvaluations
+    .pop();
+
+malformedIncomplete
+    .evaluation
+    .assessment
+    .runAssessments[0]
+    .preserved =
+    2;
+
+malformedIncomplete.observationIds =
+    malformedIncomplete
+        .evaluation
+        .assessment
+        .runAssessments[0]
+        .boundaryEvaluations
+        .flatMap(
+            (
+                item:
+                    any
+            ) =>
+                item.observationIds
+        );
+
+
+const incompleteSupport =
+    engine.assess({
+
+        envelopes,
+
+        solver:
+            solver(
+                [
+                    fullConfiguration
+                ],
+                []
+            ),
+
+        globalEvidenceBindings:
+            bindings([
+                malformedIncomplete
+            ])
+
+    });
+
+
+check(
+    "INCOMPLETE GLOBAL BOUNDARY SET CANNOT CLAIM SUPPORT",
+    incompleteSupport.errors.length >
+        0 &&
+    incompleteSupport.assessments.length ===
+        0
+);
+
+
+/*
+ * ------------------------------------------------------------
+ * VISUALIZATION CONTEXT REMAINS LOCAL ONLY
+ * ------------------------------------------------------------
+ */
+
+check(
+    "LOCAL ENVELOPE CANDIDATE STATES ARE PRESERVED FOR VISUALIZATION",
+    JSON.stringify(
+        full.assessments[0]
+            .supportedCandidateIds
+    ) ===
+        JSON.stringify([
+            "LOCAL-SUPPORT"
+        ]) &&
+    JSON.stringify(
+        full.assessments[0]
+            .challengedCandidateIds
+    ) ===
+        JSON.stringify([
+            "LOCAL-CHALLENGE"
+        ]) &&
+    JSON.stringify(
+        full.assessments[0]
+            .inconclusiveCandidateIds
+    ) ===
+        JSON.stringify([
+            "LOCAL-INCONCLUSIVE"
+        ])
+);
+
+
+check(
+    "BOUNDARY REGIONS REMAIN VISUALIZATION CONTEXT",
+    JSON.stringify(
+        full.assessments[0]
+            .preservedBoundaryRegionIds
+    ) ===
+        JSON.stringify([
+            "BOUNDARY-ERC-1001"
+        ]) &&
+    JSON.stringify(
+        full.assessments[0]
+            .violatedBoundaryRegionIds
+    ) ===
+        JSON.stringify([
+            "BOUNDARY-ERC-1002"
+        ]) &&
+    JSON.stringify(
+        full.assessments[0]
+            .unevaluatedBoundaryRegionIds
+    ) ===
+        JSON.stringify([
+            "BOUNDARY-ERC-1003"
+        ])
 );
 
 
@@ -1000,27 +1663,51 @@ const reverse =
 
         },
 
-        compositionGraphs: [
-            fullGraph
-        ],
+        solver: {
 
-        globalEvaluations: [
-            globalEvaluation(
-                "GRAPH-FULL-SUPPORT",
+            ...solver(
                 [
-                    "ERC-1001",
-                    "ERC-1002",
-                    "ERC-1003"
+                    fullConfiguration
                 ],
-                "SUPPORT"
-            )
-        ]
+                []
+            ),
+
+            solutions:
+                [...solver(
+                    [
+                        fullConfiguration
+                    ],
+                    []
+                ).solutions]
+                    .reverse()
+
+        },
+
+        globalEvidenceBindings: {
+
+            ...bindings([
+                binding(
+                    fullConfiguration,
+                    "SUPPORT"
+                )
+            ]),
+
+            bindings:
+                [...bindings([
+                    binding(
+                        fullConfiguration,
+                        "SUPPORT"
+                    )
+                ]).bindings]
+                    .reverse()
+
+        }
 
     });
 
 
 check(
-    "HARMONY ASSESSMENT IS DETERMINISTIC",
+    "SOLVER-AWARE HARMONY IS DETERMINISTIC",
     JSON.stringify(
         full
     ) ===
@@ -1031,24 +1718,33 @@ check(
 
 
 check(
-    "HARMONY MODEL DOES NOT EXPOSE SCIENTIFIC POLARITY AS ITS OWN VERDICT",
+    "HARMONY DOES NOT EXPOSE SCIENTIFIC POLARITY AS ITS OWN VERDICT",
     !(
         "scientificPolarity" in
         full.assessments[0]
     ) &&
     full.assessments[0]
         .evidenceBasis ===
-        "EXACT_GLOBAL_CONFIGURATION_EVIDENCE"
+        "EXACT_SOLVER_CONFIGURATION_GLOBAL_EVIDENCE"
+);
+
+
+console.log("");
+console.log(
+    `PASS: ${passed}`
+);
+console.log(
+    `FAIL: ${failed}`
 );
 
 
 if (
-    failures >
+    failed >
     0
 ) {
 
     console.log(
-        `\nRESULT: FAIL (${failures})`
+        "\nRESULT: FAIL"
     );
 
     process.exitCode =
