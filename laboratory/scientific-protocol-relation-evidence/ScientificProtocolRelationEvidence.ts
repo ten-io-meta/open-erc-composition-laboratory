@@ -1,95 +1,67 @@
-import type {
+﻿import type {
     ScientificSourceObservationLocator
 } from "../scientific-source-observation/ScientificSourceObservationLocator.js";
 
 
 export type ScientificProtocolRelationKind =
-    "EXTENSION_FOR";
+    | "EXTENSION_FOR"
+    | "COMPOSES_WITH";
 
 
 export type ScientificProtocolRelationEvidenceBasis =
-    "MARKDOWN_H1_EXPLICIT_EXTENSION_FOR_ERC";
+    | "MARKDOWN_H1_EXPLICIT_EXTENSION_FOR_ERC"
+    | "MARKDOWN_H1_EXPLICIT_COMPOSES_WITH_ERC";
 
 
 export interface ScientificProtocolRelationEvidence {
 
-    /*
-     * Deterministic identity of this exact observed relation
-     * evidence occurrence.
-     */
     relationEvidenceId:
         string;
 
-    /*
-     * Research source from which this documentary evidence
-     * originated.
-     */
     sourceId:
         string;
 
-    /*
-     * Exact source revision when available.
-     */
     sourceRevision?:
         string;
 
-    /*
-     * Documentation observation containing both the document
-     * subject and the explicit relation statement.
-     */
     observationId:
         string;
 
     /*
-     * Exact symbolic subject observed in the Markdown H1.
-     *
-     * This is not automatically canonicalized into a protocol
-     * identity.
+     * Exact documentary subject observed in the H1.
      */
     subjectSymbol:
         string;
 
     /*
-     * Explicit documentary relation observed in the source.
+     * Canonical protocol identity only when the documentation
+     * establishes it directly through an explicit ERC H1 or an
+     * unambiguous ERC<number> source-path segment.
+     *
+     * Its absence does not invalidate the documentary relation,
+     * but prevents protocol-owned composition use downstream.
      */
+    subjectProtocolId?:
+        string;
+
     relation:
         ScientificProtocolRelationKind;
 
-    /*
-     * Canonicalized ERC identifier explicitly named as the
-     * relation object.
-     */
     objectProtocolId:
         string;
 
-    /*
-     * Exact extraction rule that established this evidence.
-     */
     evidenceBasis:
         ScientificProtocolRelationEvidenceBasis;
 
-    /*
-     * Exact location of the Markdown H1 establishing the
-     * documentary subject.
-     */
     subjectLocator:
         ScientificSourceObservationLocator;
 
-    /*
-     * Exact H1 source line.
-     */
     subjectRawText:
         string;
 
-    /*
-     * Exact location of the explicit relation statement.
-     */
     locator:
         ScientificSourceObservationLocator;
 
-    /*
-     * Exact source line establishing the relation.
-     */
     rawText:
         string;
 

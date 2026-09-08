@@ -1,4 +1,4 @@
-import type {
+﻿import type {
     ScientificSourceObservation
 } from "../scientific-source-observation/ScientificSourceObservation.js";
 
@@ -7,7 +7,9 @@ import type {
 } from "../scientific-source-observation/ScientificSourceObservationLocator.js";
 
 import type {
-    ScientificProtocolRelationEvidence
+    ScientificProtocolRelationEvidence,
+    ScientificProtocolRelationEvidenceBasis,
+    ScientificProtocolRelationKind
 } from "./ScientificProtocolRelationEvidence.js";
 
 import type {
@@ -34,6 +36,9 @@ interface MarkdownSubject {
     symbol:
         string;
 
+    protocolId?:
+        string;
+
     lineIndex:
         number;
 
@@ -43,10 +48,16 @@ interface MarkdownSubject {
 }
 
 
-interface ExplicitExtensionRelation {
+interface ExplicitDocumentedRelation {
+
+    relation:
+        ScientificProtocolRelationKind;
 
     objectProtocolId:
         string;
+
+    evidenceBasis:
+        ScientificProtocolRelationEvidenceBasis;
 
     lineIndex:
         number;
@@ -78,10 +89,7 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
                         "DOCUMENTATION"
                 )
                 .sort(
-                    (
-                        a,
-                        b
-                    ) =>
+                    (a, b) =>
                         a.observationId.localeCompare(
                             b.observationId
                         )
@@ -105,11 +113,10 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
                     [],
 
                 unresolvedObservationIds:
-                    documentationObservations
-                        .map(
-                            observation =>
-                                observation.observationId
-                        ),
+                    documentationObservations.map(
+                        observation =>
+                            observation.observationId
+                    ),
 
                 errors
 
@@ -119,8 +126,7 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
 
 
         const relations:
-            ScientificProtocolRelationEvidence[] =
-            [];
+            ScientificProtocolRelationEvidence[] = [];
 
         const unresolvedObservationIds =
             new Set<string>();
@@ -156,8 +162,41 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
             }
 
 
+            const pathProtocolId =
+                this.protocolIdFromExplicitSourcePathSegment(
+                    observation.locator.filePath
+                );
+
+
+            /*
+             * Explicit H1 identity and explicit path identity must
+             * agree when both are present.
+             */
+            if (
+                subject.protocolId !==
+                    undefined &&
+                pathProtocolId !==
+                    undefined &&
+                subject.protocolId !==
+                    pathProtocolId
+            ) {
+
+                unresolvedObservationIds.add(
+                    observation.observationId
+                );
+
+                continue;
+
+            }
+
+
+            const subjectProtocolId =
+                subject.protocolId ??
+                pathProtocolId;
+
+
             const explicitRelations =
-                this.explicitExtensionRelations(
+                this.explicitDocumentedRelations(
                     lines
                 );
 
@@ -186,6 +225,7 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
                         observation.locator,
                         subject.lineIndex
                     );
+
 
                 const relationLocator =
                     this.lineLocator(
@@ -217,14 +257,23 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
                     subjectSymbol:
                         subject.symbol,
 
+                    ...(
+                        subjectProtocolId !==
+                            undefined
+                            ? {
+                                subjectProtocolId
+                            }
+                            : {}
+                    ),
+
                     relation:
-                        "EXTENSION_FOR",
+                        explicitRelation.relation,
 
                     objectProtocolId:
                         explicitRelation.objectProtocolId,
 
                     evidenceBasis:
-                        "MARKDOWN_H1_EXPLICIT_EXTENSION_FOR_ERC",
+                        explicitRelation.evidenceBasis,
 
                     subjectLocator,
 
@@ -245,10 +294,7 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
 
 
         relations.sort(
-            (
-                a,
-                b
-            ) =>
+            (a, b) =>
                 a.relationEvidenceId.localeCompare(
                     b.relationEvidenceId
                 )
@@ -396,7 +442,7 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
         }
 
 
-        return errors;
+        return errors.sort();
 
     }
 
@@ -449,10 +495,6 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
             }
 
 
-            /*
-             * Only an actual Markdown H1 is eligible.
-             * Lower-level headings and free prose are excluded.
-             */
             const headingMatch =
                 /^#\s+(.+?)\s*$/.exec(
                     rawLine
@@ -470,14 +512,55 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
 
             const candidate =
                 this.unwrapInlineCode(
-                    headingMatch[1]
-                        .trim()
+                    headingMatch[1].trim()
                 );
 
 
             /*
-             * The document subject must be a single observed
-             * symbol rather than a descriptive title.
+             * Explicit ERC documentary heading.
+             *
+             * Accepted:
+             *
+             * # ERC-8301
+             * # ERC-8301: AI Agent Execution
+             * # ERC-8312 — Bounded Agent Actions
+             *
+             * The descriptive suffix carries no identity meaning.
+             */
+            const ercHeading =
+                /^ERC-([1-9][0-9]*)(?:\s*(?::|—|-)\s*.+)?$/
+                    .exec(
+                        candidate
+                    );
+
+
+            if (
+                ercHeading
+            ) {
+
+                const protocolId =
+                    `ERC-${ercHeading[1]}`;
+
+
+                return {
+
+                    symbol:
+                        protocolId,
+
+                    protocolId,
+
+                    lineIndex,
+
+                    rawText:
+                        rawLine
+
+                };
+
+            }
+
+
+            /*
+             * Preserve the existing conservative symbolic H1 rule.
              */
             if (
                 !/^[A-Za-z_][A-Za-z0-9_]*$/.test(
@@ -510,14 +593,16 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
     }
 
 
-    private explicitExtensionRelations(
+    private explicitDocumentedRelations(
         lines:
             string[]
-    ): ExplicitExtensionRelation[] {
+    ): ExplicitDocumentedRelation[] {
 
         const relations:
-            ExplicitExtensionRelation[] =
-            [];
+            ExplicitDocumentedRelation[] = [];
+
+        const seen =
+            new Set<string>();
 
         let insideFence =
             false;
@@ -553,6 +638,10 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
             }
 
 
+            /*
+             * Examples, diagrams, blockquotes and tables remain
+             * excluded. A plain ERC co-mention is never enough.
+             */
             if (
                 insideFence ||
                 trimmed.startsWith(
@@ -568,42 +657,196 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
             }
 
 
-            /*
-             * Deliberately narrow documentary grammar.
-             *
-             * A co-mention of two standards is not a relation.
-             * A table row is not a relation.
-             * Only the explicit phrase below is evidence.
-             */
-            const relationPattern =
-                /\bextension\s+for\s+ERC-([1-9][0-9]*)\b/g;
+            const grammars = [
+
+                {
+                    relation:
+                        "EXTENSION_FOR" as const,
+
+                    evidenceBasis:
+                        "MARKDOWN_H1_EXPLICIT_EXTENSION_FOR_ERC" as const,
+
+                    pattern:
+                        /\bextension\s+for\s+(?:\[\s*)?ERC-([1-9][0-9]*)(?:\s*\])?/gi
+                },
+
+                {
+                    relation:
+                        "COMPOSES_WITH" as const,
+
+                    evidenceBasis:
+                        "MARKDOWN_H1_EXPLICIT_COMPOSES_WITH_ERC" as const,
+
+                    pattern:
+                        /\bcomposes?\s+with\s+(?:\[\s*)?ERC-([1-9][0-9]*)(?:\s*\])?/gi
+                },
+
+                {
+                    relation:
+                        "COMPOSES_WITH" as const,
+
+                    evidenceBasis:
+                        "MARKDOWN_H1_EXPLICIT_COMPOSES_WITH_ERC" as const,
+
+                    pattern:
+                        /\bcomposing\b[^.\r\n]{0,160}?\bwith\s+(?:\[\s*)?ERC-([1-9][0-9]*)(?:\s*\])?/gi
+                }
+
+            ];
 
 
             for (
-                const match
-                of rawLine.matchAll(
-                    relationPattern
-                )
+                const grammar
+                of grammars
             ) {
 
-                relations.push({
+                for (
+                    const match
+                    of rawLine.matchAll(
+                        grammar.pattern
+                    )
+                ) {
 
-                    objectProtocolId:
-                        `ERC-${match[1]}`,
+                    const objectProtocolId =
+                        `ERC-${match[1]}`;
 
-                    lineIndex,
 
-                    rawText:
-                        rawLine
+                    const key =
+                        [
+                            grammar.relation,
+                            objectProtocolId,
+                            String(
+                                lineIndex
+                            )
+                        ].join(
+                            "|"
+                        );
 
-                });
+
+                    if (
+                        seen.has(
+                            key
+                        )
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    seen.add(
+                        key
+                    );
+
+
+                    relations.push({
+
+                        relation:
+                            grammar.relation,
+
+                        objectProtocolId,
+
+                        evidenceBasis:
+                            grammar.evidenceBasis,
+
+                        lineIndex,
+
+                        rawText:
+                            rawLine
+
+                    });
+
+                }
 
             }
 
         }
 
 
-        return relations;
+        return relations.sort(
+            (a, b) =>
+                [
+                    a.lineIndex,
+                    a.relation,
+                    a.objectProtocolId
+                ]
+                    .join("|")
+                    .localeCompare(
+                        [
+                            b.lineIndex,
+                            b.relation,
+                            b.objectProtocolId
+                        ].join("|")
+                    )
+        );
+
+    }
+
+
+    private protocolIdFromExplicitSourcePathSegment(
+        filePath:
+            string | undefined
+    ): string | undefined {
+
+        if (
+            filePath ===
+            undefined
+        ) {
+
+            return undefined;
+
+        }
+
+
+        const normalized =
+            filePath.replace(
+                /\\/g,
+                "/"
+            );
+
+
+        const protocolIds =
+            new Set<string>();
+
+
+        const pattern =
+            /(?:^|\/)ERC([1-9][0-9]*)(?=\/|$)/g;
+
+
+        let match:
+            RegExpExecArray | null;
+
+
+        while (
+            (
+                match =
+                    pattern.exec(
+                        normalized
+                    )
+            ) !==
+            null
+        ) {
+
+            protocolIds.add(
+                `ERC-${match[1]}`
+            );
+
+        }
+
+
+        if (
+            protocolIds.size !==
+            1
+        ) {
+
+            return undefined;
+
+        }
+
+
+        return [
+            ...protocolIds
+        ][0];
 
     }
 
@@ -644,12 +887,11 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
             number
     ): ScientificSourceObservationLocator {
 
-        const observationStartLine =
-            observationLocator.startLine ??
-            1;
-
         const exactLine =
-            observationStartLine +
+            (
+                observationLocator.startLine ??
+                1
+            ) +
             zeroBasedLineIndex;
 
 
@@ -687,73 +929,45 @@ export class ScientificDocumentationProtocolRelationEvidenceEngine {
         subject:
             MarkdownSubject,
         relation:
-            ExplicitExtensionRelation,
+            ExplicitDocumentedRelation,
         locator:
             ScientificSourceObservationLocator
     ): string {
 
-        const revisionPresence =
-            input.sourceRevision ===
-                undefined
-                ? "REVISION-ABSENT"
-                : "REVISION-PRESENT";
-
-        const revisionValue =
-            input.sourceRevision ??
-            "";
-
-        const filePathPresence =
-            locator.filePath ===
-                undefined
-                ? "FILE-PATH-ABSENT"
-                : "FILE-PATH-PRESENT";
-
-        const filePathValue =
-            locator.filePath ??
-            "";
-
-        const startLinePresence =
-            locator.startLine ===
-                undefined
-                ? "START-LINE-ABSENT"
-                : "START-LINE-PRESENT";
-
-        const startLineValue =
-            locator.startLine ===
-                undefined
-                ? ""
-                : String(
-                    locator.startLine
-                );
-
-
-        const identityComponents =
+        const components =
             [
                 "PROTOCOL-RELATION-EVIDENCE",
                 input.sourceId,
-                revisionPresence,
-                revisionValue,
+                input.sourceRevision ===
+                    undefined
+                    ? "REVISION-ABSENT"
+                    : "REVISION-PRESENT",
+                input.sourceRevision ??
+                    "",
                 observation.observationId,
                 subject.symbol,
-                "EXTENSION_FOR",
+                relation.relation,
                 relation.objectProtocolId,
+                relation.evidenceBasis,
                 locator.sourceLocation,
-                filePathPresence,
-                filePathValue,
-                startLinePresence,
-                startLineValue,
+                locator.filePath ??
+                    "",
+                locator.startLine ===
+                    undefined
+                    ? ""
+                    : String(
+                        locator.startLine
+                    ),
                 relation.rawText
             ];
 
 
-        return identityComponents
+        return components
             .map(
                 component =>
                     `${component.length}:${component}`
             )
-            .join(
-                "|"
-            );
+            .join("|");
 
     }
 
