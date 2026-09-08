@@ -1057,6 +1057,8 @@ export class ScientificDecisionTraceEngine {
                         contribution.contributionId,
                         "CONTRIBUTION",
                         contribution.participantId,
+                        profile.sourceId,
+                        profile.sourceRevision,
                         contribution.subject,
                         contribution.evidenceIds,
                         resolvedEvidenceIds
@@ -1076,6 +1078,8 @@ export class ScientificDecisionTraceEngine {
                         boundary.boundaryId,
                         "BOUNDARY",
                         boundary.participantId,
+                        profile.sourceId,
+                        profile.sourceRevision,
                         boundary.subject,
                         boundary.evidenceIds,
                         resolvedEvidenceIds
@@ -1095,6 +1099,8 @@ export class ScientificDecisionTraceEngine {
                         need.needId,
                         "NEED",
                         need.participantId,
+                        profile.sourceId,
+                        profile.sourceRevision,
                         need.subject,
                         need.evidenceIds,
                         resolvedEvidenceIds
@@ -1741,6 +1747,10 @@ export class ScientificDecisionTraceEngine {
             ScientificDecisionTraceParticipantArtifact["artifactKind"],
         participantId:
             string,
+        sourceId:
+            string,
+        sourceRevision:
+            string | undefined,
         subject:
             string,
         evidenceIds:
@@ -1762,6 +1772,17 @@ export class ScientificDecisionTraceEngine {
             artifactKind,
 
             participantId,
+
+            sourceId,
+
+            ...(
+                sourceRevision !==
+                undefined
+                    ? {
+                        sourceRevision
+                    }
+                    : {}
+            ),
 
             subject,
 

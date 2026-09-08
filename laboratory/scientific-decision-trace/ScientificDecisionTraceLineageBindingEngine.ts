@@ -3,6 +3,7 @@ import type {
 } from "./ScientificDecisionTrace.js";
 
 import type {
+    ScientificEvidenceLineageReference,
     ScientificEvidenceLineageResult
 } from "../scientific-evidence-lineage/ScientificEvidenceLineage.js";
 
@@ -15,8 +16,44 @@ export interface ScientificDecisionTraceLineageBindingResult {
     lineage:
         ScientificEvidenceLineageResult;
 
+    unresolvedEvidenceRefs:
+        ScientificEvidenceLineageReference[];
+
     errors:
         string[];
+
+}
+
+
+function encode(
+    parts:
+        string[]
+): string {
+
+    return parts
+        .map(
+            part =>
+                `${part.length}:${part}`
+        )
+        .join("|");
+
+}
+
+
+function key(
+    sourceId:
+        string,
+    sourceRevision:
+        string | undefined,
+    evidenceId:
+        string
+): string {
+
+    return encode([
+        sourceId,
+        sourceRevision ?? "UNVERSIONED",
+        evidenceId
+    ]);
 
 }
 
@@ -85,6 +122,9 @@ export class ScientificDecisionTraceLineageBindingEngine {
 
                 lineage,
 
+                unresolvedEvidenceRefs:
+                    [],
+
                 errors
 
             };
@@ -92,33 +132,55 @@ export class ScientificDecisionTraceLineageBindingEngine {
         }
 
 
-        const resolutionById =
+        const resolutionByKey =
             new Map(
                 lineage.resolutions.map(
                     resolution => [
-                        resolution.evidenceId,
+                        key(
+                            resolution.sourceId,
+                            resolution.sourceRevision,
+                            resolution.evidenceId
+                        ),
                         resolution
                     ]
                 )
             );
 
-        const directlyResolved =
+
+        const directlyResolvedByKey =
             new Set(
-                trace.evidenceCatalog.map(
-                    evidence =>
-                        evidence.evidenceId
-                )
+                trace.evidenceCatalog
+                    .map(
+                        evidence =>
+                            key(
+                                evidence.sourceId,
+                                evidence.sourceRevision,
+                                evidence.evidenceId
+                            )
+                    )
             );
 
 
         const resolved = (
+            sourceId:
+                string,
+            sourceRevision:
+                string | undefined,
             evidenceId:
                 string
         ): boolean => {
 
-            if (
-                directlyResolved.has(
+            const scopedKey =
+                key(
+                    sourceId,
+                    sourceRevision,
                     evidenceId
+                );
+
+
+            if (
+                directlyResolvedByKey.has(
+                    scopedKey
                 )
             ) {
 
@@ -127,9 +189,9 @@ export class ScientificDecisionTraceLineageBindingEngine {
             }
 
 
-            return resolutionById
+            return resolutionByKey
                 .get(
-                    evidenceId
+                    scopedKey
                 )
                 ?.status ===
                 "RESOLVED";
@@ -159,6 +221,8 @@ export class ScientificDecisionTraceLineageBindingEngine {
                                     .filter(
                                         evidenceId =>
                                             resolved(
+                                                artifact.sourceId,
+                                                artifact.sourceRevision,
                                                 evidenceId
                                             )
                                     ),
@@ -168,6 +232,8 @@ export class ScientificDecisionTraceLineageBindingEngine {
                                     .filter(
                                         evidenceId =>
                                             !resolved(
+                                                artifact.sourceId,
+                                                artifact.sourceRevision,
                                                 evidenceId
                                             )
                                     )
@@ -178,68 +244,61 @@ export class ScientificDecisionTraceLineageBindingEngine {
                 );
 
 
-        const candidateTraces =
-            trace.candidateTraces
-                .map(
-                    candidate => {
-
-                        const evidenceIds =
-                            unique([
-                                ...candidate.discoveryEvidenceIds,
-                                ...candidate.compatibilityEvidenceIds
-                            ]);
-
-
-                        return {
-
-                            ...candidate,
-
-                            resolvedEvidenceIds:
-                                evidenceIds
-                                    .filter(
-                                        evidenceId =>
-                                            resolved(
-                                                evidenceId
-                                            )
-                                    ),
-
-                            unresolvedEvidenceIds:
-                                evidenceIds
-                                    .filter(
-                                        evidenceId =>
-                                            !resolved(
-                                                evidenceId
-                                            )
-                                    )
-
-                        };
-
-                    }
-                );
-
-
-        const unresolvedEvidenceIds =
-            unique([
-                ...trace.unresolvedEvidenceIds
-                    .filter(
-                        evidenceId =>
-                            !resolved(
-                                evidenceId
-                            )
-                    ),
-
-                ...participantArtifacts
+        const participantEvidenceIds =
+            new Set(
+                trace.participantArtifacts
                     .flatMap(
                         artifact =>
-                            artifact.unresolvedEvidenceIds
-                    ),
-
-                ...candidateTraces
-                    .flatMap(
-                        candidate =>
-                            candidate.unresolvedEvidenceIds
+                            artifact.evidenceIds
                     )
-            ]);
+            );
+
+
+        const nonParticipantUnresolvedIds =
+            trace.unresolvedEvidenceIds
+                .filter(
+                    evidenceId =>
+                        !participantEvidenceIds.has(
+                            evidenceId
+                        )
+                );
+
+
+        const candidateUnresolvedIds =
+            trace.candidateTraces
+                .flatMap(
+                    candidate =>
+                        candidate.unresolvedEvidenceIds
+                );
+
+
+        const unresolvedEvidenceRefs:
+            ScientificEvidenceLineageReference[] =
+            participantArtifacts
+                .flatMap(
+                    artifact =>
+                        artifact.unresolvedEvidenceIds
+                            .map(
+                                evidenceId => ({
+
+                                    evidenceId,
+
+                                    sourceId:
+                                        artifact.sourceId,
+
+                                    ...(
+                                        artifact.sourceRevision !==
+                                        undefined
+                                            ? {
+                                                sourceRevision:
+                                                    artifact.sourceRevision
+                                            }
+                                            : {}
+                                    )
+
+                                })
+                            )
+                );
 
 
         return {
@@ -250,13 +309,22 @@ export class ScientificDecisionTraceLineageBindingEngine {
 
                 participantArtifacts,
 
-                candidateTraces,
-
-                unresolvedEvidenceIds
+                unresolvedEvidenceIds:
+                    unique([
+                        ...nonParticipantUnresolvedIds,
+                        ...candidateUnresolvedIds,
+                        ...unresolvedEvidenceRefs
+                            .map(
+                                reference =>
+                                    reference.evidenceId
+                            )
+                    ])
 
             },
 
             lineage,
+
+            unresolvedEvidenceRefs,
 
             errors:
                 []

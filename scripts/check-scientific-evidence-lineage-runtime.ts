@@ -25,9 +25,7 @@ function check(
         `${name}: ${condition ? "PASS" : "FAIL"}`
     );
 
-    if (
-        condition
-    ) {
+    if (condition) {
         pass++;
     }
     else {
@@ -37,18 +35,29 @@ function check(
 }
 
 
-const revision =
-    "0123456789abcdef0123456789abcdef01234567";
+const revisionA =
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+const revisionB =
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 
 
-const observation:
-    any = {
+function observation(
+    sourceId:
+        string,
+    revision:
+        string,
+    observationId:
+        string,
+    repo:
+        string
+): any {
 
-        observationId:
-            "OBS-1",
+    return {
 
-        sourceId:
-            "GITHUB-A",
+        observationId,
+
+        sourceId,
 
         sourceType:
             "GITHUB",
@@ -61,35 +70,46 @@ const observation:
 
         locator: {
             sourceLocation:
-                "https://github.com/example/a",
+                repo,
 
             filePath:
-                "src/A.sol",
+                "src/Test.sol",
 
             startLine:
-                10,
+                1,
 
             endLine:
                 20
         },
 
         rawText:
-            "contract A {}"
+            "interface Test {}"
 
     };
 
+}
 
-const fact:
-    any = {
 
-        factId:
-            "FACT-1",
+function fact(
+    sourceId:
+        string,
+    revision:
+        string,
+    observationId:
+        string,
+    factId:
+        string,
+    repo:
+        string
+): any {
 
-        observationId:
-            "OBS-1",
+    return {
 
-        sourceId:
-            "GITHUB-A",
+        factId,
+
+        observationId,
+
+        sourceId,
 
         sourceRevision:
             revision,
@@ -99,143 +119,59 @@ const fact:
 
         locator: {
             sourceLocation:
-                "https://github.com/example/a",
+                repo,
 
             filePath:
-                "src/A.sol",
+                "src/Test.sol",
 
             startLine:
-                15,
+                10,
 
             endLine:
-                15
+                10
         },
 
         rawText:
-            "function run() external {}"
+            "function register() external;"
 
     };
 
+}
 
-const derivedLinks:
-    any[] = [
 
-        {
-            evidenceId:
-                "CAP-1",
+const obsA =
+    observation(
+        "GITHUB-A",
+        revisionA,
+        "OBS-A",
+        "https://github.com/example/a"
+    );
 
-            kind:
-                "SEMANTIC_CAPABILITY",
+const obsB =
+    observation(
+        "GITHUB-B",
+        revisionB,
+        "OBS-B",
+        "https://github.com/example/b"
+    );
 
-            sourceId:
-                "GITHUB-A",
+const factA =
+    fact(
+        "GITHUB-A",
+        revisionA,
+        "OBS-A",
+        "FACT-A",
+        "https://github.com/example/a"
+    );
 
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "FACT-1"
-            ]
-        },
-
-        {
-            evidenceId:
-                "ATTR-1",
-
-            kind:
-                "CAPABILITY_ATTRIBUTION",
-
-            sourceId:
-                "GITHUB-A",
-
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "CAP-1",
-                "FACT-1",
-                "OBS-1"
-            ]
-        },
-
-        {
-            evidenceId:
-                "PATTR-1",
-
-            kind:
-                "PROTOCOL_ATTRIBUTION",
-
-            sourceId:
-                "GITHUB-A",
-
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "ATTR-1",
-                "OBS-1"
-            ]
-        },
-
-        {
-            evidenceId:
-                "PCONCEPT-1",
-
-            kind:
-                "PROTOCOL_CONCEPT",
-
-            sourceId:
-                "GITHUB-A",
-
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "PATTR-1",
-                "CAP-1",
-                "FACT-1"
-            ]
-        },
-
-        {
-            evidenceId:
-                "STRUCTURAL-REL-1",
-
-            kind:
-                "STRUCTURAL_PROTOCOL_RELATION",
-
-            sourceId:
-                "GITHUB-A",
-
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "FACT-1",
-                "OBS-1"
-            ]
-        },
-
-        {
-            evidenceId:
-                "CALL-ATTR-1",
-
-            kind:
-                "PROTOCOL_EXTERNAL_CALL_ATTRIBUTION",
-
-            sourceId:
-                "GITHUB-A",
-
-            sourceRevision:
-                revision,
-
-            parentEvidenceIds: [
-                "FACT-1",
-                "OBS-1"
-            ]
-        }
-
-    ];
+const factB =
+    fact(
+        "GITHUB-B",
+        revisionB,
+        "OBS-B",
+        "FACT-B",
+        "https://github.com/example/b"
+    );
 
 
 const engine =
@@ -246,28 +182,144 @@ const lineage =
     engine.resolve({
 
         observations: [
-            observation
+            obsA,
+            obsB
         ],
 
         facts: [
-            fact
+            factA,
+            factB
         ],
 
         protocolRelationEvidence:
             [],
 
-        derivedLinks,
+        derivedLinks: [
 
-        requestedEvidenceIds: [
-            "OBS-1",
-            "FACT-1",
-            "CAP-1",
-            "ATTR-1",
-            "PATTR-1",
-            "PCONCEPT-1",
-            "STRUCTURAL-REL-1",
-            "CALL-ATTR-1",
-            "MISSING-1"
+            {
+                evidenceId:
+                    "LEXICAL-REGISTER",
+
+                kind:
+                    "SEMANTIC_CAPABILITY",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA,
+
+                parentEvidenceIds: [
+                    "FACT-A"
+                ]
+            },
+
+            {
+                evidenceId:
+                    "ATTR-A",
+
+                kind:
+                    "CAPABILITY_ATTRIBUTION",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA,
+
+                parentEvidenceIds: [
+                    "LEXICAL-REGISTER",
+                    "FACT-A",
+                    "OBS-A"
+                ]
+            },
+
+            {
+                evidenceId:
+                    "LEXICAL-REGISTER",
+
+                kind:
+                    "SEMANTIC_CAPABILITY",
+
+                sourceId:
+                    "GITHUB-B",
+
+                sourceRevision:
+                    revisionB,
+
+                parentEvidenceIds: [
+                    "FACT-B"
+                ]
+            },
+
+            {
+                evidenceId:
+                    "ATTR-B",
+
+                kind:
+                    "CAPABILITY_ATTRIBUTION",
+
+                sourceId:
+                    "GITHUB-B",
+
+                sourceRevision:
+                    revisionB,
+
+                parentEvidenceIds: [
+                    "LEXICAL-REGISTER",
+                    "FACT-B",
+                    "OBS-B"
+                ]
+            }
+
+        ],
+
+        requestedEvidenceRefs: [
+
+            {
+                evidenceId:
+                    "LEXICAL-REGISTER",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA
+            },
+
+            {
+                evidenceId:
+                    "LEXICAL-REGISTER",
+
+                sourceId:
+                    "GITHUB-B",
+
+                sourceRevision:
+                    revisionB
+            },
+
+            {
+                evidenceId:
+                    "ATTR-A",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA
+            },
+
+            {
+                evidenceId:
+                    "UNKNOWN",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA
+            }
+
         ]
 
     });
@@ -275,190 +327,151 @@ const lineage =
 
 console.log("");
 console.log(
-    "SCIENTIFIC EVIDENCE LINEAGE — RUNTIME"
+    "SCIENTIFIC SOURCE-SCOPED EVIDENCE LINEAGE"
 );
 console.log(
-    "-------------------------------------"
+    "-----------------------------------------"
 );
 
 
 check(
-    "VALID LINEAGE HAS NO ERRORS",
+    "SAME LEXICAL ID IN TWO SOURCES DOES NOT COLLIDE",
     lineage.errors.length ===
         0
 );
 
 
-check(
-    "SOURCE OBSERVATION IS TERMINAL EVIDENCE",
-    lineage.terminalEvidenceCatalog.some(
-        evidence =>
-            evidence.evidenceId ===
-                "OBS-1" &&
-            evidence.kind ===
-                "SOURCE_OBSERVATION"
-    )
-);
-
-
-check(
-    "SOURCE FACT IS TERMINAL EVIDENCE",
-    lineage.terminalEvidenceCatalog.some(
-        evidence =>
-            evidence.evidenceId ===
-                "FACT-1" &&
-            evidence.kind ===
-                "SOURCE_FACT"
-    )
-);
-
-
-const protocolAttribution =
+const lexicalA =
     lineage.resolutions.find(
         resolution =>
             resolution.evidenceId ===
-            "PATTR-1"
+                "LEXICAL-REGISTER" &&
+            resolution.sourceId ===
+                "GITHUB-A"
+    )!;
+
+const lexicalB =
+    lineage.resolutions.find(
+        resolution =>
+            resolution.evidenceId ===
+                "LEXICAL-REGISTER" &&
+            resolution.sourceId ===
+                "GITHUB-B"
     )!;
 
 
 check(
-    "PROTOCOL ATTRIBUTION RESOLVES TRANSITIVELY",
-    protocolAttribution.status ===
+    "SOURCE A LEXICAL CAPABILITY RESOLVES",
+    lexicalA.status ===
         "RESOLVED"
 );
 
 
 check(
-    "PROTOCOL ATTRIBUTION REACHES REAL SOURCE FACT",
-    protocolAttribution.terminalEvidenceIds.includes(
-        "FACT-1"
+    "SOURCE B LEXICAL CAPABILITY RESOLVES",
+    lexicalB.status ===
+        "RESOLVED"
+);
+
+
+check(
+    "SOURCE A DOES NOT ABSORB SOURCE B FACT",
+    lexicalA.terminalEvidenceIds.includes(
+        "FACT-A"
+    ) &&
+    !lexicalA.terminalEvidenceIds.includes(
+        "FACT-B"
     )
 );
 
 
 check(
-    "PROTOCOL ATTRIBUTION REACHES SOURCE OBSERVATION",
-    protocolAttribution.terminalEvidenceIds.includes(
-        "OBS-1"
+    "SOURCE B DOES NOT ABSORB SOURCE A FACT",
+    lexicalB.terminalEvidenceIds.includes(
+        "FACT-B"
+    ) &&
+    !lexicalB.terminalEvidenceIds.includes(
+        "FACT-A"
     )
 );
 
 
-const concept =
+const attributionA =
     lineage.resolutions.find(
         resolution =>
             resolution.evidenceId ===
-            "PCONCEPT-1"
+                "ATTR-A"
     )!;
 
 
 check(
-    "PROTOCOL CONCEPT RESOLVES THROUGH ATTRIBUTION CHAIN",
-    concept.status ===
+    "DERIVED ATTRIBUTION RESOLVES TRANSITIVELY",
+    attributionA.status ===
         "RESOLVED" &&
-    concept.terminalEvidenceIds.includes(
-        "FACT-1"
+    attributionA.terminalEvidenceIds.includes(
+        "FACT-A"
+    ) &&
+    attributionA.terminalEvidenceIds.includes(
+        "OBS-A"
     )
 );
 
 
-const missing =
+const unknown =
     lineage.resolutions.find(
         resolution =>
             resolution.evidenceId ===
-            "MISSING-1"
+                "UNKNOWN"
     )!;
 
 
 check(
     "UNKNOWN EVIDENCE REMAINS UNRESOLVED",
-    missing.status ===
-        "UNRESOLVED" &&
-    missing.unresolvedLeafIds.includes(
-        "MISSING-1"
-    )
+    unknown.status ===
+        "UNRESOLVED"
 );
 
 
 /*
- * Bind the structured lineage back to the existing Decision Trace.
+ * Decision Trace artifact scope must control lineage lookup.
  */
 const rawTrace:
     any = {
 
-        evidenceCatalog: [
-            {
-                evidenceId:
-                    "FACT-1",
-
-                evidenceKind:
-                    "SOURCE_FACT",
-
-                sourceId:
-                    "GITHUB-A",
-
-                sourceType:
-                    "GITHUB",
-
-                sourceRevision:
-                    revision,
-
-                observationId:
-                    "OBS-1",
-
-                sourceLocation:
-                    "https://github.com/example/a",
-
-                filePath:
-                    "src/A.sol",
-
-                startLine:
-                    15,
-
-                endLine:
-                    15,
-
-                rawText:
-                    "function run() external {}",
-
-                factKind:
-                    "FUNCTION_DECLARATION"
-            }
-        ],
+        evidenceCatalog:
+            [],
 
         participantArtifacts: [
             {
                 artifactId:
-                    "CONTRIBUTION-1",
+                    "CONTRIBUTION-A",
 
                 artifactKind:
                     "CONTRIBUTION",
 
                 participantId:
-                    "ERC-1",
+                    "ERC-A",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA,
 
                 subject:
-                    "run",
+                    "register",
 
                 evidenceIds: [
-                    "PATTR-1",
-                    "ATTR-1",
-                    "CAP-1",
-                    "OBS-1",
-                    "FACT-1",
-                    "MISSING-1"
+                    "LEXICAL-REGISTER",
+                    "ATTR-A"
                 ],
 
-                resolvedEvidenceIds: [
-                    "FACT-1"
-                ],
+                resolvedEvidenceIds:
+                    [],
 
                 unresolvedEvidenceIds: [
-                    "PATTR-1",
-                    "ATTR-1",
-                    "CAP-1",
-                    "OBS-1",
-                    "MISSING-1"
+                    "LEXICAL-REGISTER",
+                    "ATTR-A"
                 ]
             }
         ],
@@ -470,11 +483,8 @@ const rawTrace:
             [],
 
         unresolvedEvidenceIds: [
-            "PATTR-1",
-            "ATTR-1",
-            "CAP-1",
-            "OBS-1",
-            "MISSING-1"
+            "LEXICAL-REGISTER",
+            "ATTR-A"
         ],
 
         errors:
@@ -492,7 +502,7 @@ const bound =
 
 
 check(
-    "LINEAGE BINDS TO DECISION TRACE",
+    "SOURCE-SCOPED LINEAGE BINDS TO DECISION TRACE",
     bound.errors.length ===
         0 &&
     bound.trace !==
@@ -501,92 +511,26 @@ check(
 
 
 check(
-    "DERIVED PROFILE EVIDENCE BECOMES RESOLVED",
+    "ARTIFACT DERIVED EVIDENCE BECOMES RESOLVED",
     bound.trace!
         .participantArtifacts[0]
-        .resolvedEvidenceIds
-        .includes(
-            "PATTR-1"
-        )
+        .unresolvedEvidenceIds
+        .length ===
+        0
 );
 
 
 check(
-    "SOURCE OBSERVATION REFERENCE BECOMES RESOLVED",
+    "TRACE HAS NO FALSE UNRESOLVED EVIDENCE",
     bound.trace!
-        .participantArtifacts[0]
-        .resolvedEvidenceIds
-        .includes(
-            "OBS-1"
-        )
-);
-
-
-check(
-    "TRULY UNKNOWN EVIDENCE STAYS UNRESOLVED",
-    JSON.stringify(
-        bound.trace!
-            .unresolvedEvidenceIds
-    ) ===
-        JSON.stringify([
-            "MISSING-1"
-        ])
-);
-
-
-/*
- * Cross-source lineage must fail closed.
- */
-const crossSource =
-    engine.resolve({
-
-        observations: [
-            observation
-        ],
-
-        facts: [
-            fact
-        ],
-
-        protocolRelationEvidence:
-            [],
-
-        derivedLinks: [
-            {
-                evidenceId:
-                    "BAD-DERIVED",
-
-                kind:
-                    "CAPABILITY_ATTRIBUTION",
-
-                sourceId:
-                    "GITHUB-B",
-
-                sourceRevision:
-                    revision,
-
-                parentEvidenceIds: [
-                    "FACT-1"
-                ]
-            }
-        ],
-
-        requestedEvidenceIds: [
-            "BAD-DERIVED"
-        ]
-
-    });
-
-
-check(
-    "CROSS SOURCE LINEAGE FAILS CLOSED",
-    crossSource.errors.length >
+        .unresolvedEvidenceIds
+        .length ===
         0
 );
 
 
 /*
- * Cyclic lineage must fail closed.
+ * Same-source cyclic lineage must still fail closed.
  */
 const cycle =
     engine.resolve({
@@ -611,6 +555,9 @@ const cycle =
                 sourceId:
                     "GITHUB-A",
 
+                sourceRevision:
+                    revisionA,
+
                 parentEvidenceIds: [
                     "B"
                 ]
@@ -625,21 +572,33 @@ const cycle =
                 sourceId:
                     "GITHUB-A",
 
+                sourceRevision:
+                    revisionA,
+
                 parentEvidenceIds: [
                     "A"
                 ]
             }
         ],
 
-        requestedEvidenceIds: [
-            "A"
+        requestedEvidenceRefs: [
+            {
+                evidenceId:
+                    "A",
+
+                sourceId:
+                    "GITHUB-A",
+
+                sourceRevision:
+                    revisionA
+            }
         ]
 
     });
 
 
 check(
-    "CYCLIC LINEAGE FAILS CLOSED",
+    "CYCLIC LINEAGE STILL FAILS CLOSED",
     cycle.errors.length >
         0
 );

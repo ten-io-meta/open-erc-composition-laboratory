@@ -12,6 +12,7 @@ import type {
 
 import type {
     ScientificEvidenceLineageDerivedLink,
+    ScientificEvidenceLineageReference,
     ScientificEvidenceLineageResolution,
     ScientificEvidenceLineageResult,
     ScientificEvidenceLineageTerminalEvidence
@@ -32,13 +33,42 @@ export interface ScientificEvidenceLineageEngineInput {
     derivedLinks:
         ScientificEvidenceLineageDerivedLink[];
 
-    requestedEvidenceIds:
-        string[];
+    requestedEvidenceRefs:
+        ScientificEvidenceLineageReference[];
 
 }
 
 
-function unique(
+function encode(
+    parts:
+        string[]
+): string {
+
+    return parts
+        .map(
+            part =>
+                `${part.length}:${part}`
+        )
+        .join("|");
+
+}
+
+
+function referenceKey(
+    reference:
+        ScientificEvidenceLineageReference
+): string {
+
+    return encode([
+        reference.sourceId,
+        reference.sourceRevision ?? "UNVERSIONED",
+        reference.evidenceId
+    ]);
+
+}
+
+
+function uniqueStrings(
     values:
         string[]
 ): string[] {
@@ -48,6 +78,48 @@ function unique(
             values
         )
     ].sort();
+
+}
+
+
+function uniqueReferences(
+    values:
+        ScientificEvidenceLineageReference[]
+): ScientificEvidenceLineageReference[] {
+
+    const byKey =
+        new Map<
+            string,
+            ScientificEvidenceLineageReference
+        >();
+
+
+    for (
+        const value
+        of values
+    ) {
+
+        byKey.set(
+            referenceKey(
+                value
+            ),
+            value
+        );
+
+    }
+
+
+    return [...byKey.values()]
+        .sort(
+            (a, b) =>
+                referenceKey(
+                    a
+                ).localeCompare(
+                    referenceKey(
+                        b
+                    )
+                )
+        );
 
 }
 
@@ -71,6 +143,35 @@ function sameRevision(
 }
 
 
+function reference(
+    sourceId:
+        string,
+    sourceRevision:
+        string | undefined,
+    evidenceId:
+        string
+): ScientificEvidenceLineageReference {
+
+    return {
+
+        evidenceId,
+
+        sourceId,
+
+        ...(
+            sourceRevision !==
+            undefined
+                ? {
+                    sourceRevision
+                }
+                : {}
+        )
+
+    };
+
+}
+
+
 export class ScientificEvidenceLineageEngine {
 
     resolve(
@@ -82,11 +183,13 @@ export class ScientificEvidenceLineageEngine {
             string[] =
             [];
 
+
         const terminals =
             new Map<
                 string,
                 ScientificEvidenceLineageTerminalEvidence
             >();
+
 
         const observations =
             new Map<
@@ -100,14 +203,27 @@ export class ScientificEvidenceLineageEngine {
             of input.observations
         ) {
 
+            const observationRef =
+                reference(
+                    observation.sourceId,
+                    observation.sourceRevision,
+                    observation.observationId
+                );
+
+            const key =
+                referenceKey(
+                    observationRef
+                );
+
+
             if (
                 observations.has(
-                    observation.observationId
+                    key
                 )
             ) {
 
                 errors.push(
-                    `Duplicate source observation ${observation.observationId}.`
+                    `Duplicate source observation in provenance scope ${key}.`
                 );
 
                 continue;
@@ -116,7 +232,7 @@ export class ScientificEvidenceLineageEngine {
 
 
             observations.set(
-                observation.observationId,
+                key,
                 observation
             );
 
@@ -124,27 +240,14 @@ export class ScientificEvidenceLineageEngine {
             this.addTerminal(
                 terminals,
                 {
-                    evidenceId:
-                        observation.observationId,
+
+                    ...observationRef,
 
                     kind:
                         "SOURCE_OBSERVATION",
 
-                    sourceId:
-                        observation.sourceId,
-
                     sourceType:
                         observation.sourceType,
-
-                    ...(
-                        observation.sourceRevision !==
-                        undefined
-                            ? {
-                                sourceRevision:
-                                    observation.sourceRevision
-                            }
-                            : {}
-                    ),
 
                     sourceLocation:
                         observation.locator.sourceLocation,
@@ -181,6 +284,7 @@ export class ScientificEvidenceLineageEngine {
 
                     rawText:
                         observation.rawText
+
                 },
                 errors
             );
@@ -195,7 +299,13 @@ export class ScientificEvidenceLineageEngine {
 
             const observation =
                 observations.get(
-                    fact.observationId
+                    referenceKey(
+                        reference(
+                            fact.sourceId,
+                            fact.sourceRevision,
+                            fact.observationId
+                        )
+                    )
                 );
 
 
@@ -205,7 +315,7 @@ export class ScientificEvidenceLineageEngine {
             ) {
 
                 errors.push(
-                    `Source fact ${fact.factId} references unknown observation ${fact.observationId}.`
+                    `Source fact ${fact.factId} references unknown observation ${fact.observationId} inside ${fact.sourceId}.`
                 );
 
                 continue;
@@ -234,27 +344,18 @@ export class ScientificEvidenceLineageEngine {
             this.addTerminal(
                 terminals,
                 {
-                    evidenceId:
-                        fact.factId,
+
+                    ...reference(
+                        fact.sourceId,
+                        fact.sourceRevision,
+                        fact.factId
+                    ),
 
                     kind:
                         "SOURCE_FACT",
 
-                    sourceId:
-                        fact.sourceId,
-
                     sourceType:
                         observation.sourceType,
-
-                    ...(
-                        fact.sourceRevision !==
-                        undefined
-                            ? {
-                                sourceRevision:
-                                    fact.sourceRevision
-                            }
-                            : {}
-                    ),
 
                     sourceLocation:
                         fact.locator.sourceLocation,
@@ -291,6 +392,7 @@ export class ScientificEvidenceLineageEngine {
 
                     rawText:
                         fact.rawText
+
                 },
                 errors
             );
@@ -305,7 +407,13 @@ export class ScientificEvidenceLineageEngine {
 
             const observation =
                 observations.get(
-                    relation.observationId
+                    referenceKey(
+                        reference(
+                            relation.sourceId,
+                            relation.sourceRevision,
+                            relation.observationId
+                        )
+                    )
                 );
 
 
@@ -344,27 +452,18 @@ export class ScientificEvidenceLineageEngine {
             this.addTerminal(
                 terminals,
                 {
-                    evidenceId:
-                        relation.relationEvidenceId,
+
+                    ...reference(
+                        relation.sourceId,
+                        relation.sourceRevision,
+                        relation.relationEvidenceId
+                    ),
 
                     kind:
                         "DOCUMENTARY_RELATION",
 
-                    sourceId:
-                        relation.sourceId,
-
                     sourceType:
                         observation.sourceType,
-
-                    ...(
-                        relation.sourceRevision !==
-                        undefined
-                            ? {
-                                sourceRevision:
-                                    relation.sourceRevision
-                            }
-                            : {}
-                    ),
 
                     sourceLocation:
                         relation.locator.sourceLocation,
@@ -401,6 +500,7 @@ export class ScientificEvidenceLineageEngine {
 
                     rawText:
                         relation.rawText
+
                 },
                 errors
             );
@@ -426,25 +526,64 @@ export class ScientificEvidenceLineageEngine {
                     ...inputLink,
 
                     parentEvidenceIds:
-                        unique(
+                        uniqueStrings(
                             inputLink.parentEvidenceIds
                         )
 
                 };
 
+            const key =
+                referenceKey(
+                    link
+                );
+
 
             if (
                 terminals.has(
-                    link.evidenceId
-                ) ||
-                links.has(
-                    link.evidenceId
+                    key
                 )
             ) {
 
                 errors.push(
-                    `Evidence identity collision ${link.evidenceId}.`
+                    `Evidence identity collides with terminal evidence inside provenance scope ${key}.`
                 );
+
+                continue;
+
+            }
+
+
+            const existing =
+                links.get(
+                    key
+                );
+
+
+            if (
+                existing !==
+                undefined
+            ) {
+
+                if (
+                    existing.kind !==
+                    link.kind
+                ) {
+
+                    errors.push(
+                        `Derived evidence ${link.evidenceId} has conflicting kinds inside ${link.sourceId}.`
+                    );
+
+                    continue;
+
+                }
+
+
+                existing.parentEvidenceIds =
+                    uniqueStrings([
+                        ...existing.parentEvidenceIds,
+                        ...link.parentEvidenceIds
+                    ]);
+
 
                 continue;
 
@@ -466,7 +605,7 @@ export class ScientificEvidenceLineageEngine {
 
 
             links.set(
-                link.evidenceId,
+                key,
                 link
             );
 
@@ -491,20 +630,26 @@ export class ScientificEvidenceLineageEngine {
                 ScientificEvidenceLineageResolution
             >();
 
-        const reachedTerminals =
+        const reachedTerminalKeys =
             new Set<string>();
 
 
         const resolveOne = (
-            evidenceId:
-                string,
+            requested:
+                ScientificEvidenceLineageReference,
             stack:
                 string[]
         ): ScientificEvidenceLineageResolution => {
 
+            const key =
+                referenceKey(
+                    requested
+                );
+
+
             const cached =
                 memo.get(
-                    evidenceId
+                    key
                 );
 
 
@@ -520,7 +665,7 @@ export class ScientificEvidenceLineageEngine {
 
             const terminal =
                 terminals.get(
-                    evidenceId
+                    key
                 );
 
 
@@ -529,21 +674,21 @@ export class ScientificEvidenceLineageEngine {
                 undefined
             ) {
 
-                reachedTerminals.add(
-                    evidenceId
+                reachedTerminalKeys.add(
+                    key
                 );
 
 
                 const resolution:
                     ScientificEvidenceLineageResolution = {
 
-                        evidenceId,
+                        ...requested,
 
                         status:
                             "RESOLVED",
 
                         terminalEvidenceIds: [
-                            evidenceId
+                            requested.evidenceId
                         ],
 
                         unresolvedLeafIds:
@@ -553,7 +698,7 @@ export class ScientificEvidenceLineageEngine {
 
 
                 memo.set(
-                    evidenceId,
+                    key,
                     resolution
                 );
 
@@ -565,21 +710,18 @@ export class ScientificEvidenceLineageEngine {
 
             if (
                 stack.includes(
-                    evidenceId
+                    key
                 )
             ) {
 
                 errors.push(
-                    `Evidence lineage cycle ${[
-                        ...stack,
-                        evidenceId
-                    ].join(" -> ")}.`
+                    `Evidence lineage cycle detected inside provenance scope ${requested.sourceId}.`
                 );
 
 
                 return {
 
-                    evidenceId,
+                    ...requested,
 
                     status:
                         "UNRESOLVED",
@@ -588,7 +730,7 @@ export class ScientificEvidenceLineageEngine {
                         [],
 
                     unresolvedLeafIds: [
-                        evidenceId
+                        requested.evidenceId
                     ]
 
                 };
@@ -598,7 +740,7 @@ export class ScientificEvidenceLineageEngine {
 
             const link =
                 links.get(
-                    evidenceId
+                    key
                 );
 
 
@@ -610,7 +752,7 @@ export class ScientificEvidenceLineageEngine {
                 const resolution:
                     ScientificEvidenceLineageResolution = {
 
-                        evidenceId,
+                        ...requested,
 
                         status:
                             "UNRESOLVED",
@@ -619,14 +761,14 @@ export class ScientificEvidenceLineageEngine {
                             [],
 
                         unresolvedLeafIds: [
-                            evidenceId
+                            requested.evidenceId
                         ]
 
                     };
 
 
                 memo.set(
-                    evidenceId,
+                    key,
                     resolution
                 );
 
@@ -636,69 +778,47 @@ export class ScientificEvidenceLineageEngine {
             }
 
 
-            const childResults =
-                link.parentEvidenceIds.map(
-                    parentId =>
-                        resolveOne(
-                            parentId,
-                            [
-                                ...stack,
-                                evidenceId
-                            ]
-                        )
-                );
+            const parentResults =
+                link.parentEvidenceIds
+                    .map(
+                        parentEvidenceId =>
+                            resolveOne(
+                                reference(
+                                    link.sourceId,
+                                    link.sourceRevision,
+                                    parentEvidenceId
+                                ),
+                                [
+                                    ...stack,
+                                    key
+                                ]
+                            )
+                    );
 
 
             const terminalEvidenceIds =
-                unique(
-                    childResults.flatMap(
-                        result =>
-                            result.terminalEvidenceIds
-                    )
+                uniqueStrings(
+                    parentResults
+                        .flatMap(
+                            result =>
+                                result.terminalEvidenceIds
+                        )
                 );
 
             const unresolvedLeafIds =
-                unique(
-                    childResults.flatMap(
-                        result =>
-                            result.unresolvedLeafIds
-                    )
+                uniqueStrings(
+                    parentResults
+                        .flatMap(
+                            result =>
+                                result.unresolvedLeafIds
+                        )
                 );
-
-
-            for (
-                const terminalId
-                of terminalEvidenceIds
-            ) {
-
-                const terminalEvidence =
-                    terminals.get(
-                        terminalId
-                    )!;
-
-
-                if (
-                    terminalEvidence.sourceId !==
-                        link.sourceId ||
-                    !sameRevision(
-                        terminalEvidence.sourceRevision,
-                        link.sourceRevision
-                    )
-                ) {
-
-                    errors.push(
-                        `Derived evidence ${link.evidenceId} crosses source provenance through ${terminalId}.`
-                    );
-
-                }
-
-            }
 
 
             const resolution:
                 ScientificEvidenceLineageResolution = {
 
-                    evidenceId,
+                    ...requested,
 
                     status:
                         unresolvedLeafIds.length ===
@@ -716,7 +836,7 @@ export class ScientificEvidenceLineageEngine {
 
 
             memo.set(
-                evidenceId,
+                key,
                 resolution
             );
 
@@ -726,25 +846,25 @@ export class ScientificEvidenceLineageEngine {
         };
 
 
-        const requestedEvidenceIds =
-            unique(
-                input.requestedEvidenceIds
-            );
-
-
         const resolutions =
-            requestedEvidenceIds
+            uniqueReferences(
+                input.requestedEvidenceRefs
+            )
                 .map(
-                    evidenceId =>
+                    requested =>
                         resolveOne(
-                            evidenceId,
+                            requested,
                             []
                         )
                 )
                 .sort(
                     (a, b) =>
-                        a.evidenceId.localeCompare(
-                            b.evidenceId
+                        referenceKey(
+                            a
+                        ).localeCompare(
+                            referenceKey(
+                                b
+                            )
                         )
                 );
 
@@ -764,17 +884,21 @@ export class ScientificEvidenceLineageEngine {
         return {
 
             terminalEvidenceCatalog:
-                [...reachedTerminals]
+                [...reachedTerminalKeys]
                     .map(
-                        evidenceId =>
+                        key =>
                             terminals.get(
-                                evidenceId
+                                key
                             )!
                     )
                     .sort(
                         (a, b) =>
-                            a.evidenceId.localeCompare(
-                                b.evidenceId
+                            referenceKey(
+                                a
+                            ).localeCompare(
+                                referenceKey(
+                                    b
+                                )
                             )
                     ),
 
@@ -782,8 +906,12 @@ export class ScientificEvidenceLineageEngine {
                 [...links.values()]
                     .sort(
                         (a, b) =>
-                            a.evidenceId.localeCompare(
-                                b.evidenceId
+                            referenceKey(
+                                a
+                            ).localeCompare(
+                                referenceKey(
+                                    b
+                                )
                             )
                     ),
 
@@ -809,14 +937,20 @@ export class ScientificEvidenceLineageEngine {
             string[]
     ): void {
 
+        const key =
+            referenceKey(
+                terminal
+            );
+
+
         if (
             terminals.has(
-                terminal.evidenceId
+                key
             )
         ) {
 
             errors.push(
-                `Duplicate terminal evidence ${terminal.evidenceId}.`
+                `Duplicate terminal evidence inside provenance scope ${key}.`
             );
 
             return;
@@ -825,7 +959,7 @@ export class ScientificEvidenceLineageEngine {
 
 
         terminals.set(
-            terminal.evidenceId,
+            key,
             terminal
         );
 
@@ -849,7 +983,7 @@ export class ScientificEvidenceLineageEngine {
                 [],
 
             errors:
-                unique(
+                uniqueStrings(
                     errors
                 )
 

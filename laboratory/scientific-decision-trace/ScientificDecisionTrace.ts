@@ -104,6 +104,12 @@ export interface ScientificDecisionTraceParticipantArtifact {
     participantId:
         string;
 
+    sourceId:
+        string;
+
+    sourceRevision?:
+        string;
+
     subject:
         string;
 
