@@ -25,6 +25,10 @@ import {
 } from "../laboratory/scientific-the-graph-protocol-attribution/ScientificTheGraphProtocolAttributionEngine.js";
 
 import {
+    projectScientificTheGraphProtocolAttributionDecision
+} from "../laboratory/scientific-the-graph-protocol-attribution/ScientificTheGraphProtocolAttributionDecision.js";
+
+import {
     ScientificTheGraphSubgraphMcpLiveClient
 } from "../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
 
@@ -2329,6 +2333,219 @@ async function main(): Promise<void> {
 
     }
 
+
+    /*
+     * =========================================================
+     * FINAL V2 SELECTIVE PROTOCOL-ATTRIBUTION DECISION
+     * =========================================================
+     *
+     * Project each exact LIVE schema attribution through the
+     * production POSITIVE / NEGATIVE / ABSTAIN decision layer.
+     *
+     * These decisions remain scoped to protocol attribution in
+     * the exact inspected schema. They do not manufacture
+     * compatibility, composition or scientific polarity.
+     */
+    const realGraphProtocolAttributionDecisions =
+        realGraphProtocolAttribution.assessments.map(
+            assessment =>
+                projectScientificTheGraphProtocolAttributionDecision(
+                    assessment
+                )
+        );
+
+
+    if (
+        realGraphProtocolAttributionDecisions.length !==
+        realGraphProtocolAttribution.assessments.length
+    ) {
+
+        throw new Error(
+            "Selective Graph attribution decision count does not match LIVE attribution assessment count."
+        );
+
+    }
+
+
+    for (
+        let index =
+            0;
+        index <
+            realGraphProtocolAttribution.assessments.length;
+        index++
+    ) {
+
+        const assessment =
+            realGraphProtocolAttribution.assessments[index];
+
+        const decision =
+            realGraphProtocolAttributionDecisions[index];
+
+
+        if (
+            decision.assessmentId !==
+                assessment.assessmentId ||
+            decision.protocolId !==
+                assessment.protocolId ||
+            decision.profileId !==
+                assessment.profileId ||
+            decision.normativeSourceId !==
+                assessment.normativeSourceId ||
+            decision.normativeSourceRevision !==
+                assessment.normativeSourceRevision ||
+            decision.subgraphId !==
+                assessment.subgraphId ||
+            decision.ipfsHash !==
+                assessment.ipfsHash ||
+            decision.providerMode !==
+                assessment.providerMode ||
+            decision.schemaObservationId !==
+                assessment.schemaObservationId ||
+            decision.schemaHash !==
+                assessment.schemaHash
+        ) {
+
+            throw new Error(
+                `Selective attribution decision lost exact LIVE provenance for assessment ${assessment.assessmentId}.`
+            );
+
+        }
+
+
+        if (
+            decision.decisionBasis ===
+            "INCONSISTENT_ATTRIBUTION_ASSESSMENT"
+        ) {
+
+            throw new Error(
+                `LIVE attribution assessment ${assessment.assessmentId} is internally inconsistent under the production decision projector.`
+            );
+
+        }
+
+
+        if (
+            assessment.status ===
+                "ATTRIBUTED" &&
+            decision.decision !==
+                "POSITIVE"
+        ) {
+
+            throw new Error(
+                `Accepted LIVE attribution ${assessment.assessmentId} did not project to POSITIVE.`
+            );
+
+        }
+
+    }
+
+
+    const positiveGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "POSITIVE"
+        );
+
+
+    const negativeGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "NEGATIVE"
+        );
+
+
+    const abstainedGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "ABSTAIN"
+        );
+
+
+    const graphDecisionSerialization =
+        JSON.stringify(
+            realGraphProtocolAttributionDecisions
+        );
+
+
+    if (
+        graphDecisionSerialization.includes(
+            "scientificPolarity"
+        ) ||
+        graphDecisionSerialization.includes(
+            "compatibilityPolarity"
+        ) ||
+        graphDecisionSerialization.includes(
+            '"SUPPORT"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"CHALLENGE"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"FULL"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "Selective LIVE Graph attribution decisions manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH SELECTIVE ATTRIBUTION DECISIONS"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `LIVE assessments: ${realGraphProtocolAttributionDecisions.length}`
+    );
+
+    console.log(
+        `POSITIVE:         ${positiveGraphDecisions.length}`
+    );
+
+    console.log(
+        `NEGATIVE:         ${negativeGraphDecisions.length}`
+    );
+
+    console.log(
+        `ABSTAIN:          ${abstainedGraphDecisions.length}`
+    );
+
+
+    for (
+        const decision
+        of realGraphProtocolAttributionDecisions
+    ) {
+
+        console.log(
+            `${decision.protocolId} ${decision.decision} ${decision.decisionBasis}`
+        );
+
+        console.log(
+            `  subgraph:   ${decision.subgraphId}`
+        );
+
+        console.log(
+            `  deployment: ${decision.ipfsHash}`
+        );
+
+    }
 
     const fullInspectionSerialization =
         JSON.stringify(
