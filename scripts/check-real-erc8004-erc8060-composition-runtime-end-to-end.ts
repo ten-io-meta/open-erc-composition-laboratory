@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import {
     mkdtemp,
     readFile,
-    rm
+    rm,
+    writeFile
 } from "node:fs/promises";
 
 import {
@@ -3380,6 +3381,62 @@ try {
 
 
         console.log("");
+    const v21ExportPath =
+        process.env.OECL_V21_REAL_CONTROL_EXPORT;
+
+
+    if (
+        v21ExportPath !==
+        undefined &&
+        v21ExportPath.trim().length >
+        0
+    ) {
+
+        const v21ConstraintObservations =
+            execution
+                ?.jointContractHarnessExecution
+                ?.driverReport
+                ?.constraintObservations ??
+            [];
+
+
+        if (
+            v21ConstraintObservations.length !==
+            17
+        ) {
+
+            throw new Error(
+                `V2.1 real-control export requires exactly 17 runtime constraint observations, observed ${v21ConstraintObservations.length}.`
+            );
+
+        }
+
+
+        await writeFile(
+            v21ExportPath,
+            JSON.stringify(
+                {
+                    requirement,
+                    constraintObservations:
+                        v21ConstraintObservations,
+                    compositionConstraintEvaluation:
+                        execution
+                            ?.compositionConstraintEvaluation ??
+                        null
+                },
+                null,
+                2
+            ),
+            "utf8"
+        );
+
+
+        console.log(
+            `V2.1_REAL_CONTROL_EXPORT:${v21ExportPath}`
+        );
+
+    }
+
         console.log(
             "=== REAL END TO END RUNTIME SUMMARY ==="
         );
