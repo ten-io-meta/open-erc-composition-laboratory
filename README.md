@@ -1,195 +1,167 @@
-# Open ERC Composition Laboratory (OECL)
+﻿# Open ERC Composition Laboratory (OECL)
 
-**Open research infrastructure for deterministic Ethereum protocol composition.**
+**Scientific infrastructure for discovering and evaluating Ethereum standard composition.**
 
----
+OECL investigates one central question:
 
-## About OECL
+> Which Ethereum standards can work together, what does each one contribute, and how far can composition go without violating the rules of any participant?
 
-The Open ERC Composition Laboratory (OECL) is an independent open research project dedicated to the deterministic study of Ethereum protocol composition.
-
-Its mission is to provide a reproducible research infrastructure for analyzing how independent Ethereum standards compose, interact, and preserve deterministic behavior across protocol boundaries.
-
-OECL focuses on research methodology rather than protocol implementation. The laboratory is designed to generate reproducible experimental evidence, transform that evidence into structured knowledge, and continuously improve the understanding of protocol interoperability.
-
-OECL is currently maintained by **tenio.eth**.
+OECL separates **discovery** from **scientific validation**.
 
 ---
 
-## Research Philosophy
+## Scientific Pipeline
 
-OECL follows a reproducible scientific workflow.
+`REAL SOURCE -> FACTS -> CONCEPTS -> PROTOCOL ATTRIBUTION`
 
-Research begins with deterministic experiments and progresses through successive layers of analysis, transforming experimental evidence into accumulated scientific knowledge.
+`RELATIONS -> CONTRIBUTIONS / BARRIERS / NEEDS -> COMPOSITION FRAME`
 
-Rather than relying on assumptions, research conclusions are expected to originate from reproducible observations whenever possible.
+`CROSS-PROTOCOL DISCOVERY -> COMPATIBILITY GATE -> COMPOSITION GRAPH`
 
----
-
-## Research Pipeline
-
-OECL is organized as a modular research pipeline.
-
-```text
-Experiment Engine
-
-↓
-
-Benchmark Engine
-
-↓
-
-Requirements Engine
-
-↓
-
-Emergent Property Engine
-
-↓
-
-Pattern Discovery
-
-↓
-
-Relationship Engine
-
-↓
-
-Composition Matrix
-
-↓
-
-Composition Intelligence
-
-↓
-
-Hypothesis Engine
-
-↓
-
-Hypothesis Validation
-
-↓
-
-Automatic Scenario Generation
-
-↓
-
-Adaptive Research Planner
-
-↓
-
-Research Memory
-
-↓
-
-Research Knowledge
-```
-
-Each engine performs a single responsibility while contributing to a deterministic and reproducible research process.
+`CANDIDATES / PATHS -> SCIENTIFIC EVALUATION -> EXPERIMENT / RUNTIME -> CONCLUSION`
 
 ---
 
-## Project Architecture
+## Real Scientific Control: ERC-8004 x ERC-8060
 
-The architecture is intentionally divided into complementary layers.
+OECL detects that both protocols have a structural dependency on ERC-721.
 
-### OECL Core
+- ERC-8004 -> ERC-721
+- ERC-8060 -> ERC-721
+- shared foundation -> ERC-721
+- discovery candidate -> UNEVALUATED
 
-OECL Core provides the open research infrastructure.
+A shared foundation opens a candidate. It does not prove compatibility.
 
-Core capabilities include:
+The real positive control then evaluates six required scientific gates:
 
-* deterministic experiment execution
-* scenario execution
-* benchmarking
-* protocol requirements
-* relationship analysis
-* composition matrix generation
-* validation
-* dataset generation
+- qualifying composition candidate: PASS
+- known relevant boundaries: PASS
+- observed relevant boundaries: PASS
+- no observed boundary violation: PASS
+- sufficient compatibility evidence: PASS
+- functional configuration evidence: PASS
 
-OECL Core exists to support open, reproducible research across the Ethereum ecosystem.
+**6 / 6 gates -> SUPPORTED**
 
----
-
-### OECL Research
-
-OECL Research extends the Core through advanced research capabilities.
-
-Research capabilities include:
-
-* Composition Intelligence
-* Research Memory
-* Research Knowledge
-* Hypothesis Generation
-* Hypothesis Validation
-* Adaptive Research Planning
-* Automatic Scenario Generation
-
-These components transform deterministic observations into accumulated scientific knowledge.
+This is candidate-scoped support, not a universal compatibility claim.
 
 ---
 
-## Design Principles
+## Fail-Closed Uncertainty
 
-OECL is guided by the following principles:
+OECL preserves uncertainty when evidence is insufficient.
 
-* reproducible research
-* deterministic validation
-* protocol neutrality
-* modular architecture
-* accumulated scientific knowledge
-* long-term sustainability
-* open scientific collaboration
+Real control: ERC-8301 -> ERC-8354
 
----
+- documentary evidence: 2
+- known boundaries: 0
+- compatibility observations: 0
+- functional configurations: 0
 
-## Governance
+**decision: INCONCLUSIVE**
 
-OECL maintains its own research identity, governance principles, and technical direction.
+Documentary evidence can open a candidate without manufacturing compatibility.
 
-Project governance is documented in:
-
-* `docs/GOVERNANCE.md`
-
-Project architecture is documented in:
-
-* `docs/ARCHITECTURE.md`
-
-Contribution guidelines are available in:
-
-* `docs/CONTRIBUTING.md`
-
-Intellectual property policies are described in:
-
-* `docs/IP_POLICY.md`
+- discovery != compatibility
+- candidate support != global support
+- missing evidence != preserved boundary
 
 ---
 
-## Licensing
+## Scientific Outputs
 
-The licensing strategy is documented separately.
+### Final Scientific Report
 
-OECL Core is intended to remain open research infrastructure.
+Projects the final scientific state, candidates, compositions, evidence lineage, unresolved evidence, and polarity.
 
-Additional layers of the OECL ecosystem may adopt different licensing models while preserving interoperability with the Core.
+### Candidate Composition Dossier
+
+Projects candidate kind, participants, boundaries, relevance scope, evidence gaps, compatibility state, and runtime configuration evidence.
+
+### Why / Why Not
+
+Turns upstream scientific reason codes and observed conditions into human-readable explanations without recalculating the decision.
+
+### Clean Demo CLI
+
+Consumes projected scientific outputs only.
+
+The CLI cannot execute the solver, promote a candidate, change polarity, or invent evidence.
+
+---
+
+## Quick Scientific Demo
+
+From the repository root:
+
+`npx tsx .\scripts\check-v21-real-control-structural-foundation-runtime.ts`
+`npx tsx .\scripts\check-v21-real-positive-control-decision-runtime.ts`
+`npx tsx .\scripts\check-v21-real-inconclusive-control-runtime.ts`
+
+Expected scientific behavior:
+
+- ERC-8004 x ERC-8060 -> shared ERC-721 foundation -> UNEVALUATED at discovery
+- REAL-CONTROL-POSITIVE-8004-8060 -> 6/6 gates -> SUPPORTED
+- REAL-CONTROL-INCONCLUSIVE-8301-8354 -> INCONCLUSIVE
+
+---
+
+## V2.1 Validation
+
+Frozen scientific implementation:
+
+- commit: `f3f8855c467ea3966d10de362eb20af5b4318f8b`
+- tag: `oecl-v2.1-final-quality-pass-validated`
+
+- TypeScript: PASS
+- full-suite passes: 206
+- recovered targeted check: PASS
+- unique executed checks validated: 207
+- known scientific failures: 0
+
+Four live The Graph checks remain **NOT VALIDATED** because `THE_GRAPH_API_KEY` was unavailable during final validation.
+
+They are not represented as passing checks.
+
+Full validation record: `docs/v2.1-quality-pass/F-final-validation.md`
+
+---
+
+## Challenged Control Integrity
+
+A real CHALLENGED control was preregistered, but no qualifying real boundary violation was found in the current corpus.
+
+OECL therefore did not manufacture a CHALLENGED result from:
+
+- synthetic fixtures
+- semantic cues
+- injected observations
+- missing evidence
+- rejected invalid transactions
+
+---
+
+## Scientific Principles
+
+- real evidence before compatibility claims
+- discovery and evaluation remain separate
+- no known boundary does not mean compatible
+- no observed violation does not by itself prove preservation
+- shared foundation does not imply functional complementarity
+- pairwise support does not imply whole-composition support
+- uncertainty is preserved rather than guessed away
+- presentation layers cannot invent scientific state
 
 ---
 
 ## Project Status
 
-**Status:** Active Research
+OECL V2.1 scientific quality pass is frozen and validated.
 
-The Open ERC Composition Laboratory is under active development as a long-term research infrastructure for deterministic Ethereum protocol composition.
+Post-freeze work is limited to presentation and documentation layers such as README, video, and web.
 
----
+Maintainer: **tenio.eth**
 
-## Maintainer
-
-The Open ERC Composition Laboratory (OECL) is currently maintained by **tenio.eth**.
-
-References to tenio.eth identify the current maintainer of the project and, where applicable, the copyright holder of original works.
-
-The research identity, governance, and long-term mission of OECL remain independent of any specific commercial product or service.
-
+Validation: `docs/v2.1-quality-pass/F-final-validation.md`
+Challenged-control audit: `docs/v2.1-quality-pass/A3-real-challenged-control-audit.md`
