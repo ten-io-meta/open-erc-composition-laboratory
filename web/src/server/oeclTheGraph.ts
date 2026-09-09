@@ -1,4 +1,6 @@
-﻿import { ScientificTheGraphGatewayProvider } from "../../../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";
+﻿import { ScientificTheGraphSubgraphMcpLiveClient } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
+import { ScientificTheGraphSubgraphMcpKeywordProvider } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpKeywordProvider.js";
+import { ScientificTheGraphGatewayProvider } from "../../../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";
 import { AGENT0_BASE_MAINNET_SUBGRAPH_ID } from "../../../laboratory/scientific-the-graph-agent0/ScientificAgent0Erc8004Adapter.js";
 
 type Agent0GraphResponse = {
@@ -81,4 +83,61 @@ export async function getLiveAgent0State() {
 }
 
 
+
+
+
+export async function discoverLiveSubgraphs(protocolId: string) {
+  const apiKey = process.env.THE_GRAPH_API_KEY?.trim();
+  const normalized = protocolId.trim().toUpperCase();
+
+  if (!apiKey) {
+    return { status: "NOT_CONFIGURED" as const, protocolId: normalized, searches: [] };
+  }
+
+  if (!/^ERC-\d+$/.test(normalized)) {
+    return { status: "INVALID_PROTOCOL" as const, protocolId: normalized, searches: [] };
+  }
+
+  const client = new ScientificTheGraphSubgraphMcpLiveClient(apiKey);
+
+  try {
+    const result = await new ScientificTheGraphSubgraphMcpKeywordProvider(
+      client,
+      "LIVE"
+    ).discover([
+      {
+        requestId: `WEB-DISCOVERY-${normalized}`,
+        protocolId: normalized,
+        profileId: `WEB-PROFILE-${normalized}`,
+        sourceId: "OECL-WEB-LIVE-DISCOVERY",
+        searchTerms: [normalized],
+        searchBasis: "PROTOCOL_IDENTITY_ALIASES",
+        targetProductKind: "SUBGRAPH",
+      },
+    ]);
+
+    return {
+      status: result.errors.length === 0 ? "LIVE" as const : "ERROR" as const,
+      protocolId: normalized,
+      searches: result.searches.map((search) => ({
+        protocolId: search.protocolId,
+        searchTerm: search.searchTerm,
+        provider: search.provider,
+        providerMode: search.providerMode,
+        returned: search.returned,
+        total: search.total,
+        status: search.status,
+        hits: search.hits.map((hit) => ({
+          subgraphId: hit.subgraphId,
+          displayName: hit.displayName,
+          ipfsHash: hit.ipfsHash,
+          providerRank: hit.providerRank,
+        })),
+      })),
+      errors: result.errors,
+    };
+  } finally {
+    await client.close();
+  }
+}
 
