@@ -85,6 +85,9 @@ import {
 import {
     ScientificCandidateScopedCompatibilityEngine
 } from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateScopedCompatibilityEngine.js";
+import {
+    ScientificCandidateFunctionalConfigurationEvidenceEngine
+} from "../laboratory/scientific-candidate-functional-configuration/ScientificCandidateFunctionalConfigurationEvidenceEngine.js";
 
 import type {
     ScientificCompositionExecutionRequirement
@@ -1142,6 +1145,200 @@ async function main(): Promise<void> {
         );
 
     }
+
+    const runtimeExport =
+        exported as typeof exported & {
+            driverReport?: {
+                chainId:
+                    string | number;
+                sharedRuntime:
+                    boolean;
+                participantA: {
+                    executed:
+                        boolean;
+                    contractAddresses:
+                        string[];
+                };
+                participantB: {
+                    executed:
+                        boolean;
+                    contractAddresses:
+                        string[];
+                };
+                crossProtocolInteractionObservations?: Array<{
+                    observationId:
+                        string;
+                    candidateId:
+                        string;
+                    sourceSide:
+                        "A" | "B";
+                    targetSide:
+                        "A" | "B";
+                    callKind:
+                        "CALL" | "STATICCALL" | "DELEGATECALL";
+                    sourceAddress:
+                        string;
+                    targetAddress:
+                        string;
+                    status:
+                        "OBSERVED";
+                    evidence:
+                        string[];
+                }>;
+            } | null;
+        };
+
+
+    const driverReport =
+        runtimeExport.driverReport;
+
+
+    if (!driverReport) {
+        throw new Error(
+            "A2.9b real driver report missing."
+        );
+    }
+
+
+    const runtimeInteractions =
+        driverReport
+            .crossProtocolInteractionObservations ??
+        [];
+
+
+    check(
+        "REAL DRIVER REPORT HAS SHARED RUNTIME",
+        driverReport.sharedRuntime === true
+    );
+
+
+    check(
+        "BOTH REAL PARTICIPANTS EXECUTED WITH ADDRESSES",
+        driverReport.participantA.executed === true &&
+        driverReport.participantB.executed === true &&
+        driverReport.participantA.contractAddresses.length > 0 &&
+        driverReport.participantB.contractAddresses.length > 0
+    );
+
+
+    check(
+        "REAL DRIVER REPORT HAS TWO OBSERVED CROSS-PROTOCOL INTERACTIONS",
+        runtimeInteractions.length === 2 &&
+        runtimeInteractions.every(
+            interaction =>
+                interaction.status === "OBSERVED"
+        )
+    );
+
+    const sideParticipant = {
+        A: registration.applicability.participantA.participantId,
+        B: registration.applicability.participantB.participantId
+    } as const;
+
+
+    const functionalConfiguration =
+        new ScientificCandidateFunctionalConfigurationEvidenceEngine()
+            .evaluate({
+                candidateId: genericCandidate.candidateId,
+
+                participantIds: [
+                    genericCandidate.sourceParticipantId,
+                    genericCandidate.targetParticipantId
+                ],
+
+                runtimeBinding: {
+                    genericCandidateId: genericCandidate.candidateId,
+                    runtimeCandidateId:
+                        exported.requirement.candidate.candidateId,
+                    evidenceIds: [...genericCandidate.evidenceIds]
+                },
+
+                chainId: driverReport.chainId,
+                sharedRuntime: driverReport.sharedRuntime,
+
+                participants: [
+                    {
+                        participantId: sideParticipant.A,
+                        executed: driverReport.participantA.executed,
+                        contractAddresses:
+                            [...driverReport.participantA.contractAddresses]
+                    },
+                    {
+                        participantId: sideParticipant.B,
+                        executed: driverReport.participantB.executed,
+                        contractAddresses:
+                            [...driverReport.participantB.contractAddresses]
+                    }
+                ],
+
+                interactions: runtimeInteractions.map(
+                    interaction => ({
+                        observationId: interaction.observationId,
+                        runtimeCandidateId: interaction.candidateId,
+                        sourceParticipantId:
+                            sideParticipant[interaction.sourceSide],
+                        targetParticipantId:
+                            sideParticipant[interaction.targetSide],
+                        callKind: interaction.callKind,
+                        sourceAddress: interaction.sourceAddress,
+                        targetAddress: interaction.targetAddress,
+                        evidenceIds: [...interaction.evidence]
+                    })
+                ),
+
+                compatibility: {
+                    candidateId: genericCandidate.candidateId,
+                    scientificPolarity:
+                        scopedAssessment.compatibility.scientificPolarity,
+                    total: scopedAssessment.compatibility.statistics.total,
+                    preserved:
+                        scopedAssessment.compatibility.statistics.preserved,
+                    violated:
+                        scopedAssessment.compatibility.statistics.violated,
+                    unevaluated:
+                        scopedAssessment.compatibility.statistics.unevaluated,
+                    unresolvedRelevance:
+                        scopedAssessment.relevanceStatistics.unresolved
+                }
+            });
+
+
+    noErrors(
+        "A2.9b functional configuration",
+        functionalConfiguration.errors
+    );
+
+    check(
+        "REAL FUNCTIONAL CONFIGURATION IS EVIDENCED",
+        functionalConfiguration.evidence?.status === "EVIDENCED"
+    );
+
+
+    check(
+        "REAL FUNCTIONAL CONFIGURATION PRESERVES TWO INTERACTIONS",
+        functionalConfiguration
+            .evidence
+            ?.interactionObservationIds
+            .length === 2
+    );
+
+
+    check(
+        "REAL FUNCTIONAL CONFIGURATION PRESERVES SHARED RUNTIME",
+        functionalConfiguration.evidence?.sharedRuntime === true
+    );
+
+
+    console.log("");
+    console.log(
+        `functional configuration: ${functionalConfiguration.evidence?.status ?? "MISSING"}`
+    );
+    console.log(
+        `runtime interactions:     ${functionalConfiguration.evidence?.interactionObservationIds.length ?? 0}`
+    );
+    console.log(
+        `shared runtime:           ${functionalConfiguration.evidence?.sharedRuntime ?? false}`
+    );
 
 
     console.log("");

@@ -3422,6 +3422,12 @@ try {
                     compositionConstraintEvaluation:
                         execution
                             ?.compositionConstraintEvaluation ??
+                        null,
+
+                    driverReport:
+                        execution
+                            ?.jointContractHarnessExecution
+                            ?.driverReport ??
                         null
                 },
                 null,
