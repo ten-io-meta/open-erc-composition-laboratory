@@ -210,6 +210,33 @@ function protocolIdentifierRejectionReasons(
                 String.raw`\bfails?\s+to\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
             ),
 
+            /*
+             * Generic negated protocol relationships.
+             *
+             * These patterns reject an otherwise affirmative-looking
+             * relationship when its local state is explicitly absent,
+             * removed or no longer active.
+             */
+            new RegExp(
+                String.raw`\bno\s+longer\s+(?:implements?|indexes?|supports?|uses?|represents?|describes?)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:never|cannot|can't|cant)\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bno\s+(?:support|implementation|indexing)\s+(?:of|for)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:support|implementation|indexing)\s+(?:of|for)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9]).{0,48}\b(?:is|are|was|were|has\s+been|have\s+been)\s+(?:removed|disabled|absent|deprecated|withdrawn|dropped)\b`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,48}\b(?:support|implementation|indexing)\b.{0,48}\b(?:is|are|was|were|has\s+been|have\s+been)\s+(?:removed|disabled|absent|deprecated|withdrawn|dropped)\b`
+            ),
+
             new RegExp(
                 String.raw`\bnot\s+an?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])\s+(?:implementation|indexer|supporter)\b`
             ),
