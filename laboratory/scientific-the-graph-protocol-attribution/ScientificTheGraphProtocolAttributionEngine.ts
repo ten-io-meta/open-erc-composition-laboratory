@@ -188,12 +188,16 @@ function protocolIdentifierRejectionReasons(
 
 
     /*
-     * String.raw is required here because these patterns are
-     * constructed dynamically with RegExp().
+     * These rules identify explicit contexts where the presence
+     * of a protocol identifier is documentary or negative rather
+     * than affirmative attribution evidence.
      *
-     * Without String.raw, JavaScript template-string escaping
-     * consumes sequences such as \b and \s before the regex
-     * engine receives them.
+     * They operate line-by-line and remain deliberately
+     * conservative. They do not infer compatibility or semantic
+     * protocol equivalence.
+     *
+     * String.raw preserves regex escapes in dynamic RegExp
+     * construction.
      */
     const explicitNegationPatterns =
         [
@@ -216,6 +220,34 @@ function protocolIdentifierRejectionReasons(
 
             new RegExp(
                 String.raw`\bunrelated\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:does|do|did)\s+not\s+conform\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:doesn't|doesnt)\s+conform\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:is|are)\s+not\s+compatible\s+with\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,48}\bcompatibility\s+(?:is|was)\s+not\s+claimed\b`
+            ),
+
+            new RegExp(
+                String.raw`\bexplicitly\s+excludes?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bexcludes?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bno\s+${normalizedIdentifier}(?=$|[^a-z0-9]).{0,48}\bentities?\s+(?:are|is)\s+indexed\b`
             )
 
         ];
@@ -242,6 +274,34 @@ function protocolIdentifierRejectionReasons(
 
             new RegExp(
                 String.raw`\bsee(?:\s+also)?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bcomparison\s+with\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9]).{0,32}\bonly\b`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,64}\bdiscussed\b.{0,48}\bonly\s+as\s+an?\s+alternative\b`
+            ),
+
+            new RegExp(
+                String.raw`\binspired\s+by\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\blegacy\s+reference\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bmigration\s+note\b.{0,64}\bmentions?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9]).{0,32}\bonly\b`
+            ),
+
+            new RegExp(
+                String.raw`\bexample\s+label\b.{0,48}${normalizedIdentifier}(?=$|[^a-z0-9]).{0,96}\b(?:test\s+documentation|documentation)\b.{0,32}\bonly\b`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,64}\bhistorical\s+comparison\b`
             )
 
         ];
