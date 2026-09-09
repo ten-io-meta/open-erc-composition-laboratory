@@ -1081,13 +1081,25 @@ export class ScientificCompositionVisualizationEngine {
                                             contributionId:
                                                 edge.contributionId
                                         }
-                                        : {
-                                            documentaryCandidateId:
-                                                edge.documentaryCandidateId,
+                                        : edge.kind ===
+                                            "DOCUMENTARY_COMPOSITION"
+                                            ? {
+                                                documentaryCandidateId:
+                                                    edge.documentaryCandidateId,
 
-                                            documentaryRelation:
-                                                edge.relation
-                                        }
+                                                documentaryRelation:
+                                                    edge.relation
+                                            }
+                                            : {
+                                                structuralFoundationCandidateId:
+                                                    edge.structuralFoundationCandidateId,
+
+                                                structuralFoundationDirectionality:
+                                                    "UNDIRECTED" as const,
+
+                                                foundationProtocolId:
+                                                    edge.foundationProtocolId
+                                            }
                                 )
 
                             };

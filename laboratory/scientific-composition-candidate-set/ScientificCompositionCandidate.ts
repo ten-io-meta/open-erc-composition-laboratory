@@ -6,10 +6,15 @@ import type {
     ScientificProtocolRelationKind
 } from "../scientific-protocol-relation-evidence/ScientificProtocolRelationEvidence.js";
 
+import type {
+    ScientificCompositionProvenance
+} from "../scientific-cross-protocol-composition/ScientificCompositionCandidate.js";
+
 
 export type ScientificCompositionCandidateKind =
     | "FUNCTIONAL_COMPLEMENTARITY"
-    | "DOCUMENTARY_COMPOSITION";
+    | "DOCUMENTARY_COMPOSITION"
+    | "STRUCTURAL_FOUNDATION";
 
 
 interface ScientificCompositionCandidateBase {
@@ -31,7 +36,7 @@ interface ScientificCompositionCandidateBase {
 
     /*
      * Candidate discovery alone establishes no compatibility,
-     * runtime interaction, polarity, confidence, or composition.
+     * runtime interaction, polarity, confidence or composition.
      */
     evaluationStatus:
         "UNEVALUATED";
@@ -84,6 +89,37 @@ export interface ScientificDocumentaryCompositionCandidateRecord
 }
 
 
+export interface ScientificStructuralFoundationCompositionCandidateRecord
+    extends ScientificCompositionCandidateBase {
+
+    kind:
+        "STRUCTURAL_FOUNDATION";
+
+    structuralFoundationCandidateId:
+        string;
+
+    sourceCrossProtocolCandidateId:
+        string;
+
+    /*
+     * sourceParticipantId / targetParticipantId are canonical
+     * storage order only for this candidate kind.
+     *
+     * They do not represent semantic direction.
+     */
+    directionality:
+        "UNDIRECTED";
+
+    foundationProtocolId:
+        string;
+
+    provenance:
+        ScientificCompositionProvenance[];
+
+}
+
+
 export type ScientificCompositionCandidate =
     | ScientificFunctionalCompositionCandidate
-    | ScientificDocumentaryCompositionCandidateRecord;
+    | ScientificDocumentaryCompositionCandidateRecord
+    | ScientificStructuralFoundationCompositionCandidateRecord;

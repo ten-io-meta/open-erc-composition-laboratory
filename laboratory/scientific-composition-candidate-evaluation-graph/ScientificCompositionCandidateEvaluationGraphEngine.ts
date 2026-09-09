@@ -448,7 +448,10 @@ export class ScientificCompositionCandidateEvaluationGraphEngine {
                 });
 
             }
-            else {
+            else if (
+                candidateEdge.kind ===
+                "DOCUMENTARY_COMPOSITION"
+            ) {
 
                 edges.push({
 
@@ -462,6 +465,30 @@ export class ScientificCompositionCandidateEvaluationGraphEngine {
 
                     relation:
                         candidateEdge.relation
+
+                });
+
+            }
+            else {
+
+                edges.push({
+
+                    ...base,
+
+                    kind:
+                        "STRUCTURAL_FOUNDATION",
+
+                    structuralFoundationCandidateId:
+                        candidateEdge.structuralFoundationCandidateId,
+
+                    sourceCrossProtocolCandidateId:
+                        candidateEdge.sourceCrossProtocolCandidateId,
+
+                    directionality:
+                        "UNDIRECTED",
+
+                    foundationProtocolId:
+                        candidateEdge.foundationProtocolId
 
                 });
 
@@ -510,6 +537,14 @@ export class ScientificCompositionCandidateEvaluationGraphEngine {
             ).length;
 
 
+        const structuralFoundationCandidateEdges =
+            edges.filter(
+                edge =>
+                    edge.kind ===
+                    "STRUCTURAL_FOUNDATION"
+            ).length;
+
+
         const graph:
             ScientificCompositionCandidateEvaluationGraph = {
 
@@ -549,7 +584,9 @@ export class ScientificCompositionCandidateEvaluationGraphEngine {
 
                     functionalCandidateEdges,
 
-                    documentaryCandidateEdges
+                    documentaryCandidateEdges,
+
+                    structuralFoundationCandidateEdges
 
                 }
 

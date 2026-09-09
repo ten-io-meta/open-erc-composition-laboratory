@@ -143,6 +143,15 @@ export interface ScientificCompositionEnvelopeRelation {
     documentaryRelation?:
         ScientificProtocolRelationKind;
 
+    structuralFoundationCandidateId?:
+        string;
+
+    structuralFoundationDirectionality?:
+        "UNDIRECTED";
+
+    foundationProtocolId?:
+        string;
+
     evaluationStatus:
         "EVALUATED";
 

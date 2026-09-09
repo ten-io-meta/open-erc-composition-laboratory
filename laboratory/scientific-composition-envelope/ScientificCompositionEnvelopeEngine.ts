@@ -894,12 +894,26 @@ export class ScientificCompositionEnvelopeEngine {
                                     edge.contributionId
 
                             }
-                            : {
+                            : edge.kind ===
+                                "DOCUMENTARY_COMPOSITION"
+                                ? {
 
-                                documentaryRelation:
-                                    edge.relation
+                                    documentaryRelation:
+                                        edge.relation
 
-                            }
+                                }
+                                : {
+
+                                    structuralFoundationCandidateId:
+                                        edge.structuralFoundationCandidateId,
+
+                                    structuralFoundationDirectionality:
+                                        "UNDIRECTED" as const,
+
+                                    foundationProtocolId:
+                                        edge.foundationProtocolId
+
+                                }
                     ),
 
                     evaluationStatus:

@@ -116,6 +116,15 @@ export interface ScientificCompositionVisualizationRelation {
     documentaryRelation?:
         ScientificProtocolRelationKind;
 
+    structuralFoundationCandidateId?:
+        string;
+
+    structuralFoundationDirectionality?:
+        "UNDIRECTED";
+
+    foundationProtocolId?:
+        string;
+
 }
 
 

@@ -7,6 +7,10 @@ import type {
 } from "../scientific-documentary-composition-candidate/ScientificDocumentaryCompositionCandidate.js";
 
 import type {
+    ScientificStructuralFoundationCompositionCandidate
+} from "../scientific-structural-foundation-candidate/ScientificStructuralFoundationCompositionCandidate.js";
+
+import type {
     ScientificCompositionCandidate
 } from "./ScientificCompositionCandidate.js";
 
@@ -25,6 +29,9 @@ export interface ScientificCompositionCandidateSetEngineInput {
 
     documentaryCandidates:
         ScientificDocumentaryCompositionCandidate[];
+
+    structuralFoundationCandidates?:
+        ScientificStructuralFoundationCompositionCandidate[];
 
 }
 
@@ -391,6 +398,159 @@ export class ScientificCompositionCandidateSetEngine {
         }
 
 
+        const structuralCandidateIds =
+            new Set<string>();
+
+
+        for (
+            const candidate
+            of input.structuralFoundationCandidates ?? []
+        ) {
+
+            if (
+                !candidate.candidateId.trim()
+            ) {
+
+                errors.push(
+                    "Composition candidate set received an empty structural-foundation candidate identity."
+                );
+
+                continue;
+
+            }
+
+
+            if (
+                structuralCandidateIds.has(
+                    candidate.candidateId
+                )
+            ) {
+
+                errors.push(
+                    `Duplicate structural-foundation candidate ${candidate.candidateId}.`
+                );
+
+            }
+
+
+            structuralCandidateIds.add(
+                candidate.candidateId
+            );
+
+
+            if (
+                !participantIds.has(
+                    candidate.participantAId
+                )
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} references unknown participant ${candidate.participantAId}.`
+                );
+
+            }
+
+
+            if (
+                !participantIds.has(
+                    candidate.participantBId
+                )
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} references unknown participant ${candidate.participantBId}.`
+                );
+
+            }
+
+
+            if (
+                candidate.participantAId ===
+                candidate.participantBId
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} is not cross-protocol.`
+                );
+
+            }
+
+
+            if (
+                candidate.directionality !==
+                "UNDIRECTED"
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} must remain undirected.`
+                );
+
+            }
+
+
+            if (
+                candidate.mechanism !==
+                "SHARED_PROTOCOL_FOUNDATION"
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} has unexpected mechanism.`
+                );
+
+            }
+
+
+            if (
+                !/^ERC-[1-9][0-9]*$/.test(
+                    candidate.foundationProtocolId
+                )
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} has invalid foundation protocol.`
+                );
+
+            }
+
+
+            if (
+                candidate.evidenceIds.length ===
+                0
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} has no evidence.`
+                );
+
+            }
+
+
+            if (
+                candidate.provenance.length ===
+                0
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} has no provenance.`
+                );
+
+            }
+
+
+            if (
+                candidate.evaluationStatus !==
+                "UNEVALUATED"
+            ) {
+
+                errors.push(
+                    `Structural-foundation candidate ${candidate.candidateId} is not unevaluated.`
+                );
+
+            }
+
+        }
+
+
         if (
             errors.length >
             0
@@ -510,6 +670,69 @@ export class ScientificCompositionCandidateSetEngine {
 
                 evidenceIds:
                     [...documentary.evidenceIds].sort(),
+
+                evaluationStatus:
+                    "UNEVALUATED"
+
+            });
+
+        }
+
+
+        for (
+            const structural
+            of [
+                ...(
+                    input.structuralFoundationCandidates ??
+                    []
+                )
+            ].sort(
+                (a, b) =>
+                    a.candidateId.localeCompare(
+                        b.candidateId
+                    )
+            )
+        ) {
+
+            candidates.push({
+
+                candidateId:
+                    encode([
+                        "SCIENTIFIC-COMPOSITION-CANDIDATE",
+                        "STRUCTURAL_FOUNDATION",
+                        structural.candidateId
+                    ]),
+
+                kind:
+                    "STRUCTURAL_FOUNDATION",
+
+                /*
+                 * Canonical participant order only.
+                 * Scientific direction remains UNDIRECTED.
+                 */
+                sourceParticipantId:
+                    structural.participantAId,
+
+                targetParticipantId:
+                    structural.participantBId,
+
+                structuralFoundationCandidateId:
+                    structural.candidateId,
+
+                sourceCrossProtocolCandidateId:
+                    structural.sourceCandidateId,
+
+                directionality:
+                    "UNDIRECTED",
+
+                foundationProtocolId:
+                    structural.foundationProtocolId,
+
+                evidenceIds:
+                    [...structural.evidenceIds].sort(),
+
+                provenance:
+                    [...structural.provenance],
 
                 evaluationStatus:
                     "UNEVALUATED"

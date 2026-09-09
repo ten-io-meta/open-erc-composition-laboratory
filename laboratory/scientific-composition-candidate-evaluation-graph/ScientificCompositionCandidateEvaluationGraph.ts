@@ -125,9 +125,31 @@ export interface ScientificDocumentaryCandidateEvaluationGraphEdge
 }
 
 
+export interface ScientificStructuralFoundationCandidateEvaluationGraphEdge
+    extends ScientificCompositionCandidateEvaluationGraphEdgeBase {
+
+    kind:
+        "STRUCTURAL_FOUNDATION";
+
+    structuralFoundationCandidateId:
+        string;
+
+    sourceCrossProtocolCandidateId:
+        string;
+
+    directionality:
+        "UNDIRECTED";
+
+    foundationProtocolId:
+        string;
+
+}
+
+
 export type ScientificCompositionCandidateEvaluationGraphEdge =
     | ScientificFunctionalCandidateEvaluationGraphEdge
-    | ScientificDocumentaryCandidateEvaluationGraphEdge;
+    | ScientificDocumentaryCandidateEvaluationGraphEdge
+    | ScientificStructuralFoundationCandidateEvaluationGraphEdge;
 
 
 export interface ScientificCompositionCandidateEvaluationGraphStatistics {
@@ -151,6 +173,9 @@ export interface ScientificCompositionCandidateEvaluationGraphStatistics {
         number;
 
     documentaryCandidateEdges:
+        number;
+
+    structuralFoundationCandidateEdges:
         number;
 
 }

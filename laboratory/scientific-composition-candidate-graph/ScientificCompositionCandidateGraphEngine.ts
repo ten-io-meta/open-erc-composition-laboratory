@@ -400,6 +400,46 @@ export class ScientificCompositionCandidateGraphEngine {
                 });
 
             }
+            else if (
+                candidate.kind ===
+                "DOCUMENTARY_COMPOSITION"
+            ) {
+
+                edges.push({
+
+                    edgeId:
+                        encode([
+                            "SCIENTIFIC-COMPOSITION-CANDIDATE-GRAPH-EDGE",
+                            candidate.candidateId
+                        ]),
+
+                    candidateId:
+                        candidate.candidateId,
+
+                    kind:
+                        "DOCUMENTARY_COMPOSITION",
+
+                    sourceParticipantId:
+                        candidate.sourceParticipantId,
+
+                    targetParticipantId:
+                        candidate.targetParticipantId,
+
+                    documentaryCandidateId:
+                        candidate.documentaryCandidateId,
+
+                    relation:
+                        candidate.relation,
+
+                    evidenceIds:
+                        [...candidate.evidenceIds].sort(),
+
+                    evaluationStatus:
+                        "UNEVALUATED"
+
+                });
+
+            }
             else {
 
                 edges.push({
@@ -414,7 +454,7 @@ export class ScientificCompositionCandidateGraphEngine {
                         candidate.candidateId,
 
                     kind:
-                        candidate.kind,
+                        "STRUCTURAL_FOUNDATION",
 
                     sourceParticipantId:
                         candidate.sourceParticipantId,
@@ -422,11 +462,17 @@ export class ScientificCompositionCandidateGraphEngine {
                     targetParticipantId:
                         candidate.targetParticipantId,
 
-                    documentaryCandidateId:
-                        candidate.documentaryCandidateId,
+                    structuralFoundationCandidateId:
+                        candidate.structuralFoundationCandidateId,
 
-                    relation:
-                        candidate.relation,
+                    sourceCrossProtocolCandidateId:
+                        candidate.sourceCrossProtocolCandidateId,
+
+                    directionality:
+                        "UNDIRECTED",
+
+                    foundationProtocolId:
+                        candidate.foundationProtocolId,
 
                     evidenceIds:
                         [...candidate.evidenceIds].sort(),
@@ -454,6 +500,14 @@ export class ScientificCompositionCandidateGraphEngine {
                 edge =>
                     edge.kind ===
                     "DOCUMENTARY_COMPOSITION"
+            ).length;
+
+
+        const structuralFoundationCandidateEdges =
+            edges.filter(
+                edge =>
+                    edge.kind ===
+                    "STRUCTURAL_FOUNDATION"
             ).length;
 
 
@@ -491,7 +545,9 @@ export class ScientificCompositionCandidateGraphEngine {
 
                     functionalCandidateEdges,
 
-                    documentaryCandidateEdges
+                    documentaryCandidateEdges,
+
+                    structuralFoundationCandidateEdges
 
                 }
 
