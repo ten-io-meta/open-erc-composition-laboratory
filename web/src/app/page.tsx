@@ -1,4 +1,5 @@
-﻿import { CompositionExplorer } from "@/components/CompositionExplorer";
+﻿import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
+import { CompositionExplorer } from "@/components/CompositionExplorer";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
           Explore candidates, protocol boundaries, runtime evidence, and the scientific reasoning behind each composition state.
         </p>
       </section>
+      <ProtocolDiscovery />
       <CompositionExplorer />
     </main>
   );
