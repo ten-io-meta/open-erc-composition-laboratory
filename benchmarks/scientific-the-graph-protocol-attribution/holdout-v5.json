@@ -1,0 +1,425 @@
+[
+  {
+    "caseId": "V5-POS-CLEAR-8004-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8004",
+    "expected": "POSITIVE",
+    "schemaText": "# This schema indexes ERC-8004 identity records."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8004-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8004",
+    "expected": "POSITIVE",
+    "schemaText": "# Implementation of ERC8004 agent state."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8060-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# This deployment supports ERC-8060."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8060-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8060 value records are indexed."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8263-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8263",
+    "expected": "POSITIVE",
+    "schemaText": "# This schema conforms to ERC-8263."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8263-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8263",
+    "expected": "POSITIVE",
+    "schemaText": "# Data defined by ERC8263 is indexed."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8274-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# This deployment indexes ERC-8274 verification state."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8274-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# Support for ERC8274 implementation records."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8275-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8275",
+    "expected": "POSITIVE",
+    "schemaText": "# Implementation of ERC-8275 settlement state."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8275-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8275",
+    "expected": "POSITIVE",
+    "schemaText": "# This subgraph supports ERC8275."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8301-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "# Protocol ERC-8301 execution records."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8301-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "# Indexed standard: ERC8301"
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8312-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# This deployment indexes ERC-8312 cursor records."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8312-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# State defined by ERC8312 is indexed."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8354-A",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8354",
+    "expected": "POSITIVE",
+    "schemaText": "# This schema complies to ERC-8354."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8354-B",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8354",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8354 implementation records."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8004-C",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8004",
+    "expected": "POSITIVE",
+    "schemaText": "# Records defined by ERC-8004 are indexed."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8060-C",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# This deployment implements ERC8060 value state."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8274-C",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# This schema supports ERC-8274."
+  },
+  {
+    "caseId": "V5-POS-CLEAR-8312-C",
+    "category": "CLEAR_POSITIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC-8312 is the indexed cursor standard."
+  },
+
+  {
+    "caseId": "V5-POS-AMBIG-8004",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8004",
+    "expected": "POSITIVE",
+    "schemaText": "# Primary protocol: ERC-8004."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8060",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# Protocol family = ERC-8060."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8263",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8263",
+    "expected": "POSITIVE",
+    "schemaText": "# Schema target is ERC-8263."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8274",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# Canonical standard for these entities is ERC-8274."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8275",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8275",
+    "expected": "POSITIVE",
+    "schemaText": "# Settlement specification used here is ERC-8275."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8301",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "# Workflow protocol ID: ERC-8301."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8312",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# Cursor standard identifier: ERC-8312."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8354",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8354",
+    "expected": "POSITIVE",
+    "schemaText": "# Domain protocol implemented by these entities: ERC-8354."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8004-B",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8004",
+    "expected": "POSITIVE",
+    "schemaText": "# All indexed records follow ERC-8004."
+  },
+  {
+    "caseId": "V5-POS-AMBIG-8060-B",
+    "category": "AMBIGUOUS_POSITIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# These entities correspond to ERC-8060."
+  },
+
+  {
+    "caseId": "V5-NEG-CLEAR-8004-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8004",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment does not implement ERC-8004."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8060-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# No support for ERC-8060 exists in this deployment."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8263-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8263",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema no longer indexes ERC-8263."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8274-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# Implementation of ERC-8274 has been removed."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8275-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8275",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment cannot support ERC-8275."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8301-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# This is not an ERC-8301 implementation."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8312-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8312 entities are not indexed."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8354-A",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8354",
+    "expected": "NEGATIVE",
+    "schemaText": "# Support for ERC-8354 has been dropped."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8004-B",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8004",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment fails to implement ERC-8004."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8060-B",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8060 implementation is absent from this schema."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8274-B",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment is not compatible with ERC-8274."
+  },
+  {
+    "caseId": "V5-NEG-CLEAR-8312-B",
+    "category": "CLEAR_NEGATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment explicitly excludes ERC-8312."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8004",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8004",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema indexes ERC-9999 agent data."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8060",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# Lowercase erc-8060 is not a canonical exact identifier."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8263",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8263",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC 8263 is spaced and not canonical."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8274",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# XERC-8274Y is an application identifier."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8275",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8275",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema indexes ERC-8274."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8301",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "type WorkflowRecord @entity { id: ID! }"
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8312",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-83120 is a neighboring identifier."
+  },
+  {
+    "caseId": "V5-NEG-NO-ID-8354",
+    "category": "LEXICAL_NEGATIVE",
+    "protocolId": "ERC-8354",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema indexes ERC-8301 domain records."
+  },
+
+  {
+    "caseId": "V5-NEG-AMBIG-8004",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8004",
+    "expected": "NEGATIVE",
+    "schemaText": "# Documentation discusses ERC-8004 migration patterns."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8060",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# Example compatibility note: ERC-8060."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8263",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8263",
+    "expected": "NEGATIVE",
+    "schemaText": "# Future integration may use ERC-8263."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8274",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# Roadmap candidate: ERC-8274."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8275",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8275",
+    "expected": "NEGATIVE",
+    "schemaText": "# Sample schema text mentions ERC-8275."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8301",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# Code example shows ERC-8301 as a possible workflow."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8312",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# Test documentation references ERC-8312."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8354",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8354",
+    "expected": "NEGATIVE",
+    "schemaText": "# A later release may support ERC-8354."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8004-B",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8004",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8004 is cited here for historical context."
+  },
+  {
+    "caseId": "V5-NEG-AMBIG-8060-B",
+    "category": "AMBIGUOUS_NEGATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# Comparison section includes ERC-8060."
+  }
+]
