@@ -395,7 +395,7 @@ const zeroActivity =
 
             inspection:
                 makeInspection(
-                    "# ERC-8004",
+                    "# This deployment indexes ERC-8004 protocol entities.",
                     0
                 )
         }
@@ -412,7 +412,7 @@ const positiveActivity =
 
             inspection:
                 makeInspection(
-                    "# ERC-8004",
+                    "# This deployment indexes ERC-8004 protocol entities.",
                     999
                 )
         }

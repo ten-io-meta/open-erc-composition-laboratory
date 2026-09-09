@@ -21,7 +21,8 @@ export interface ScientificTheGraphProtocolIdentifierMatch {
 
 export type ScientificTheGraphProtocolIdentifierRejectionReason =
     | "EXPLICIT_NEGATION_CONTEXT"
-    | "REFERENCE_ONLY_CONTEXT";
+    | "REFERENCE_ONLY_CONTEXT"
+    | "AMBIGUOUS_IDENTIFIER_CONTEXT";
 
 
 export interface ScientificTheGraphProtocolIdentifierRejectedOccurrence {

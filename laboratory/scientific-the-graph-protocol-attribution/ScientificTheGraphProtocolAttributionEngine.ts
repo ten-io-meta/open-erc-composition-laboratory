@@ -207,6 +207,14 @@ function protocolIdentifierRejectionReasons(
             ),
 
             new RegExp(
+                String.raw`\bfails?\s+to\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bnot\s+an?\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])\s+(?:implementation|indexer|supporter)\b`
+            ),
+
+            new RegExp(
                 String.raw`\b(?:doesn't|doesnt)\s+(?:implement|index|support|use|represent|describe)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
             ),
 
@@ -352,6 +360,93 @@ function protocolIdentifierRejectionReasons(
 
 }
 
+function protocolIdentifierHasAffirmativeEvidence(
+    line:
+        string,
+    identifier:
+        string
+): boolean {
+
+    const normalizedLine =
+        line
+            .toLowerCase()
+            .replace(
+                /\s+/g,
+                " "
+            )
+            .trim();
+
+
+    const normalizedIdentifier =
+        escapeRegex(
+            identifier.toLowerCase()
+        );
+
+
+    /*
+     * An exact identifier is no longer affirmative evidence by
+     * itself.
+     *
+     * Attribution requires an explicit implementation/indexing/
+     * protocol relationship or structural GraphQL association.
+     *
+     * Unknown mention forms fail closed as ambiguous.
+     */
+    const affirmativePatterns =
+        [
+
+            new RegExp(
+                String.raw`\b(?:implements?|indexes?|supports?)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:conforms?|complies?)\s+to\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:implementation|indexing|support)\s+(?:of|for)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:indexed\s+)?(?:entities|records|state|schema|data(?:\s+model)?)\s+(?:defined\s+by|for)\s+(?:the\s+)?${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`\bindexed\s+standard\s*:\s*${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9])\s+(?:protocol|standard|implementation)\b`
+            ),
+
+            new RegExp(
+                String.raw`\bprotocol\s+${normalizedIdentifier}(?=$|[^a-z0-9]).{0,64}\b(?:execution|indexing|indexed|entities|records|state|data)\b`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9])\s+(?:(?:[a-z0-9-]+\s+){0,4})(?:entities|records|state)\b`
+            ),
+
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9])\s+is\s+the\s+(?:indexed\s+)?(?:(?:[a-z0-9-]+\s+){0,3})standard\b`
+            ),
+
+            new RegExp(
+                String.raw`\b(?:type|interface|enum|input|scalar|union)\b.{0,240}${normalizedIdentifier}(?=$|[^a-z0-9])`
+            )
+
+        ];
+
+
+    return affirmativePatterns.some(
+        pattern =>
+            pattern.test(
+                normalizedLine
+            )
+    );
+
+}
+
 interface ScientificTheGraphProtocolIdentifierAnalysis {
 
     identifier:
@@ -381,6 +476,7 @@ function analyzeProtocolIdentifier(
 
     let rejectedOccurrenceCount =
         0;
+
 
     const rejectionReasons =
         new Set<
@@ -412,7 +508,10 @@ function analyzeProtocolIdentifier(
         }
 
 
-        const reasons =
+        /*
+         * Explicit negative/reference context always wins.
+         */
+        const explicitRejectionReasons =
             protocolIdentifierRejectionReasons(
                 line,
                 identifier
@@ -420,8 +519,42 @@ function analyzeProtocolIdentifier(
 
 
         if (
-            reasons.length ===
+            explicitRejectionReasons.length >
             0
+        ) {
+
+            rejectedOccurrenceCount +=
+                occurrenceCount;
+
+
+            for (
+                const reason
+                of explicitRejectionReasons
+            ) {
+
+                rejectionReasons.add(
+                    reason
+                );
+
+            }
+
+
+            continue;
+
+        }
+
+
+        /*
+         * Exact lexical presence is not enough.
+         *
+         * A firm ATTRIBUTED decision requires affirmative or
+         * structural schema evidence.
+         */
+        if (
+            protocolIdentifierHasAffirmativeEvidence(
+                line,
+                identifier
+            )
         ) {
 
             acceptedOccurrenceCount +=
@@ -432,20 +565,18 @@ function analyzeProtocolIdentifier(
         }
 
 
+        /*
+         * Unknown exact-token contexts fail closed.
+         *
+         * The token remains auditably preserved, but it does not
+         * manufacture protocol attribution.
+         */
         rejectedOccurrenceCount +=
             occurrenceCount;
 
-
-        for (
-            const reason
-            of reasons
-        ) {
-
-            rejectionReasons.add(
-                reason
-            );
-
-        }
+        rejectionReasons.add(
+            "AMBIGUOUS_IDENTIFIER_CONTEXT"
+        );
 
     }
 
