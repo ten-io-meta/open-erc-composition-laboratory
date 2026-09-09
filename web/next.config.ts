@@ -2,6 +2,15 @@
 
 const nextConfig: NextConfig = {
   turbopack: { root: process.cwd() },
+
+  webpack(config) {
+    config.resolve.extensionAlias = {
+      ".js": [".ts", ".tsx", ".js"],
+      ".mjs": [".mts", ".mjs"],
+      ".cjs": [".cts", ".cjs"],
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
