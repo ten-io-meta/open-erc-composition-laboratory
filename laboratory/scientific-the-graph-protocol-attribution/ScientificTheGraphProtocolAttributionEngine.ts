@@ -342,6 +342,51 @@ function protocolIdentifierRejectionReasons(
         ];
 
 
+    /*
+     * A protocol-looking affirmative phrase is not enough when
+     * the surrounding line explicitly scopes it as documentary,
+     * illustrative, hypothetical or future work.
+     *
+     * These contexts remain auditable but fail closed as
+     * AMBIGUOUS_IDENTIFIER_CONTEXT instead of manufacturing
+     * attribution.
+     */
+    const nonAssertiveScopePatterns =
+        [
+
+            /*
+             * Documentary / illustrative scope before the
+             * identifier or affirmative phrase.
+             */
+            new RegExp(
+                String.raw`\b(?:documentation|docs?|example|sample|test\s+documentation|code\s+example|example\s+sentence|sample\s+graphql\s+documentation)\b.{0,192}${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            /*
+             * Documentary / illustrative scope after the
+             * identifier.
+             */
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,192}\b(?:documentation\s+only|sample\s+text\s+only|example\s+only|placeholder\s+text|test\s+documentation)\b`
+            ),
+
+            /*
+             * Roadmap, planned or future support before the
+             * identifier.
+             */
+            new RegExp(
+                String.raw`\b(?:roadmap|planned|planning|future|future\s+version|future\s+release|later\s+release|intended)\b.{0,192}${normalizedIdentifier}(?=$|[^a-z0-9])`
+            ),
+
+            /*
+             * Future or non-shipped state after the identifier.
+             */
+            new RegExp(
+                String.raw`${normalizedIdentifier}(?=$|[^a-z0-9]).{0,192}\b(?:future\s+version|future\s+release|later\s+release|planned|planning|roadmap|not\s+yet\s+shipped|has\s+not\s+shipped|intended\s+for\s+(?:a\s+)?future)\b`
+            )
+
+        ];
+
     const reasons:
         ScientificTheGraphProtocolIdentifierRejectionReason[] =
         [];
@@ -378,6 +423,21 @@ function protocolIdentifierRejectionReasons(
 
     }
 
+
+    if (
+        nonAssertiveScopePatterns.some(
+            pattern =>
+                pattern.test(
+                    normalizedLine
+                )
+        )
+    ) {
+
+        reasons.push(
+            "AMBIGUOUS_IDENTIFIER_CONTEXT"
+        );
+
+    }
 
     return [
         ...new Set(

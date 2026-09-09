@@ -82,9 +82,15 @@ export interface ScientificTheGraphProtocolAttributionAssessment {
 
     /*
      * ATTRIBUTED means the exact inspected schema contains at
-     * least one exact protocol identifier token.
+     * least one accepted exact protocol identifier occurrence
+     * in affirmative or structural attribution context.
      *
-     * It does not establish compatibility, composition,
+     * UNATTRIBUTED does not necessarily mean protocol absence.
+     * attributionBasis and rejectedIdentifierOccurrences
+     * distinguish no explicit identifier from rejected,
+     * negative, reference-only or ambiguous identifier context.
+     *
+     * Neither status establishes compatibility, composition,
      * scientific SUPPORT or semantic completeness.
      */
     status:
