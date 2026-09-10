@@ -1,5 +1,6 @@
 ﻿import { ScientificTheGraphSubgraphMcpLiveClient } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
 import { ScientificTheGraphSubgraphMcpKeywordProvider } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpKeywordProvider.js";
+import { ScientificTheGraphSubgraphInspectionEngine } from "../../../laboratory/scientific-the-graph-subgraph-inspection/ScientificTheGraphSubgraphInspectionEngine.js";
 import { ScientificTheGraphGatewayProvider } from "../../../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";
 import { AGENT0_BASE_MAINNET_SUBGRAPH_ID } from "../../../laboratory/scientific-the-graph-agent0/ScientificAgent0Erc8004Adapter.js";
 
@@ -135,6 +136,68 @@ export async function discoverLiveSubgraphs(protocolId: string) {
         })),
       })),
       errors: result.errors,
+    };
+  } finally {
+    await client.close();
+  }
+}
+export async function inspectLiveSubgraph(
+  subgraphId: string,
+  ipfsHash: string
+) {
+  const apiKey = process.env.THE_GRAPH_API_KEY?.trim();
+  const normalizedSubgraphId = subgraphId.trim();
+  const normalizedIpfsHash = ipfsHash.trim();
+
+  if (!apiKey) {
+    return { status: "NOT_CONFIGURED" as const };
+  }
+
+  if (!normalizedSubgraphId || !normalizedIpfsHash) {
+    return { status: "INVALID_REQUEST" as const };
+  }
+
+  const client = new ScientificTheGraphSubgraphMcpLiveClient(apiKey);
+
+  try {
+    const result = await new ScientificTheGraphSubgraphInspectionEngine(
+      client,
+      "LIVE"
+    ).inspect([
+      {
+        requestId: `WEB-INSPECTION-${normalizedSubgraphId}`,
+        subgraphId: normalizedSubgraphId,
+        ipfsHash: normalizedIpfsHash,
+      },
+    ]);
+
+    if (result.errors.length > 0 || result.inspections.length !== 1) {
+      return {
+        status: "ERROR" as const,
+        errors: result.errors,
+      };
+    }
+
+    const inspection = result.inspections[0];
+
+    return {
+      status: "LIVE" as const,
+      subgraphId: inspection.subgraphId,
+      ipfsHash: inspection.ipfsHash,
+      providerMode: inspection.providerMode,
+      inspectionStatus: inspection.status,
+      schema: {
+        status: inspection.schemaObservation.status,
+        hash: inspection.schemaObservation.schemaHash,
+        characters: inspection.schemaObservation.schemaText.length,
+      },
+      activity: {
+        status: inspection.queryActivityObservation.activityStatus,
+        dataPoints: inspection.queryActivityObservation.dataPointsCount,
+        totalQueries: inspection.queryActivityObservation.totalQueryCount,
+      },
+      nextAction: inspection.nextAction,
+      errors: [],
     };
   } finally {
     await client.close();
