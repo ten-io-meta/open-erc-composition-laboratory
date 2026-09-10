@@ -1,4 +1,5 @@
-﻿import { CompositionExplorer } from "@/components/CompositionExplorer";
+﻿import { CompositionWorkbench } from "@/components/CompositionWorkbench";
+import { CompositionExplorer } from "@/components/CompositionExplorer";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 
 export default function Home() {
@@ -29,29 +30,7 @@ export default function Home() {
           and inspect the evidence behind the scientific result.
         </p>
 
-        <div className="mt-9 grid gap-4 md:grid-cols-2">
-          <a
-            href="#compositions"
-            className="rounded-[24px] border border-[#cfd7d2] bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <div className="font-mono text-xs text-[#1e5d46]">01 · FIND COMPOSITIONS</div>
-            <div className="mt-3 text-xl font-medium">What can work with my ERC?</div>
-            <p className="mt-2 text-sm leading-6 text-[#68706c]">
-              Explore discovered candidates, contributions, barriers, boundaries and scientific state.
-            </p>
-          </a>
-
-          <a
-            href="#compositions"
-            className="rounded-[24px] border border-[#cfd7d2] bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <div className="font-mono text-xs text-[#1e5d46]">02 · CHECK A PAIR</div>
-            <div className="mt-3 text-xl font-medium">Can ERC-X compose with ERC-Y?</div>
-            <p className="mt-2 text-sm leading-6 text-[#68706c]">
-              Inspect the candidate route, evidence, boundaries and Why / Why Not explanation.
-            </p>
-          </a>
-        </div>
+        <CompositionWorkbench />
       </section>
 
       <div id="compositions">
