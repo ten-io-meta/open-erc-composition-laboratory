@@ -30,8 +30,8 @@ export function CompositionExplorer() {
     <section className="mx-auto mt-11 max-w-[1500px]">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-5">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#1e5d46]">Composition Explorer</p>
-          <h2 className="mt-2 text-2xl font-medium tracking-tight">Inspect real scientific controls</h2>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#1e5d46]">Validated Composition Explorer</p>
+          <h2 className="mt-2 text-2xl font-medium tracking-tight">Explore validated composition results</h2>
         </div>
         <div className="flex flex-wrap rounded-full border border-[#dfe4e1] bg-white p-1">
           {compositionCases.map((item, index) => (
@@ -119,8 +119,4 @@ export function CompositionExplorer() {
     </section>
   );
 }
-
-
-
-
 
