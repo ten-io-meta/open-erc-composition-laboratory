@@ -1,5 +1,4 @@
-﻿import { CompositionWorkbench } from "@/components/CompositionWorkbench";
-import { CompositionExplorer } from "@/components/CompositionExplorer";
+import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 
 export default function Home() {
@@ -34,7 +33,6 @@ export default function Home() {
       </section>
 
       <div id="compositions">
-        <CompositionExplorer />
       </div>
 
       <section className="mx-auto mt-12 max-w-[1500px] pb-20">
@@ -51,4 +49,3 @@ export default function Home() {
     </main>
   );
 }
-

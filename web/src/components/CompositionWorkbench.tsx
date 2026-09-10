@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import { compositionCases } from "@/data/compositionCases";
@@ -113,9 +113,14 @@ export function CompositionWorkbench() {
                     </div>
                   </div>
 
-                  <p className="mt-4 max-w-3xl text-sm leading-6 text-[#68706c]">
-                    {item.summary}
-                  </p>
+                  <div className="mt-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#1e5d46]">
+                      Why this candidate exists
+                    </div>
+                    <p className="mt-1 max-w-3xl text-sm leading-6 text-[#68706c]">
+                      {item.summary}
+                    </p>
+                  </div>
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     {item.metrics
@@ -149,4 +154,3 @@ export function CompositionWorkbench() {
     </section>
   );
 }
-

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import boundaryData from "@/data/realControl8004Erc8060Boundaries.json";
@@ -160,9 +160,69 @@ export function BoundaryDetails() {
     ...new Set(selected.map((item) => item.participantId)),
   ];
 
+  const relevantParticipants = [
+    ...new Set(relevant.map((item) => item.participantId)),
+  ];
+
   return (
     <section className="mt-5 rounded-2xl border border-[#d9dfdb] bg-white">
       <div className="border-b border-[#e4e8e5] p-4">
+        <div className="mb-4">
+          <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#1e5d46]">
+            What this evaluation exercised
+          </div>
+
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            {relevantParticipants.map((participant) => {
+              const items = relevant.filter(
+                (item) => item.participantId === participant,
+              );
+
+              const contexts = [
+                ...new Set(
+                  items
+                    .map((item) => runtimeContext(item))
+                    .filter((value): value is string => Boolean(value)),
+                ),
+              ];
+
+              return (
+                <div
+                  key={participant}
+                  className="rounded-xl bg-[#f4f6f5] p-3"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="font-medium">{participant}</span>
+                    <span className="text-xs text-[#68706c]">
+                      {items.length} reached rules
+                    </span>
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {contexts.slice(0, 4).map((context) => (
+                      <span
+                        key={context}
+                        className="rounded-full bg-white px-2.5 py-1 font-mono text-[10px] text-[#4f5752]"
+                      >
+                        {context}
+                      </span>
+                    ))}
+
+                    {contexts.length > 4 && (
+                      <span className="rounded-full px-2 py-1 text-[10px] text-[#68706c]">
+                        +{contexts.length - 4} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="mt-2 text-[11px] leading-5 text-[#7b837e]">
+            This is the runtime surface actually reached by this evaluation, not a claim that it represents every capability of either protocol.
+          </p>
+        </div>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="text-sm font-medium">
