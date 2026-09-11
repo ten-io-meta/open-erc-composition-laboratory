@@ -4300,6 +4300,64 @@ async function main(): Promise<void> {
         "Real scientific relevance-aware candidate evidence gap diagnosis",
         candidateEvidenceGaps.errors
     );
+    /*
+     * Optional deterministic pair projection materialization.
+     *
+     * This serializes already-computed scientific state only.
+     * It does not create relevance, compatibility, SUPPORT,
+     * Harmony or Composition Value.
+     */
+    const scientificPairCatalogOutputPath =
+        process.env.OECL_SCIENTIFIC_PAIR_CATALOG_PATH?.trim();
+
+    if (scientificPairCatalogOutputPath) {
+
+        const {
+            buildScientificPairProjectionCatalog
+        } =
+            await import(
+                "../laboratory/scientific-pair-projection/ScientificPairProjectionCatalog.js"
+            );
+
+        const scientificPairCatalog =
+            buildScientificPairProjectionCatalog({
+
+                relevanceAssessments:
+                    candidateBoundaryRelevanceAssessments,
+
+                envelopes:
+                    compositionEnvelopes.envelopes,
+
+                harmonyAssessments:
+                    compositionHarmony.assessments,
+
+                valueAssessments:
+                    compositionValue.assessments
+
+            });
+
+        const {
+            writeFile
+        } =
+            await import(
+                "node:fs/promises"
+            );
+
+        await writeFile(
+            scientificPairCatalogOutputPath,
+            JSON.stringify(
+                scientificPairCatalog,
+                null,
+                2
+            ) + "\n",
+            "utf8"
+        );
+
+        console.log(
+            `Scientific pair catalog written: ${scientificPairCatalogOutputPath}`
+        );
+
+    }
 
 
     /*
