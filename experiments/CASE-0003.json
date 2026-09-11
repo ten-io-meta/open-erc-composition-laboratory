@@ -9,7 +9,7 @@
   ],
   "actions": [
     {
-      "protocol": "MockAuthority",
+      "protocol": "ERC8001Authority",
       "action": "authorize",
       "amount": 40
     },
@@ -19,7 +19,7 @@
       "amount": 40
     },
     {
-      "protocol": "MockSettlement",
+      "protocol": "ERC8275Settlement",
       "action": "settle",
       "amount": 40
     }
