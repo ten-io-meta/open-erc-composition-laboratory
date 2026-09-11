@@ -1,0 +1,243 @@
+{
+    "knowledgeBaseId": "KB-2026-09-03T23:17:55.052Z",
+    "generatedAt": "2026-09-03T23:17:55.052Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "protocolPair": "ERC2771+ERC7579",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EmbeddedValue->ENABLES->Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "protocolPair": "ERC2771+ERC7579",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "protocolPair": "ERC2771+ERC7579",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "protocolPair": "ERC2771+ERC7579",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00005",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "EmbeddedValue:ENABLES:Reservation",
+            "protocolPair": "EmbeddedValue->Reservation",
+            "observations": 1,
+            "averageConfidence": 72,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:EmbeddedValue:ENABLES:Reservation",
+                "capability:EmbeddedValue",
+                "capability:Reservation",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00006",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 76,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00007",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "Reservation:BOUNDS:Settlement",
+            "protocolPair": "Reservation->Settlement",
+            "observations": 1,
+            "averageConfidence": 74,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:BOUNDS:Settlement",
+                "capability:Reservation",
+                "capability:Settlement",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00008",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "protocolPair": "InvariantValidation->Accounting",
+            "observations": 1,
+            "averageConfidence": 78,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00009",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "Testing:SUPPORTS:InvariantValidation",
+            "protocolPair": "Testing->InvariantValidation",
+            "observations": 1,
+            "averageConfidence": 70,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Testing:SUPPORTS:InvariantValidation",
+                "capability:Testing",
+                "capability:InvariantValidation",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00010",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "DeterministicExecution:REQUIRES:Accounting",
+            "protocolPair": "DeterministicExecution->Accounting",
+            "observations": 1,
+            "averageConfidence": 68,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:DeterministicExecution:REQUIRES:Accounting",
+                "claim:deterministic",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        },
+        {
+            "entryId": "KNOW-00011",
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "relation": "InvariantLanguage:INDICATES:SafetyConstraint",
+            "protocolPair": "InvariantLanguage->SafetyConstraint",
+            "observations": 1,
+            "averageConfidence": 64,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantLanguage:INDICATES:SafetyConstraint",
+                "claim:normative-language",
+                "evidence-profile:GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS:VERY_HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:55.052Z"
+        }
+    ],
+    "statistics": {
+        "entries": 11,
+        "totalObservations": 11,
+        "emerging": 11,
+        "supported": 0,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    },
+    "processedSources": [
+        {
+            "sourceId": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "processedAt": "2026-09-03T23:17:55.055Z"
+        }
+    ]
+}

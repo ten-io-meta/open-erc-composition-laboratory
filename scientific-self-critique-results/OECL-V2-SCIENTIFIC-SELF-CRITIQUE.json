@@ -1,0 +1,1572 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.640Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "critiques": [
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00001",
+            "targetId": "THEORY-00001",
+            "targetEvidenceIds": [],
+            "targetType": "THEORY",
+            "statement": "Reservation-Constrained Accounting Theory",
+            "severity": "HIGH",
+            "critiqueType": "WEAK_VALIDATION",
+            "evidence": [
+                "Only 0 independent source(s) support this theory.",
+                "Validation score is only 53.",
+                "The scientific validation remains inconclusive."
+            ],
+            "robustnessScore": 43,
+            "falsificationRisk": "HIGH",
+            "recommendation": "Repeat scientific validation using stronger implementation evidence and adversarial tests.",
+            "explanation": "Theory received robustness score 43. The critique considered 1 supporting edge(s), 0 independent source(s), 0 contradictory finding(s), and validation status INCONCLUSIVE."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00045",
+            "targetId": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Security Considerations appears to constrain Standardization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -25.",
+                "Independent source support changed by -3."
+            ],
+            "robustnessScore": 55,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 56. Confidence range: 62-87."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00046",
+            "targetId": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Specification appears to enable Standardization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -25.",
+                "Independent source support changed by -3."
+            ],
+            "robustnessScore": 55,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 56. Confidence range: 62-87."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00041",
+            "targetId": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to enable Fungibleaccounting across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 58,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 62. Confidence range: 66-88."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00042",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to support Transfer across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 58,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 62. Confidence range: 66-88."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00043",
+            "targetId": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Auditevidence appears to support Safetyconstraint across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 58,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 62. Confidence range: 64-86."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00044",
+            "targetId": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Negativetesting appears to support Safetyconstraint across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 58,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 62. Confidence range: 64-86."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00038",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Ownership appears to constrain Upgradeability across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 60,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 74. Confidence range: 62-82."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00039",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to support Standardization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 60,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 64. Confidence range: 68-88."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00040",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to support Standardization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 60,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 64. Confidence range: 68-88."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00036",
+            "targetId": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Authority appears to constrain Transfer across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -18.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 62,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 76. Confidence range: 66-84."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00037",
+            "targetId": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Standardization appears to enable Interoperability across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -18.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 62,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 76. Confidence range: 62-80."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00027",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP712 appears to support Signatureauthorization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 69,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 86. Confidence range: 68-79."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00028",
+            "targetId": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC165 appears to support Standardization across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 69,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 86. Confidence range: 68-79."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00029",
+            "targetId": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Signatureauthorization appears to enable Authority across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 69,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 86. Confidence range: 68-79."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00035",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Ownership appears to constrain Authority across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 69,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 86. Confidence range: 62-73."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00093",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "severity": "MEDIUM",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 0 independent source(s)."
+            ],
+            "robustnessScore": 70,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 11 observation(s). Latest status: SUPPORTED. Latest confidence: 82. Latest independent evidence count: 0."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00026",
+            "targetId": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Mint appears to enable Supply across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 71,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 88. Confidence range: 68-77."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00031",
+            "targetId": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Burn appears to constrain Supply across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 71,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 88. Confidence range: 64-73."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00032",
+            "targetId": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to enable Multiassetaccounting across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 71,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 88. Confidence range: 64-73."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00033",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to support Transfer across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 71,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 88. Confidence range: 64-73."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00047",
+            "targetId": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Invariant Validation appears to validate Accounting across 2 independent sources.",
+            "severity": "MEDIUM",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -2."
+            ],
+            "robustnessScore": 71,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 0. Confidence range: 70-98."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00092",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "severity": "MEDIUM",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 52.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 72,
+            "falsificationRisk": "MODERATE",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 91 observation(s). Latest status: ARCHIVED. Latest confidence: 52. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00004",
+            "targetId": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to bound Settlement across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -3.",
+                "Independent source support changed by -1."
+            ],
+            "robustnessScore": 77,
+            "falsificationRisk": "LOW",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 94. Confidence range: 97-100."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00005",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Accounting across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -1.",
+                "Independent source support changed by -3."
+            ],
+            "robustnessScore": 79,
+            "falsificationRisk": "LOW",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 80. Confidence range: 93-99."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00025",
+            "targetId": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Embedded Value appears to enable Reservation across 3 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "DECLINING_EVIDENCE",
+            "evidence": [
+                "Total confidence changed by -20."
+            ],
+            "robustnessScore": 80,
+            "falsificationRisk": "LOW",
+            "recommendation": "Investigate which source or relation caused the recent loss of confidence or support.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 77. Confidence range: 68-88."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00083",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 82,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 62. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00084",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 82,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 62. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00088",
+            "targetId": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 82,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 62. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00090",
+            "targetId": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 82,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 62. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00091",
+            "targetId": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 82,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 62. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00048",
+            "targetId": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00050",
+            "targetId": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00053",
+            "targetId": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00056",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00057",
+            "targetId": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00058",
+            "targetId": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00059",
+            "targetId": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00061",
+            "targetId": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00063",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00064",
+            "targetId": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00069",
+            "targetId": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00074",
+            "targetId": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00075",
+            "targetId": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00076",
+            "targetId": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00077",
+            "targetId": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00079",
+            "targetId": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00082",
+            "targetId": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 84,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 64. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00002",
+            "targetId": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC8060 appears to enable IERC8060Reservable across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 100-100."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00003",
+            "targetId": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Deterministic Execution appears to require Accounting across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 96-96."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00006",
+            "targetId": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reentrancyguard appears to constrain Settlement across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 75-75."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00007",
+            "targetId": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Burn appears to enable Settlement across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 73-73."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00008",
+            "targetId": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC4626 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 68-68."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00009",
+            "targetId": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP2612 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 68-68."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00010",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 68-68."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00011",
+            "targetId": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to enable Ownership across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 66-66."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00012",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to support Transfer across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 66-66."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00013",
+            "targetId": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP165 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00014",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP712 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00015",
+            "targetId": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7562 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00016",
+            "targetId": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7579 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00017",
+            "targetId": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7702 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00018",
+            "targetId": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1271 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00019",
+            "targetId": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC4337 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00020",
+            "targetId": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7562 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00021",
+            "targetId": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7579 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00022",
+            "targetId": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7739 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00023",
+            "targetId": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7821 appears to support Standardization across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00024",
+            "targetId": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Interoperability appears to support Composition across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 100 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 64-64."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00030",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 0."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 11 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 82-82."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00034",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Settlement across 2 independent sources.",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Maximum source diversity is only 2."
+            ],
+            "robustnessScore": 85,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Evidence history was reviewed across 91 campaign(s). Trend: STABLE. Stability score: 100. Confidence range: 52-52."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00049",
+            "targetId": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 86,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 66. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00066",
+            "targetId": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 86,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 66. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00068",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 86,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 66. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00071",
+            "targetId": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 86,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 66. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00073",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 86,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 66. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00054",
+            "targetId": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00055",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00062",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00065",
+            "targetId": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00067",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00070",
+            "targetId": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00072",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00081",
+            "targetId": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00089",
+            "targetId": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 88,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00051",
+            "targetId": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 73. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00052",
+            "targetId": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 96. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00078",
+            "targetId": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 100. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00080",
+            "targetId": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 89. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00085",
+            "targetId": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 75. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00086",
+            "targetId": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 97. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00087",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "severity": "LOW",
+            "critiqueType": "INSUFFICIENT_INDEPENDENCE",
+            "evidence": [
+                "Latest evidence history contains only 2 independent source(s)."
+            ],
+            "robustnessScore": 90,
+            "falsificationRisk": "LOW",
+            "recommendation": "Collect evidence from at least one additional independent implementation or specification.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 96. Latest independent evidence count: 2."
+        },
+        {
+            "critiqueId": "SCIENTIFIC-CRITIQUE-00060",
+            "targetId": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "severity": "LOW",
+            "critiqueType": "LOW_CONFIDENCE",
+            "evidence": [
+                "Latest confidence is 68."
+            ],
+            "robustnessScore": 98,
+            "falsificationRisk": "LOW",
+            "recommendation": "Do not promote this knowledge until stronger direct evidence increases confidence.",
+            "explanation": "Scientific memory contains 172 observation(s). Latest status: ARCHIVED. Latest confidence: 68. Latest independent evidence count: 3."
+        }
+    ],
+    "statistics": {
+        "critiques": 93,
+        "critical": 0,
+        "high": 1,
+        "medium": 22,
+        "low": 70,
+        "theoriesCritiqued": 1,
+        "knowledgeCritiqued": 46,
+        "evidenceHistoriesCritiqued": 46,
+        "discoveriesCritiqued": 0,
+        "averageRobustnessScore": 80,
+        "veryHighFalsificationRisk": 0,
+        "highFalsificationRisk": 1,
+        "moderateFalsificationRisk": 22,
+        "lowFalsificationRisk": 70
+    },
+    "errors": []
+}

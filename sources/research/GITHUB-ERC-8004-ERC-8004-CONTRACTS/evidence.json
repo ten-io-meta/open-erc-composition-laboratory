@@ -1,0 +1,24 @@
+{
+    "sourceId": "GITHUB-ERC-8004-ERC-8004-CONTRACTS",
+    "evidenceType": "GITHUB_REPOSITORY",
+    "quality": "HIGH",
+    "reproducible": true,
+    "commitSha": "b9e466c250744a7e06b13dff9d3c2844ed64f825",
+    "worktreeClean": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": false,
+    "hasCoverage": false,
+    "hasCitation": false,
+    "confidenceWeight": 0.85,
+    "observations": [
+        "README: true",
+        "Package metadata: true",
+        "Tests: true",
+        "Contracts/interfaces: true",
+        "Documentation: false",
+        "CI: false",
+        "Citation: false",
+        "Evidence score: 70"
+    ]
+}

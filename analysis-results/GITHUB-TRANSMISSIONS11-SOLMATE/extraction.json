@@ -1,0 +1,264 @@
+{
+    "success": true,
+    "extraction": {
+        "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+        "extractedAt": "2026-09-03T23:17:58.463Z",
+        "protocols": [
+            "ERC20",
+            "ERC721",
+            "ERC1155",
+            "ERC4626",
+            "ERC6909",
+            "ERC155",
+            "ERC165",
+            "ERC777"
+        ],
+        "capabilities": [
+            "Accounting",
+            "InvariantValidation",
+            "Testing",
+            "Redemption"
+        ],
+        "claims": [
+            {
+                "claimId": "GITHUB-CLAIM-00001",
+                "text": "│  ├─ RolesAuthority — \"Role based Authority that supports up to 256 roles\"",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00002",
+                "text": "├─ CREATE3 — \"Deploy to deterministic addresses without an initcode factor\"",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00003",
+                "text": "- There are implicit invariants these contracts expect to hold.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00004",
+                "text": "import {DSInvariantTest} from \"./utils/DSInvariantTest.sol\";",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00005",
+                "text": "function invariantMetadata() public {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00006",
+                "text": "contract ERC20Invariants is DSTestPlus, DSInvariantTest {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00007",
+                "text": "function invariantBalanceSum() public {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00008",
+                "text": "must be unchecked in order to support `n = type(int256).min`",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00009",
+                "text": "function invariantReentrancyStatusAlways1() public {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00010",
+                "text": "contract DSInvariantTest {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00011",
+                "text": "if (b == 0) return assertEq(a, b); // If the expected is 0, actual must be too.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00012",
+                "text": "Cannot overflow because the sum of all user",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00013",
+                "text": "contract WETHInvariants is DSTestPlus, DSInvariantTest {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00014",
+                "text": "function invariantTotalSupplyEqualsBalance() public {",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00015",
+                "text": "always swap out the authority even if it's reverting or using up a lot of gas.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00016",
+                "text": "the array index counter which cannot possibly overflow.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00017",
+                "text": "/ @dev Do not manually set balances without updating totalSupply, as the sum of all user balances must not exceed it.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00018",
+                "text": "the owner's nonce which cannot realistically overflow.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00019",
+                "text": "Cannot underflow because a user's balance",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00020",
+                "text": "will never be larger than the total supply.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00021",
+                "text": "uint256 private locked = 1;",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00022",
+                "text": "require(locked == 1, \"REENTRANCY\");",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00023",
+                "text": "return wadExp((wadLn(x) * y) / 1e18); // Using ln(x) means x must be greater than 0.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00024",
+                "text": "basis, so the final right shift is always by a positive amount.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00025",
+                "text": "Prefix the bytecode with a STOP opcode to ensure it cannot be called.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00026",
+                "text": "This is **experimental software** and is provided on an \"as is\" and \"as available\" basis.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00027",
+                "text": "- There are implicit invariants these contracts expect to hold.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00028",
+                "text": "Repository contains README research context.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00029",
+                "text": "Repository contains contract or interface material.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00030",
+                "text": "Repository contains test evidence.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00031",
+                "text": "Repository contains documentation material.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00032",
+                "text": "Repository contains invariant-like statements.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00033",
+                "text": "Repository exposes 562 executable test or invariant target(s).",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00034",
+                "text": "Repository uses the Foundry toolchain.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00035",
+                "text": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00036",
+                "text": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            }
+        ],
+        "invariants": [],
+        "relationships": [
+            {
+                "relationshipId": "GITHUB-REL-00001",
+                "fromCapability": "InvariantValidation",
+                "toCapability": "Accounting",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00002",
+                "fromCapability": "Testing",
+                "toCapability": "InvariantValidation",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-TRANSMISSIONS11-SOLMATE",
+                "confidence": 70
+            }
+        ],
+        "errors": []
+    },
+    "errors": []
+}

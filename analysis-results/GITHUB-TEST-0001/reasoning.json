@@ -1,0 +1,37 @@
+{
+    "sourceId": "GRAPH-GITHUB-TEST-0001",
+    "reasonedAt": "2026-07-06T18:33:06.424Z",
+    "relations": [
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Accounting",
+            "relation": "PROTECTS",
+            "reason": "Reservation protects accounting by separating locked value from available value.",
+            "evidence": [
+                "GRAPH-GITHUB-TEST-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Accounting",
+            "toCapability": "Reservation",
+            "relation": "ACCOUNTS_FOR",
+            "reason": "Accounting tracks reserved value through locked and available value boundaries.",
+            "evidence": [
+                "GRAPH-GITHUB-TEST-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "EmbeddedValue",
+            "toCapability": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-GITHUB-TEST-0001"
+            ],
+            "confidence": 90
+        }
+    ],
+    "errors": []
+}

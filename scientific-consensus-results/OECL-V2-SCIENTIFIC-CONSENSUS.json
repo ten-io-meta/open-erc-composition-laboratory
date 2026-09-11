@@ -1,0 +1,20 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.320Z",
+    "consensus": [
+        {
+            "consensusId": "CONSENSUS-00001",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "consensusLevel": "WEAK",
+            "confidence": 82,
+            "supportingSources": 0,
+            "maturity": "PRELIMINARY"
+        }
+    ],
+    "statistics": {
+        "total": 1,
+        "weak": 1,
+        "moderate": 0,
+        "strong": 0
+    },
+    "errors": []
+}

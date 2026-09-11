@@ -1,0 +1,109 @@
+# ethereum/EIPs
+
+Repository: ethereum/EIPs
+
+URL: https://github.com/ethereum/EIPs
+
+## Description
+
+Automatically generated OECL research bundle from GitHub repository ethereum/EIPs.
+
+## Protocols
+
+- ERC20
+- ERC1155
+- IERC1155
+- ERC721
+- IERC1155MetadataURI
+- IERC1155Receiver
+- ERC165
+- IERC1155TokenReceiver
+- IERC1155Views
+- IERC165
+- ERC1271
+- ERC137
+- ERC1723
+- ERC1724
+- ERC223
+- ERC4337
+- ERC2535
+- ERC191
+- ERC2612
+- ERC1046
+- ERC7201
+- ERC7683
+- ERC1167
+- ERC1967
+- ERC7562
+- ERC2470
+- ERC2335
+
+## Capabilities
+
+- Reservation
+- Accounting
+- Settlement
+- EmbeddedValue
+- InvariantValidation
+- Testing
+- Redemption
+
+## Claims
+
+- - Coordinate many implementations that must all be compatible? Allow.
+- The function map\_to\_curve\_simple\_swu(u) implements a simplification
+- 1. MAJOR version when you make incompatible API changes,
+- 1. MINOR version when you add functionality in a backwards compatible
+- 1. PATCH version when you make backwards compatible bug fixes.
+- affecting the API increment the patch version, backwards compatible API
+- additions/changes increment the minor version, and backwards incompatible API
+- compatible bug fixes are introduced. A bug fix is defined as an internal
+- compatible functionality is introduced to the public API. It MUST be
+- incompatible changes are introduced to the public API. It MAY also include minor
+- package management system and know that they will be compatible with existing
+- If even the tiniest backwards incompatible changes to the public API require a major version bump, won't I end up at version 42.0.0 very rapidly?
+- This is a question of responsible development and foresight. Incompatible
+- Having to bump major versions to release incompatible changes means you'll
+- What do I do if I accidentally release a backwards incompatible change as a minor version?
+- That would be considered compatible since it does not affect the public API.
+- (PCRE [Perl Compatible Regular Expressions, i.e. Perl, PHP and R], Python
+- cg3 = patch, cg4 = prerelease and cg5 = buildmetadata) that is compatible
+- with ECMA Script (JavaScript), PCRE (Perl Compatible Regular Expressions,
+- "AA_ENTRY_POINT"->SC: Validate AA Transaction\n""senderValidationData""
+- / Are transfers of a conditional token locked?
+- / @param _user Querying if locked for this user.
+- function isConditionalLocked(address _user, uint256 _condition) public view returns (bool) {
+- require(_to != address(0), "ERC1155: target address must be non-zero");
+- require(_ids.length == _values.length, "ERC1155: IDs and _values must have same lengths");
+- INVARIANT: `_originalAddress(newToOldAccount[newAccount]) == _originalAddress(newAccount)`
+- INVARIANT: originalAddresses and originalToCurrentAddresses are mutually inverse.
+- Auditor: Check that the above invariant hold.
+- Auditor: Check that the above invariants hold.
+- / because the tokens may be already withdrawn. And it cannot be done in a fully decentralized way because
+- / To make it safe, it must stop accepting any new tokens after a transfer.
+- / Must be called with `_id != 0`.
+- / In functions of this contract `condition` is always a customer's original address.
+- * _Available since v3.1._
+- * Clients calling this function must replace the `\{id\}` substring with the
+- * - `account` cannot be the zero address.
+- * - `accounts` and `ids` must have the same length.
+- * Because these URIs cannot be meaningfully represented by the {URI} event,
+- * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+- * - `ids` and `amounts` must have the same length.
+- * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
+- * - `account` must have at least `amount` tokens of token type `id`.
+- * - `from` and `to` are never both zero.
+- require(ids.length == values.length, "ERC1155: IDs and values must have same lengths");
+- To accept the transfer, this must return
+- been updated. To accept the transfer(s), this must return
+- @param ids An array containing ids of each token being transferred (order and length must match values array)
+- @param values An array containing amounts of each token being transferred (order and length must match ids array)
+- require(accountHasSalary[_orig], "Cannot resign account receiving a salary.");
+- by calling this function, the contract storage variables cannot be modified  (precomputed values)
+- Repository contains README research context.
+- Repository contains contract or interface material.
+- Repository contains test evidence.
+- Repository contains documentation material.
+- Repository contains invariant-like statements.
+- Repository exposes 15 executable test or invariant target(s).
+- Repository toolchain could not be determined.

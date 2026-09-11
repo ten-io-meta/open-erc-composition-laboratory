@@ -1,0 +1,412 @@
+OECL V2 - RESULT ARTIFACT AUDIT
+
+============================================================
+DIRECTORY: adaptive-research-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> adaptive-plans.json
+
+============================================================
+DIRECTORY: analysis-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 0
+
+============================================================
+DIRECTORY: architecture-audit-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 0
+
+============================================================
+DIRECTORY: autonomous-experiment-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-AUTONOMOUS-EXPERIMENTS.json
+
+============================================================
+DIRECTORY: benchmark-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> benchmark.json
+
+============================================================
+DIRECTORY: campaign-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> BATCH-0001.json
+
+============================================================
+DIRECTORY: composability-evidence-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-composability-evidence.json
+
+============================================================
+DIRECTORY: composition-discovery-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-composition-candidates.json
+
+============================================================
+DIRECTORY: composition-learning-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-composition-learning.json
+
+============================================================
+DIRECTORY: confidence-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-CONFIDENCE-ASSESSMENTS.json
+
+============================================================
+DIRECTORY: contradiction-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-CONTRADICTIONS.json
+
+============================================================
+DIRECTORY: corpus-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> research-corpus.json
+
+============================================================
+DIRECTORY: cross-source-pattern-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-CROSS-SOURCE-PATTERNS.json
+
+============================================================
+DIRECTORY: discovery-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-findings.json
+
+============================================================
+DIRECTORY: emergent-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> properties.json
+
+============================================================
+DIRECTORY: evidence-graph-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-EVIDENCE-GRAPH.json
+
+============================================================
+DIRECTORY: evidence-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-evidence.json
+
+============================================================
+DIRECTORY: evidence-support-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-supported-composability-evidence.json
+
+============================================================
+DIRECTORY: extraction-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-extraction.json
+
+============================================================
+DIRECTORY: github-adapter-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> GITHUB-ERC8060-RESERVABLE.json
+
+============================================================
+DIRECTORY: hypothesis-refinement-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-REFINED-HYPOTHESES.json
+
+============================================================
+DIRECTORY: hypothesis-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 3
+  -> composition-hypotheses.json
+  -> DOI-0001-hypotheses.json
+  -> OECL-V2-MERGED-HYPOTHESES.json
+
+============================================================
+DIRECTORY: hypothesis-validation-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 2
+  -> DOI-0001-v2-validation.json
+  -> validation-plans.json
+
+============================================================
+DIRECTORY: inference-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-INFERENCES.json
+
+============================================================
+DIRECTORY: intelligence-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> protocol-intelligence.json
+
+============================================================
+DIRECTORY: knowledge-consolidation-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-KNOWLEDGE-CONSOLIDATION.json
+
+============================================================
+DIRECTORY: knowledge-gain-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-KNOWLEDGE-GAIN.json
+
+============================================================
+DIRECTORY: knowledge-gap-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-KNOWLEDGE-GAPS.json
+
+============================================================
+DIRECTORY: knowledge-graph-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> GRAPH-DOI-0001.json
+
+============================================================
+DIRECTORY: knowledge-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> research-knowledge.json
+
+============================================================
+DIRECTORY: matrix-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> composition-matrix.json
+
+============================================================
+DIRECTORY: pattern-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> patterns.json
+
+============================================================
+DIRECTORY: pipeline-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-PIPELINE.json
+
+============================================================
+DIRECTORY: prediction-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-PREDICTIONS.json
+
+============================================================
+DIRECTORY: reasoning-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> DOI-0001-reasoning.json
+
+============================================================
+DIRECTORY: relationship-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> relationships.json
+
+============================================================
+DIRECTORY: repository-intelligence-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-REPOSITORY-INTELLIGENCE.json
+
+============================================================
+DIRECTORY: requirements-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> protocols.json
+
+============================================================
+DIRECTORY: research-conclusion-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-CONCLUSIONS.json
+
+============================================================
+DIRECTORY: research-evolution-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-EVOLUTION.json
+
+============================================================
+DIRECTORY: research-knowledge-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 4
+  -> OECL-V2-INCREMENTAL-KNOWLEDGE.json
+  -> OECL-V2-KNOWLEDGE-BASE.json
+  -> OECL-V2-MERGED-KNOWLEDGE.json
+  -> OECL-V2-RESEARCH-KNOWLEDGE.json
+
+============================================================
+DIRECTORY: research-memory-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 3
+  -> OECL-V2-RESEARCH-MEMORY-RESULT.json
+  -> OECL-V2-RESEARCH-MEMORY.json
+  -> research-memory.json
+
+============================================================
+DIRECTORY: research-planner-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-PLAN.json
+
+============================================================
+DIRECTORY: research-question-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-QUESTIONS.json
+
+============================================================
+DIRECTORY: research-report-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-REPORT.json
+
+============================================================
+DIRECTORY: research-strategy-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-RESEARCH-STRATEGY.json
+
+============================================================
+DIRECTORY: scientific-consensus-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-CONSENSUS.json
+
+============================================================
+DIRECTORY: scientific-discovery-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-DISCOVERIES.json
+
+============================================================
+DIRECTORY: scientific-evidence-accumulator-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EVIDENCE-ACCUMULATOR.json
+
+============================================================
+DIRECTORY: scientific-execution-capability-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXECUTION-CAPABILITIES.json
+
+============================================================
+DIRECTORY: scientific-execution-observation-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXECUTION-OBSERVATIONS.json
+
+============================================================
+DIRECTORY: scientific-execution-outcome-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXECUTION-OUTCOMES.json
+
+============================================================
+DIRECTORY: scientific-execution-plan-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXECUTION-PLANS.json
+
+============================================================
+DIRECTORY: scientific-execution-runtime-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXECUTION-RUNTIME.json
+
+============================================================
+DIRECTORY: scientific-experiment-execution-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXPERIMENT-EXECUTION.json
+
+============================================================
+DIRECTORY: scientific-experiment-queue-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-EXPERIMENT-QUEUE.json
+
+============================================================
+DIRECTORY: scientific-knowledge-evolution-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-KNOWLEDGE-EVOLUTION.json
+
+============================================================
+DIRECTORY: scientific-memory-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-MEMORY.json
+
+============================================================
+DIRECTORY: scientific-retest-experiment-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-RETEST-EXPERIMENTS.json
+
+============================================================
+DIRECTORY: scientific-retest-planner-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-RETEST-PLANS.json
+
+============================================================
+DIRECTORY: scientific-revision-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-REVISION.json
+
+============================================================
+DIRECTORY: scientific-runtime-outcome-adapter-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-RUNTIME-OUTCOME-ADAPTER.json
+
+============================================================
+DIRECTORY: scientific-self-critique-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-SELF-CRITIQUE.json
+
+============================================================
+DIRECTORY: scientific-validation-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-SCIENTIFIC-VALIDATIONS.json
+
+============================================================
+DIRECTORY: semantic-discovery-results
+REFERENCED BY RUN-OECL-V2: False
+JSON FILES: 1
+  -> SEMANTIC-DOI-0001.json
+
+============================================================
+DIRECTORY: theory-results
+REFERENCED BY RUN-OECL-V2: True
+JSON FILES: 1
+  -> OECL-V2-THEORIES.json
+
+============================================================
+AUDIT SUMMARY
+============================================================
+
+RESULT DIRECTORIES: 66
+REFERENCED BY RUN-OECL-V2: 40
+NOT REFERENCED BY RUN-OECL-V2: 26
+EMPTY RESULT DIRECTORIES: 2

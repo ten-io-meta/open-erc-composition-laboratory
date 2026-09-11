@@ -1,0 +1,25 @@
+{
+    "sourceId": "GRAPH-GITHUB-TEST-0001",
+    "generatedAt": "2026-07-06T18:33:06.424Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-GITHUB-TEST-0001"
+            ],
+            "semanticConfidence": 90,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 54,
+            "status": "CANDIDATE"
+        }
+    ],
+    "errors": []
+}

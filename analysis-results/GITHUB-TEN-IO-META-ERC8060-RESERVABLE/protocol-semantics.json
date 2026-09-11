@@ -1,0 +1,52 @@
+{
+    "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+    "extractedAt": "2026-09-03T23:17:52.901Z",
+    "semantics": [
+        {
+            "protocolId": "IERC8060Reservable",
+            "capabilities": [
+                "Reservation",
+                "Accounting"
+            ],
+            "role": "Reservable accounting layer",
+            "evidence": [
+                "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8004",
+            "capabilities": [
+                "AgentIdentity"
+            ],
+            "role": "Agent identity binding",
+            "evidence": [
+                "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8281",
+            "capabilities": [
+                "InputProvenance"
+            ],
+            "role": "Input provenance",
+            "evidence": [
+                "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "confidence": 100
+        },
+        {
+            "protocolId": "ERC8060",
+            "capabilities": [
+                "EmbeddedValue"
+            ],
+            "role": "Embedded native value",
+            "evidence": [
+                "GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "confidence": 100
+        }
+    ],
+    "errors": []
+}

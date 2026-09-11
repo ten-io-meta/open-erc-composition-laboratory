@@ -10,4 +10,6 @@ export interface ProtocolRelationship {
 
     successfulCompositions: number;
 
+    experimentIds: string[];
+
 }

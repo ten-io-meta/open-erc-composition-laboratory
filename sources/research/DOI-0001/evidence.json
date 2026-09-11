@@ -1,0 +1,19 @@
+{
+    "sourceId": "DOI-0001",
+    "evidenceType": "RESEARCH_ARTIFACT",
+    "quality": "HIGH",
+    "reproducible": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": true,
+    "hasCoverage": true,
+    "hasCitation": true,
+    "confidenceWeight": 1.0,
+    "observations": [
+        "Includes implementation evidence.",
+        "Includes validation suite evidence.",
+        "Includes deterministic accounting invariants.",
+        "Includes reproducibility instructions.",
+        "Includes citation metadata."
+    ]
+}

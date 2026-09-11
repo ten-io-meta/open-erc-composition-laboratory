@@ -1,0 +1,67 @@
+{
+    "graphId": "GRAPH-GITHUB-ETHEREUM-EIPS",
+    "discoveredAt": "2026-09-03T23:17:16.094Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-ETHEREUM-EIPS",
+        "generatedAt": "2026-09-03T23:17:16.094Z",
+        "capabilities": [
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "Settlement",
+                "label": "Settlement",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "EmbeddedValue",
+                "label": "EmbeddedValue",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "Testing",
+                "label": "Testing",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            },
+            {
+                "capabilityId": "Redemption",
+                "label": "Redemption",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-ETHEREUM-EIPS"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}

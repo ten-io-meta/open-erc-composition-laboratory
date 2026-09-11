@@ -25,16 +25,13 @@
   "scripts": {
     "test": "npm run benchmark && npm run requirements",
     "oecl": "tsx scripts/run-oecl.ts",
-
     "experiment": "tsx scripts/run-experiment.ts",
     "experiment:positive": "tsx scripts/run-experiment.ts CASE-0003",
     "experiment:negative": "tsx scripts/run-experiment.ts CASE-0004",
     "experiment:erc8275": "tsx scripts/run-experiment.ts CASE-0005",
     "experiment:erc-stack": "tsx scripts/run-experiment.ts CASE-0006",
     "experiment:erc8312": "tsx scripts/run-experiment.ts CASE-0007",
-
     "campaign": "tsx scripts/run-campaign.ts",
-
     "benchmark": "tsx scripts/run-benchmark.ts",
     "requirements": "tsx scripts/run-requirements.ts",
     "emergent": "tsx scripts/run-emergent.ts",
@@ -47,10 +44,30 @@
     "validation": "tsx scripts/run-hypothesis-validation.ts",
     "knowledge": "tsx scripts/run-research-knowledge.ts",
     "memory": "tsx scripts/run-research-memory.ts",
+    "graph": "tsx scripts/run-knowledge-graph.ts",
     "adaptive": "tsx scripts/run-adaptive-research.ts",
+    "discover": "tsx scripts/run-discovery.ts",
     "query": "tsx scripts/run-query.ts",
-
     "scenario": "tsx scripts/run-scenario.ts",
+    "compose:discover": "tsx scripts/run-composition-discovery.ts",
+    "semantic": "tsx scripts/run-semantic-discovery.ts",
+    "reason": "tsx scripts/run-semantic-reasoning.ts",
+    "evidence": "tsx scripts/run-evidence-evaluation.ts",
+    "analyze": "tsx scripts/run-research-analysis.ts",
+    "evidence:composability": "tsx scripts/run-composability-evidence.ts",
+    "evidence:support": "tsx scripts/run-evidence-support.ts",
+    "knowledge:incremental": "tsx scripts/run-incremental-knowledge.ts",
+    "learning": "tsx scripts/run-composition-learning.ts",
+    "corpus": "tsx scripts/run-corpus.ts",
+    "memory:v2": "tsx scripts/run-research-memory.ts",
+    "github:bundle": "tsx scripts/run-github-bundle.ts",
+    "hypothesis": "tsx scripts/run-hypothesis.ts",
+    "hypothesis:v2:validate": "tsx scripts/run-hypothesis-v2-validation.ts",
+    "knowledge:v2": "tsx scripts/run-research-knowledge-v2.ts",
+    "v2": "tsx scripts/run-oecl-v2.ts",
+    "unmatched": "tsx scripts/analyze-unmatched-knowledge.ts",
+    "scientific:regression": "tsx scripts/run-scientific-regression-suite.ts",
+    "extract": "tsx scripts/run-research-extraction.ts",
     "scenario:batch": "tsx scripts/run-scenario-batch.ts",
     "scenario:generate": "tsx scripts/generate-scenarios.ts",
     "generate-scenarios": "tsx scripts/run-auto-scenario-generation.ts",
@@ -69,5 +86,8 @@
     "@types/node": "^26.0.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/client": "2.0.0"
   }
 }

@@ -1,0 +1,66 @@
+{
+    "generatedAt": "2026-09-03T23:17:20.612Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "capabilities": [
+        {
+            "capabilityId": "SCIENTIFIC-EXECUTION-CAPABILITY-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetId": "THEORY:THEORY-00001",
+            "targetEvidenceIds": [],
+            "capability": "TEST_EXECUTION",
+            "confidence": 50,
+            "reasons": [
+                "The task requires executable or reproducible test behavior."
+            ],
+            "recommendedTools": [
+                "Foundry",
+                "Hardhat"
+            ]
+        },
+        {
+            "capabilityId": "SCIENTIFIC-EXECUTION-CAPABILITY-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "targetId": "THEORY-00001",
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "capability": "INVARIANT_VALIDATION",
+            "confidence": 50,
+            "reasons": [
+                "The task explicitly depends on invariant or safety validation."
+            ],
+            "recommendedTools": [
+                "Foundry invariant testing",
+                "Echidna"
+            ]
+        },
+        {
+            "capabilityId": "SCIENTIFIC-EXECUTION-CAPABILITY-00003",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "targetId": "GAP-00001",
+            "targetEvidenceIds": [],
+            "capability": "SOURCE_REINGESTION",
+            "confidence": 50,
+            "reasons": [
+                "The task requires ingestion or re-ingestion of independent sources."
+            ],
+            "recommendedTools": [
+                "OECL SourcePipeline",
+                "GitHub ingestion"
+            ]
+        }
+    ],
+    "statistics": {
+        "total": 3,
+        "staticAnalysis": 0,
+        "testExecution": 1,
+        "invariantValidation": 1,
+        "sourceReingestion": 1,
+        "manualReview": 0,
+        "averageConfidence": 50
+    },
+    "errors": []
+}

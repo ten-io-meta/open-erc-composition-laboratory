@@ -1,0 +1,368 @@
+{
+    "generatedAt": "2026-09-03T23:17:20.745Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "outcomes": [
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00001",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-01",
+            "stepType": "SOURCE_REINGESTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00002",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-02",
+            "stepType": "TEST_EXECUTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00003",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-03",
+            "stepType": "INVARIANT_VALIDATION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00004",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-04",
+            "stepType": "EVIDENCE_COLLECTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00005",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "sourceIds": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "successCriteria": [
+                "Independent source count increases.",
+                "At least one new directly relevant evidence edge is discovered.",
+                "Validation score changes by at least 5 points.",
+                "The experiment produces a reproducible result."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is discovered.",
+                "The selected repository duplicates existing evidence without increasing diversity.",
+                "The validation score remains unchanged.",
+                "The evidence cannot be reproduced or traced to its source."
+            ],
+            "scientificCriteria": {
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "support": {
+                    "expectedPolarity": "SUPPORT",
+                    "condition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "challenge": {
+                    "expectedPolarity": "CHALLENGE",
+                    "condition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "inconclusive": {
+                    "whenNoScientificPolarity": true
+                }
+            },
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-01",
+            "stepType": "SOURCE_REINGESTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00006",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "sourceIds": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "successCriteria": [
+                "Independent source count increases.",
+                "At least one new directly relevant evidence edge is discovered.",
+                "Validation score changes by at least 5 points.",
+                "The experiment produces a reproducible result."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is discovered.",
+                "The selected repository duplicates existing evidence without increasing diversity.",
+                "The validation score remains unchanged.",
+                "The evidence cannot be reproduced or traced to its source."
+            ],
+            "scientificCriteria": {
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "support": {
+                    "expectedPolarity": "SUPPORT",
+                    "condition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "challenge": {
+                    "expectedPolarity": "CHALLENGE",
+                    "condition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "inconclusive": {
+                    "whenNoScientificPolarity": true
+                }
+            },
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-02",
+            "stepType": "INVARIANT_VALIDATION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00007",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "sourceIds": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "successCriteria": [
+                "Independent source count increases.",
+                "At least one new directly relevant evidence edge is discovered.",
+                "Validation score changes by at least 5 points.",
+                "The experiment produces a reproducible result."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is discovered.",
+                "The selected repository duplicates existing evidence without increasing diversity.",
+                "The validation score remains unchanged.",
+                "The evidence cannot be reproduced or traced to its source."
+            ],
+            "scientificCriteria": {
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "support": {
+                    "expectedPolarity": "SUPPORT",
+                    "condition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "challenge": {
+                    "expectedPolarity": "CHALLENGE",
+                    "condition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "inconclusive": {
+                    "whenNoScientificPolarity": true
+                }
+            },
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-03",
+            "stepType": "EVIDENCE_COLLECTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00008",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00003",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "targetType": "KNOWLEDGE_GAP",
+            "targetId": "GAP-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "Evidence diversity increases.",
+                "The associated confidence score increases or decreases meaningfully.",
+                "The gap receives a clear resolved or unresolved classification."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is found.",
+                "Only duplicate evidence is discovered.",
+                "The gap remains unchanged."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00003-01",
+            "stepType": "SOURCE_REINGESTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        },
+        {
+            "outcomeId": "SCIENTIFIC-EXECUTION-OUTCOME-00009",
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00003",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "targetType": "KNOWLEDGE_GAP",
+            "targetId": "GAP-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "successCriteria": [
+                "Evidence diversity increases.",
+                "The associated confidence score increases or decreases meaningfully.",
+                "The gap receives a clear resolved or unresolved classification."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is found.",
+                "Only duplicate evidence is discovered.",
+                "The gap remains unchanged."
+            ],
+            "stepId": "SCIENTIFIC-EXECUTION-TASK-00003-02",
+            "stepType": "EVIDENCE_COLLECTION",
+            "repository": null,
+            "selectedExecutableTarget": null,
+            "status": "NOT_EXECUTED",
+            "scientificResult": "NOT_EVALUATED",
+            "executedAt": null,
+            "evidence": [],
+            "observations": [],
+            "errors": [],
+            "explanation": "The execution step is prepared but has not yet been executed by a real runtime."
+        }
+    ],
+    "statistics": {
+        "total": 9,
+        "notExecuted": 9,
+        "success": 0,
+        "failure": 0,
+        "inconclusive": 0,
+        "blocked": 0,
+        "executed": 0
+    },
+    "errors": []
+}

@@ -1,0 +1,59 @@
+{
+    "graphId": "GRAPH-GITHUB-FOUNDRY-RS-FOUNDRY",
+    "discoveredAt": "2026-08-23T13:09:26.151Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-FOUNDRY-RS-FOUNDRY",
+        "generatedAt": "2026-08-23T13:09:26.151Z",
+        "capabilities": [
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            },
+            {
+                "capabilityId": "EmbeddedValue",
+                "label": "EmbeddedValue",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            },
+            {
+                "capabilityId": "Testing",
+                "label": "Testing",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            },
+            {
+                "capabilityId": "Redemption",
+                "label": "Redemption",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-FOUNDRY-RS-FOUNDRY"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}

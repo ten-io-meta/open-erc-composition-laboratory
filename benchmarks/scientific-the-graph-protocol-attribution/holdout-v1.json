@@ -1,0 +1,172 @@
+[
+  {
+    "caseId": "HOLDOUT-POSITIVE-8060-HYPHENATED",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# Schema indexes ERC-8060 value-bearing token state."
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8060-COMPACT",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# Indexed standard: ERC8060"
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8301-HYPHENATED",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "\"\"\"ERC-8301 workflow task entities.\"\"\""
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8301-COMPACT",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "type AgentTask @entity { id: ID! } # ERC8301"
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8312-HYPHENATED",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# Implements data model for ERC-8312 cursor state."
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8312-COMPACT",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8312 indexed cursor records"
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8274-HYPHENATED",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC-8274 verification records"
+  },
+  {
+    "caseId": "HOLDOUT-POSITIVE-8274-COMPACT",
+    "category": "POSITIVE_EXPLICIT",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "type Verification @entity { id: ID! } # ERC8274"
+  },
+
+  {
+    "caseId": "HOLDOUT-NEGATIVE-DOES-NOT-CONFORM",
+    "category": "NEGATION_UNSEEN",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment does not conform to ERC-8060."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-NOT-COMPATIBLE",
+    "category": "NEGATION_UNSEEN",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment is not compatible with ERC-8060."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-COMPARISON-ONLY",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# Comparison with ERC-8301 only; indexed protocol is ERC-9999."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-MIGRATION-NOTE",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# Migration note mentions ERC-8301 only; no ERC-8301 entities are indexed."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-INSPIRED-BY",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# Inspired by ERC-8312; this schema indexes a different protocol."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-COMPATIBILITY-NOT-CLAIMED",
+    "category": "NEGATION_UNSEEN",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8274 compatibility is not claimed by this schema."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-LEGACY-REFERENCE",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# Legacy reference to ERC-8060 for historical comparison."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-EXCLUDES",
+    "category": "NEGATION_UNSEEN",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment explicitly excludes ERC-8274."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-EXAMPLE-LABEL",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# Example label \"ERC-8312\" appears in test documentation only."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-ALTERNATIVE-STANDARD",
+    "category": "REFERENCE_UNSEEN",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8301 is discussed here only as an alternative to ERC-9999."
+  },
+
+  {
+    "caseId": "HOLDOUT-NEGATIVE-LOWERCASE",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# schema indexes erc-8060-like data"
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-EMBEDDED",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# XERC-8301Y is an unrelated application identifier"
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-NEIGHBORING",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-83120 is a different identifier"
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-SPACED",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC 8060 is not the canonical identifier"
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-WRONG-STANDARD",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema indexes ERC-8275."
+  },
+  {
+    "caseId": "HOLDOUT-NEGATIVE-SEMANTIC-ONLY",
+    "category": "LEXICAL_CONTROL",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "type AgentWorkflow @entity { id: ID! task: Bytes! reply: Bytes }"
+  }
+]

@@ -1,0 +1,1139 @@
+{
+    "graphId": "GRAPH-DOI-0001",
+    "discoveredAt": "2026-06-29T01:51:12.337Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-DOI-0001",
+        "generatedAt": "2026-06-29T01:51:12.335Z",
+        "capabilities": [
+            {
+                "capabilityId": "AgentIdentity",
+                "label": "AgentIdentity",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "IdentityBinding",
+                "label": "IdentityBinding",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "InputProvenance",
+                "label": "InputProvenance",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "SpineCommitment",
+                "label": "SpineCommitment",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Authority",
+                "label": "Authority",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Cursor",
+                "label": "Cursor",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Workflow",
+                "label": "Workflow",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Anchoring",
+                "label": "Anchoring",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Verification",
+                "label": "Verification",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Eligibility",
+                "label": "Eligibility",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Settlement",
+                "label": "Settlement",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "EmbeddedValue",
+                "label": "EmbeddedValue",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [
+                    "ERC8004",
+                    "ERC8217",
+                    "ERC8281",
+                    "ERC8299",
+                    "ERC8001",
+                    "ERC8312",
+                    "ERC8301",
+                    "ERC8263",
+                    "ERC8274",
+                    "ReceiptOS",
+                    "ERC8275",
+                    "ERC8060",
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "DOI-0001"
+                ]
+            }
+        ],
+        "relationships": [
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "IdentityBinding",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "InputProvenance",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "SpineCommitment",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Authority",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Cursor",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "AgentIdentity",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "InputProvenance",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "SpineCommitment",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Authority",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Cursor",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "IdentityBinding",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "SpineCommitment",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Authority",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Cursor",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "InputProvenance",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Authority",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Cursor",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "SpineCommitment",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Cursor",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Authority",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Workflow",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Cursor",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Anchoring",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Workflow",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "Verification",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Anchoring",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Verification",
+                "toCapability": "Eligibility",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Verification",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Verification",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Verification",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Verification",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Eligibility",
+                "toCapability": "Settlement",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Eligibility",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Eligibility",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Eligibility",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Settlement",
+                "toCapability": "EmbeddedValue",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Settlement",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Settlement",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "EmbeddedValue",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "EmbeddedValue",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            },
+            {
+                "fromCapability": "Reservation",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "DOI-0001"
+                ],
+                "confidence": 50
+            }
+        ]
+    }
+}

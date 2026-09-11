@@ -1,0 +1,32 @@
+{
+    "generatedAt": "2026-09-03T23:18:00.808Z",
+    "evolutions": [],
+    "statistics": {
+        "evolutions": 0,
+        "newKnowledge": 0,
+        "strengthenedKnowledge": 0,
+        "weakenedKnowledge": 0,
+        "removedKnowledge": 0,
+        "newPatterns": 0,
+        "strengthenedPatterns": 0,
+        "weakenedPatterns": 0,
+        "removedPatterns": 0,
+        "newConclusions": 0,
+        "strengthenedConclusions": 0,
+        "weakenedConclusions": 0,
+        "removedConclusions": 0,
+        "positiveEvolutions": 0,
+        "negativeEvolutions": 0,
+        "unchangedEntities": 59,
+        "stagnantCycle": true,
+        "knowledgeDecay": 0,
+        "campaignProductivity": 0,
+        "researchMaturityScore": 42,
+        "researchMaturity": "INITIAL",
+        "researchVelocityScore": 0,
+        "researchVelocity": "STAGNANT",
+        "researchAccelerationScore": 0,
+        "researchAcceleration": "STABLE"
+    },
+    "errors": []
+}

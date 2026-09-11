@@ -1,0 +1,20 @@
+{
+    "evaluatedAt": "2026-06-29T03:07:27.772Z",
+    "sourceId": "DOI-0001",
+    "assessment": {
+        "sourceId": "DOI-0001",
+        "quality": "MEDIUM",
+        "confidence": 60,
+        "reproducible": false,
+        "hasImplementation": false,
+        "hasTests": true,
+        "hasFormalInvariants": true,
+        "peerReviewed": true,
+        "observations": [
+            "Validation or test evidence detected.",
+            "Invariant or deterministic accounting evidence detected.",
+            "Persistent citation or DOI evidence detected."
+        ]
+    },
+    "errors": []
+}

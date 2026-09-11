@@ -1,0 +1,185 @@
+﻿{
+    "schemaVersion":  "OECL-WEB-CORPUS-DISCOVERY-2",
+    "generatedAt":  "2026-09-10T14:45:10.993Z",
+    "scientificScope":  null,
+    "discovery":  {
+                      "candidateSet":  {
+                                           "candidates":  [
+                                                              {
+                                                                  "candidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|21:STRUCTURAL_FOUNDATION|89:54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8004|8:ERC-8060|7:ERC-721",
+                                                                  "kind":  "STRUCTURAL_FOUNDATION",
+                                                                  "sourceParticipantId":  "ERC-8004",
+                                                                  "targetParticipantId":  "ERC-8060",
+                                                                  "structuralFoundationCandidateId":  "54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8004|8:ERC-8060|7:ERC-721",
+                                                                  "sourceCrossProtocolCandidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|26:SHARED_PROTOCOL_FOUNDATION|8:PROTOCOL|8:ERC-8004|8:PROTOCOL|8:ERC-8060|18:FOUNDATION-PRESENT|7:ERC-721",
+                                                                  "directionality":  "UNDIRECTED",
+                                                                  "foundationProtocolId":  "ERC-721",
+                                                                  "evidenceIds":  [
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00011-FACT-00001|8:ERC-8004|10:DEPENDS_ON|7:ERC-721|7:IERC721",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|34:GITHUB-ERC-8004-ERC-8004-CONTRACTS|16:REVISION-PRESENT|40:b9e466c250744a7e06b13dff9d3c2844ed64f825|55:GITHUB-ERC-8004-ERC-8004-CONTRACTS-OBS-00006-FACT-00001|8:ERC-8004|10:DEPENDS_ON|7:ERC-721|27:ERC721URIStorageUpgradeable",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|43:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE|16:REVISION-PRESENT|40:c7eed906835ab39fbc8439eb0493e5a5371b23a2|64:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE-OBS-00001-FACT-00003|8:ERC-8060|10:DEPENDS_ON|7:ERC-721|12:IERC721Value",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|43:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE|16:REVISION-PRESENT|40:c7eed906835ab39fbc8439eb0493e5a5371b23a2|64:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE-OBS-00001-FACT-00003|8:ERC-8060|10:DEPENDS_ON|7:ERC-721|16:ERC721URIStorage"
+                                                                                  ],
+                                                                  "provenance":  [
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00011-FACT-00001|8:ERC-8004|10:DEPENDS_ON|7:ERC-721|7:IERC721"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-ERC-8004-ERC-8004-CONTRACTS",
+                                                                                         "sourceRevision":  "b9e466c250744a7e06b13dff9d3c2844ed64f825",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|34:GITHUB-ERC-8004-ERC-8004-CONTRACTS|16:REVISION-PRESENT|40:b9e466c250744a7e06b13dff9d3c2844ed64f825|55:GITHUB-ERC-8004-ERC-8004-CONTRACTS-OBS-00006-FACT-00001|8:ERC-8004|10:DEPENDS_ON|7:ERC-721|27:ERC721URIStorageUpgradeable"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE",
+                                                                                         "sourceRevision":  "c7eed906835ab39fbc8439eb0493e5a5371b23a2",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|43:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE|16:REVISION-PRESENT|40:c7eed906835ab39fbc8439eb0493e5a5371b23a2|64:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE-OBS-00001-FACT-00003|8:ERC-8060|10:DEPENDS_ON|7:ERC-721|12:IERC721Value"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE",
+                                                                                         "sourceRevision":  "c7eed906835ab39fbc8439eb0493e5a5371b23a2",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|43:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE|16:REVISION-PRESENT|40:c7eed906835ab39fbc8439eb0493e5a5371b23a2|64:GITHUB-TEN-IO-META-ERC8060-NATIVE-ETH-VALUE-OBS-00001-FACT-00003|8:ERC-8060|10:DEPENDS_ON|7:ERC-721|16:ERC721URIStorage"
+                                                                                     }
+                                                                                 ],
+                                                                  "evaluationStatus":  "UNEVALUATED"
+                                                              },
+                                                              {
+                                                                  "candidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|21:STRUCTURAL_FOUNDATION|89:54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8312|8:ERC-8323|7:ERC-165",
+                                                                  "kind":  "STRUCTURAL_FOUNDATION",
+                                                                  "sourceParticipantId":  "ERC-8312",
+                                                                  "targetParticipantId":  "ERC-8323",
+                                                                  "structuralFoundationCandidateId":  "54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8312|8:ERC-8323|7:ERC-165",
+                                                                  "sourceCrossProtocolCandidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|26:SHARED_PROTOCOL_FOUNDATION|8:PROTOCOL|8:ERC-8312|8:PROTOCOL|8:ERC-8323|18:FOUNDATION-PRESENT|7:ERC-165",
+                                                                  "directionality":  "UNDIRECTED",
+                                                                  "foundationProtocolId":  "ERC-165",
+                                                                  "evidenceIds":  [
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00001|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00008|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00018-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00019-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                  ],
+                                                                  "provenance":  [
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00001|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00008|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00018-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00019-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     }
+                                                                                 ],
+                                                                  "evaluationStatus":  "UNEVALUATED"
+                                                              },
+                                                              {
+                                                                  "candidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|21:STRUCTURAL_FOUNDATION|89:54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8312|8:ERC-8354|7:ERC-165",
+                                                                  "kind":  "STRUCTURAL_FOUNDATION",
+                                                                  "sourceParticipantId":  "ERC-8312",
+                                                                  "targetParticipantId":  "ERC-8354",
+                                                                  "structuralFoundationCandidateId":  "54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8312|8:ERC-8354|7:ERC-165",
+                                                                  "sourceCrossProtocolCandidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|26:SHARED_PROTOCOL_FOUNDATION|8:PROTOCOL|8:ERC-8312|8:PROTOCOL|8:ERC-8354|18:FOUNDATION-PRESENT|7:ERC-165",
+                                                                  "directionality":  "UNDIRECTED",
+                                                                  "foundationProtocolId":  "ERC-165",
+                                                                  "evidenceIds":  [
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00018-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00019-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00037-FACT-00015|8:ERC-8354|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                  ],
+                                                                  "provenance":  [
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00018-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00019-FACT-00001|8:ERC-8312|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00037-FACT-00015|8:ERC-8354|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     }
+                                                                                 ],
+                                                                  "evaluationStatus":  "UNEVALUATED"
+                                                              },
+                                                              {
+                                                                  "candidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|21:STRUCTURAL_FOUNDATION|89:54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8323|8:ERC-8354|7:ERC-165",
+                                                                  "kind":  "STRUCTURAL_FOUNDATION",
+                                                                  "sourceParticipantId":  "ERC-8323",
+                                                                  "targetParticipantId":  "ERC-8354",
+                                                                  "structuralFoundationCandidateId":  "54:SCIENTIFIC-STRUCTURAL-FOUNDATION-COMPOSITION-CANDIDATE|8:ERC-8323|8:ERC-8354|7:ERC-165",
+                                                                  "sourceCrossProtocolCandidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|26:SHARED_PROTOCOL_FOUNDATION|8:PROTOCOL|8:ERC-8323|8:PROTOCOL|8:ERC-8354|18:FOUNDATION-PRESENT|7:ERC-165",
+                                                                  "directionality":  "UNDIRECTED",
+                                                                  "foundationProtocolId":  "ERC-165",
+                                                                  "evidenceIds":  [
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00001|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00008|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165",
+                                                                                      "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00037-FACT-00015|8:ERC-8354|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                  ],
+                                                                  "provenance":  [
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00001|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00015-FACT-00008|8:ERC-8323|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     },
+                                                                                     {
+                                                                                         "kind":  "STRUCTURAL_PROTOCOL_RELATION",
+                                                                                         "sourceId":  "GITHUB-TRUSTLESS-AI-AGENT-ERCS",
+                                                                                         "sourceRevision":  "01283ca57305f915afb560d23359a27fd748eb5a",
+                                                                                         "evidenceId":  "48:SCIENTIFIC-STRUCTURAL-PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|51:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00037-FACT-00015|8:ERC-8354|10:DEPENDS_ON|7:ERC-165|7:IERC165"
+                                                                                     }
+                                                                                 ],
+                                                                  "evaluationStatus":  "UNEVALUATED"
+                                                              },
+                                                              {
+                                                                  "candidateId":  "32:SCIENTIFIC-COMPOSITION-CANDIDATE|23:DOCUMENTARY_COMPOSITION|86:44:SCIENTIFIC-DOCUMENTARY-COMPOSITION-CANDIDATE|8:ERC-8301|13:COMPOSES_WITH|8:ERC-8354",
+                                                                  "kind":  "DOCUMENTARY_COMPOSITION",
+                                                                  "sourceParticipantId":  "ERC-8301",
+                                                                  "targetParticipantId":  "ERC-8354",
+                                                                  "documentaryCandidateId":  "44:SCIENTIFIC-DOCUMENTARY-COMPOSITION-CANDIDATE|8:ERC-8301|13:COMPOSES_WITH|8:ERC-8354",
+                                                                  "relation":  "COMPOSES_WITH",
+                                                                  "evidenceIds":  [
+                                                                                      "26:PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|40:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00010|8:ERC-8301|13:COMPOSES_WITH|8:ERC-8354|38:MARKDOWN_H1_EXPLICIT_COMPOSES_WITH_ERC|42:https://github.com/trustless-ai/agent-ercs|77:external/github/trustless-ai/agent-ercs/contracts/execution/ERC8301/README.md|2:16|98:for composing ERC-8301 with ERC-8354; nothing in the core depends on it, and a workflow that never",
+                                                                                      "26:PROTOCOL-RELATION-EVIDENCE|30:GITHUB-TRUSTLESS-AI-AGENT-ERCS|16:REVISION-PRESENT|40:01283ca57305f915afb560d23359a27fd748eb5a|40:GITHUB-TRUSTLESS-AI-AGENT-ERCS-OBS-00010|8:ERC-8301|13:COMPOSES_WITH|8:ERC-8354|38:MARKDOWN_H1_EXPLICIT_COMPOSES_WITH_ERC|42:https://github.com/trustless-ai/agent-ercs|77:external/github/trustless-ai/agent-ercs/contracts/execution/ERC8301/README.md|2:42|271:A workflow stage whose reply carries no plaintext output. The action and the policy stay hidden; the fact that the action cleared the policy stays verifiable. `IConfidentialStep.sol` defines that path by composing ERC-8301 with [ERC-8354](../../verify/ERC8354/README.md)."
+                                                                                  ],
+                                                                  "evaluationStatus":  "UNEVALUATED"
+                                                              }
+                                                          ],
+                                           "errors":  [
+
+                                                      ]
+                                       }
+                  }
+}

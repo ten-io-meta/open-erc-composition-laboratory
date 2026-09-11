@@ -1,0 +1,1971 @@
+{
+    "graphId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+    "generatedAt": "2026-09-03T23:17:54.981Z",
+    "nodes": [
+        {
+            "id": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "type": "ResearchSource",
+            "label": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "id": "ERC7579",
+            "type": "Protocol",
+            "label": "ERC7579"
+        },
+        {
+            "id": "ERC2771",
+            "type": "Protocol",
+            "label": "ERC2771"
+        },
+        {
+            "id": "ERC7739",
+            "type": "Protocol",
+            "label": "ERC7739"
+        },
+        {
+            "id": "ERC4337",
+            "type": "Protocol",
+            "label": "ERC4337"
+        },
+        {
+            "id": "ERC7913",
+            "type": "Protocol",
+            "label": "ERC7913"
+        },
+        {
+            "id": "ERC20",
+            "type": "Protocol",
+            "label": "ERC20"
+        },
+        {
+            "id": "ERC1271",
+            "type": "Protocol",
+            "label": "ERC1271"
+        },
+        {
+            "id": "ERC1155",
+            "type": "Protocol",
+            "label": "ERC1155"
+        },
+        {
+            "id": "ERC7786",
+            "type": "Protocol",
+            "label": "ERC7786"
+        },
+        {
+            "id": "ERC165",
+            "type": "Protocol",
+            "label": "ERC165"
+        },
+        {
+            "id": "IERC6909ContentURI",
+            "type": "Protocol",
+            "label": "IERC6909ContentURI"
+        },
+        {
+            "id": "IERC6909TokenSupply",
+            "type": "Protocol",
+            "label": "IERC6909TokenSupply"
+        },
+        {
+            "id": "IERC6909Metadata",
+            "type": "Protocol",
+            "label": "IERC6909Metadata"
+        },
+        {
+            "id": "ERC6909",
+            "type": "Protocol",
+            "label": "ERC6909"
+        },
+        {
+            "id": "IERC20",
+            "type": "Protocol",
+            "label": "IERC20"
+        },
+        {
+            "id": "ERC721",
+            "type": "Protocol",
+            "label": "ERC721"
+        },
+        {
+            "id": "ERC7201",
+            "type": "Protocol",
+            "label": "ERC7201"
+        },
+        {
+            "id": "ERC6093",
+            "type": "Protocol",
+            "label": "ERC6093"
+        },
+        {
+            "id": "IERC20Metadata",
+            "type": "Protocol",
+            "label": "IERC20Metadata"
+        },
+        {
+            "id": "IERC7579Module",
+            "type": "Protocol",
+            "label": "IERC7579Module"
+        },
+        {
+            "id": "ERC4626",
+            "type": "Protocol",
+            "label": "ERC4626"
+        },
+        {
+            "id": "ERC1967",
+            "type": "Protocol",
+            "label": "ERC1967"
+        },
+        {
+            "id": "ERC6372",
+            "type": "Protocol",
+            "label": "ERC6372"
+        },
+        {
+            "id": "IERC4337",
+            "type": "Protocol",
+            "label": "IERC4337"
+        },
+        {
+            "id": "ERC3009",
+            "type": "Protocol",
+            "label": "ERC3009"
+        },
+        {
+            "id": "IERC1155Receiver",
+            "type": "Protocol",
+            "label": "IERC1155Receiver"
+        },
+        {
+            "id": "ERC7802",
+            "type": "Protocol",
+            "label": "ERC7802"
+        },
+        {
+            "id": "ERC7702",
+            "type": "Protocol",
+            "label": "ERC7702"
+        },
+        {
+            "id": "ERC7930",
+            "type": "Protocol",
+            "label": "ERC7930"
+        },
+        {
+            "id": "IERC7786",
+            "type": "Protocol",
+            "label": "IERC7786"
+        },
+        {
+            "id": "IERC7751",
+            "type": "Protocol",
+            "label": "IERC7751"
+        },
+        {
+            "id": "IERC7821",
+            "type": "Protocol",
+            "label": "IERC7821"
+        },
+        {
+            "id": "ERC7821",
+            "type": "Protocol",
+            "label": "ERC7821"
+        },
+        {
+            "id": "IERC6909",
+            "type": "Protocol",
+            "label": "IERC6909"
+        },
+        {
+            "id": "ERC1363",
+            "type": "Protocol",
+            "label": "ERC1363"
+        },
+        {
+            "id": "IERC1967",
+            "type": "Protocol",
+            "label": "IERC1967"
+        },
+        {
+            "id": "ERC1167",
+            "type": "Protocol",
+            "label": "ERC1167"
+        },
+        {
+            "id": "ERC7674",
+            "type": "Protocol",
+            "label": "ERC7674"
+        },
+        {
+            "id": "IERC721Receiver",
+            "type": "Protocol",
+            "label": "IERC721Receiver"
+        },
+        {
+            "id": "ERC777",
+            "type": "Protocol",
+            "label": "ERC777"
+        },
+        {
+            "id": "ERC1820",
+            "type": "Protocol",
+            "label": "ERC1820"
+        },
+        {
+            "id": "ERC1822",
+            "type": "Protocol",
+            "label": "ERC1822"
+        },
+        {
+            "id": "ERC5267",
+            "type": "Protocol",
+            "label": "ERC5267"
+        },
+        {
+            "id": "IERC20Upgradeable",
+            "type": "Protocol",
+            "label": "IERC20Upgradeable"
+        },
+        {
+            "id": "IERC5313",
+            "type": "Protocol",
+            "label": "IERC5313"
+        },
+        {
+            "id": "IERC4906",
+            "type": "Protocol",
+            "label": "IERC4906"
+        },
+        {
+            "id": "ERC4906",
+            "type": "Protocol",
+            "label": "ERC4906"
+        },
+        {
+            "id": "IERC20Permit",
+            "type": "Protocol",
+            "label": "IERC20Permit"
+        },
+        {
+            "id": "ERC2981",
+            "type": "Protocol",
+            "label": "ERC2981"
+        },
+        {
+            "id": "ERC712",
+            "type": "Protocol",
+            "label": "ERC712"
+        },
+        {
+            "id": "ERC3156",
+            "type": "Protocol",
+            "label": "ERC3156"
+        },
+        {
+            "id": "ERC2098",
+            "type": "Protocol",
+            "label": "ERC2098"
+        },
+        {
+            "id": "IERC1820Registry",
+            "type": "Protocol",
+            "label": "IERC1820Registry"
+        },
+        {
+            "id": "IERC165",
+            "type": "Protocol",
+            "label": "IERC165"
+        },
+        {
+            "id": "ERC6900",
+            "type": "Protocol",
+            "label": "ERC6900"
+        },
+        {
+            "id": "IERC1271",
+            "type": "Protocol",
+            "label": "IERC1271"
+        },
+        {
+            "id": "IERC7579Validator",
+            "type": "Protocol",
+            "label": "IERC7579Validator"
+        },
+        {
+            "id": "IERC7579Execution",
+            "type": "Protocol",
+            "label": "IERC7579Execution"
+        },
+        {
+            "id": "IERC7579AccountConfig",
+            "type": "Protocol",
+            "label": "IERC7579AccountConfig"
+        },
+        {
+            "id": "IERC7579ModuleConfig",
+            "type": "Protocol",
+            "label": "IERC7579ModuleConfig"
+        },
+        {
+            "id": "IERC7579",
+            "type": "Protocol",
+            "label": "IERC7579"
+        },
+        {
+            "id": "IERC7579Hook",
+            "type": "Protocol",
+            "label": "IERC7579Hook"
+        },
+        {
+            "id": "ERC7562",
+            "type": "Protocol",
+            "label": "ERC7562"
+        },
+        {
+            "id": "IERC721",
+            "type": "Protocol",
+            "label": "IERC721"
+        },
+        {
+            "id": "IERC1155",
+            "type": "Protocol",
+            "label": "IERC1155"
+        },
+        {
+            "id": "IERC1155Errors",
+            "type": "Protocol",
+            "label": "IERC1155Errors"
+        },
+        {
+            "id": "IERC6093",
+            "type": "Protocol",
+            "label": "IERC6093"
+        },
+        {
+            "id": "IERC721Errors",
+            "type": "Protocol",
+            "label": "IERC721Errors"
+        },
+        {
+            "id": "IERC7802",
+            "type": "Protocol",
+            "label": "IERC7802"
+        },
+        {
+            "id": "IERC7786GatewaySource",
+            "type": "Protocol",
+            "label": "IERC7786GatewaySource"
+        },
+        {
+            "id": "IERC7786Recipient",
+            "type": "Protocol",
+            "label": "IERC7786Recipient"
+        },
+        {
+            "id": "IERC5805",
+            "type": "Protocol",
+            "label": "IERC5805"
+        },
+        {
+            "id": "IERC6372",
+            "type": "Protocol",
+            "label": "IERC6372"
+        },
+        {
+            "id": "ERC5805",
+            "type": "Protocol",
+            "label": "ERC5805"
+        },
+        {
+            "id": "IERC1822",
+            "type": "Protocol",
+            "label": "IERC1822"
+        },
+        {
+            "id": "IERC1822Proxiable",
+            "type": "Protocol",
+            "label": "IERC1822Proxiable"
+        },
+        {
+            "id": "IERC3009",
+            "type": "Protocol",
+            "label": "IERC3009"
+        },
+        {
+            "id": "IERC3009Cancel",
+            "type": "Protocol",
+            "label": "IERC3009Cancel"
+        },
+        {
+            "id": "IERC20Errors",
+            "type": "Protocol",
+            "label": "IERC20Errors"
+        },
+        {
+            "id": "IERC7674",
+            "type": "Protocol",
+            "label": "IERC7674"
+        },
+        {
+            "id": "IERC1155MetadataURI",
+            "type": "Protocol",
+            "label": "IERC1155MetadataURI"
+        },
+        {
+            "id": "IERC1363",
+            "type": "Protocol",
+            "label": "IERC1363"
+        },
+        {
+            "id": "IERC1363Receiver",
+            "type": "Protocol",
+            "label": "IERC1363Receiver"
+        },
+        {
+            "id": "IERC1363Spender",
+            "type": "Protocol",
+            "label": "IERC1363Spender"
+        },
+        {
+            "id": "IERC1820Implementer",
+            "type": "Protocol",
+            "label": "IERC1820Implementer"
+        },
+        {
+            "id": "IERC2309",
+            "type": "Protocol",
+            "label": "IERC2309"
+        },
+        {
+            "id": "ERC2309",
+            "type": "Protocol",
+            "label": "ERC2309"
+        },
+        {
+            "id": "IERC2612",
+            "type": "Protocol",
+            "label": "IERC2612"
+        },
+        {
+            "id": "IERC2981",
+            "type": "Protocol",
+            "label": "IERC2981"
+        },
+        {
+            "id": "IERC3156",
+            "type": "Protocol",
+            "label": "IERC3156"
+        },
+        {
+            "id": "IERC3156FlashBorrower",
+            "type": "Protocol",
+            "label": "IERC3156FlashBorrower"
+        },
+        {
+            "id": "IERC3156FlashLender",
+            "type": "Protocol",
+            "label": "IERC3156FlashLender"
+        },
+        {
+            "id": "ERC7766",
+            "type": "Protocol",
+            "label": "ERC7766"
+        },
+        {
+            "id": "IERC4626",
+            "type": "Protocol",
+            "label": "IERC4626"
+        },
+        {
+            "id": "IERC5267",
+            "type": "Protocol",
+            "label": "IERC5267"
+        },
+        {
+            "id": "IERC721Enumerable",
+            "type": "Protocol",
+            "label": "IERC721Enumerable"
+        },
+        {
+            "id": "IERC721Metadata",
+            "type": "Protocol",
+            "label": "IERC721Metadata"
+        },
+        {
+            "id": "ERC7751",
+            "type": "Protocol",
+            "label": "ERC7751"
+        },
+        {
+            "id": "IERC777",
+            "type": "Protocol",
+            "label": "IERC777"
+        },
+        {
+            "id": "IERC777Sender",
+            "type": "Protocol",
+            "label": "IERC777Sender"
+        },
+        {
+            "id": "IERC777Recipient",
+            "type": "Protocol",
+            "label": "IERC777Recipient"
+        },
+        {
+            "id": "IERC7913",
+            "type": "Protocol",
+            "label": "IERC7913"
+        },
+        {
+            "id": "IERC7913SignatureVerifier",
+            "type": "Protocol",
+            "label": "IERC7913SignatureVerifier"
+        },
+        {
+            "id": "ERC2612",
+            "type": "Protocol",
+            "label": "ERC2612"
+        },
+        {
+            "id": "ERC7572",
+            "type": "Protocol",
+            "label": "ERC7572"
+        },
+        {
+            "id": "ERC191",
+            "type": "Protocol",
+            "label": "ERC191"
+        },
+        {
+            "id": "ERC6942",
+            "type": "Protocol",
+            "label": "ERC6942"
+        },
+        {
+            "id": "ERC7390",
+            "type": "Protocol",
+            "label": "ERC7390"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "Settlement",
+            "type": "Capability",
+            "label": "Settlement"
+        },
+        {
+            "id": "EmbeddedValue",
+            "type": "Capability",
+            "label": "EmbeddedValue"
+        },
+        {
+            "id": "InvariantValidation",
+            "type": "Capability",
+            "label": "InvariantValidation"
+        },
+        {
+            "id": "Testing",
+            "type": "Capability",
+            "label": "Testing"
+        },
+        {
+            "id": "Redemption",
+            "type": "Capability",
+            "label": "Redemption"
+        },
+        {
+            "id": "GITHUB-CLAIM-00001",
+            "type": "Claim",
+            "label": "`ERC4337Utils`: in `parseValidationData`, resolve `validUntil == 0` to `type(uint48).max` and only strip `BLOCK_RANGE_FLAG` when a block range is detected. Propagates to `packValidationData`, `getValidationData`, `combineValidationData` and `PaymasterSigner`, matching the EntryPoint's behavior."
+        },
+        {
+            "id": "GITHUB-CLAIM-00002",
+            "type": "Claim",
+            "label": "`MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00003",
+            "type": "Claim",
+            "label": "`super` must be called in `_update` overrides, in `supportsInterface` overrides, and whenever an extension builds on base behavior. Skipping `super` is only acceptable for genuinely new functions that have no base implementation."
+        },
+        {
+            "id": "GITHUB-CLAIM-00004",
+            "type": "Claim",
+            "label": "`supportsInterface` always follows the pattern:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00005",
+            "type": "Claim",
+            "label": "interfaceId == type(X).interfaceId || super.supportsInterface(interfaceId)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00006",
+            "type": "Claim",
+            "label": "`scripts/minimize-pragma.js` builds a dependency graph from compiled artifacts, compiles each file against every candidate `solc`, and writes back the lowest version that compiles for that file and is compatible with all of its dependents. The script picks the syntax for you (`>=` for interfaces, `^` for implementations and libraries) and respects the `minVersionForContracts` floor (default `0.8.20`)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00007",
+            "type": "Claim",
+            "label": "Only use `unchecked` with an inline invariant comment that names the bound. The comment may be omitted only when the reason is immediately apparent from the line directly above:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00008",
+            "type": "Claim",
+            "label": "| Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |"
+        },
+        {
+            "id": "GITHUB-CLAIM-00009",
+            "type": "Claim",
+            "label": "Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it."
+        },
+        {
+            "id": "GITHUB-CLAIM-00010",
+            "type": "Claim",
+            "label": "- One sentence. No bullet points, no multi-paragraph prose. The release pipeline composes these into `CHANGELOG.md` automatically."
+        },
+        {
+            "id": "GITHUB-CLAIM-00011",
+            "type": "Claim",
+            "label": "- `address.transfer(value)`, which is like `send` but automatically propagates exceptions, and supports `.gas()`. See https://github.com/ethereum/solidity/issues/610 for more on this."
+        },
+        {
+            "id": "GITHUB-CLAIM-00012",
+            "type": "Claim",
+            "label": "- `ERC6372Utils`: Add utility library for ERC-6372 clock mode validation, supporting block number and timestamp modes with consistency checks. ([#6483](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6483))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00013",
+            "type": "Claim",
+            "label": "- `MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`. ([#6642](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6642))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00014",
+            "type": "Claim",
+            "label": "- `ERC4337Utils`: The `parseValidationData` now returns a `ValidationRange` as the last return tuple value indicating whether the `validationData` is compared against a timestamp or block number. Developers must update their code to handle this new return value (e.g. `(aggregator, validAfter, validUntil) -> (aggregator, validAfter, validUntil, range)`). ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00015",
+            "type": "Claim",
+            "label": "- `SignerWebAuthn`: The `_rawSignatureValidation` function now returns `false` when the signature is not a valid WebAuthn authentication assertion. P256 fallback is removed. Developers can add it back by overriding the function. ([#6337](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6337))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00016",
+            "type": "Claim",
+            "label": "- `ERC4337Utils`: Added variants of `packValidationData(address,uint48,uint48)` and `packValidationData(bool,uint48,uint48)` that receive a `ValidationRange` argument, could be timestamp or block number. Similarly, the `parseValidationData` now returns a `ValidationRange` too. ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00017",
+            "type": "Claim",
+            "label": "- `ERC165Checker`: Ensure the `supportsERC165` function returns false if the target reverts during the `supportsInterface(0xffffffff)` call. ([#5880](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5880))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00018",
+            "type": "Claim",
+            "label": "- `AccountERC7579`: Extension of `Account` that implements support for ERC-7579 modules of type executor, validator, and fallback handler. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00019",
+            "type": "Claim",
+            "label": "- `AccountERC7579Hooked`: Extension of `AccountERC7579` that implements support for ERC-7579 hook modules. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00020",
+            "type": "Claim",
+            "label": "- `ERC20Bridgeable`: Implementation of ERC-7802 that makes an ERC-20 compatible with crosschain bridges. ([#5735](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5735))"
+        },
+        {
+            "id": "GITHUB-CLAIM-00021",
+            "type": "Claim",
+            "label": "| Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |"
+        },
+        {
+            "id": "GITHUB-CLAIM-00022",
+            "type": "Claim",
+            "label": "Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it."
+        },
+        {
+            "id": "GITHUB-CLAIM-00023",
+            "type": "Claim",
+            "label": "A bug fix must add a minimal test that reproduces the bug, committed alongside the fix. The objective is 100% branch coverage per PR."
+        },
+        {
+            "id": "GITHUB-CLAIM-00024",
+            "type": "Claim",
+            "label": "Manual mocks live in `contracts/mocks/` (not `test/`) and mirror the `contracts/` directory layout. Write a manual mock only when `hardhat-exposed` cannot give you what you need:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00025",
+            "type": "Claim",
+            "label": "Any contract that implements ERC-165 must explicitly indicate support of"
+        },
+        {
+            "id": "GITHUB-CLAIM-00026",
+            "type": "Claim",
+            "label": "* This function call must use less than 30 000 gas."
+        },
+        {
+            "id": "GITHUB-CLAIM-00027",
+            "type": "Claim",
+            "label": "it('non-admin cannot grant role to other accounts', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00028",
+            "type": "Claim",
+            "label": "it('non-admin cannot revoke role', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00029",
+            "type": "Claim",
+            "label": "'DefaultAdminTransferCanceled', // Cancellation is always emitted since it was never accepted"
+        },
+        {
+            "id": "GITHUB-CLAIM-00030",
+            "type": "Claim",
+            "label": "if (roleId === roles.PUBLIC.id) continue; // Every address belong to public and is locked"
+        },
+        {
+            "id": "GITHUB-CLAIM-00031",
+            "type": "Claim",
+            "label": "if (roleId === roles.ADMIN.id) continue; // Admin set during construction and is locked"
+        },
+        {
+            "id": "GITHUB-CLAIM-00032",
+            "type": "Claim",
+            "label": ".to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedRole')"
+        },
+        {
+            "id": "GITHUB-CLAIM-00033",
+            "type": "Claim",
+            "label": ".to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedFunction')"
+        },
+        {
+            "id": "GITHUB-CLAIM-00034",
+            "type": "Claim",
+            "label": "it('cannot execute a setAuthority call when a target admin delay is set', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00035",
+            "type": "Claim",
+            "label": "cannot update directly - there is a delay"
+        },
+        {
+            "id": "GITHUB-CLAIM-00036",
+            "type": "Claim",
+            "label": "cannot bypass via execute either - targetAdminDelay is enforced for setAuthority"
+        },
+        {
+            "id": "GITHUB-CLAIM-00037",
+            "type": "Claim",
+            "label": "verify that accountA cannot accept ownership anymore"
+        },
+        {
+            "id": "GITHUB-CLAIM-00038",
+            "type": "Claim",
+            "label": "domain cannot be fetched using getDomain(mock) before the mock is deployed"
+        },
+        {
+            "id": "GITHUB-CLAIM-00039",
+            "type": "Claim",
+            "label": "it('cannot set weight to non-existent signer', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00040",
+            "type": "Claim",
+            "label": "it('cannot set weight to 0', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00041",
+            "type": "Claim",
+            "label": ").to.be.revertedWithCustomError(this.mock, 'ERC7579CannotDecodeFallbackData');"
+        },
+        {
+            "id": "GITHUB-CLAIM-00042",
+            "type": "Claim",
+            "label": "it('prices the postOp unused-gas penalty so an inflated paymasterPostOpGasLimit cannot drain the paymaster', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00043",
+            "type": "Claim",
+            "label": "the inflated postOp limit. The token charge (tokenPrice = 2) must cover it, i.e. the user pays for the"
+        },
+        {
+            "id": "GITHUB-CLAIM-00044",
+            "type": "Claim",
+            "label": "it('rejects a guaranteed op whose paymasterPostOpGasLimit cannot cover the refund', async function () {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00045",
+            "type": "Claim",
+            "label": "Guarantor must propagate the reduced value returned by super, otherwise the postOp context"
+        },
+        {
+            "id": "GITHUB-CLAIM-00046",
+            "type": "Claim",
+            "label": "(calldata-padded with zeros) match the marker, so a 2-byte initCode must bind the delegate too."
+        },
+        {
+            "id": "GITHUB-CLAIM-00047",
+            "type": "Claim",
+            "label": "18 zeros, so a nonzero tail makes this a regular factory deployment. The digest must therefore"
+        },
+        {
+            "id": "GITHUB-CLAIM-00048",
+            "type": "Claim",
+            "label": "assertEq(hashA, hashB, \"digest must not bind a delegate for a non-EIP-7702 initCode\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00049",
+            "type": "Claim",
+            "label": "assertNotEq(hashA, hashB, \"digest must bind the effective EIP-7702 delegate\");"
+        },
+        {
+            "id": "GITHUB-CLAIM-00050",
+            "type": "Claim",
+            "label": "Parts of this test file are adapted from Adam Egyed (@adamegyed) proof of concept available at:"
+        },
+        {
+            "id": "GITHUB-CLAIM-00051",
+            "type": "Claim",
+            "label": "Repository contains README research context."
+        },
+        {
+            "id": "GITHUB-CLAIM-00052",
+            "type": "Claim",
+            "label": "Repository contains contract or interface material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00053",
+            "type": "Claim",
+            "label": "Repository contains test evidence."
+        },
+        {
+            "id": "GITHUB-CLAIM-00054",
+            "type": "Claim",
+            "label": "Repository contains documentation material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00055",
+            "type": "Claim",
+            "label": "Repository contains invariant-like statements."
+        },
+        {
+            "id": "GITHUB-CLAIM-00056",
+            "type": "Claim",
+            "label": "Repository exposes 2718 executable test or invariant target(s)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00057",
+            "type": "Claim",
+            "label": "Repository exposes both Foundry and Hardhat configuration."
+        },
+        {
+            "id": "GITHUB-CLAIM-00058",
+            "type": "Claim",
+            "label": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting."
+        },
+        {
+            "id": "GITHUB-CLAIM-00059",
+            "type": "Claim",
+            "label": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00060",
+            "type": "Claim",
+            "label": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement."
+        },
+        {
+            "id": "GITHUB-CLAIM-00061",
+            "type": "Claim",
+            "label": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety."
+        },
+        {
+            "id": "GITHUB-CLAIM-00062",
+            "type": "Claim",
+            "label": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation."
+        },
+        {
+            "id": "GITHUB-CLAIM-00063",
+            "type": "Claim",
+            "label": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value."
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7579",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC2771",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7739",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC4337",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7913",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1271",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7786",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6909ContentURI",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6909TokenSupply",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6909Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC6909",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7201",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC6093",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC20Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579Module",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC4626",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1967",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC6372",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC4337",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC3009",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1155Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7802",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7702",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7930",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7786",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7751",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7821",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7821",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6909",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1363",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1967",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1167",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7674",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC721Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC777",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1820",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC1822",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC5267",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC20Upgradeable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC5313",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC4906",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC4906",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC20Permit",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC2981",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC712",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC3156",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC2098",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1820Registry",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC6900",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1271",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579Validator",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579Execution",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579AccountConfig",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579ModuleConfig",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7579Hook",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7562",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1155Errors",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6093",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC721Errors",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7802",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7786GatewaySource",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7786Recipient",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC5805",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC6372",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC5805",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1822",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1822Proxiable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC3009",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC3009Cancel",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC20Errors",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7674",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1155MetadataURI",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1363",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1363Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1363Spender",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC1820Implementer",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC2309",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC2309",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC2612",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC2981",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC3156",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC3156FlashBorrower",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC3156FlashLender",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7766",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC4626",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC5267",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC721Enumerable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC721Metadata",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7751",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC777",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC777Sender",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC777Recipient",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7913",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "IERC7913SignatureVerifier",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC2612",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7572",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC191",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC6942",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "ERC7390",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "Settlement",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "EmbeddedValue",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "InvariantValidation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "Testing",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "Redemption",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00002",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00003",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00004",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00005",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00006",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00007",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00008",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00009",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00010",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00011",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00012",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00013",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00014",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00015",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00016",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00017",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00018",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00019",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00020",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00021",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00022",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00023",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00024",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00025",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00026",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00027",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00028",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00029",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00030",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00031",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00032",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00033",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00034",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00035",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00036",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00037",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00038",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00039",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00040",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00041",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00042",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00043",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00044",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00045",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00046",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00047",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00048",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00049",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00050",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00051",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00052",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00053",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00054",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00055",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00056",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00057",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00058",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00059",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00060",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00061",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00062",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        },
+        {
+            "from": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+            "to": "GITHUB-CLAIM-00063",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+        }
+    ]
+}

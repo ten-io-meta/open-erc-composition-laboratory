@@ -1,0 +1,728 @@
+{
+    "knowledgeBaseId": "KB-2026-09-03T23:17:16.012Z",
+    "generatedAt": "2026-09-03T23:17:16.012Z",
+    "entries": [
+        {
+            "entryId": "KNOW-00001",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Standardization->ENABLES->Interoperability",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Standardization->ENABLES->Interoperability",
+                "validation:HYP-00001",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00002",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Authority->CONSTRAINS->Transfer",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Authority->CONSTRAINS->Transfer",
+                "validation:HYP-00002",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00003",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Reservation->CONSTRAINS->Accounting",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Reservation->CONSTRAINS->Accounting",
+                "validation:HYP-00003",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00004",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "InvariantValidation->VALIDATES->Accounting",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:InvariantValidation->VALIDATES->Accounting",
+                "validation:HYP-00004",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00005",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Ownership->CONSTRAINS->Upgradeability",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Ownership->CONSTRAINS->Upgradeability",
+                "validation:HYP-00005",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00006",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP2612->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP2612->SUPPORTS->Standardization",
+                "validation:HYP-00006",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00007",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC721->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC721->SUPPORTS->Standardization",
+                "validation:HYP-00007",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00008",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC223->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC223->SUPPORTS->Standardization",
+                "validation:HYP-00008",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00009",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC777->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC777->SUPPORTS->Standardization",
+                "validation:HYP-00009",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00010",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP777->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP777->SUPPORTS->Standardization",
+                "validation:HYP-00010",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00011",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP721->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP721->SUPPORTS->Standardization",
+                "validation:HYP-00011",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00012",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC165->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC165->SUPPORTS->Standardization",
+                "validation:HYP-00012",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00013",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP165->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP165->SUPPORTS->Standardization",
+                "validation:HYP-00013",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00014",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC1155->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC1155->SUPPORTS->Standardization",
+                "validation:HYP-00014",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00015",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP1155->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP1155->SUPPORTS->Standardization",
+                "validation:HYP-00015",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00016",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC1820->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC1820->SUPPORTS->Standardization",
+                "validation:HYP-00016",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00017",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP1820->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP1820->SUPPORTS->Standardization",
+                "validation:HYP-00017",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00018",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC4524->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC4524->SUPPORTS->Standardization",
+                "validation:HYP-00018",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00019",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP4524->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP4524->SUPPORTS->Standardization",
+                "validation:HYP-00019",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00020",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC1363->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC1363->SUPPORTS->Standardization",
+                "validation:HYP-00020",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00021",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP1363->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP1363->SUPPORTS->Standardization",
+                "validation:HYP-00021",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00022",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC2612->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC2612->SUPPORTS->Standardization",
+                "validation:HYP-00022",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00023",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC4626->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC4626->SUPPORTS->Standardization",
+                "validation:HYP-00023",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00024",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP4626->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP4626->SUPPORTS->Standardization",
+                "validation:HYP-00024",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00025",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC20->SUPPORTS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC20->SUPPORTS->Standardization",
+                "validation:HYP-00025",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00026",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC20->ENABLES->FungibleAccounting",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC20->ENABLES->FungibleAccounting",
+                "validation:HYP-00026",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00027",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC20->SUPPORTS->Transfer",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC20->SUPPORTS->Transfer",
+                "validation:HYP-00027",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00028",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC721->ENABLES->Ownership",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC721->ENABLES->Ownership",
+                "validation:HYP-00028",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00029",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "ERC721->SUPPORTS->Transfer",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:ERC721->SUPPORTS->Transfer",
+                "validation:HYP-00029",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00030",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Mint->ENABLES->Supply",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Mint->ENABLES->Supply",
+                "validation:HYP-00030",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00031",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "SignatureAuthorization->ENABLES->Authority",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:SignatureAuthorization->ENABLES->Authority",
+                "validation:HYP-00031",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00032",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "EIP712->SUPPORTS->SignatureAuthorization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:EIP712->SUPPORTS->SignatureAuthorization",
+                "validation:HYP-00032",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00033",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Interoperability->SUPPORTS->Composition",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Interoperability->SUPPORTS->Composition",
+                "validation:HYP-00033",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00034",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Specification->ENABLES->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:Specification->ENABLES->Standardization",
+                "validation:HYP-00034",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00035",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "SecurityConsiderations->CONSTRAINS->Standardization",
+            "protocolPair": "EIP2612+ERC721",
+            "observations": 1,
+            "averageConfidence": 25,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "learning:SecurityConsiderations->CONSTRAINS->Standardization",
+                "validation:HYP-00035",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "LEARNING",
+            "timestamp": "2026-09-03T23:17:16.012Z"
+        },
+        {
+            "entryId": "KNOW-00036",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "Reservation:CONSTRAINS:Accounting",
+            "protocolPair": "Reservation->Accounting",
+            "observations": 1,
+            "averageConfidence": 76,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:16.013Z"
+        },
+        {
+            "entryId": "KNOW-00037",
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "relation": "InvariantValidation:VALIDATES:Accounting",
+            "protocolPair": "InvariantValidation->Accounting",
+            "observations": 1,
+            "averageConfidence": 78,
+            "confirmed": 0,
+            "partial": 1,
+            "unsupported": 0,
+            "status": "EMERGING",
+            "evidence": [
+                "machine-reasoning",
+                "inference:InvariantValidation:VALIDATES:Accounting",
+                "capability:InvariantValidation",
+                "capability:Accounting",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH"
+            ],
+            "generatedBy": "MACHINE_REASONING",
+            "timestamp": "2026-09-03T23:17:16.013Z"
+        }
+    ],
+    "statistics": {
+        "entries": 37,
+        "totalObservations": 37,
+        "emerging": 37,
+        "supported": 0,
+        "validated": 0,
+        "canonical": 0,
+        "rejected": 0
+    },
+    "processedSources": [
+        {
+            "sourceId": "GITHUB-CRYTIC-SLITHER",
+            "processedAt": "2026-09-03T23:17:16.028Z"
+        }
+    ]
+}

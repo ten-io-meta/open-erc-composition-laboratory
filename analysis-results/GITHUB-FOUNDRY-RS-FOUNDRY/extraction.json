@@ -1,0 +1,485 @@
+{
+    "success": true,
+    "extraction": {
+        "sourceId": "GITHUB-FOUNDRY-RS-FOUNDRY",
+        "extractedAt": "2026-08-23T13:09:26.150Z",
+        "protocols": [
+            "IERC20ToBytes32Map",
+            "IERC20",
+            "IERC20ToBytes32MapEntry",
+            "ERC20",
+            "IERC721",
+            "IERC165",
+            "ERC1155",
+            "ERC165",
+            "ERC7201",
+            "IERC721Empty",
+            "IERC20Permit",
+            "ERC1967",
+            "IERC4626",
+            "IERC712View",
+            "IERC1271",
+            "ERC721",
+            "IERC20Metadata",
+            "IERC3156FlashBorrower",
+            "IERC20Aux",
+            "IERC20Incorrect",
+            "IERC20Correct",
+            "IERC20NamedCorrect",
+            "IERC721Incorrect",
+            "IERC721Correct",
+            "IERC721NamedCorrect",
+            "IERC20Like",
+            "IERC20LikeMetadata",
+            "ERC6909",
+            "IERC20Wrapper",
+            "IERC721Receiver",
+            "IERC165Upgradeable",
+            "IERC721Upgradeable",
+            "IERC20Upgradeable",
+            "IERC20MetadataUpgradeable",
+            "IERC3156FlashLender",
+            "ERC3156",
+            "IERC20Indexable",
+            "ERC4494",
+            "IERC4494",
+            "IERC4494Alternative",
+            "ERC1271",
+            "ERC2981",
+            "IERC1155",
+            "IERC1155Receiver",
+            "IERC173",
+            "ERC173",
+            "IERC1155Internal",
+            "IERC2612",
+            "IERC20Internal",
+            "IERC1155Enumerable"
+        ],
+        "capabilities": [
+            "Reservation",
+            "Accounting",
+            "EmbeddedValue",
+            "InvariantValidation",
+            "Testing",
+            "Redemption"
+        ],
+        "claims": [
+            {
+                "claimId": "GITHUB-CLAIM-00001",
+                "text": "Made Anvil state dumps deterministic by sorting blocks, transactions, and historical state.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00002",
+                "text": "Kept fork endpoint identity validation strict and atomic during resets and RPC URL replacement.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00003",
+                "text": "Updated Foundry's Ethereum, Optimism, and Tempo EVM integrations to revm 42, including Amsterdam state-gas accounting and the latest hardfork mappings.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00004",
+                "text": "Added optional Touch ID-assisted authentication for encrypted Cast keystores used by Cast and Forge on supported macOS builds. Packaged Apple Silicon releases enable Touch ID, while the packaged Intel macOS artifact retains its previous deployment target without the `touch-id` feature. Authentication may fall back to the macOS login password, and explicit keystore passwords remain supported. Cast can report, enroll, and remove Touch ID enrollment for existing keystores. Wallet listings hide recognized sidecars while preserving and deterministically ordering unknown files.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00005",
+                "text": "Treat zero invariant time and block delay limits as disabled instead of panicking.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00006",
+                "text": "Reduced gas report runtime and peak memory use for fuzz and invariant tests.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00007",
+                "text": "Fixed persistent trace-cmp values in the fuzz dictionary being dropped when state values are reverted between invariant runs.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00008",
+                "text": "PR validation is deterministic and independent of the advisory AI suggestion. It rejects",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00009",
+                "text": "Fixed persisted failures causing secondary invariants to be skipped in later campaigns.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00010",
+                "text": "Reduced symbolic model validation overhead by caching shared expression results.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00011",
+                "text": "Unified stateless and invariant fuzz execution behind a shared campaign lifecycle, ensuring rejected",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00012",
+                "text": "invariant assumptions do not advance the block timestamp or number.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00013",
+                "text": "Unified stateless and invariant fuzz input generation behind a shared sequence pipeline.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00014",
+                "text": "For fuzz or invariant corpus coverage work, `forge test --showmap-out <DIR>`",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00015",
+                "text": "not include validation/testing boilerplate such as \"Validated with\", \"Tested",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00016",
+                "text": "- For invariant or campaign-style benchmarking, use `foundry-scfuzzbench`; this",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00017",
+                "text": "is the local equivalent of the `derek bench invariant`/`decofe bench",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00018",
+                "text": "invariant` PR flow, which publishes a `scfuzzbench` event.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00019",
+                "text": "Do not use `foundry-bench` for long-running invariant campaign quality,",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00020",
+                "text": "example symbolic solver queries, reported solver time, invariant throughput, or",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00021",
+                "text": "CARGO_TERM_COLOR: always",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00022",
+                "text": "run: cargo nextest run --locked --profile flaky --no-fail-fast",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00023",
+                "text": "# Use a unique key for each run to always update the cache.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00024",
+                "text": "cargo nextest run --locked \"${args[@]}\"",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00025",
+                "text": "config: multiline_func_header = \"params_always\"",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00026",
+                "text": "always returns true",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00027",
+                "text": "require(a > 0, \"a must be positive\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00028",
+                "text": "require(b > 0, \"b must be positive\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00029",
+                "text": "require(value > 0, \"ExternalMathLib: value must be positive\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00030",
+                "text": "require(value > 0, \"InternalMathLib: value must be positive\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00031",
+                "text": "require(value > 0, \"Value must be greater than zero\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00032",
+                "text": "require(value > 0, \"Value must be positive\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00033",
+                "text": "/ Ensure that you cannot use expectCall with an expectRevert.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00034",
+                "text": "This should fail, as this event is never emitted",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00035",
+                "text": "/ While we can ignore static calls, we cannot ignore normal calls.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00036",
+                "text": "Regression: must fail because 0xdead is not the actual reverter when a",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00037",
+                "text": "Regression: must fail because the reverter address argument is enforced",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00038",
+                "text": "Regression: must fail when the innermost reverting frame is a nested",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00039",
+                "text": "the outer address must fail.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00040",
+                "text": "assertGt(uint256(orderId), 0, \"order id must be non-zero\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00041",
+                "text": "assertEq(quote.allowance(payer, STABLECOIN_DEX), 0, \"allowance must remain zero\");",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00042",
+                "text": "Permit on a side branch must not suppress the fall-through path.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00043",
+                "text": "Guard scoped to one branch must not leak.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00044",
+                "text": "Sink runs before the equality short-circuits — the guard cannot retroactively",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00045",
+                "text": "Modifier guard placed *after* `_;` cannot be hoisted.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00046",
+                "text": "State-var token reassigned after permit must invalidate the record.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00047",
+                "text": "State-var owner reassigned after permit must invalidate the record.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00048",
+                "text": "`immutable` state vars can chain: storage cannot be rewritten post-deploy.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00049",
+                "text": "ERC721 same-named methods must NOT trigger this lint.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00050",
+                "text": "Flash-loan call on the RHS of `&&` may not execute; its repayment must not leak.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00051",
+                "text": "Repository contains README research context.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00052",
+                "text": "Repository contains contract or interface material.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00053",
+                "text": "Repository contains test evidence.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00054",
+                "text": "Repository contains documentation material.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00055",
+                "text": "Repository contains invariant-like statements.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00056",
+                "text": "Repository toolchain could not be determined.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00057",
+                "text": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00058",
+                "text": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00059",
+                "text": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00060",
+                "text": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00061",
+                "text": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            }
+        ],
+        "invariants": [],
+        "relationships": [
+            {
+                "relationshipId": "GITHUB-REL-00001",
+                "fromCapability": "EmbeddedValue",
+                "toCapability": "Reservation",
+                "relation": "ENABLES",
+                "reason": "GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00002",
+                "fromCapability": "Reservation",
+                "toCapability": "Accounting",
+                "relation": "PROTECTS",
+                "reason": "GitHub repository claims indicate that reservation separates locked value from available value.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00003",
+                "fromCapability": "InvariantValidation",
+                "toCapability": "Accounting",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains invariant-like statements related to accounting safety.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00004",
+                "fromCapability": "Testing",
+                "toCapability": "InvariantValidation",
+                "relation": "VALIDATES",
+                "reason": "GitHub repository contains test evidence supporting invariant validation.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            },
+            {
+                "relationshipId": "GITHUB-REL-00005",
+                "fromCapability": "Redemption",
+                "toCapability": "EmbeddedValue",
+                "relation": "CONSUMES",
+                "reason": "GitHub repository claims indicate redemption consumes embedded value.",
+                "evidence": "GITHUB-FOUNDRY-RS-FOUNDRY",
+                "confidence": 70
+            }
+        ],
+        "errors": []
+    },
+    "errors": []
+}

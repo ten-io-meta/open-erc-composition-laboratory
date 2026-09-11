@@ -1,0 +1,33 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.319Z",
+    "refinedHypotheses": [
+        {
+            "refinedHypothesisId": "REFINED-HYP-00001",
+            "sourceQuestionId": "QUESTION-00001",
+            "sourceType": "THEORY",
+            "originalQuestion": "What additional independent evidence would strengthen \"Reservation-Constrained Accounting Theory\"?",
+            "refinedStatement": "Hypothesis requires stronger independent evidence for \"Reservation-Constrained Accounting Theory\".",
+            "action": "STRENGTHEN",
+            "priority": "MEDIUM",
+            "rationale": "Generated from research question QUESTION-00001: Reservation appears to constrain accounting boundaries and reduce unsafe settlement ambiguity across independent sources."
+        },
+        {
+            "refinedHypothesisId": "REFINED-HYP-00002",
+            "sourceQuestionId": "QUESTION-00002",
+            "sourceType": "LOW_CONFIDENCE",
+            "originalQuestion": "What evidence is needed to move \"Reservation appears to constrain Accounting across 2 observed source identities.\" beyond preliminary confidence?",
+            "refinedStatement": "Hypothesis requires additional evidence to move \"Reservation appears to constrain Accounting across 2 observed source identities.\" beyond preliminary confidence.",
+            "action": "INVESTIGATE",
+            "priority": "MEDIUM",
+            "rationale": "Generated from research question QUESTION-00002: Calculated confidence is 82 with 0 independent sources."
+        }
+    ],
+    "statistics": {
+        "total": 2,
+        "refine": 0,
+        "split": 0,
+        "strengthen": 1,
+        "investigate": 1
+    },
+    "errors": []
+}

@@ -1,0 +1,69 @@
+{
+    "graphId": "GRAPH-GITHUB-TEST-0001",
+    "discoveredAt": "2026-07-06T18:33:06.424Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-TEST-0001",
+        "generatedAt": "2026-07-06T18:33:06.424Z",
+        "capabilities": [
+            {
+                "capabilityId": "EmbeddedValue",
+                "label": "EmbeddedValue",
+                "protocols": [
+                    "ERC8060"
+                ],
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ]
+            },
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [
+                    "IERC8060Reservable"
+                ],
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ]
+            }
+        ],
+        "relationships": [
+            {
+                "fromCapability": "EmbeddedValue",
+                "toCapability": "Reservation",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ],
+                "confidence": 75
+            },
+            {
+                "fromCapability": "EmbeddedValue",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ],
+                "confidence": 75
+            },
+            {
+                "fromCapability": "Reservation",
+                "toCapability": "Accounting",
+                "relation": "CO_OCCURS_WITH",
+                "evidence": [
+                    "GITHUB-TEST-0001"
+                ],
+                "confidence": 75
+            }
+        ]
+    }
+}

@@ -1,0 +1,405 @@
+{
+    "graphId": "GRAPH-DOI-0001",
+    "generatedAt": "2026-07-02T14:14:59.296Z",
+    "nodes": [
+        {
+            "id": "DOI-0001",
+            "type": "ResearchSource",
+            "label": "DOI-0001"
+        },
+        {
+            "id": "ERC8004",
+            "type": "Protocol",
+            "label": "ERC8004"
+        },
+        {
+            "id": "ERC8217",
+            "type": "Protocol",
+            "label": "ERC8217"
+        },
+        {
+            "id": "ERC8281",
+            "type": "Protocol",
+            "label": "ERC8281"
+        },
+        {
+            "id": "ERC8299",
+            "type": "Protocol",
+            "label": "ERC8299"
+        },
+        {
+            "id": "ERC8001",
+            "type": "Protocol",
+            "label": "ERC8001"
+        },
+        {
+            "id": "ERC8312",
+            "type": "Protocol",
+            "label": "ERC8312"
+        },
+        {
+            "id": "ERC8301",
+            "type": "Protocol",
+            "label": "ERC8301"
+        },
+        {
+            "id": "ERC8263",
+            "type": "Protocol",
+            "label": "ERC8263"
+        },
+        {
+            "id": "ERC8274",
+            "type": "Protocol",
+            "label": "ERC8274"
+        },
+        {
+            "id": "ReceiptOS",
+            "type": "Protocol",
+            "label": "ReceiptOS"
+        },
+        {
+            "id": "ERC8275",
+            "type": "Protocol",
+            "label": "ERC8275"
+        },
+        {
+            "id": "ERC8060",
+            "type": "Protocol",
+            "label": "ERC8060"
+        },
+        {
+            "id": "IERC8060Reservable",
+            "type": "Protocol",
+            "label": "IERC8060Reservable"
+        },
+        {
+            "id": "AgentIdentity",
+            "type": "Capability",
+            "label": "AgentIdentity"
+        },
+        {
+            "id": "IdentityBinding",
+            "type": "Capability",
+            "label": "IdentityBinding"
+        },
+        {
+            "id": "InputProvenance",
+            "type": "Capability",
+            "label": "InputProvenance"
+        },
+        {
+            "id": "SpineCommitment",
+            "type": "Capability",
+            "label": "SpineCommitment"
+        },
+        {
+            "id": "Authority",
+            "type": "Capability",
+            "label": "Authority"
+        },
+        {
+            "id": "Cursor",
+            "type": "Capability",
+            "label": "Cursor"
+        },
+        {
+            "id": "Workflow",
+            "type": "Capability",
+            "label": "Workflow"
+        },
+        {
+            "id": "Anchoring",
+            "type": "Capability",
+            "label": "Anchoring"
+        },
+        {
+            "id": "Verification",
+            "type": "Capability",
+            "label": "Verification"
+        },
+        {
+            "id": "Eligibility",
+            "type": "Capability",
+            "label": "Eligibility"
+        },
+        {
+            "id": "Settlement",
+            "type": "Capability",
+            "label": "Settlement"
+        },
+        {
+            "id": "EmbeddedValue",
+            "type": "Capability",
+            "label": "EmbeddedValue"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "DOI-0001-CLAIM-0001",
+            "type": "Claim",
+            "label": "Experimental research on deterministic protocol composition and interoperability for Ethereum. Research validation suite for deterministic protocol composition around ERC-8060 Reservable and interoperable Ethereum protocol layers."
+        }
+    ],
+    "edges": [
+        {
+            "from": "DOI-0001",
+            "to": "ERC8004",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8217",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8281",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8299",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8001",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8312",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8301",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8263",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8274",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ReceiptOS",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8275",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "ERC8060",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "IERC8060Reservable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "AgentIdentity",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "IdentityBinding",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "InputProvenance",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "SpineCommitment",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Authority",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Cursor",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Workflow",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Anchoring",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Verification",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Eligibility",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Settlement",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "EmbeddedValue",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8004",
+            "to": "AgentIdentity",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8217",
+            "to": "IdentityBinding",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8281",
+            "to": "InputProvenance",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8299",
+            "to": "SpineCommitment",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8001",
+            "to": "Authority",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8312",
+            "to": "Cursor",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8301",
+            "to": "Workflow",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8263",
+            "to": "Anchoring",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8274",
+            "to": "Verification",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ReceiptOS",
+            "to": "Eligibility",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8275",
+            "to": "Settlement",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "ERC8060",
+            "to": "EmbeddedValue",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Reservation",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Accounting",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "DOI-0001"
+        },
+        {
+            "from": "DOI-0001",
+            "to": "DOI-0001-CLAIM-0001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "DOI"
+        }
+    ]
+}

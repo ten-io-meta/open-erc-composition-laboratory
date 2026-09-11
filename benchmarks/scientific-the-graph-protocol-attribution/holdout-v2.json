@@ -1,0 +1,171 @@
+[
+  {
+    "caseId": "V2-POSITIVE-8060-CONFORMS",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# This schema conforms to ERC-8060 and indexes redeemable value."
+  },
+  {
+    "caseId": "V2-POSITIVE-8060-COMPACT-IMPLEMENTATION",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8060",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8060 implementation data is indexed here."
+  },
+  {
+    "caseId": "V2-POSITIVE-8301-IMPLEMENTS",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "# This deployment implements ERC-8301 workflow execution."
+  },
+  {
+    "caseId": "V2-POSITIVE-8301-COMPACT-STANDARD",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8301",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8301 is the indexed workflow standard."
+  },
+  {
+    "caseId": "V2-POSITIVE-8312-CURSOR",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# Cursor records defined by ERC-8312 are indexed."
+  },
+  {
+    "caseId": "V2-POSITIVE-8312-COMPACT-CONFORMS",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8312",
+    "expected": "POSITIVE",
+    "schemaText": "# This data model conforms to ERC8312 cursor semantics."
+  },
+  {
+    "caseId": "V2-POSITIVE-8274-SUPPORTS",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# This subgraph supports ERC-8274 verification state."
+  },
+  {
+    "caseId": "V2-POSITIVE-8274-COMPACT-IMPLEMENTATION",
+    "category": "POSITIVE_AFFIRMATIVE",
+    "protocolId": "ERC-8274",
+    "expected": "POSITIVE",
+    "schemaText": "# ERC8274 implementation entities are indexed."
+  },
+
+  {
+    "caseId": "V2-NEGATIVE-FAILS-TO-IMPLEMENT",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment fails to implement ERC-8060."
+  },
+  {
+    "caseId": "V2-NEGATIVE-WITHOUT-SUPPORT",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# This deployment operates without ERC-8060 support."
+  },
+  {
+    "caseId": "V2-NEGATIVE-NOT-AN-IMPLEMENTATION",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# This is not an ERC-8301 implementation."
+  },
+  {
+    "caseId": "V2-NEGATIVE-SUPPORT-DISABLED",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8301 support is intentionally disabled in this schema."
+  },
+  {
+    "caseId": "V2-NEGATIVE-MERELY-MENTIONS",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# This comment merely mentions ERC-8312."
+  },
+  {
+    "caseId": "V2-NEGATIVE-COMMENTS-ONLY",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8312 appears only in comments; no protocol entities are indexed."
+  },
+  {
+    "caseId": "V2-NEGATIVE-OUTSIDE-SCOPE",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8274 is outside the scope of this schema."
+  },
+  {
+    "caseId": "V2-NEGATIVE-UNSUPPORTED",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8274 is unsupported by this deployment."
+  },
+  {
+    "caseId": "V2-NEGATIVE-RATHER-THAN",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema targets ERC-9999 rather than ERC-8060."
+  },
+  {
+    "caseId": "V2-NEGATIVE-COMPARISON-PURPOSES",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8301 is mentioned for comparison purposes only."
+  },
+  {
+    "caseId": "V2-NEGATIVE-PREVIOUS-STANDARD",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8312 was the previous standard; this schema indexes ERC-9999."
+  },
+  {
+    "caseId": "V2-NEGATIVE-EXAMPLE-ONLY",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# The token ERC-8274 is shown as an example only."
+  },
+  {
+    "caseId": "V2-NEGATIVE-SECURITY-NOTE",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8060",
+    "expected": "NEGATIVE",
+    "schemaText": "# Security note references ERC-8060 but the deployment indexes another standard."
+  },
+  {
+    "caseId": "V2-NEGATIVE-PLANNED-NOT-PRESENT",
+    "category": "NEGATION_NEW",
+    "protocolId": "ERC-8301",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8301 support is planned but not present in this deployment."
+  },
+  {
+    "caseId": "V2-NEGATIVE-TEST-FIXTURE-ONLY",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8312",
+    "expected": "NEGATIVE",
+    "schemaText": "# ERC-8312 appears only in a compatibility test fixture."
+  },
+  {
+    "caseId": "V2-NEGATIVE-MIGRATION-FROM",
+    "category": "REFERENCE_NEW",
+    "protocolId": "ERC-8274",
+    "expected": "NEGATIVE",
+    "schemaText": "# This schema documents migration from ERC-8274 to ERC-9999."
+  }
+]

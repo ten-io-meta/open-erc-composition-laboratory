@@ -1,0 +1,32 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.321Z",
+    "validations": [
+        {
+            "validationId": "SCIENTIFIC-VALIDATION-00001",
+            "theoryId": "THEORY-00001",
+            "theoryTitle": "Reservation-Constrained Accounting Theory",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "theoryConfidence": 49,
+            "supportingEvidence": 1,
+            "supportingEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "contradictoryEvidence": 0,
+            "contradictoryEvidenceIds": [],
+            "independentSources": 0,
+            "validationScore": 53,
+            "status": "INCONCLUSIVE",
+            "challenges": [],
+            "explanation": "Theory evaluated using 1 supporting edge(s), 0 explicitly established independent source(s), and 0 contradictory finding(s). Validation score: 53. Result: INCONCLUSIVE."
+        }
+    ],
+    "statistics": {
+        "total": 1,
+        "validated": 0,
+        "challenged": 0,
+        "rejected": 0,
+        "inconclusive": 1,
+        "averageValidationScore": 53
+    },
+    "errors": []
+}

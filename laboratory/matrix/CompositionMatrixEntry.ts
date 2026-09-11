@@ -1,25 +1,25 @@
 export interface CompositionMatrixEntry {
-
     protocolA: string;
-
     protocolB: string;
 
     occurrences: number;
-
     successfulCompositions: number;
 
-    compatibility: number;
-
-    eligibility: boolean;
+    experimentIds: string[];
 
     relationshipConfidence: number;
 
+    compatibility: number | null;
+    stabilityScore: number | null;
+    safetyScore: number | null;
+
+    risk:
+        | "Low"
+        | "Medium"
+        | "High"
+        | "Unknown";
+
+    eligibility: boolean;
+
     evidence: number;
-
-    stabilityScore: number;
-
-    safetyScore: number;
-
-    risk: "Low" | "Medium" | "High";
-
 }

@@ -1,0 +1,61 @@
+{
+    "graphId": "GRAPH-DOI-0001",
+    "discoveredAt": "2026-09-03T23:17:15.755Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-DOI-0001-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 13 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "ERC8004",
+                "ERC8217",
+                "ERC8281",
+                "ERC8299",
+                "ERC8001",
+                "ERC8312",
+                "ERC8301",
+                "ERC8263",
+                "ERC8274",
+                "ReceiptOS",
+                "ERC8275",
+                "ERC8060",
+                "IERC8060Reservable"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-DOI-0001-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 14 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-DOI-0001-CLAIM-DOI-0001-CLAIM-0001",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Experimental research on deterministic protocol composition and interoperability for Ethereum. Research validation suite for deterministic protocol composition around ERC-8060 Reservable and interoperable Ethereum protocol layers.",
+            "evidence": [
+                "DOI-0001-CLAIM-0001"
+            ],
+            "confidence": 100
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "generatedAt": "2026-09-03T23:18:00.810Z",
+    "strategies": [
+        {
+            "strategyId": "STRATEGY-00001",
+            "objective": "Additional evidence is likely to strengthen: Low-confidence conclusion: Reservation appears to constrain Accounting across 2 observed source identities.",
+            "recommendedAction": "Ingest the highest-value repository candidate and rerun OECL V2.",
+            "targetRepositories": [
+                "transmissions11/solmate",
+                "Vectorized/solady",
+                "thirdweb-dev/contracts"
+            ],
+            "expectedKnowledgeGain": 60,
+            "priority": "MEDIUM",
+            "rationale": "Prediction is 60% confident. No repository history available yet."
+        }
+    ],
+    "statistics": {
+        "strategies": 1,
+        "high": 0,
+        "medium": 1,
+        "low": 0
+    },
+    "errors": []
+}

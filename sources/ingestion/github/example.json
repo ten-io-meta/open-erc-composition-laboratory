@@ -1,0 +1,24 @@
+{
+    "sourceId": "GITHUB-TEST-0001",
+    "repository": "ten-io-meta/erc8060-reservable",
+    "title": "IERC8060 Reservable",
+    "description": "Reference implementation of reservable accounting for ERC-8060.",
+    "branch": "main",
+    "protocols": [
+        "ERC8060",
+        "IERC8060Reservable"
+    ],
+    "capabilities": [
+        "EmbeddedValue",
+        "Reservation",
+        "Accounting"
+    ],
+    "claims": [
+        "Reservation constrains accounting.",
+        "Embedded value enables deterministic settlement."
+    ],
+    "tags": [
+        "Ethereum",
+        "ERC"
+    ]
+}

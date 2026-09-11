@@ -1,17 +1,14 @@
+import type { ResearchMemoryTimeline } from "./ResearchMemoryTimeline.js";
+import type { ResearchMemoryStatistics } from "./ResearchMemoryStatistics.js";
+
 export interface ResearchMemory {
 
-    campaigns: any[];
+    memoryId: string;
 
-    totalCampaigns: number;
+    generatedAt: string;
 
-    totalScenarios: number;
+    timelines: ResearchMemoryTimeline[];
 
-    totalPassed: number;
-
-    totalFailed: number;
-
-    protocolCoverage: Record<string, number>;
-
-    hypothesisCoverage: number;
+    statistics: ResearchMemoryStatistics;
 
 }

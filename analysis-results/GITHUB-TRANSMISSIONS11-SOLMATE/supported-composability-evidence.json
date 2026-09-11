@@ -1,0 +1,42 @@
+{
+    "generatedAt": "2026-09-03T23:17:58.465Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC20",
+            "protocolB": "ERC721",
+            "capabilityA": "InvariantValidation",
+            "capabilityB": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "evidence": [
+                "claim:InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "ERC20",
+            "protocolB": "ERC721",
+            "capabilityA": "Testing",
+            "capabilityB": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "evidence": [
+                "claim:Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 25,
+            "status": "INCONCLUSIVE"
+        }
+    ],
+    "errors": []
+}

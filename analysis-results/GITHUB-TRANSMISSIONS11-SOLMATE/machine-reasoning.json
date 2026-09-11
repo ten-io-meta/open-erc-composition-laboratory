@@ -1,0 +1,58 @@
+{
+    "generatedAt": "2026-09-03T23:17:58.463Z",
+    "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+    "inferences": [
+        {
+            "inferenceId": "MRI-00001",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "subject": "InvariantValidation",
+            "relation": "VALIDATES",
+            "object": "Accounting",
+            "reason": "Invariant validation combined with accounting suggests that the repository attempts to prove accounting safety properties.",
+            "confidence": 78,
+            "evidence": [
+                "capability:InvariantValidation",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00002",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "subject": "Testing",
+            "relation": "SUPPORTS",
+            "object": "InvariantValidation",
+            "reason": "Testing and invariant validation appearing together indicates executable evidence for claimed invariants.",
+            "confidence": 70,
+            "evidence": [
+                "capability:Testing",
+                "capability:InvariantValidation"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00003",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "subject": "DeterministicExecution",
+            "relation": "REQUIRES",
+            "object": "Accounting",
+            "reason": "Claims mentioning deterministic behavior together with accounting indicate that deterministic execution depends on stable accounting boundaries.",
+            "confidence": 68,
+            "evidence": [
+                "claim:deterministic",
+                "capability:Accounting"
+            ]
+        },
+        {
+            "inferenceId": "MRI-00004",
+            "sourceId": "GITHUB-TRANSMISSIONS11-SOLMATE",
+            "subject": "InvariantLanguage",
+            "relation": "INDICATES",
+            "object": "SafetyConstraint",
+            "reason": "Normative language such as cannot, never, or must suggests safety constraints that may be suitable for hypothesis validation.",
+            "confidence": 64,
+            "evidence": [
+                "claim:normative-language"
+            ]
+        }
+    ],
+    "errors": []
+}

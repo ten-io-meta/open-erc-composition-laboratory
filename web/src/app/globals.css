@@ -1,0 +1,27 @@
+﻿@import "tailwindcss" source("../");
+
+:root {
+  --ink: #101312;
+  --muted: #68706c;
+  --line: #dfe4e1;
+  --panel: rgba(255, 255, 255, 0.82);
+  --ground: #f4f6f4;
+  --signal: #1e5d46;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--ground); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(30,93,70,.08), transparent 32rem),
+    linear-gradient(180deg, #fafbfa 0%, var(--ground) 100%);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+

@@ -1,0 +1,22 @@
+{
+    "generatedAt": "2026-09-03T23:18:00.803Z",
+    "predictions": [
+        {
+            "predictionId": "PREDICTION-00001",
+            "prediction": "Additional evidence is likely to strengthen: Low-confidence conclusion: Reservation appears to constrain Accounting across 2 observed source identities.",
+            "basedOn": [
+                "GAP-00001"
+            ],
+            "confidence": 60,
+            "expectedValue": "MEDIUM",
+            "validationTarget": "Collect additional independent evidence from implementation-heavy repositories."
+        }
+    ],
+    "statistics": {
+        "predictions": 1,
+        "highValue": 0,
+        "mediumValue": 1,
+        "lowValue": 0
+    },
+    "errors": []
+}

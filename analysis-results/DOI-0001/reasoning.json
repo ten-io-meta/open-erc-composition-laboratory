@@ -1,0 +1,127 @@
+{
+    "sourceId": "GRAPH-DOI-0001",
+    "reasonedAt": "2026-09-03T23:17:15.756Z",
+    "relations": [
+        {
+            "fromCapability": "Authority",
+            "toCapability": "Cursor",
+            "relation": "CONSTRAINS",
+            "reason": "Authority constrains how much consumption can be represented by the cursor.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Cursor",
+            "toCapability": "Authority",
+            "relation": "DEPENDS_ON",
+            "reason": "Cursor accounting depends on an authority boundary to determine valid consumption.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Reservation constrains settlement by defining the maximum reserved value available for settlement.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Settlement",
+            "toCapability": "Reservation",
+            "relation": "DEPENDS_ON",
+            "reason": "Settlement depends on reserved value to remain bounded by deterministic accounting.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Accounting",
+            "relation": "PROTECTS",
+            "reason": "Reservation protects accounting by separating locked value from available value.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Accounting",
+            "toCapability": "Reservation",
+            "relation": "ACCOUNTS_FOR",
+            "reason": "Accounting tracks reserved value through locked and available value boundaries.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "EmbeddedValue",
+            "toCapability": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 90
+        },
+        {
+            "fromCapability": "Workflow",
+            "toCapability": "Authority",
+            "relation": "DEPENDS_ON",
+            "reason": "Workflow execution depends on authority constraints to remain bounded.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 85
+        },
+        {
+            "fromCapability": "Workflow",
+            "toCapability": "Settlement",
+            "relation": "PRODUCES",
+            "reason": "Workflow execution can produce settlement actions as part of a composed protocol flow.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 85
+        },
+        {
+            "fromCapability": "Verification",
+            "toCapability": "Settlement",
+            "relation": "VALIDATES",
+            "reason": "Verification validates settlement conditions before value movement is accepted.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 85
+        },
+        {
+            "fromCapability": "Anchoring",
+            "toCapability": "Verification",
+            "relation": "ANCHORS",
+            "reason": "Anchoring provides commitment references that verification can use as evidence.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 85
+        },
+        {
+            "fromCapability": "Eligibility",
+            "toCapability": "Settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Eligibility constrains settlement by determining whether a settlement path is allowed.",
+            "evidence": [
+                "GRAPH-DOI-0001"
+            ],
+            "confidence": 85
+        }
+    ],
+    "errors": []
+}

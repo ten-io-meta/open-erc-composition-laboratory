@@ -1,0 +1,22 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.318Z",
+    "theories": [
+        {
+            "theoryId": "THEORY-00001",
+            "title": "Reservation-Constrained Accounting Theory",
+            "description": "Reservation appears to constrain accounting boundaries and reduce unsafe settlement ambiguity across independent sources.",
+            "supportingEdges": [
+                "EDGE-00001"
+            ],
+            "confidence": 49,
+            "maturity": "SUPPORTED"
+        }
+    ],
+    "statistics": {
+        "theories": 1,
+        "emerging": 0,
+        "supported": 1,
+        "established": 0
+    },
+    "errors": []
+}

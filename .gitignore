@@ -4,6 +4,11 @@ dist/
 .DS_Store
 *.log
 
-on type .package.json
+# Local temporary and migration artifacts
+tmp/
+migration-backup-*/
 
-/on type .package.json
+# Local cloned repositories used by OECL adapters
+
+external/
+github-adapter-results/

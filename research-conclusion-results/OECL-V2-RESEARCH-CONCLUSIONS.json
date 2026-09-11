@@ -1,0 +1,32 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.313Z",
+    "conclusions": [
+        {
+            "conclusionId": "CONCLUSION-00001",
+            "subject": "Reservation",
+            "relation": "Constrains",
+            "object": "Accounting",
+            "sourcePatternId": "CROSS-PATTERN-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "supportedBy": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "confidence": 49,
+            "status": "PRELIMINARY",
+            "evidence": [
+                "machine-reasoning",
+                "inference:Reservation:CONSTRAINS:Accounting",
+                "capability:Reservation",
+                "capability:Accounting",
+                "evidence-profile:DOI-0001:HIGH",
+                "evidence-profile:GITHUB-CRYTIC-SLITHER:HIGH",
+                "evidence-profile:GITHUB-ETHEREUM-EIPS:HIGH",
+                "learning:Reservation->CONSTRAINS->Accounting",
+                "validation:HYP-00003"
+            ]
+        }
+    ],
+    "errors": []
+}

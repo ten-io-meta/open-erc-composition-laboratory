@@ -1,0 +1,108 @@
+{
+  "registryId": "OECL-V2.1-REAL-CONTROLS-V1",
+  "baseline": {
+    "branch": "oecl-v2-post-freeze",
+    "commit": "23ebfb2270bdef3ba52264e9eaa1829e8f9c6989",
+    "tag": "oecl-v2-final-scientific-pipeline-validated"
+  },
+  "scientificPolicy": {
+    "selectionBeforeMotorModification": true,
+    "noManufacturedCompatibility": true,
+    "noAbsenceAsIncompatibility": true,
+    "candidateDiscoveryIsNotCompatibility": true,
+    "pairwisePreservationIsNotGlobalComposition": true,
+    "missingEvidenceRemainsMissing": true,
+    "allFirmDecisionsRequireEvidence": true
+  },
+  "decisionContracts": {
+    "SUPPORTED": {
+      "required": [
+        "QUALIFYING_COMPOSITION_CANDIDATE",
+        "KNOWN_RELEVANT_BOUNDARIES",
+        "OBSERVED_RELEVANT_BOUNDARIES",
+        "NO_OBSERVED_BOUNDARY_VIOLATION",
+        "SUFFICIENT_COMPATIBILITY_EVIDENCE",
+        "FUNCTIONAL_CONFIGURATION_EVIDENCE"
+      ],
+      "forbiddenShortcuts": [
+        "DOCUMENTARY_RELATION_ONLY",
+        "LEXICAL_SIMILARITY_ONLY",
+        "COEXISTENCE_ONLY",
+        "NO_KNOWN_BOUNDARIES"
+      ]
+    },
+    "CHALLENGED": {
+      "required": [
+        "QUALIFYING_COMPOSITION_CANDIDATE",
+        "KNOWN_RELEVANT_BOUNDARY",
+        "OBSERVED_BOUNDARY_VIOLATION",
+        "EXACT_VIOLATION_EVIDENCE"
+      ],
+      "forbiddenShortcuts": [
+        "NO_RELATION_FOUND",
+        "NO_GRAPH_ATTRIBUTION",
+        "MISSING_EVIDENCE",
+        "UNRESOLVED_NEED_ONLY"
+      ]
+    },
+    "INCONCLUSIVE": {
+      "requiredAny": [
+        "INSUFFICIENT_COMPATIBILITY_EVIDENCE",
+        "NO_KNOWN_BOUNDARIES",
+        "NO_CANDIDATE_COMPATIBILITY_OBSERVATIONS",
+        "UNRESOLVED_REQUIRED_EVIDENCE",
+        "UNRESOLVED_CANDIDATE_TOPOLOGY"
+      ],
+      "meaning": "A candidate or scientific question exists, but the available evidence does not justify SUPPORT or CHALLENGE."
+    }
+  },
+  "controls": [
+    {
+      "controlId": "REAL-CONTROL-POSITIVE-8004-8060",
+      "role": "POSITIVE_CONTROL_CANDIDATE",
+      "selectionStatus": "PREREGISTERED_CANDIDATE",
+      "protocols": [
+        "ERC-8004",
+        "ERC-8060"
+      ],
+      "expectedFinalDecision": null,
+      "knownPriorEvidence": {
+        "pairSpecificConstraintPreservation": true,
+        "knownConstraintCount": 17,
+        "knownPreservedCount": 17,
+        "knownViolatedCount": 0,
+        "genericFunctionalCompositionDemonstrated": false
+      },
+      "acceptanceRule": "This pair becomes the positive control only if the generic N-protocol pipeline independently satisfies the full SUPPORTED decision contract. Existing pair-specific preservation evidence alone is insufficient."
+    },
+    {
+      "controlId": "REAL-CONTROL-CHALLENGED-TBD",
+      "role": "CHALLENGED_CONTROL",
+      "selectionStatus": "UNSELECTED",
+      "protocols": [],
+      "expectedFinalDecision": "CHALLENGED",
+      "acceptanceRule": "A real pair may be selected only when a known relevant boundary and an exact observed violation can both be evidenced independently of the desired verdict."
+    },
+    {
+      "controlId": "REAL-CONTROL-INCONCLUSIVE-8301-8354",
+      "role": "INCONCLUSIVE_CONTROL",
+      "selectionStatus": "LOCKED",
+      "subjectProtocolId": "ERC-8301",
+      "relation": "COMPOSES_WITH",
+      "objectProtocolId": "ERC-8354",
+      "expectedFinalDecision": "INCONCLUSIVE",
+      "knownEvidence": {
+        "documentaryRelationEvidenceCount": 2,
+        "knownCandidateBoundaries": 0,
+        "candidateCompatibilityObservations": 0,
+        "functionalConfigurations": 0
+      },
+      "expectedReasons": [
+        "DOCUMENTARY_RELATION_OPENED_CANDIDATE",
+        "NO_KNOWN_BOUNDARIES",
+        "NO_CANDIDATE_COMPATIBILITY_OBSERVATIONS",
+        "GLOBAL_COMPOSITION_NOT_ESTABLISHED"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+    "generatedAt": "2026-09-03T23:17:20.613Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "plans": [
+        {
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00001",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00001",
+            "experimentId": "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY:THEORY-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "supportCondition": "The retested scientific claim is supported when independent executable evidence reproducibly confirms behavior consistent with the hypothesis.",
+            "challengeCondition": "The retested scientific claim is challenged when independent executable evidence reproducibly demonstrates behavior incompatible with the hypothesis.",
+            "successCriteria": [
+                "At least one new independent evidence source is introduced.",
+                "The target receives new directly relevant evidence.",
+                "The scientific assessment changes or receives stronger reproducible justification.",
+                "The target survives or fails an explicit adversarial retest."
+            ],
+            "failureCriteria": [
+                "Only duplicate evidence is discovered.",
+                "No independent implementation can be evaluated.",
+                "The experiment produces no directly relevant evidence.",
+                "The result cannot be reproduced or traced to source evidence."
+            ],
+            "origin": "RETEST",
+            "priority": "HIGH",
+            "queueScore": 93,
+            "steps": [
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-01",
+                    "order": 1,
+                    "stepType": "SOURCE_REINGESTION",
+                    "title": "Re-ingest experimental sources",
+                    "objective": "Load and normalize independent source material before evaluation.",
+                    "tools": [
+                        "OECL SourcePipeline"
+                    ],
+                    "requiredInputs": [
+                        "ten-io-meta/erc8060-reservable",
+                        "OpenZeppelin/openzeppelin-contracts",
+                        "Vectorized/solady",
+                        "transmissions11/solmate"
+                    ],
+                    "expectedOutputs": [
+                        "Normalized source representation",
+                        "Updated source evidence"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-02",
+                    "order": 2,
+                    "stepType": "TEST_EXECUTION",
+                    "title": "Execute reproducibility tests",
+                    "objective": "Run executable tests designed to reproduce or falsify the target claim.",
+                    "tools": [
+                        "Foundry",
+                        "Hardhat"
+                    ],
+                    "requiredInputs": [
+                        "THEORY:THEORY-00001",
+                        "At least one independent implementation source.",
+                        "Direct implementation, executable test, or invariant evidence.",
+                        "Traceable evidence linked to the target statement.",
+                        "Explicit search for contradictory evidence.",
+                        "At least one adversarial test designed specifically to falsify the theory."
+                    ],
+                    "expectedOutputs": [
+                        "Test execution results",
+                        "Reproduction evidence",
+                        "Failure traces"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-03",
+                    "order": 3,
+                    "stepType": "INVARIANT_VALIDATION",
+                    "title": "Validate experimental invariants",
+                    "objective": "Attempt to detect invariant violations under adversarial execution.",
+                    "tools": [
+                        "Foundry invariant testing",
+                        "Echidna"
+                    ],
+                    "requiredInputs": [
+                        "THEORY:THEORY-00001",
+                        "At least one independent implementation source.",
+                        "Direct implementation, executable test, or invariant evidence.",
+                        "Traceable evidence linked to the target statement.",
+                        "Explicit search for contradictory evidence.",
+                        "At least one adversarial test designed specifically to falsify the theory."
+                    ],
+                    "expectedOutputs": [
+                        "Invariant validation results",
+                        "Counterexample traces"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00001-04",
+                    "order": 4,
+                    "stepType": "EVIDENCE_COLLECTION",
+                    "title": "Collect experimental evidence",
+                    "objective": "Convert execution outputs into traceable scientific evidence.",
+                    "tools": [
+                        "OECL EvidencePipeline"
+                    ],
+                    "requiredInputs": [
+                        "RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001",
+                        "At least one new independent evidence source is introduced.",
+                        "The target receives new directly relevant evidence.",
+                        "The scientific assessment changes or receives stronger reproducible justification.",
+                        "The target survives or fails an explicit adversarial retest.",
+                        "Only duplicate evidence is discovered.",
+                        "No independent implementation can be evaluated.",
+                        "The experiment produces no directly relevant evidence.",
+                        "The result cannot be reproduced or traced to source evidence."
+                    ],
+                    "expectedOutputs": [
+                        "Experimental evidence records",
+                        "Scientific evidence references"
+                    ],
+                    "status": "READY"
+                }
+            ],
+            "totalSteps": 4,
+            "readySteps": 4,
+            "blockedSteps": 0,
+            "executionReady": true,
+            "explanation": "Execution plan generated for RETEST-EXPERIMENT-SCIENTIFIC-RETEST-00001 using capability TEST_EXECUTION."
+        },
+        {
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00002",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00002",
+            "experimentId": "AUTO-EXPERIMENT-00001",
+            "targetType": "THEORY_VALIDATION",
+            "targetId": "THEORY-00001",
+            "sourcePatternRelation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+            "sourceIds": [
+                "DOI-0001",
+                "GITHUB-CRYTIC-SLITHER"
+            ],
+            "targetEvidenceIds": [
+                "EDGE-00001"
+            ],
+            "supportCondition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+            "challengeCondition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+            "scientificCriteria": {
+                "relation": "RESERVATION:CONSTRAINS:ACCOUNTING",
+                "support": {
+                    "expectedPolarity": "SUPPORT",
+                    "condition": "Reservation-Constrained Accounting Theory is supported when an executable assertion demonstrates behavior consistent with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "challenge": {
+                    "expectedPolarity": "CHALLENGE",
+                    "condition": "Reservation-Constrained Accounting Theory is challenged when an executable assertion reproduces a counterexample incompatible with the scientific relation \"RESERVATION:CONSTRAINS:ACCOUNTING\"."
+                },
+                "inconclusive": {
+                    "whenNoScientificPolarity": true
+                }
+            },
+            "successCriteria": [
+                "Independent source count increases.",
+                "At least one new directly relevant evidence edge is discovered.",
+                "Validation score changes by at least 5 points.",
+                "The experiment produces a reproducible result."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is discovered.",
+                "The selected repository duplicates existing evidence without increasing diversity.",
+                "The validation score remains unchanged.",
+                "The evidence cannot be reproduced or traced to its source."
+            ],
+            "origin": "AUTONOMOUS",
+            "priority": "MEDIUM",
+            "queueScore": 69,
+            "steps": [
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-01",
+                    "order": 1,
+                    "stepType": "SOURCE_REINGESTION",
+                    "title": "Re-ingest experimental sources",
+                    "objective": "Load and normalize independent source material before evaluation.",
+                    "tools": [
+                        "OECL SourcePipeline"
+                    ],
+                    "requiredInputs": [
+                        "OpenZeppelin/openzeppelin-contracts",
+                        "ten-io-meta/erc8060-reservable",
+                        "Vectorized/solady",
+                        "transmissions11/solmate",
+                        "thirdweb-dev/contracts"
+                    ],
+                    "expectedOutputs": [
+                        "Normalized source representation",
+                        "Updated source evidence"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-02",
+                    "order": 2,
+                    "stepType": "INVARIANT_VALIDATION",
+                    "title": "Validate experimental invariants",
+                    "objective": "Attempt to detect invariant violations under adversarial execution.",
+                    "tools": [
+                        "Foundry invariant testing",
+                        "Echidna"
+                    ],
+                    "requiredInputs": [
+                        "THEORY-00001",
+                        "At least one independent implementation source.",
+                        "Executable tests or invariant checks.",
+                        "Direct executable evidence supporting or challenging the relation \"RESERVATION:CONSTRAINS:ACCOUNTING\".",
+                        "Evidence from a repository not currently responsible for the theory."
+                    ],
+                    "expectedOutputs": [
+                        "Invariant validation results",
+                        "Counterexample traces"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00002-03",
+                    "order": 3,
+                    "stepType": "EVIDENCE_COLLECTION",
+                    "title": "Collect experimental evidence",
+                    "objective": "Convert execution outputs into traceable scientific evidence.",
+                    "tools": [
+                        "OECL EvidencePipeline"
+                    ],
+                    "requiredInputs": [
+                        "AUTO-EXPERIMENT-00001",
+                        "Independent source count increases.",
+                        "At least one new directly relevant evidence edge is discovered.",
+                        "Validation score changes by at least 5 points.",
+                        "The experiment produces a reproducible result.",
+                        "No relevant evidence is discovered.",
+                        "The selected repository duplicates existing evidence without increasing diversity.",
+                        "The validation score remains unchanged.",
+                        "The evidence cannot be reproduced or traced to its source."
+                    ],
+                    "expectedOutputs": [
+                        "Experimental evidence records",
+                        "Scientific evidence references"
+                    ],
+                    "status": "READY"
+                }
+            ],
+            "totalSteps": 3,
+            "readySteps": 3,
+            "blockedSteps": 0,
+            "executionReady": true,
+            "explanation": "Execution plan generated for AUTO-EXPERIMENT-00001 using capability INVARIANT_VALIDATION."
+        },
+        {
+            "executionPlanId": "SCIENTIFIC-EXECUTION-PLAN-00003",
+            "executionTaskId": "SCIENTIFIC-EXECUTION-TASK-00003",
+            "experimentId": "AUTO-EXPERIMENT-00002",
+            "targetType": "KNOWLEDGE_GAP",
+            "targetId": "GAP-00001",
+            "sourceConclusionId": "CONCLUSION-00001",
+            "sourceIds": [],
+            "targetEvidenceIds": [],
+            "supportCondition": "The knowledge gap is reduced when new independent executable evidence provides reproducible information directly relevant to the unresolved scientific statement.",
+            "challengeCondition": "The knowledge gap remains or increases when new executable evidence contradicts the unresolved statement or exposes additional uncertainty that prevents deterministic resolution.",
+            "successCriteria": [
+                "Evidence diversity increases.",
+                "The associated confidence score increases or decreases meaningfully.",
+                "The gap receives a clear resolved or unresolved classification."
+            ],
+            "failureCriteria": [
+                "No relevant evidence is found.",
+                "Only duplicate evidence is discovered.",
+                "The gap remains unchanged."
+            ],
+            "origin": "AUTONOMOUS",
+            "priority": "MEDIUM",
+            "queueScore": 56,
+            "steps": [
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00003-01",
+                    "order": 1,
+                    "stepType": "SOURCE_REINGESTION",
+                    "title": "Re-ingest experimental sources",
+                    "objective": "Load and normalize independent source material before evaluation.",
+                    "tools": [
+                        "OECL SourcePipeline"
+                    ],
+                    "requiredInputs": [
+                        "ten-io-meta/erc8060-reservable",
+                        "OpenZeppelin/openzeppelin-contracts",
+                        "Vectorized/solady",
+                        "transmissions11/solmate",
+                        "thirdweb-dev/contracts"
+                    ],
+                    "expectedOutputs": [
+                        "Normalized source representation",
+                        "Updated source evidence"
+                    ],
+                    "status": "READY"
+                },
+                {
+                    "stepId": "SCIENTIFIC-EXECUTION-TASK-00003-02",
+                    "order": 2,
+                    "stepType": "EVIDENCE_COLLECTION",
+                    "title": "Collect experimental evidence",
+                    "objective": "Convert execution outputs into traceable scientific evidence.",
+                    "tools": [
+                        "OECL EvidencePipeline"
+                    ],
+                    "requiredInputs": [
+                        "AUTO-EXPERIMENT-00002",
+                        "Evidence diversity increases.",
+                        "The associated confidence score increases or decreases meaningfully.",
+                        "The gap receives a clear resolved or unresolved classification.",
+                        "No relevant evidence is found.",
+                        "Only duplicate evidence is discovered.",
+                        "The gap remains unchanged."
+                    ],
+                    "expectedOutputs": [
+                        "Experimental evidence records",
+                        "Scientific evidence references"
+                    ],
+                    "status": "READY"
+                }
+            ],
+            "totalSteps": 2,
+            "readySteps": 2,
+            "blockedSteps": 0,
+            "executionReady": true,
+            "explanation": "Execution plan generated for AUTO-EXPERIMENT-00002 using capability SOURCE_REINGESTION."
+        }
+    ],
+    "statistics": {
+        "plans": 3,
+        "totalSteps": 9,
+        "readyPlans": 3,
+        "blockedPlans": 0,
+        "sourceReingestionSteps": 3,
+        "staticAnalysisSteps": 0,
+        "testExecutionSteps": 1,
+        "invariantValidationSteps": 2,
+        "evidenceCollectionSteps": 3,
+        "manualReviewSteps": 0,
+        "averageStepsPerPlan": 3
+    },
+    "errors": []
+}

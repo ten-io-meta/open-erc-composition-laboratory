@@ -1,0 +1,1036 @@
+{
+    "graphId": "GRAPH-GITHUB-VECTORIZED-SOLADY",
+    "generatedAt": "2026-09-03T23:17:56.958Z",
+    "nodes": [
+        {
+            "id": "GITHUB-VECTORIZED-SOLADY",
+            "type": "ResearchSource",
+            "label": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "id": "ERC1967",
+            "type": "Protocol",
+            "label": "ERC1967"
+        },
+        {
+            "id": "ERC1271",
+            "type": "Protocol",
+            "label": "ERC1271"
+        },
+        {
+            "id": "ERC4337",
+            "type": "Protocol",
+            "label": "ERC4337"
+        },
+        {
+            "id": "ERC7739",
+            "type": "Protocol",
+            "label": "ERC7739"
+        },
+        {
+            "id": "ERC6551",
+            "type": "Protocol",
+            "label": "ERC6551"
+        },
+        {
+            "id": "ERC7562",
+            "type": "Protocol",
+            "label": "ERC7562"
+        },
+        {
+            "id": "IERC6551Executable",
+            "type": "Protocol",
+            "label": "IERC6551Executable"
+        },
+        {
+            "id": "ERC165",
+            "type": "Protocol",
+            "label": "ERC165"
+        },
+        {
+            "id": "ERC721",
+            "type": "Protocol",
+            "label": "ERC721"
+        },
+        {
+            "id": "ERC7821",
+            "type": "Protocol",
+            "label": "ERC7821"
+        },
+        {
+            "id": "ERC7579",
+            "type": "Protocol",
+            "label": "ERC7579"
+        },
+        {
+            "id": "ERC1155",
+            "type": "Protocol",
+            "label": "ERC1155"
+        },
+        {
+            "id": "ERC20",
+            "type": "Protocol",
+            "label": "ERC20"
+        },
+        {
+            "id": "ERC2981",
+            "type": "Protocol",
+            "label": "ERC2981"
+        },
+        {
+            "id": "ERC4626",
+            "type": "Protocol",
+            "label": "ERC4626"
+        },
+        {
+            "id": "ERC6909",
+            "type": "Protocol",
+            "label": "ERC6909"
+        },
+        {
+            "id": "ERC5805",
+            "type": "Protocol",
+            "label": "ERC5805"
+        },
+        {
+            "id": "ERC6372",
+            "type": "Protocol",
+            "label": "ERC6372"
+        },
+        {
+            "id": "IERC721Receiver",
+            "type": "Protocol",
+            "label": "IERC721Receiver"
+        },
+        {
+            "id": "ERC6492",
+            "type": "Protocol",
+            "label": "ERC6492"
+        },
+        {
+            "id": "ERC1167",
+            "type": "Protocol",
+            "label": "ERC1167"
+        },
+        {
+            "id": "ERC2771",
+            "type": "Protocol",
+            "label": "ERC2771"
+        },
+        {
+            "id": "IERC20",
+            "type": "Protocol",
+            "label": "IERC20"
+        },
+        {
+            "id": "IERC1155Receiver",
+            "type": "Protocol",
+            "label": "IERC1155Receiver"
+        },
+        {
+            "id": "IERC20Permit",
+            "type": "Protocol",
+            "label": "IERC20Permit"
+        },
+        {
+            "id": "ERC1822",
+            "type": "Protocol",
+            "label": "ERC1822"
+        },
+        {
+            "id": "ERC155",
+            "type": "Protocol",
+            "label": "ERC155"
+        },
+        {
+            "id": "IERC6551Registry",
+            "type": "Protocol",
+            "label": "IERC6551Registry"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "InvariantValidation",
+            "type": "Capability",
+            "label": "InvariantValidation"
+        },
+        {
+            "id": "Testing",
+            "type": "Capability",
+            "label": "Testing"
+        },
+        {
+            "id": "Redemption",
+            "type": "Capability",
+            "label": "Redemption"
+        },
+        {
+            "id": "GITHUB-CLAIM-00001",
+            "type": "Claim",
+            "label": "Performs the signature validation without nested EIP-712 if the caller is"
+        },
+        {
+            "id": "GITHUB-CLAIM-00002",
+            "type": "Claim",
+            "label": "ERC1271 signature validation (Nested EIP-712 workflow)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00003",
+            "type": "Claim",
+            "label": "Performs the signature validation without nested EIP-712 to allow for easy sign ins."
+        },
+        {
+            "id": "GITHUB-CLAIM-00004",
+            "type": "Claim",
+            "label": "`LibClone.deployDeterministicERC1967` to clone the implementation. See: [`ERC4337Factory.sol`](accounts/erc4337factory.md)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00005",
+            "type": "Claim",
+            "label": "returns (uint256 validationData)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00006",
+            "type": "Claim",
+            "label": "this validation call returns successfully."
+        },
+        {
+            "id": "GITHUB-CLAIM-00007",
+            "type": "Claim",
+            "label": ") internal virtual returns (uint256 validationData)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00008",
+            "type": "Claim",
+            "label": "- The ERC4337 standard expects the factory to use deterministic deployment."
+        },
+        {
+            "id": "GITHUB-CLAIM-00009",
+            "type": "Claim",
+            "label": "As such, this factory does not include any non-deterministic deployment methods."
+        },
+        {
+            "id": "GITHUB-CLAIM-00010",
+            "type": "Claim",
+            "label": "Deploys an ERC4337 account with `ownSalt` and returns its deterministic address."
+        },
+        {
+            "id": "GITHUB-CLAIM-00011",
+            "type": "Claim",
+            "label": "Returns the deterministic address of the account created via `createAccount`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00012",
+            "type": "Claim",
+            "label": "Recent updates to the account abstraction validation scope rules"
+        },
+        {
+            "id": "GITHUB-CLAIM-00013",
+            "type": "Claim",
+            "label": "[ERC7562](https://eips.ethereum.org/EIPS/eip-7562) has made ERC6551 compatible with ERC4337."
+        },
+        {
+            "id": "GITHUB-CLAIM-00014",
+            "type": "Claim",
+            "label": "user operation validation functionality (and use ERC6551's execution functionality)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00015",
+            "type": "Claim",
+            "label": "function supportsInterface(bytes4 interfaceId)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00016",
+            "type": "Claim",
+            "label": "Returns true if this contract implements the interface defined by `interfaceId`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00017",
+            "type": "Claim",
+            "label": "- `0x01000000000078210001...`: Single batch. Supports optional `opData`."
+        },
+        {
+            "id": "GITHUB-CLAIM-00018",
+            "type": "Claim",
+            "label": "supportsExecutionMode(bytes32)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00019",
+            "type": "Claim",
+            "label": "function supportsExecutionMode(bytes32 mode)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00020",
+            "type": "Claim",
+            "label": "deployProxyDeterministic(address,address,bytes32)"
+        },
+        {
+            "id": "GITHUB-CLAIM-00021",
+            "type": "Claim",
+            "label": "uint256 savedBlockedNumber,"
+        },
+        {
+            "id": "GITHUB-CLAIM-00022",
+            "type": "Claim",
+            "label": "savedBlockedNumber = _bound(savedBlockedNumber, 0, 2 ** 64 - 1);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00023",
+            "type": "Claim",
+            "label": "vm.roll(savedBlockedNumber + 1);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00024",
+            "type": "Claim",
+            "label": "vm.setBlockhash(savedBlockedNumber, hashToSave);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00025",
+            "type": "Claim",
+            "label": "function testFullMulDivAlwaysRevertsIfDivisorIsZero(uint256 a, uint256 b) public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00026",
+            "type": "Claim",
+            "label": "import \"./utils/InvariantTest.sol\";"
+        },
+        {
+            "id": "GITHUB-CLAIM-00027",
+            "type": "Claim",
+            "label": "contract ERC20Invariants is SoladyTest, InvariantTest {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00028",
+            "type": "Claim",
+            "label": "function invariantBalanceSum() public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00029",
+            "type": "Claim",
+            "label": "struct _TestVoteInvariantsTemps {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00030",
+            "type": "Claim",
+            "label": "function testVoteInvariants(bytes32) public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00031",
+            "type": "Claim",
+            "label": "_TestVoteInvariantsTemps memory t;"
+        },
+        {
+            "id": "GITHUB-CLAIM-00032",
+            "type": "Claim",
+            "label": "if (_randomChance(8)) _checkVoteInvariants(t);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00033",
+            "type": "Claim",
+            "label": "_checkVoteInvariants(t);"
+        },
+        {
+            "id": "GITHUB-CLAIM-00034",
+            "type": "Claim",
+            "label": "function _checkVoteInvariants(_TestVoteInvariantsTemps memory t) internal {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00035",
+            "type": "Claim",
+            "label": "`bob` must accept recovery."
+        },
+        {
+            "id": "GITHUB-CLAIM-00036",
+            "type": "Claim",
+            "label": "function testCannotExceedMaxBalance() public {"
+        },
+        {
+            "id": "GITHUB-CLAIM-00037",
+            "type": "Claim",
+            "label": "so always 2 * 2 * 64 = 256"
+        },
+        {
+            "id": "GITHUB-CLAIM-00038",
+            "type": "Claim",
+            "label": "/ @dev bytes32[] because len_in_bytes is always a multiple of 32 in our case even 128"
+        },
+        {
+            "id": "GITHUB-CLAIM-00039",
+            "type": "Claim",
+            "label": "exponent always 1"
+        },
+        {
+            "id": "GITHUB-CLAIM-00040",
+            "type": "Claim",
+            "label": "The pool must not also fund a vault for that same payout."
+        },
+        {
+            "id": "GITHUB-CLAIM-00041",
+            "type": "Claim",
+            "label": "This must be placed at the end of the `and` clause,"
+        },
+        {
+            "id": "GITHUB-CLAIM-00042",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnClone(instance));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00043",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnClone(instance, _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00044",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnClone(instance, _random(), _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00045",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967(instance));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00046",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967(instance, _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00047",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967(instance, _random(), _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00048",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967I(instance));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00049",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967I(instance, _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00050",
+            "type": "Claim",
+            "label": "_mustCompute(this.argsOnERC1967I(instance, _random(), _random()));"
+        },
+        {
+            "id": "GITHUB-CLAIM-00051",
+            "type": "Claim",
+            "label": "Repository contains README research context."
+        },
+        {
+            "id": "GITHUB-CLAIM-00052",
+            "type": "Claim",
+            "label": "Repository contains contract or interface material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00053",
+            "type": "Claim",
+            "label": "Repository contains test evidence."
+        },
+        {
+            "id": "GITHUB-CLAIM-00054",
+            "type": "Claim",
+            "label": "Repository contains documentation material."
+        },
+        {
+            "id": "GITHUB-CLAIM-00055",
+            "type": "Claim",
+            "label": "Repository contains invariant-like statements."
+        },
+        {
+            "id": "GITHUB-CLAIM-00056",
+            "type": "Claim",
+            "label": "Repository exposes 1995 executable test or invariant target(s)."
+        },
+        {
+            "id": "GITHUB-CLAIM-00057",
+            "type": "Claim",
+            "label": "Repository uses the Foundry toolchain."
+        },
+        {
+            "id": "GITHUB-CLAIM-00058",
+            "type": "Claim",
+            "label": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value."
+        },
+        {
+            "id": "GITHUB-CLAIM-00059",
+            "type": "Claim",
+            "label": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety."
+        },
+        {
+            "id": "GITHUB-CLAIM-00060",
+            "type": "Claim",
+            "label": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation."
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC1967",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC1271",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC4337",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC7739",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC6551",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC7562",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC6551Executable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC165",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC721",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC7821",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC7579",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC1155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC2981",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC4626",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC6909",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC5805",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC6372",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC721Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC6492",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC1167",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC2771",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC20",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC1155Receiver",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC20Permit",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC1822",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "ERC155",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "IERC6551Registry",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "InvariantValidation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "Testing",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "Redemption",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00002",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00003",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00004",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00005",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00006",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00007",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00008",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00009",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00010",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00011",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00012",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00013",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00014",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00015",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00016",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00017",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00018",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00019",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00020",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00021",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00022",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00023",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00024",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00025",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00026",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00027",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00028",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00029",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00030",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00031",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00032",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00033",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00034",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00035",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00036",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00037",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00038",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00039",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00040",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00041",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00042",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00043",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00044",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00045",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00046",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00047",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00048",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00049",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00050",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00051",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00052",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00053",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00054",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00055",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00056",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00057",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00058",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00059",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        },
+        {
+            "from": "GITHUB-VECTORIZED-SOLADY",
+            "to": "GITHUB-CLAIM-00060",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "GITHUB-VECTORIZED-SOLADY"
+        }
+    ]
+}

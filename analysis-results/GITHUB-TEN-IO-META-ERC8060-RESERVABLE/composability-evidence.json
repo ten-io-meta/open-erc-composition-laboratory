@@ -1,0 +1,97 @@
+{
+    "sourceId": "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+    "generatedAt": "2026-09-03T23:17:52.901Z",
+    "claims": [
+        {
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-GITHUB-TEN-IO-META-ERC8060-RESERVABLE"
+            ],
+            "semanticConfidence": 90,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 54,
+            "status": "CANDIDATE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8004",
+            "capabilityA": "EmbeddedValue",
+            "capabilityB": "Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "relation": "ENABLES",
+            "reason": "Structured claim extracted from source: EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting",
+            "evidence": [
+                "claim:EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00003",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8004",
+            "capabilityA": "Reservation",
+            "capabilityB": "Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Structured claim extracted from source: Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement",
+            "evidence": [
+                "claim:Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00004",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8004",
+            "capabilityA": "InvariantValidation",
+            "capabilityB": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "evidence": [
+                "claim:InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        },
+        {
+            "claimId": "COMP-EVIDENCE-00005",
+            "protocolA": "IERC8060Reservable",
+            "protocolB": "ERC8004",
+            "capabilityA": "Testing",
+            "capabilityB": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "relation": "VALIDATES",
+            "reason": "Structured claim extracted from source: Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "evidence": [
+                "claim:Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation"
+            ],
+            "semanticConfidence": 70,
+            "experimentalSupport": 0,
+            "statisticalSupport": 0,
+            "emergentPatternSupport": 0,
+            "overallConfidence": 42,
+            "status": "INCONCLUSIVE"
+        }
+    ],
+    "errors": []
+}

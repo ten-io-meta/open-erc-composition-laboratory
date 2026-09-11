@@ -1,0 +1,22 @@
+{
+    "sourceId": "GITHUB-TEN-IO-META-ERC8060-RESERVABLE",
+    "evidenceType": "GITHUB_REPOSITORY",
+    "quality": "HIGH",
+    "reproducible": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": true,
+    "hasCoverage": false,
+    "hasCitation": false,
+    "confidenceWeight": 0.85,
+    "observations": [
+        "README: true",
+        "Package metadata: true",
+        "Tests: true",
+        "Contracts/interfaces: true",
+        "Documentation: true",
+        "CI: false",
+        "Citation: false",
+        "Evidence score: 80"
+    ]
+}

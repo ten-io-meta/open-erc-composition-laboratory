@@ -1,0 +1,2268 @@
+{
+    "graphId": "GRAPH-DOI-0001",
+    "discoveredAt": "2026-06-29T01:38:41.102Z",
+    "candidates": [
+        {
+            "candidateId": "COMP-00001",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8217",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8217"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00002",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8281",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8281"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00003",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8299",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8299"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00004",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8001",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8001"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00005",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8312",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8312"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00006",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00007",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00008",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00009",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00010",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00011",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00012",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8004",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8004",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00013",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8281",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8281"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00014",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8299",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8299"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00015",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8001",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8001"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00016",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8312",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8312"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00017",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00018",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00019",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00020",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00021",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00022",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00023",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8217",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8217",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00024",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8299",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8299"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00025",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8001",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8001"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00026",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8312",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8312"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00027",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00028",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00029",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00030",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00031",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00032",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00033",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8281",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8281",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00034",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8001",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8001"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00035",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8312",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8312"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00036",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00037",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00038",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00039",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00040",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00041",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00042",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8299",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8299",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00043",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8312",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8312"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00044",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00045",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00046",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00047",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00048",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00049",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00050",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8001",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8001",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00051",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8301",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ERC8301"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00052",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00053",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00054",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00055",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00056",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00057",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8312",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8312",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00058",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8263",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "ERC8263"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00059",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00060",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00061",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00062",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00063",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8301",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8301",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00064",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8263",
+            "protocolB": "ERC8274",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8263",
+                "ERC8274"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00065",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8263",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8263",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00066",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8263",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8263",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00067",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8263",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8263",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00068",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8263",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8263",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00069",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8274",
+            "protocolB": "ReceiptOS",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8274",
+                "ReceiptOS"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00070",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8274",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8274",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00071",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8274",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8274",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00072",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8274",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8274",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00073",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ReceiptOS",
+            "protocolB": "ERC8275",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ReceiptOS",
+                "ERC8275"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00074",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ReceiptOS",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ReceiptOS",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00075",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ReceiptOS",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ReceiptOS",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00076",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8275",
+            "protocolB": "ERC8060",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8275",
+                "ERC8060"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00077",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8275",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8275",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        },
+        {
+            "candidateId": "COMP-00078",
+            "sourceGraphId": "GRAPH-DOI-0001",
+            "protocolA": "ERC8060",
+            "protocolB": "IERC8060Reservable",
+            "reason": "Both protocols are mentioned by the same research source and may require composition feasibility analysis.",
+            "supportingCapabilities": [
+                "AgentIdentity",
+                "IdentityBinding",
+                "InputProvenance",
+                "SpineCommitment",
+                "Authority",
+                "Cursor",
+                "Workflow",
+                "Anchoring",
+                "Verification",
+                "Eligibility",
+                "Settlement",
+                "EmbeddedValue",
+                "Reservation",
+                "Accounting"
+            ],
+            "evidence": [
+                "GRAPH-DOI-0001",
+                "ERC8060",
+                "IERC8060Reservable"
+            ],
+            "confidence": 50
+        }
+    ]
+}

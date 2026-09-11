@@ -1,0 +1,27 @@
+{
+    "sourceId": "GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS",
+    "reasonedAt": "2026-09-03T23:18:00.633Z",
+    "relations": [
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Accounting",
+            "relation": "PROTECTS",
+            "reason": "Reservation protects accounting by separating locked value from available value.",
+            "evidence": [
+                "GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Accounting",
+            "toCapability": "Reservation",
+            "relation": "ACCOUNTS_FOR",
+            "reason": "Accounting tracks reserved value through locked and available value boundaries.",
+            "evidence": [
+                "GRAPH-GITHUB-THIRDWEB-DEV-CONTRACTS"
+            ],
+            "confidence": 100
+        }
+    ],
+    "errors": []
+}

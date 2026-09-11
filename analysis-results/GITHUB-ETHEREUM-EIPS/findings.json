@@ -1,0 +1,688 @@
+{
+    "graphId": "GRAPH-GITHUB-ETHEREUM-EIPS",
+    "discoveredAt": "2026-09-03T23:17:16.094Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 27 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "ERC20",
+                "ERC1155",
+                "IERC1155",
+                "ERC721",
+                "IERC1155MetadataURI",
+                "IERC1155Receiver",
+                "ERC165",
+                "IERC1155TokenReceiver",
+                "IERC1155Views",
+                "IERC165",
+                "ERC1271",
+                "ERC137",
+                "ERC1723",
+                "ERC1724",
+                "ERC223",
+                "ERC4337",
+                "ERC2535",
+                "ERC191",
+                "ERC2612",
+                "ERC1046",
+                "ERC7201",
+                "ERC7683",
+                "ERC1167",
+                "ERC1967",
+                "ERC7562",
+                "ERC2470",
+                "ERC2335"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 7 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "Reservation",
+                "Accounting",
+                "Settlement",
+                "EmbeddedValue",
+                "InvariantValidation",
+                "Testing",
+                "Redemption"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00001",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- Coordinate many implementations that must all be compatible? Allow.",
+            "evidence": [
+                "GITHUB-CLAIM-00001"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00002",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "The function map\\_to\\_curve\\_simple\\_swu(u) implements a simplification",
+            "evidence": [
+                "GITHUB-CLAIM-00002"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00003",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "1. MAJOR version when you make incompatible API changes,",
+            "evidence": [
+                "GITHUB-CLAIM-00003"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00004",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "1. MINOR version when you add functionality in a backwards compatible",
+            "evidence": [
+                "GITHUB-CLAIM-00004"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00005",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "1. PATCH version when you make backwards compatible bug fixes.",
+            "evidence": [
+                "GITHUB-CLAIM-00005"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00006",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "affecting the API increment the patch version, backwards compatible API",
+            "evidence": [
+                "GITHUB-CLAIM-00006"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00007",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "additions/changes increment the minor version, and backwards incompatible API",
+            "evidence": [
+                "GITHUB-CLAIM-00007"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00008",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "compatible bug fixes are introduced. A bug fix is defined as an internal",
+            "evidence": [
+                "GITHUB-CLAIM-00008"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00009",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "compatible functionality is introduced to the public API. It MUST be",
+            "evidence": [
+                "GITHUB-CLAIM-00009"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00010",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "incompatible changes are introduced to the public API. It MAY also include minor",
+            "evidence": [
+                "GITHUB-CLAIM-00010"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00011",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "package management system and know that they will be compatible with existing",
+            "evidence": [
+                "GITHUB-CLAIM-00011"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00012",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "If even the tiniest backwards incompatible changes to the public API require a major version bump, won't I end up at version 42.0.0 very rapidly?",
+            "evidence": [
+                "GITHUB-CLAIM-00012"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00013",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "This is a question of responsible development and foresight. Incompatible",
+            "evidence": [
+                "GITHUB-CLAIM-00013"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00014",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Having to bump major versions to release incompatible changes means you'll",
+            "evidence": [
+                "GITHUB-CLAIM-00014"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00015",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "What do I do if I accidentally release a backwards incompatible change as a minor version?",
+            "evidence": [
+                "GITHUB-CLAIM-00015"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00016",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "That would be considered compatible since it does not affect the public API.",
+            "evidence": [
+                "GITHUB-CLAIM-00016"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00017",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "(PCRE [Perl Compatible Regular Expressions, i.e. Perl, PHP and R], Python",
+            "evidence": [
+                "GITHUB-CLAIM-00017"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00018",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "cg3 = patch, cg4 = prerelease and cg5 = buildmetadata) that is compatible",
+            "evidence": [
+                "GITHUB-CLAIM-00018"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00019",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "with ECMA Script (JavaScript), PCRE (Perl Compatible Regular Expressions,",
+            "evidence": [
+                "GITHUB-CLAIM-00019"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00020",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "\"AA_ENTRY_POINT\"->SC: Validate AA Transaction\\n\"\"senderValidationData\"\"",
+            "evidence": [
+                "GITHUB-CLAIM-00020"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00021",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ Are transfers of a conditional token locked?",
+            "evidence": [
+                "GITHUB-CLAIM-00021"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00022",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ @param _user Querying if locked for this user.",
+            "evidence": [
+                "GITHUB-CLAIM-00022"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00023",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "function isConditionalLocked(address _user, uint256 _condition) public view returns (bool) {",
+            "evidence": [
+                "GITHUB-CLAIM-00023"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00024",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "require(_to != address(0), \"ERC1155: target address must be non-zero\");",
+            "evidence": [
+                "GITHUB-CLAIM-00024"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00025",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "require(_ids.length == _values.length, \"ERC1155: IDs and _values must have same lengths\");",
+            "evidence": [
+                "GITHUB-CLAIM-00025"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00026",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "INVARIANT: `_originalAddress(newToOldAccount[newAccount]) == _originalAddress(newAccount)`",
+            "evidence": [
+                "GITHUB-CLAIM-00026"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00027",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "INVARIANT: originalAddresses and originalToCurrentAddresses are mutually inverse.",
+            "evidence": [
+                "GITHUB-CLAIM-00027"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00028",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Auditor: Check that the above invariant hold.",
+            "evidence": [
+                "GITHUB-CLAIM-00028"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00029",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Auditor: Check that the above invariants hold.",
+            "evidence": [
+                "GITHUB-CLAIM-00029"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00030",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ because the tokens may be already withdrawn. And it cannot be done in a fully decentralized way because",
+            "evidence": [
+                "GITHUB-CLAIM-00030"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00031",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ To make it safe, it must stop accepting any new tokens after a transfer.",
+            "evidence": [
+                "GITHUB-CLAIM-00031"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00032",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ Must be called with `_id != 0`.",
+            "evidence": [
+                "GITHUB-CLAIM-00032"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00033",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "/ In functions of this contract `condition` is always a customer's original address.",
+            "evidence": [
+                "GITHUB-CLAIM-00033"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00034",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* _Available since v3.1._",
+            "evidence": [
+                "GITHUB-CLAIM-00034"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00035",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* Clients calling this function must replace the `\\{id\\}` substring with the",
+            "evidence": [
+                "GITHUB-CLAIM-00035"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00036",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - `account` cannot be the zero address.",
+            "evidence": [
+                "GITHUB-CLAIM-00036"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00037",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - `accounts` and `ids` must have the same length.",
+            "evidence": [
+                "GITHUB-CLAIM-00037"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00038",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* Because these URIs cannot be meaningfully represented by the {URI} event,",
+            "evidence": [
+                "GITHUB-CLAIM-00038"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00039",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the",
+            "evidence": [
+                "GITHUB-CLAIM-00039"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00040",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - `ids` and `amounts` must have the same length.",
+            "evidence": [
+                "GITHUB-CLAIM-00040"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00041",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the",
+            "evidence": [
+                "GITHUB-CLAIM-00041"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00042",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - `account` must have at least `amount` tokens of token type `id`.",
+            "evidence": [
+                "GITHUB-CLAIM-00042"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00043",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* - `from` and `to` are never both zero.",
+            "evidence": [
+                "GITHUB-CLAIM-00043"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00044",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "require(ids.length == values.length, \"ERC1155: IDs and values must have same lengths\");",
+            "evidence": [
+                "GITHUB-CLAIM-00044"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00045",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "To accept the transfer, this must return",
+            "evidence": [
+                "GITHUB-CLAIM-00045"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00046",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "been updated. To accept the transfer(s), this must return",
+            "evidence": [
+                "GITHUB-CLAIM-00046"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00047",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "@param ids An array containing ids of each token being transferred (order and length must match values array)",
+            "evidence": [
+                "GITHUB-CLAIM-00047"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00048",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "@param values An array containing amounts of each token being transferred (order and length must match ids array)",
+            "evidence": [
+                "GITHUB-CLAIM-00048"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00049",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "require(accountHasSalary[_orig], \"Cannot resign account receiving a salary.\");",
+            "evidence": [
+                "GITHUB-CLAIM-00049"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00050",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "by calling this function, the contract storage variables cannot be modified  (precomputed values)",
+            "evidence": [
+                "GITHUB-CLAIM-00050"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00051",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains README research context.",
+            "evidence": [
+                "GITHUB-CLAIM-00051"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00052",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains contract or interface material.",
+            "evidence": [
+                "GITHUB-CLAIM-00052"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00053",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains test evidence.",
+            "evidence": [
+                "GITHUB-CLAIM-00053"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00054",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains documentation material.",
+            "evidence": [
+                "GITHUB-CLAIM-00054"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00055",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains invariant-like statements.",
+            "evidence": [
+                "GITHUB-CLAIM-00055"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00056",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository exposes 15 executable test or invariant target(s).",
+            "evidence": [
+                "GITHUB-CLAIM-00056"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00057",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository toolchain could not be determined.",
+            "evidence": [
+                "GITHUB-CLAIM-00057"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00058",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00058"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00059",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
+            "evidence": [
+                "GITHUB-CLAIM-00059"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00060",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement.",
+            "evidence": [
+                "GITHUB-CLAIM-00060"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00061",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+            "evidence": [
+                "GITHUB-CLAIM-00061"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00062",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+            "evidence": [
+                "GITHUB-CLAIM-00062"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-ETHEREUM-EIPS-CLAIM-GITHUB-CLAIM-00063",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value.",
+            "evidence": [
+                "GITHUB-CLAIM-00063"
+            ],
+            "confidence": 100
+        }
+    ]
+}

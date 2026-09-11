@@ -1,0 +1,2163 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.642Z",
+    "campaignId": "OECL-V2-CAMPAIGN-2026-09-03T23-17-15-740Z",
+    "revisions": [
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00001",
+            "targetId": "THEORY-00001",
+            "targetEvidenceIds": [],
+            "targetType": "THEORY",
+            "statement": "Reservation-Constrained Accounting Theory",
+            "action": "CHALLENGE",
+            "priority": "HIGH",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 43,
+            "highestFalsificationRisk": "HIGH",
+            "reasons": [
+                "Only 0 independent source(s) support this theory.",
+                "Validation score is only 53.",
+                "The scientific validation remains inconclusive.",
+                "Repeat scientific validation using stronger implementation evidence and adversarial tests."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00001"
+            ],
+            "requiresExperiment": true,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision CHALLENGE was generated from 1 scientific critique(s) with average robustness 43 and highest falsification risk HIGH."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00002",
+            "targetId": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Security Considerations appears to constrain Standardization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 55,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -25.",
+                "Independent source support changed by -3.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00045"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 55 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00003",
+            "targetId": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Specification appears to enable Standardization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 55,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -25.",
+                "Independent source support changed by -3.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00046"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 55 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00004",
+            "targetId": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to enable Fungibleaccounting across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 58,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00041"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 58 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00005",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to support Transfer across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 58,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00042"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 58 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00006",
+            "targetId": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Auditevidence appears to support Safetyconstraint across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 58,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00043"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 58 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00007",
+            "targetId": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Negativetesting appears to support Safetyconstraint across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 58,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -22.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00044"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 58 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00008",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Ownership appears to constrain Upgradeability across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 60,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00038"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 60 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00009",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to support Standardization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 60,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00039"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 60 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00010",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to support Standardization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 60,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -20.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00040"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 60 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00011",
+            "targetId": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Authority appears to constrain Transfer across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 62,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -18.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00036"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 62 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00012",
+            "targetId": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Standardization appears to enable Interoperability across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 62,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -18.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00037"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 62 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00013",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP712 appears to support Signatureauthorization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 69,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00027"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 69 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00014",
+            "targetId": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC165 appears to support Standardization across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 69,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00028"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 69 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00015",
+            "targetId": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Signatureauthorization appears to enable Authority across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 69,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00029"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 69 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00016",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Ownership appears to constrain Authority across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 69,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -11.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00035"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 69 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00018",
+            "targetId": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Mint appears to enable Supply across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 71,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00026"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 71 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00019",
+            "targetId": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Burn appears to constrain Supply across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 71,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00031"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 71 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00020",
+            "targetId": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to enable Multiassetaccounting across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 71,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00032"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 71 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00021",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1155 appears to support Transfer across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 71,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00033"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 71 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00022",
+            "targetId": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Invariant Validation appears to validate Accounting across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 71,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Total confidence changed by -9.",
+                "Independent source support changed by -2.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00047"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 71 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00024",
+            "targetId": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to bound Settlement across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 77,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Total confidence changed by -3.",
+                "Independent source support changed by -1.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00004"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 77 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00025",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Accounting across 2 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 79,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Total confidence changed by -1.",
+                "Independent source support changed by -3.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00005"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 79 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00026",
+            "targetId": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Embedded Value appears to enable Reservation across 3 independent sources.",
+            "action": "WEAKEN",
+            "priority": "MEDIUM",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 80,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Total confidence changed by -20.",
+                "Investigate which source or relation caused the recent loss of confidence or support."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00025"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision WEAKEN was generated from 1 scientific critique(s) with average robustness 80 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00017",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "action": "REVIEW",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 70,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Latest evidence history contains only 0 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00093"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision REVIEW was generated from 1 scientific critique(s) with average robustness 70 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00023",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "action": "REVIEW",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 72,
+            "highestFalsificationRisk": "MODERATE",
+            "reasons": [
+                "Latest confidence is 52.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00092"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision REVIEW was generated from 1 scientific critique(s) with average robustness 72 and highest falsification risk MODERATE."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00027",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "OWNERSHIP-APPEARS-TO-CONSTRAIN-AUTHORITY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 82,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00083"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 82 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00028",
+            "targetId": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "OWNERSHIP-APPEARS-TO-CONSTRAIN-UPGRADEABILITY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 82,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00084"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 82 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00029",
+            "targetId": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SECURITY-CONSIDERATIONS-APPEARS-TO-CONSTRAIN-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 82,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00088"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 82 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00030",
+            "targetId": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SPECIFICATION-APPEARS-TO-ENABLE-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 82,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00090"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 82 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00031",
+            "targetId": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "STANDARDIZATION-APPEARS-TO-ENABLE-INTEROPERABILITY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 82,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 62.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00091"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 82 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00032",
+            "targetId": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "AUDITEVIDENCE-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00048"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00033",
+            "targetId": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "BURN-APPEARS-TO-CONSTRAIN-SUPPLY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00050"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00034",
+            "targetId": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00053"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00035",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00056"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00036",
+            "targetId": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00057"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00037",
+            "targetId": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00058"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00038",
+            "targetId": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00059"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00039",
+            "targetId": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-ENABLE-MULTIASSETACCOUNTING",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00061"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00040",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-SUPPORT-TRANSFER",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00063"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00041",
+            "targetId": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00064"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00042",
+            "targetId": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00069"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00043",
+            "targetId": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00074"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00044",
+            "targetId": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00075"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00045",
+            "targetId": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00076"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00046",
+            "targetId": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00077"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00047",
+            "targetId": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00079"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00048",
+            "targetId": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "NEGATIVETESTING-APPEARS-TO-SUPPORT-SAFETYCONSTRAINT",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 84,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 64.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00082"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 84 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00049",
+            "targetId": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC8060 appears to enable IERC8060Reservable across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00002"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00050",
+            "targetId": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Deterministic Execution appears to require Accounting across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00003"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00051",
+            "targetId": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reentrancyguard appears to constrain Settlement across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00006"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00052",
+            "targetId": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Burn appears to enable Settlement across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00007"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00053",
+            "targetId": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC4626 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00008"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00054",
+            "targetId": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP2612 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00009"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00055",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC20 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00010"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00056",
+            "targetId": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to enable Ownership across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00011"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00057",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC721 appears to support Transfer across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00012"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00058",
+            "targetId": "EIP165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP165 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00013"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00059",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP712 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00014"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00060",
+            "targetId": "EIP7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7562 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00015"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00061",
+            "targetId": "EIP7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7579 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00016"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00062",
+            "targetId": "EIP7702-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "EIP7702 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00017"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00063",
+            "targetId": "ERC1271-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC1271 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00018"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00064",
+            "targetId": "ERC4337-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC4337 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00019"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00065",
+            "targetId": "ERC7562-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7562 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00020"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00066",
+            "targetId": "ERC7579-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7579 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00021"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00067",
+            "targetId": "ERC7739-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7739 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00022"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00068",
+            "targetId": "ERC7821-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "ERC7821 appears to support Standardization across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00023"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00069",
+            "targetId": "INTEROPERABILITY-APPEARS-TO-SUPPORT-COMPOSITION",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Interoperability appears to support Composition across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00024"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00070",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING-ACROSS-2-OBSERVED-SOURCE-IDENTITIES",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Accounting across 2 observed source identities.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 0.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00030"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00071",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "EVIDENCE_HISTORY",
+            "statement": "Reservation appears to constrain Settlement across 2 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 85,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Maximum source diversity is only 2.",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00034"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 85 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00072",
+            "targetId": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "AUTHORITY-APPEARS-TO-CONSTRAIN-TRANSFER",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 86,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00049"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 86 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00073",
+            "targetId": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-ENABLE-FUNGIBLEACCOUNTING",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 86,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00066"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 86 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00074",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-SUPPORT-TRANSFER",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 86,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00068"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 86 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00075",
+            "targetId": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-ENABLE-OWNERSHIP",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 86,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00071"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 86 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00076",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-SUPPORT-TRANSFER",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 86,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 66.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00073"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 86 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00077",
+            "targetId": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP2612-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00054"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00078",
+            "targetId": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EIP712-APPEARS-TO-SUPPORT-SIGNATUREAUTHORIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00055"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00079",
+            "targetId": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC1155-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00062"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00080",
+            "targetId": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC165-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00065"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00081",
+            "targetId": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC20-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00067"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00082",
+            "targetId": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC4626-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00070"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00083",
+            "targetId": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC721-APPEARS-TO-SUPPORT-STANDARDIZATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00072"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00084",
+            "targetId": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "MINT-APPEARS-TO-ENABLE-SUPPLY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00081"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00085",
+            "targetId": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "SIGNATUREAUTHORIZATION-APPEARS-TO-ENABLE-AUTHORITY",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 88,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Latest evidence history contains only 2 independent source(s).",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00089"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 88 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00086",
+            "targetId": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "BURN-APPEARS-TO-ENABLE-SETTLEMENT",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00051"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00087",
+            "targetId": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "DETERMINISTIC-EXECUTION-APPEARS-TO-REQUIRE-ACCOUNTING",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00052"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00088",
+            "targetId": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "ERC8060-APPEARS-TO-ENABLE-IERC8060RESERVABLE",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00078"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00089",
+            "targetId": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "INVARIANT-VALIDATION-APPEARS-TO-VALIDATE-ACCOUNTING",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00080"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00090",
+            "targetId": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "REENTRANCYGUARD-APPEARS-TO-CONSTRAIN-SETTLEMENT",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00085"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00091",
+            "targetId": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-BOUND-SETTLEMENT",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00086"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00092",
+            "targetId": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "RESERVATION-APPEARS-TO-CONSTRAIN-ACCOUNTING",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 90,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest evidence history contains only 2 independent source(s).",
+                "Collect evidence from at least one additional independent implementation or specification."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00087"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 90 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00093",
+            "targetId": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "EMBEDDED-VALUE-APPEARS-TO-ENABLE-RESERVATION",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 1,
+            "averageRobustnessScore": 98,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "Latest confidence is 68.",
+                "Do not promote this knowledge until stronger direct evidence increases confidence."
+            ],
+            "sourceCritiqueIds": [
+                "SCIENTIFIC-CRITIQUE-00060"
+            ],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "Revision decision KEEP was generated from 1 scientific critique(s) with average robustness 98 and highest falsification risk LOW."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00094",
+            "targetId": "TESTING-APPEARS-TO-SUPPORT-INVARIANT-VALIDATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "Testing appears to support Invariant Validation across 3 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 0,
+            "averageRobustnessScore": 100,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "No active scientific critique requires revision in the current campaign."
+            ],
+            "sourceCritiqueIds": [],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "The knowledge state is retained because no active critique currently requires revision."
+        },
+        {
+            "revisionId": "SCIENTIFIC-REVISION-00095",
+            "targetId": "TESTING-APPEARS-TO-VALIDATE-INVARIANT-VALIDATION",
+            "targetEvidenceIds": [],
+            "targetType": "KNOWLEDGE",
+            "statement": "Testing appears to validate Invariant Validation across 3 independent sources.",
+            "action": "KEEP",
+            "priority": "LOW",
+            "critiqueCount": 0,
+            "averageRobustnessScore": 100,
+            "highestFalsificationRisk": "LOW",
+            "reasons": [
+                "No active scientific critique requires revision in the current campaign."
+            ],
+            "sourceCritiqueIds": [],
+            "requiresExperiment": false,
+            "requiresHumanReview": false,
+            "explanation": "The knowledge state is retained because no active critique currently requires revision."
+        }
+    ],
+    "statistics": {
+        "total": 95,
+        "keep": 69,
+        "review": 2,
+        "weaken": 23,
+        "challenge": 1,
+        "retest": 0,
+        "refuteCandidate": 0,
+        "requiringExperiment": 1,
+        "requiringHumanReview": 0
+    },
+    "errors": []
+}

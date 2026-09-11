@@ -1,0 +1,769 @@
+{
+    "graphId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+    "discoveredAt": "2026-09-03T23:17:54.981Z",
+    "findings": [
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-FINDING-0001",
+            "type": "PROTOCOL_CLUSTER",
+            "title": "Protocol cluster detected",
+            "description": "The research source mentions 108 protocols, indicating a multi-protocol composition context.",
+            "evidence": [
+                "ERC7579",
+                "ERC2771",
+                "ERC7739",
+                "ERC4337",
+                "ERC7913",
+                "ERC20",
+                "ERC1271",
+                "ERC1155",
+                "ERC7786",
+                "ERC165",
+                "IERC6909ContentURI",
+                "IERC6909TokenSupply",
+                "IERC6909Metadata",
+                "ERC6909",
+                "IERC20",
+                "ERC721",
+                "ERC7201",
+                "ERC6093",
+                "IERC20Metadata",
+                "IERC7579Module",
+                "ERC4626",
+                "ERC1967",
+                "ERC6372",
+                "IERC4337",
+                "ERC3009",
+                "IERC1155Receiver",
+                "ERC7802",
+                "ERC7702",
+                "ERC7930",
+                "IERC7786",
+                "IERC7751",
+                "IERC7821",
+                "ERC7821",
+                "IERC6909",
+                "ERC1363",
+                "IERC1967",
+                "ERC1167",
+                "ERC7674",
+                "IERC721Receiver",
+                "ERC777",
+                "ERC1820",
+                "ERC1822",
+                "ERC5267",
+                "IERC20Upgradeable",
+                "IERC5313",
+                "IERC4906",
+                "ERC4906",
+                "IERC20Permit",
+                "ERC2981",
+                "ERC712",
+                "ERC3156",
+                "ERC2098",
+                "IERC1820Registry",
+                "IERC165",
+                "ERC6900",
+                "IERC1271",
+                "IERC7579Validator",
+                "IERC7579Execution",
+                "IERC7579AccountConfig",
+                "IERC7579ModuleConfig",
+                "IERC7579",
+                "IERC7579Hook",
+                "ERC7562",
+                "IERC721",
+                "IERC1155",
+                "IERC1155Errors",
+                "IERC6093",
+                "IERC721Errors",
+                "IERC7802",
+                "IERC7786GatewaySource",
+                "IERC7786Recipient",
+                "IERC5805",
+                "IERC6372",
+                "ERC5805",
+                "IERC1822",
+                "IERC1822Proxiable",
+                "IERC3009",
+                "IERC3009Cancel",
+                "IERC20Errors",
+                "IERC7674",
+                "IERC1155MetadataURI",
+                "IERC1363",
+                "IERC1363Receiver",
+                "IERC1363Spender",
+                "IERC1820Implementer",
+                "IERC2309",
+                "ERC2309",
+                "IERC2612",
+                "IERC2981",
+                "IERC3156",
+                "IERC3156FlashBorrower",
+                "IERC3156FlashLender",
+                "ERC7766",
+                "IERC4626",
+                "IERC5267",
+                "IERC721Enumerable",
+                "IERC721Metadata",
+                "ERC7751",
+                "IERC777",
+                "IERC777Sender",
+                "IERC777Recipient",
+                "IERC7913",
+                "IERC7913SignatureVerifier",
+                "ERC2612",
+                "ERC7572",
+                "ERC191",
+                "ERC6942",
+                "ERC7390"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-FINDING-0002",
+            "type": "CAPABILITY_CLUSTER",
+            "title": "Capability cluster detected",
+            "description": "The research source mentions 7 capabilities, indicating layered protocol behavior.",
+            "evidence": [
+                "Reservation",
+                "Accounting",
+                "Settlement",
+                "EmbeddedValue",
+                "InvariantValidation",
+                "Testing",
+                "Redemption"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00001",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "`ERC4337Utils`: in `parseValidationData`, resolve `validUntil == 0` to `type(uint48).max` and only strip `BLOCK_RANGE_FLAG` when a block range is detected. Propagates to `packValidationData`, `getValidationData`, `combineValidationData` and `PaymasterSigner`, matching the EntryPoint's behavior.",
+            "evidence": [
+                "GITHUB-CLAIM-00001"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00002",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "`MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`.",
+            "evidence": [
+                "GITHUB-CLAIM-00002"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00003",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "`super` must be called in `_update` overrides, in `supportsInterface` overrides, and whenever an extension builds on base behavior. Skipping `super` is only acceptable for genuinely new functions that have no base implementation.",
+            "evidence": [
+                "GITHUB-CLAIM-00003"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00004",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "`supportsInterface` always follows the pattern:",
+            "evidence": [
+                "GITHUB-CLAIM-00004"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00005",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "interfaceId == type(X).interfaceId || super.supportsInterface(interfaceId)",
+            "evidence": [
+                "GITHUB-CLAIM-00005"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00006",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "`scripts/minimize-pragma.js` builds a dependency graph from compiled artifacts, compiles each file against every candidate `solc`, and writes back the lowest version that compiles for that file and is compatible with all of its dependents. The script picks the syntax for you (`>=` for interfaces, `^` for implementations and libraries) and respects the `minVersionForContracts` floor (default `0.8.20`).",
+            "evidence": [
+                "GITHUB-CLAIM-00006"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00007",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Only use `unchecked` with an inline invariant comment that names the bound. The comment may be omitted only when the reason is immediately apparent from the line directly above:",
+            "evidence": [
+                "GITHUB-CLAIM-00007"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00008",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "| Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |",
+            "evidence": [
+                "GITHUB-CLAIM-00008"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00009",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it.",
+            "evidence": [
+                "GITHUB-CLAIM-00009"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00010",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- One sentence. No bullet points, no multi-paragraph prose. The release pipeline composes these into `CHANGELOG.md` automatically.",
+            "evidence": [
+                "GITHUB-CLAIM-00010"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00011",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `address.transfer(value)`, which is like `send` but automatically propagates exceptions, and supports `.gas()`. See https://github.com/ethereum/solidity/issues/610 for more on this.",
+            "evidence": [
+                "GITHUB-CLAIM-00011"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00012",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `ERC6372Utils`: Add utility library for ERC-6372 clock mode validation, supporting block number and timestamp modes with consistency checks. ([#6483](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6483))",
+            "evidence": [
+                "GITHUB-CLAIM-00012"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00013",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `MultiSignerERC7913`: Decode the multisignature payload directly from calldata and return `false` on malformed encoding instead of reverting during `abi.decode`, so paymaster/account validation can surface `SIG_VALIDATION_FAILED` rather than bubble up a revert. The `_validateSignatures` and `_validateThreshold` override parameters change from `bytes[] memory` to `bytes[] calldata`. ([#6642](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6642))",
+            "evidence": [
+                "GITHUB-CLAIM-00013"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00014",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `ERC4337Utils`: The `parseValidationData` now returns a `ValidationRange` as the last return tuple value indicating whether the `validationData` is compared against a timestamp or block number. Developers must update their code to handle this new return value (e.g. `(aggregator, validAfter, validUntil) -> (aggregator, validAfter, validUntil, range)`). ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))",
+            "evidence": [
+                "GITHUB-CLAIM-00014"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00015",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `SignerWebAuthn`: The `_rawSignatureValidation` function now returns `false` when the signature is not a valid WebAuthn authentication assertion. P256 fallback is removed. Developers can add it back by overriding the function. ([#6337](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6337))",
+            "evidence": [
+                "GITHUB-CLAIM-00015"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00016",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `ERC4337Utils`: Added variants of `packValidationData(address,uint48,uint48)` and `packValidationData(bool,uint48,uint48)` that receive a `ValidationRange` argument, could be timestamp or block number. Similarly, the `parseValidationData` now returns a `ValidationRange` too. ([#6215](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/6215))",
+            "evidence": [
+                "GITHUB-CLAIM-00016"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00017",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `ERC165Checker`: Ensure the `supportsERC165` function returns false if the target reverts during the `supportsInterface(0xffffffff)` call. ([#5880](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5880))",
+            "evidence": [
+                "GITHUB-CLAIM-00017"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00018",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `AccountERC7579`: Extension of `Account` that implements support for ERC-7579 modules of type executor, validator, and fallback handler. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))",
+            "evidence": [
+                "GITHUB-CLAIM-00018"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00019",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `AccountERC7579Hooked`: Extension of `AccountERC7579` that implements support for ERC-7579 hook modules. ([#5657](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5657))",
+            "evidence": [
+                "GITHUB-CLAIM-00019"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00020",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "- `ERC20Bridgeable`: Implementation of ERC-7802 that makes an ERC-20 compatible with crosschain bridges. ([#5735](https://github.com/OpenZeppelin/openzeppelin-contracts/pull/5735))",
+            "evidence": [
+                "GITHUB-CLAIM-00020"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00021",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "| Fuzzing (Foundry)             | Math-heavy code, data structures, complex invariants not suited for FV                                      |",
+            "evidence": [
+                "GITHUB-CLAIM-00021"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00022",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Default to Hardhat+Chai unit tests, add Halmos for invariants you can express symbolically, escalate to Certora when state-machine coverage requires it.",
+            "evidence": [
+                "GITHUB-CLAIM-00022"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00023",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "A bug fix must add a minimal test that reproduces the bug, committed alongside the fix. The objective is 100% branch coverage per PR.",
+            "evidence": [
+                "GITHUB-CLAIM-00023"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00024",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Manual mocks live in `contracts/mocks/` (not `test/`) and mirror the `contracts/` directory layout. Write a manual mock only when `hardhat-exposed` cannot give you what you need:",
+            "evidence": [
+                "GITHUB-CLAIM-00024"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00025",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Any contract that implements ERC-165 must explicitly indicate support of",
+            "evidence": [
+                "GITHUB-CLAIM-00025"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00026",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "* This function call must use less than 30 000 gas.",
+            "evidence": [
+                "GITHUB-CLAIM-00026"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00027",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('non-admin cannot grant role to other accounts', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00027"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00028",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('non-admin cannot revoke role', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00028"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00029",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "'DefaultAdminTransferCanceled', // Cancellation is always emitted since it was never accepted",
+            "evidence": [
+                "GITHUB-CLAIM-00029"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00030",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "if (roleId === roles.PUBLIC.id) continue; // Every address belong to public and is locked",
+            "evidence": [
+                "GITHUB-CLAIM-00030"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00031",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "if (roleId === roles.ADMIN.id) continue; // Admin set during construction and is locked",
+            "evidence": [
+                "GITHUB-CLAIM-00031"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00032",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": ".to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedRole')",
+            "evidence": [
+                "GITHUB-CLAIM-00032"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00033",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": ".to.be.revertedWithCustomError(this.manager, 'AccessManagerLockedFunction')",
+            "evidence": [
+                "GITHUB-CLAIM-00033"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00034",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('cannot execute a setAuthority call when a target admin delay is set', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00034"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00035",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "cannot update directly - there is a delay",
+            "evidence": [
+                "GITHUB-CLAIM-00035"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00036",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "cannot bypass via execute either - targetAdminDelay is enforced for setAuthority",
+            "evidence": [
+                "GITHUB-CLAIM-00036"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00037",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "verify that accountA cannot accept ownership anymore",
+            "evidence": [
+                "GITHUB-CLAIM-00037"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00038",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "domain cannot be fetched using getDomain(mock) before the mock is deployed",
+            "evidence": [
+                "GITHUB-CLAIM-00038"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00039",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('cannot set weight to non-existent signer', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00039"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00040",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('cannot set weight to 0', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00040"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00041",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": ").to.be.revertedWithCustomError(this.mock, 'ERC7579CannotDecodeFallbackData');",
+            "evidence": [
+                "GITHUB-CLAIM-00041"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00042",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('prices the postOp unused-gas penalty so an inflated paymasterPostOpGasLimit cannot drain the paymaster', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00042"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00043",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "the inflated postOp limit. The token charge (tokenPrice = 2) must cover it, i.e. the user pays for the",
+            "evidence": [
+                "GITHUB-CLAIM-00043"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00044",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "it('rejects a guaranteed op whose paymasterPostOpGasLimit cannot cover the refund', async function () {",
+            "evidence": [
+                "GITHUB-CLAIM-00044"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00045",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Guarantor must propagate the reduced value returned by super, otherwise the postOp context",
+            "evidence": [
+                "GITHUB-CLAIM-00045"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00046",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "(calldata-padded with zeros) match the marker, so a 2-byte initCode must bind the delegate too.",
+            "evidence": [
+                "GITHUB-CLAIM-00046"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00047",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "18 zeros, so a nonzero tail makes this a regular factory deployment. The digest must therefore",
+            "evidence": [
+                "GITHUB-CLAIM-00047"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00048",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "assertEq(hashA, hashB, \"digest must not bind a delegate for a non-EIP-7702 initCode\");",
+            "evidence": [
+                "GITHUB-CLAIM-00048"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00049",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "assertNotEq(hashA, hashB, \"digest must bind the effective EIP-7702 delegate\");",
+            "evidence": [
+                "GITHUB-CLAIM-00049"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00050",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Parts of this test file are adapted from Adam Egyed (@adamegyed) proof of concept available at:",
+            "evidence": [
+                "GITHUB-CLAIM-00050"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00051",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains README research context.",
+            "evidence": [
+                "GITHUB-CLAIM-00051"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00052",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains contract or interface material.",
+            "evidence": [
+                "GITHUB-CLAIM-00052"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00053",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains test evidence.",
+            "evidence": [
+                "GITHUB-CLAIM-00053"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00054",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains documentation material.",
+            "evidence": [
+                "GITHUB-CLAIM-00054"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00055",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository contains invariant-like statements.",
+            "evidence": [
+                "GITHUB-CLAIM-00055"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00056",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository exposes 2718 executable test or invariant target(s).",
+            "evidence": [
+                "GITHUB-CLAIM-00056"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00057",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Repository exposes both Foundry and Hardhat configuration.",
+            "evidence": [
+                "GITHUB-CLAIM-00057"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00058",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "EmbeddedValue ENABLES Reservation: GitHub repository claims indicate that embedded ERC8060 value enables reservation accounting.",
+            "evidence": [
+                "GITHUB-CLAIM-00058"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00059",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reservation PROTECTS Accounting: GitHub repository claims indicate that reservation separates locked value from available value.",
+            "evidence": [
+                "GITHUB-CLAIM-00059"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00060",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Reservation CONSTRAINS Settlement: GitHub repository claims indicate that reservation can bound deterministic settlement.",
+            "evidence": [
+                "GITHUB-CLAIM-00060"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00061",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety.",
+            "evidence": [
+                "GITHUB-CLAIM-00061"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00062",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation.",
+            "evidence": [
+                "GITHUB-CLAIM-00062"
+            ],
+            "confidence": 100
+        },
+        {
+            "findingId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS-CLAIM-GITHUB-CLAIM-00063",
+            "type": "SOURCE_CLAIM",
+            "title": "Research claim detected",
+            "description": "Redemption CONSUMES EmbeddedValue: GitHub repository claims indicate redemption consumes embedded value.",
+            "evidence": [
+                "GITHUB-CLAIM-00063"
+            ],
+            "confidence": 100
+        }
+    ]
+}

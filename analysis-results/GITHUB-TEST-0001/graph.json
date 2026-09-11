@@ -1,0 +1,97 @@
+{
+    "graphId": "GRAPH-GITHUB-TEST-0001",
+    "generatedAt": "2026-07-06T18:33:06.424Z",
+    "nodes": [
+        {
+            "id": "GITHUB-TEST-0001",
+            "type": "ResearchSource",
+            "label": "GITHUB-TEST-0001"
+        },
+        {
+            "id": "ERC8060",
+            "type": "Protocol",
+            "label": "ERC8060"
+        },
+        {
+            "id": "IERC8060Reservable",
+            "type": "Protocol",
+            "label": "IERC8060Reservable"
+        },
+        {
+            "id": "EmbeddedValue",
+            "type": "Capability",
+            "label": "EmbeddedValue"
+        },
+        {
+            "id": "Reservation",
+            "type": "Capability",
+            "label": "Reservation"
+        },
+        {
+            "id": "Accounting",
+            "type": "Capability",
+            "label": "Accounting"
+        },
+        {
+            "id": "GITHUB-TEST-0001-CLAIM-0001",
+            "type": "Claim",
+            "label": "Reference implementation of reservable accounting for ERC-8060."
+        }
+    ],
+    "edges": [
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "ERC8060",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "IERC8060Reservable",
+            "relation": "MENTIONS_PROTOCOL",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "EmbeddedValue",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "Reservation",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "Accounting",
+            "relation": "MENTIONS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "ERC8060",
+            "to": "EmbeddedValue",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Reservation",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "IERC8060Reservable",
+            "to": "Accounting",
+            "relation": "IMPLEMENTS_CAPABILITY",
+            "evidence": "GITHUB-TEST-0001"
+        },
+        {
+            "from": "GITHUB-TEST-0001",
+            "to": "GITHUB-TEST-0001-CLAIM-0001",
+            "relation": "SUPPORTS_CLAIM",
+            "evidence": "https://github.com/ten-io-meta/erc8060-reservable"
+        }
+    ]
+}

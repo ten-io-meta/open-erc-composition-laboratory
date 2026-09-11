@@ -1,0 +1,57 @@
+{
+    "sourceId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+    "reasonedAt": "2026-09-03T23:17:54.981Z",
+    "relations": [
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Settlement",
+            "relation": "CONSTRAINS",
+            "reason": "Reservation constrains settlement by defining the maximum reserved value available for settlement.",
+            "evidence": [
+                "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Settlement",
+            "toCapability": "Reservation",
+            "relation": "DEPENDS_ON",
+            "reason": "Settlement depends on reserved value to remain bounded by deterministic accounting.",
+            "evidence": [
+                "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Reservation",
+            "toCapability": "Accounting",
+            "relation": "PROTECTS",
+            "reason": "Reservation protects accounting by separating locked value from available value.",
+            "evidence": [
+                "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "Accounting",
+            "toCapability": "Reservation",
+            "relation": "ACCOUNTS_FOR",
+            "reason": "Accounting tracks reserved value through locked and available value boundaries.",
+            "evidence": [
+                "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+            ],
+            "confidence": 100
+        },
+        {
+            "fromCapability": "EmbeddedValue",
+            "toCapability": "Reservation",
+            "relation": "ENABLES",
+            "reason": "Embedded value enables reservable accounting by providing value held inside the token context.",
+            "evidence": [
+                "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+            ],
+            "confidence": 90
+        }
+    ],
+    "errors": []
+}

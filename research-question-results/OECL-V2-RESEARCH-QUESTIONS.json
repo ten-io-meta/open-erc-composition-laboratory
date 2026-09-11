@@ -1,0 +1,28 @@
+{
+    "generatedAt": "2026-09-03T23:17:16.319Z",
+    "questions": [
+        {
+            "questionId": "QUESTION-00001",
+            "question": "What additional independent evidence would strengthen \"Reservation-Constrained Accounting Theory\"?",
+            "sourceType": "THEORY",
+            "relatedId": "THEORY-00001",
+            "priority": "MEDIUM",
+            "rationale": "Reservation appears to constrain accounting boundaries and reduce unsafe settlement ambiguity across independent sources."
+        },
+        {
+            "questionId": "QUESTION-00002",
+            "question": "What evidence is needed to move \"Reservation appears to constrain Accounting across 2 observed source identities.\" beyond preliminary confidence?",
+            "sourceType": "LOW_CONFIDENCE",
+            "relatedId": "CONFIDENCE-00001",
+            "priority": "MEDIUM",
+            "rationale": "Calculated confidence is 82 with 0 independent sources."
+        }
+    ],
+    "statistics": {
+        "questions": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+    },
+    "errors": []
+}

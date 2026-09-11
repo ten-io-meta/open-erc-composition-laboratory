@@ -1,0 +1,22 @@
+{
+    "sourceId": "GITHUB-THIRDWEB-DEV-CONTRACTS",
+    "evidenceType": "GITHUB_REPOSITORY",
+    "quality": "VERY_HIGH",
+    "reproducible": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": true,
+    "hasCoverage": false,
+    "hasCitation": false,
+    "confidenceWeight": 1,
+    "observations": [
+        "README: true",
+        "Package metadata: true",
+        "Tests: true",
+        "Contracts/interfaces: true",
+        "Documentation: true",
+        "CI: true",
+        "Citation: false",
+        "Evidence score: 90"
+    ]
+}

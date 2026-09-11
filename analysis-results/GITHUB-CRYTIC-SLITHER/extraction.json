@@ -1,0 +1,272 @@
+{
+    "success": true,
+    "extraction": {
+        "sourceId": "GITHUB-CRYTIC-SLITHER",
+        "extractedAt": "2026-09-03T23:17:15.928Z",
+        "protocols": [
+            "EIP2612",
+            "ERC721",
+            "ERC223",
+            "ERC777",
+            "EIP777",
+            "EIP721",
+            "ERC165",
+            "EIP165",
+            "ERC1155",
+            "EIP1155",
+            "ERC1820",
+            "EIP1820",
+            "ERC4524",
+            "EIP4524",
+            "ERC1363",
+            "EIP1363",
+            "ERC2612",
+            "ERC4626",
+            "EIP4626",
+            "ERC20"
+        ],
+        "capabilities": [
+            "Accounting",
+            "Reservation",
+            "Authority",
+            "Transfer",
+            "Burn",
+            "Mint",
+            "Ownership",
+            "Upgradeability",
+            "AccessControl",
+            "Verification",
+            "InvariantValidation",
+            "Standardization",
+            "Interoperability"
+        ],
+        "claims": [
+            {
+                "claimId": "GITHUB-CLAIM-00001",
+                "text": "Standardization ENABLES Interoperability.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00002",
+                "text": "Authority CONSTRAINS Transfer.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00003",
+                "text": "Reservation CONSTRAINS Accounting.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00004",
+                "text": "InvariantValidation VALIDATES Accounting.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00005",
+                "text": "AccessControl IMPLEMENTS Authority.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00006",
+                "text": "Ownership CONSTRAINS Upgradeability.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00007",
+                "text": "EIP2612 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00008",
+                "text": "ERC721 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00009",
+                "text": "ERC223 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00010",
+                "text": "ERC777 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00011",
+                "text": "EIP777 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00012",
+                "text": "EIP721 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00013",
+                "text": "ERC165 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00014",
+                "text": "EIP165 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00015",
+                "text": "ERC1155 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00016",
+                "text": "EIP1155 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00017",
+                "text": "ERC1820 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00018",
+                "text": "EIP1820 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00019",
+                "text": "ERC4524 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00020",
+                "text": "EIP4524 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00021",
+                "text": "ERC1363 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00022",
+                "text": "EIP1363 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00023",
+                "text": "ERC2612 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00024",
+                "text": "ERC4626 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00025",
+                "text": "EIP4626 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00026",
+                "text": "ERC20 SUPPORTS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00027",
+                "text": "ERC20 ENABLES FungibleAccounting.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00028",
+                "text": "ERC20 SUPPORTS Transfer.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00029",
+                "text": "ERC721 ENABLES Ownership.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00030",
+                "text": "ERC721 SUPPORTS Transfer.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00031",
+                "text": "Mint ENABLES Supply.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00032",
+                "text": "SignatureAuthorization ENABLES Authority.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00033",
+                "text": "EIP712 SUPPORTS SignatureAuthorization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00034",
+                "text": "Transfer PRESERVES Accounting.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00035",
+                "text": "Interoperability SUPPORTS Composition.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00036",
+                "text": "Specification ENABLES Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            },
+            {
+                "claimId": "GITHUB-CLAIM-00037",
+                "text": "SecurityConsiderations CONSTRAINS Standardization.",
+                "evidence": "GITHUB-CRYTIC-SLITHER",
+                "confidence": 70
+            }
+        ],
+        "invariants": [],
+        "relationships": [],
+        "errors": []
+    },
+    "errors": []
+}

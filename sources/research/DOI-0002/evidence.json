@@ -1,0 +1,16 @@
+{
+    "sourceId": "DOI-0002",
+    "evidenceType": "RESEARCH_ARTIFACT",
+    "quality": "MEDIUM",
+    "reproducible": true,
+    "hasImplementation": true,
+    "hasTests": true,
+    "hasInvariants": true,
+    "hasCoverage": true,
+    "hasCitation": true,
+    "confidenceWeight": 0.5,
+    "observations": [
+        "Temporary cloned research artifact used for multi-source pipeline validation.",
+        "Should be replaced with an independent source before scientific interpretation."
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "sourceId": "DOI-0001",
+    "success": true,
+    "extraction": {
+        "sourceId": "DOI-0001",
+        "extractedAt": "2026-06-29T00:49:54.055Z",
+        "protocols": [
+            "ERC8004",
+            "ERC8217",
+            "ERC8281",
+            "ERC8299",
+            "ERC8001",
+            "ERC8312",
+            "ERC8301",
+            "ERC8263",
+            "ERC8274",
+            "ReceiptOS",
+            "ERC8275",
+            "ERC8060",
+            "IERC8060Reservable"
+        ],
+        "capabilities": [
+            "AgentIdentity",
+            "IdentityBinding",
+            "InputProvenance",
+            "SpineCommitment",
+            "Authority",
+            "Cursor",
+            "Workflow",
+            "Anchoring",
+            "Verification",
+            "Eligibility",
+            "Settlement",
+            "EmbeddedValue",
+            "Reservation",
+            "Accounting"
+        ],
+        "invariants": [],
+        "relationships": [],
+        "claims": [
+            {
+                "claimId": "DOI-0001-CLAIM-0001",
+                "text": "Experimental research on deterministic protocol composition and interoperability for Ethereum. Research validation suite for deterministic protocol composition around ERC-8060 Reservable and interoperable Ethereum protocol layers.",
+                "evidence": "DOI",
+                "confidence": 100
+            }
+        ]
+    },
+    "errors": []
+}

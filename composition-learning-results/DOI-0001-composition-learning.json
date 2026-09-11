@@ -1,0 +1,60 @@
+{
+    "learnedAt": "2026-09-03T23:18:00.692Z",
+    "observations": [
+        {
+            "observationId": "OBS-00001",
+            "claimId": "COMP-EVIDENCE-00001",
+            "protocolA": "ERC20",
+            "protocolB": "ERC1155",
+            "capabilityA": "InvariantValidation",
+            "capabilityB": "Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+            "relation": "VALIDATES",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 25,
+            "evidence": [
+                "claim:InvariantValidation VALIDATES Accounting: GitHub repository contains invariant-like statements related to accounting safety"
+            ]
+        },
+        {
+            "observationId": "OBS-00002",
+            "claimId": "COMP-EVIDENCE-00002",
+            "protocolA": "ERC20",
+            "protocolB": "ERC1155",
+            "capabilityA": "Testing",
+            "capabilityB": "InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+            "relation": "VALIDATES",
+            "status": "INCONCLUSIVE",
+            "overallConfidence": 25,
+            "evidence": [
+                "claim:Testing VALIDATES InvariantValidation: GitHub repository contains test evidence supporting invariant validation"
+            ]
+        }
+    ],
+    "knowledge": {
+        "generatedAt": "2026-09-03T23:18:00.692Z",
+        "totalObservations": 2,
+        "statistics": [
+            {
+                "relationKey": "InvariantValidation->VALIDATES->Accounting: GitHub repository contains invariant-like statements related to accounting safety",
+                "protocolPair": "ERC1155+ERC20",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 25,
+                "status": "UNKNOWN"
+            },
+            {
+                "relationKey": "Testing->VALIDATES->InvariantValidation: GitHub repository contains test evidence supporting invariant validation",
+                "protocolPair": "ERC1155+ERC20",
+                "observations": 1,
+                "supported": 0,
+                "candidates": 0,
+                "inconclusive": 1,
+                "averageConfidence": 25,
+                "status": "UNKNOWN"
+            }
+        ]
+    },
+    "errors": []
+}

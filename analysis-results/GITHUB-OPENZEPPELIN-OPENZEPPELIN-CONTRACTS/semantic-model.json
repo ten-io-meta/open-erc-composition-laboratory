@@ -1,0 +1,67 @@
+{
+    "graphId": "GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+    "discoveredAt": "2026-09-03T23:17:54.981Z",
+    "model": {
+        "modelId": "SEMANTIC-GRAPH-GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS",
+        "generatedAt": "2026-09-03T23:17:54.981Z",
+        "capabilities": [
+            {
+                "capabilityId": "Reservation",
+                "label": "Reservation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Accounting",
+                "label": "Accounting",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Settlement",
+                "label": "Settlement",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "EmbeddedValue",
+                "label": "EmbeddedValue",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "InvariantValidation",
+                "label": "InvariantValidation",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Testing",
+                "label": "Testing",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            },
+            {
+                "capabilityId": "Redemption",
+                "label": "Redemption",
+                "protocols": [],
+                "evidence": [
+                    "GITHUB-OPENZEPPELIN-OPENZEPPELIN-CONTRACTS"
+                ]
+            }
+        ],
+        "relationships": []
+    }
+}
