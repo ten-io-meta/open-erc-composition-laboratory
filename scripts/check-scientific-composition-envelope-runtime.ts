@@ -938,14 +938,14 @@ check(
         0 &&
     noBoundaries.envelopes[0]
         .statistics
-        .relationsWithoutKnownBoundaries ===
+        .relationsWithoutCandidateScopedBoundaries ===
         2 &&
     noBoundaries.envelopes[0]
         .relations
         .every(
             relation =>
                 relation.boundaryCoverage ===
-                    "NO_KNOWN_BOUNDARIES" &&
+                    "NO_CANDIDATE_SCOPED_BOUNDARIES" &&
                 relation.compatibilityPolarity ===
                     "INCONCLUSIVE"
         )

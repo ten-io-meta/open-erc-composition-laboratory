@@ -1,5 +1,6 @@
 ﻿export type ScientificCompositionBoundaryKind =
     | "SOURCE_CONSTRAINT"
+    | "NORMATIVE_SOURCE_CONSTRAINT"
     | "REQUIRED_INTERFACE"
     | "AUTHORITY_BOUNDARY"
     | "VALUE_BOUNDARY"

@@ -19,6 +19,10 @@ import type {
 } from "../scientific-source-fact/ScientificSourceFact.js";
 
 import type {
+    ScientificNormativeStatement
+} from "../scientific-normative-statement/ScientificNormativeStatement.js";
+
+import type {
     ScientificCompositionContribution
 } from "../scientific-composition-frame/ScientificCompositionContribution.js";
 
@@ -49,6 +53,9 @@ export interface ScientificProtocolCompositionProfileEngineInput {
 
     sourceFacts:
         ScientificSourceFact[];
+
+    normativeStatements?:
+        ScientificNormativeStatement[];
 
     attributedCapabilities:
         ScientificProtocolAttributedCapability[];
@@ -301,6 +308,50 @@ export class ScientificProtocolCompositionProfileEngine {
 
                 errors.push(
                     `Fact ${fact.factId} belongs to another revision.`
+                );
+
+            }
+
+        }
+
+
+        for (
+            const statement
+            of input.normativeStatements ?? []
+        ) {
+
+            if (
+                statement.protocolId !==
+                input.protocolId
+            ) {
+
+                errors.push(
+                    `Normative statement ${statement.statementId} belongs to ${statement.protocolId}.`
+                );
+
+            }
+
+
+            if (
+                statement.sourceId !==
+                input.sourceId
+            ) {
+
+                errors.push(
+                    `Normative statement ${statement.statementId} belongs to another source.`
+                );
+
+            }
+
+
+            if (
+                input.sourceRevision &&
+                statement.sourceRevision !==
+                    input.sourceRevision
+            ) {
+
+                errors.push(
+                    `Normative statement ${statement.statementId} belongs to another revision.`
                 );
 
             }
@@ -640,6 +691,47 @@ export class ScientificProtocolCompositionProfileEngine {
                 evidenceIds: [
                     fact.factId,
                     fact.observationId
+                ]
+
+            });
+
+        }
+
+
+        /*
+         * Normative documentary statements are distinct from
+         * executable Solidity REQUIRE statements.
+         *
+         * They establish what this participant documents as
+         * required to remain true. They do not establish
+         * candidate compatibility or runtime preservation.
+         */
+        for (
+            const statement
+            of input.normativeStatements ?? []
+        ) {
+
+            boundaries.push({
+
+                boundaryId:
+                    encode([
+                        "SCIENTIFIC-PROTOCOL-NORMATIVE-BOUNDARY",
+                        input.protocolId,
+                        statement.statementId
+                    ]),
+
+                participantId:
+                    input.protocolId,
+
+                kind:
+                    "NORMATIVE_SOURCE_CONSTRAINT",
+
+                subject:
+                    statement.normalizedText,
+
+                evidenceIds: [
+                    statement.statementId,
+                    statement.observationId
                 ]
 
             });

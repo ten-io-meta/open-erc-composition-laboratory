@@ -31,6 +31,10 @@ import type {
 } from "./ScientificCompositionEnvelope.js";
 
 
+import type {
+    ScientificCandidateBoundaryRelevanceAssessment
+} from "../scientific-candidate-boundary-relevance/ScientificCandidateBoundaryRelevanceAssessment.js";
+
 export interface ScientificCompositionEnvelopeEngineInput {
 
     compositionSets:
@@ -41,6 +45,10 @@ export interface ScientificCompositionEnvelopeEngineInput {
 
     candidateCompatibility:
         ScientificCompositionCandidateCompatibilityResult;
+
+
+    candidateBoundaryRelevanceAssessments?:
+        ScientificCandidateBoundaryRelevanceAssessment[];
 
     candidateEvaluationGraph:
         ScientificCompositionCandidateEvaluationGraphResult;
@@ -879,8 +887,8 @@ export class ScientificCompositionEnvelopeEngine {
                     boundaryCoverage:
                         edge.boundaryIds.length ===
                             0
-                            ? "NO_KNOWN_BOUNDARIES"
-                            : "KNOWN_BOUNDARIES_PRESENT",
+                            ? "NO_CANDIDATE_SCOPED_BOUNDARIES"
+                            : "CANDIDATE_SCOPED_BOUNDARIES_PRESENT",
 
                     ...(
                         edge.kind ===
@@ -983,8 +991,39 @@ export class ScientificCompositionEnvelopeEngine {
 
 
                         if (
-                            evaluation ===
+                        evaluation ===
                             undefined
+                    ) {
+
+                        const relevanceAssessments =
+                            input.candidateBoundaryRelevanceAssessments ===
+                                undefined
+                                ? []
+                                : input.candidateBoundaryRelevanceAssessments
+                                    .filter(
+                                        relevance =>
+                                            relevance.candidateId ===
+                                                relation.candidateId &&
+                                            relevance.participantId ===
+                                                participant.participantId &&
+                                            relevance.boundaryId ===
+                                                boundary.boundaryId
+                                    );
+
+
+                        const relevance =
+                            relevanceAssessments.length ===
+                                1
+                                ? relevanceAssessments[0]
+                                : undefined;
+
+
+                        /*
+                         * Legacy callers preserve the original invariant.
+                         */
+                        if (
+                            input.candidateBoundaryRelevanceAssessments ===
+                                undefined
                         ) {
 
                             errors.push(
@@ -994,6 +1033,108 @@ export class ScientificCompositionEnvelopeEngine {
                             continue;
 
                         }
+
+
+                        /*
+                         * Relevance-aware callers fail closed when the
+                         * candidate/boundary relevance identity is absent
+                         * or duplicated.
+                         */
+                        if (
+                            relevanceAssessments.length !==
+                                1 ||
+                            relevance ===
+                                undefined
+                        ) {
+
+                            errors.push(
+                                `Known boundary ${boundary.boundaryId} must have exactly one relevance assessment for incident candidate ${relation.candidateId}.`
+                            );
+
+                            continue;
+
+                        }
+
+
+                        /*
+                         * A RELEVANT boundary belongs to candidate
+                         * compatibility and may not disappear.
+                         */
+                        if (
+                            relevance.relevance ===
+                                "RELEVANT"
+                        ) {
+
+                            errors.push(
+                                `Relevant boundary ${boundary.boundaryId} is missing from incident candidate ${relation.candidateId}.`
+                            );
+
+                            continue;
+
+                        }
+
+
+                        /*
+                         * OUT_OF_SCOPE and UNRESOLVED are not candidate
+                         * compatibility evaluations. The protocol boundary
+                         * remains present in the Envelope, with zero
+                         * candidate evaluations.
+                         */
+                        continue;
+
+                    }
+
+
+                    /*
+                     * If an evaluation DOES exist and relevance ingress is
+                     * present, it must be RELEVANT.
+                     */
+                    if (
+                        input.candidateBoundaryRelevanceAssessments !==
+                            undefined
+                    ) {
+
+                        const relevanceAssessments =
+                            input.candidateBoundaryRelevanceAssessments
+                                .filter(
+                                    relevance =>
+                                        relevance.candidateId ===
+                                            relation.candidateId &&
+                                        relevance.participantId ===
+                                            participant.participantId &&
+                                        relevance.boundaryId ===
+                                            boundary.boundaryId
+                                );
+
+
+                        if (
+                            relevanceAssessments.length !==
+                                1
+                        ) {
+
+                            errors.push(
+                                `Evaluated boundary ${boundary.boundaryId} must have exactly one relevance assessment for incident candidate ${relation.candidateId}.`
+                            );
+
+                            continue;
+
+                        }
+
+
+                        if (
+                            relevanceAssessments[0].relevance !==
+                                "RELEVANT"
+                        ) {
+
+                            errors.push(
+                                `Candidate ${relation.candidateId} evaluates boundary ${boundary.boundaryId} despite relevance ${relevanceAssessments[0].relevance}.`
+                            );
+
+                            continue;
+
+                        }
+
+                    }
 
 
                         candidateEvaluations.push({
@@ -1266,11 +1407,11 @@ export class ScientificCompositionEnvelopeEngine {
                                 "INCONCLUSIVE"
                         ).length,
 
-                    relationsWithoutKnownBoundaries:
+                    relationsWithoutCandidateScopedBoundaries:
                         envelopeRelations.filter(
                             relation =>
                                 relation.boundaryCoverage ===
-                                "NO_KNOWN_BOUNDARIES"
+                                "NO_CANDIDATE_SCOPED_BOUNDARIES"
                         ).length
 
                 },

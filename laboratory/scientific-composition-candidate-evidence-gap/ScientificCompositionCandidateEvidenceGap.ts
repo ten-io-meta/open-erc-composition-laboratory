@@ -8,6 +8,7 @@ import type {
 
 
 export type ScientificCompositionCandidateEvidenceGapKind =
+    | "UNRESOLVED_CANDIDATE_BOUNDARY_RELEVANCE"
     | "NO_KNOWN_BOUNDARIES"
     | "NO_CANDIDATE_COMPATIBILITY_OBSERVATIONS"
     | "UNEVALUATED_KNOWN_BOUNDARIES";

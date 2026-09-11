@@ -3,28 +3,35 @@
 import { useMemo, useState } from "react";
 import { compositionCases } from "@/data/compositionCases";
 import { BoundaryDetails } from "@/components/BoundaryDetails";
+import { ScientificDiscoveryResults } from "@/components/ScientificDiscoveryResults";
 
 function normalize(value: string) {
-  return value.trim().toUpperCase();
+  const normalized = value.trim().toUpperCase();
+  const match = normalized.match(/^ERC-?([1-9][0-9]*)$/);
+
+  return match ? `ERC-${match[1]}` : normalized;
 }
 
 export function CompositionWorkbench() {
   const [mode, setMode] = useState<"find" | "pair">("find");
-  const [primary, setPrimary] = useState("ERC-8004");
-  const [secondary, setSecondary] = useState("ERC-8060");
+  const [primary, setPrimary] = useState("");
+  const [secondary, setSecondary] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const primaryReady =
+    /^ERC-[1-9][0-9]*$/.test(normalize(primary));
+
+  const secondaryReady =
+    /^ERC-[1-9][0-9]*$/.test(normalize(secondary));
+
+  const canInvestigate =
+    primaryReady &&
+    (mode === "find" || secondaryReady);
+
   const results = useMemo(() => {
-    if (!submitted) return [];
+    if (!submitted || mode !== "pair") return [];
 
     const a = normalize(primary);
-
-    if (mode === "find") {
-      return compositionCases.filter((item) =>
-        item.protocols.includes(a)
-      );
-    }
-
     const b = normalize(secondary);
 
     return compositionCases.filter(
@@ -33,7 +40,6 @@ export function CompositionWorkbench() {
         item.protocols.includes(b)
     );
   }, [mode, primary, secondary, submitted]);
-
   return (
     <section className="mt-9 rounded-[28px] border border-[#cfd7d2] bg-white p-6 md:p-8">
       <div className="flex flex-wrap gap-2">
@@ -71,7 +77,8 @@ export function CompositionWorkbench() {
 
         <button
           onClick={() => setSubmitted(true)}
-          className="rounded-2xl bg-[#1e5d46] px-6 py-3 text-white"
+          disabled={!canInvestigate}
+          className="rounded-2xl bg-[#1e5d46] px-6 py-3 text-white disabled:cursor-not-allowed disabled:opacity-40"
         >
           Investigate
         </button>
@@ -79,7 +86,11 @@ export function CompositionWorkbench() {
 
       {submitted && (
         <div className="mt-7 border-t border-[#e2e7e4] pt-6">
-          {results.length === 0 ? (
+          {mode === "find" ? (
+            <ScientificDiscoveryResults
+              protocolId={normalize(primary)}
+            />
+          ) : results.length === 0 ? (
             <div>
               <div className="font-mono text-xs text-[#8a6b20]">NO VALIDATED RESULT</div>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-[#68706c]">
@@ -97,7 +108,7 @@ export function CompositionWorkbench() {
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <div className="text-lg font-medium">
-                        {item.protocols.join(" × ")}
+                        {item.protocols.join(" \u00d7 ")}
                       </div>
                       <div className="mt-1 font-mono text-xs text-[#68706c]">
                         {item.relation}
@@ -143,7 +154,7 @@ export function CompositionWorkbench() {
                     <BoundaryDetails />
                   )}
                   <div className="mt-4 font-mono text-[11px] text-[#1e5d46]">
-                    VALIDATED · OECL V2.1
+                    {"VALIDATED \u00b7 OECL V2.1"}
                   </div>
                 </article>
               ))}

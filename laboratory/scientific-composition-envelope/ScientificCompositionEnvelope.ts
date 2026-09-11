@@ -97,9 +97,18 @@ export interface ScientificCompositionEnvelopeBoundaryRegion {
 }
 
 
+/*
+ * Candidate-scoped boundary coverage for one Envelope relation.
+ *
+ * Protocol boundaries may still exist in envelope boundaryRegions
+ * when this relation has NO_CANDIDATE_SCOPED_BOUNDARIES.
+ *
+ * This field does not mean that the participant protocols have no
+ * known boundaries.
+ */
 export type ScientificCompositionEnvelopeBoundaryCoverage =
-    | "NO_KNOWN_BOUNDARIES"
-    | "KNOWN_BOUNDARIES_PRESENT";
+    | "NO_CANDIDATE_SCOPED_BOUNDARIES"
+    | "CANDIDATE_SCOPED_BOUNDARIES_PRESENT";
 
 
 export interface ScientificCompositionEnvelopeRelation {
@@ -196,7 +205,7 @@ export interface ScientificCompositionEnvelopeStatistics {
     inconclusiveRelations:
         number;
 
-    relationsWithoutKnownBoundaries:
+    relationsWithoutCandidateScopedBoundaries:
         number;
 
 }

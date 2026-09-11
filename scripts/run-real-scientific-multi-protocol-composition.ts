@@ -88,12 +88,31 @@ import {
 } from "../laboratory/scientific-protocol-composition-profile/ScientificProtocolCompositionProfileEngine.js";
 
 import {
+    ScientificNormativeStatementEngine
+} from "../laboratory/scientific-normative-statement/ScientificNormativeStatementEngine.js";
+
+import {
     ScientificCompositionParticipantExpansionEngine
 } from "../laboratory/scientific-composition-participant-expansion/ScientificCompositionParticipantExpansionEngine.js";
 
 import {
-    ScientificCompositionCandidateCompatibilityEngine
-} from "../laboratory/scientific-composition-candidate-compatibility/ScientificCompositionCandidateCompatibilityEngine.js";
+    ScientificCandidateBoundaryRelevanceEngine
+} from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateBoundaryRelevanceEngine.js";
+
+import {
+    ScientificCandidateScopedCompatibilityEngine
+} from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateScopedCompatibilityEngine.js";
+
+import {
+    ScientificCandidateBoundaryRelevanceRequirementEngine
+} from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateBoundaryRelevanceRequirementEngine.js";
+import {
+    ScientificCandidateBoundaryRelevanceGapOverlayEngine
+} from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateBoundaryRelevanceGapOverlayEngine.js";
+
+import {
+    ScientificCandidateEvidenceRequirementRoutingEngine
+} from "../laboratory/scientific-candidate-boundary-relevance/ScientificCandidateEvidenceRequirementRoutingEngine.js";
 
 import {
     ScientificCompositionCandidateEvidenceSpecificationEngine
@@ -142,6 +161,10 @@ import {
 import {
     ScientificCompositionHarmonyAssessmentEngine
 } from "../laboratory/scientific-composition-harmony/ScientificCompositionHarmonyAssessmentEngine.js";
+
+import {
+    ScientificCompositionValueAssessmentEngine
+} from "../laboratory/scientific-composition-value/ScientificCompositionValueAssessmentEngine.js";
 
 import {
     ScientificCompositionEnvelopeEngine
@@ -735,6 +758,31 @@ async function main(): Promise<void> {
                     );
 
 
+            const normativeExtraction =
+                new ScientificNormativeStatementEngine()
+                    .extract({
+
+                        observations:
+                            source.github.sourceObservations
+
+                    });
+
+
+            requireNoErrors(
+                `Normative statements ${protocolId}`,
+                normativeExtraction.errors
+            );
+
+
+            const normativeStatements =
+                normativeExtraction.statements
+                    .filter(
+                        statement =>
+                            statement.protocolId ===
+                            protocolId
+                    );
+
+
             const result =
                 profileEngine.build({
 
@@ -748,6 +796,8 @@ async function main(): Promise<void> {
 
                     sourceFacts:
                         source.github.sourceFacts,
+
+                    normativeStatements,
 
                     attributedCapabilities,
 
@@ -1141,6 +1191,31 @@ async function main(): Promise<void> {
                 );
 
 
+        const normativeExtraction =
+            new ScientificNormativeStatementEngine()
+                .extract({
+
+                    observations:
+                        source.github.sourceObservations
+
+                });
+
+
+        requireNoErrors(
+            `Expanded normative statements ${protocolId}`,
+            normativeExtraction.errors
+        );
+
+
+        const normativeStatements =
+            normativeExtraction.statements
+                .filter(
+                    statement =>
+                        statement.protocolId ===
+                        protocolId
+                );
+
+
         const result =
             profileEngine.build({
 
@@ -1154,6 +1229,8 @@ async function main(): Promise<void> {
 
                 sourceFacts:
                     source.github.sourceFacts,
+
+                normativeStatements,
 
                 attributedCapabilities,
 
@@ -2978,49 +3055,306 @@ async function main(): Promise<void> {
     );
 
 
-    const candidateCompatibility =
-        new ScientificCompositionCandidateCompatibilityEngine()
+    /*
+     * ---------------------------------------------------------
+     * CANDIDATE-SCOPED PROTOCOL BOUNDARY RELEVANCE
+     * ---------------------------------------------------------
+     *
+     * Protocol boundaries are not automatically candidate
+     * boundaries.
+     *
+     * At this stage there are deliberately no runtime reachability
+     * observations and no complete execution-surface exclusions.
+     *
+     * Therefore known protocol boundaries must remain UNRESOLVED
+     * for candidate relevance rather than being silently treated as
+     * relevant or out of scope.
+     */
+    const candidateScopedCompatibilityProfiles =
+        profiles.map(
+            profile => ({
+
+                protocolId:
+                    profile.protocolId,
+
+                boundaries:
+                    profile.boundaries.map(
+                        boundary => ({
+
+                            boundaryId:
+                                boundary.boundaryId,
+
+                            participantId:
+                                boundary.participantId
+
+                        })
+                    )
+
+            })
+        );
+
+
+    const candidateBoundaryRelevanceResults =
+        compositionCandidateSet.candidates
+            .map(
+                candidate => {
+
+                    const participantIds = [
+                        candidate.sourceParticipantId,
+                        candidate.targetParticipantId
+                    ];
+
+
+                    const candidateProtocolBoundaries =
+                        profiles
+                            .filter(
+                                profile =>
+                                    participantIds.includes(
+                                        profile.protocolId
+                                    )
+                            )
+                            .flatMap(
+                                profile =>
+                                    profile.boundaries
+                            );
+
+
+                    const relevance =
+                        new ScientificCandidateBoundaryRelevanceEngine()
+                            .evaluate({
+
+                                candidateId:
+                                    candidate.candidateId,
+
+                                participantIds,
+
+                                boundaries:
+                                    candidateProtocolBoundaries,
+
+                                /*
+                                 * No candidate-specific runtime
+                                 * reachability or complete-surface
+                                 * exclusion evidence exists yet.
+                                 */
+                                evidence:
+                                    []
+
+                            });
+
+
+                    requireNoErrors(
+                        `Candidate boundary relevance ${candidate.candidateId}`,
+                        relevance.errors
+                    );
+
+
+                    const requirements =
+                        new ScientificCandidateBoundaryRelevanceRequirementEngine()
+                            .derive(
+                                relevance
+                            );
+
+
+                    requireNoErrors(
+                        `Candidate boundary relevance requirements ${candidate.candidateId}`,
+                        requirements.errors
+                    );
+
+
+                    return {
+
+                        candidateId:
+                            candidate.candidateId,
+
+                        sourceParticipantId:
+                            candidate.sourceParticipantId,
+
+                        targetParticipantId:
+                            candidate.targetParticipantId,
+
+                        relevance,
+
+                        requirements
+
+                    };
+
+                }
+            );
+
+
+    const candidateBoundaryRelevanceAssessments =
+        candidateBoundaryRelevanceResults
+            .flatMap(
+                result =>
+                    result.relevance.assessments
+            );
+
+
+    const candidateBoundaryRelevanceRequirements =
+        candidateBoundaryRelevanceResults
+            .flatMap(
+                result =>
+                    result.requirements.requirements
+            );
+
+
+    const candidateScopedCompatibility =
+        new ScientificCandidateScopedCompatibilityEngine()
             .evaluate({
 
                 profiles:
-                    profiles.map(
-                        profile => ({
-
-                            protocolId:
-                                profile.protocolId,
-
-                            boundaries:
-                                profile.boundaries.map(
-                                    boundary => ({
-
-                                        boundaryId:
-                                            boundary.boundaryId,
-
-                                        participantId:
-                                            boundary.participantId
-
-                                    })
-                                )
-
-                        })
-                    ),
+                    candidateScopedCompatibilityProfiles,
 
                 candidateSet:
                     compositionCandidateSet,
 
                 /*
-                 * Real candidate discovered from source evidence,
-                 * but no candidate-specific boundary observations
-                 * have been executed yet.
-                 *
-                 * Absence of observations must therefore remain
-                 * INCONCLUSIVE.
+                 * Candidate-specific boundary observations are
+                 * still absent in this real runner phase.
                  */
                 observations:
-                    []
+                    [],
+
+                relevanceAssessments:
+                    candidateBoundaryRelevanceAssessments
 
             });
 
+
+    requireNoErrors(
+        "Real scientific candidate scoped compatibility",
+        candidateScopedCompatibility.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC CANDIDATE BOUNDARY RELEVANCE"
+    );
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `assessments: ${candidateBoundaryRelevanceAssessments.length}`
+    );
+
+    console.log(
+        `requirements: ${candidateBoundaryRelevanceRequirements.length}`
+    );
+
+
+    for (
+        const result
+        of candidateBoundaryRelevanceResults
+    ) {
+
+        console.log(
+            `  CANDIDATE ${result.sourceParticipantId} -> ${result.targetParticipantId}`
+        );
+
+        console.log(
+            `    total boundaries: ${result.relevance.statistics.total}`
+        );
+
+        console.log(
+            `    relevant:         ${result.relevance.statistics.relevant}`
+        );
+
+        console.log(
+            `    out of scope:     ${result.relevance.statistics.outOfScope}`
+        );
+
+        console.log(
+            `    unresolved:       ${result.relevance.statistics.unresolved}`
+        );
+
+        console.log(
+            `    requirements:     ${result.requirements.statistics.total}`
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC CANDIDATE SCOPED COMPATIBILITY"
+    );
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `assessments: ${candidateScopedCompatibility.assessments.length}`
+    );
+
+
+    for (
+        const scoped
+        of candidateScopedCompatibility.assessments
+    ) {
+
+        console.log(
+            `  CANDIDATE ${scoped.compatibility.sourceParticipantId} -> ${scoped.compatibility.targetParticipantId}`
+        );
+
+        console.log(
+            `    compatibility: ${scoped.compatibility.scientificPolarity}`
+        );
+
+        console.log(
+            `    protocol boundaries: ${scoped.relevanceStatistics.protocolBoundaryTotal}`
+        );
+
+        console.log(
+            `    relevant:            ${scoped.relevanceStatistics.relevant}`
+        );
+
+        console.log(
+            `    out of scope:        ${scoped.relevanceStatistics.outOfScope}`
+        );
+
+        console.log(
+            `    unresolved:          ${scoped.relevanceStatistics.unresolved}`
+        );
+
+    }
+
+
+    /*
+     * DOWNSTREAM COMPATIBILITY AUTHORITY
+     *
+     * candidateCompatibility is projected exclusively from
+     * candidateScopedCompatibility.
+     *
+     * Candidate-boundary relevance remains independent:
+     * RELEVANT, OUT_OF_SCOPE or UNRESOLVED.
+     *
+     * Relevance evidence is never converted into compatibility
+     * evidence.
+     */
+    const candidateCompatibility =
+        {
+
+            assessments:
+                candidateScopedCompatibility.assessments
+                    .map(
+                        scoped =>
+                            scoped.compatibility
+                    ),
+
+            errors:
+                [...candidateScopedCompatibility.errors]
+
+        };
 
     requireNoErrors(
         "Real scientific candidate compatibility",
@@ -3274,6 +3608,8 @@ async function main(): Promise<void> {
 
                 candidateCompatibility,
 
+                candidateBoundaryRelevanceAssessments,
+
                 candidateEvaluationGraph,
 
                 complementarity
@@ -3361,7 +3697,7 @@ async function main(): Promise<void> {
         );
 
         console.log(
-            `    relations without known boundaries: ${envelope.statistics.relationsWithoutKnownBoundaries}`
+            `    relations without candidate-scoped boundaries: ${envelope.statistics.relationsWithoutCandidateScopedBoundaries}`
         );
 
 
@@ -3371,7 +3707,7 @@ async function main(): Promise<void> {
         ) {
 
             console.log(
-                `    RELATION ${relation.sourceParticipantId} -> ${relation.targetParticipantId} kind=${relation.candidateKind} compatibility=${relation.compatibilityPolarity} boundaryCoverage=${relation.boundaryCoverage}`
+                `    RELATION ${relation.sourceParticipantId} -> ${relation.targetParticipantId} kind=${relation.candidateKind} compatibility=${relation.compatibilityPolarity} candidateBoundaryCoverage=${relation.boundaryCoverage}`
             );
 
         }
@@ -3766,7 +4102,161 @@ async function main(): Promise<void> {
 
     }
 
-    const candidateEvidenceGaps =
+    const compositionValue =
+        new ScientificCompositionValueAssessmentEngine()
+            .assess({
+
+                envelopes:
+                    compositionEnvelopes,
+
+                solver:
+                    nProtocolCompositionSolutions,
+
+                harmony:
+                    compositionHarmony
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific composition value assessment",
+        compositionValue.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC N-PROTOCOL COMPOSITION VALUE"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `assessments: ${compositionValue.assessments.length}`
+    );
+
+
+    for (
+        const assessment
+        of compositionValue.assessments
+    ) {
+
+        console.log(
+            `  VALUE ${assessment.valueEvaluationStatus}`
+        );
+
+        console.log(
+            `    harmony:      ${assessment.harmonyStatus}`
+        );
+
+        console.log(
+            `    participants: ${assessment.participantIds.join(", ")}`
+        );
+
+        console.log(
+            `    findings:     ${assessment.findings.length}`
+        );
+
+
+        for (
+            const finding
+            of assessment.findings
+        ) {
+
+            console.log(
+                `      ${finding.ruleId} ${finding.kind}`
+            );
+
+            console.log(
+                `        title: ${finding.title}`
+            );
+
+            console.log(
+                `        configurations: ${finding.configurationIds.join(", ")}`
+            );
+
+            console.log(
+                `        candidates:     ${finding.candidateIds.join(", ")}`
+            );
+
+            console.log(
+                `        needs:          ${finding.needIds.join(", ")}`
+            );
+
+            console.log(
+                `        contributions:  ${finding.contributionIds.join(", ")}`
+            );
+
+            console.log(
+                `        boundaries:     ${finding.boundaryIds.length}`
+            );
+
+            console.log(
+                `        discovery evidence:     ${finding.discoveryEvidenceIds.length}`
+            );
+
+            console.log(
+                `        compatibility evidence: ${finding.compatibilityEvidenceIds.length}`
+            );
+
+            console.log(
+                `        observations:   ${finding.observationIds.length}`
+            );
+
+            console.log(
+                `        runs:           ${finding.runIds.length}`
+            );
+
+        }
+
+    }
+
+
+    const forbiddenValueClaims =
+        compositionValue.assessments
+            .flatMap(
+                assessment =>
+                    assessment.findings
+            )
+            .filter(
+                finding =>
+                    finding.kind ===
+                        "ADVANTAGE" ||
+                    finding.kind ===
+                        "EMERGENT_PROPERTY"
+            );
+
+
+    if (
+        forbiddenValueClaims.length >
+        0
+    ) {
+
+        throw new Error(
+            "Hito 2 must not manufacture ADVANTAGE or EMERGENT_PROPERTY findings."
+        );
+
+    }
+
+
+    /*
+     * Legacy candidate-boundary evidence diagnosis remains the
+     * first pass.
+     *
+     * It only sees candidate-scoped compatibility and therefore
+     * cannot distinguish:
+     *
+     *   genuinely no protocol boundary known
+     *
+     * from:
+     *
+     *   protocol boundary known but candidate relevance unresolved.
+     */
+    const legacyCandidateEvidenceGaps =
         new ScientificCompositionCandidateEvidenceGapEngine()
             .diagnose({
 
@@ -3780,10 +4270,194 @@ async function main(): Promise<void> {
 
 
     requireNoErrors(
-        "Real scientific candidate evidence gap diagnosis",
+        "Real scientific legacy candidate evidence gap diagnosis",
+        legacyCandidateEvidenceGaps.errors
+    );
+
+
+    /*
+     * Reconcile the legacy compatibility-centric gap model with
+     * candidate-boundary relevance.
+     *
+     * This does not generate compatibility evidence.
+     * This does not mark any boundary RELEVANT.
+     * This does not invent a boundary.
+     */
+    const candidateEvidenceGaps =
+        new ScientificCandidateBoundaryRelevanceGapOverlayEngine()
+            .apply({
+
+                diagnosis:
+                    legacyCandidateEvidenceGaps,
+
+                relevanceAssessments:
+                    candidateBoundaryRelevanceAssessments
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific relevance-aware candidate evidence gap diagnosis",
         candidateEvidenceGaps.errors
     );
 
+
+    /*
+     * Scientific invariant:
+     *
+     * every unresolved relevance gap must have at least one
+     * explicit relevance requirement from Hito 4A.7, and every
+     * boundary named by the gap must have its own requirement.
+     */
+    for (
+        const diagnostic
+        of candidateEvidenceGaps.diagnostics
+    ) {
+
+        const unresolvedRelevanceGap =
+            diagnostic.gaps.find(
+                gap =>
+                    gap.kind ===
+                    "UNRESOLVED_CANDIDATE_BOUNDARY_RELEVANCE"
+            );
+
+
+        if (
+            unresolvedRelevanceGap ===
+            undefined
+        ) {
+
+            continue;
+
+        }
+
+
+        const requirementsForCandidate =
+            candidateBoundaryRelevanceRequirements
+                .filter(
+                    requirement =>
+                        requirement.candidateId ===
+                        diagnostic.candidateId
+                );
+
+
+        for (
+            const boundaryId
+            of unresolvedRelevanceGap.boundaryIds
+        ) {
+
+            const requirement =
+                requirementsForCandidate.find(
+                    candidateRequirement =>
+                        candidateRequirement.boundaryId ===
+                        boundaryId
+                );
+
+
+            if (
+                requirement ===
+                undefined
+            ) {
+
+                throw new Error(
+                    `Candidate ${diagnostic.candidateId} has unresolved relevance for boundary ${boundaryId} without a relevance requirement.`
+                );
+
+            }
+
+        }
+
+    }
+
+
+    const unresolvedRelevanceGapCount =
+        candidateEvidenceGaps.diagnostics
+            .flatMap(
+                diagnostic =>
+                    diagnostic.gaps
+            )
+            .filter(
+                gap =>
+                    gap.kind ===
+                    "UNRESOLVED_CANDIDATE_BOUNDARY_RELEVANCE"
+            )
+            .length;
+
+
+    const falseNoKnownBoundariesCount =
+        candidateEvidenceGaps.diagnostics
+            .filter(
+                diagnostic => {
+
+                    const hasRelevanceAssessments =
+                        candidateBoundaryRelevanceAssessments
+                            .some(
+                                assessment =>
+                                    assessment.candidateId ===
+                                    diagnostic.candidateId
+                            );
+
+
+                    const hasUnresolvedRelevance =
+                        candidateBoundaryRelevanceAssessments
+                            .some(
+                                assessment =>
+                                    assessment.candidateId ===
+                                        diagnostic.candidateId &&
+                                    assessment.relevance ===
+                                        "UNRESOLVED"
+                            );
+
+
+                    return (
+                        hasRelevanceAssessments &&
+                        hasUnresolvedRelevance &&
+                        diagnostic.gaps.some(
+                            gap =>
+                                gap.kind ===
+                                "NO_KNOWN_BOUNDARIES"
+                        )
+                    );
+
+                }
+            )
+            .length;
+
+
+    if (
+        falseNoKnownBoundariesCount >
+        0
+    ) {
+
+        throw new Error(
+            "Relevance-aware evidence gaps still contain false NO_KNOWN_BOUNDARIES."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC RELEVANCE-AWARE EVIDENCE GAPS"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `unresolved relevance gaps: ${unresolvedRelevanceGapCount}`
+    );
+
+    console.log(
+        `relevance requirements: ${candidateBoundaryRelevanceRequirements.length}`
+    );
+
+    console.log(
+        "false NO_KNOWN_BOUNDARIES: 0"
+    );
 
     const compositionVisualization =
         new ScientificCompositionVisualizationEngine()
@@ -5025,12 +5699,55 @@ async function main(): Promise<void> {
 
     }
 
+    const candidateEvidenceRequirementRouting =
+        new ScientificCandidateEvidenceRequirementRoutingEngine()
+            .route({
+
+                diagnosis:
+                    candidateEvidenceGaps
+
+            });
+
+
+    requireNoErrors(
+        "Real scientific candidate evidence requirement routing",
+        candidateEvidenceRequirementRouting.errors
+    );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL SCIENTIFIC CANDIDATE EVIDENCE REQUIREMENT ROUTING"
+    );
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `authoritative diagnostics: ${candidateEvidenceGaps.diagnostics.length}`
+    );
+
+    console.log(
+        `legacy requirement diagnostics: ${candidateEvidenceRequirementRouting.legacyDiagnosis.diagnostics.length}`
+    );
+
+    console.log(
+        `routed relevance gaps: ${candidateEvidenceRequirementRouting.routedRelevanceGapIds.length}`
+    );
+
+    console.log(
+        `relevance-only diagnostics excluded from legacy requirements: ${candidateEvidenceRequirementRouting.relevanceOnlyDiagnosticIds.length}`
+    );
+
     const candidateEvidenceRequirements =
         new ScientificCompositionCandidateEvidenceRequirementEngine()
             .derive({
 
                 diagnosis:
-                    candidateEvidenceGaps
+                    candidateEvidenceRequirementRouting.legacyDiagnosis
 
             });
 
@@ -5782,7 +6499,7 @@ async function main(): Promise<void> {
     );
 
     console.log(
-        "This run makes no global composition claim."
+        "Any global composition conclusion in this run is limited to the explicit Harmony and Composition Value assessments reported above."
     );
 
 }
