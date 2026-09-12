@@ -15,6 +15,12 @@ type EvidenceNetwork = {
 
   candidate: {
     protocolId: string;
+    sourceClaim: {
+      status: string;
+      statement: string | null;
+      provenance: string | null;
+      locatorStatus: string;
+    };
     protocolStatus: string;
     candidateAddress: string | null;
     observedBlock: number | null;
@@ -237,6 +243,40 @@ export function ProtocolEvidenceGate() {
                     {network.candidate.protocolId}
                   </div>
 
+                  <div className="mt-3 text-xs text-[#68706c]">
+                    Source claim
+                  </div>
+
+                  <div className="mt-1 text-sm font-semibold">
+                    {displayStatus(
+                      network.candidate.sourceClaim.status
+                    )}
+                  </div>
+
+                  {network.candidate.sourceClaim.statement && (
+                    <div className="mt-2 rounded-xl border border-[#ded9c6] bg-[#fffdf5] p-3">
+                      <div className="text-xs leading-5 text-[#5f604f]">
+                        {network.candidate.sourceClaim.statement}
+                      </div>
+
+                      {network.candidate.sourceClaim.provenance && (
+                        <div className="mt-2 font-mono text-[10px] text-[#68706c]">
+                          source: {network.candidate.sourceClaim.provenance}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="mt-2 font-mono text-[10px] text-[#68706c]">
+                    {displayStatus(
+                      network.candidate.sourceClaim.locatorStatus
+                    )}
+                  </div>
+
+                  <div className="mt-4 text-xs text-[#68706c]">
+                    On-chain candidate evidence
+                  </div>
+
                   <div className="mt-1 text-sm font-semibold">
                     {displayStatus(
                       network.candidate.protocolStatus
@@ -320,6 +360,8 @@ export function ProtocolEvidenceGate() {
         </div>
 
         <p className="mt-2 text-sm leading-6 text-[#68706c]">
+          A source claim is knowledge, not chain evidence. A claim may
+          exist while its deployment locator remains unresolved.
           Runtime code at a candidate address is evidence of code,
           not proof of protocol identity. Identity criteria come from
           the evidence descriptor and are executed against Ethereum.

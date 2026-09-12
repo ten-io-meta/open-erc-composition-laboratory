@@ -10,6 +10,8 @@ type NetworkConfig = {
   chainId: string;
   rpcUri: string;
   candidateAddress: string | null;
+  sourceClaim: string | null;
+  sourceClaimProvenance: string | null;
 };
 
 function configs(): NetworkConfig[] {
@@ -24,6 +26,12 @@ function configs(): NetworkConfig[] {
       candidateAddress:
         process.env.OECL_EVIDENCE_ETHEREUM_ADDRESS?.trim() ||
         null,
+      sourceClaim:
+        process.env.OECL_EVIDENCE_ETHEREUM_DEPLOYMENT_CLAIM?.trim() ||
+        null,
+      sourceClaimProvenance:
+        process.env.OECL_EVIDENCE_ETHEREUM_DEPLOYMENT_CLAIM_PROVENANCE?.trim() ||
+        null,
     },
     {
       network: "base",
@@ -35,6 +43,12 @@ function configs(): NetworkConfig[] {
       candidateAddress:
         process.env.OECL_EVIDENCE_BASE_ADDRESS?.trim() ||
         null,
+      sourceClaim:
+        process.env.OECL_EVIDENCE_BASE_DEPLOYMENT_CLAIM?.trim() ||
+        null,
+      sourceClaimProvenance:
+        process.env.OECL_EVIDENCE_BASE_DEPLOYMENT_CLAIM_PROVENANCE?.trim() ||
+        null,
     },
     {
       network: "polygon",
@@ -45,6 +59,12 @@ function configs(): NetworkConfig[] {
         "https://polygon-bor-rpc.publicnode.com",
       candidateAddress:
         process.env.OECL_EVIDENCE_POLYGON_ADDRESS?.trim() ||
+        null,
+      sourceClaim:
+        process.env.OECL_EVIDENCE_POLYGON_DEPLOYMENT_CLAIM?.trim() ||
+        null,
+      sourceClaimProvenance:
+        process.env.OECL_EVIDENCE_POLYGON_DEPLOYMENT_CLAIM_PROVENANCE?.trim() ||
         null,
     },
   ];
@@ -137,6 +157,24 @@ export async function getProtocolEvidenceGate() {
             candidate: {
               protocolId:
                 candidateProtocolId,
+
+              sourceClaim: {
+                status:
+                  config.sourceClaim
+                    ? "SOURCE_CLAIM_OBSERVED" as const
+                    : "NO_SOURCE_CLAIM" as const,
+
+                statement:
+                  config.sourceClaim,
+
+                provenance:
+                  config.sourceClaimProvenance,
+
+                locatorStatus:
+                  config.candidateAddress
+                    ? "LOCATOR_SUPPLIED" as const
+                    : "LOCATOR_UNRESOLVED" as const,
+              },
 
               ...candidate,
 
