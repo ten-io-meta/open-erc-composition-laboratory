@@ -17,8 +17,20 @@ type EvidenceNetwork = {
     protocolId: string;
     protocolStatus: string;
     candidateAddress: string | null;
+    observedBlock: number | null;
+    observedBlockHash: string | null;
     chainMatch: boolean | null;
     runtimeCodePresent: boolean | null;
+    identityStatus: string;
+    identityTests: Array<{
+      criterionId: string;
+      kind: string;
+      interfaceId: string;
+      provenance: string | null;
+      status: string;
+      observedValue: boolean | null;
+      error: string | null;
+    }>;
     error: string | null;
     evidenceBasis: string | null;
   };
@@ -231,6 +243,45 @@ export function ProtocolEvidenceGate() {
                     )}
                   </div>
 
+                  <div className="mt-3 text-xs text-[#68706c]">
+                    Identity criterion
+                  </div>
+
+                  <div className="mt-1 text-sm font-semibold">
+                    {displayStatus(
+                      network.candidate.identityStatus
+                    )}
+                  </div>
+
+                  {network.candidate.identityTests.map(
+                    (test) => (
+                      <div
+                        key={test.criterionId}
+                        className="mt-2 rounded-xl border border-[#dfe4e1] bg-white p-3"
+                      >
+                        <div className="font-mono text-[10px] text-[#68706c]">
+                          {test.kind} {test.interfaceId}
+                        </div>
+
+                        <div className="mt-1 text-xs font-semibold">
+                          {displayStatus(test.status)}
+                        </div>
+
+                        {test.provenance && (
+                          <div className="mt-1 font-mono text-[10px] text-[#68706c]">
+                            source: {test.provenance}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  )}
+
+                  {network.candidate.observedBlock !== null && (
+                    <div className="mt-2 font-mono text-[10px] text-[#68706c]">
+                      observed block: {network.candidate.observedBlock.toLocaleString()}
+                    </div>
+                  )}
+
                   {network.candidate.candidateAddress && (
                     <div className="mt-2 font-mono text-[11px] text-[#68706c]">
                       {shortAddress(
@@ -269,16 +320,17 @@ export function ProtocolEvidenceGate() {
         </div>
 
         <p className="mt-2 text-sm leading-6 text-[#68706c]">
-          RUNTIME CODE OBSERVED AT CANDIDATE means runtime code exists at a
-          supplied candidate address on the expected chain.
-          NO EVIDENCE SOURCE does not mean that no deployment
-          exists. ELIGIBLE only permits OECL to search for a
-          qualifying on-chain interaction; it does not establish
-          compatibility or composition.
+          Runtime code at a candidate address is evidence of code,
+          not proof of protocol identity. Identity criteria come from
+          the evidence descriptor and are executed against Ethereum.
+          ELIGIBLE requires those criteria to be satisfied and only
+          permits OECL to search for a qualifying on-chain interaction;
+          it does not establish compatibility or composition.
+          NO EVIDENCE SOURCE does not mean that no deployment exists.
         </p>
 
         <p className="mt-3 font-mono text-[11px] text-[#68706c]">
-          KNOWLEDGE MAY LOCATE EVIDENCE — IT CANNOT REPLACE OBSERVATION
+          KNOWLEDGE DEFINES WHAT TO TEST — ETHEREUM DETERMINES WHETHER THE TEST PASSES
         </p>
       </div>
 
