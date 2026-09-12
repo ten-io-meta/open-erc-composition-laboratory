@@ -217,3 +217,9 @@ Maintainer: **tenio.eth**
 
 Validation: `docs/v2.1-quality-pass/F-final-validation.md`
 Challenged-control audit: `docs/v2.1-quality-pass/A3-real-challenged-control-audit.md`
+
+### AI-assisted development
+
+AI tools were used as development assistants during the ETHOnline
+2026 extension. They are not part of OECL's runtime scientific
+decision path. See [AI_USAGE.md](./AI_USAGE.md) for the full disclosure.
