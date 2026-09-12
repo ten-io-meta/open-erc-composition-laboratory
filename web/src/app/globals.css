@@ -1,27 +1,55 @@
-﻿@import "tailwindcss" source("../");
+@import "tailwindcss" source("../");
 
 :root {
-  --ink: #101312;
-  --muted: #68706c;
-  --line: #dfe4e1;
-  --panel: rgba(255, 255, 255, 0.82);
-  --ground: #f4f6f4;
-  --signal: #1e5d46;
+  --ink: #151815;
+  --muted: #70746f;
+  --line: #dcded9;
+  --ground: #f2f2ee;
+  --paper: #fcfcfa;
+  --signal: #174c38;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { background: var(--ground); }
+html {
+  background: var(--ground);
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 15% 10%, rgba(30,93,70,.08), transparent 32rem),
-    linear-gradient(180deg, #fafbfa 0%, var(--ground) 100%);
+  background: var(--ground);
   font-family: var(--font-geist-sans), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-button, input { font: inherit; }
-button { cursor: pointer; }
+button,
+input {
+  font: inherit;
+}
 
+button {
+  cursor: pointer;
+}
+
+::selection {
+  color: #ffffff;
+  background: #174c38;
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -1,166 +1,256 @@
-import { CompositionWorkbench } from "@/components/CompositionWorkbench";
-import { ScientificCorpusOverview } from "@/components/ScientificCorpusOverview";
-import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
-import { LiveGraphStandardization } from "@/components/LiveGraphStandardization";
-import { EthereumVerifiedEvidence } from "@/components/EthereumVerifiedEvidence";
+import {
+  CompositionWorkbench,
+} from "@/components/CompositionWorkbench";
+
+import {
+  EvidenceReceiptGateway,
+} from "@/components/EvidenceReceiptGateway";
+
+import {
+  ProtocolDiscovery,
+} from "@/components/ProtocolDiscovery";
+
+import {
+  ScientificCorpusOverview,
+} from "@/components/ScientificCorpusOverview";
 
 
 export default function Home() {
 
   return (
-    <main className="min-h-screen px-6 py-6 md:px-10 lg:px-14">
+    <main className="min-h-screen">
 
-      <header className="mx-auto flex max-w-[1500px] items-center justify-between border-b border-[#dfe4e1] pb-5">
+      <header className="border-b border-[#dcded9]">
 
-        <div>
-          <div className="text-sm font-semibold">
-            OECL
+        <div className="mx-auto flex max-w-[1480px] items-center justify-between px-6 py-5 md:px-10 lg:px-14">
+
+          <div className="flex items-baseline gap-4">
+
+            <div className="text-[15px] font-semibold tracking-[-0.02em]">
+              OECL
+            </div>
+
+            <div className="hidden text-xs text-[#858983] sm:block">
+              Open ERC Composition Laboratory
+            </div>
+
           </div>
 
-          <div className="text-xs text-[#68706c]">
-            Open ERC Composition Laboratory
-          </div>
-        </div>
 
-        <div className="font-mono text-xs text-[#68706c]">
-          V2.1 BASELINE · ETHONLINE 2026 EXTENSION
+          <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#858983]">
+            ETHOnline 2026 · V2.2
+          </div>
+
         </div>
 
       </header>
 
 
-      <section className="mx-auto max-w-[1500px] pt-12">
+      <section className="mx-auto max-w-[1480px] px-6 pb-24 pt-16 md:px-10 md:pt-24 lg:px-14">
 
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-[#1e5d46]">
-          Ethereum composition intelligence
-        </p>
+        <div className="grid gap-14 lg:grid-cols-[1.7fr_.7fr] lg:gap-20">
 
-        <h1 className="mt-5 max-w-5xl text-5xl font-medium leading-[1.02] tracking-[-0.045em] md:text-6xl">
-          Verify the evidence before reasoning about composition.
-        </h1>
+          <div>
 
-        <p className="mt-5 max-w-4xl text-lg leading-8 text-[#68706c]">
-          OECL studies how Ethereum standards may work together without
-          concluding more than the evidence supports. The ETHOnline 2026
-          extension adds standardized live observation through The Graph and
-          independent same-block verification against the chains themselves.
-        </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#174c38]">
+              Verified evidence infrastructure
+            </p>
+
+            <h1 className="mt-7 max-w-[950px] text-[48px] font-medium leading-[0.99] tracking-[-0.055em] md:text-[72px] lg:text-[82px]">
+              Evidence you can hand
+              <br />
+              to another machine.
+            </h1>
+
+            <p className="mt-8 max-w-3xl text-[17px] leading-8 text-[#70746f] md:text-[18px]">
+              OECL turns standardized live blockchain observations into
+              independently witnessed, machine-readable EvidenceReceipts
+              before agents or research systems are allowed to reason from them.
+            </p>
 
 
-        <section className="mt-12">
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#dcded9] pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#70746f]">
 
-          <div className="rounded-[28px] border border-[#bfd7cc] bg-[#f4f9f6] p-6 md:p-8">
+              <span>The Graph observes</span>
+              <span>Chain state witnesses</span>
+              <span>OECL decides</span>
 
-            <div className="flex flex-wrap items-start justify-between gap-6">
+            </div>
 
-              <div>
+          </div>
 
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#1e5d46]">
-                  01 · ETHOnline 2026 live extension
-                </p>
 
-                <h2 className="mt-2 max-w-4xl text-3xl font-medium tracking-[-0.025em]">
-                  One standardized observation becomes independently verified evidence
-                </h2>
+          <aside className="border-l border-[#dcded9] pl-6 lg:pt-9">
 
-                <p className="mt-3 max-w-4xl text-sm leading-6 text-[#68706c]">
-                  ERC-8004 is the live worked example. One GraphQL model and
-                  query observe the protocol across Ethereum, Base and Polygon.
-                  OECL then checks each observation against the corresponding
-                  blockchain at the exact indexed block.
-                </p>
+            <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#858983]">
+              Live system
+            </div>
 
+
+            <div className="mt-8 border-b border-[#dcded9] pb-6">
+
+              <div className="text-[38px] font-medium tracking-[-0.045em]">
+                1
               </div>
 
-              <div className="rounded-full border border-[#bfd7cc] bg-white px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1e5d46]">
-                LIVE · STANDARDIZED · VERIFIABLE
+              <div className="mt-1 text-xs text-[#70746f]">
+                standardized query
               </div>
 
             </div>
 
 
-            <div className="mt-7 grid gap-3 md:grid-cols-4">
+            <div className="border-b border-[#dcded9] py-6">
 
-              <div className="rounded-2xl border border-[#d7dfda] bg-white p-5">
+              <div className="text-[38px] font-medium tracking-[-0.045em]">
+                5
+              </div>
 
-                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#68706c]">
-                  01 · Observe
+              <div className="mt-1 text-xs text-[#70746f]">
+                mainnet targets
+              </div>
+
+            </div>
+
+
+            <div className="py-6">
+
+              <div className="font-mono text-[11px] font-semibold text-[#174c38]">
+                OECL_EVIDENCE_ADMISSION_V1
+              </div>
+
+              <div className="mt-2 text-xs leading-5 text-[#70746f]">
+                ADMISSIBLE · REJECTED · INCOMPLETE
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+
+        <EvidenceReceiptGateway />
+
+
+        <section className="mt-28 border-t border-[#cfd2cc] pt-10">
+
+          <div className="grid gap-10 lg:grid-cols-[.7fr_1.5fr]">
+
+            <div>
+
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#174c38]">
+                How it works
+              </p>
+
+              <h2 className="mt-4 text-3xl font-medium tracking-[-0.035em]">
+                Observation is not evidence.
+              </h2>
+
+            </div>
+
+
+            <div className="grid md:grid-cols-4">
+
+              <div className="border-t border-[#dcded9] py-5 md:border-l md:border-t-0 md:px-5 md:py-0">
+
+                <div className="font-mono text-[9px] text-[#959992]">
+                  01
                 </div>
 
-                <div className="mt-2 text-xl font-medium">
-                  1 standardized query
+                <div className="mt-3 text-sm font-medium">
+                  Observe
                 </div>
 
-                <p className="mt-1 text-xs leading-5 text-[#68706c]">
-                  The Graph supplies a consistent ERC-8004 observation model.
+                <p className="mt-2 text-xs leading-5 text-[#777b75]">
+                  One standardized GraphQL model reads ERC-8004 state.
                 </p>
 
               </div>
 
 
-              <div className="rounded-2xl border border-[#d7dfda] bg-white p-5">
+              <div className="border-t border-[#dcded9] py-5 md:border-l md:border-t-0 md:px-5 md:py-0">
 
-                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#68706c]">
-                  02 · Reuse
+                <div className="font-mono text-[9px] text-[#959992]">
+                  02
                 </div>
 
-                <div className="mt-2 text-xl font-medium">
-                  3 live networks
+                <div className="mt-3 text-sm font-medium">
+                  Witness
                 </div>
 
-                <p className="mt-1 text-xs leading-5 text-[#68706c]">
-                  Ethereum, Base and Polygon use the same observation pattern.
+                <p className="mt-2 text-xs leading-5 text-[#777b75]">
+                  Independent RPC calls inspect the corresponding indexed block.
                 </p>
 
               </div>
 
 
-              <div className="rounded-2xl border border-[#d7dfda] bg-white p-5">
+              <div className="border-t border-[#dcded9] py-5 md:border-l md:border-t-0 md:px-5 md:py-0">
 
-                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#68706c]">
-                  03 · Verify
+                <div className="font-mono text-[9px] text-[#959992]">
+                  03
                 </div>
 
-                <div className="mt-2 text-xl font-medium">
-                  Same-block checks
+                <div className="mt-3 text-sm font-medium">
+                  Compare
                 </div>
 
-                <p className="mt-1 text-xs leading-5 text-[#68706c]">
-                  Each chain independently answers for the indexed state.
+                <p className="mt-2 text-xs leading-5 text-[#777b75]">
+                  Chain ID, block hash, registry runtime and agent ownership are checked.
                 </p>
 
               </div>
 
 
-              <div className="rounded-2xl border border-[#a9cbbb] bg-[#eaf4ef] p-5">
+              <div className="border-t border-[#dcded9] py-5 md:border-l md:border-t-0 md:px-5 md:py-0">
 
-                <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#1e5d46]">
-                  04 · Decide
+                <div className="font-mono text-[9px] text-[#959992]">
+                  04
                 </div>
 
-                <div className="mt-2 text-xl font-medium text-[#173f32]">
-                  Evidence decision
+                <div className="mt-3 text-sm font-medium">
+                  Admit
                 </div>
 
-                <p className="mt-1 text-xs leading-5 text-[#45695b]">
-                  OECL determines what the observed facts are sufficient to support.
+                <p className="mt-2 text-xs leading-5 text-[#777b75]">
+                  OECL emits a deterministic EvidenceReceipt for downstream systems.
                 </p>
 
               </div>
 
             </div>
 
+          </div>
 
-            <div className="mt-6 rounded-2xl border border-[#d7dfda] bg-white p-5">
+        </section>
 
-              <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#1e5d46]">
-                Trust boundary
-              </div>
 
-              <p className="mt-2 max-w-5xl text-sm leading-6 text-[#68706c]">
-                The Graph is the standardized observer. The chain itself is the
-                witness. OECL does not replace either one: it deterministically
-                compares the evidence and refuses to advance unsupported claims.
+        <section className="mt-28 border-t border-[#cfd2cc] pt-10">
+
+          <div className="grid gap-10 lg:grid-cols-[.7fr_1.5fr]">
+
+            <div>
+
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#174c38]">
+                Scientific consumer
+              </p>
+
+              <h2 className="mt-4 max-w-sm text-3xl font-medium tracking-[-0.035em]">
+                Evidence enters research only after admission.
+              </h2>
+
+            </div>
+
+
+            <div>
+
+              <p className="max-w-3xl text-[15px] leading-7 text-[#70746f]">
+                OECL V2.1 is the first scientific consumer of this evidence
+                model. Its current composition corpus remains frozen and
+                deterministic: live receipts do not rewrite existing
+                conclusions, and verified protocol presence still does not
+                establish compatibility.
               </p>
 
             </div>
@@ -168,36 +258,10 @@ export default function Home() {
           </div>
 
 
-          <LiveGraphStandardization />
-
-          <EthereumVerifiedEvidence />
-
-        </section>
-
-
-        <section className="mt-20 border-t border-[#dfe4e1] pt-12">
-
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#1e5d46]">
-            02 · Current scientific corpus
-          </p>
-
-          <h2 className="mt-3 max-w-4xl text-3xl font-medium tracking-[-0.025em]">
-            Where verified evidence can ultimately become composition research
-          </h2>
-
-          <p className="mt-3 max-w-4xl text-base leading-7 text-[#68706c]">
-            OECL V2.1 already contains a deterministic scientific snapshot of
-            materialized composition candidates. This baseline is not an
-            exhaustive survey and does not rank candidates by compatibility.
-            It shows the research layer that live verified evidence is designed
-            to support.
-          </p>
-
-
           <ScientificCorpusOverview />
 
 
-          <div className="mt-10">
+          <div className="mt-12">
 
             <CompositionWorkbench />
 
@@ -205,26 +269,52 @@ export default function Home() {
 
         </section>
 
+
+        <section className="mt-28 border-t border-[#cfd2cc] pt-8">
+
+          <details>
+
+            <summary className="flex cursor-pointer items-center justify-between py-3 text-sm font-medium">
+
+              <span>
+                Advanced protocol discovery
+              </span>
+
+              <span className="font-mono text-[10px] text-[#8b8f89]">
+                THE GRAPH MCP
+              </span>
+
+            </summary>
+
+
+            <div className="mt-3 border-t border-[#dcded9] pt-3">
+
+              <ProtocolDiscovery />
+
+            </div>
+
+          </details>
+
+        </section>
+
       </section>
 
 
-      <section className="mx-auto mt-12 max-w-[1500px] pb-20">
+      <footer className="border-t border-[#dcded9]">
 
-        <details className="rounded-[24px] border border-[#dfe4e1] bg-white">
+        <div className="mx-auto flex max-w-[1480px] flex-wrap items-center justify-between gap-4 px-6 py-7 text-[11px] text-[#858983] md:px-10 lg:px-14">
 
-          <summary className="cursor-pointer px-6 py-5 text-sm font-medium">
-            Advanced Live Evidence - The Graph
-          </summary>
+          <span>
+            Open ERC Composition Laboratory
+          </span>
 
-          <div className="border-t border-[#e2e7e4] px-1 pb-1">
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em]">
+            Discovery ≠ compatibility
+          </span>
 
-            <ProtocolDiscovery />
+        </div>
 
-          </div>
-
-        </details>
-
-      </section>
+      </footer>
 
     </main>
   );
