@@ -204,7 +204,7 @@ export function LiveGraphStandardization() {
               </dl>
 
               <div className="mt-5 border-t border-[#edf0ee] pt-4">
-                <div className="text-xs text-[#68706c]">Deployment provenance</div>
+                <div className="text-xs text-[#68706c]">Subgraph deployment</div>
                 <div className="mt-1 break-all font-mono text-[11px] leading-5 text-[#8a918d]">
                   {observation.deployment ?? "NOT OBSERVED"}
                 </div>

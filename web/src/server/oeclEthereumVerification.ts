@@ -6,35 +6,55 @@ const ERC8004_IDENTITY_REGISTRY =
 type RpcTarget = {
   network: string;
   chainId: string;
-  uri: string;
+  uris: string[];
 };
+
+function uniqueRpcUris(
+  ...values: Array<string | undefined>
+): string[] {
+  return Array.from(
+    new Set(
+      values
+        .map((value) => value?.trim())
+        .filter(
+          (value): value is string =>
+            Boolean(value)
+        )
+    )
+  );
+}
 
 function rpcTargets(): RpcTarget[] {
   return [
     {
       network: "ethereum",
       chainId: "1",
-      uri:
-        process.env.ETHEREUM_MAINNET_RPC_URL?.trim() ||
+      uris: uniqueRpcUris(
+        process.env.ETHEREUM_MAINNET_RPC_URL,
         "https://ethereum-rpc.publicnode.com",
+        "https://eth.llamarpc.com"
+      ),
     },
     {
       network: "base",
       chainId: "8453",
-      uri:
-        process.env.BASE_MAINNET_RPC_URL?.trim() ||
+      uris: uniqueRpcUris(
+        process.env.BASE_MAINNET_RPC_URL,
         "https://mainnet.base.org",
+        "https://base-rpc.publicnode.com"
+      ),
     },
     {
       network: "polygon",
       chainId: "137",
-      uri:
-        process.env.POLYGON_MAINNET_RPC_URL?.trim() ||
+      uris: uniqueRpcUris(
+        process.env.POLYGON_MAINNET_RPC_URL,
         "https://polygon-bor-rpc.publicnode.com",
+        "https://polygon-rpc.com"
+      ),
     },
   ];
 }
-
 type JsonRpcResponse = {
   result?: unknown;
   error?: {
@@ -44,39 +64,75 @@ type JsonRpcResponse = {
 };
 
 async function rpc(
-  uri: string,
+  uris: string[],
   method: string,
   params: unknown[]
 ): Promise<unknown> {
-  const response = await fetch(uri, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      jsonrpc: "2.0",
-      id: 1,
-      method,
-      params,
-    }),
-    cache: "no-store",
-  });
+  const errors: string[] = [];
+  const rounds = 2;
 
-  if (!response.ok) {
-    throw new Error(`${method} HTTP ${response.status}`);
+  for (let round = 1; round <= rounds; round += 1) {
+    for (const uri of uris) {
+      try {
+        const response = await fetch(uri, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            jsonrpc: "2.0",
+            id: 1,
+            method,
+            params,
+          }),
+          cache: "no-store",
+          signal: AbortSignal.timeout(10_000),
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `${method} HTTP ${response.status}`
+          );
+        }
+
+        const body =
+          (await response.json()) as JsonRpcResponse;
+
+        if (body.error) {
+          throw new Error(
+            `${method} RPC error: ${
+              body.error.message ??
+              body.error.code ??
+              "UNKNOWN"
+            }`
+          );
+        }
+
+        return body.result;
+      } catch (error) {
+        errors.push(
+          `round ${round} ${uri}: ${
+            error instanceof Error
+              ? error.message
+              : "unknown error"
+          }`
+        );
+      }
+    }
+
+    if (round < rounds) {
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 500);
+      });
+    }
   }
 
-  const body = (await response.json()) as JsonRpcResponse;
-
-  if (body.error) {
-    throw new Error(
-      `${method} RPC error: ${body.error.message ?? body.error.code ?? "UNKNOWN"}`
-    );
-  }
-
-  return body.result;
+  throw new Error(
+    `${method} failed after ${rounds} round(s) across ${uris.length} RPC endpoint(s): ${errors.join(
+      " | "
+    )}`
+  );
 }
-
 function ownerOfCallData(agentId: string): string {
   const tokenId = BigInt(agentId);
 
@@ -202,19 +258,19 @@ export async function getLiveErc8004EthereumVerification() {
           runtimeCodeResult,
           ownerResult,
         ] = await Promise.all([
-          rpc(target.uri, "eth_chainId", []),
+          rpc(target.uris, "eth_chainId", []),
 
-          rpc(target.uri, "eth_getBlockByNumber", [
+          rpc(target.uris, "eth_getBlockByNumber", [
             blockTag,
             false,
           ]),
 
-          rpc(target.uri, "eth_getCode", [
+          rpc(target.uris, "eth_getCode", [
             ERC8004_IDENTITY_REGISTRY,
             blockTag,
           ]),
 
-          rpc(target.uri, "eth_call", [
+          rpc(target.uris, "eth_call", [
             {
               to: ERC8004_IDENTITY_REGISTRY,
               data: ownerOfCallData(observation.sampleAgent.agentId),

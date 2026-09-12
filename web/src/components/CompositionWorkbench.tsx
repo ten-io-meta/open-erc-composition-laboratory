@@ -191,7 +191,7 @@ export function CompositionWorkbench() {
 
                             }
                         }
-                        placeholder="ERC-8060"
+                        placeholder="ERC-8354"
                         className="flex-1 rounded-2xl border border-[#cfd7d2] px-5 py-3 outline-none focus:border-[#1e5d46]"
                     />
 

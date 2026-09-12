@@ -41,6 +41,23 @@ function shortAddress(value: string | null) {
   return `${value.slice(0, 10)}...${value.slice(-8)}`;
 }
 
+function shortHash(value: string | null) {
+  if (!value) return "-";
+  if (value.length <= 26) return value;
+
+  return `${value.slice(0, 14)}...${value.slice(-10)}`;
+}
+
+function verificationLabel(
+  checked: boolean,
+  positiveLabel: string,
+  negativeLabel: string,
+  unavailable: boolean
+) {
+  if (unavailable) return "NOT CHECKED";
+  return checked ? positiveLabel : negativeLabel;
+}
+
 export function EthereumVerifiedEvidence() {
   const [data, setData] =
     useState<VerificationResponse | null>(null);
@@ -134,7 +151,7 @@ export function EthereumVerifiedEvidence() {
       <div className="flex flex-wrap items-start justify-between gap-5">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#1e5d46]">
-            Ethereum Verified Evidence
+            Independent Chain Verification
           </p>
 
           <h2 className="mt-2 text-2xl font-medium">
@@ -159,6 +176,44 @@ export function EthereumVerifiedEvidence() {
               : data
                 ? `${data.verifiedNetworks}/${data.totalNetworks} NETWORKS VERIFIED`
                 : "UNAVAILABLE"}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-2 md:grid-cols-4">
+        <div className="rounded-xl border border-[#dfe4e1] bg-[#f7f9f7] px-4 py-3">
+          <div className="font-mono text-[10px] text-[#68706c]">
+            01
+          </div>
+          <div className="mt-1 text-xs font-medium">
+            The Graph observation
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-[#dfe4e1] bg-[#f7f9f7] px-4 py-3">
+          <div className="font-mono text-[10px] text-[#68706c]">
+            02
+          </div>
+          <div className="mt-1 text-xs font-medium">
+            Exact indexed block
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-[#dfe4e1] bg-[#f7f9f7] px-4 py-3">
+          <div className="font-mono text-[10px] text-[#68706c]">
+            03
+          </div>
+          <div className="mt-1 text-xs font-medium">
+            Independent Ethereum RPC
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-[#bfd7cc] bg-[#f2f8f5] px-4 py-3">
+          <div className="font-mono text-[10px] text-[#1e5d46]">
+            04
+          </div>
+          <div className="mt-1 text-xs font-semibold text-[#173f32]">
+            Deterministic verification
           </div>
         </div>
       </div>
@@ -213,7 +268,7 @@ export function EthereumVerifiedEvidence() {
                     Chain ID
                   </span>
                   <strong>
-                    {network.chainMatch ? "MATCH" : "NO MATCH"}
+                    {verificationLabel(network.chainMatch, "MATCH", "NO MATCH", Boolean(network.error))}
                   </strong>
                 </div>
 
@@ -222,8 +277,26 @@ export function EthereumVerifiedEvidence() {
                     Block hash
                   </span>
                   <strong>
-                    {network.blockHashMatch ? "MATCH" : "NO MATCH"}
+                    {verificationLabel(network.blockHashMatch, "MATCH", "NO MATCH", Boolean(network.error))}
                   </strong>
+                </div>
+
+                <div className="flex justify-between gap-3 text-[11px]">
+                  <span className="text-[#68706c]">
+                    Graph hash
+                  </span>
+                  <span className="font-mono">
+                    {shortHash(network.graphBlockHash)}
+                  </span>
+                </div>
+
+                <div className="flex justify-between gap-3 text-[11px]">
+                  <span className="text-[#68706c]">
+                    RPC hash
+                  </span>
+                  <span className="font-mono">
+                    {shortHash(network.rpcBlockHash)}
+                  </span>
                 </div>
 
                 <div className="flex justify-between gap-3">
@@ -231,7 +304,7 @@ export function EthereumVerifiedEvidence() {
                     Registry runtime
                   </span>
                   <strong>
-                    {network.runtimeCodePresent ? "PRESENT" : "ABSENT"}
+                    {verificationLabel(network.runtimeCodePresent, "PRESENT", "ABSENT", Boolean(network.error))}
                   </strong>
                 </div>
 
@@ -249,7 +322,7 @@ export function EthereumVerifiedEvidence() {
                     ownerOf(agentId)
                   </span>
                   <strong>
-                    {network.ownerMatch ? "MATCH" : "NO MATCH"}
+                    {verificationLabel(network.ownerMatch, "MATCH", "NO MATCH", Boolean(network.error))}
                   </strong>
                 </div>
               </div>
