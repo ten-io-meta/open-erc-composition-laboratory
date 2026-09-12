@@ -389,8 +389,44 @@ export async function observeProtocolCandidate(
             }
 
             try {
-              const callResult =
-                await rpc(
+              const [
+                erc165SelfResult,
+                erc165InvalidResult,
+                targetResult,
+              ] = await Promise.all([
+                rpc(
+                  rpcUri,
+                  "eth_call",
+                  [
+                    {
+                      to: candidateAddress,
+                      data:
+                        supportsInterfaceCallData(
+                          "0x01ffc9a7"
+                        ),
+                      gas: "0x7530",
+                    },
+                    blockTag,
+                  ]
+                ),
+
+                rpc(
+                  rpcUri,
+                  "eth_call",
+                  [
+                    {
+                      to: candidateAddress,
+                      data:
+                        supportsInterfaceCallData(
+                          "0xffffffff"
+                        ),
+                      gas: "0x7530",
+                    },
+                    blockTag,
+                  ]
+                ),
+
+                rpc(
                   rpcUri,
                   "eth_call",
                   [
@@ -400,13 +436,31 @@ export async function observeProtocolCandidate(
                         supportsInterfaceCallData(
                           criterion.interfaceId
                         ),
+                      gas: "0x7530",
                     },
                     blockTag,
                   ]
+                ),
+              ]);
+
+              const erc165SelfSupported =
+                decodeBoolean(
+                  erc165SelfResult
                 );
 
-              const supported =
-                decodeBoolean(callResult);
+              const erc165InvalidSupported =
+                decodeBoolean(
+                  erc165InvalidResult
+                );
+
+              const targetSupported =
+                decodeBoolean(
+                  targetResult
+                );
+
+              const erc165BehaviorValid =
+                erc165SelfSupported &&
+                !erc165InvalidSupported;
 
               return {
                 criterionId:
@@ -422,12 +476,18 @@ export async function observeProtocolCandidate(
                   criterion.provenance,
 
                 status:
-                  supported
-                    ? "ERC165_SUPPORT_TRUE" as const
-                    : "ERC165_SUPPORT_FALSE" as const,
+                  !erc165BehaviorValid
+                    ? "ERC165_BEHAVIOR_INVALID" as const
+                    : targetSupported
+                      ? "ERC165_SUPPORT_TRUE" as const
+                      : "ERC165_SUPPORT_FALSE" as const,
 
                 observedValue:
-                  supported,
+                  targetSupported,
+
+                erc165SelfSupported,
+                erc165InvalidSupported,
+                erc165BehaviorValid,
 
                 error: null,
               };
@@ -449,6 +509,10 @@ export async function observeProtocolCandidate(
                   "CRITERION_UNRESOLVED" as const,
 
                 observedValue: null,
+
+                erc165SelfSupported: null,
+                erc165InvalidSupported: null,
+                erc165BehaviorValid: null,
 
                 error:
                   error instanceof Error
