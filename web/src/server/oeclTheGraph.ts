@@ -225,9 +225,19 @@ const AGENT0_STANDARDIZED_TARGETS: Agent0StandardizedTarget[] = [
     subgraphId: "43s9hQRurMGjuYnC1r2ZwS6xSQktbFyXMPMqGKUFJojb",
   },
   {
+    network: "bsc",
+    chainId: "56",
+    subgraphId: "D6aWqowLkWqBgcqmpNKXuNikPkob24ADXCciiP8Hvn1K",
+  },
+  {
     network: "polygon",
     chainId: "137",
     subgraphId: "9q16PZv1JudvtnCAf44cBoxg82yK9SSsFvrjCY9xnneF",
+  },
+  {
+    network: "monad",
+    chainId: "143",
+    subgraphId: "4tvLxkczjhSaMiqRrCV1EyheYHyJ7Ad8jub1UUyukBjg",
   },
 ];
 

@@ -45,12 +45,32 @@ function rpcTargets(): RpcTarget[] {
       ),
     },
     {
+      network: "bsc",
+      chainId: "56",
+      uris: uniqueRpcUris(
+        process.env.BSC_MAINNET_RPC_URL,
+        "https://bsc-dataseed.bnbchain.org",
+        "https://bsc-dataseed-public.bnbchain.org",
+        "https://bsc-rpc.publicnode.com"
+      ),
+    },
+    {
       network: "polygon",
       chainId: "137",
       uris: uniqueRpcUris(
         process.env.POLYGON_MAINNET_RPC_URL,
         "https://polygon-bor-rpc.publicnode.com",
         "https://polygon-rpc.com"
+      ),
+    },
+    {
+      network: "monad",
+      chainId: "143",
+      uris: uniqueRpcUris(
+        process.env.MONAD_MAINNET_RPC_URL,
+        "https://rpc.monad.xyz",
+        "https://rpc1.monad.xyz",
+        "https://rpc3.monad.xyz"
       ),
     },
   ];
@@ -160,7 +180,9 @@ function decodeAddress(value: unknown): string {
 function networkLabel(network: string): string {
   if (network === "ethereum") return "Ethereum";
   if (network === "base") return "Base";
+  if (network === "bsc") return "BNB Chain";
   if (network === "polygon") return "Polygon";
+  if (network === "monad") return "Monad";
 
   return network;
 }
