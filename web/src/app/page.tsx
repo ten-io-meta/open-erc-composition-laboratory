@@ -2,6 +2,7 @@ import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 import { LiveGraphStandardization } from "@/components/LiveGraphStandardization";
 import { EthereumVerifiedEvidence } from "@/components/EthereumVerifiedEvidence";
+import { ProtocolEvidenceGate } from "@/components/ProtocolEvidenceGate";
 
 export default function Home() {
   return (
@@ -34,6 +35,8 @@ export default function Home() {
         <LiveGraphStandardization />
 
         <EthereumVerifiedEvidence />
+
+        <ProtocolEvidenceGate />
 
 
 
