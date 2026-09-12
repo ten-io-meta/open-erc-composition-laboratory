@@ -7,6 +7,8 @@ import { AGENT0_BASE_MAINNET_SUBGRAPH_ID } from "../../../laboratory/scientific-
 type Agent0GraphResponse = {
   data?: {
     agents?: Array<{
+      id?: string | null;
+      chainId?: string | null;
       agentId?: string | null;
       owner?: string | null;
       totalFeedback?: string | null;
@@ -297,6 +299,14 @@ export async function getLiveAgent0MultichainState() {
         indexedBlock: result.query?.indexedBlock ?? null,
         deployment: response?.data?._meta?.deployment ?? null,
         agentCount: agents.length,
+        sampleAgent:
+          agents.length > 0
+            ? {
+                id: agents[0].id ?? null,
+                agentId: agents[0].agentId ?? null,
+                owner: agents[0].owner ?? null,
+              }
+            : null,
         hasIndexingErrors:
           response?.data?._meta?.hasIndexingErrors ?? null,
         errors: result.errors,

@@ -1,6 +1,7 @@
 import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 import { LiveGraphStandardization } from "@/components/LiveGraphStandardization";
+import { EthereumVerifiedEvidence } from "@/components/EthereumVerifiedEvidence";
 
 export default function Home() {
   return (
@@ -31,6 +32,10 @@ export default function Home() {
         </p>
 
         <LiveGraphStandardization />
+
+        <EthereumVerifiedEvidence />
+
+
 
         <CompositionWorkbench />
       </section>
