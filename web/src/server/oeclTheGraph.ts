@@ -253,6 +253,73 @@ query OECLAgent0StandardizedObservation {
 }
 `;
 
+async function queryStandardizedAgent0Target(
+  provider: ScientificTheGraphGatewayProvider,
+  target: Agent0StandardizedTarget,
+  apiKey: string
+) {
+  const maxAttempts = 3;
+
+  let lastResult:
+    Awaited<
+      ReturnType<
+        ScientificTheGraphGatewayProvider["query"]
+      >
+    > | null = null;
+
+  for (
+    let attempt = 1;
+    attempt <= maxAttempts;
+    attempt += 1
+  ) {
+    const result = await provider.query({
+      subgraphId: target.subgraphId,
+      network: target.network,
+      chainId: target.chainId,
+      apiKey,
+      document: AGENT0_STANDARDIZED_DOCUMENT,
+      variables: {},
+      schemaId: "AGENT0-ERC8004",
+      timeoutMs: 30_000,
+    });
+
+    lastResult = result;
+
+    const completeIndexedBlock =
+      result.errors.length === 0 &&
+      result.query?.indexedBlock?.number !== undefined &&
+      typeof result.query.indexedBlock.hash === "string" &&
+      result.query.indexedBlock.hash.length > 0;
+
+    if (completeIndexedBlock) {
+      return {
+        result,
+        attempts: attempt,
+        provenanceReady: true,
+      };
+    }
+
+    if (attempt < maxAttempts) {
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 500 * attempt);
+      });
+    }
+  }
+
+  if (lastResult === null) {
+    throw new Error(
+      "The Graph observation was not attempted."
+    );
+  }
+
+  return {
+    result: lastResult,
+    attempts: maxAttempts,
+    provenanceReady: false,
+  };
+}
+
+
 export async function getLiveAgent0MultichainState() {
   const apiKey = process.env.THE_GRAPH_API_KEY?.trim();
 
@@ -271,16 +338,15 @@ export async function getLiveAgent0MultichainState() {
 
   const observations = await Promise.all(
     AGENT0_STANDARDIZED_TARGETS.map(async (target) => {
-      const result = await provider.query({
-        subgraphId: target.subgraphId,
-        network: target.network,
-        chainId: target.chainId,
-        apiKey,
-        document: AGENT0_STANDARDIZED_DOCUMENT,
-        variables: {},
-        schemaId: "AGENT0-ERC8004",
-        timeoutMs: 30_000,
-      });
+      const {
+        result,
+        attempts,
+        provenanceReady,
+      } = await queryStandardizedAgent0Target(
+        provider,
+        target,
+        apiKey
+      );
 
       const response = result.query?.response as Agent0GraphResponse | null;
       const agents = Array.isArray(response?.data?.agents)
@@ -290,7 +356,12 @@ export async function getLiveAgent0MultichainState() {
       return {
         network: target.network,
         chainId: target.chainId,
-        status: result.errors.length === 0 ? "LIVE" as const : "ERROR" as const,
+        status:
+          provenanceReady
+            ? "LIVE" as const
+            : "ERROR" as const,
+        observationAttempts: attempts,
+        provenanceReady,
         provider: result.provider,
         providerMode: result.providerMode,
         productId: result.productId,
@@ -309,7 +380,15 @@ export async function getLiveAgent0MultichainState() {
             : null,
         hasIndexingErrors:
           response?.data?._meta?.hasIndexingErrors ?? null,
-        errors: result.errors,
+        errors:
+          provenanceReady
+            ? result.errors
+            : Array.from(
+                new Set([
+                  ...result.errors,
+                  "The Graph observation has no complete indexed block provenance after availability retries.",
+                ])
+              ),
       };
     })
   );
