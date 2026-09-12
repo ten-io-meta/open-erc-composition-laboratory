@@ -1,4 +1,4 @@
-﻿import { ScientificTheGraphSubgraphMcpLiveClient } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
+import { ScientificTheGraphSubgraphMcpLiveClient } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpClient.js";
 import { ScientificTheGraphSubgraphMcpKeywordProvider } from "../../../laboratory/scientific-the-graph-subgraph-mcp/ScientificTheGraphSubgraphMcpKeywordProvider.js";
 import { ScientificTheGraphSubgraphInspectionEngine } from "../../../laboratory/scientific-the-graph-subgraph-inspection/ScientificTheGraphSubgraphInspectionEngine.js";
 import { ScientificTheGraphGatewayProvider } from "../../../laboratory/scientific-the-graph-provider/ScientificTheGraphGatewayProvider.js";

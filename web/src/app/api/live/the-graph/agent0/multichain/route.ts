@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getLiveAgent0MultichainState } from "@/server/oeclTheGraph";
 
 export const runtime = "nodejs";

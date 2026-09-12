@@ -1,4 +1,4 @@
-﻿import { CompositionWorkbench } from "@/components/CompositionWorkbench";
+import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 import { LiveGraphStandardization } from "@/components/LiveGraphStandardization";
 
@@ -12,7 +12,7 @@ export default function Home() {
         </div>
 
         <div className="font-mono text-xs text-[#68706c]">
-          V2.1 Â· VALIDATED SCIENTIFIC SNAPSHOT
+          V2.1 · VALIDATED SCIENTIFIC SNAPSHOT
         </div>
       </header>
 
@@ -52,5 +52,3 @@ export default function Home() {
     </main>
   );
 }
-
-
