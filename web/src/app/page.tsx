@@ -5,6 +5,9 @@ import { EthereumVerifiedEvidence } from "@/components/EthereumVerifiedEvidence"
 import { ProtocolEvidenceGate } from "@/components/ProtocolEvidenceGate";
 
 export default function Home() {
+  const candidateProtocolId =
+    process.env.OECL_EVIDENCE_PROTOCOL_ID?.trim() || null;
+
   return (
     <main className="min-h-screen px-6 py-6 md:px-10 lg:px-14">
       <header className="mx-auto flex max-w-[1500px] items-center justify-between border-b border-[#dfe4e1] pb-5">
@@ -36,7 +39,9 @@ export default function Home() {
 
         <EthereumVerifiedEvidence />
 
-        <ProtocolEvidenceGate />
+        {candidateProtocolId && (
+          <ProtocolEvidenceGate />
+        )}
 
 
 

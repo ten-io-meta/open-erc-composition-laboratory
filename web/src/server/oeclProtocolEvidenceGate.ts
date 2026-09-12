@@ -78,7 +78,32 @@ export async function getProtocolEvidenceGate() {
     process.env
       .OECL_EVIDENCE_PROTOCOL_ID
       ?.trim() ||
-    "ERC-8060";
+    null;
+
+  if (!candidateProtocolId) {
+    return {
+      status:
+        "NOT_CONFIGURED" as const,
+
+      rule:
+        "NO_PAIR_EVALUATION_WITHOUT_EXPLICIT_CANDIDATE",
+
+      primaryProtocolId,
+      candidateProtocolId: null,
+
+      descriptor: null,
+
+      eligibleNetworks: 0,
+      totalNetworks: 0,
+
+      interpretation: {
+        candidate:
+          "No candidate protocol has been explicitly selected. OECL will not invent or privilege one.",
+      },
+
+      networks: [],
+    };
+  }
 
   const candidateDescriptor =
     buildConfiguredProtocolDescriptor(
