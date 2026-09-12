@@ -1,5 +1,6 @@
-import { CompositionWorkbench } from "@/components/CompositionWorkbench";
+﻿import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
+import { LiveGraphStandardization } from "@/components/LiveGraphStandardization";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
         </div>
 
         <div className="font-mono text-xs text-[#68706c]">
-          V2.1 · VALIDATED SCIENTIFIC SNAPSHOT
+          V2.1 Â· VALIDATED SCIENTIFIC SNAPSHOT
         </div>
       </header>
 
@@ -29,6 +30,8 @@ export default function Home() {
           and inspect the evidence behind the scientific result.
         </p>
 
+        <LiveGraphStandardization />
+
         <CompositionWorkbench />
       </section>
 
@@ -38,7 +41,7 @@ export default function Home() {
       <section className="mx-auto mt-12 max-w-[1500px] pb-20">
         <details className="rounded-[24px] border border-[#dfe4e1] bg-white">
           <summary className="cursor-pointer px-6 py-5 text-sm font-medium">
-            Advanced Live Evidence · The Graph
+            Advanced Live Evidence - The Graph
           </summary>
 
           <div className="border-t border-[#e2e7e4] px-1 pb-1">
@@ -49,3 +52,5 @@ export default function Home() {
     </main>
   );
 }
+
+

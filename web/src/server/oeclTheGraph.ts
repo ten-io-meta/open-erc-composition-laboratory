@@ -204,3 +204,122 @@ export async function inspectLiveSubgraph(
   }
 }
 
+
+type Agent0StandardizedTarget = {
+  network: string;
+  chainId: string;
+  subgraphId: string;
+};
+
+const AGENT0_STANDARDIZED_TARGETS: Agent0StandardizedTarget[] = [
+  {
+    network: "ethereum",
+    chainId: "1",
+    subgraphId: "FV6RR6y13rsnCxBAicKuQEwDp8ioEGiNaWaZUmvr1F8k",
+  },
+  {
+    network: "base",
+    chainId: "8453",
+    subgraphId: "43s9hQRurMGjuYnC1r2ZwS6xSQktbFyXMPMqGKUFJojb",
+  },
+  {
+    network: "polygon",
+    chainId: "137",
+    subgraphId: "9q16PZv1JudvtnCAf44cBoxg82yK9SSsFvrjCY9xnneF",
+  },
+];
+
+const AGENT0_STANDARDIZED_DOCUMENT = `
+query OECLAgent0StandardizedObservation {
+  agents(first: 3) {
+    id
+    chainId
+    agentId
+    owner
+    totalFeedback
+    lastActivity
+  }
+
+  _meta {
+    block {
+      number
+      hash
+    }
+    deployment
+    hasIndexingErrors
+  }
+}
+`;
+
+export async function getLiveAgent0MultichainState() {
+  const apiKey = process.env.THE_GRAPH_API_KEY?.trim();
+
+  if (!apiKey) {
+    return {
+      status: "NOT_CONFIGURED" as const,
+      protocolId: "ERC-8004",
+      standardizedQuery: true,
+      networksRequested: AGENT0_STANDARDIZED_TARGETS.length,
+      networksLive: 0,
+      networks: [],
+    };
+  }
+
+  const provider = new ScientificTheGraphGatewayProvider();
+
+  const observations = await Promise.all(
+    AGENT0_STANDARDIZED_TARGETS.map(async (target) => {
+      const result = await provider.query({
+        subgraphId: target.subgraphId,
+        network: target.network,
+        chainId: target.chainId,
+        apiKey,
+        document: AGENT0_STANDARDIZED_DOCUMENT,
+        variables: {},
+        schemaId: "AGENT0-ERC8004",
+        timeoutMs: 30_000,
+      });
+
+      const response = result.query?.response as Agent0GraphResponse | null;
+      const agents = Array.isArray(response?.data?.agents)
+        ? response.data.agents
+        : [];
+
+      return {
+        network: target.network,
+        chainId: target.chainId,
+        status: result.errors.length === 0 ? "LIVE" as const : "ERROR" as const,
+        provider: result.provider,
+        providerMode: result.providerMode,
+        productId: result.productId,
+        schemaId: result.schemaId ?? null,
+        fetchedAt: result.query?.fetchedAt ?? null,
+        indexedBlock: result.query?.indexedBlock ?? null,
+        deployment: response?.data?._meta?.deployment ?? null,
+        agentCount: agents.length,
+        hasIndexingErrors:
+          response?.data?._meta?.hasIndexingErrors ?? null,
+        errors: result.errors,
+      };
+    })
+  );
+
+  const networksLive = observations.filter(
+    (observation) => observation.status === "LIVE"
+  ).length;
+
+  return {
+    status:
+      networksLive === observations.length
+        ? "LIVE" as const
+        : networksLive > 0
+          ? "PARTIAL" as const
+          : "ERROR" as const,
+    protocolId: "ERC-8004",
+    standardizedQuery: true,
+    schemaId: "AGENT0-ERC8004",
+    networksRequested: observations.length,
+    networksLive,
+    networks: observations,
+  };
+}
