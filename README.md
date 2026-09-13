@@ -1,4 +1,4 @@
-﻿# Open ERC Composition Laboratory (OECL)
+# Open ERC Composition Laboratory (OECL)
 
 **Scientific infrastructure for discovering and evaluating Ethereum standard composition.**
 
@@ -10,6 +10,58 @@ OECL separates **discovery** from **scientific validation**.
 
 ---
 
+## ETHOnline 2026 Continuity Extension
+
+OECL is a pre-existing research project. The validated V2.1 scientific baseline was frozen before ETHOnline 2026.
+
+For continuity attribution:
+
+- pre-hackathon baseline: `e9b5517`
+- baseline tag: `oecl-v2.1-main`
+- hackathon development branch: `oecl-v2.2-dev`
+
+The following live evidence infrastructure was built during **ETHOnline 2026** on top of that baseline:
+
+- standardized live ERC-8004 observation across Ethereum, Base, and Polygon using The Graph
+- one shared GraphQL observation model across the three networks
+- independent Ethereum JSON-RPC verification at the exact block indexed by The Graph
+- block-hash, chain-id, registry-code, and sampled-agent ownership cross-checks
+- generic protocol evidence descriptors
+- ERC-165 behavioral validation before protocol identity can be accepted
+- separation of source claims from independently observable on-chain evidence
+- fail-closed evidence gating before interaction analysis
+- explicit candidate selection: OECL does not invent or privilege a protocol pair
+
+The core rule of this extension is:
+
+> **Knowledge defines what to test. Ethereum determines whether the test passes.**
+
+The Graph acts as a standardized observation layer. Ethereum is the independent witness. OECL deterministically verifies whether the available evidence is sufficient to advance.
+
+A source claim, repository, forum discussion, or discovered relationship can guide investigation, but none of them can independently create compatibility or composition.
+
+### Hackathon scientific boundary
+
+During ETHOnline 2026, OECL does **not** claim that ERC-8004 and ERC-8060 are composing on mainnet.
+
+The current live system distinguishes:
+
+`SOURCE CLAIM -> LOCATOR -> ON-CHAIN CODE -> PROTOCOL IDENTITY -> INTERACTION ELIGIBILITY -> COMPOSITION EVALUATION`
+
+Every transition may stop if evidence is missing or unresolved.
+
+In particular:
+
+- verified protocol presence is not compatibility
+- shared infrastructure is not interaction
+- correlation is not composition
+- a source claim is not chain evidence
+- no explicit candidate means no pair evaluation
+- no qualifying on-chain interaction means no on-chain composition claim
+
+This extension was implemented during the ETHOnline 2026 hackathon and is intentionally separated from the frozen V2.1 scientific baseline.
+
+---
 ## Scientific Pipeline
 
 `REAL SOURCE -> FACTS -> CONCEPTS -> PROTOCOL ATTRIBUTION`
@@ -22,7 +74,7 @@ OECL separates **discovery** from **scientific validation**.
 
 ---
 
-## Real Scientific Control: ERC-8004 x ERC-8060
+## V2.1 Internal Scientific Control: ERC-8004 x ERC-8060
 
 OECL detects that both protocols have a structural dependency on ERC-721.
 
@@ -44,7 +96,7 @@ The real positive control then evaluates six required scientific gates:
 
 **6 / 6 gates -> SUPPORTED**
 
-This is candidate-scoped support, not a universal compatibility claim.
+This is a V2.1 candidate-scoped internal scientific control. It is not evidence of a real on-chain ERC-8004 x ERC-8060 interaction, and it is not a universal compatibility claim.
 
 ---
 
@@ -165,3 +217,9 @@ Maintainer: **tenio.eth**
 
 Validation: `docs/v2.1-quality-pass/F-final-validation.md`
 Challenged-control audit: `docs/v2.1-quality-pass/A3-real-challenged-control-audit.md`
+
+### AI-assisted development
+
+AI tools were used as development assistants during the ETHOnline
+2026 extension. They are not part of OECL's runtime scientific
+decision path. See [AI_USAGE.md](./AI_USAGE.md) for the full disclosure.
