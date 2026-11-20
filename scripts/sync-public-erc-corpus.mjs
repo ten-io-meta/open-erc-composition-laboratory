@@ -19,6 +19,14 @@ for(const filename of files){
 }
 standards.sort((a,b)=>a.number-b.number);
 const ids=new Set(standards.map(x=>x.id));
+// ERC frontmatter 'requires: 155, 721' uses bare EIP/ERC numbers.
+// Only classify a reference as an ERC when the official ERC corpus contains it.
+// Never silently convert a core EIP number into an ERC ID.
+for(const record of standards){
+  const classify=id=>ids.has(id)?id:'REF-'+id.slice(4)+'-UNCLASSIFIED';
+  record.requires=record.requires.map(classify);
+  record.mentions=record.mentions.map(classify);
+}
 if(standards.length<400||ids.size!==standards.length)throw Error("Official ERC inventory incomplete or duplicated: "+standards.length);
 const revision=execFileSync("git",["-C",root,"rev-parse","HEAD"],{encoding:"utf8"}).trim();
 if(!/^[0-9a-f]{40}$/.test(revision))throw Error("Missing pinned official ERC Git revision");
