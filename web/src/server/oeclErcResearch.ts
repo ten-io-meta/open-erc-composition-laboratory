@@ -31,7 +31,7 @@ export type ErcDocument = {
   };
 };
 export type ForumEvidence = {
-  status: "SEARCHED" | "SOURCE_UNAVAILABLE";
+  status: "SEARCHED" | "SOURCE_UNAVAILABLE" | "LINKED_DISCUSSION_ONLY";
   query: string;
   topics: Array<{
     id: number; title: string; url: string;
@@ -39,6 +39,8 @@ export type ForumEvidence = {
     author: string | null; firstPostUpdatedAt: string | null;
     firstPostVersion: number | null; metadataStatus: "VERIFIED_TOPIC" | "SEARCH_RESULT_ONLY";
     postCount: number | null;
+    originalPostPreview: string | null;
+    discoveryKind:"SEARCH_HIT"|"DECLARED_DISCUSSION";
   }>;
 };
 type DocumentRelation = {
@@ -160,65 +162,83 @@ async function loadDocument(id: string): Promise<ErcDocument> {
     proposalAttribution:null
   };
 }
-async function searchMagicians(id: string): Promise<ForumEvidence> {
-  const fallback:ForumEvidence={status:"SOURCE_UNAVAILABLE",query:id,topics:[]};
+async function searchMagicians(id:string,discussionUrl:string|null):Promise<ForumEvidence> {
+ const fallback:ForumEvidence={status:"SOURCE_UNAVAILABLE",query:id,topics:[]};
+ const hits:ForumEvidence["topics"]=[];
+ const linked=/^https:\/\/ethereum-magicians\.org\/t\/[a-z0-9-]+\/([1-9]\d*)(?:\/.*)?$/i.exec(discussionUrl??"");
+ if(linked) {
+  const topicId=Number(linked[1]);
+  if(Number.isSafeInteger(topicId)){
+   hits.push({
+    id:topicId,title:"Discussion declared by "+id+" specification",url:discussionUrl!,
+    createdAt:null,lastActivityAt:null,author:null,firstPostUpdatedAt:null,
+    firstPostVersion:null,postCount:null,metadataStatus:"SEARCH_RESULT_ONLY",
+    originalPostPreview:null,discoveryKind:"DECLARED_DISCUSSION"
+   });
+  }
+ }
+ let searched=false;
+ try {
+  const response=await fetch(
+   "https://ethereum-magicians.org/search.json?q="+encodeURIComponent('"'+id+'"'),
+   {next:{revalidate:3600},signal:AbortSignal.timeout(6500),
+    headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}}
+  );
+  if(response.ok) {
+   searched=true;
+   const root=await response.json() as {topics?:unknown[]};
+   for(const item of (Array.isArray(root.topics)?root.topics:[]).slice(0,3)){
+    if(!item||typeof item!=="object")continue;
+    const t=item as {id?:unknown;title?:unknown;slug?:unknown;
+      created_at?:unknown;last_posted_at?:unknown;posts_count?:unknown};
+    if(typeof t.id!=="number"||!Number.isSafeInteger(t.id)||
+       typeof t.title!=="string"||typeof t.slug!=="string"||
+       !/^[a-z0-9-]+$/.test(t.slug)||hits.some(x=>x.id===t.id))continue;
+    hits.push({
+     id:t.id,title:t.title.slice(0,240),
+     url:"https://ethereum-magicians.org/t/"+t.slug+"/"+t.id,
+     createdAt:typeof t.created_at==="string"?t.created_at:null,
+     lastActivityAt:typeof t.last_posted_at==="string"?t.last_posted_at:null,
+     author:null,firstPostUpdatedAt:null,firstPostVersion:null,
+     postCount:typeof t.posts_count==="number"?t.posts_count:null,
+     metadataStatus:"SEARCH_RESULT_ONLY",originalPostPreview:null,
+     discoveryKind:"SEARCH_HIT"
+    });
+   }
+  }
+ }catch{}
+ if(!hits.length)return searched?{...fallback,status:"SEARCHED"}:fallback;
+ const topics=await Promise.all(hits.slice(0,4).map(async hit=>{
   try {
-    const response=await fetch(
-      "https://ethereum-magicians.org/search.json?q="+encodeURIComponent('"'+id+'"'),
-      {next:{revalidate:3600},signal:AbortSignal.timeout(7000),
-       headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}}
-    );
-    if(!response.ok)return fallback;
-    const payload:unknown=await response.json();
-    const root=payload as {topics?:unknown[]};
-    // Bound calls to avoid scraping and rate-limit violations.
-    const hits=(Array.isArray(root.topics)?root.topics:[]).slice(0,3)
-      .flatMap((value):ForumEvidence["topics"]=>{
-        if(!value||typeof value!=="object")return [];
-        const t=value as {id?:unknown;title?:unknown;slug?:unknown;
-          created_at?:unknown;last_posted_at?:unknown;posts_count?:unknown};
-        if(typeof t.id!=="number"||!Number.isSafeInteger(t.id)||
-           typeof t.title!=="string"||typeof t.slug!=="string"||
-           !/^[a-z0-9-]+$/.test(t.slug))return [];
-        return [{
-          id:t.id,title:t.title.slice(0,240),
-          url:"https://ethereum-magicians.org/t/"+t.slug+"/"+t.id,
-          createdAt:typeof t.created_at==="string"?t.created_at:null,
-          lastActivityAt:typeof t.last_posted_at==="string"?t.last_posted_at:null,
-          author:null,firstPostUpdatedAt:null,firstPostVersion:null,
-          postCount:typeof t.posts_count==="number"?t.posts_count:null,
-          metadataStatus:"SEARCH_RESULT_ONLY" as const
-        }];
-      });
-    const topics=await Promise.all(hits.map(async hit=>{
-      try {
-        const response=await fetch(
-          "https://ethereum-magicians.org/t/"+hit.id+".json",
-          {next:{revalidate:3600},signal:AbortSignal.timeout(5000),
-           headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}}
-        );
-        if(!response.ok)return hit;
-        const topic=await response.json() as {
-          id?:number;created_at?:string;last_posted_at?:string;posts_count?:number;
-          post_stream?:{posts?:Array<{post_number?:number;username?:string;
-            created_at?:string;updated_at?:string;version?:number}>}
-        };
-        if(topic.id!==hit.id)return hit;
-        const first=topic.post_stream?.posts?.find(p=>p.post_number===1);
-        return {...hit,
-          createdAt:topic.created_at??hit.createdAt,
-          lastActivityAt:topic.last_posted_at??hit.lastActivityAt,
-          author:first?.username??null,firstPostUpdatedAt:first?.updated_at??null,
-          firstPostVersion:first?.version??null,postCount:topic.posts_count??hit.postCount,
-          metadataStatus:first?"VERIFIED_TOPIC" as const:"SEARCH_RESULT_ONLY" as const};
-      }catch{return hit;}
-    }));
-    return {status:"SEARCHED",query:id,topics};
-  }catch{return fallback;}
+   const response=await fetch("https://ethereum-magicians.org/t/"+hit.id+".json",{
+    next:{revalidate:3600},signal:AbortSignal.timeout(5000),
+    headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}
+   });
+   if(!response.ok)return hit;
+   const topic=await response.json() as {
+    id?:number;title?:string;created_at?:string;last_posted_at?:string;posts_count?:number;
+    post_stream?:{posts?:Array<{post_number?:number;username?:string;
+      raw?:string;created_at?:string;updated_at?:string;version?:number}>}
+   };
+   if(topic.id!==hit.id)return hit;
+   const first=topic.post_stream?.posts?.find(x=>x.post_number===1);
+   return {...hit,
+    title:typeof topic.title==="string"?topic.title.slice(0,240):hit.title,
+    createdAt:topic.created_at??hit.createdAt,lastActivityAt:topic.last_posted_at??hit.lastActivityAt,
+    author:first?.username??null,firstPostUpdatedAt:first?.updated_at??null,
+    firstPostVersion:first?.version??null,postCount:topic.posts_count??hit.postCount,
+    // Untrusted raw forum prose, displayed ONLY as escaped React text.
+    originalPostPreview:typeof first?.raw==="string"?
+      first.raw.replace(/\s+/g," ").trim().slice(0,220):null,
+    metadataStatus:first?"VERIFIED_TOPIC" as const:"SEARCH_RESULT_ONLY" as const};
+  }catch{return hit;}
+ }));
+ return {status:searched?"SEARCHED":"LINKED_DISCUSSION_ONLY",query:id,topics};
 }
 export async function researchErcPair(a:string,b:string) {
-  const [left,right,forumA,forumB] = await Promise.all([
-    loadDocument(a),loadDocument(b),searchMagicians(a),searchMagicians(b)
+  const [left,right]=await Promise.all([loadDocument(a),loadDocument(b)]);
+  const [forumA,forumB]=await Promise.all([
+    searchMagicians(a,left.discussionUrl),searchMagicians(b,right.discussionUrl)
   ]);
   const documentaryRelations: DocumentRelation[]=[];
   for (const [source,target] of [[left,right],[right,left]]) {
