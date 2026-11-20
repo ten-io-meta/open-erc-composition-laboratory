@@ -18,11 +18,27 @@ export type ErcDocument = {
   references: string[];
   url: string;
   sourceRevision: string;
+  specAuthors: string | null;
+  documentCreatedAt: string | null;
+  proposalAttribution: null | {
+    pullRequestNumber: number;
+    submittedBy: string | null;
+    openedAt: string | null;
+    updatedAt: string | null;
+    sourceCommitSha: string;
+    sourcePullRequestUrl: string;
+  };
 };
 export type ForumEvidence = {
   status: "SEARCHED" | "SOURCE_UNAVAILABLE";
   query: string;
-  topics: Array<{ id: number; title: string; url: string }>;
+  topics: Array<{
+    id: number; title: string; url: string;
+    createdAt: string | null; lastActivityAt: string | null;
+    author: string | null; firstPostUpdatedAt: string | null;
+    firstPostVersion: number | null; metadataStatus: "VERIFIED_TOPIC" | "SEARCH_RESULT_ONLY";
+    postCount: number | null;
+  }>;
 };
 type DocumentRelation = {
   kind: "DECLARED_REQUIRES" | "MENTIONS" | "PROPOSAL_REQUIRES" | "PROPOSAL_MENTIONS";
@@ -75,7 +91,7 @@ async function readOpenProposal(id:string):Promise<ErcDocument|null>{
  try {
   const q='repo:ethereum/ERCs is:pr is:open "'+number+'"';
   const response=await githubJson("https://api.github.com/search/issues?q="+encodeURIComponent(q)+"&per_page=8") as
-  {items?:Array<{number?:number;state?:string}>};
+  {items?:Array<{number?:number;state?:string;user?:{login?:string};created_at?:string;updated_at?:string;html_url?:string}>};
   for(const item of (response.items??[]).slice(0,8)){
    if(typeof item.number!=="number"||item.state!=="open")continue;
    const files=await githubJson("https://api.github.com/repos/ethereum/ERCs/pulls/"+item.number+"/files?per_page=100") as
@@ -105,7 +121,14 @@ async function readOpenProposal(id:string):Promise<ErcDocument|null>{
      discussionUrl:forumLink&&/^https:\/\/(?:ethereum-magicians\.org|github\.com|ethresear\.ch)\//i.test(forumLink)?forumLink:null,
      requires,references:referencesFromProposal(body,id),
      url:"https://github.com/ethereum/ERCs/pull/"+item.number,
-     sourceRevision:blobRef
+     sourceRevision:blobRef,
+     specAuthors:front.author??null,
+     documentCreatedAt:front.created??null,
+     proposalAttribution:{
+       pullRequestNumber:item.number,submittedBy:item.user?.login??null,
+       openedAt:item.created_at??null,updatedAt:item.updated_at??null,
+       sourceCommitSha:blobRef,sourcePullRequestUrl:"https://github.com/ethereum/ERCs/pull/"+item.number
+     }
    };
   }
  }catch{}
@@ -119,7 +142,8 @@ async function loadDocument(id: string): Promise<ErcDocument> {
     id,status:"SOURCE_UNAVAILABLE",title:null,editorialStatus:null,
     summary:null,discussionUrl:null,requires:[],references:[],
     url:"https://github.com/ethereum/ERCs/blob/"+index.sourceCommitSha+"/ERCS/erc-"+n+".md",
-    sourceRevision:index.sourceCommitSha
+    sourceRevision:index.sourceCommitSha,
+    specAuthors:null,documentCreatedAt:null,proposalAttribution:null
   };
   if(!known.has(n))return (await readOpenProposal(id))??{...base,status:"NOT_IN_OFFICIAL_SNAPSHOT"};
   // The entire corpus comes from ONE pinned Git checkout, not on-demand drifting versions.
@@ -129,32 +153,66 @@ async function loadDocument(id: string): Promise<ErcDocument> {
     editorialStatus:profile.editorialStatus,
     summary:profile.summary,discussionUrl:profile.discussionUrl,
     requires:profile.requires,references:profile.references,
-    url:profile.sourceUrl,sourceRevision:profile.sourceRevision
+    url:profile.sourceUrl,sourceRevision:profile.sourceRevision,
+    specAuthors:profile.specAuthors??null,documentCreatedAt:profile.created??null,
+    proposalAttribution:null
   };
 }
 async function searchMagicians(id: string): Promise<ForumEvidence> {
-  const fallback: ForumEvidence={status:"SOURCE_UNAVAILABLE",query:id,topics:[]};
+  const fallback:ForumEvidence={status:"SOURCE_UNAVAILABLE",query:id,topics:[]};
   try {
-    // Discourse public search, fixed origin: bounded, read-only and not proof of implementation.
     const response=await fetch(
-      "https://ethereum-magicians.org/search.json?q=" + encodeURIComponent('"' + id + '"'),
-      { next:{revalidate:3600},signal:AbortSignal.timeout(7000),
-        headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"} }
+      "https://ethereum-magicians.org/search.json?q="+encodeURIComponent('"'+id+'"'),
+      {next:{revalidate:3600},signal:AbortSignal.timeout(7000),
+       headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}}
     );
-    if (!response.ok) return fallback;
-    const json: unknown=await response.json();
-    const data=json as {topics?:unknown[]};
-    const topics=(Array.isArray(data.topics)?data.topics:[]).slice(0,6)
-      .flatMap((t): ForumEvidence["topics"] => {
-        if (!t || typeof t!=="object") return [];
-        const v=t as {id?:unknown,title?:unknown,slug?:unknown};
-        if (typeof v.id!=="number"||typeof v.title!=="string"||
-            typeof v.slug!=="string"||!/^[a-z0-9-]+$/.test(v.slug)) return [];
-        return [{id:v.id,title:v.title.slice(0,240),
-          url:"https://ethereum-magicians.org/t/"+v.slug+"/"+v.id}];
+    if(!response.ok)return fallback;
+    const payload:unknown=await response.json();
+    const root=payload as {topics?:unknown[]};
+    // Bound calls to avoid scraping and rate-limit violations.
+    const hits=(Array.isArray(root.topics)?root.topics:[]).slice(0,3)
+      .flatMap((value):ForumEvidence["topics"]=>{
+        if(!value||typeof value!=="object")return [];
+        const t=value as {id?:unknown;title?:unknown;slug?:unknown;
+          created_at?:unknown;last_posted_at?:unknown;posts_count?:unknown};
+        if(typeof t.id!=="number"||!Number.isSafeInteger(t.id)||
+           typeof t.title!=="string"||typeof t.slug!=="string"||
+           !/^[a-z0-9-]+$/.test(t.slug))return [];
+        return [{
+          id:t.id,title:t.title.slice(0,240),
+          url:"https://ethereum-magicians.org/t/"+t.slug+"/"+t.id,
+          createdAt:typeof t.created_at==="string"?t.created_at:null,
+          lastActivityAt:typeof t.last_posted_at==="string"?t.last_posted_at:null,
+          author:null,firstPostUpdatedAt:null,firstPostVersion:null,
+          postCount:typeof t.posts_count==="number"?t.posts_count:null,
+          metadataStatus:"SEARCH_RESULT_ONLY" as const
+        }];
       });
+    const topics=await Promise.all(hits.map(async hit=>{
+      try {
+        const response=await fetch(
+          "https://ethereum-magicians.org/t/"+hit.id+".json",
+          {next:{revalidate:3600},signal:AbortSignal.timeout(5000),
+           headers:{"Accept":"application/json","User-Agent":"OECL-documentary-research/1.0"}}
+        );
+        if(!response.ok)return hit;
+        const topic=await response.json() as {
+          id?:number;created_at?:string;last_posted_at?:string;posts_count?:number;
+          post_stream?:{posts?:Array<{post_number?:number;username?:string;
+            created_at?:string;updated_at?:string;version?:number}>}
+        };
+        if(topic.id!==hit.id)return hit;
+        const first=topic.post_stream?.posts?.find(p=>p.post_number===1);
+        return {...hit,
+          createdAt:topic.created_at??hit.createdAt,
+          lastActivityAt:topic.last_posted_at??hit.lastActivityAt,
+          author:first?.username??null,firstPostUpdatedAt:first?.updated_at??null,
+          firstPostVersion:first?.version??null,postCount:topic.posts_count??hit.postCount,
+          metadataStatus:first?"VERIFIED_TOPIC" as const:"SEARCH_RESULT_ONLY" as const};
+      }catch{return hit;}
+    }));
     return {status:"SEARCHED",query:id,topics};
-  } catch {return fallback;}
+  }catch{return fallback;}
 }
 export async function researchErcPair(a:string,b:string) {
   const [left,right,forumA,forumB] = await Promise.all([
