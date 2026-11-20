@@ -1,0 +1,114 @@
+name: OECL — official ERC + Magicians documentary corpus
+on:
+  pull_request:
+    paths:
+      - scripts/lib/erc-corpus.mjs
+      - scripts/sync-public-erc-corpus.mjs
+      - tests/public-erc-corpus.test.mjs
+      - web/src/app/**
+      - web/src/components/**
+      - web/src/server/**
+      - .github/workflows/public-erc-corpus.yml
+  workflow_dispatch:
+concurrency:
+  group: oecl-erc-corpus-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  gather-and-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    steps:
+      - name: Checkout OECL source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Clone official ERC source (immutable revision recorded in snapshot)
+        run: git clone --depth 1 --single-branch --branch master https://github.com/ethereum/ERCs.git /tmp/oecl-official-ERCs
+      - name: Ingest ALL official ERC markdown, plus bounded Magicians recent topics
+        run: node scripts/sync-public-erc-corpus.mjs --erc-root /tmp/oecl-official-ERCs --output web/src/data/publicErcCorpus.json --magicians-pages 2
+      - name: Test documentary boundaries
+        run: |
+          node --test tests/public-erc-corpus.test.mjs
+          node - <<'NODE'
+          const corpus = require('./web/src/data/publicErcCorpus.json');
+          const ids = new Set(corpus.standards.map(x => x.id));
+          if (ids.size < 400 || !ids.has("ERC-721") || !ids.has("ERC-8004"))
+            throw Error('Official ERC corpus failed coverage gate');
+          if (corpus.scientificStatus !== 'NOT_EVALUATED')
+            throw Error('Never promote documentary evidence to scientific result');
+          console.log('OECL_OFFICIAL_ERC_COVERAGE', JSON.stringify({official:ids.size,magiciansRecent:corpus.recentDiscussionTopics.length,revision:corpus.source.revision,forum:corpus.forum.status}));
+          NODE
+      - name: Build OECL website with snapshot
+        run: |
+          npm ci
+          npm ci --prefix web
+          npm run build --prefix web
+      - name: Smoke-test live HTTP API with pinned official corpus
+        run: |
+          npm run start --prefix web -- --port 3055 >/tmp/oecl-next-smoke.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const host='http://127.0.0.1:3055';
+          let healthy=false;
+          for(let i=0;i<25;i++){
+            try{const r=await fetch(host+'/api/research/erc?limit=1');
+              if(r.ok){healthy=true;break;}}catch{}
+            await new Promise(resolve=>setTimeout(resolve,500));
+          }
+          assert(healthy,'Next server did not start for HTTP smoke tests');
+          const get=async path=>{
+            const r=await fetch(host+path,{signal:AbortSignal.timeout(15000)});
+            assert.equal(r.status,200,path+' failed with '+r.status);
+            return await r.json();
+          };
+          const list=await get('/api/research/erc?q=721');
+          assert.equal(list.totalIndexed,626);
+          assert(list.standards.some(x=>x.id==='ERC-721'));
+          const dependent=await get('/api/research/pair?left=721&right=8004');
+          assert.equal(dependent.documentary.relation,'DECLARED_REQUIREMENT');
+          assert.equal(dependent.scientific.compatibility,'NOT_EVALUATED');
+          assert.deepEqual(dependent.scientific.observedEmergentProperties,[]);
+          const unpublished=await get('/api/research/pair?left=721&right=8060');
+          assert.equal(unpublished.indexedOfficialRecords,1);
+          assert.equal(unpublished.scientific.compatibility,'NOT_EVALUATED');
+          const frozen=await get('/api/research/pair?left=8301&right=8354');
+          assert.equal(frozen.scientific.compatibility,'INCONCLUSIVE');
+          console.log('OECL_WEB_HTTP_SMOKE_PASS '+JSON.stringify({
+            indexed:list.totalIndexed,declared:dependent.documentary.relation,
+            unpublished:unpublished.indexedOfficialRecords,
+            frozen:frozen.scientific.compatibility,emergentFindings:dependent.scientific.observedEmergentProperties.length
+          }));
+          NODE
+      - name: Archive independently verifiable public-source snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-official-erc-corpus-and-forum-coverage
+          path: web/src/data/publicErcCorpus.json
+          if-no-files-found: warn
+      - name: Save validated snapshot ONLY to review branch, never main
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          github.event.pull_request.head.ref == 'feat/oecl-open-erc-research-corpus-v1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/src/data/publicErcCorpus.json
+          if git diff --cached --quiet; then
+            echo 'No corpus changes to commit'
+          else
+            git commit -m "data(oecl): materialize official ERCs with Magicians documentary coverage"
+            git fetch origin refs/heads/feat/oecl-open-erc-research-corpus-v1
+            git rebase origin/feat/oecl-open-erc-research-corpus-v1
+            git push origin HEAD:refs/heads/feat/oecl-open-erc-research-corpus-v1
+          fi
