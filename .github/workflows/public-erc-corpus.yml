@@ -44,6 +44,7 @@ jobs:
           NODE
       - name: Build OECL website with snapshot
         run: |
+          npm ci
           npm ci --prefix web
           npm run build --prefix web
       - name: Archive independently verifiable public-source snapshot
