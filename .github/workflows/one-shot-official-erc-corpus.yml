@@ -1,0 +1,55 @@
+name: One-shot snapshot of every official ERC document
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-official-erc-corpus.mjs'
+      - '.github/workflows/one-shot-official-erc-corpus.yml'
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    if: >-
+      ${{ github.event.pull_request.number }} == 4 &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      ${{ github.event.pull_request.head.ref }} == 'feature/erc-research-github-magicians-web-v1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/checkout@v4
+        with:
+          repository: ethereum/ERCs
+          ref: master
+          path: official-ercs
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse every official ERC document in one Git checkout
+        run: node scripts/build-official-erc-corpus.mjs
+      - name: Validate documentary dataset without claiming compatibility
+        run: |
+          node --input-type=module - <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const corpus=JSON.parse(readFileSync('web/src/data/officialErcCorpus.json','utf8'));
+          const index=JSON.parse(readFileSync('web/src/data/officialErcIndex.json','utf8'));
+          if(corpus.profiles.length!==index.count || index.count<300 ||
+             corpus.provenance.sourceCommitSha!==index.sourceCommitSha ||
+             corpus.profiles.some(p=>p.experimentStatus!=='NOT_EVALUATED'))
+            throw Error('Corpus provenance or research-status validation failed');
+          console.log('OECL_ERC_PROFILES_VALIDATED', index.count);
+          NODE
+      - name: Commit only source-derived metadata and remove privileged one-shot workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/src/data/officialErcIndex.json web/src/data/officialErcCorpus.json
+          git rm .github/workflows/one-shot-official-erc-corpus.yml
+          git diff --cached --stat
+          git commit -m "data(research): snapshot full official ERC corpus with pinned source revision"
+          git push origin HEAD:feature/erc-research-github-magicians-web-v1
