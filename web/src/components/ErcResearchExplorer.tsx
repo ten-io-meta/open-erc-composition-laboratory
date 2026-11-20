@@ -5,7 +5,7 @@ import index from "@/data/officialErcIndex.json";
 
 type ERCSpec = {
  id:string;status:"FETCHED"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
- title:string|null;editorialStatus:string|null;requires:string[];references:string[];
+ title:string|null;editorialStatus:string|null;summary:string|null;discussionUrl:string|null;requires:string[];references:string[];
  url:string;sourceRevision:string;
 };
 type ErcResearch = {
@@ -97,9 +97,15 @@ export function ErcResearchExplorer() {
                <div className="font-mono text-[11px] text-[#174c38]">{doc.id} · {doc.status}</div>
                <h4 className="mt-2 text-lg font-semibold">{doc.title??"Source not available in official snapshot"}</h4>
                <p className="mt-2 text-xs text-[#68746b]">Editorial status: {doc.editorialStatus??"Unknown"}</p>
+               {doc.summary&&<p className="mt-3 text-sm leading-6 text-[#515b54]">{doc.summary}</p>}
                <p className="mt-2 text-xs text-[#68746b]">Declared requires: {doc.requires.length?doc.requires.join(", "):"None found"}</p>
                <p className="mt-2 text-xs text-[#68746b]">Text references: {doc.references.length?doc.references.slice(0,12).join(", "):"None found"}</p>
-               <a href={doc.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-xs font-medium text-[#174c38] underline">Official GitHub document</a>
+               <div className="mt-4 flex flex-wrap gap-4">
+                 <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#174c38] underline">Official GitHub document</a>
+                 {doc.discussionUrl && /^https:\/\/(?:ethereum-magicians\.org|github\.com|ethresear\.ch)\//i.test(doc.discussionUrl)&&(
+                   <a href={doc.discussionUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#174c38] underline">Discussion linked in ERC</a>
+                 )}
+               </div>
              </article>
            ))}
          </div>
