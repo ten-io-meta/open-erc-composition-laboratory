@@ -1,0 +1,33 @@
+name: OECL public ERC proposal provenance index
+on:
+  pull_request:
+    paths:
+      - "scripts/index-open-erc-proposals.mjs"
+      - ".github/workflows/oecl-open-proposal-index.yml"
+  workflow_dispatch:
+  schedule:
+    - cron: "43 4 * * 3"
+permissions:
+  contents: read
+jobs:
+  index:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Discover official repository open PRs without labeling them merged ERCs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/index-open-erc-proposals.mjs
+      - name: Publish research snapshot for human review only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-unmerged-erc-proposals-source-snapshot
+          path: audit-results/open-erc-proposals.json
+          if-no-files-found: warn
