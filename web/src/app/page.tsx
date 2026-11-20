@@ -6,6 +6,8 @@ import {
   EvidenceReceiptGateway,
 } from "@/components/EvidenceReceiptGateway";
 
+import { ErcResearchExplorer } from "@/components/ErcResearchExplorer";
+
 import {
   ProtocolDiscovery,
 } from "@/components/ProtocolDiscovery";
@@ -53,19 +55,19 @@ export default function Home() {
           <div>
 
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#174c38]">
-              Verified evidence infrastructure
+              Cross-standard ERC research
             </p>
 
             <h1 className="mt-7 max-w-[950px] text-[48px] font-medium leading-[0.99] tracking-[-0.055em] md:text-[72px] lg:text-[82px]">
-              Evidence you can hand
+              Discover what ERCs
               <br />
-              to another machine.
+              can build together.
             </h1>
 
             <p className="mt-8 max-w-3xl text-[17px] leading-8 text-[#70746f] md:text-[18px]">
-              OECL turns standardized live blockchain observations into
-              independently witnessed, machine-readable EvidenceReceipts
-              before agents or research systems are allowed to reason from them.
+              Explore official ERC specifications and Ethereum Magicians discussions,
+              then distinguish documentary composition candidates from independently
+              reproduced properties. Missing evidence is never called incompatibility.
             </p>
 
 
@@ -130,7 +132,11 @@ export default function Home() {
         </div>
 
 
-        <EvidenceReceiptGateway />
+        <ErcResearchExplorer />
+
+        <div className="mt-12">
+          <EvidenceReceiptGateway />
+        </div>
 
 
         <section className="mt-28 border-t border-[#cfd2cc] pt-10">

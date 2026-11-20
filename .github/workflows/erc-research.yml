@@ -1,0 +1,66 @@
+name: ERC research index and web validation
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'scripts/sync-official-erc-index.mjs'
+      - '.github/workflows/erc-research.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  official-erc-index:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all pinned official ERC documentary records
+        run: node scripts/check-official-erc-corpus.mjs
+      - name: Refresh official ERC GitHub index (read-only; never auto-deploy)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-official-erc-index.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oecl-official-erc-index-for-review
+          path: web/src/data/officialErcIndex.json
+  web-build:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install OECL root runtime dependencies for shared lab modules
+        run: npm ci
+        working-directory: .
+      - run: npm ci
+      - name: Verify Next production build with no public wallet operations
+        run: npm run build
+      - name: Lint research API and web components
+        run: npm run lint
+      - name: Smoke-test ERC explorer over HTTP (read-only)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OECL_WEB_PORT: "3100"
+        run: |
+          npm run start -- -p 3100 >/tmp/oecl-next.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid 2>/dev/null || true' EXIT
+          for i in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:3100/api/research/erc-index >/dev/null; then break; fi
+            sleep 1
+          done
+          node ../scripts/check-erc-research-http.mjs
