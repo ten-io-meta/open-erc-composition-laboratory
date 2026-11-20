@@ -2,7 +2,8 @@
   "schemaVersion": "OECL_OFFICIAL_ERC_INDEX_V1",
   "source": "ethereum/ERCs",
   "branch": "master",
-  "sourceTreeSha": "99123078478fb56b1b5a5abcbb6b6207dba70832",
+  "sourceTreeSha": "184939a85a88b6f1a2bd802098af5138fe77d07f",
+  "sourceCommitSha": "99123078478fb56b1b5a5abcbb6b6207dba70832",
   "description": "Official GitHub ERC documents; indexed presence only, not composition validation",
   "count": 626,
   "ids": [
@@ -632,6 +633,5 @@
     8441,
     8444,
     8501
-  ],
-  "sourceCommitSha": "99123078478fb56b1b5a5abcbb6b6207dba70832"
+  ]
 }
