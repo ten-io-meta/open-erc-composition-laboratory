@@ -6,6 +6,7 @@
 import index from "@/data/officialErcIndex.json";
 import corpus from "@/data/officialErcCorpus.json";
 import scientificCatalog from "@/data/scientificPairCatalog.json";
+import openProposalIndex from "@/data/openErcProposalIndex.json";
 import { scientificWorkOrder } from "@/server/oeclScientificWorkOrder";
 
 export type ErcDocument = {
@@ -87,8 +88,37 @@ async function githubJson(url:string):Promise<unknown>{
  if(!response.ok)throw Error("GitHub source unavailable: "+response.status);
  return response.json();
 }
+type IndexedOpenProposal = {
+ id:string;prNumber:number;githubPRUrl:string;status:"OPEN_PROPOSAL_PR";
+ sourceRevision:string;openedAt:string|null;updatedAt:string|null;
+ submittedBy:string|null;specAuthors:string|null;proposalStatus:string|null;
+ sourceCreatedAt:string|null;title:string|null;requires:string[];discussionUrl:string|null;
+};
+const indexedOpenProposals=openProposalIndex.proposals as IndexedOpenProposal[];
 async function readOpenProposal(id:string):Promise<ErcDocument|null>{
  const number=Number(id.slice(4));
+ // First use a full, reviewable snapshot. Live search is only for newly opened PRs.
+ const pinned=indexedOpenProposals.filter(x=>x.id===id)
+   .sort((a,b)=>(b.updatedAt??"").localeCompare(a.updatedAt??""))[0];
+ if(pinned) {
+  return {
+   id,status:"OPEN_PROPOSAL_PR",title:pinned.title,
+   editorialStatus:(pinned.proposalStatus??"Proposed")+" (unmerged in indexed GitHub snapshot)",
+   summary:null,discussionUrl:pinned.discussionUrl,requires:pinned.requires,
+   references:[],url:pinned.githubPRUrl,sourceRevision:pinned.sourceRevision,
+   specAuthors:pinned.specAuthors,documentCreatedAt:pinned.sourceCreatedAt,
+   proposalAttribution:{
+     pullRequestNumber:pinned.prNumber,submittedBy:pinned.submittedBy,
+     openedAt:pinned.openedAt,updatedAt:pinned.updatedAt,
+     sourceCommitSha:pinned.sourceRevision,
+     sourcePullRequestUrl:pinned.githubPRUrl
+   }
+  };
+ }
+ if(openProposalIndex.errors.some(x=>("erc" in x)&&x.erc===number)){
+  // Explicit source contradiction cannot be quietly repaired by search relevance.
+  return null;
+ }
  // Search only ethereum/ERCs PRs. An external repository or forum post does not
  // acquire ERC editorial status from search relevance alone.
  try {
