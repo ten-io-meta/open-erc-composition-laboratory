@@ -41,6 +41,9 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: web/package-lock.json
+      - name: Install OECL root runtime dependencies for shared lab modules
+        run: npm ci
+        working-directory: .
       - run: npm ci
       - name: Verify Next production build with no public wallet operations
         run: npm run build
