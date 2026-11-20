@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "OECL_PUBLIC_ERC_DOCUMENTARY_CORPUS_V1",
+  "generatedAt": null,
+  "source": {
+    "repository": "ethereum/ERCs",
+    "revision": null,
+    "treePath": "ERCS/erc-*.md",
+    "url": "https://github.com/ethereum/ERCs",
+    "scope": "Awaiting first audited full sync"
+  },
+  "forum": {
+    "source": "https://ethereum-magicians.org",
+    "status": "NOT_YET_SYNCED",
+    "attemptedPages": 0,
+    "fetchedPages": 0,
+    "lastError": null,
+    "caution": "Discussion is not implementation evidence."
+  },
+  "scientificStatus": "NOT_EVALUATED",
+  "standards": [],
+  "recentDiscussionTopics": []
+}
