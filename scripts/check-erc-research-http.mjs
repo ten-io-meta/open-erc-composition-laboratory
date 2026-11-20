@@ -34,6 +34,23 @@ if(proposalStatus==="OPEN_PROPOSAL_PR") {
     "Unverified PR must remain unestablished");
 }
 ok(proposal.json.emergentPropertiesVerified.length===0,"PR alone cannot prove emergence");
+ok(proposal.json.scienceWorkOrder?.currentExperiment?.status==="NOT_REGISTERED_FOR_EXECUTION",
+   "ERC-721 x ERC-8060 must not acquire a nonexistent registered harness");
+ok(typeof proposal.json.standards[1].specAuthors==="string",
+   "Open proposal must retain the source specification authorship");
+ok(proposal.json.standards[1].proposalAttribution?.pullRequestNumber===1315,
+   "ERC-8060 open proposal attribution and PR identity must be linked");
+const controlled=await get("/api/research/erc-pair?a=ERC-8004&b=ERC-8060");
+ok(controlled.status===200,"Known joint-control pair API unavailable");
+ok(controlled.json.scienceWorkOrder?.currentExperiment?.status==="PINNED_OFFLINE_RECIPE_AVAILABLE",
+   "Existing OECL real joint harness was not bridged to candidate research");
+ok(controlled.json.scienceWorkOrder?.currentExperiment?.historicalScientificPolarity==="NEUTRAL",
+   "Historical joint execution cannot be promoted to positive compatibility");
+ok(controlled.json.scienceWorkOrder?.requiredExperiments?.length===6,
+   "Six mandatory evidence scenarios not exposed");
+ok(controlled.json.scienceWorkOrder?.verifiedEmergentProperties?.length===0,
+   "The work order must not fabricate emergent properties");
+
 console.log("OECL_RESEARCH_HTTP_PASS "+JSON.stringify({
  indexed:index.json.indexedDocumentCount,officialPair:pair.json.protocols,
  proposalStatus,provenProperties:0
