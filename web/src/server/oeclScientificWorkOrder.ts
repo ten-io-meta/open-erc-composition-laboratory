@@ -7,7 +7,9 @@ import catalog from "@/data/scientificPairCatalog.json";
  * infrastructure. Never executes unreviewed code from GitHub, Magicians,
  * arbitrary ERC text or browser inputs.
  */
-const profiles = new Map(corpus.profiles.map(p => [p.id,p]));
+const profiles = new Map<string,{requires:string[];references:string[]}>(
+ corpus.profiles.map(p => [p.id,{requires:[...p.requires],references:[...p.references]}])
+);
 function unorderedPair(a:string,b:string,x:string,y:string) {
  return (a===x&&b===y)||(a===y&&b===x);
 }
