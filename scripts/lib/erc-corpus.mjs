@@ -21,8 +21,9 @@ export function parseOfficialErc(path, source) {
   if (meta.category && meta.category.toUpperCase() !== "ERC") return null;
   const id = "ERC-" + number;
   const full = source.replace(/^\uFEFF/, "");
-  const abstractMatch = full.match(/^#{1,3}\s+(?:Abstract|Simple Summary)\s*$([\s\S]*?)(?=^#{1,3}\s|\s*$)/im);
-  const abstractText = abstractMatch ? abstractMatch[1] : "";
+  const heading = full.match(/^#{1,3}\s+(?:Abstract|Simple Summary)\s*$/im);
+  const afterHeading = heading ? full.slice((heading.index ?? 0) + heading[0].length).replace(/^\s*\r?\n/, "") : "";
+  const abstractText = afterHeading.split(/^#{1,3}\s/m)[0] || "";
   const summary = abstractText.replace(/<[^>]+>/g, " ").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/[\x60*_#]/g, "").replace(/\s+/g, " ").trim().slice(0, 320);
   const requires = [...new Set((meta.requires || "").match(/\b[1-9]\d+\b/g) || [])]
