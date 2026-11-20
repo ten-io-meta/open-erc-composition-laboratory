@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import index from "@/data/officialErcIndex.json";
+import proposalIndex from "@/data/openErcProposalIndex.json";
 
 type ERCSpec = {
  id:string;status:"FETCHED"|"OPEN_PROPOSAL_PR"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
@@ -75,7 +76,14 @@ export function ErcResearchExplorer() {
        <div className="rounded-2xl bg-[#eff4f0] px-5 py-4 text-right">
          <div className="font-mono text-3xl font-semibold text-[#174c38]">{index.count}</div>
          <div className="max-w-[170px] text-xs leading-5 text-[#68746b]">official ERC documents indexed</div>
-         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Merged documents only · open PRs discovered separately</div>
+         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Merged documents</div>
+         <div className="mt-4 border-t border-[#d7e2da] pt-3 font-mono text-xl font-semibold text-[#174c38]">
+           {proposalIndex.examinedDocumentProposals || "—"}
+         </div>
+         <div className="max-w-[170px] text-xs leading-5 text-[#68746b]">Open proposal documents</div>
+         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">
+           Unmerged · {proposalIndex.coverage}
+         </div>
        </div>
      </div>
      <form onSubmit={compare} className="mt-8 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
