@@ -10,6 +10,9 @@ on:
       - web/src/server/**
       - .github/workflows/public-erc-corpus.yml
   workflow_dispatch:
+concurrency:
+  group: oecl-erc-corpus-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -105,5 +108,7 @@ jobs:
             echo 'No corpus changes to commit'
           else
             git commit -m "data(oecl): materialize official ERCs with Magicians documentary coverage"
+            git fetch origin refs/heads/feat/oecl-open-erc-research-corpus-v1
+            git rebase origin/feat/oecl-open-erc-research-corpus-v1
             git push origin HEAD:refs/heads/feat/oecl-open-erc-research-corpus-v1
           fi
