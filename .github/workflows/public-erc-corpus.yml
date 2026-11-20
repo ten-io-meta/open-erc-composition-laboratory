@@ -47,6 +47,44 @@ jobs:
           npm ci
           npm ci --prefix web
           npm run build --prefix web
+      - name: Smoke-test live HTTP API with pinned official corpus
+        run: |
+          npm run start --prefix web -- --port 3055 >/tmp/oecl-next-smoke.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+          node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const host='http://127.0.0.1:3055';
+          let healthy=false;
+          for(let i=0;i<25;i++){
+            try{const r=await fetch(host+'/api/research/erc?limit=1');
+              if(r.ok){healthy=true;break;}}catch{}
+            await new Promise(resolve=>setTimeout(resolve,500));
+          }
+          assert(healthy,'Next server did not start for HTTP smoke tests');
+          const get=async path=>{
+            const r=await fetch(host+path,{signal:AbortSignal.timeout(15000)});
+            assert.equal(r.status,200,path+' failed with '+r.status);
+            return await r.json();
+          };
+          const list=await get('/api/research/erc?q=721');
+          assert.equal(list.totalIndexed,626);
+          assert(list.standards.some(x=>x.id==='ERC-721'));
+          const dependent=await get('/api/research/pair?left=721&right=8004');
+          assert.equal(dependent.documentary.relation,'DECLARED_REQUIREMENT');
+          assert.equal(dependent.scientific.compatibility,'NOT_EVALUATED');
+          assert.deepEqual(dependent.scientific.observedEmergentProperties,[]);
+          const unpublished=await get('/api/research/pair?left=721&right=8060');
+          assert.equal(unpublished.indexedOfficialRecords,1);
+          assert.equal(unpublished.scientific.compatibility,'NOT_EVALUATED');
+          const frozen=await get('/api/research/pair?left=8301&right=8354');
+          assert.equal(frozen.scientific.compatibility,'INCONCLUSIVE');
+          console.log('OECL_WEB_HTTP_SMOKE_PASS '+JSON.stringify({
+            indexed:list.totalIndexed,declared:dependent.documentary.relation,
+            unpublished:unpublished.indexedOfficialRecords,
+            frozen:frozen.scientific.compatibility,emergentFindings:dependent.scientific.observedEmergentProperties.length
+          }));
+          NODE
       - name: Archive independently verifiable public-source snapshot
         if: always()
         uses: actions/upload-artifact@v4
