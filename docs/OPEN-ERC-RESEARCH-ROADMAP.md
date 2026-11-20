@@ -5,6 +5,7 @@
 ## Data origins
 
 - Official primary standard source: [ethereum/ERCs](https://github.com/ethereum/ERCs), `master/ERCS/erc-*.md`. The sync clones at one Git revision, records the immutable commit hash, and pins every ERC's source URL. Metadata: title, status, abstract, `requires`, and distinct plain-text mentions.
+- Bare numeric `requires` references are classified as an `ERC-<number>` only when that number has an official ERC document in this pinned corpus. Otherwise the index records `REF-<number>-UNCLASSIFIED` rather than pretending a core EIP or unpublished proposal is an ERC.
 - Source status **must be shown**. A Draft or Stagnant ERC is not Final. A proposal absent from the official repo may still exist on GitHub, Magicians, as a pending PR, or as a separate interface. Absence is *not* incompatibility.
 - Secondary discourse: [Ethereum Magicians](https://ethereum-magicians.org). Each ERC `discussions-to` link is preserved. The scheduled/bounded catalog attempts only two recent Discourse topic-list pages, and the pair API optionally reads the first post of up to two linked topics. Any failure is recorded as `UNAVAILABLE`. Topic titles or statements are not proof of contract behavior.
 - Existing scientific results: `web/src/data/scientificPairCatalog.json` remains an **unchanged frozen baseline**. The new pair endpoint displays its existing polarity/Harmony/value only for an *exact pair already present*. No documentary reference, similarity or forum opinion creates `SUPPORT` or `EMERGENT_PROPERTY`.
