@@ -1,6 +1,7 @@
 import {
   CompositionWorkbench,
 } from "@/components/CompositionWorkbench";
+import { ErcResearchExplorer } from "@/components/ErcResearchExplorer";
 
 import {
   EvidenceReceiptGateway,
@@ -257,6 +258,8 @@ export default function Home() {
 
           </div>
 
+
+          <ErcResearchExplorer />
 
           <ScientificCorpusOverview />
 
