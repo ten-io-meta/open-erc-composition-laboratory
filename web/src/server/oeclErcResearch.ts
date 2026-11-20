@@ -6,6 +6,7 @@
 import index from "@/data/officialErcIndex.json";
 import corpus from "@/data/officialErcCorpus.json";
 import scientificCatalog from "@/data/scientificPairCatalog.json";
+import { scientificWorkOrder } from "@/server/oeclScientificWorkOrder";
 
 export type ErcDocument = {
   id: string;
@@ -245,6 +246,7 @@ export async function researchErcPair(a:string,b:string) {
     standards:[left,right],
     forum:[forumA,forumB],
     documentaryRelations,
+    scienceWorkOrder:scientificWorkOrder(a,b),
     scientificProjection:projection ? {
       compatibility:projection.compatibility?.polarity??"INCONCLUSIVE",
       harmony:projection.harmony?.status??"INCONCLUSIVE",
