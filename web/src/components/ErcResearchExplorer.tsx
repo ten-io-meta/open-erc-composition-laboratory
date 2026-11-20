@@ -25,7 +25,7 @@ type ErcResearch = {
  protocols:string[];
  provenance:{repository:string;treeSha:string;commitSha:string;indexedDocuments:number;forum:string};
  standards:ERCSpec[];
- forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string;createdAt:string|null;lastActivityAt:string|null;author:string|null;firstPostUpdatedAt:string|null;firstPostVersion:number|null;postCount:number|null;metadataStatus:string}>}>;
+ forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string;createdAt:string|null;lastActivityAt:string|null;author:string|null;firstPostUpdatedAt:string|null;firstPostVersion:number|null;postCount:number|null;metadataStatus:string;originalPostPreview:string|null;discoveryKind:"SEARCH_HIT"|"DECLARED_DISCUSSION"}>}>;
  documentaryRelations:Array<{kind:string;source:string;target:string;explanation:string;evidenceUrl:string}>;
  scientificProjection:{compatibility:string;harmony:string;valueStatus:string;findingCount:number;basis:string}|null;
  scienceWorkOrder:ScienceWorkOrder;
@@ -172,7 +172,13 @@ export function ErcResearchExplorer() {
                          {t.lastActivityAt?"Last activity "+t.lastActivityAt.slice(0,10)+" · ":""}
                          {t.metadataStatus==="VERIFIED_TOPIC"?"Verified topic metadata":"Search metadata only"}
                          {t.firstPostVersion!==null?" · First post version "+t.firstPostVersion:""}
+                         {" · "}{t.discoveryKind==="DECLARED_DISCUSSION"?"Linked from specification":"Discourse search result"}
                        </p>
+                       {t.originalPostPreview&&(
+                         <p className="mt-1 rounded-lg bg-white p-2 text-xs leading-5 text-[#67716b]">
+                           First post preview (unverified commentary): {t.originalPostPreview}
+                         </p>
+                       )}
                      </li>
                    ))}</ul>
                  ):<p className="mt-1 text-xs text-[#777e77]">{group.status==="SEARCHED"?"No matching topics returned; not proof no discussion exists.":"Forum unavailable; evidence incomplete."}</p>}
