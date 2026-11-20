@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify all pinned official ERC documentary records
+        run: node scripts/check-official-erc-corpus.mjs
       - name: Refresh official ERC GitHub index (read-only; never auto-deploy)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
