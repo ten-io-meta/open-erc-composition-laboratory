@@ -1,0 +1,53 @@
+name: One-shot pinned ERC author corpus regeneration
+on:
+  pull_request:
+    paths:
+      - "scripts/build-official-erc-corpus.mjs"
+      - ".github/workflows/one-shot-erc-author-corpus.yml"
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    if: >-
+      github.event.pull_request.number == 5 &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'feature/erc-community-science-evidence-gates-v1'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+          fetch-depth: 1
+      - uses: actions/checkout@v4
+        with:
+          repository: ethereum/ERCs
+          ref: 99123078478fb56b1b5a5abcbb6b6207dba70832
+          path: official-ercs
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extract specification author(s) from the same verified official commit
+        run: |
+          node scripts/build-official-erc-corpus.mjs
+          node scripts/check-official-erc-corpus.mjs
+          node - <<'NODE'
+          const c=require('./web/src/data/officialErcCorpus.json');
+          if(c.profiles.length!==626 || c.profiles.filter(x=>x.specAuthors).length<550)
+            throw Error('Incomplete ERC author extraction');
+          if(c.provenance.sourceCommitSha!=='99123078478fb56b1b5a5abcbb6b6207dba70832')
+            throw Error('Unexpected official source drift');
+          console.log('OECL_AUTHOR_CORPUS_PASS', c.profiles.filter(x=>x.specAuthors).length);
+          NODE
+      - name: Commit only generated corpus and remove privileged workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/src/data/officialErcCorpus.json
+          git rm .github/workflows/one-shot-erc-author-corpus.yml
+          git diff --cached --stat
+          git commit -m "data(erc): pin official specification authors from the complete ERC source revision"
+          git push origin HEAD:feature/erc-community-science-evidence-gates-v1
