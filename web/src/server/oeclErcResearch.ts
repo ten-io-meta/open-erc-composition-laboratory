@@ -4,6 +4,7 @@
  * No untrusted web content is executed, no ERC is privileged, no compatibility is inferred.
  */
 import index from "@/data/officialErcIndex.json";
+import corpus from "@/data/officialErcCorpus.json";
 import scientificCatalog from "@/data/scientificPairCatalog.json";
 
 export type ErcDocument = {
@@ -11,6 +12,8 @@ export type ErcDocument = {
   status: "FETCHED" | "NOT_IN_OFFICIAL_SNAPSHOT" | "SOURCE_UNAVAILABLE";
   title: string | null;
   editorialStatus: string | null;
+  summary: string | null;
+  discussionUrl: string | null;
   requires: string[];
   references: string[];
   url: string;
@@ -36,49 +39,26 @@ export const normalizeErc = (value: string | null): string | null => {
   const match = /^(?:ERC[- ]?)?([1-9][0-9]{0,6})$/i.exec(value.trim());
   return match ? "ERC-" + Number(match[1]) : null;
 };
-const idNumber = (id: string) => Number(id.slice(4));
-const unique = (values: string[]) => Array.from(new Set(values)).sort(
-  (a,b) => Number(a.split("-")[1]) - Number(b.split("-")[1])
-);
-function parseFrontmatter(body: string) {
-  const normalized = body.replace(/^\uFEFF/, "");
-  const match = /^---\s*\r?\n([\s\S]{0,12000}?)\r?\n---/.exec(normalized);
-  const fields: Record<string,string> = {};
-  for (const line of (match?.[1] ?? "").split(/\r?\n/)) {
-    const field = /^([a-z][a-z-]*):\s*(.*)$/i.exec(line);
-    if (field) fields[field[1].toLowerCase()] = field[2].trim().replace(/^["']|["']$/g,"");
-  }
-  return fields;
-}
-function ercIdsFromText(text: string, max = 50): string[] {
-  const refs: string[] = [];
-  for (const match of text.matchAll(/\b(?:ERC|EIP)[- ]([1-9]\d{0,6})\b/gi)) {
-    refs.push("ERC-" + Number(match[1]));
-    if (refs.length > max * 8) break;
-  }
-  return unique(refs).slice(0, max);
-}
+const documentById = new Map(corpus.profiles.map(profile => [profile.id, profile] as const));
 async function loadDocument(id: string): Promise<ErcDocument> {
-  const n = idNumber(id);
-  const url = "https://github.com/ethereum/ERCs/blob/master/ERCS/erc-" + n + ".md";
-  const base: ErcDocument = { id, status:"SOURCE_UNAVAILABLE", title:null,
-    editorialStatus:null, requires:[], references:[], url, sourceRevision:index.sourceCommitSha };
-  if (!known.has(n)) return {...base,status:"NOT_IN_OFFICIAL_SNAPSHOT"};
-  try {
-    const response = await fetch(
-      "https://raw.githubusercontent.com/ethereum/ERCs/" + index.sourceCommitSha + "/ERCS/erc-" + n + ".md",
-      { next:{revalidate:21600}, signal:AbortSignal.timeout(8000), headers:{"Accept":"text/plain"} }
-    );
-    if (!response.ok) return base;
-    const text = (await response.text()).slice(0,230000);
-    const front = parseFrontmatter(text);
-    const requires = (front.requires ?? "").split(/[,\s]+/).filter(Boolean)
-      .map(x => normalizeErc(x.replace(/^EIP-/i,"").replace(/^ERC-/i,"")))
-      .filter((x):x is string=>Boolean(x));
-    return {...base,status:"FETCHED",title:front.title || null,
-      editorialStatus:front.status || null,requires:unique(requires),
-      references:ercIdsFromText(text.slice(0,100000)).filter(x=>x!==id)};
-  } catch {return base;}
+  const profile=documentById.get(id);
+  const n=Number(id.slice(4));
+  const base: ErcDocument={
+    id,status:"SOURCE_UNAVAILABLE",title:null,editorialStatus:null,
+    summary:null,discussionUrl:null,requires:[],references:[],
+    url:"https://github.com/ethereum/ERCs/blob/"+index.sourceCommitSha+"/ERCS/erc-"+n+".md",
+    sourceRevision:index.sourceCommitSha
+  };
+  if(!known.has(n))return {...base,status:"NOT_IN_OFFICIAL_SNAPSHOT"};
+  // The entire corpus comes from ONE pinned Git checkout, not on-demand drifting versions.
+  if(corpus.provenance.sourceCommitSha!==index.sourceCommitSha||!profile)return base;
+  return {
+    ...base,status:"FETCHED",title:profile.title,
+    editorialStatus:profile.editorialStatus,
+    summary:profile.summary,discussionUrl:profile.discussionUrl,
+    requires:profile.requires,references:profile.references,
+    url:profile.sourceUrl,sourceRevision:profile.sourceRevision
+  };
 }
 async function searchMagicians(id: string): Promise<ForumEvidence> {
   const fallback: ForumEvidence={status:"SOURCE_UNAVAILABLE",query:id,topics:[]};
