@@ -6,14 +6,14 @@ import index from "@/data/officialErcIndex.json";
 type ERCSpec = {
  id:string;status:"FETCHED"|"OPEN_PROPOSAL_PR"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
  title:string|null;editorialStatus:string|null;summary:string|null;discussionUrl:string|null;requires:string[];references:string[];
- url:string;sourceRevision:string;
+ url:string;sourceRevision:string;specAuthors:string|null;documentCreatedAt:string|null;proposalAttribution:null|{pullRequestNumber:number;submittedBy:string|null;openedAt:string|null;updatedAt:string|null;sourceCommitSha:string;sourcePullRequestUrl:string};
 };
 type ErcResearch = {
  status:string;
  protocols:string[];
  provenance:{repository:string;treeSha:string;commitSha:string;indexedDocuments:number;forum:string};
  standards:ERCSpec[];
- forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string}>}>;
+ forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string;createdAt:string|null;lastActivityAt:string|null;author:string|null;firstPostUpdatedAt:string|null;firstPostVersion:number|null;postCount:number|null;metadataStatus:string}>}>;
  documentaryRelations:Array<{kind:string;source:string;target:string;explanation:string;evidenceUrl:string}>;
  scientificProjection:{compatibility:string;harmony:string;valueStatus:string;findingCount:number;basis:string}|null;
  newExperimentExecuted:boolean;
@@ -97,6 +97,13 @@ export function ErcResearchExplorer() {
                <div className="font-mono text-[11px] text-[#174c38]">{doc.id} · {doc.status}</div>
                <h4 className="mt-2 text-lg font-semibold">{doc.title??"Source not available in official snapshot"}</h4>
                <p className="mt-2 text-xs text-[#68746b]">Editorial status: {doc.editorialStatus??"Unknown"}</p>
+               <p className="mt-1 text-xs text-[#68746b]">Specification author(s): {doc.specAuthors??"Not available"}</p>
+               <p className="mt-1 text-xs text-[#68746b]">Created: {doc.documentCreatedAt??"Unknown"}</p>
+               {doc.proposalAttribution&&<p className="mt-2 text-xs text-[#68746b]">
+                 Open PR #{doc.proposalAttribution.pullRequestNumber} · Submitted by {doc.proposalAttribution.submittedBy??"Unknown"}
+                 · {doc.proposalAttribution.openedAt?.slice(0,10)??"Unknown date"}
+                 · Source revision {doc.proposalAttribution.sourceCommitSha.slice(0,12)}
+               </p>}
                {doc.summary&&<p className="mt-3 text-sm leading-6 text-[#515b54]">{doc.summary}</p>}
                <p className="mt-2 text-xs text-[#68746b]">Declared requires: {doc.requires.length?doc.requires.join(", "):"None found"}</p>
                <p className="mt-2 text-xs text-[#68746b]">Text references: {doc.references.length?doc.references.slice(0,12).join(", "):"None found"}</p>
@@ -144,7 +151,16 @@ export function ErcResearchExplorer() {
                  <div className="font-mono text-xs text-[#667067]">{group.query} · {group.status}</div>
                  {group.topics.length?(
                    <ul className="mt-2 space-y-2">{group.topics.map(t=>(
-                     <li key={t.id}><a href={t.url} target="_blank" rel="noopener noreferrer" className="text-sm text-[#174c38] underline">{t.title}</a></li>
+                     <li key={t.id} className="space-y-1">
+                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="text-sm text-[#174c38] underline">{t.title}</a>
+                       <p className="text-[11px] text-[#68746b]">
+                         {t.author?"Started by @"+t.author+" · ":""}
+                         {t.createdAt?"Created "+t.createdAt.slice(0,10)+" · ":""}
+                         {t.lastActivityAt?"Last activity "+t.lastActivityAt.slice(0,10)+" · ":""}
+                         {t.metadataStatus==="VERIFIED_TOPIC"?"Verified topic metadata":"Search metadata only"}
+                         {t.firstPostVersion!==null?" · First post version "+t.firstPostVersion:""}
+                       </p>
+                     </li>
                    ))}</ul>
                  ):<p className="mt-1 text-xs text-[#777e77]">{group.status==="SEARCHED"?"No matching topics returned; not proof no discussion exists.":"Forum unavailable; evidence incomplete."}</p>}
                </div>
