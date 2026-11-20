@@ -95,6 +95,7 @@ type IndexedOpenProposal = {
  sourceCreatedAt:string|null;title:string|null;requires:string[];discussionUrl:string|null;
 };
 const indexedOpenProposals=openProposalIndex.proposals as IndexedOpenProposal[];
+const proposalSourceErrors=openProposalIndex.errors as Array<{erc?:number}>;
 async function readOpenProposal(id:string):Promise<ErcDocument|null>{
  const number=Number(id.slice(4));
  // First use a full, reviewable snapshot. Live search is only for newly opened PRs.
@@ -115,7 +116,7 @@ async function readOpenProposal(id:string):Promise<ErcDocument|null>{
    }
   };
  }
- if(openProposalIndex.errors.some(x=>("erc" in x)&&x.erc===number)){
+ if(proposalSourceErrors.some(x=>x.erc===number)){
   // Explicit source contradiction cannot be quietly repaired by search relevance.
   return null;
  }
