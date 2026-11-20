@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import index from "@/data/officialErcIndex.json";
 
 type ERCSpec = {
- id:string;status:"FETCHED"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
+ id:string;status:"FETCHED"|"OPEN_PROPOSAL_PR"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
  title:string|null;editorialStatus:string|null;summary:string|null;discussionUrl:string|null;requires:string[];references:string[];
  url:string;sourceRevision:string;
 };
@@ -54,7 +54,7 @@ export function ErcResearchExplorer() {
          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#174c38]">OECL · ERC research explorer</p>
          <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] md:text-4xl">What can these ERCs do together?</h2>
          <p className="mt-3 max-w-3xl text-sm leading-6 text-[#656d67]">
-           Compare official GitHub specifications with Ethereum Magicians discussions.
+           Compare merged ERC specifications, open ERC proposal PRs, and Ethereum Magicians discussions.
            A documented relation is a candidate, <strong>not</strong> proven composition.
            Only recorded experimental evidence can support a scientific verdict.
          </p>
@@ -62,7 +62,7 @@ export function ErcResearchExplorer() {
        <div className="rounded-2xl bg-[#eff4f0] px-5 py-4 text-right">
          <div className="font-mono text-3xl font-semibold text-[#174c38]">{index.count}</div>
          <div className="max-w-[170px] text-xs leading-5 text-[#68746b]">official ERC documents indexed</div>
-         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Index presence ≠ validation</div>
+         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Merged documents only · open PRs discovered separately</div>
        </div>
      </div>
      <form onSubmit={compare} className="mt-8 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
@@ -101,7 +101,7 @@ export function ErcResearchExplorer() {
                <p className="mt-2 text-xs text-[#68746b]">Declared requires: {doc.requires.length?doc.requires.join(", "):"None found"}</p>
                <p className="mt-2 text-xs text-[#68746b]">Text references: {doc.references.length?doc.references.slice(0,12).join(", "):"None found"}</p>
                <div className="mt-4 flex flex-wrap gap-4">
-                 <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#174c38] underline">Official GitHub document</a>
+                 <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#174c38] underline">{doc.status==="OPEN_PROPOSAL_PR"?"Open ERC proposal (not merged)":"Official merged ERC document"}</a>
                  {doc.discussionUrl && /^https:\/\/(?:ethereum-magicians\.org|github\.com|ethresear\.ch)\//i.test(doc.discussionUrl)&&(
                    <a href={doc.discussionUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-[#174c38] underline">Discussion linked in ERC</a>
                  )}
@@ -120,7 +120,7 @@ export function ErcResearchExplorer() {
                  </li>
                ))}
              </ul>
-           ):<p className="mt-2 text-sm text-[#68746b]">No explicit dependency or cross-reference was found in the retrieved specifications. This is not proof of incompatibility.</p>}
+           ):<p className="mt-2 text-sm text-[#68746b]">No explicit dependency or cross-reference was found in the retrieved source material. This is not proof of incompatibility.</p>}
          </div>
          <div className="grid gap-5 md:grid-cols-2">
            <div className="rounded-xl border border-[#dce1da] bg-[#f8f9f5] p-5">
