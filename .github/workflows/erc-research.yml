@@ -1,0 +1,48 @@
+name: ERC research index and web validation
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'scripts/sync-official-erc-index.mjs'
+      - '.github/workflows/erc-research.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  official-erc-index:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refresh official ERC GitHub index (read-only; never auto-deploy)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-official-erc-index.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oecl-official-erc-index-for-review
+          path: web/src/data/officialErcIndex.json
+  web-build:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Verify Next production build with no public wallet operations
+        run: npm run build
+      - name: Lint research API and web components
+        run: npm run lint
