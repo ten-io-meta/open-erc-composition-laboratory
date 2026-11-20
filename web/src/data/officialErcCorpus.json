@@ -17,6 +17,7 @@
       "id": "ERC-20",
       "number": 20,
       "title": "Token Standard",
+      "specAuthors": "Fabian Vogelsteller <fabian@ethereum.org>, Vitalik Buterin <vitalik.buterin@ethereum.org>",
       "editorialStatus": "Final",
       "created": "2015-11-19",
       "requires": [],
@@ -32,6 +33,7 @@
       "id": "ERC-55",
       "number": 55,
       "title": "Mixed-case checksum address encoding",
+      "specAuthors": "Vitalik Buterin <vitalik.buterin@ethereum.org>, Alex Van de Sande <avsa@ethereum.org>",
       "editorialStatus": "Final",
       "created": "2016-01-14",
       "requires": [],
@@ -47,6 +49,7 @@
       "id": "ERC-67",
       "number": 67,
       "title": "URI Scheme with Metadata, Value and Bytecode",
+      "specAuthors": "Alex Van de Sande (@alexvansande)",
       "editorialStatus": "Withdrawn",
       "created": "2016-02-17",
       "requires": [],
@@ -64,6 +67,7 @@
       "id": "ERC-137",
       "number": 137,
       "title": "Ethereum Domain Name Service - Specification",
+      "specAuthors": "Nick Johnson <arachnid@notdot.net>",
       "editorialStatus": "Final",
       "created": "2016-04-04",
       "requires": [],
@@ -81,6 +85,7 @@
       "id": "ERC-162",
       "number": 162,
       "title": "Initial ENS Hash Registrar",
+      "specAuthors": "Maurelian, Nick Johnson  <nick@ethereum.org>, Alex Van de Sande <avsa@ethereum.org>",
       "editorialStatus": "Final",
       "created": "2016-10-25",
       "requires": [],
@@ -99,6 +104,7 @@
       "id": "ERC-165",
       "number": 165,
       "title": "Standard Interface Detection",
+      "specAuthors": "Christian Reitwießner <chris@ethereum.org>, Nick Johnson <nick@ethereum.org>, Fabian Vogelsteller <fabian@lukso.network>, Jordi Baylina <jordi@baylina.cat>, Konrad Feldmeier <konrad.feldmeier@brainbot.com>, William Entriken <github.com@phor.net>",
       "editorialStatus": "Final",
       "created": "2018-01-23",
       "requires": [
@@ -119,6 +125,7 @@
       "id": "ERC-173",
       "number": 173,
       "title": "Contract Ownership Standard",
+      "specAuthors": "Nick Mudge (@mudgen), Dan Finlay <dan@danfinlay.com>",
       "editorialStatus": "Final",
       "created": "2018-06-07",
       "requires": [],
@@ -137,6 +144,7 @@
       "id": "ERC-181",
       "number": 181,
       "title": "ENS support for reverse resolution of Ethereum addresses",
+      "specAuthors": "Nick Johnson <arachnid@notdot.net>",
       "editorialStatus": "Final",
       "created": "2016-12-01",
       "requires": [],
@@ -152,6 +160,7 @@
       "id": "ERC-190",
       "number": 190,
       "title": "Ethereum Smart Contract Packaging Standard",
+      "specAuthors": "Piper Merriam (@pipermerriam), Tim Coulter (@tcoulter), Denis Erfurt (@mhhf), RJ Catalano (@VoR0220), Iuri Matias (@iurimatias)",
       "editorialStatus": "Final",
       "created": "2017-01-10",
       "requires": [],
@@ -170,6 +179,7 @@
       "id": "ERC-191",
       "number": 191,
       "title": "Signed Data Standard",
+      "specAuthors": "Martin Holst Swende (@holiman), Nick Johnson <arachnid@notdot.net>",
       "editorialStatus": "Final",
       "created": "2016-01-20",
       "requires": [],
@@ -187,6 +197,7 @@
       "id": "ERC-205",
       "number": 205,
       "title": "ENS support for contract ABIs",
+      "specAuthors": "Nick Johnson <nick@ethereum.org>",
       "editorialStatus": "Stagnant",
       "created": "2017-02-06",
       "requires": [
@@ -205,6 +216,7 @@
       "id": "ERC-223",
       "number": 223,
       "title": "Token with transaction handling model",
+      "specAuthors": "Dexaran (@Dexaran) <dexaran@ethereumclassic.org>",
       "editorialStatus": "Final",
       "created": "2017-05-03",
       "requires": [],
@@ -222,6 +234,7 @@
       "id": "ERC-600",
       "number": 600,
       "title": "Ethereum purpose allocation for Deterministic Wallets",
+      "specAuthors": "Nick Johnson (@arachnid), Micah Zoltu (@micahzoltu)",
       "editorialStatus": "Final",
       "created": "2017-04-13",
       "requires": [],
@@ -237,6 +250,7 @@
       "id": "ERC-601",
       "number": 601,
       "title": "Ethereum hierarchy for deterministic wallets",
+      "specAuthors": "Nick Johnson (@arachnid), Micah Zoltu (@micahzoltu)",
       "editorialStatus": "Final",
       "created": "2017-04-13",
       "requires": [],
@@ -252,6 +266,7 @@
       "id": "ERC-634",
       "number": 634,
       "title": "Storage of text records in ENS",
+      "specAuthors": "Richard Moore (@ricmoo)",
       "editorialStatus": "Stagnant",
       "created": "2017-05-17",
       "requires": [
@@ -272,6 +287,7 @@
       "id": "ERC-681",
       "number": 681,
       "title": "URL Format for Transaction Requests",
+      "specAuthors": "Daniel A. Nagy (@nagydani)",
       "editorialStatus": "Final",
       "created": "2017-08-01",
       "requires": [
@@ -294,6 +310,7 @@
       "id": "ERC-721",
       "number": 721,
       "title": "Non-Fungible Token Standard",
+      "specAuthors": "William Entriken (@fulldecent), Dieter Shirley <dete@axiomzen.co>, Jacob Evans <jacob@dekz.net>, Nastassia Sachs <nastassia.sachs@protonmail.com>",
       "editorialStatus": "Final",
       "created": "2018-01-24",
       "requires": [
@@ -319,6 +336,7 @@
       "id": "ERC-725",
       "number": 725,
       "title": "General data key/value store and execution",
+      "specAuthors": "Fabian Vogelsteller (@frozeman), Tyler Yasaka (@tyleryasaka)",
       "editorialStatus": "Draft",
       "created": "2017-10-02",
       "requires": [
@@ -341,6 +359,7 @@
       "id": "ERC-777",
       "number": 777,
       "title": "Token Standard",
+      "specAuthors": "Jacques Dafflon <mail@0xjac.com>, Jordi Baylina <jordi@baylina.cat>, Thomas Shababi <tom@truelevel.io>",
       "editorialStatus": "Final",
       "created": "2017-11-20",
       "requires": [
@@ -365,6 +384,7 @@
       "id": "ERC-801",
       "number": 801,
       "title": "Canary Standard",
+      "specAuthors": "ligi <ligi@ligi.de>",
       "editorialStatus": "Stagnant",
       "created": "2017-12-16",
       "requires": [],
@@ -380,6 +400,7 @@
       "id": "ERC-820",
       "number": 820,
       "title": "Pseudo-introspection Registry Contract",
+      "specAuthors": "Jordi Baylina <jordi@baylina.cat>, Jacques Dafflon <jacques@dafflon.tech>",
       "editorialStatus": "Final",
       "created": "2018-01-05",
       "requires": [
@@ -403,6 +424,7 @@
       "id": "ERC-823",
       "number": 823,
       "title": "Token Exchange Standard",
+      "specAuthors": "Kashish Khullar <kkhullar7@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-01-06",
       "requires": [
@@ -422,6 +444,7 @@
       "id": "ERC-831",
       "number": 831,
       "title": "URI Format for Ethereum",
+      "specAuthors": "ligi (@ligi)",
       "editorialStatus": "Stagnant",
       "created": "2018-01-15",
       "requires": [
@@ -443,6 +466,7 @@
       "id": "ERC-838",
       "number": 838,
       "title": "ABI specification for REVERT reason string",
+      "specAuthors": "Federico Bond (@federicobond), Renan Rodrigues de Souza (@RenanSouza2)",
       "editorialStatus": "Draft",
       "created": "2020-08-20",
       "requires": [],
@@ -458,6 +482,7 @@
       "id": "ERC-875",
       "number": 875,
       "title": "Simpler NFT standard with batching and native atomic swaps",
+      "specAuthors": "Weiwu Zhang <a@colourful.land>, James Sangalli <j.l.sangalli@gmail.com>",
       "editorialStatus": "Withdrawn",
       "created": "2018-02-08",
       "requires": [],
@@ -476,6 +501,7 @@
       "id": "ERC-884",
       "number": 884,
       "title": "DGCL Token",
+      "specAuthors": "Dave Sag <davesag@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-02-14",
       "requires": [],
@@ -494,6 +520,7 @@
       "id": "ERC-897",
       "number": 897,
       "title": "DelegateProxy",
+      "specAuthors": "Jorge Izquierdo <jorge@aragon.one>, Manuel Araoz <manuel@zeppelin.solutions>",
       "editorialStatus": "Stagnant",
       "created": "2018-02-21",
       "requires": [],
@@ -509,6 +536,7 @@
       "id": "ERC-900",
       "number": 900,
       "title": "Simple Staking Interface",
+      "specAuthors": "Dean Eigenmann <dean@tokenate.io>, Jorge Izquierdo <jorge@aragon.one>",
       "editorialStatus": "Stagnant",
       "created": "2018-02-22",
       "requires": [],
@@ -524,6 +552,7 @@
       "id": "ERC-902",
       "number": 902,
       "title": "Token Validation",
+      "specAuthors": "Brooklyn Zelenka (@expede), Tom Carchrae (@carchrae), Gleb Naumenko (@naumenkogs)",
       "editorialStatus": "Stagnant",
       "created": "2018-02-14",
       "requires": [
@@ -546,6 +575,7 @@
       "id": "ERC-918",
       "number": 918,
       "title": "Mineable Token Standard",
+      "specAuthors": "Jay Logelin <jlogelin@alumni.harvard.edu>, Infernal_toast <admin@0xbitcoin.org>, Michael Seiler <mgs33@cornell.edu>, Brandon Grill <bg2655@columbia.edu>",
       "editorialStatus": "Stagnant",
       "created": "2018-03-07",
       "requires": [],
@@ -564,6 +594,7 @@
       "id": "ERC-926",
       "number": 926,
       "title": "Address metadata registry",
+      "specAuthors": "Nick Johnson <nick@ethereum.org>",
       "editorialStatus": "Stagnant",
       "created": "2018-03-12",
       "requires": [
@@ -586,6 +617,7 @@
       "id": "ERC-927",
       "number": 927,
       "title": "Generalised authorisations",
+      "specAuthors": "Nick Johnson <nick@ethereum.org>",
       "editorialStatus": "Stagnant",
       "created": "2018-03-12",
       "requires": [
@@ -607,6 +639,7 @@
       "id": "ERC-998",
       "number": 998,
       "title": "Composable Non-Fungible Token",
+      "specAuthors": "Matt Lockyer <mattdlockyer@gmail.com>, Nick Mudge <nick@perfectabstractions.com>, Jordan Schalm <jordan.schalm@gmail.com>, sebastian echeverry <sebastian.echeverry@robotouniverse.com>, Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Draft",
       "created": "2018-07-07",
       "requires": [
@@ -631,6 +664,7 @@
       "id": "ERC-1046",
       "number": 1046,
       "title": "tokenURI Interoperability",
+      "specAuthors": "Tommy Nicholas (@tomasienrbc), Matt Russo (@mateosu), John Zettler (@JohnZettler), Matt Condon (@shrugs), Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2018-04-13",
       "requires": [
@@ -655,6 +689,7 @@
       "id": "ERC-1056",
       "number": 1056,
       "title": "Ethereum Lightweight Identity",
+      "specAuthors": "Pelle Braendgaard <pelle.braendgaard@consensys.net>, Joel Torstensson <oed@consensys.net>",
       "editorialStatus": "Stagnant",
       "created": "2018-05-03",
       "requires": [],
@@ -672,6 +707,7 @@
       "id": "ERC-1062",
       "number": 1062,
       "title": "Formalize IPFS hash into ENS(Ethereum Name Service) resolver",
+      "specAuthors": "Phyrex Tsai <phyrex@portal.network>, Portal Network Team",
       "editorialStatus": "Stagnant",
       "created": "2018-05-02",
       "requires": [],
@@ -687,6 +723,7 @@
       "id": "ERC-1066",
       "number": 1066,
       "title": "Status Codes",
+      "specAuthors": "Brooklyn Zelenka (@expede), Tom Carchrae (@carchrae), Gleb Naumenko (@naumenkogs)",
       "editorialStatus": "Stagnant",
       "created": "2018-05-05",
       "requires": [],
@@ -705,6 +742,7 @@
       "id": "ERC-1077",
       "number": 1077,
       "title": "Gas relay for contract calls",
+      "specAuthors": "Alex Van de Sande <avsa@ethereum.org>, Ricardo Guilherme Schmidt (@3esmit)",
       "editorialStatus": "Stagnant",
       "created": "2018-05-04",
       "requires": [
@@ -731,6 +769,7 @@
       "id": "ERC-1078",
       "number": 1078,
       "title": "Universal login / signup using ENS subdomains",
+      "specAuthors": "Alex Van de Sande <avsa@ethereum.org>",
       "editorialStatus": "Stagnant",
       "created": "2018-05-04",
       "requires": [
@@ -755,6 +794,7 @@
       "id": "ERC-1080",
       "number": 1080,
       "title": "Recoverable Token",
+      "specAuthors": "Bradley Leatherwood <bradleat@inkibra.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-05-02",
       "requires": [],
@@ -773,6 +813,7 @@
       "id": "ERC-1081",
       "number": 1081,
       "title": "Standard Bounties",
+      "specAuthors": "Mark Beylin <mark.beylin@consensys.net>, Kevin Owocki <kevin.owocki@consensys.net>, Ricardo Guilherme Schmidt (@3esmit)",
       "editorialStatus": "Stagnant",
       "created": "2018-05-14",
       "requires": [
@@ -792,6 +833,7 @@
       "id": "ERC-1123",
       "number": 1123,
       "title": "Revised Ethereum Smart Contract Packaging Standard",
+      "specAuthors": "g. nicholas d’andrea (@gnidan), Piper Merriam (@pipermerriam), Nick Gheorghita (@njgheorghita), Danny Ryan (@djrtwo)",
       "editorialStatus": "Withdrawn",
       "created": "2018-06-01",
       "requires": [],
@@ -810,6 +852,7 @@
       "id": "ERC-1129",
       "number": 1129,
       "title": "Standardised DAPP announcements",
+      "specAuthors": "Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Stagnant",
       "created": "2018-05-31",
       "requires": [],
@@ -827,6 +870,7 @@
       "id": "ERC-1132",
       "number": 1132,
       "title": "Extending ERC20 with token locking capability",
+      "specAuthors": "nitika-goel <nitika@govblocks.io>",
       "editorialStatus": "Stagnant",
       "created": "2018-06-03",
       "requires": [],
@@ -844,6 +888,7 @@
       "id": "ERC-1154",
       "number": 1154,
       "title": "Oracle Interface",
+      "specAuthors": "Alan Lu (@cag)",
       "editorialStatus": "Withdrawn",
       "created": "2018-06-13",
       "requires": [],
@@ -859,6 +904,7 @@
       "id": "ERC-1155",
       "number": 1155,
       "title": "Multi Token Standard",
+      "specAuthors": "Witek Radomski <witek@enjin.io>, Andrew Cooke <ac0dem0nk3y@gmail.com>, Philippe Castonguay (@phabc) <pc@horizongames.net>, James Therien <james@turing-complete.com>, Eric Binet <eric@enjin.io>, Ronan Sandford (@wighawag) <wighawag@gmail.com>",
       "editorialStatus": "Final",
       "created": "2018-06-17",
       "requires": [
@@ -883,6 +929,7 @@
       "id": "ERC-1167",
       "number": 1167,
       "title": "Minimal Proxy Contract",
+      "specAuthors": "Peter Murray (@yarrumretep), Nate Welch (@flygoing), Joe Messerman (@JAMesserman)",
       "editorialStatus": "Final",
       "created": "2018-06-22",
       "requires": [
@@ -902,6 +949,7 @@
       "id": "ERC-1175",
       "number": 1175,
       "title": "Wallet & shop standard for all tokens (erc20)",
+      "specAuthors": "Jet Lim (@Nitro888)",
       "editorialStatus": "Stagnant",
       "created": "2018-06-21",
       "requires": [
@@ -921,6 +969,7 @@
       "id": "ERC-1178",
       "number": 1178,
       "title": "Multi-class Token Standard",
+      "specAuthors": "Albert Chon <achon@stanford.edu>",
       "editorialStatus": "Stagnant",
       "created": "2018-06-22",
       "requires": [],
@@ -939,6 +988,7 @@
       "id": "ERC-1185",
       "number": 1185,
       "title": "Storage of DNS Records in ENS",
+      "specAuthors": "Jim McDonald (@mcdee)",
       "editorialStatus": "Review",
       "created": "2018-06-26",
       "requires": [
@@ -959,6 +1009,7 @@
       "id": "ERC-1191",
       "number": 1191,
       "title": "Add chain id to mixed-case checksum address encoding",
+      "specAuthors": "Juliano Rizzo (@juli)",
       "editorialStatus": "Last Call",
       "created": "2018-03-18",
       "requires": [
@@ -980,6 +1031,7 @@
       "id": "ERC-1202",
       "number": 1202,
       "title": "Voting Interface",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv), ERC-1202 Working Group <erc1202@googlegroups.com>",
       "editorialStatus": "Review",
       "created": "2018-07-08",
       "requires": [
@@ -1004,6 +1056,7 @@
       "id": "ERC-1203",
       "number": 1203,
       "title": "ERC-1203 Multi-Class Token Standard (ERC-20 Extension)",
+      "specAuthors": "Jeff Huang <jeffishjeff@gmail.com>, Min Zu <crawlregister@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-07-01",
       "requires": [],
@@ -1023,6 +1076,7 @@
       "id": "ERC-1207",
       "number": 1207,
       "title": "DAuth Access Delegation Standard",
+      "specAuthors": "Xiaoyu Wang (@wxygeek), Bicong Wang (@Wangbicong)",
       "editorialStatus": "Stagnant",
       "created": "2018-07-10",
       "requires": [],
@@ -1040,6 +1094,7 @@
       "id": "ERC-1261",
       "number": 1261,
       "title": "Membership Verification Token (MVT)",
+      "specAuthors": "Chaitanya Potti (@chaitanyapotti), Partha Bhattacharya (@pb25193)",
       "editorialStatus": "Stagnant",
       "created": "2018-07-14",
       "requires": [
@@ -1068,6 +1123,7 @@
       "id": "ERC-1271",
       "number": 1271,
       "title": "Standard Signature Validation Method for Contracts",
+      "specAuthors": "Francisco Giordano (@frangio), Matt Condon (@shrugs), Philippe Castonguay (@PhABC), Amir Bandeali (@abandeali1), Jorge Izquierdo (@izqui), Bertrand Masius (@catageek)",
       "editorialStatus": "Final",
       "created": "2018-07-25",
       "requires": [],
@@ -1086,6 +1142,7 @@
       "id": "ERC-1319",
       "number": 1319,
       "title": "Smart Contract Package Registry Interface",
+      "specAuthors": "Piper Merriam <piper@ethereum.org>, Christopher Gewecke <christophergewecke@gmail.com>, g. nicholas d'andrea <nick.dandrea@consensys.net>, Nick Gheorghita (@njgheorghita)",
       "editorialStatus": "Stagnant",
       "created": "2018-08-13",
       "requires": [],
@@ -1105,6 +1162,7 @@
       "id": "ERC-1328",
       "number": 1328,
       "title": "WalletConnect URI Format",
+      "specAuthors": "ligi (@ligi), Pedro Gomes (@pedrouid)",
       "editorialStatus": "Final",
       "created": "2018-08-15",
       "requires": [],
@@ -1120,6 +1178,7 @@
       "id": "ERC-1337",
       "number": 1337,
       "title": "Subscriptions on the blockchain",
+      "specAuthors": "Kevin Owocki <kevin@gitcoin.co>, Andrew Redden <andrew@blockcrushr.com>, Scott Burke <scott@blockcrushr.com>, Kevin Seagraves <k.s.seagraves@gmail.com>, Luka Kacil <luka.kacil@gmail.com>, Štefan Šimec <stefan.simec@gmail.com>, Piotr Kosiński (@kosecki123), ankit raj <tradeninja7@gmail.com>, John Griffin <john@atchai.com>, Nathan Creswell <nathantr@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-08-01",
       "requires": [
@@ -1141,6 +1200,7 @@
       "id": "ERC-1363",
       "number": 1363,
       "title": "Payable Token",
+      "specAuthors": "Vittorio Minacori (@vittominacori)",
       "editorialStatus": "Final",
       "created": "2018-08-30",
       "requires": [
@@ -1165,6 +1225,7 @@
       "id": "ERC-1386",
       "number": 1386,
       "title": "Attestation management contract",
+      "specAuthors": "Weiwu Zhang <a@colourful.land>, James Sangalli <j.l.sangalli@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-09-08",
       "requires": [],
@@ -1180,6 +1241,7 @@
       "id": "ERC-1387",
       "number": 1387,
       "title": "Merkle Tree Attestations with Privacy enabled",
+      "specAuthors": "Weiwu Zhang <a@colourful.land>, James Sangalli <j.l.sangalli@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-09-08",
       "requires": [],
@@ -1195,6 +1257,7 @@
       "id": "ERC-1388",
       "number": 1388,
       "title": "Attestation Issuers Management List",
+      "specAuthors": "Weiwu Zhang <a@colourful.land>, James Sangalli <j.l.sangalli@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-09-08",
       "requires": [],
@@ -1210,6 +1273,7 @@
       "id": "ERC-1417",
       "number": 1417,
       "title": "Poll Standard",
+      "specAuthors": "Chaitanya Potti (@chaitanyapotti), Partha Bhattacharya (@pb25193)",
       "editorialStatus": "Stagnant",
       "created": "2018-09-16",
       "requires": [
@@ -1235,6 +1299,7 @@
       "id": "ERC-1438",
       "number": 1438,
       "title": "dApp Components (avatar) & Universal Wallet",
+      "specAuthors": "Jet Lim (@Nitro888)",
       "editorialStatus": "Stagnant",
       "created": "2018-09-21",
       "requires": [],
@@ -1252,6 +1317,7 @@
       "id": "ERC-1444",
       "number": 1444,
       "title": "Localized Messaging with Signal-to-Text",
+      "specAuthors": "Brooklyn Zelenka (@expede), Jennifer Cooper (@jenncoop)",
       "editorialStatus": "Stagnant",
       "created": "2018-09-23",
       "requires": [],
@@ -1269,6 +1335,7 @@
       "id": "ERC-1450",
       "number": 1450,
       "title": "RTA-Controlled Security Token",
+      "specAuthors": "Howard Marks (@howardmarks) <howard@startengine.com>, Devender Gollapally (@devender-startengine) <devender@startengine.com>, Joe Mathews (@se-joe) <joe@startengine.com>, Jordan Jahja (@jordan-jahja) <jordan.jahja@startengine.com>, John Shiple (@johnshiple), David Zhang (@david-colab) <david@startengine.com>",
       "editorialStatus": "Final",
       "created": "2018-09-25",
       "requires": [
@@ -1299,6 +1366,7 @@
       "id": "ERC-1462",
       "number": 1462,
       "title": "Base Security Token",
+      "specAuthors": "Maxim Kupriianov <mk@atlant.io>, Julian Svirsky <js@atlant.io>",
       "editorialStatus": "Stagnant",
       "created": "2018-10-01",
       "requires": [
@@ -1327,6 +1395,7 @@
       "id": "ERC-1484",
       "number": 1484,
       "title": "Digital Identity Aggregator",
+      "specAuthors": "Anurag Angara <anurag.angara@gmail.com>, Andy Chorlian <andychorlian@gmail.com>, Shane Hampton <shanehampton1@gmail.com>, Noah Zinsmeister <noahwz@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-10-12",
       "requires": [
@@ -1348,6 +1417,7 @@
       "id": "ERC-1491",
       "number": 1491,
       "title": "Human Cost Accounting Standard (Like Gas but for humans)",
+      "specAuthors": "Iamnot Chris (@cohabo)",
       "editorialStatus": "Stagnant",
       "created": "2018-10-12",
       "requires": [],
@@ -1368,6 +1438,7 @@
       "id": "ERC-1504",
       "number": 1504,
       "title": "Upgradable Smart Contract",
+      "specAuthors": "Kaidong Wu <wukd94@pku.edu.cn>, Chuqiao Ren <cr025@bucknell.edu>, Ruthia He <rujiahe@gmail.com>, Yun Ma <mayun@pku.edu.cn>, Xuanzhe Liu <liuxuanzhe@pku.edu.cn>",
       "editorialStatus": "Stagnant",
       "created": "2018-10-17",
       "requires": [],
@@ -1385,6 +1456,7 @@
       "id": "ERC-1523",
       "number": 1523,
       "title": "Standard for Insurance Policies as ERC-721 Non Fungible Tokens",
+      "specAuthors": "Christoph Mussenbrock (@christoph2806)",
       "editorialStatus": "Stagnant",
       "created": "2018-10-10",
       "requires": [
@@ -1405,6 +1477,7 @@
       "id": "ERC-1538",
       "number": 1538,
       "title": "Transparent Contract Standard",
+      "specAuthors": "Nick Mudge <nick@perfectabstractions.com>",
       "editorialStatus": "Withdrawn",
       "created": "2018-10-31",
       "requires": [],
@@ -1426,6 +1499,7 @@
       "id": "ERC-1577",
       "number": 1577,
       "title": "contenthash field for ENS",
+      "specAuthors": "Dean Eigenmann <dean@ens.domains>, Nick Johnson <nick@ens.domains>",
       "editorialStatus": "Stagnant",
       "created": "2018-11-13",
       "requires": [],
@@ -1441,6 +1515,7 @@
       "id": "ERC-1581",
       "number": 1581,
       "title": "Non-wallet usage of keys derived from BIP-32 trees",
+      "specAuthors": "Michele Balistreri (@bitgamma)",
       "editorialStatus": "Stagnant",
       "created": "2018-11-13",
       "requires": [],
@@ -1456,6 +1531,7 @@
       "id": "ERC-1592",
       "number": 1592,
       "title": "Address and ERC20-compliant transfer rules",
+      "specAuthors": "Cyril Lapinte <cyril.lapinte@mtpelerin.com>, Laurent Aapro <laurent.aapro@mtpelerin.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-11-09",
       "requires": [],
@@ -1476,6 +1552,7 @@
       "id": "ERC-1613",
       "number": 1613,
       "title": "Gas Stations Network",
+      "specAuthors": "Yoav Weiss (@yoavw), Dror Tirosh (@drortirosh), Alex Forshtat (@forshtat), Shahaf Nacson (@shahafn)",
       "editorialStatus": "Draft",
       "created": "2018-11-18",
       "requires": [
@@ -1497,6 +1574,7 @@
       "id": "ERC-1616",
       "number": 1616,
       "title": "Attribute Registry Standard",
+      "specAuthors": "0age (@0age), Santiago Palladino (@spalladino), Leo Arias (@elopio), Alejo Salles (@fiiiu), Stephane Gosselin (@thegostep)",
       "editorialStatus": "Stagnant",
       "created": "2018-11-23",
       "requires": [
@@ -1518,6 +1596,7 @@
       "id": "ERC-1620",
       "number": 1620,
       "title": "Money Streaming",
+      "specAuthors": "Paul Berg (@PaulRBerg)",
       "editorialStatus": "Stagnant",
       "created": "2018-11-24",
       "requires": [],
@@ -1535,6 +1614,7 @@
       "id": "ERC-1633",
       "number": 1633,
       "title": "Re-Fungible Token Standard (RFT)",
+      "specAuthors": "Billy Rennekamp (@okwme), Dan Long <dan@artblx.com>, Kiryl Yermakou <kiryl@artblx.com>, Nate van der Ende <nate@artblx.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-11-18",
       "requires": [
@@ -1558,6 +1638,7 @@
       "id": "ERC-1710",
       "number": 1710,
       "title": "URL Format for Web3 Browsers",
+      "specAuthors": "Bruno Barbieri (@brunobar79)",
       "editorialStatus": "Stagnant",
       "created": "2019-01-13",
       "requires": [
@@ -1578,6 +1659,7 @@
       "id": "ERC-1753",
       "number": 1753,
       "title": "Smart Contract Interface for Licences",
+      "specAuthors": "Lucas Cullen (@BitcoinBrisbane), Kai Yeung (@CivicKai), Anna Crowley <annaelizabethcrowley@gmail.com>, Caroline Marshall <caroline.marshall888@gmail.com>, Katrina Donaghy <katrina@civicledger.com>",
       "editorialStatus": "Stagnant",
       "created": "2019-02-06",
       "requires": [],
@@ -1593,6 +1675,7 @@
       "id": "ERC-1761",
       "number": 1761,
       "title": "Scoped Approval Interface",
+      "specAuthors": "Witek Radomski <witek@enjin.io>, Andrew Cooke <ac0dem0nk3y@gmail.com>, James Therien <james@enjin.io>, Eric Binet <eric@enjin.io>",
       "editorialStatus": "Stagnant",
       "created": "2019-02-18",
       "requires": [
@@ -1614,6 +1697,7 @@
       "id": "ERC-1775",
       "number": 1775,
       "title": "App Keys, application specific wallet accounts",
+      "specAuthors": "Vincent Eli (@Bunjin), Dan Finlay (@DanFinlay)",
       "editorialStatus": "Stagnant",
       "created": "2019-02-20",
       "requires": [],
@@ -1635,6 +1719,7 @@
       "id": "ERC-1812",
       "number": 1812,
       "title": "Ethereum Verifiable Claims",
+      "specAuthors": "Pelle Braendgaard (@pelle)",
       "editorialStatus": "Stagnant",
       "created": "2019-03-03",
       "requires": [
@@ -1658,6 +1743,7 @@
       "id": "ERC-1820",
       "number": 1820,
       "title": "Pseudo-introspection Registry Contract",
+      "specAuthors": "Jordi Baylina <jordi@baylina.cat>, Jacques Dafflon <mail@0xjac.com>",
       "editorialStatus": "Final",
       "created": "2019-03-04",
       "requires": [
@@ -1681,6 +1767,7 @@
       "id": "ERC-1822",
       "number": 1822,
       "title": "Universal Upgradeable Proxy Standard (UUPS)",
+      "specAuthors": "Gabriel Barros <gabriel@terminal.co>, Patrick Gallagher <blockchainbuddha@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2019-03-04",
       "requires": [],
@@ -1698,6 +1785,7 @@
       "id": "ERC-1844",
       "number": 1844,
       "title": "ENS Interface Discovery",
+      "specAuthors": "Nick Johnson (@arachnid)",
       "editorialStatus": "Stagnant",
       "created": "2019-03-15",
       "requires": [
@@ -1718,6 +1806,7 @@
       "id": "ERC-1900",
       "number": 1900,
       "title": "dType - Decentralized Type System for EVM",
+      "specAuthors": "Loredana Cirstea (@loredanacirstea), Christian Tzurcanu (@ctzurcanu)",
       "editorialStatus": "Stagnant",
       "created": "2019-03-28",
       "requires": [],
@@ -1735,6 +1824,7 @@
       "id": "ERC-1921",
       "number": 1921,
       "title": "dType Functions Extension",
+      "specAuthors": "Loredana Cirstea (@loredanacirstea), Christian Tzurcanu (@ctzurcanu)",
       "editorialStatus": "Stagnant",
       "created": "2019-04-06",
       "requires": [
@@ -1754,6 +1844,7 @@
       "id": "ERC-1922",
       "number": 1922,
       "title": "zk-SNARK Verifier Standard",
+      "specAuthors": "Michael Connor <michael.connor@uk.ey.com>, Chaitanya Konda <chaitanya.konda@uk.ey.com>, Duncan Westland <duncan.westland@uk.ey.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-09-14",
       "requires": [
@@ -1779,6 +1870,7 @@
       "id": "ERC-1923",
       "number": 1923,
       "title": "zk-SNARK Verifier Registry Standard",
+      "specAuthors": "Michael Connor <michael.connor@uk.ey.com>, Chaitanya Konda <chaitanya.konda@uk.ey.com>, Duncan Westland <duncan.westland@uk.ey.com>",
       "editorialStatus": "Stagnant",
       "created": "2018-12-22",
       "requires": [
@@ -1804,6 +1896,7 @@
       "id": "ERC-1948",
       "number": 1948,
       "title": "Non-fungible Data Token",
+      "specAuthors": "Johann Barbie (@johannbarbie), Ben Bollen <ben@ost.com>, pinkiebell (@pinkiebell)",
       "editorialStatus": "Stagnant",
       "created": "2019-04-18",
       "requires": [
@@ -1823,6 +1916,7 @@
       "id": "ERC-1967",
       "number": 1967,
       "title": "Proxy Storage Slots",
+      "specAuthors": "Santiago Palladino (@spalladino), Francisco Giordano (@frangio), Hadrien Croubois (@Amxx)",
       "editorialStatus": "Final",
       "created": "2019-04-24",
       "requires": [],
@@ -1838,6 +1932,7 @@
       "id": "ERC-1973",
       "number": 1973,
       "title": "Scalable Rewards",
+      "specAuthors": "Lee Raj (@lerajk), Qin Jian (@qinjian)",
       "editorialStatus": "Stagnant",
       "created": "2019-04-01",
       "requires": [],
@@ -1855,6 +1950,7 @@
       "id": "ERC-1996",
       "number": 1996,
       "title": "Holdable Token",
+      "specAuthors": "Julio Faura <julio@adhara.io>, Fernando Paris <fer@io.builders>, Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-04-10",
       "requires": [
@@ -1875,6 +1971,7 @@
       "id": "ERC-2009",
       "number": 2009,
       "title": "Compliance Service",
+      "specAuthors": "Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-05-09",
       "requires": [
@@ -1897,6 +1994,7 @@
       "id": "ERC-2018",
       "number": 2018,
       "title": "Clearable Token",
+      "specAuthors": "Julio Faura <julio@adhara.io>, Fernando Paris <fer@io.builders>, Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-04-30",
       "requires": [
@@ -1918,6 +2016,7 @@
       "id": "ERC-2019",
       "number": 2019,
       "title": "Fundable Token",
+      "specAuthors": "Fernando Paris <fer@io.builders>, Julio Faura <julio@adhara.io>, Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-05-10",
       "requires": [
@@ -1938,6 +2037,7 @@
       "id": "ERC-2020",
       "number": 2020,
       "title": "E-Money Standard Token",
+      "specAuthors": "Julio Faura <julio@adhara.io>, Fernando Paris <fer@io.builders>, Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-05-10",
       "requires": [
@@ -1969,6 +2069,7 @@
       "id": "ERC-2021",
       "number": 2021,
       "title": "Payoutable Token",
+      "specAuthors": "Fernando Paris <fer@io.builders>, Julio Faura <julio@adhara.io>, Daniel Lehrner <daniel@io.builders>",
       "editorialStatus": "Stagnant",
       "created": "2019-05-10",
       "requires": [
@@ -1992,6 +2093,7 @@
       "id": "ERC-2098",
       "number": 2098,
       "title": "Compact Signature Representation",
+      "specAuthors": "Richard Moore (@ricmoo), Nick Johnson <nick@ethereum.org>",
       "editorialStatus": "Final",
       "created": "2019-03-14",
       "requires": [
@@ -2011,6 +2113,7 @@
       "id": "ERC-2135",
       "number": 2135,
       "title": "Consumable Interface (Tickets, etc)",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Final",
       "created": "2019-06-23",
       "requires": [
@@ -2036,6 +2139,7 @@
       "id": "ERC-2157",
       "number": 2157,
       "title": "dType Storage Extension - Decentralized Type System for EVM",
+      "specAuthors": "Loredana Cirstea (@loredanacirstea), Christian Tzurcanu (@ctzurcanu)",
       "editorialStatus": "Stagnant",
       "created": "2019-06-28",
       "requires": [
@@ -2055,6 +2159,7 @@
       "id": "ERC-2193",
       "number": 2193,
       "title": "dType Alias Extension - Decentralized Type System",
+      "specAuthors": "Loredana Cirstea (@loredanacirstea), Christian Tzurcanu (@ctzurcanu)",
       "editorialStatus": "Stagnant",
       "created": "2019-07-16",
       "requires": [
@@ -2079,6 +2184,7 @@
       "id": "ERC-2266",
       "number": 2266,
       "title": "Atomic Swap-based American Call Option Contract Standard",
+      "specAuthors": "Runchao Han <runchao.han@monash.edu>, Haoyu Lin <chris.haoyul@gmail.com>, Jiangshan Yu <jiangshan.yu@monash.edu>",
       "editorialStatus": "Last Call",
       "created": "2019-08-17",
       "requires": [],
@@ -2094,6 +2200,7 @@
       "id": "ERC-2304",
       "number": 2304,
       "title": "Multichain address resolution for ENS",
+      "specAuthors": "Nick Johnson <nick@ens.domains>",
       "editorialStatus": "Stagnant",
       "created": "2019-09-09",
       "requires": [
@@ -2115,6 +2222,7 @@
       "id": "ERC-2309",
       "number": 2309,
       "title": "ERC-721 Consecutive Transfer Extension",
+      "specAuthors": "Sean Papanikolas (@pizzarob)",
       "editorialStatus": "Final",
       "created": "2019-10-08",
       "requires": [
@@ -2136,6 +2244,7 @@
       "id": "ERC-2333",
       "number": 2333,
       "title": "BLS12-381 Key Generation",
+      "specAuthors": "Carl Beekhuizen (@CarlBeek) <carl@ethereum.org>",
       "editorialStatus": "Review",
       "created": "2019-09-30",
       "requires": [],
@@ -2151,6 +2260,7 @@
       "id": "ERC-2334",
       "number": 2334,
       "title": "BLS12-381 Deterministic Account Hierarchy",
+      "specAuthors": "Carl Beekhuizen (@CarlBeek) <carl@ethereum.org>",
       "editorialStatus": "Review",
       "created": "2019-09-30",
       "requires": [
@@ -2172,6 +2282,7 @@
       "id": "ERC-2335",
       "number": 2335,
       "title": "BLS12-381 Keystore",
+      "specAuthors": "Carl Beekhuizen (@CarlBeek) <carl@ethereum.org>",
       "editorialStatus": "Review",
       "created": "2019-09-30",
       "requires": [
@@ -2193,6 +2304,7 @@
       "id": "ERC-2386",
       "number": 2386,
       "title": "Ethereum 2 Hierarchical Deterministic Walletstore",
+      "specAuthors": "Jim McDonald <Jim@mcdee.net>",
       "editorialStatus": "Stagnant",
       "created": "2019-11-21",
       "requires": [
@@ -2214,6 +2326,7 @@
       "id": "ERC-2390",
       "number": 2390,
       "title": "Geo-ENS",
+      "specAuthors": "James Choncholas (@james-choncholas)",
       "editorialStatus": "Stagnant",
       "created": "2019-11-15",
       "requires": [
@@ -2238,6 +2351,7 @@
       "id": "ERC-2400",
       "number": 2400,
       "title": "Transaction Receipt URI",
+      "specAuthors": "Ricardo Guilherme Schmidt (@3esmit), Eric Dvorsak (@yenda)",
       "editorialStatus": "Stagnant",
       "created": "2019-11-05",
       "requires": [
@@ -2259,6 +2373,7 @@
       "id": "ERC-2470",
       "number": 2470,
       "title": "Singleton Factory",
+      "specAuthors": "Ricardo Guilherme Schmidt (@3esmit)",
       "editorialStatus": "Stagnant",
       "created": "2020-01-15",
       "requires": [
@@ -2283,6 +2398,7 @@
       "id": "ERC-2477",
       "number": 2477,
       "title": "Token Metadata Integrity",
+      "specAuthors": "Kristijan Sedlak (@xpepermint), William Entriken <github.com@phor.net>, Witek Radomski <witek@enjin.io>",
       "editorialStatus": "Stagnant",
       "created": "2020-01-02",
       "requires": [
@@ -2310,6 +2426,7 @@
       "id": "ERC-2494",
       "number": 2494,
       "title": "Baby Jubjub Elliptic Curve",
+      "specAuthors": "Barry WhiteHat (@barryWhiteHat), Marta Bellés (@bellesmarta), Jordi Baylina (@jbaylina)",
       "editorialStatus": "Stagnant",
       "created": "2020-01-29",
       "requires": [],
@@ -2325,6 +2442,7 @@
       "id": "ERC-2520",
       "number": 2520,
       "title": "Multiple contenthash records for ENS",
+      "specAuthors": "Filip Štamcar (@filips123)",
       "editorialStatus": "Stagnant",
       "created": "2020-02-18",
       "requires": [
@@ -2344,6 +2462,7 @@
       "id": "ERC-2525",
       "number": 2525,
       "title": "ENSLogin",
+      "specAuthors": "Hadrien Croubois (@amxx)",
       "editorialStatus": "Stagnant",
       "created": "2020-02-19",
       "requires": [
@@ -2368,6 +2487,7 @@
       "id": "ERC-2535",
       "number": 2535,
       "title": "Diamonds, Multi-Facet Proxy",
+      "specAuthors": "Nick Mudge (@mudgen)",
       "editorialStatus": "Final",
       "created": "2020-02-22",
       "requires": [],
@@ -2387,6 +2507,7 @@
       "id": "ERC-2544",
       "number": 2544,
       "title": "ENS Wildcard Resolution",
+      "specAuthors": "Nick Johnson (@arachnid), 0age (@0age)",
       "editorialStatus": "Stagnant",
       "created": "2020-02-28",
       "requires": [
@@ -2406,6 +2527,7 @@
       "id": "ERC-2569",
       "number": 2569,
       "title": "Saving and Displaying Image Onchain for Universal Tokens",
+      "specAuthors": "Hua Zhang (@dgczhh), Yuefei Tan (@whtyfhas), Derek Zhou (@zhous), Ran Xing (@lemontreeran)",
       "editorialStatus": "Stagnant",
       "created": "2020-03-28",
       "requires": [],
@@ -2426,6 +2548,7 @@
       "id": "ERC-2612",
       "number": 2612,
       "title": "Permit Extension for EIP-20 Signed Approvals",
+      "specAuthors": "Martin Lundfall (@Mrchico)",
       "editorialStatus": "Final",
       "created": "2020-04-13",
       "requires": [
@@ -2448,6 +2571,7 @@
       "id": "ERC-2615",
       "number": 2615,
       "title": "Non-Fungible Token with mortgage and rental functions",
+      "specAuthors": "Kohshi Shiba <kohshi.shiba@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2020-04-25",
       "requires": [
@@ -2468,6 +2592,7 @@
       "id": "ERC-2645",
       "number": 2645,
       "title": "Hierarchical Deterministic Wallet for Layer-2",
+      "specAuthors": "Tom Brand <tom@starkware.co>, Louis Guthmann <louis@starkware.co>",
       "editorialStatus": "Stagnant",
       "created": "2020-05-13",
       "requires": [],
@@ -2483,6 +2608,7 @@
       "id": "ERC-2678",
       "number": 2678,
       "title": "Revised Ethereum Smart Contract Packaging Standard (EthPM v3)",
+      "specAuthors": "g. nicholas d’andrea (@gnidan), Piper Merriam (@pipermerriam), Nick Gheorghita (@njgheorghita), Christian Reitwiessner (@chriseth), Ben Hauser (@iamdefinitelyahuman), Bryant Eisenbach (@fubuloubu)",
       "editorialStatus": "Final",
       "created": "2020-05-26",
       "requires": [],
@@ -2500,6 +2626,7 @@
       "id": "ERC-2680",
       "number": 2680,
       "title": "Ethereum 2 wallet layout",
+      "specAuthors": "Jim McDonald <Jim@mcdee.net>",
       "editorialStatus": "Stagnant",
       "created": "2020-05-29",
       "requires": [],
@@ -2515,6 +2642,7 @@
       "id": "ERC-2746",
       "number": 2746,
       "title": "Rules Engine Standard",
+      "specAuthors": "Aaron Kendall (@jaerith), Juan Blanco (@juanfranblanco)",
       "editorialStatus": "Stagnant",
       "created": "2020-06-20",
       "requires": [],
@@ -2532,6 +2660,7 @@
       "id": "ERC-2767",
       "number": 2767,
       "title": "Contract Ownership Governance",
+      "specAuthors": "Soham Zemse (@zemse), Nick Mudge (@mudgen)",
       "editorialStatus": "Stagnant",
       "created": "2020-07-04",
       "requires": [
@@ -2558,6 +2687,7 @@
       "id": "ERC-2770",
       "number": 2770,
       "title": "Meta-Transactions Forwarder Contract",
+      "specAuthors": "Alex Forshtat (@forshtat), Dror Tirosh (@drortirosh)",
       "editorialStatus": "Withdrawn",
       "created": "2020-07-01",
       "requires": [
@@ -2580,6 +2710,7 @@
       "id": "ERC-2771",
       "number": 2771,
       "title": "Secure Protocol for Native Meta Transactions",
+      "specAuthors": "Ronan Sandford (@wighawag), Liraz Siri (@lirazsiri), Dror Tirosh (@drortirosh), Yoav Weiss (@yoavw), Alex Forshtat (@forshtat), Hadrien Croubois (@Amxx), Sachin Tomar (@tomarsachin2271), Patrick McCorry (@stonecoldpat), Nicolas Venturo (@nventuro), Fabian Vogelsteller (@frozeman), Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2020-07-01",
       "requires": [],
@@ -2595,6 +2726,7 @@
       "id": "ERC-2848",
       "number": 2848,
       "title": "My Own Messages (MOM)",
+      "specAuthors": "Giuseppe Bertone (@Neurone)",
       "editorialStatus": "Stagnant",
       "created": "2020-08-02",
       "requires": [],
@@ -2610,6 +2742,7 @@
       "id": "ERC-2876",
       "number": 2876,
       "title": "Deposit contract and address standard",
+      "specAuthors": "Jonathan Underwood (@junderw)",
       "editorialStatus": "Stagnant",
       "created": "2020-08-13",
       "requires": [],
@@ -2628,6 +2761,7 @@
       "id": "ERC-2917",
       "number": 2917,
       "title": "Staking Reward Calculation",
+      "specAuthors": "Tony Carson <tony.carsonn@gmail.com>, Mehmet Sabir Kiraz <m.kiraz@gmail.com>, Süleyman Kardaş <skardas@gmail.com>",
       "editorialStatus": "Stagnant",
       "created": "2020-08-28",
       "requires": [],
@@ -2646,6 +2780,7 @@
       "id": "ERC-2942",
       "number": 2942,
       "title": "EthPM URI Specification",
+      "specAuthors": "Nick Gheorghita (@njgheorghita), Piper Merriam (@pipermerriam), g. nicholas d'andrea (@gnidan), Benjamin Hauser (@iamdefinitelyahuman)",
       "editorialStatus": "Stagnant",
       "created": "2020-09-04",
       "requires": [
@@ -2665,6 +2800,7 @@
       "id": "ERC-2980",
       "number": 2980,
       "title": "Swiss Compliant Asset Token",
+      "specAuthors": "Gianluca Perletti (@Perlets9), Alan Scarpellini (@alanscarpellini), Roberto Gorini (@robertogorini), Manuel Olivi (@manvel79)",
       "editorialStatus": "Stagnant",
       "created": "2020-09-08",
       "requires": [
@@ -2685,6 +2821,7 @@
       "id": "ERC-2981",
       "number": 2981,
       "title": "NFT Royalty Standard",
+      "specAuthors": "Zach Burks (@vexycats), James Morgan (@jamesmorgan), Blaine Malone (@blmalone), James Seibel (@seibelj)",
       "editorialStatus": "Final",
       "created": "2020-09-15",
       "requires": [
@@ -2707,6 +2844,7 @@
       "id": "ERC-3000",
       "number": 3000,
       "title": "Optimistic enactment governance standard",
+      "specAuthors": "Jorge Izquierdo (@izqui), Fabien Marino (@bonustrack)",
       "editorialStatus": "Stagnant",
       "created": "2020-09-24",
       "requires": [],
@@ -2722,6 +2860,7 @@
       "id": "ERC-3005",
       "number": 3005,
       "title": "Batched meta transactions",
+      "specAuthors": "Matt (@defifuture)",
       "editorialStatus": "Stagnant",
       "created": "2020-09-25",
       "requires": [],
@@ -2740,6 +2879,7 @@
       "id": "ERC-3009",
       "number": 3009,
       "title": "Transfer With Authorization",
+      "specAuthors": "Peter Jihoon Kim (@petejkim), Kevin Britz (@kbrizzle), David Knott (@DavidLKnott)",
       "editorialStatus": "Draft",
       "created": "2020-09-28",
       "requires": [
@@ -2765,6 +2905,7 @@
       "id": "ERC-3135",
       "number": 3135,
       "title": "Exclusive Claimable Token",
+      "specAuthors": "Zhenyu Sun (@Ungigdu)",
       "editorialStatus": "Stagnant",
       "created": "2020-08-10",
       "requires": [
@@ -2784,6 +2925,7 @@
       "id": "ERC-3156",
       "number": 3156,
       "title": "Flash Loans",
+      "specAuthors": "Alberto Cuesta Cañada (@alcueca), Fiona Kobayashi (@fifikobayashi), fubuloubu (@fubuloubu), Austin Williams (@onewayfunction)",
       "editorialStatus": "Final",
       "created": "2020-11-15",
       "requires": [],
@@ -2802,6 +2944,7 @@
       "id": "ERC-3224",
       "number": 3224,
       "title": "Described Data",
+      "specAuthors": "Richard Moore (@ricmoo), Nick Johnson (@arachnid)",
       "editorialStatus": "Stagnant",
       "created": "2021-01-23",
       "requires": [
@@ -2823,6 +2966,7 @@
       "id": "ERC-3234",
       "number": 3234,
       "title": "Batch Flash Loans",
+      "specAuthors": "Alberto Cuesta Cañada (@albertocuestacanada), Fiona Kobayashi (@fifikobayashi), fubuloubu (@fubuloubu), Austin Williams (@onewayfunction)",
       "editorialStatus": "Stagnant",
       "created": "2021-01-31",
       "requires": [],
@@ -2842,6 +2986,7 @@
       "id": "ERC-3386",
       "number": 3386,
       "title": "ERC-721 and ERC-1155 to ERC-20 Wrapper",
+      "specAuthors": "Calvin Koder (@ashrowz)",
       "editorialStatus": "Stagnant",
       "created": "2021-03-12",
       "requires": [
@@ -2864,6 +3009,7 @@
       "id": "ERC-3440",
       "number": 3440,
       "title": "ERC-721 Editions Standard",
+      "specAuthors": "Nathan Ginnever (@nginnever)",
       "editorialStatus": "Stagnant",
       "created": "2021-04-20",
       "requires": [
@@ -2886,6 +3032,7 @@
       "id": "ERC-3448",
       "number": 3448,
       "title": "MetaProxy Standard",
+      "specAuthors": "pinkiebell (@pinkiebell)",
       "editorialStatus": "Final",
       "created": "2021-03-29",
       "requires": [],
@@ -2901,6 +3048,7 @@
       "id": "ERC-3450",
       "number": 3450,
       "title": "Standardized Shamir Secret Sharing Scheme for BIP-39 Mnemonics",
+      "specAuthors": "Daniel Streit (@danielstreit)",
       "editorialStatus": "Stagnant",
       "created": "2021-03-29",
       "requires": [],
@@ -2916,6 +3064,7 @@
       "id": "ERC-3475",
       "number": 3475,
       "title": "Abstract Storage Bonds",
+      "specAuthors": "Yu Liu (@yuliu-debond), Varun Deshpande (@dr-chain), Cedric Ngakam (@drikssy), Dhruv Malik (@dhruvmalik007), Samuel Gwlanold Edoumou (@Edoumou), Toufic Batrice (@toufic0710)",
       "editorialStatus": "Final",
       "created": "2021-04-05",
       "requires": [
@@ -2939,6 +3088,7 @@
       "id": "ERC-3525",
       "number": 3525,
       "title": "Semi-Fungible Token",
+      "specAuthors": "Will Wang (@will42w), Mike Meng <myan@solv.finance>, Yi Cai (@YeeTsai) <yee.tsai@gmail.com>, Ryan Chow <ryanchow@solv.finance>, Zhongxin Wu (@Nerverwind), AlvisDu (@AlvisDu)",
       "editorialStatus": "Final",
       "created": "2020-12-01",
       "requires": [
@@ -2962,6 +3112,7 @@
       "id": "ERC-3561",
       "number": 3561,
       "title": "Trust Minimized Upgradeability Proxy",
+      "specAuthors": "Sam Porter (@SamPorter1984)",
       "editorialStatus": "Stagnant",
       "created": "2021-05-09",
       "requires": [],
@@ -2979,6 +3130,7 @@
       "id": "ERC-3569",
       "number": 3569,
       "title": "Sealed NFT Metadata Standard",
+      "specAuthors": "Sean Papanikolas (@pizzarob)",
       "editorialStatus": "Stagnant",
       "created": "2021-05-07",
       "requires": [],
@@ -2997,6 +3149,7 @@
       "id": "ERC-3589",
       "number": 3589,
       "title": "Assemble assets into NFTs",
+      "specAuthors": "Zhenyu Sun (@Ungigdu), Xinqi Yang (@xinqiyang)",
       "editorialStatus": "Stagnant",
       "created": "2021-05-24",
       "requires": [
@@ -3018,6 +3171,7 @@
       "id": "ERC-3643",
       "number": 3643,
       "title": "T-REX - Token for Regulated EXchanges",
+      "specAuthors": "Joachim Lebrun (@Joachim-Lebrun), Tony Malghem (@TonyMalghem), Kevin Thizy (@Nakasar), Luc Falempin (@lfalempin), Adam Boudjemaa (@Aboudjem)",
       "editorialStatus": "Final",
       "created": "2021-07-09",
       "requires": [
@@ -3039,6 +3193,7 @@
       "id": "ERC-3668",
       "number": 3668,
       "title": "CCIP Read—Secure offchain data retrieval",
+      "specAuthors": "Nick Johnson (@arachnid)",
       "editorialStatus": "Final",
       "created": "2020-07-19",
       "requires": [],
@@ -3054,6 +3209,7 @@
       "id": "ERC-3722",
       "number": 3722,
       "title": "Poster",
+      "specAuthors": "Auryn Macmillan (@auryn-macmillan)",
       "editorialStatus": "Stagnant",
       "created": "2021-07-31",
       "requires": [],
@@ -3071,6 +3227,7 @@
       "id": "ERC-3754",
       "number": 3754,
       "title": "A Vanilla Non-Fungible Token Standard",
+      "specAuthors": "Simon Tian (@simontianx)",
       "editorialStatus": "Stagnant",
       "created": "2021-08-21",
       "requires": [],
@@ -3088,6 +3245,7 @@
       "id": "ERC-3770",
       "number": 3770,
       "title": "Chain-specific addresses",
+      "specAuthors": "Lukas Schor (@lukasschor), Richard Meissner (@rmeissner), Pedro Gomes (@pedrouid), ligi <ligi@ligi.de>",
       "editorialStatus": "Draft",
       "created": "2021-08-26",
       "requires": [],
@@ -3106,6 +3264,7 @@
       "id": "ERC-3772",
       "number": 3772,
       "title": "Compressed Integers",
+      "specAuthors": "Soham Zemse (@zemse)",
       "editorialStatus": "Stagnant",
       "created": "2021-08-27",
       "requires": [],
@@ -3121,6 +3280,7 @@
       "id": "ERC-4337",
       "number": 4337,
       "title": "Account Abstraction Using Alt Mempool",
+      "specAuthors": "Vitalik Buterin (@vbuterin), Yoav Weiss (@yoavw), Dror Tirosh (@drortirosh), Shahaf Nacson (@shahafn), Alex Forshtat (@forshtat), Kristof Gazso (@kristofgazso), Tjaden Hess (@tjade273)",
       "editorialStatus": "Final",
       "created": "2021-09-29",
       "requires": [
@@ -3148,6 +3308,7 @@
       "id": "ERC-4341",
       "number": 4341,
       "title": "Ordered NFT Batch Standard",
+      "specAuthors": "Simon Tian (@simontianx)",
       "editorialStatus": "Stagnant",
       "created": "2021-10-01",
       "requires": [],
@@ -3168,6 +3329,7 @@
       "id": "ERC-4353",
       "number": 4353,
       "title": "Interface for Staked Tokens in NFTs",
+      "specAuthors": "Rex Creed (@aug2uag), Dane Scarborough <dane@nftapps.us>",
       "editorialStatus": "Stagnant",
       "created": "2021-10-08",
       "requires": [
@@ -3189,6 +3351,7 @@
       "id": "ERC-4361",
       "number": 4361,
       "title": "Sign-In with Ethereum",
+      "specAuthors": "Wayne Chang (@wyc), Gregory Rocco (@obstropolos), Brantly Millegan (@brantlymillegan), Nick Johnson (@Arachnid), Oliver Terbu (@awoie)",
       "editorialStatus": "Final",
       "created": "2021-10-11",
       "requires": [
@@ -3222,6 +3385,7 @@
       "id": "ERC-4393",
       "number": 4393,
       "title": "Micropayments for NFTs and Multi Tokens",
+      "specAuthors": "Jules Lai (@julesl23)",
       "editorialStatus": "Stagnant",
       "created": "2021-10-24",
       "requires": [
@@ -3246,6 +3410,7 @@
       "id": "ERC-4400",
       "number": 4400,
       "title": "EIP-721 Consumable Extension",
+      "specAuthors": "Daniel Ivanov (@Daniel-K-Ivanov), George Spasov (@Perseverance)",
       "editorialStatus": "Final",
       "created": "2021-10-30",
       "requires": [
@@ -3267,6 +3432,7 @@
       "id": "ERC-4430",
       "number": 4430,
       "title": "Described Transactions",
+      "specAuthors": "Richard Moore (@ricmoo), Nick Johnson (@arachnid)",
       "editorialStatus": "Stagnant",
       "created": "2021-11-07",
       "requires": [],
@@ -3285,6 +3451,7 @@
       "id": "ERC-4494",
       "number": 4494,
       "title": "Permit for ERC-721 NFTs",
+      "specAuthors": "Simon Fremaux (@dievardump), William Schwab (@wschwab)",
       "editorialStatus": "Stagnant",
       "created": "2021-11-25",
       "requires": [
@@ -3312,6 +3479,7 @@
       "id": "ERC-4519",
       "number": 4519,
       "title": "Non-Fungible Tokens Tied to Physical Assets",
+      "specAuthors": "Javier Arcenegui (@Hardblock-IMSE-CNM), Rosario Arjona (@RosarioArjona), Roberto Román <roman@imse-cnm.csic.es>, Iluminada Baturone (@lumi2018)",
       "editorialStatus": "Final",
       "created": "2021-12-03",
       "requires": [
@@ -3333,6 +3501,7 @@
       "id": "ERC-4521",
       "number": 4521,
       "title": "721/20-compatible transfer",
+      "specAuthors": "Ross Campbell (@z0r0z)",
       "editorialStatus": "Stagnant",
       "created": "2021-12-13",
       "requires": [
@@ -3353,6 +3522,7 @@
       "id": "ERC-4524",
       "number": 4524,
       "title": "Safer ERC-20",
+      "specAuthors": "William Schwab (@wschwab)",
       "editorialStatus": "Stagnant",
       "created": "2021-12-05",
       "requires": [
@@ -3378,6 +3548,7 @@
       "id": "ERC-4527",
       "number": 4527,
       "title": "QR Code transmission protocol for wallets",
+      "specAuthors": "Aaron Chen (@aaronisme), Sora Lee (@soralit), ligi (@ligi), Dan Miller (@danjm), AndreasGassmann (@andreasgassmann), xardass (@xardass), Lixin Liu (@BitcoinLixin)",
       "editorialStatus": "Stagnant",
       "created": "2021-12-07",
       "requires": [],
@@ -3397,6 +3568,7 @@
       "id": "ERC-4546",
       "number": 4546,
       "title": "Wrapped Deposits",
+      "specAuthors": "Justice Hudson (@jchancehud)",
       "editorialStatus": "Stagnant",
       "created": "2021-12-11",
       "requires": [],
@@ -3415,6 +3587,7 @@
       "id": "ERC-4626",
       "number": 4626,
       "title": "Tokenized Vaults",
+      "specAuthors": "Joey Santoro (@joeysantoro), t11s (@transmissions11), Jet Jadeja (@JetJadeja), Alberto Cuesta Cañada (@alcueca), Señor Doggo (@fubuloubu)",
       "editorialStatus": "Final",
       "created": "2021-12-22",
       "requires": [
@@ -3436,6 +3609,7 @@
       "id": "ERC-4671",
       "number": 4671,
       "title": "Non-Tradable Tokens Standard",
+      "specAuthors": "Omar Aflak (@omaraflak), Pol-Malo Le Bris, Marvin Martin (@MarvinMartin24)",
       "editorialStatus": "Stagnant",
       "created": "2022-01-13",
       "requires": [
@@ -3453,6 +3627,7 @@
       "id": "ERC-4675",
       "number": 4675,
       "title": "Multi-Fractional Non-Fungible Tokens",
+      "specAuthors": "David Kim (@powerstream3604)",
       "editorialStatus": "Stagnant",
       "created": "2022-01-13",
       "requires": [
@@ -3477,6 +3652,7 @@
       "id": "ERC-4799",
       "number": 4799,
       "title": "Non-Fungible Token Ownership Designation Standard",
+      "specAuthors": "David Buckman (@davidbuckman), Isaac Buckman (@isaacbuckman)",
       "editorialStatus": "Stagnant",
       "created": "2022-02-13",
       "requires": [
@@ -3497,6 +3673,7 @@
       "id": "ERC-4804",
       "number": 4804,
       "title": "Web3 URL to EVM Call Message Translation",
+      "specAuthors": "Qi Zhou (@qizhou), Chao Pi (@pichaoqkc), Sam Wilson (@SamWilsn)",
       "editorialStatus": "Final",
       "created": "2022-02-14",
       "requires": [
@@ -3514,6 +3691,7 @@
       "id": "ERC-4824",
       "number": 4824,
       "title": "Common Interfaces for DAOs",
+      "specAuthors": "Joshua Tan (@thelastjosh), Isaac Patka (@ipatka), Ido Gershtein <ido@daostack.io>, Eyal Eithcowich <eyal@deepdao.io>, Michael Zargham (@mzargham), Sam Furter (@nivida)",
       "editorialStatus": "Review",
       "created": "2022-02-17",
       "requires": [],
@@ -3534,6 +3712,7 @@
       "id": "ERC-4834",
       "number": 4834,
       "title": "Hierarchical Domains",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2022-02-22",
       "requires": [],
@@ -3551,6 +3730,7 @@
       "id": "ERC-4883",
       "number": 4883,
       "title": "Composable SVG NFT",
+      "specAuthors": "Andrew B Coathup (@abcoathup), Alex (@AlexPartyPanda), Damian Martinelli (@damianmarti), blockdev (@0xbok), Austin Griffith (@austintgriffith)",
       "editorialStatus": "Draft",
       "created": "2022-03-08",
       "requires": [
@@ -3568,6 +3748,7 @@
       "id": "ERC-4885",
       "number": 4885,
       "title": "Subscription NFTs and Multi Tokens",
+      "specAuthors": "Jules Lai (@julesl23)",
       "editorialStatus": "Stagnant",
       "created": "2022-03-08",
       "requires": [
@@ -3592,6 +3773,7 @@
       "id": "ERC-4886",
       "number": 4886,
       "title": "Proxy Ownership Register",
+      "specAuthors": "Omnus Sunmo (@omnus)",
       "editorialStatus": "Stagnant",
       "created": "2022-09-03",
       "requires": [],
@@ -3607,6 +3789,7 @@
       "id": "ERC-4906",
       "number": 4906,
       "title": "EIP-721 Metadata Update Extension",
+      "specAuthors": "Anders (@0xanders), Lance (@LanceSnow), Shrug <shrug@emojidao.org>, Nathan <nathan.gang@gemini.com>",
       "editorialStatus": "Final",
       "created": "2022-03-13",
       "requires": [
@@ -3628,6 +3811,7 @@
       "id": "ERC-4907",
       "number": 4907,
       "title": "Rental NFT, an Extension of EIP-721",
+      "specAuthors": "Anders (@0xanders), Lance (@LanceSnow), Shrug <shrug@emojidao.org>",
       "editorialStatus": "Final",
       "created": "2022-03-11",
       "requires": [
@@ -3648,6 +3832,7 @@
       "id": "ERC-4910",
       "number": 4910,
       "title": "Royalty Bearing NFTs",
+      "specAuthors": "Andreas Freund (@Therecanbeonlyone1969)",
       "editorialStatus": "Final",
       "created": "2022-03-14",
       "requires": [
@@ -3669,6 +3854,7 @@
       "id": "ERC-4931",
       "number": 4931,
       "title": "Generic Token Upgrade Standard",
+      "specAuthors": "John Peterson (@John-peterson-coinbase), Roberto Bayardo (@roberto-bayardo), David Núñez (@cygnusv)",
       "editorialStatus": "Stagnant",
       "created": "2021-11-02",
       "requires": [
@@ -3688,6 +3874,7 @@
       "id": "ERC-4944",
       "number": 4944,
       "title": "Contract with Exactly One Non-fungible Token",
+      "specAuthors": "Víctor Muñoz (@victormunoz), Josep Lluis de la Rosa (@peplluis7), Andres El-Fakdi (@Bluezfish)",
       "editorialStatus": "Stagnant",
       "created": "2022-03-25",
       "requires": [
@@ -3709,6 +3896,7 @@
       "id": "ERC-4950",
       "number": 4950,
       "title": "Entangled Tokens",
+      "specAuthors": "Víctor Muñoz (@victormunoz), Josep Lluis de la Rosa (@peplluis7), Easy Innova (@easyinnova)",
       "editorialStatus": "Stagnant",
       "created": "2022-03-28",
       "requires": [
@@ -3732,6 +3920,7 @@
       "id": "ERC-4955",
       "number": 4955,
       "title": "Vendor Metadata Extension for NFTs",
+      "specAuthors": "Ignacio Mazzara (@nachomazzara)",
       "editorialStatus": "Final",
       "created": "2022-03-29",
       "requires": [
@@ -3753,6 +3942,7 @@
       "id": "ERC-4972",
       "number": 4972,
       "title": "Name-Owned Account",
+      "specAuthors": "Shu Dong (@dongshu2013), Qi Zhou (@qizhou), Zihao Chen (@zihaoccc)",
       "editorialStatus": "Draft",
       "created": "2022-04-04",
       "requires": [
@@ -3772,6 +3962,7 @@
       "id": "ERC-4973",
       "number": 4973,
       "title": "Account-bound Tokens",
+      "specAuthors": "Tim Daubenschütz (@TimDaub)",
       "editorialStatus": "Review",
       "created": "2022-04-01",
       "requires": [
@@ -3798,6 +3989,7 @@
       "id": "ERC-4974",
       "number": 4974,
       "title": "Ratings",
+      "specAuthors": "Daniel Tedesco (@dtedesco1)",
       "editorialStatus": "Stagnant",
       "created": "2022-04-02",
       "requires": [
@@ -3819,6 +4011,7 @@
       "id": "ERC-4987",
       "number": 4987,
       "title": "Held token interface",
+      "specAuthors": "Devin Conley (@devinaconley)",
       "editorialStatus": "Stagnant",
       "created": "2021-09-21",
       "requires": [
@@ -3844,6 +4037,7 @@
       "id": "ERC-5005",
       "number": 5005,
       "title": "Zodiac Modular Accounts",
+      "specAuthors": "Auryn Macmillan (@auryn-macmillan), Kei Kreutler (@keikreutler)",
       "editorialStatus": "Stagnant",
       "created": "2022-04-14",
       "requires": [
@@ -3861,6 +4055,7 @@
       "id": "ERC-5006",
       "number": 5006,
       "title": "Rental NFT, NFT User Extension",
+      "specAuthors": "Lance (@LanceSnow), Anders (@0xanders), Shrug <shrug@emojidao.org>",
       "editorialStatus": "Final",
       "created": "2022-04-12",
       "requires": [
@@ -3882,6 +4077,7 @@
       "id": "ERC-5007",
       "number": 5007,
       "title": "Time NFT, ERC-721 Time Extension",
+      "specAuthors": "Anders (@0xanders), Lance (@LanceSnow), Shrug <shrug@emojidao.org>",
       "editorialStatus": "Final",
       "created": "2022-04-13",
       "requires": [
@@ -3903,6 +4099,7 @@
       "id": "ERC-5008",
       "number": 5008,
       "title": "ERC-721 Nonce Extension",
+      "specAuthors": "Anders (@0xanders), Lance (@LanceSnow), Shrug <shrug@emojidao.org>",
       "editorialStatus": "Last Call",
       "created": "2022-04-10",
       "requires": [
@@ -3924,6 +4121,7 @@
       "id": "ERC-5018",
       "number": 5018,
       "title": "Filesystem-like Interface for Contracts",
+      "specAuthors": "Qi Zhou (@qizhou)",
       "editorialStatus": "Stagnant",
       "created": "2022-04-18",
       "requires": [],
@@ -3941,6 +4139,7 @@
       "id": "ERC-5023",
       "number": 5023,
       "title": "Shareable Non-Fungible Token",
+      "specAuthors": "Jarno Marttila (@yaruno), Martin Moravek (@mmartinmo)",
       "editorialStatus": "Final",
       "created": "2022-01-28",
       "requires": [
@@ -3962,6 +4161,7 @@
       "id": "ERC-5050",
       "number": 5050,
       "title": "Interactive NFTs with Modular Environments",
+      "specAuthors": "Alexi (@alexi)",
       "editorialStatus": "Stagnant",
       "created": "2021-04-18",
       "requires": [
@@ -3991,6 +4191,7 @@
       "id": "ERC-5058",
       "number": 5058,
       "title": "Lockable Non-Fungible Tokens",
+      "specAuthors": "Tyler (@radiocaca), Alex (@gojazdev), John (@sfumato00)",
       "editorialStatus": "Stagnant",
       "created": "2022-04-30",
       "requires": [
@@ -4013,6 +4214,7 @@
       "id": "ERC-5094",
       "number": 5094,
       "title": "URL Format for Ethereum Network Switching",
+      "specAuthors": "Luc van Kampen (@lucemans), Jakob Helgesson (@svemat01), Joshua Hendrix (@thejoshuahendrix)",
       "editorialStatus": "Stagnant",
       "created": "2022-05-13",
       "requires": [
@@ -4035,6 +4237,7 @@
       "id": "ERC-5095",
       "number": 5095,
       "title": "Principal Token",
+      "specAuthors": "Julian Traversa (@JTraversa), Robert Robbins (@robrobbins), Alberto Cuesta Cañada (@alcueca)",
       "editorialStatus": "Stagnant",
       "created": "2022-05-01",
       "requires": [
@@ -4058,6 +4261,7 @@
       "id": "ERC-5114",
       "number": 5114,
       "title": "Soulbound Badge",
+      "specAuthors": "Micah Zoltu (@MicahZoltu)",
       "editorialStatus": "Last Call",
       "created": "2022-05-30",
       "requires": [],
@@ -4073,6 +4277,7 @@
       "id": "ERC-5115",
       "number": 5115,
       "title": "SY Token",
+      "specAuthors": "Vu Nguyen (@mrenoon), Long Vuong (@UncleGrandpa925), Anton Buenavista (@ayobuenavista)",
       "editorialStatus": "Draft",
       "created": "2022-05-30",
       "requires": [
@@ -4095,6 +4300,7 @@
       "id": "ERC-5131",
       "number": 5131,
       "title": "SAFE Authentication For ENS",
+      "specAuthors": "Wilkins Chung (@wwhchung) <wilkins@manifold.xyz>, Jalil Wahdatehagh (@jwahdatehagh), Cry (@crydoteth), Sillytuna (@sillytuna), Cyberpnk (@CyberpnkWin)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-03",
       "requires": [
@@ -4118,6 +4324,7 @@
       "id": "ERC-5139",
       "number": 5139,
       "title": "Remote Procedure Call Provider Lists",
+      "specAuthors": "Sam Wilson (@SamWilsn)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-06",
       "requires": [
@@ -4140,6 +4347,7 @@
       "id": "ERC-5143",
       "number": 5143,
       "title": "Slippage Protection for Tokenized Vault",
+      "specAuthors": "Hadrien Croubois (@amxx)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-09",
       "requires": [
@@ -4161,6 +4369,7 @@
       "id": "ERC-5164",
       "number": 5164,
       "title": "Cross-Chain Execution",
+      "specAuthors": "Brendan Asselstine (@asselstine), Pierrick Turelier (@PierrickGT), Chris Whinfrey (@cwhinfrey)",
       "editorialStatus": "Last Call",
       "created": "2022-06-14",
       "requires": [],
@@ -4176,6 +4385,7 @@
       "id": "ERC-5169",
       "number": 5169,
       "title": "Client Script URI for Token Contracts",
+      "specAuthors": "James (@JamesSmartCell), Weiwu (@weiwu-zhang)",
       "editorialStatus": "Final",
       "created": "2022-05-03",
       "requires": [
@@ -4202,6 +4412,7 @@
       "id": "ERC-5173",
       "number": 5173,
       "title": "NFT Future Rewards (nFR)",
+      "specAuthors": "Yale ReiSoleil (@longnshort), dRadiant (@dRadiant), D Wang, PhD <david@iob.fi>",
       "editorialStatus": "Draft",
       "created": "2022-05-08",
       "requires": [
@@ -4224,6 +4435,7 @@
       "id": "ERC-5185",
       "number": 5185,
       "title": "NFT Updatable Metadata Extension",
+      "specAuthors": "Christophe Le Bars (@clbrge)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-27",
       "requires": [
@@ -4245,6 +4457,7 @@
       "id": "ERC-5187",
       "number": 5187,
       "title": "Extend EIP-1155 with rentable usage rights",
+      "specAuthors": "DerivStudio (@DerivStudio)",
       "editorialStatus": "Stagnant",
       "created": "2022-04-17",
       "requires": [
@@ -4267,6 +4480,7 @@
       "id": "ERC-5189",
       "number": 5189,
       "title": "Account Abstraction via Endorsed Operations",
+      "specAuthors": "Agustín Aguilar (@agusx1211), Philippe Castonguay (@phabc), Michael Standen (@ScreamingHawk)",
       "editorialStatus": "Draft",
       "created": "2022-06-29",
       "requires": [],
@@ -4288,6 +4502,7 @@
       "id": "ERC-5192",
       "number": 5192,
       "title": "Minimal Soulbound NFTs",
+      "specAuthors": "Tim Daubenschütz (@TimDaub), Anders (@0xanders)",
       "editorialStatus": "Final",
       "created": "2022-07-01",
       "requires": [
@@ -4309,6 +4524,7 @@
       "id": "ERC-5202",
       "number": 5202,
       "title": "Blueprint contract format",
+      "specAuthors": "Charles Cooper (@charles-cooper), Edward Amor (@skellet0r)",
       "editorialStatus": "Final",
       "created": "2022-06-23",
       "requires": [
@@ -4328,6 +4544,7 @@
       "id": "ERC-5216",
       "number": 5216,
       "title": "ERC-1155 Allowance Extension",
+      "specAuthors": "Iván Mañús (@ivanmmurciaua), Juan Carlos Cantó (@EscuelaCryptoES)",
       "editorialStatus": "Last Call",
       "created": "2022-07-11",
       "requires": [
@@ -4352,6 +4569,7 @@
       "id": "ERC-5218",
       "number": 5218,
       "title": "NFT Rights Management",
+      "specAuthors": "James Grimmelmann (@grimmelm), Yan Ji (@iseriohn), Tyler Kell (@relyt29)",
       "editorialStatus": "Stagnant",
       "created": "2022-07-11",
       "requires": [
@@ -4373,6 +4591,7 @@
       "id": "ERC-5219",
       "number": 5219,
       "title": "Contract Resource Requests",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2022-07-10",
       "requires": [],
@@ -4388,6 +4607,7 @@
       "id": "ERC-5247",
       "number": 5247,
       "title": "Smart Contract Executable Proposal Interface",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Review",
       "created": "2022-07-13",
       "requires": [],
@@ -4406,6 +4626,7 @@
       "id": "ERC-5252",
       "number": 5252,
       "title": "Account-bound Finance",
+      "specAuthors": "Hyungsuk Kang (@hskang9), Viktor Pernjek (@smuxx)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-29",
       "requires": [
@@ -4429,6 +4650,7 @@
       "id": "ERC-5267",
       "number": 5267,
       "title": "Retrieval of EIP-712 domain",
+      "specAuthors": "Francisco Giordano (@frangio)",
       "editorialStatus": "Final",
       "created": "2022-07-14",
       "requires": [
@@ -4452,6 +4674,7 @@
       "id": "ERC-5269",
       "number": 5269,
       "title": "ERC Detection and Discovery",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Review",
       "created": "2022-07-15",
       "requires": [
@@ -4481,6 +4704,7 @@
       "id": "ERC-5289",
       "number": 5289,
       "title": "Ethereum Notary Interface",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Review",
       "created": "2022-07-16",
       "requires": [
@@ -4501,6 +4725,7 @@
       "id": "ERC-5298",
       "number": 5298,
       "title": "ENS Trust to hold NFTs under ENS name",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Stagnant",
       "created": "2022-07-12",
       "requires": [
@@ -4525,6 +4750,7 @@
       "id": "ERC-5313",
       "number": 5313,
       "title": "Light Contract Ownership",
+      "specAuthors": "William Entriken (@fulldecent)",
       "editorialStatus": "Final",
       "created": "2022-07-22",
       "requires": [
@@ -4546,6 +4772,7 @@
       "id": "ERC-5334",
       "number": 5334,
       "title": "EIP-721 User And Expires And Level Extension",
+      "specAuthors": "Yan (@yan253319066)",
       "editorialStatus": "Stagnant",
       "created": "2022-07-25",
       "requires": [
@@ -4566,6 +4793,7 @@
       "id": "ERC-5375",
       "number": 5375,
       "title": "NFT Author Information and Consent",
+      "specAuthors": "Samuele Marro (@samuelemarro), Luca Donno (@lucadonnoh)",
       "editorialStatus": "Final",
       "created": "2022-07-30",
       "requires": [
@@ -4593,6 +4821,7 @@
       "id": "ERC-5380",
       "number": 5380,
       "title": "ERC-721 Entitlement Extension",
+      "specAuthors": "Gavin John (@Pandapip1), Tim Daubenschütz (@TimDaub)",
       "editorialStatus": "Final",
       "created": "2022-03-11",
       "requires": [
@@ -4619,6 +4848,7 @@
       "id": "ERC-5409",
       "number": 5409,
       "title": "EIP-1155 Non-Fungible Token extension",
+      "specAuthors": "Ronan Sandford (@wighawag)",
       "editorialStatus": "Stagnant",
       "created": "2022-07-23",
       "requires": [
@@ -4641,6 +4871,7 @@
       "id": "ERC-5437",
       "number": 5437,
       "title": "Security Contact Interface",
+      "specAuthors": "Zainan Zhou (@xinbenlv)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-09",
       "requires": [
@@ -4661,6 +4892,7 @@
       "id": "ERC-5453",
       "number": 5453,
       "title": "Endorsement - Permit for Any Functions",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Last Call",
       "created": "2022-08-12",
       "requires": [
@@ -4691,6 +4923,7 @@
       "id": "ERC-5484",
       "number": 5484,
       "title": "Consensual Soulbound Tokens",
+      "specAuthors": "Buzz Cai (@buzzcai)",
       "editorialStatus": "Final",
       "created": "2022-08-17",
       "requires": [
@@ -4712,6 +4945,7 @@
       "id": "ERC-5485",
       "number": 5485,
       "title": "Jurisdiction, Accreditation, and Enforcement",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Review",
       "created": "2022-08-17",
       "requires": [
@@ -4732,6 +4966,7 @@
       "id": "ERC-5489",
       "number": 5489,
       "title": "NFT Hyperlink Extension",
+      "specAuthors": "IronMan_CH (@coderfengyun)",
       "editorialStatus": "Final",
       "created": "2022-08-16",
       "requires": [
@@ -4752,6 +4987,7 @@
       "id": "ERC-5496",
       "number": 5496,
       "title": "Multi-privilege Management NFT Extension",
+      "specAuthors": "Jeremy Z (@wnft)",
       "editorialStatus": "Last Call",
       "created": "2022-07-30",
       "requires": [
@@ -4774,6 +5010,7 @@
       "id": "ERC-5501",
       "number": 5501,
       "title": "Rental & Delegation NFT - EIP-721 Extension",
+      "specAuthors": "Jan Smrža (@smrza), David Rábel (@rabeles11), Tomáš Janča <tomas.janca@jtbstorage.eu>, Jan Bureš (@JohnyX89), DOBBYLABS (@DOBBYLABS)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-18",
       "requires": [
@@ -4799,6 +5036,7 @@
       "id": "ERC-5505",
       "number": 5505,
       "title": "EIP-1155 asset backed NFT extension",
+      "specAuthors": "liszechung (@liszechung)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-18",
       "requires": [
@@ -4819,6 +5057,7 @@
       "id": "ERC-5507",
       "number": 5507,
       "title": "Refundable Tokens",
+      "specAuthors": "elie222 (@elie222), Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2022-08-19",
       "requires": [
@@ -4844,6 +5083,7 @@
       "id": "ERC-5516",
       "number": 5516,
       "title": "Soulbound Multi-owner Tokens",
+      "specAuthors": "Lucas Martín Grasso Ramos (@LucasGrasso), Matias Arazi (@MatiArazi)",
       "editorialStatus": "Final",
       "created": "2022-08-19",
       "requires": [
@@ -4865,6 +5105,7 @@
       "id": "ERC-5521",
       "number": 5521,
       "title": "Referable NFT",
+      "specAuthors": "Saber Yu (@OniReimu), Qin Wang <qin.wang@data61.csiro.au>, Shange Fu <shange.fu@monash.edu>, Yilin Sai <yilin.sai@data61.csiro.au>, Shiping Chen <shiping.chen@data61.csiro.au>, Sherry Xu <xiwei.xu@data61.csiro.au>, Jiangshan Yu <jiangshan.yu@monash.edu>",
       "editorialStatus": "Final",
       "created": "2022-08-10",
       "requires": [
@@ -4887,6 +5128,7 @@
       "id": "ERC-5528",
       "number": 5528,
       "title": "Refundable Fungible Token",
+      "specAuthors": "StartfundInc (@StartfundInc)",
       "editorialStatus": "Final",
       "created": "2022-08-16",
       "requires": [
@@ -4906,6 +5148,7 @@
       "id": "ERC-5539",
       "number": 5539,
       "title": "Revocation List Registry",
+      "specAuthors": "Philipp Bolte (@strumswell), Lauritz Leifermann (@lleifermann), Dennis von der Bey (@DennisVonDerBey)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-26",
       "requires": [
@@ -4925,6 +5168,7 @@
       "id": "ERC-5553",
       "number": 5553,
       "title": "Representing IP and its Royalty Structure",
+      "specAuthors": "Roy Osherove (@royosherove)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-17",
       "requires": [
@@ -4947,6 +5191,7 @@
       "id": "ERC-5554",
       "number": 5554,
       "title": "NFT Legal Use, Repurposing, and Remixing",
+      "specAuthors": "Isaac Patka (@ipatka), COALA Licensing Taskforce <info@coala.org>",
       "editorialStatus": "Stagnant",
       "created": "2022-07-07",
       "requires": [
@@ -4967,6 +5212,7 @@
       "id": "ERC-5559",
       "number": 5559,
       "title": "Cross Chain Write Deferral Protocol",
+      "specAuthors": "Paul Gauvreau (@0xpaulio), Nick Johnson (@arachnid)",
       "editorialStatus": "Stagnant",
       "created": "2022-06-23",
       "requires": [
@@ -4987,6 +5233,7 @@
       "id": "ERC-5560",
       "number": 5560,
       "title": "Redeemable NFTs",
+      "specAuthors": "Olivier Fernandez (@fernandezOli), Frédéric Le Coidic (@FredLC29), Julien Béranger (@julienbrg)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-30",
       "requires": [
@@ -5008,6 +5255,7 @@
       "id": "ERC-5564",
       "number": 5564,
       "title": "Stealth Addresses",
+      "specAuthors": "Toni Wahrstätter (@nerolation), Matt Solomon (@mds1), Ben DiFrancesco (@apbendi), Vitalik Buterin (@vbuterin)",
       "editorialStatus": "Final",
       "created": "2022-08-13",
       "requires": [],
@@ -5029,6 +5277,7 @@
       "id": "ERC-5568",
       "number": 5568,
       "title": "Well-Known Format for Required Actions",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Review",
       "created": "2022-08-31",
       "requires": [
@@ -5049,6 +5298,7 @@
       "id": "ERC-5570",
       "number": 5570,
       "title": "Digital Receipt Non-Fungible Tokens",
+      "specAuthors": "Sean Darcy (@darcys22)",
       "editorialStatus": "Final",
       "created": "2022-09-01",
       "requires": [
@@ -5068,6 +5318,7 @@
       "id": "ERC-5573",
       "number": 5573,
       "title": "Sign-In with Ethereum Capabilities, ReCaps",
+      "specAuthors": "Oliver Terbu (@awoie), Jacob Ward (@cobward), Charles Lehner (@clehner), Sam Gbafa (@skgbafa), Wayne Chang (@wyc), Charles Cunningham (@chunningham)",
       "editorialStatus": "Draft",
       "created": "2021-07-20",
       "requires": [
@@ -5087,6 +5338,7 @@
       "id": "ERC-5585",
       "number": 5585,
       "title": "ERC-721 NFT Authorization",
+      "specAuthors": "Veega Labs (@VeegaLabsOfficial), Sean NG (@ngveega), Tiger (@tiger0x), Fred (@apan826), Fov Cao (@fovcao)",
       "editorialStatus": "Final",
       "created": "2022-08-15",
       "requires": [
@@ -5106,6 +5358,7 @@
       "id": "ERC-5604",
       "number": 5604,
       "title": "NFT Lien",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv), Allen Zhou <allen@ubiloan.io>, Alex Qin <alex@ubiloan.io>",
       "editorialStatus": "Draft",
       "created": "2022-09-05",
       "requires": [
@@ -5129,6 +5382,7 @@
       "id": "ERC-5606",
       "number": 5606,
       "title": "Multiverse NFTs",
+      "specAuthors": "Gaurang Torvekar (@gaurangtorvekar), Khemraj Adhawade (@akhemraj), Nikhil Asrani (@nikhilasrani)",
       "editorialStatus": "Final",
       "created": "2022-09-06",
       "requires": [
@@ -5150,6 +5404,7 @@
       "id": "ERC-5615",
       "number": 5615,
       "title": "ERC-1155 Supply Extension",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Final",
       "created": "2023-05-25",
       "requires": [
@@ -5172,6 +5427,7 @@
       "id": "ERC-5625",
       "number": 5625,
       "title": "NFT Metadata JSON Schema dStorage Extension",
+      "specAuthors": "Gavin Fu (@gavfu), Leo Wang (@wanglie1986), Bova Chen (@appoipp), Guang Han (@pangwa), Brian Wu (@wuhaixian1984)",
       "editorialStatus": "Final",
       "created": "2022-09-08",
       "requires": [
@@ -5193,6 +5449,7 @@
       "id": "ERC-5630",
       "number": 5630,
       "title": "New approach for encryption / decryption",
+      "specAuthors": "Firn Protocol (@firnprotocol), Fried L. Trout, Weiji Guo (@weijiguo)",
       "editorialStatus": "Draft",
       "created": "2022-09-07",
       "requires": [],
@@ -5211,6 +5468,7 @@
       "id": "ERC-5633",
       "number": 5633,
       "title": "Composable Soulbound NFT, EIP-1155 Extension",
+      "specAuthors": "HonorLabs (@honorworldio)",
       "editorialStatus": "Stagnant",
       "created": "2022-09-09",
       "requires": [
@@ -5232,6 +5490,7 @@
       "id": "ERC-5635",
       "number": 5635,
       "title": "NFT Licensing Agreements",
+      "specAuthors": "Timi (@0xTimi), 0xTriple7 (@ysqi)",
       "editorialStatus": "Stagnant",
       "created": "2022-08-10",
       "requires": [
@@ -5257,6 +5516,7 @@
       "id": "ERC-5639",
       "number": 5639,
       "title": "Delegation Registry",
+      "specAuthors": "foobar (@0xfoobar), Wilkins Chung (@wwhchung) <wilkins@manifold.xyz>, ryley-o (@ryley-o), Jake Rockland (@jakerockland), andy8052 (@andy8052)",
       "editorialStatus": "Review",
       "created": "2022-09-09",
       "requires": [],
@@ -5272,6 +5532,7 @@
       "id": "ERC-5643",
       "number": 5643,
       "title": "Subscription NFTs",
+      "specAuthors": "cygaar (@cygaar)",
       "editorialStatus": "Stagnant",
       "created": "2022-09-10",
       "requires": [
@@ -5292,6 +5553,7 @@
       "id": "ERC-5646",
       "number": 5646,
       "title": "Token State Fingerprint",
+      "specAuthors": "Naim Ashhab (@ashhanai)",
       "editorialStatus": "Final",
       "created": "2022-09-11",
       "requires": [
@@ -5312,6 +5574,7 @@
       "id": "ERC-5679",
       "number": 5679,
       "title": "Token Minting and Burning",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Final",
       "created": "2022-09-17",
       "requires": [
@@ -5338,6 +5601,7 @@
       "id": "ERC-5700",
       "number": 5700,
       "title": "Bindable Token Interface",
+      "specAuthors": "Leeren (@leeren)",
       "editorialStatus": "Draft",
       "created": "2022-09-22",
       "requires": [
@@ -5362,6 +5626,7 @@
       "id": "ERC-5719",
       "number": 5719,
       "title": "Signature replacement interface",
+      "specAuthors": "Agustin Aguilar (@Agusx1211)",
       "editorialStatus": "Stagnant",
       "created": "2022-09-26",
       "requires": [
@@ -5381,6 +5646,7 @@
       "id": "ERC-5725",
       "number": 5725,
       "title": "Transferable Vesting NFT",
+      "specAuthors": "Apeguru (@Apegurus), Marco De Vries <marco@paladinsec.co>, Mario <mario@paladinsec.co>, DeFiFoFum (@DeFiFoFum), Elliott Green (@elliott-green)",
       "editorialStatus": "Final",
       "created": "2022-09-08",
       "requires": [
@@ -5402,6 +5668,7 @@
       "id": "ERC-5727",
       "number": 5727,
       "title": "Semi-Fungible Soulbound Token",
+      "specAuthors": "Austin Zhu (@AustinZhu), Terry Chen <terry.chen@phaneroz.io>",
       "editorialStatus": "Draft",
       "created": "2022-09-28",
       "requires": [
@@ -5435,6 +5702,7 @@
       "id": "ERC-5732",
       "number": 5732,
       "title": "Commit Interface",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv), Matt Stam (@mattstam)",
       "editorialStatus": "Final",
       "created": "2022-09-29",
       "requires": [
@@ -5457,6 +5725,7 @@
       "id": "ERC-5744",
       "number": 5744,
       "title": "Latent Fungible Token",
+      "specAuthors": "Cozy Finance (@cozyfinance), Tony Sheng (@tonysheng), Matt Solomon (@mds1), David Laprade (@davidlaprade), Payom Dousti (@payomdousti), Chad Fleming (@chad-js), Franz Chen (@Dendrimer)",
       "editorialStatus": "Stagnant",
       "created": "2022-09-29",
       "requires": [
@@ -5477,6 +5746,7 @@
       "id": "ERC-5750",
       "number": 5750,
       "title": "General Extensibility for Method Behaviors",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Final",
       "created": "2022-10-04",
       "requires": [
@@ -5501,6 +5771,7 @@
       "id": "ERC-5753",
       "number": 5753,
       "title": "Lockable Extension for EIP-721",
+      "specAuthors": "Filipp Makarov (@filmakarov)",
       "editorialStatus": "Stagnant",
       "created": "2022-10-05",
       "requires": [
@@ -5522,6 +5793,7 @@
       "id": "ERC-5773",
       "number": 5773,
       "title": "Context-Dependent Multi-Asset Tokens",
+      "specAuthors": "Bruno Škvorc (@Swader), Cicada (@CicadaNCR), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2022-10-10",
       "requires": [
@@ -5544,6 +5816,7 @@
       "id": "ERC-5791",
       "number": 5791,
       "title": "Physical Backed Tokens",
+      "specAuthors": "2pmflow (@2pmflow), locationtba (@locationtba), Cameron Robertson (@ccamrobertson), cygaar (@cygaar), Brian Weick (@bweick), vectorized (@vectorized), djdabs (@djdabs)",
       "editorialStatus": "Draft",
       "created": "2022-10-17",
       "requires": [
@@ -5567,6 +5840,7 @@
       "id": "ERC-5805",
       "number": 5805,
       "title": "Voting with delegation",
+      "specAuthors": "Hadrien Croubois (@Amxx), Francisco Giordano (@frangio)",
       "editorialStatus": "Review",
       "created": "2022-07-04",
       "requires": [
@@ -5590,6 +5864,7 @@
       "id": "ERC-5827",
       "number": 5827,
       "title": "Auto-renewable allowance extension",
+      "specAuthors": "zlace (@zlace0x), zhongfu (@zhongfu), edison0xyz (@edison0xyz)",
       "editorialStatus": "Stagnant",
       "created": "2022-10-22",
       "requires": [
@@ -5611,6 +5886,7 @@
       "id": "ERC-5850",
       "number": 5850,
       "title": "Complex Numbers stored in `bytes32` types",
+      "specAuthors": "Paul Edge (@genkifs)",
       "editorialStatus": "Stagnant",
       "created": "2022-10-29",
       "requires": [],
@@ -5626,6 +5902,7 @@
       "id": "ERC-5851",
       "number": 5851,
       "title": "On-Chain Verifiable Credentials",
+      "specAuthors": "Yu Liu (@yuliu-debond), Junyi Zhong (@Jooeys)",
       "editorialStatus": "Stagnant",
       "created": "2022-10-18",
       "requires": [
@@ -5650,6 +5927,7 @@
       "id": "ERC-5883",
       "number": 5883,
       "title": "Token Transfer by Social Recovery",
+      "specAuthors": "Erhard Dinhobl (@mrqc), Kevin Riedl (@wsdt)",
       "editorialStatus": "Stagnant",
       "created": "2022-07-19",
       "requires": [],
@@ -5667,6 +5945,7 @@
       "id": "ERC-5902",
       "number": 5902,
       "title": "Smart Contract Event Hooks",
+      "specAuthors": "Simon Brown (@orbmis)",
       "editorialStatus": "Stagnant",
       "created": "2022-11-09",
       "requires": [
@@ -5688,6 +5967,7 @@
       "id": "ERC-5982",
       "number": 5982,
       "title": "Role-based Access Control",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Review",
       "created": "2022-11-15",
       "requires": [
@@ -5709,6 +5989,7 @@
       "id": "ERC-6047",
       "number": 6047,
       "title": "ERC-721 Balance indexing via Transfer event",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Stagnant",
       "created": "2022-11-26",
       "requires": [
@@ -5729,6 +6010,7 @@
       "id": "ERC-6059",
       "number": 6059,
       "title": "Parent-Governed Nestable Non-Fungible Tokens",
+      "specAuthors": "Bruno Škvorc (@Swader), Cicada (@CicadaNCR), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2022-11-15",
       "requires": [
@@ -5751,6 +6033,7 @@
       "id": "ERC-6065",
       "number": 6065,
       "title": "Real Estate Token",
+      "specAuthors": "Alex (@Alex-Klasma), Ben Fusek (@bfusek), Daniel Fallon-Cyr (@dfalloncyr)",
       "editorialStatus": "Review",
       "created": "2022-11-29",
       "requires": [
@@ -5770,6 +6053,7 @@
       "id": "ERC-6066",
       "number": 6066,
       "title": "Signature Validation Method for NFTs",
+      "specAuthors": "Jack Boyuan Xu (@boyuanx)",
       "editorialStatus": "Final",
       "created": "2022-11-29",
       "requires": [
@@ -5797,6 +6081,7 @@
       "id": "ERC-6093",
       "number": 6093,
       "title": "Custom errors for commonly-used tokens",
+      "specAuthors": "Ernesto García (@ernestognw), Francisco Giordano (@frangio), Hadrien Croubois (@Amxx)",
       "editorialStatus": "Final",
       "created": "2022-12-06",
       "requires": [
@@ -5820,6 +6105,7 @@
       "id": "ERC-6105",
       "number": 6105,
       "title": "No Intermediary NFT Trading Protocol",
+      "specAuthors": "5660-eth (@5660-eth), Silvere Heraudeau (@lambdalf-dev), Martin McConnell (@offgridgecko), Abu <team10kuni@gmail.com>, Wizard Wang",
       "editorialStatus": "Final",
       "created": "2022-12-02",
       "requires": [
@@ -5844,6 +6130,7 @@
       "id": "ERC-6120",
       "number": 6120,
       "title": "Universal Token Router",
+      "specAuthors": "Derion (@derion-io), Zergity (@Zergity), Ngo Quang Anh (@anhnq82), BerlinP (@BerlinP), Khanh Pham (@blackskin18), Hal Blackburn (@h4l)",
       "editorialStatus": "Review",
       "created": "2022-12-12",
       "requires": [
@@ -5871,6 +6158,7 @@
       "id": "ERC-6123",
       "number": 6123,
       "title": "Smart Derivative Contract",
+      "specAuthors": "Christian Fries (@cfries), Peter Kohl-Landgraf (@pekola), Alexandros Korpis (@kourouta)",
       "editorialStatus": "Draft",
       "created": "2022-12-13",
       "requires": [],
@@ -5888,6 +6176,7 @@
       "id": "ERC-6147",
       "number": 6147,
       "title": "Guard of NFT/SBT, an Extension of ERC-721",
+      "specAuthors": "5660-eth (@5660-eth), Wizard Wang",
       "editorialStatus": "Final",
       "created": "2022-12-07",
       "requires": [
@@ -5908,6 +6197,7 @@
       "id": "ERC-6150",
       "number": 6150,
       "title": "Hierarchical NFTs",
+      "specAuthors": "Keegan Lee (@keeganlee), msfew <msfew@hyperoracle.io>, Kartin <kartin@hyperoracle.io>, qizhou (@qizhou)",
       "editorialStatus": "Final",
       "created": "2022-12-15",
       "requires": [
@@ -5929,6 +6219,7 @@
       "id": "ERC-6170",
       "number": 6170,
       "title": "Cross-Chain Messaging Interface",
+      "specAuthors": "Sujith Somraaj (@sujithsomraaj)",
       "editorialStatus": "Draft",
       "created": "2022-12-19",
       "requires": [],
@@ -5944,6 +6235,7 @@
       "id": "ERC-6220",
       "number": 6220,
       "title": "Composable NFTs utilizing Equippable Parts",
+      "specAuthors": "Bruno Škvorc (@Swader), Cicada (@CicadaNCR), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2022-12-20",
       "requires": [
@@ -5967,6 +6259,7 @@
       "id": "ERC-6224",
       "number": 6224,
       "title": "Contracts Dependencies Registry",
+      "specAuthors": "Artem Chystiakov (@arvolear)",
       "editorialStatus": "Last Call",
       "created": "2022-12-27",
       "requires": [
@@ -5985,6 +6278,7 @@
       "id": "ERC-6229",
       "number": 6229,
       "title": "Tokenized Vaults with Lock-in Period",
+      "specAuthors": "Anderson Chen (@Ankarrr), Martinet Lee <martinetlee@gmail.com>, Anton Cheng <antonassocareer@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2022-12-21",
       "requires": [
@@ -6005,6 +6299,7 @@
       "id": "ERC-6239",
       "number": 6239,
       "title": "Semantic Soulbound Tokens",
+      "specAuthors": "Jessica Chang (@JessicaChg)",
       "editorialStatus": "Final",
       "created": "2022-12-30",
       "requires": [
@@ -6028,6 +6323,7 @@
       "id": "ERC-6268",
       "number": 6268,
       "title": "Untransferability Indicator for EIP-1155",
+      "specAuthors": "Yuki Aoki (@yuki-js)",
       "editorialStatus": "Stagnant",
       "created": "2022-01-06",
       "requires": [
@@ -6050,6 +6346,7 @@
       "id": "ERC-6315",
       "number": 6315,
       "title": "ERC-2771 Namespaced Account Abstraction",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Review",
       "created": "2023-01-11",
       "requires": [
@@ -6072,6 +6369,7 @@
       "id": "ERC-6327",
       "number": 6327,
       "title": "Elastic Signature",
+      "specAuthors": "George (@JXRow)",
       "editorialStatus": "Draft",
       "created": "2023-01-13",
       "requires": [],
@@ -6089,6 +6387,7 @@
       "id": "ERC-6353",
       "number": 6353,
       "title": "Charity token",
+      "specAuthors": "Aubay <blockchain-team@aubay.com>, BOCA Jeabby (@bjeabby1507), EL MERSHATI Laith (@lth-elm), KEMP Elia (@eliakemp)",
       "editorialStatus": "Stagnant",
       "created": "2022-05-13",
       "requires": [
@@ -6109,6 +6408,7 @@
       "id": "ERC-6357",
       "number": 6357,
       "title": "Single-contract Multi-delegatecall",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Last Call",
       "created": "2023-01-18",
       "requires": [],
@@ -6127,6 +6427,7 @@
       "id": "ERC-6358",
       "number": 6358,
       "title": "Cross-Chain Token States Synchronization",
+      "specAuthors": "Shawn Zheng (@xiyu1984), Jason Cheng <chengjingxx@gmail.com>, George Huang (@virgil2019), Kay Lin (@kay404)",
       "editorialStatus": "Review",
       "created": "2023-01-17",
       "requires": [],
@@ -6146,6 +6447,7 @@
       "id": "ERC-6366",
       "number": 6366,
       "title": "Permission Token",
+      "specAuthors": "Chiro (@chiro-hiro), Victor Dusart (@vdusart)",
       "editorialStatus": "Review",
       "created": "2022-01-19",
       "requires": [
@@ -6165,6 +6467,7 @@
       "id": "ERC-6372",
       "number": 6372,
       "title": "Contract clock",
+      "specAuthors": "Hadrien Croubois (@Amxx), Francisco Giordano (@frangio)",
       "editorialStatus": "Review",
       "created": "2023-01-25",
       "requires": [],
@@ -6182,6 +6485,7 @@
       "id": "ERC-6381",
       "number": 6381,
       "title": "Public Non-Fungible Token Emote Repository",
+      "specAuthors": "Bruno Škvorc (@Swader), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2023-01-22",
       "requires": [
@@ -6203,6 +6507,7 @@
       "id": "ERC-6384",
       "number": 6384,
       "title": "Human-readable offline signatures",
+      "specAuthors": "Tal Be'ery <tal@zengo.com>, RoiV (@DeVaz1)",
       "editorialStatus": "Stagnant",
       "created": "2023-01-08",
       "requires": [
@@ -6224,6 +6529,7 @@
       "id": "ERC-6454",
       "number": 6454,
       "title": "Minimal Transferable NFT detection interface",
+      "specAuthors": "Bruno Škvorc (@Swader), Francesco Sullo (@sullof), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2023-01-31",
       "requires": [
@@ -6246,6 +6552,7 @@
       "id": "ERC-6464",
       "number": 6464,
       "title": "Multi-operator, per-token ERC-721 approvals.",
+      "specAuthors": "Cristian Espinoza (@crisgarner), Simon Fremaux (@dievardump), David Huber (@cxkoda), and Arran Schlosberg (@aschlosberg)",
       "editorialStatus": "Stagnant",
       "created": "2023-02-02",
       "requires": [
@@ -6268,6 +6575,7 @@
       "id": "ERC-6492",
       "number": 6492,
       "title": "Signature Validation for Predeploy Contracts",
+      "specAuthors": "Ivo Georgiev (@Ivshti), Agustin Aguilar (@Agusx1211)",
       "editorialStatus": "Final",
       "created": "2023-02-10",
       "requires": [
@@ -6288,6 +6596,7 @@
       "id": "ERC-6506",
       "number": 6506,
       "title": "P2P Escrowed Governance Incentives",
+      "specAuthors": "Josh Weintraub (@jhweintraub)",
       "editorialStatus": "Stagnant",
       "created": "2023-02-15",
       "requires": [],
@@ -6303,6 +6612,7 @@
       "id": "ERC-6538",
       "number": 6538,
       "title": "Stealth Meta-Address Registry",
+      "specAuthors": "Matt Solomon (@mds1), Toni Wahrstätter (@nerolation), Ben DiFrancesco (@apbendi), Vitalik Buterin (@vbuterin), Gary Ghayrat (@garyghayrat)",
       "editorialStatus": "Final",
       "created": "2023-01-24",
       "requires": [
@@ -6327,6 +6637,7 @@
       "id": "ERC-6551",
       "number": 6551,
       "title": "Non-fungible Token Bound Accounts",
+      "specAuthors": "Jayden Windle (@jaydenwindle), Benny Giang <bg@futureprimitive.xyz>, Steve Jang, Druzy Downs (@druzydowns), Raymond Huynh (@huynhr), Alanah Lam <alanah@futureprimitive.xyz>, Wilkins Chung (@wwhchung) <wilkins@manifold.xyz>, Paul Sullivan (@sullivph) <paul.sullivan@manifold.xyz>, Auryn Macmillan (@auryn-macmillan), Jan-Felix Schwarz (@jfschwarz), Anton Bukov (@k06a), Mikhail Melnik (@ZumZoom), Josh Weintraub (@jhweintraub) <jhweintraub@gmail.com>, Rob Montgomery (@RobAnon) <rob@revest.finance>, vectorized (@vectorized), Víctor Martínez (@vnmrtz), Adrián Pajares (@0xadrii)",
       "editorialStatus": "Review",
       "created": "2023-02-23",
       "requires": [
@@ -6352,6 +6663,7 @@
       "id": "ERC-6596",
       "number": 6596,
       "title": "Cultural and Historical Asset Token",
+      "specAuthors": "Phillip Pon <phillip@artifactlabs.com>, Gary Liu <gary@artifactlabs.com>, Henry Chan <henry@artifactlabs.com>, Joey Liu <joey@artifactlabs.com>, Lauren Ho <lauren@artifactlabs.com>, Jeff Leung <jeff@artifactlabs.com>, Brian Liang <brian@artifactlabs.com>, Joyce Li <joyce@artifactlabs.com>, Avir Mahtani <avir@artifactlabs.com>, Antoine Cote (@acote88), David Leung (@dhl)",
       "editorialStatus": "Review",
       "created": "2023-02-28",
       "requires": [
@@ -6373,6 +6685,7 @@
       "id": "ERC-6604",
       "number": 6604,
       "title": "Abstract Token",
+      "specAuthors": "Chris Walker (@cr-walker) <chris@ckwalker.com>",
       "editorialStatus": "Draft",
       "created": "2023-03-03",
       "requires": [
@@ -6398,6 +6711,7 @@
       "id": "ERC-6617",
       "number": 6617,
       "title": "Bit Based Permission",
+      "specAuthors": "Chiro (@chiro-hiro), Victor Dusart (@vdusart)",
       "editorialStatus": "Review",
       "created": "2023-02-27",
       "requires": [],
@@ -6416,6 +6730,7 @@
       "id": "ERC-6662",
       "number": 6662,
       "title": "AA Account Metadata For Authentication",
+      "specAuthors": "Shu Dong (@dongshu2013), Zihao Chen (@zihaoccc), Peter Chen (@pette1999)",
       "editorialStatus": "Draft",
       "created": "2023-03-09",
       "requires": [
@@ -6437,6 +6752,7 @@
       "id": "ERC-6672",
       "number": 6672,
       "title": "Multi-redeemable NFTs",
+      "specAuthors": "RE:DREAMER Lab <dev@redreamer.io>, Archie Chang (@ArchieR7) <archie@redreamer.io>, Kai Yu (@chihkaiyu) <kai@redreamer.io>, Yonathan Randyanto (@Randyanto) <randy@redreamer.io>, Boyu Chu (@chuboyu) <boyu@redreamer.io>, Boxi Li (@boxi79) <boxi@redreamer.io>, Jason Cheng (@JasonCheng0729) <jason@redreamer.io>",
       "editorialStatus": "Final",
       "created": "2023-02-21",
       "requires": [
@@ -6458,6 +6774,7 @@
       "id": "ERC-6682",
       "number": 6682,
       "title": "NFT Flashloans",
+      "specAuthors": "out.eth (@outdoteth)",
       "editorialStatus": "Draft",
       "created": "2023-03-12",
       "requires": [
@@ -6481,6 +6798,7 @@
       "id": "ERC-6734",
       "number": 6734,
       "title": "L2 Token List",
+      "specAuthors": "Kelvin Fichter (@smartcontracts), Andreas Freund (@Therecanbeonlyone1969), Pavel Sinelnikov (@psinelnikov)",
       "editorialStatus": "Review",
       "created": "2023-03-20",
       "requires": [
@@ -6502,6 +6820,7 @@
       "id": "ERC-6735",
       "number": 6735,
       "title": "L2 Aliasing of EVM-based Addresses",
+      "specAuthors": "Kelvin Fichter (@smartcontracts), Andreas Freund (@Therecanbeonlyone1969)",
       "editorialStatus": "Review",
       "created": "2022-03-20",
       "requires": [
@@ -6521,6 +6840,7 @@
       "id": "ERC-6785",
       "number": 6785,
       "title": "ERC-721 Utilities Information Extension",
+      "specAuthors": "Otniel Nicola (@OT-kthd), Bogdan Popa (@BogdanKTHD)",
       "editorialStatus": "Draft",
       "created": "2023-03-27",
       "requires": [
@@ -6542,6 +6862,7 @@
       "id": "ERC-6786",
       "number": 6786,
       "title": "Registry for royalties payment for NFTs",
+      "specAuthors": "Otniel Nicola (@OT-kthd), Bogdan Popa (@BogdanKTHD)",
       "editorialStatus": "Draft",
       "created": "2023-03-27",
       "requires": [
@@ -6563,6 +6884,7 @@
       "id": "ERC-6787",
       "number": 6787,
       "title": "Order Book DEX with Two Phase Withdrawal",
+      "specAuthors": "Jessica (@qizheng09), Roy (@royshang), Jun (@SniperUsopp)",
       "editorialStatus": "Draft",
       "created": "2023-03-27",
       "requires": [],
@@ -6578,6 +6900,7 @@
       "id": "ERC-6806",
       "number": 6806,
       "title": "ERC-721 Holding Time Tracking",
+      "specAuthors": "Saitama (@saitama2009), Combo <combo@1combo.io>, Luigi <luigi@1combo.io>",
       "editorialStatus": "Draft",
       "created": "2023-03-30",
       "requires": [
@@ -6597,6 +6920,7 @@
       "id": "ERC-6808",
       "number": 6808,
       "title": "Fungible Key Bound Token",
+      "specAuthors": "Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)",
       "editorialStatus": "Final",
       "created": "2023-03-31",
       "requires": [
@@ -6616,6 +6940,7 @@
       "id": "ERC-6809",
       "number": 6809,
       "title": "Non-Fungible Key Bound Token",
+      "specAuthors": "Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)",
       "editorialStatus": "Final",
       "created": "2023-03-31",
       "requires": [
@@ -6635,6 +6960,7 @@
       "id": "ERC-6821",
       "number": 6821,
       "title": "Support ENS Name for Web3 URL",
+      "specAuthors": "Qi Zhou (@qizhou), Qiang Zhu (@qzhodl)",
       "editorialStatus": "Draft",
       "created": "2023-04-02",
       "requires": [
@@ -6659,6 +6985,7 @@
       "id": "ERC-6823",
       "number": 6823,
       "title": "Token Mapping Slot Retrieval Extension",
+      "specAuthors": "qdqd (@qd-qd) <qdqdqdqdqd@protonmail.com>",
       "editorialStatus": "Draft",
       "created": "2023-03-29",
       "requires": [
@@ -6682,6 +7009,7 @@
       "id": "ERC-6860",
       "number": 6860,
       "title": "Web3 URL to EVM Call Message Translation",
+      "specAuthors": "Qi Zhou (@qizhou), Chao Pi (@pichaoqkc), Sam Wilson (@SamWilsn), Nicolas Deschildre (@nand2)",
       "editorialStatus": "Draft",
       "created": "2023-09-29",
       "requires": [
@@ -6702,6 +7030,7 @@
       "id": "ERC-6864",
       "number": 6864,
       "title": "Upgradable Fungible Token",
+      "specAuthors": "Jeff Huang (@jeffishjeff)",
       "editorialStatus": "Draft",
       "created": "2023-04-05",
       "requires": [
@@ -6722,6 +7051,7 @@
       "id": "ERC-6865",
       "number": 6865,
       "title": "On-Chain EIP-712 Visualization",
+      "specAuthors": "Abderrahmen Hanafi (@a6-dou)",
       "editorialStatus": "Draft",
       "created": "2023-04-10",
       "requires": [
@@ -6744,6 +7074,7 @@
       "id": "ERC-6900",
       "number": 6900,
       "title": "Modular Smart Contract Accounts",
+      "specAuthors": "Adam Egyed (@adamegyed), Fangting Liu (@trinity-0111), Jay Paik (@jaypaik), Yoav Weiss (@yoavw), Huawei Gu (@huaweigu), Daniel Lim (@dlim-circle), Ruben Koch (@0xrubes), David Philipson (@dphilipson), Howy Ho (@howydev), Nikita Belenkov (@nikita-quantstamp), zer0dot (@zer0dot), David Kim (@PowerStream3604)",
       "editorialStatus": "Draft",
       "created": "2023-04-18",
       "requires": [
@@ -6767,6 +7098,7 @@
       "id": "ERC-6909",
       "number": 6909,
       "title": "Minimal Multi-Token Interface",
+      "specAuthors": "JT Riley (@jtriley2p), Dillon (@d1ll0n), Sara (@snreynolds), Vectorized (@Vectorized), Neodaoist (@neodaoist)",
       "editorialStatus": "Final",
       "created": "2023-04-19",
       "requires": [
@@ -6789,6 +7121,7 @@
       "id": "ERC-6932",
       "number": 6932,
       "title": "Subscription-Based Token",
+      "specAuthors": "360 Core <hello@360coreinc.com>, Robin Rajput (@0xRobinR)",
       "editorialStatus": "Draft",
       "created": "2023-04-25",
       "requires": [
@@ -6808,6 +7141,7 @@
       "id": "ERC-6944",
       "number": 6944,
       "title": "ERC-5219 Resolve Mode",
+      "specAuthors": "Gavin John (@Pandapip1), Qi Zhou (@qizhou)",
       "editorialStatus": "Draft",
       "created": "2023-04-27",
       "requires": [
@@ -6830,6 +7164,7 @@
       "id": "ERC-6956",
       "number": 6956,
       "title": "Asset-bound Non-Fungible Tokens",
+      "specAuthors": "Thomas Bergmueller (@tbergmueller), Lukas Meyer (@ibex-technology)",
       "editorialStatus": "Review",
       "created": "2023-04-29",
       "requires": [
@@ -6855,6 +7190,7 @@
       "id": "ERC-6960",
       "number": 6960,
       "title": "Dual Layer Token",
+      "specAuthors": "Adam Boudjemaa (@aboudjem), Mohamad Hammoud (@mohamadhammoud), Nawar Hisso (@nawar-hisso), Khawla Hassan (@khawlahssn), Mohammad Zakeri Rad (@zakrad), Ashish Sood <soodgen@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2023-04-30",
       "requires": [],
@@ -6874,6 +7210,7 @@
       "id": "ERC-6981",
       "number": 6981,
       "title": "Reserved Ownership Accounts",
+      "specAuthors": "Paul Sullivan (@sullivph) <paul.sullivan@manifold.xyz>, Wilkins Chung (@wwchung) <wilkins@manifold.xyz>, Kartik Patel (@Slokh) <kartik@manifold.xyz>",
       "editorialStatus": "Draft",
       "created": "2023-04-25",
       "requires": [
@@ -6899,6 +7236,7 @@
       "id": "ERC-6982",
       "number": 6982,
       "title": "Efficient Default Lockable Tokens",
+      "specAuthors": "Francesco Sullo (@sullof), Alexe Spataru (@urataps)",
       "editorialStatus": "Final",
       "created": "2023-05-02",
       "requires": [
@@ -6921,6 +7259,7 @@
       "id": "ERC-6997",
       "number": 6997,
       "title": "ERC-721 with transaction validation step.",
+      "specAuthors": "Eduard López i Fina (@eduardfina)",
       "editorialStatus": "Review",
       "created": "2023-05-07",
       "requires": [
@@ -6940,6 +7279,7 @@
       "id": "ERC-7007",
       "number": 7007,
       "title": "Verifiable AI-Generated Content Token",
+      "specAuthors": "Cathie So (@socathie), Xiaohang Yu (@xhyumiracle), Conway (@0x1cc), Lee Ting Ting (@tina1998612), Kartin <kartin@hyperoracle.io>",
       "editorialStatus": "Final",
       "created": "2023-05-10",
       "requires": [
@@ -6961,6 +7301,7 @@
       "id": "ERC-7015",
       "number": 7015,
       "title": "NFT Creator Attribution",
+      "specAuthors": "indreams (@strollinghome)",
       "editorialStatus": "Review",
       "created": "2023-05-11",
       "requires": [
@@ -6988,6 +7329,7 @@
       "id": "ERC-7053",
       "number": 7053,
       "title": "Interoperable Digital Media Indexing",
+      "specAuthors": "Bofu Chen (@bafu), Tammy Yang (@tammyyang)",
       "editorialStatus": "Final",
       "created": "2023-05-22",
       "requires": [],
@@ -7003,6 +7345,7 @@
       "id": "ERC-7066",
       "number": 7066,
       "title": "Lockable Extension for ERC-721",
+      "specAuthors": "Piyush Chittara (@piyush-chittara), StreamNFT (@streamnft-tech), Srinivas Joshi (@SrinivasJoshi)",
       "editorialStatus": "Final",
       "created": "2023-05-25",
       "requires": [
@@ -7023,6 +7366,7 @@
       "id": "ERC-7085",
       "number": 7085,
       "title": "NFT Relationship Enhancement",
+      "specAuthors": "Guang (@xg1990)",
       "editorialStatus": "Draft",
       "created": "2023-05-02",
       "requires": [
@@ -7045,6 +7389,7 @@
       "id": "ERC-7087",
       "number": 7087,
       "title": "MIME type for Web3 URL in Auto Mode",
+      "specAuthors": "Qi Zhou (@qizhou), Nicolas Deschildre (@nand2)",
       "editorialStatus": "Draft",
       "created": "2023-05-28",
       "requires": [
@@ -7064,6 +7409,7 @@
       "id": "ERC-7092",
       "number": 7092,
       "title": "Financial Bonds",
+      "specAuthors": "Samuel Gwlanold Edoumou (@Edoumou)",
       "editorialStatus": "Final",
       "created": "2023-05-28",
       "requires": [
@@ -7086,6 +7432,7 @@
       "id": "ERC-7093",
       "number": 7093,
       "title": "Social Recovery Interface",
+      "specAuthors": "John Zhang (@johnz1019), Davis Xiang (@xcshuan), Kyle Xu (@kylexyxu), George Zhang (@odysseus0)",
       "editorialStatus": "Draft",
       "created": "2023-05-29",
       "requires": [
@@ -7107,6 +7454,7 @@
       "id": "ERC-7144",
       "number": 7144,
       "title": "ERC-20 with transaction validation step.",
+      "specAuthors": "Eduard López i Fina (@eduardfina)",
       "editorialStatus": "Review",
       "created": "2023-05-07",
       "requires": [
@@ -7127,6 +7475,7 @@
       "id": "ERC-7160",
       "number": 7160,
       "title": "ERC-721 Multi-Metadata Extension",
+      "specAuthors": "0xG (@0xGh), Marco Peyfuss (@mpeyfuss)",
       "editorialStatus": "Final",
       "created": "2023-06-09",
       "requires": [
@@ -7150,6 +7499,7 @@
       "id": "ERC-7196",
       "number": 7196,
       "title": "Simple token, Simplified ERC-20",
+      "specAuthors": "Xiang (@wenzhenxiang), Ben77 (@ben2077), Mingshi S. (@newnewsms)",
       "editorialStatus": "Draft",
       "created": "2023-06-21",
       "requires": [
@@ -7170,6 +7520,7 @@
       "id": "ERC-7201",
       "number": 7201,
       "title": "Namespaced Storage Layout",
+      "specAuthors": "Francisco Giordano (@frangio), Hadrien Croubois (@Amxx), Ernesto García (@ernestognw), Eric Lau (@ericglau)",
       "editorialStatus": "Final",
       "created": "2023-06-20",
       "requires": [],
@@ -7187,6 +7538,7 @@
       "id": "ERC-7204",
       "number": 7204,
       "title": "Contract wallet management token",
+      "specAuthors": "Xiang (@wenzhenxiang), Ben77 (@ben2077), Mingshi S. (@newnewsms)",
       "editorialStatus": "Draft",
       "created": "2023-06-21",
       "requires": [
@@ -7208,6 +7560,7 @@
       "id": "ERC-7208",
       "number": 7208,
       "title": "On-Chain Data Containers",
+      "specAuthors": "Rachid Ajaja (@abrajaja), Matthijs de Vries (@sudomati), Alexandros Athanasopulos (@Xaleee), Pavel Rubin (@pash7ka), Sebastian Galimberti Romano (@galimba), Daniel Berbesi (@berbex), Apostolos Mavropoulos (@ApostolosMavro), Barbara Marcano (@Barbara-Marcano), Daniel Ortega (@xdaniortega)",
       "editorialStatus": "Final",
       "created": "2023-06-09",
       "requires": [
@@ -7225,6 +7578,7 @@
       "id": "ERC-7231",
       "number": 7231,
       "title": "Identity-aggregated NFT",
+      "specAuthors": "Chloe Gu <chloe@carv.io>, Navid X. (@xuxinlai2002), Victor Yu <victor@carv.io>, Archer H.",
       "editorialStatus": "Final",
       "created": "2023-06-25",
       "requires": [
@@ -7247,6 +7601,7 @@
       "id": "ERC-7246",
       "number": 7246,
       "title": "Encumber - Splitting Ownership & Guarantees",
+      "specAuthors": "Coburn Berry (@coburncoburn), Mykel Pereira (@mykelp), Scott Silver (@scott-silver)",
       "editorialStatus": "Review",
       "created": "2023-06-27",
       "requires": [
@@ -7267,6 +7622,7 @@
       "id": "ERC-7254",
       "number": 7254,
       "title": "Token Revenue Sharing",
+      "specAuthors": "Quy Phan (@quyphandang), Quy Phan <quy.phan@cryptoviet.info>",
       "editorialStatus": "Draft",
       "created": "2023-06-29",
       "requires": [],
@@ -7284,6 +7640,7 @@
       "id": "ERC-7272",
       "number": 7272,
       "title": "Ethereum Access Token",
+      "specAuthors": "Chris Chung (@0xpApaSmURf), Raphael Roullet (@ra-phael)",
       "editorialStatus": "Draft",
       "created": "2023-07-03",
       "requires": [
@@ -7303,6 +7660,7 @@
       "id": "ERC-7280",
       "number": 7280,
       "title": "NFT Metadata Extension like JSON-LD",
+      "specAuthors": "Yohei Nishikubo (@yoheinishikubo)",
       "editorialStatus": "Draft",
       "created": "2023-07-04",
       "requires": [
@@ -7326,6 +7684,7 @@
       "id": "ERC-7291",
       "number": 7291,
       "title": "Purpose bound money",
+      "specAuthors": "Orchid-Dev (@proj-orchid-straitsx), Victor Liew (@alcedo), Wong Tse Jian (@wongtsejian), Jacob Shan (@Jacobshan429), Chin Sin Ong (@chinsinong), Praveen Kumar (@veenkumarr)",
       "editorialStatus": "Final",
       "created": "2023-06-24",
       "requires": [
@@ -7357,6 +7716,7 @@
       "id": "ERC-7303",
       "number": 7303,
       "title": "Token-Controlled Token Circulation",
+      "specAuthors": "Ko Fujimura (@kofujimura)",
       "editorialStatus": "Draft",
       "created": "2023-07-09",
       "requires": [
@@ -7386,6 +7746,7 @@
       "id": "ERC-7390",
       "number": 7390,
       "title": "Vanilla Options for ERC-20 Tokens",
+      "specAuthors": "Ewan Humbert (@Xeway) <xeway@protonmail.com>, Lassi Maksimainen (@mlalma) <lassi.maksimainen@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2022-09-02",
       "requires": [
@@ -7408,6 +7769,7 @@
       "id": "ERC-7399",
       "number": 7399,
       "title": "⚡ Flash Loans ⚡",
+      "specAuthors": "Alberto Cuesta Cañada (@alcueca), Michael Amadi (@AmadiMichaels), Devtooligan (@devtooligan), Ultrasecr.eth (@ultrasecreth), Sam Bacha (@sambacha)",
       "editorialStatus": "Review",
       "created": "2023-07-25",
       "requires": [
@@ -7429,6 +7791,7 @@
       "id": "ERC-7401",
       "number": 7401,
       "title": "Parent-Governed Non-Fungible Tokens Nesting",
+      "specAuthors": "Bruno Škvorc (@Swader), Cicada (@CicadaNCR), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2023-07-26",
       "requires": [
@@ -7452,6 +7815,7 @@
       "id": "ERC-7405",
       "number": 7405,
       "title": "Portable Smart Contract Accounts",
+      "specAuthors": "Aaron Yee (@aaronyee-eth)",
       "editorialStatus": "Draft",
       "created": "2023-07-26",
       "requires": [
@@ -7474,6 +7838,7 @@
       "id": "ERC-7406",
       "number": 7406,
       "title": "Multi-Namespace Onchain Registry",
+      "specAuthors": "Mengshi Zhang (@MengshiZhang), Zihao Chen (@zihaoccc)",
       "editorialStatus": "Draft",
       "created": "2023-07-23",
       "requires": [
@@ -7493,6 +7858,7 @@
       "id": "ERC-7409",
       "number": 7409,
       "title": "Public Non-Fungible Tokens Emote Repository",
+      "specAuthors": "Bruno Škvorc (@Swader), Steven Pineda (@steven2308), Stevan Bogosavljevic (@stevyhacker), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Final",
       "created": "2023-07-26",
       "requires": [
@@ -7515,6 +7881,7 @@
       "id": "ERC-7410",
       "number": 7410,
       "title": "ERC-20 Update Allowance By Spender",
+      "specAuthors": "Mohammad Zakeri Rad (@zakrad), Adam Boudjemaa (@aboudjem), Mohamad Hammoud (@mohamadhammoud)",
       "editorialStatus": "Draft",
       "created": "2023-07-26",
       "requires": [
@@ -7536,6 +7903,7 @@
       "id": "ERC-7412",
       "number": 7412,
       "title": "On-Demand Off-Chain Data Retrieval",
+      "specAuthors": "Noah Litvin (@noahlitvin), db (@dbeal-eth)",
       "editorialStatus": "Draft",
       "created": "2023-07-26",
       "requires": [],
@@ -7555,6 +7923,7 @@
       "id": "ERC-7417",
       "number": 7417,
       "title": "Token Converter",
+      "specAuthors": "Dexaran (@Dexaran) <dexaran@ethereumclassic.org>",
       "editorialStatus": "Review",
       "created": "2023-07-27",
       "requires": [
@@ -7578,6 +7947,7 @@
       "id": "ERC-7425",
       "number": 7425,
       "title": "Tokenized Reserve",
+      "specAuthors": "Jimmy Debe (@jimstir)",
       "editorialStatus": "Draft",
       "created": "2023-06-30",
       "requires": [
@@ -7599,6 +7969,7 @@
       "id": "ERC-7432",
       "number": 7432,
       "title": "Non-Fungible Token Roles",
+      "specAuthors": "Ernani São Thiago (@ernanirst), Daniel Lima (@karacurt)",
       "editorialStatus": "Final",
       "created": "2023-07-14",
       "requires": [
@@ -7620,6 +7991,7 @@
       "id": "ERC-7439",
       "number": 7439,
       "title": "Prevent ticket touting",
+      "specAuthors": "LeadBest Consulting Group <service@getoken.io>, Sandy Sung (@sandy-sung-lb), Mars Peng <mars.peng@getoken.io>, Taien Wang <taien.wang@getoken.io>",
       "editorialStatus": "Final",
       "created": "2023-07-28",
       "requires": [
@@ -7640,6 +8012,7 @@
       "id": "ERC-7444",
       "number": 7444,
       "title": "Time Locks Maturity",
+      "specAuthors": "Thanh Trinh (@thanhtrinh2003) <thanh@revest.finance>, Joshua Weintraub (@jhweintraub) <josh@revest.finance>, Rob Montgomery (@RobAnon) <rob@revest.finance>",
       "editorialStatus": "Draft",
       "created": "2023-06-05",
       "requires": [
@@ -7662,6 +8035,7 @@
       "id": "ERC-7484",
       "number": 7484,
       "title": "Registry Extension for ERC-7579",
+      "specAuthors": "Konrad Kopp (@kopy-kat), zeroknots (@zeroknots)",
       "editorialStatus": "Draft",
       "created": "2023-08-14",
       "requires": [
@@ -7682,6 +8056,7 @@
       "id": "ERC-7496",
       "number": 7496,
       "title": "NFT Dynamic Traits",
+      "specAuthors": "Adam Montgomery (@montasaurus), Ryan Ghods (@ryanio), 0age (@0age), James Wenzel (@emo-eth), Stephan Min (@stephankmin)",
       "editorialStatus": "Draft",
       "created": "2023-07-28",
       "requires": [
@@ -7705,6 +8080,7 @@
       "id": "ERC-7498",
       "number": 7498,
       "title": "NFT Redeemables",
+      "specAuthors": "Ryan Ghods (@ryanio), 0age (@0age), Adam Montgomery (@montasaurus), Stephan Min (@stephankmin)",
       "editorialStatus": "Draft",
       "created": "2023-07-28",
       "requires": [
@@ -7734,6 +8110,7 @@
       "id": "ERC-7506",
       "number": 7506,
       "title": "Trusted Hint Registry",
+      "specAuthors": "Philipp Bolte (@strumswell), Dennis von der Bey (@DennisVonDerBey), Lauritz Leifermann (@lleifermann)",
       "editorialStatus": "Draft",
       "created": "2023-08-31",
       "requires": [
@@ -7753,6 +8130,7 @@
       "id": "ERC-7507",
       "number": 7507,
       "title": "Multi-User NFT Extension",
+      "specAuthors": "Ming Jiang (@minkyn), Zheng Han (@hanbsd), Fan Yang (@fayang)",
       "editorialStatus": "Draft",
       "created": "2023-08-24",
       "requires": [
@@ -7773,6 +8151,7 @@
       "id": "ERC-7508",
       "number": 7508,
       "title": "Dynamic On-Chain Token Attributes Repository",
+      "specAuthors": "Steven Pineda (@steven2308), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Draft",
       "created": "2023-08-15",
       "requires": [
@@ -7794,6 +8173,7 @@
       "id": "ERC-7509",
       "number": 7509,
       "title": "Entity Component System",
+      "specAuthors": "Rickey (@HelloRickey)",
       "editorialStatus": "Draft",
       "created": "2023-09-05",
       "requires": [],
@@ -7809,6 +8189,7 @@
       "id": "ERC-7510",
       "number": 7510,
       "title": "Cross-Contract Hierarchical NFT",
+      "specAuthors": "Ming Jiang (@minkyn), Zheng Han (@hanbsd), Fan Yang (@fayang)",
       "editorialStatus": "Draft",
       "created": "2023-08-24",
       "requires": [
@@ -7829,6 +8210,7 @@
       "id": "ERC-7511",
       "number": 7511,
       "title": "Minimal Proxy Contract with PUSH0",
+      "specAuthors": "0xAA (@AmazingAng), vectorized (@Vectorized), 0age (@0age)",
       "editorialStatus": "Draft",
       "created": "2023-09-04",
       "requires": [
@@ -7852,6 +8234,7 @@
       "id": "ERC-7512",
       "number": 7512,
       "title": "Onchain Representation for Audits",
+      "specAuthors": "Richard Meissner - Safe (@rmeissner), Robert Chen - OtterSec (@chen-robert), Matthias Egli - ChainSecurity (@MatthiasEgli), Jan Kalivoda - Ackee Blockchain (@jaczkal), Michael Lewellen - OpenZeppelin (@cylon56), Shay Zluf - Hats Finance (@shayzluf), Alex Papageorgiou - Omniscia (@alex-ppg)",
       "editorialStatus": "Draft",
       "created": "2023-09-05",
       "requires": [
@@ -7879,6 +8262,7 @@
       "id": "ERC-7513",
       "number": 7513,
       "title": "Smart NFT - A Component for Intent-Centric",
+      "specAuthors": "MJ Tseng (@TsengMJ) <tsngmj@gmail.com>, Clay (@Clay2018) <clay.uw@outlook.com>, Jeffery.c <jeffery.c@a3sprotocol.xyz>, Johnny.c <johnny.c@a3sprotocol.xyz>",
       "editorialStatus": "Draft",
       "created": "2023-09-06",
       "requires": [
@@ -7901,6 +8285,7 @@
       "id": "ERC-7517",
       "number": 7517,
       "title": "Content Consent for AI/ML Data Mining",
+      "specAuthors": "Bofu Chen (@bafu), Tammy Yang (@tammyyang)",
       "editorialStatus": "Draft",
       "created": "2023-09-12",
       "requires": [
@@ -7923,6 +8308,7 @@
       "id": "ERC-7518",
       "number": 7518,
       "title": "Dynamic Compliant Interop Security Token",
+      "specAuthors": "Abhinav (@abhinav-d3v) <abhinav@zoniqx.com>, Prithvish Baidya (@d4mr) <pbaidya@zoniqx.com>, Rajat Kumar (@rajatwasan) <rwasan@zoniqx.com>, Prasanth Kalangi <pkalangi@zoniqx.com>",
       "editorialStatus": "Review",
       "created": "2023-09-14",
       "requires": [
@@ -7955,6 +8341,7 @@
       "id": "ERC-7521",
       "number": 7521,
       "title": "General Intents for Smart Contract Wallets",
+      "specAuthors": "Stephen Monn (@pixelcircuits), Bikem Bengisu (@supiket)",
       "editorialStatus": "Draft",
       "created": "2023-09-19",
       "requires": [],
@@ -7972,6 +8359,7 @@
       "id": "ERC-7522",
       "number": 7522,
       "title": "OIDC ZK Verifier for AA Account",
+      "specAuthors": "Shu Dong (@dongshu2013) <shu@hexlink.io>, Yudao Yan <dean@dauth.network>, Song Z <s@misfit.id>, Kai Chen <kai@dauth.network>",
       "editorialStatus": "Draft",
       "created": "2023-09-20",
       "requires": [
@@ -7991,6 +8379,7 @@
       "id": "ERC-7524",
       "number": 7524,
       "title": "PLUME Signature in Wallets",
+      "specAuthors": "Yush G (@Divide-By-0) <aayushg@mit.edu>, Kobi Gurkan (@kobigurk), Richard Liu (@rrrliu), Vivek Bhupatiraju (@vb7401), Barry Whitehat (@barryWhiteHat)",
       "editorialStatus": "Draft",
       "created": "2023-09-24",
       "requires": [],
@@ -8006,6 +8395,7 @@
       "id": "ERC-7527",
       "number": 7527,
       "title": "Token Bound Function Oracle AMM",
+      "specAuthors": "Elaine Zhang (@lanyinzly) <lz8aj@virginia.edu>, Jerry <jerrymindflow@gmail.com>, Amandafanny <amandafanny200@gmail.com>, Shouhao Wong (@wangshouh) <wongshouhao@outlook.com>, 0xPoet <0xpoets@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2023-09-03",
       "requires": [
@@ -8028,6 +8418,7 @@
       "id": "ERC-7528",
       "number": 7528,
       "title": "ETH (Native Asset) Address Convention",
+      "specAuthors": "Joey Santoro (@joeysantoro)",
       "editorialStatus": "Final",
       "created": "2023-10-03",
       "requires": [
@@ -8052,6 +8443,7 @@
       "id": "ERC-7529",
       "number": 7529,
       "title": "Contract Discovery and eTLD+1 Association",
+      "specAuthors": "Todd Chapman (@tthebc01), Charlie Sibbach <charlie@cwsoftware.com>, Sean Sing (@seansing)",
       "editorialStatus": "Draft",
       "created": "2023-09-30",
       "requires": [
@@ -8071,6 +8463,7 @@
       "id": "ERC-7531",
       "number": 7531,
       "title": "Staked ERC-721 Ownership Recognition",
+      "specAuthors": "Francesco Sullo (@sullof)",
       "editorialStatus": "Review",
       "created": "2023-10-01",
       "requires": [
@@ -8091,6 +8484,7 @@
       "id": "ERC-7533",
       "number": 7533,
       "title": "Public Cross Port",
+      "specAuthors": "George (@JXRow), Zisu (@lazy1523)",
       "editorialStatus": "Draft",
       "created": "2023-10-11",
       "requires": [],
@@ -8108,6 +8502,7 @@
       "id": "ERC-7535",
       "number": 7535,
       "title": "Native Asset ERC-4626 Tokenized Vault",
+      "specAuthors": "Joey Santoro (@joeysantoro)",
       "editorialStatus": "Final",
       "created": "2023-10-12",
       "requires": [
@@ -8131,6 +8526,7 @@
       "id": "ERC-7538",
       "number": 7538,
       "title": "Multiplicative Tokens",
+      "specAuthors": "Gavin John (@Pandapip1)",
       "editorialStatus": "Draft",
       "created": "2023-10-18",
       "requires": [
@@ -8154,6 +8550,7 @@
       "id": "ERC-7540",
       "number": 7540,
       "title": "Asynchronous ERC-4626 Tokenized Vaults",
+      "specAuthors": "Jeroen Offerijns (@hieronx), Alina Sinelnikova (@ilinzweilin), Vikram Arun (@vikramarun), Joey Santoro (@joeysantoro), Farhaan Ali (@0xfarhaan), João Martins (@0xTimepunk)",
       "editorialStatus": "Final",
       "created": "2023-10-18",
       "requires": [
@@ -8182,6 +8579,7 @@
       "id": "ERC-7546",
       "number": 7546,
       "title": "Upgradeable Clone for Scalable Contracts",
+      "specAuthors": "Shogo Ochiai (@shogochiai) <shogo.ochiai@pm.me>, Kai Hiroi (@KaiHiroi) <kai.hiroi@pm.me>",
       "editorialStatus": "Draft",
       "created": "2023-10-25",
       "requires": [
@@ -8208,6 +8606,7 @@
       "id": "ERC-7548",
       "number": 7548,
       "title": "Open IP Protocol built on NFTs",
+      "specAuthors": "Combo <combo@1combo.io>, Saitama (@saitama2009), CT29 <CT29@1combo.io>, Luigi <luigi@1combo.io>",
       "editorialStatus": "Draft",
       "created": "2023-10-31",
       "requires": [
@@ -8229,6 +8628,7 @@
       "id": "ERC-7555",
       "number": 7555,
       "title": "Single Sign-On for Account Discovery",
+      "specAuthors": "Alexander Müller (@alexmmueller), Gregory Markou (@GregTheGreek), Willem Olding (@Wollum), Belma Gutlic (@morrigan), Marin Petrunić (@mpetrunic), Pedro Gomes (@pedrouid)",
       "editorialStatus": "Draft",
       "created": "2023-11-10",
       "requires": [
@@ -8248,6 +8648,7 @@
       "id": "ERC-7561",
       "number": 7561,
       "title": "Simple NFT, Simplified ERC-721",
+      "specAuthors": "Xiang (@wenzhenxiang), Ben77 (@ben2077), Mingshi S. (@newnewsms)",
       "editorialStatus": "Draft",
       "created": "2023-10-29",
       "requires": [
@@ -8268,6 +8669,7 @@
       "id": "ERC-7562",
       "number": 7562,
       "title": "Account Abstraction Validation Scope Rules",
+      "specAuthors": "Yoav Weiss (@yoavw), Dror Tirosh (@drortirosh), Alex Forshtat (@forshtat), Shahaf Nacson (@shahafn)",
       "editorialStatus": "Review",
       "created": "2023-09-01",
       "requires": [],
@@ -8292,6 +8694,7 @@
       "id": "ERC-7564",
       "number": 7564,
       "title": "Contract wallet management NFT",
+      "specAuthors": "Xiang (@wenzhenxiang), Ben77 (@ben2077), Mingshi S. (@newnewsms)",
       "editorialStatus": "Draft",
       "created": "2023-11-21",
       "requires": [
@@ -8313,6 +8716,7 @@
       "id": "ERC-7565",
       "number": 7565,
       "title": "Perpetual Contract NFTs as Collateral",
+      "specAuthors": "Hyoungsung Kim (@HyoungsungKim) <hyougnsung@keti.re.kr>, Yong-Suk Park <yspark@keti.re.kr>, Hyun-Sik Kim <hskim@keti.re.kr>",
       "editorialStatus": "Draft",
       "created": "2023-11-27",
       "requires": [
@@ -8334,6 +8738,7 @@
       "id": "ERC-7566",
       "number": 7566,
       "title": "Multiplayer Game Communication",
+      "specAuthors": "Rickey (@HelloRickey)",
       "editorialStatus": "Draft",
       "created": "2023-11-28",
       "requires": [],
@@ -8349,6 +8754,7 @@
       "id": "ERC-7572",
       "number": 7572,
       "title": "Contract-level metadata via `contractURI()`",
+      "specAuthors": "Devin Finzer (@dfinzer), Alex Atallah (@alexanderatallah), Ryan Ghods (@ryanio)",
       "editorialStatus": "Draft",
       "created": "2023-12-06",
       "requires": [],
@@ -8366,6 +8772,7 @@
       "id": "ERC-7573",
       "number": 7573,
       "title": "Conditional-upon-Transfer-Decryption for DvP",
+      "specAuthors": "Christian Fries (@cfries), Peter Kohl-Landgraf (@pekola)",
       "editorialStatus": "Draft",
       "created": "2023-12-05",
       "requires": [],
@@ -8383,6 +8790,7 @@
       "id": "ERC-7574",
       "number": 7574,
       "title": "Authentication SBT using Credential",
+      "specAuthors": "Geunyoung Kim (@c1ick), JaeCheol Ryou <jcryou@home.cnu.ac.kr>",
       "editorialStatus": "Draft",
       "created": "2023-11-02",
       "requires": [
@@ -8405,6 +8813,7 @@
       "id": "ERC-7575",
       "number": 7575,
       "title": "Multi-Asset ERC-4626 Vaults",
+      "specAuthors": "Jeroen Offerijns (@hieronx), Alina Sinelnikova (@ilinzweilin), Vikram Arun (@vikramarun), Joey Santoro (@joeysantoro), Farhaan Ali (@0xfarhaan)",
       "editorialStatus": "Final",
       "created": "2023-12-11",
       "requires": [
@@ -8430,6 +8839,7 @@
       "id": "ERC-7578",
       "number": 7578,
       "title": "Physical Asset Redemption",
+      "specAuthors": "Lee Vidor (@V1d0r), David Tan <david@emergentx.org>, Lee Smith <lee@emergentx.org>, Gabriel Stoica (@gabrielstoica)",
       "editorialStatus": "Final",
       "created": "2023-08-01",
       "requires": [
@@ -8450,6 +8860,7 @@
       "id": "ERC-7579",
       "number": 7579,
       "title": "Minimal Modular Smart Accounts",
+      "specAuthors": "zeroknots (@zeroknots), Konrad Kopp (@kopy-kat), Taek Lee (@leekt), Fil Makarov (@filmakarov), Elim Poon (@yaonam), Lyu Min (@rockmin216)",
       "editorialStatus": "Draft",
       "created": "2023-12-14",
       "requires": [
@@ -8475,6 +8886,7 @@
       "id": "ERC-7580",
       "number": 7580,
       "title": "Advertisement Tracking Interface",
+      "specAuthors": "wart (@wartstone)",
       "editorialStatus": "Draft",
       "created": "2023-12-13",
       "requires": [],
@@ -8490,6 +8902,7 @@
       "id": "ERC-7582",
       "number": 7582,
       "title": "Modular Accounts with Delegated Validation",
+      "specAuthors": "Shivanshi Tyagi (@nerderlyne), Ross Campbell (@z0r0z)",
       "editorialStatus": "Draft",
       "created": "2023-12-25",
       "requires": [
@@ -8510,6 +8923,7 @@
       "id": "ERC-7585",
       "number": 7585,
       "title": "MixHash and Public Data Storage Proofs",
+      "specAuthors": "Liu Zhicong (@waterflier), William Entriken (@fulldecent), Wei Qiushi (@weiqiushi), Si Changjun (@photosssa)",
       "editorialStatus": "Draft",
       "created": "2023-12-27",
       "requires": [
@@ -8533,6 +8947,7 @@
       "id": "ERC-7586",
       "number": 7586,
       "title": "Interest Rate Swaps",
+      "specAuthors": "Samuel Gwlanold Edoumou (@Edoumou)",
       "editorialStatus": "Review",
       "created": "2023-12-31",
       "requires": [
@@ -8554,6 +8969,7 @@
       "id": "ERC-7588",
       "number": 7588,
       "title": "Blob Transactions Metadata JSON Schema",
+      "specAuthors": "Gavin Fu (@gavfu), Leo Wang (@wanglie1986), Bova Chen (@appoipp), Aiden X (@4ever9)",
       "editorialStatus": "Final",
       "created": "2024-01-01",
       "requires": [
@@ -8573,6 +8989,7 @@
       "id": "ERC-7589",
       "number": 7589,
       "title": "Semi-Fungible Token Roles",
+      "specAuthors": "Ernani São Thiago (@ernanirst), Daniel Lima (@karacurt)",
       "editorialStatus": "Draft",
       "created": "2023-12-28",
       "requires": [
@@ -8594,6 +9011,7 @@
       "id": "ERC-7590",
       "number": 7590,
       "title": "ERC-20 Holder Extension for NFTs",
+      "specAuthors": "Steven Pineda (@steven2308), Jan Turk (@ThunderDeliverer)",
       "editorialStatus": "Review",
       "created": "2024-01-05",
       "requires": [
@@ -8617,6 +9035,7 @@
       "id": "ERC-7595",
       "number": 7595,
       "title": "Collateralized NFT",
+      "specAuthors": "571nKY (@571nKY), Cosmos (@Cosmos4k), f4t50 (@f4t50), Harpocrates (@harpocrates555)",
       "editorialStatus": "Draft",
       "created": "2023-03-13",
       "requires": [
@@ -8638,6 +9057,7 @@
       "id": "ERC-7597",
       "number": 7597,
       "title": "Signature Validation Extension for Permit",
+      "specAuthors": "Yvonne Zhang (@yvonnezhangc), Aloysius Chan (@circle-aloychan)",
       "editorialStatus": "Draft",
       "created": "2024-01-15",
       "requires": [
@@ -8660,6 +9080,7 @@
       "id": "ERC-7598",
       "number": 7598,
       "title": "Use contract signature for signed transfer",
+      "specAuthors": "Yvonne Zhang (@yvonnezhangc), Aloysius Chan (@circle-aloychan)",
       "editorialStatus": "Draft",
       "created": "2024-01-15",
       "requires": [
@@ -8681,6 +9102,7 @@
       "id": "ERC-7603",
       "number": 7603,
       "title": "ERC-1155 Multi-Asset extension",
+      "specAuthors": "Haru (@haruu8)",
       "editorialStatus": "Draft",
       "created": "2024-01-25",
       "requires": [
@@ -8702,6 +9124,7 @@
       "id": "ERC-7604",
       "number": 7604,
       "title": "ERC-1155 Permit Approvals",
+      "specAuthors": "calvbore (@calvbore), emiliolanzalaco (@emiliolanzalaco)",
       "editorialStatus": "Draft",
       "created": "2024-01-27",
       "requires": [
@@ -8735,6 +9158,7 @@
       "id": "ERC-7613",
       "number": 7613,
       "title": "Puppet Proxy Contract",
+      "specAuthors": "Igor Żuk (@CodeSandwich)",
       "editorialStatus": "Draft",
       "created": "2024-02-04",
       "requires": [],
@@ -8753,6 +9177,7 @@
       "id": "ERC-7615",
       "number": 7615,
       "title": "Atomic Push-based Data Feed Among Contracts",
+      "specAuthors": "Elaine Zhang (@lanyinzly) <lz8aj@virginia.edu>, Jerry <jerrymindflow@gmail.com>, Amandafanny <amandafanny200@gmail.com>, Shouhao Wong (@wangshouh) <wongshouhao@outlook.com>, Doris Che (@Cheyukj) <dorischeyy@gmail.com>, Henry Yuan (@onehumanbeing) <hy2878@nyu.edu>",
       "editorialStatus": "Draft",
       "created": "2024-02-03",
       "requires": [],
@@ -8770,6 +9195,7 @@
       "id": "ERC-7617",
       "number": 7617,
       "title": "Chunk support for ERC-5219 mode in Web3 URL",
+      "specAuthors": "Qi Zhou (@qizhou), Nicolas Deschildre (@nand2)",
       "editorialStatus": "Draft",
       "created": "2024-02-08",
       "requires": [
@@ -8792,6 +9218,7 @@
       "id": "ERC-7618",
       "number": 7618,
       "title": "Content encoding in ERC-5219 mode Web3 URL",
+      "specAuthors": "Qi Zhou (@qizhou), Nicolas Deschildre (@nand2)",
       "editorialStatus": "Draft",
       "created": "2024-02-08",
       "requires": [
@@ -8814,6 +9241,7 @@
       "id": "ERC-7621",
       "number": 7621,
       "title": "Basket Token",
+      "specAuthors": "Dominic Ryder <dom@alvara.xyz>, Michael Ryder <mike@alvara.xyz>, Callum Mitchell-Clark (@AlvaraProtocol) <cal@alvara.xyz>",
       "editorialStatus": "Draft",
       "created": "2024-02-11",
       "requires": [
@@ -8842,6 +9270,7 @@
       "id": "ERC-7627",
       "number": 7627,
       "title": "Secure Messaging Protocol",
+      "specAuthors": "Chen Liaoyuan (@chenly) <cly@kip.pro>",
       "editorialStatus": "Final",
       "created": "2024-02-19",
       "requires": [],
@@ -8857,6 +9286,7 @@
       "id": "ERC-7628",
       "number": 7628,
       "title": "ERC-721 Ownership Shares Extension",
+      "specAuthors": "Chen Liaoyuan (@chenly) <cly@kip.pro>",
       "editorialStatus": "Review",
       "created": "2024-02-20",
       "requires": [
@@ -8877,6 +9307,7 @@
       "id": "ERC-7629",
       "number": 7629,
       "title": "ERC-20/ERC-721 Unified Token Interface",
+      "specAuthors": "0xZeus1111 (@0xZeus1111), Nvuwa (@Nvuwa)",
       "editorialStatus": "Draft",
       "created": "2024-02-18",
       "requires": [
@@ -8899,6 +9330,7 @@
       "id": "ERC-7631",
       "number": 7631,
       "title": "Dual Nature Token Pair",
+      "specAuthors": "vectorized (@vectorized), Thomas (@0xth0mas), Quit (@quitcrypto), Michael Amadi (@AmadiMichael), cygaar (@cygaar), Harrison (@pop-punk)",
       "editorialStatus": "Final",
       "created": "2024-02-21",
       "requires": [
@@ -8921,6 +9353,7 @@
       "id": "ERC-7632",
       "number": 7632,
       "title": "Interfaces for Named Token",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Draft",
       "created": "2024-02-08",
       "requires": [
@@ -8940,6 +9373,7 @@
       "id": "ERC-7634",
       "number": 7634,
       "title": "Limited Transfer Count NFT",
+      "specAuthors": "Qin Wang (@qinwang-git), Saber Yu (@OniReimu), Shiping Chen <shiping.chen@data61.csiro.au>",
       "editorialStatus": "Final",
       "created": "2024-02-22",
       "requires": [
@@ -8961,6 +9395,7 @@
       "id": "ERC-7638",
       "number": 7638,
       "title": "Batch Calls Encoding in SCA",
+      "specAuthors": "George (@JXRow), Zisu (@lazy1523)",
       "editorialStatus": "Draft",
       "created": "2024-02-26",
       "requires": [],
@@ -8978,6 +9413,7 @@
       "id": "ERC-7641",
       "number": 7641,
       "title": "Intrinsic RevShare Token",
+      "specAuthors": "Conway (@0x1cc), Cathie So (@socathie), Xiaohang Yu (@xhyumiracle), Suning Yao (@fewwwww), Kartin <kartin@hyperoracle.io>",
       "editorialStatus": "Draft",
       "created": "2024-02-28",
       "requires": [
@@ -8997,6 +9433,7 @@
       "id": "ERC-7644",
       "number": 7644,
       "title": "ERC-721 Name Registry Extension",
+      "specAuthors": "Chen Liaoyuan (@chenly)",
       "editorialStatus": "Draft",
       "created": "2024-03-01",
       "requires": [
@@ -9016,6 +9453,7 @@
       "id": "ERC-7649",
       "number": 7649,
       "title": "Bonding curve-embedded liquidity for NFTs",
+      "specAuthors": "Arif Khan <arif@alethea.ai>, Ahmad Matyana <ahmad@alethea.ai>, Basil Gorin (@vgorin), Vijay Bhayani (@unblocktechie)",
       "editorialStatus": "Draft",
       "created": "2024-02-28",
       "requires": [
@@ -9036,6 +9474,7 @@
       "id": "ERC-7651",
       "number": 7651,
       "title": "Fractionally Represented Non-Fungible Token",
+      "specAuthors": "Acme (@0xacme), Calder (@caldereth)",
       "editorialStatus": "Draft",
       "created": "2024-03-05",
       "requires": [
@@ -9059,6 +9498,7 @@
       "id": "ERC-7652",
       "number": 7652,
       "title": "ERC-721 Guarantee Extension",
+      "specAuthors": "Liu.C.Dao (@CDao) <iunknow@163.com>, Sam <1047180870@qq.com>",
       "editorialStatus": "Draft",
       "created": "2024-03-10",
       "requires": [
@@ -9080,6 +9520,7 @@
       "id": "ERC-7654",
       "number": 7654,
       "title": "Request Method Types",
+      "specAuthors": "Rickey (@HelloRickey)",
       "editorialStatus": "Draft",
       "created": "2024-03-13",
       "requires": [],
@@ -9095,6 +9536,7 @@
       "id": "ERC-7656",
       "number": 7656,
       "title": "Generalized Contract-Linked Services",
+      "specAuthors": "Francesco Sullo (@sullof)",
       "editorialStatus": "Final",
       "created": "2024-03-15",
       "requires": [
@@ -9125,6 +9567,7 @@
       "id": "ERC-7662",
       "number": 7662,
       "title": "AI Agent NFTs",
+      "specAuthors": "Greg Marlin (@marleymarl)",
       "editorialStatus": "Draft",
       "created": "2024-03-26",
       "requires": [
@@ -9144,6 +9587,7 @@
       "id": "ERC-7673",
       "number": 7673,
       "title": "Distinguishable base256emoji Addresses",
+      "specAuthors": "William Morriss (@wjmelements)",
       "editorialStatus": "Review",
       "created": "2024-04-01",
       "requires": [],
@@ -9162,6 +9606,7 @@
       "id": "ERC-7674",
       "number": 7674,
       "title": "Temporary Approval Extension for ERC-20",
+      "specAuthors": "Xenia Shape (@byshape), Mikhail Melnik (@ZumZoom), Hadrien Croubois (@Amxx)",
       "editorialStatus": "Review",
       "created": "2024-04-02",
       "requires": [
@@ -9183,6 +9628,7 @@
       "id": "ERC-7677",
       "number": 7677,
       "title": "Paymaster Web Service Capability",
+      "specAuthors": "Lukas Rosario (@lukasrosario), Dror Tirosh (@drortirosh), Wilson Cusack (@wilsoncusack), Kristof Gazso (@kristofgazso), Hazim Jumali (@hazim-j)",
       "editorialStatus": "Review",
       "created": "2024-04-03",
       "requires": [
@@ -9204,6 +9650,7 @@
       "id": "ERC-7679",
       "number": 7679,
       "title": "UserOperation Builder",
+      "specAuthors": "Derek Chiang (@derekchiang), Garvit Khatri (@plusminushalf), Fil Makarov (@filmakarov), Kristof Gazso (@kristofgazso), Derek Rein (@arein), Tomas Rocchi (@tomiir), bumblefudge (@bumblefudge)",
       "editorialStatus": "Draft",
       "created": "2024-04-05",
       "requires": [
@@ -9225,6 +9672,7 @@
       "id": "ERC-7681",
       "number": 7681,
       "title": "Dual Nature Multi Token Protocol",
+      "specAuthors": "Sennett Lau (@sennett-lau)",
       "editorialStatus": "Draft",
       "created": "2024-04-08",
       "requires": [
@@ -9248,6 +9696,7 @@
       "id": "ERC-7682",
       "number": 7682,
       "title": "Auxiliary Funds Capability",
+      "specAuthors": "Lukas Rosario (@lukasrosario), Wilson Cusack (@wilsoncusack), Alex Donesky (@adonesky1)",
       "editorialStatus": "Draft",
       "created": "2024-04-09",
       "requires": [
@@ -9272,6 +9721,7 @@
       "id": "ERC-7683",
       "number": 7683,
       "title": "Cross Chain Intents",
+      "specAuthors": "Francisco Giordano (@frangio), Mark Toda (@marktoda), Matt Rice (@mrice32), Nick Pai (@nicholaspai), Alexander Lindgren (@reednaa), Mark Gretzke (@mgretzke), Chris Cashwell (@ccashwell)",
       "editorialStatus": "Draft",
       "created": "2024-04-11",
       "requires": [
@@ -9292,6 +9742,7 @@
       "id": "ERC-7694",
       "number": 7694,
       "title": "Solana Storage Router",
+      "specAuthors": "Avneet Singh (@sshmatrix), 0xc0de4c0ffee (@0xc0de4c0ffee)",
       "editorialStatus": "Draft",
       "created": "2024-04-18",
       "requires": [
@@ -9313,6 +9764,7 @@
       "id": "ERC-7695",
       "number": 7695,
       "title": "Ownership Delegation and Context for ERC-721",
+      "specAuthors": "Duc Tho Tran (@ducthotran2010)",
       "editorialStatus": "Draft",
       "created": "2024-04-02",
       "requires": [
@@ -9334,6 +9786,7 @@
       "id": "ERC-7699",
       "number": 7699,
       "title": "ERC-20 Transfer Reference Extension",
+      "specAuthors": "Radek Svarz (@radeksvarz)",
       "editorialStatus": "Draft",
       "created": "2024-04-26",
       "requires": [
@@ -9355,6 +9808,7 @@
       "id": "ERC-7700",
       "number": 7700,
       "title": "Cross-chain Storage Router Protocol",
+      "specAuthors": "Avneet Singh (@sshmatrix), 0xc0de4c0ffee (@0xc0de4c0ffee), Nick Johnson (@arachnid), Makoto Inoue (@makoto)",
       "editorialStatus": "Draft",
       "created": "2024-04-30",
       "requires": [
@@ -9376,6 +9830,7 @@
       "id": "ERC-7710",
       "number": 7710,
       "title": "Smart Contract Delegation",
+      "specAuthors": "Ryan McPeck (@McOso), Dan Finlay (@DanFinlay), Rob Dawson (@rojotek), Derek Chiang (@derekchiang)",
       "editorialStatus": "Draft",
       "created": "2024-05-20",
       "requires": [
@@ -9400,6 +9855,7 @@
       "id": "ERC-7715",
       "number": 7715,
       "title": "Request Permissions from Wallets",
+      "specAuthors": "Luka Isailovic (@lukaisailovic), Derek Rein (@arein), Dan Finlay (@danfinlay), Derek Chiang (@derekchiang), Fil Makarov (@filmakarov), Pedro Gomes (@pedrouid), Conner Swenberg (@ilikesymmetry), Lukas Rosario (@lukasrosario), Idris Bowman (@V00D00-child), Jeff Smale (@jeffsmale90)",
       "editorialStatus": "Draft",
       "created": "2024-05-24",
       "requires": [
@@ -9425,6 +9881,7 @@
       "id": "ERC-7720",
       "number": 7720,
       "title": "Deferred Token Transfer",
+      "specAuthors": "Chen Liaoyuan (@chenly) <cly@kip.pro>",
       "editorialStatus": "Draft",
       "created": "2024-06-09",
       "requires": [
@@ -9444,6 +9901,7 @@
       "id": "ERC-7721",
       "number": 7721,
       "title": "Lockable Extension for ERC-1155",
+      "specAuthors": "Piyush Chittara (@piyush-chittara)",
       "editorialStatus": "Draft",
       "created": "2023-05-25",
       "requires": [
@@ -9464,6 +9922,7 @@
       "id": "ERC-7722",
       "number": 7722,
       "title": "Opaque Token",
+      "specAuthors": "Ivica Aračić (@ivica7), Ante Bešlić (@ethSplit), Mirko Katanić (@mkatanic), SWIAT",
       "editorialStatus": "Draft",
       "created": "2024-06-09",
       "requires": [],
@@ -9481,6 +9940,7 @@
       "id": "ERC-7726",
       "number": 7726,
       "title": "Common Quote Oracle",
+      "specAuthors": "alcueca (@alcueca), ruvaag (@ruvaag), totomanov (@totomanov), r0ohafza (@r0ohafza)",
       "editorialStatus": "Draft",
       "created": "2024-06-20",
       "requires": [
@@ -9502,6 +9962,7 @@
       "id": "ERC-7729",
       "number": 7729,
       "title": "Token with Metadata",
+      "specAuthors": "msfew (@fewwwww)",
       "editorialStatus": "Draft",
       "created": "2023-06-24",
       "requires": [
@@ -9521,6 +9982,7 @@
       "id": "ERC-7730",
       "number": 7730,
       "title": "Structured Data Clear Signing Format",
+      "specAuthors": "Laurent Castillo (@lcastillo-ledger), Derek Rein (@arein), Pierre Aoun (@paoun-ledger), Arik Galansky (@arikg), Bartosz Rozwarski (@llbartekll), Kaan Uzdogan (@kuzdogan), Fredrik (@Fredrik0x), Alex Forshtat (@forshtat)",
       "editorialStatus": "Draft",
       "created": "2024-02-07",
       "requires": [
@@ -9550,6 +10012,7 @@
       "id": "ERC-7734",
       "number": 7734,
       "title": "Decentralized Identity Verification (DID)",
+      "specAuthors": "Anushka Yadav (@64anushka) <64anushka@gmail.com>",
       "editorialStatus": "Final",
       "created": "2024-06-26",
       "requires": [],
@@ -9565,6 +10028,7 @@
       "id": "ERC-7738",
       "number": 7738,
       "title": "Permissionless Script Registry",
+      "specAuthors": "Victor Zhang (@zhangzhongnan928), James Brown (@JamesSmartCell)",
       "editorialStatus": "Draft",
       "created": "2024-07-01",
       "requires": [
@@ -9585,6 +10049,7 @@
       "id": "ERC-7739",
       "number": 7739,
       "title": "Readable Typed Signatures for Smart Accounts",
+      "specAuthors": "vectorized (@vectorized), Sihoon Lee (@push0ebp), Francisco Giordano (@frangio), Hadrien Croubois (@Amxx), Ernesto García (@ernestognw), Im Juno (@junomonster), howydev (@howydev), Atarpara (@Atarpara), 0xcuriousapple (@0xcuriousapple)",
       "editorialStatus": "Draft",
       "created": "2024-05-28",
       "requires": [
@@ -9610,6 +10075,7 @@
       "id": "ERC-7741",
       "number": 7741,
       "title": "Authorize Operator",
+      "specAuthors": "Jeroen Offerijns (@hieronx), João Martins (@0xTimepunk)",
       "editorialStatus": "Draft",
       "created": "2024-06-03",
       "requires": [
@@ -9635,6 +10101,7 @@
       "id": "ERC-7743",
       "number": 7743,
       "title": "Multi-Owner Non-Fungible Tokens (MO-NFT)",
+      "specAuthors": "Cheng Qian (@jamesavechives) <james.walstonn@gmail.com>",
       "editorialStatus": "Final",
       "created": "2024-07-13",
       "requires": [],
@@ -9652,6 +10119,7 @@
       "id": "ERC-7744",
       "number": 7744,
       "title": "Code Index",
+      "specAuthors": "Tim Pechersky (@peersky) <t@peersky.xyz>",
       "editorialStatus": "Last Call",
       "created": "2024-07-16",
       "requires": [],
@@ -9669,6 +10137,7 @@
       "id": "ERC-7746",
       "number": 7746,
       "title": "Composable Security Middleware Hooks",
+      "specAuthors": "Tim Pechersky (@peersky)",
       "editorialStatus": "Last Call",
       "created": "2024-07-17",
       "requires": [],
@@ -9684,6 +10153,7 @@
       "id": "ERC-7750",
       "number": 7750,
       "title": "Decentralized Employment System",
+      "specAuthors": "James Savechives (@jamesavechives) <james.walstonn@gmail.com>",
       "editorialStatus": "Review",
       "created": "2024-08-04",
       "requires": [],
@@ -9701,6 +10171,7 @@
       "id": "ERC-7751",
       "number": 7751,
       "title": "Wrapping of bubbled up reverts",
+      "specAuthors": "Daniel Gretzke (@gretzke), Sara Reynolds (@snreynolds), Alice Henshaw (@hensha256), Marko Veniger <marko.veniger@tenderly.co>, Hadrien Croubois (@Amxx)",
       "editorialStatus": "Final",
       "created": "2024-08-06",
       "requires": [],
@@ -9716,6 +10187,7 @@
       "id": "ERC-7754",
       "number": 7754,
       "title": "Tamperproof Extension Wallets API (TWIST)",
+      "specAuthors": "Erik Marks (@remarks), Guillaume Grosbois (@uni-guillaume)",
       "editorialStatus": "Draft",
       "created": "2024-07-29",
       "requires": [
@@ -9736,6 +10208,7 @@
       "id": "ERC-7758",
       "number": 7758,
       "title": "Transfer With Authorization",
+      "specAuthors": "Peter Jihoon Kim (@petejkim), Kevin Britz (@kbrizzle), David Knott (@DavidLKnott), Dongri Jin (@dongri)",
       "editorialStatus": "Review",
       "created": "2020-09-28",
       "requires": [
@@ -9759,6 +10232,7 @@
       "id": "ERC-7760",
       "number": 7760,
       "title": "Minimal Upgradeable Proxies",
+      "specAuthors": "Atarpara (@Atarpara), JT Riley (@jtriley-eth), Thomas (@0xth0mas), xiaobaiskill (@xiaobaiskill), Vectorized (@Vectorized)",
       "editorialStatus": "Draft",
       "created": "2024-08-19",
       "requires": [
@@ -9780,6 +10254,7 @@
       "id": "ERC-7765",
       "number": 7765,
       "title": "Privileged Non-Fungible Tokens Tied To RWA",
+      "specAuthors": "frank (@frankmint2024) <frank@mintchain.io>",
       "editorialStatus": "Draft",
       "created": "2024-08-20",
       "requires": [
@@ -9800,6 +10275,7 @@
       "id": "ERC-7766",
       "number": 7766,
       "title": "Signature Aggregation for ERC-4337",
+      "specAuthors": "Vitalik Buterin (@vbuterin), Yoav Weiss (@yoavw), Dror Tirosh (@drortirosh), Shahaf Nacson (@shahafn), Alex Forshtat (@forshtat)",
       "editorialStatus": "Withdrawn",
       "created": "2024-09-01",
       "requires": [
@@ -9821,6 +10297,7 @@
       "id": "ERC-7769",
       "number": 7769,
       "title": "JSON-RPC API for ERC-4337",
+      "specAuthors": "Vitalik Buterin (@vbuterin), Yoav Weiss (@yoavw), Dror Tirosh (@drortirosh), Shahaf Nacson (@shahafn), Alex Forshtat (@forshtat)",
       "editorialStatus": "Draft",
       "created": "2024-08-23",
       "requires": [
@@ -9845,6 +10322,7 @@
       "id": "ERC-7770",
       "number": 7770,
       "title": "Fractional Reserve Token",
+      "specAuthors": "Yaron Velner (@yaronvel)",
       "editorialStatus": "Draft",
       "created": "2024-09-17",
       "requires": [
@@ -9864,6 +10342,7 @@
       "id": "ERC-7774",
       "number": 7774,
       "title": "Cache invalidation in ERC-5219 mode Web3 URL",
+      "specAuthors": "Nicolas Deschildre (@nand2), Sam Wilson (@SamWilsn)",
       "editorialStatus": "Draft",
       "created": "2024-09-20",
       "requires": [
@@ -9887,6 +10366,7 @@
       "id": "ERC-7776",
       "number": 7776,
       "title": "Transparent Financial Statements",
+      "specAuthors": "Ignacio Ceaglio (@Nachoxt17) <ignacioceaglio@gmail.com>",
       "editorialStatus": "Review",
       "created": "2024-09-20",
       "requires": [
@@ -9906,6 +10386,7 @@
       "id": "ERC-7777",
       "number": 7777,
       "title": "Governance for Human Robot Societies",
+      "specAuthors": "OpenMind, Jan Liphardt <jan@openmind.org>, Shaohong Zhong (@ShaohongZ), Boyuan Chen (@bchen-dev), Paige Xu <paige@openmind.org>, James Ball <james.ball@nethermind.io>, Thamer Dridi <thamer.dridi@nethermind.io>",
       "editorialStatus": "Review",
       "created": "2024-09-29",
       "requires": [],
@@ -9921,6 +10402,7 @@
       "id": "ERC-7779",
       "number": 7779,
       "title": "Interoperable Delegated Accounts",
+      "specAuthors": "David Kim (@PowerStream3604), Richard Meissner (@rmeissner), Akshay Patel (@akshay-ap), Joshua Kim (@LightningHun), Fangting (@trinity-0111), Yoav Weiss (@yoavw)",
       "editorialStatus": "Draft",
       "created": "2024-10-02",
       "requires": [
@@ -9942,6 +10424,7 @@
       "id": "ERC-7780",
       "number": 7780,
       "title": "Validation Module Extension for ERC-7579",
+      "specAuthors": "zeroknots (@zeroknots), Konrad Kopp (@kopy-kat), Taek Lee (@leekt), Fil Makarov (@filmakarov)",
       "editorialStatus": "Draft",
       "created": "2024-10-01",
       "requires": [
@@ -9963,6 +10446,7 @@
       "id": "ERC-7785",
       "number": 7785,
       "title": "Onchain registration of chain identifiers",
+      "specAuthors": "Marco Stronati (@paracetamolo), Jeff Lau (@jefflau)",
       "editorialStatus": "Draft",
       "created": "2024-09-26",
       "requires": [
@@ -9982,6 +10466,7 @@
       "id": "ERC-7786",
       "number": 7786,
       "title": "Cross-Chain Messaging Gateway",
+      "specAuthors": "Francisco Giordano (@frangio), Hadrien Croubois (@Amxx), Ernesto García (@ernestognw), CJ Cobb (@cjcobb23), Sergey Gorbunov (@sergeynog), joxes (@Joxess)",
       "editorialStatus": "Final",
       "created": "2024-10-14",
       "requires": [
@@ -10002,6 +10487,7 @@
       "id": "ERC-7787",
       "number": 7787,
       "title": "Soulbound Degradable Governance",
+      "specAuthors": "Guilherme Neves (@0xneves), Rafael Castaneda <rafaelcastaneda@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2024-10-15",
       "requires": [
@@ -10023,6 +10509,7 @@
       "id": "ERC-7794",
       "number": 7794,
       "title": "Grant Registry",
+      "specAuthors": "Guilherme Neves (@0xneves)",
       "editorialStatus": "Draft",
       "created": "2024-10-22",
       "requires": [],
@@ -10038,6 +10525,7 @@
       "id": "ERC-7795",
       "number": 7795,
       "title": "Wallet Call Token Capabilities",
+      "specAuthors": "Agustín Aguilar (@agusx1211), Michael Standen (@ScreamingHawk), Peter Kieltyka (@pkieltyka), William Hua (@attente), Philippe Castonguay (@PhABC)",
       "editorialStatus": "Draft",
       "created": "2024-10-22",
       "requires": [
@@ -10063,6 +10551,7 @@
       "id": "ERC-7796",
       "number": 7796,
       "title": "Conditional send transaction RPC",
+      "specAuthors": "Dror Tirosh (@drortirosh), Yoav Weiss (@yoavw), Alex Forshtat (@forshtat), Shahaf Nacson (@shahafn)",
       "editorialStatus": "Review",
       "created": "2024-04-16",
       "requires": [],
@@ -10081,6 +10570,7 @@
       "id": "ERC-7802",
       "number": 7802,
       "title": "Token With Mint/Burn Access Across Chains",
+      "specAuthors": "skeletor (@skeletor-spaceman), parti (@0xParticle), joxes (@Joxess), ng (@0xng), agus duha (@agusduha), disco (@0xDiscotech), gotzen <gotzen@defi.sucks>, 0age <0age@uniswap.org>, Mark Tyneway <mark@oplabs.co>, Zain Bacchus <zain@oplabs.co>, Matt Solomon <msolomon@oplabs.co>, Maurelian <maurelian@protonmail.ch>, Blaine Malone (@blmalone)",
       "editorialStatus": "Draft",
       "created": "2024-10-30",
       "requires": [
@@ -10103,6 +10593,7 @@
       "id": "ERC-7803",
       "number": 7803,
       "title": "EIP-712 Extensions for Account Abstraction",
+      "specAuthors": "Francisco Giordano (@frangio)",
       "editorialStatus": "Draft",
       "created": "2024-10-08",
       "requires": [
@@ -10126,6 +10617,7 @@
       "id": "ERC-7806",
       "number": 7806,
       "title": "Minimal intent-centric EOA smart account",
+      "specAuthors": "hellohanchen (@hellohanchen)",
       "editorialStatus": "Draft",
       "created": "2024-11-02",
       "requires": [
@@ -10150,6 +10642,7 @@
       "id": "ERC-7811",
       "number": 7811,
       "title": "Wallet Asset Discovery",
+      "specAuthors": "Luka Isailovic (@lukaisailovic), Konrad Kopp (@kopy-kat), Derek Rein (@arein), Chris Smith (@chris13524)",
       "editorialStatus": "Draft",
       "created": "2024-11-07",
       "requires": [
@@ -10175,6 +10668,7 @@
       "id": "ERC-7812",
       "number": 7812,
       "title": "ZK Identity Registry",
+      "specAuthors": "Artem Chystiakov (@arvolear) <artem@rarilabs.com>, Oleksandr Kurbatov <oleksandr@rarilabs.com>, Yaroslav Panasenko <yaroslav@rarilabs.com>, Michael Elliot (@michaelelliot) <mike@zkpassport.id>, Vitalik Buterin (@vbuterin)",
       "editorialStatus": "Review",
       "created": "2024-11-08",
       "requires": [],
@@ -10192,6 +10686,7 @@
       "id": "ERC-7813",
       "number": 7813,
       "title": "Store, Table-Based Introspectable Storage",
+      "specAuthors": "alvarius (@alvrs), dk1a (@dk1a), frolic (@frolic), ludens (@ludns), vdrg (@vdrg), yonada <yonada@proton.me>",
       "editorialStatus": "Final",
       "created": "2024-11-08",
       "requires": [],
@@ -10207,6 +10702,7 @@
       "id": "ERC-7818",
       "number": 7818,
       "title": "Expirable ERC-20",
+      "specAuthors": "sirawt (@MASDXI), ADISAKBOONMARK (@ADISAKBOONMARK)",
       "editorialStatus": "Final",
       "created": "2024-11-13",
       "requires": [
@@ -10226,6 +10722,7 @@
       "id": "ERC-7820",
       "number": 7820,
       "title": "Access Control Registry",
+      "specAuthors": "Shubham Khandelwal (@shubh-ta), Anushka Yadav (@anushka642000)",
       "editorialStatus": "Final",
       "created": "2024-11-19",
       "requires": [],
@@ -10241,6 +10738,7 @@
       "id": "ERC-7821",
       "number": 7821,
       "title": "Minimal Batch Executor Interface",
+      "specAuthors": "Vectorized (@Vectorized), Jake Moxey (@jxom), Hadrien Croubois (@Amxx)",
       "editorialStatus": "Draft",
       "created": "2024-11-21",
       "requires": [
@@ -10262,6 +10760,7 @@
       "id": "ERC-7827",
       "number": 7827,
       "title": "JSON Contract with Value Version Control",
+      "specAuthors": "lex-clinic (@lex-clinic)",
       "editorialStatus": "Draft",
       "created": "2024-11-07",
       "requires": [],
@@ -10277,6 +10776,7 @@
       "id": "ERC-7828",
       "number": 7828,
       "title": "Interoperable Names",
+      "specAuthors": "Sam Kaufman (@SampkaML), Marco Stronati (@paracetamolo), Yuliya Alexiev (@yuliyaalexiev), Jeff Lau (@jefflau), Sam Wilson (@samwilsn), Vitalik Buterin (@vbuterin), Teddy (@0xteddybear), Joxes (@Joxess), Racu (@0xRacoon), Skeletor Spaceman (@0xskeletor-spaceman), TiTi (@0xtiti), Gori (@0xGorilla), Ardy (@0xArdy), Onizuka (@onizuka-wl), Lumi (@oxlumi), Moebius (@0xmoebius), Thomas Clowes (@clowestab), Prem Makeig (@nxt3d), Mono (@0xMonoAx), Orca (@0xrcinus)",
       "editorialStatus": "Review",
       "created": "2024-11-27",
       "requires": [
@@ -10298,6 +10798,7 @@
       "id": "ERC-7829",
       "number": 7829,
       "title": "Data Asset NFT",
+      "specAuthors": "Allen Dong (@Allen2730), Lonika Zhang <lonika@memolabs.net>, Steven He <steven@memolabs.net>",
       "editorialStatus": "Review",
       "created": "2024-11-29",
       "requires": [
@@ -10318,6 +10819,7 @@
       "id": "ERC-7831",
       "number": 7831,
       "title": "Multi-Chain Addressing",
+      "specAuthors": "Sam Wilson (@SamWilsn) <sam@binarycake.ca>",
       "editorialStatus": "Draft",
       "created": "2024-08-30",
       "requires": [
@@ -10346,6 +10848,7 @@
       "id": "ERC-7832",
       "number": 7832,
       "title": "Sustainable collaborative NFT collections",
+      "specAuthors": "Gustavo Lobo (@gflobo)",
       "editorialStatus": "Review",
       "created": "2024-12-04",
       "requires": [
@@ -10365,6 +10868,7 @@
       "id": "ERC-7836",
       "number": 7836,
       "title": "Wallet Call Preparation API",
+      "specAuthors": "Lukas Rosario (@lukasrosario), Conner Swenberg (@ilikesymmetry), Adam Hodges (@ajhodges), Paaras Bhandari (@paarasbhandari), Jake Moxey (@jxom)",
       "editorialStatus": "Draft",
       "created": "2024-12-06",
       "requires": [
@@ -10386,6 +10890,7 @@
       "id": "ERC-7837",
       "number": 7837,
       "title": "Diffusive Tokens",
+      "specAuthors": "Cheng Qian (@jamesavechives) <james.walstonn@gmail.com>",
       "editorialStatus": "Final",
       "created": "2024-12-07",
       "requires": [],
@@ -10403,6 +10908,7 @@
       "id": "ERC-7841",
       "number": 7841,
       "title": "Cross-chain Message Format and Mailbox",
+      "specAuthors": "Ellie Davidson (@elliedavidson), Alex Xiong (@alxiong), Philippe Camacho (@philippecamacho), and Ben Fisch (@benafisch)",
       "editorialStatus": "Draft",
       "created": "2024-12-12",
       "requires": [],
@@ -10422,6 +10928,7 @@
       "id": "ERC-7845",
       "number": 7845,
       "title": "Universal Orchestrator RPC",
+      "specAuthors": "Kieran Goodary (@IAmKio), Pillar Wallet (@pillarwallet), Luke Wickens (@lbw33), Rana Khoury (@RanaBug)",
       "editorialStatus": "Draft",
       "created": "2024-11-07",
       "requires": [],
@@ -10439,6 +10946,7 @@
       "id": "ERC-7846",
       "number": 7846,
       "title": "Wallet Connection API",
+      "specAuthors": "Conner Swenberg (@ilikesymmetry), Jake Moxey (@jxom), Lukas Rosario (@lukasrosario)",
       "editorialStatus": "Draft",
       "created": "2024-12-15",
       "requires": [],
@@ -10459,6 +10967,7 @@
       "id": "ERC-7847",
       "number": 7847,
       "title": "Social Media NFTs",
+      "specAuthors": "Nick Juntilla (@nickjuntilla) <nick@ownerfy.com>",
       "editorialStatus": "Draft",
       "created": "2024-12-18",
       "requires": [
@@ -10480,6 +10989,7 @@
       "id": "ERC-7856",
       "number": 7856,
       "title": "Chain-Specific Payment Requests",
+      "specAuthors": "Jack Chuma (@jackchuma)",
       "editorialStatus": "Draft",
       "created": "2025-01-01",
       "requires": [],
@@ -10500,6 +11010,7 @@
       "id": "ERC-7857",
       "number": 7857,
       "title": "AI Agents NFT with Private Metadata",
+      "specAuthors": "Ming Wu (@sparkmiw), Jason Zeng (@zenghbo), Wei Wu (@Wilbert957), Michael Heinrich (@michaelomg)",
       "editorialStatus": "Final",
       "created": "2025-01-02",
       "requires": [],
@@ -10518,6 +11029,7 @@
       "id": "ERC-7858",
       "number": 7858,
       "title": "Expirable NFTs and SBTs",
+      "specAuthors": "sirawt (@MASDXI), ADISAKBOONMARK (@ADISAKBOONMARK), parametprame (@parametprame), Nacharoen (@najaroen)",
       "editorialStatus": "Final",
       "created": "2024-01-04",
       "requires": [
@@ -10545,6 +11057,7 @@
       "id": "ERC-7861",
       "number": 7861,
       "title": "ERC-721 Verifiable Credential Extension",
+      "specAuthors": "Valerio Massimo Camaiani (@vmc-crossmint)",
       "editorialStatus": "Draft",
       "created": "2025-01-14",
       "requires": [
@@ -10566,6 +11079,7 @@
       "id": "ERC-7866",
       "number": 7866,
       "title": "Decentralised User Profiles",
+      "specAuthors": "Kumar Anirudha (@anistark)",
       "editorialStatus": "Review",
       "created": "2025-01-22",
       "requires": [
@@ -10587,6 +11101,7 @@
       "id": "ERC-7871",
       "number": 7871,
       "title": "Wallet Signing API",
+      "specAuthors": "Lukas Rosario (@lukasrosario), Jake Moxey (@jxom), Cody Crozier (@wcrozier12), Conner Swenberg (@ilikesymmetry)",
       "editorialStatus": "Draft",
       "created": "2024-01-29",
       "requires": [
@@ -10610,6 +11125,7 @@
       "id": "ERC-7876",
       "number": 7876,
       "title": "Ethereum Network Configuration for DApps",
+      "specAuthors": "Bogdan Gusiev (@bogdan), Sergey Bomko (@aquiladev)",
       "editorialStatus": "Draft",
       "created": "2025-01-03",
       "requires": [
@@ -10633,6 +11149,7 @@
       "id": "ERC-7878",
       "number": 7878,
       "title": "Bequeathable Contracts",
+      "specAuthors": "Wamith Mockbill (@wamith)",
       "editorialStatus": "Final",
       "created": "2025-02-01",
       "requires": [
@@ -10657,6 +11174,7 @@
       "id": "ERC-7884",
       "number": 7884,
       "title": "Operation Router",
+      "specAuthors": "Lucas Picollo (@pikonha), Alex Netto (@alextnetto), Nick Johnson (@arachnid)",
       "editorialStatus": "Draft",
       "created": "2025-01-23",
       "requires": [],
@@ -10675,6 +11193,7 @@
       "id": "ERC-7887",
       "number": 7887,
       "title": "Cancelation for ERC-7540 Tokenized Vaults",
+      "specAuthors": "Jeroen Offerijns (@hieronx), Vikram Arun (@vikramarun)",
       "editorialStatus": "Draft",
       "created": "2025-02-18",
       "requires": [
@@ -10697,6 +11216,7 @@
       "id": "ERC-7888",
       "number": 7888,
       "title": "Crosschain Broadcaster",
+      "specAuthors": "Henry Arneson (@godzillaba), Chris Buckland (@yahgwai)",
       "editorialStatus": "Draft",
       "created": "2025-02-18",
       "requires": [],
@@ -10712,6 +11232,7 @@
       "id": "ERC-7891",
       "number": 7891,
       "title": "Splitting and Merging of NFTs",
+      "specAuthors": "Nitin Bhagat (@nitin312) <bhagatnitin312@gmail.com>, JongWook Bae <bae@cwnu.ac.kr>, Su-Hyun Lee <sleepl@changwon.ac.kr>",
       "editorialStatus": "Draft",
       "created": "2025-02-15",
       "requires": [
@@ -10735,6 +11256,7 @@
       "id": "ERC-7893",
       "number": 7893,
       "title": "DeFi Protocol Solvency Proof Mechanism",
+      "specAuthors": "Sean Luis Guada Rodríguez (@SeanLuis) <seanluis47@gmail.com>",
       "editorialStatus": "Final",
       "created": "2025-01-30",
       "requires": [
@@ -10755,6 +11277,7 @@
       "id": "ERC-7895",
       "number": 7895,
       "title": "API for Hierarchical Accounts",
+      "specAuthors": "Wilson Cusack (@wilsoncusack), Jake Feldman (@jakefeldman), Montana Wong (@montycheese), Felix Zhang (@fan-zhang-sv), Jake Moxey (@jxom)",
       "editorialStatus": "Draft",
       "created": "2025-02-18",
       "requires": [],
@@ -10773,6 +11296,7 @@
       "id": "ERC-7897",
       "number": 7897,
       "title": "Wallet-Linked Services for Smart Accounts",
+      "specAuthors": "Francesco Sullo (@sullof)",
       "editorialStatus": "Withdrawn",
       "created": "2024-04-15",
       "requires": [
@@ -10800,6 +11324,7 @@
       "id": "ERC-7902",
       "number": 7902,
       "title": "Wallet Capabilities for Account Abstraction",
+      "specAuthors": "Yoav Weiss (@yoavw), Alex Forshtat (@forshtat), Dror Tirosh (@drortirosh), Shahaf Nacson (@shahafn)",
       "editorialStatus": "Draft",
       "created": "2025-03-01",
       "requires": [
@@ -10832,6 +11357,7 @@
       "id": "ERC-7908",
       "number": 7908,
       "title": "HD wallet In Treasury Management",
+      "specAuthors": "Xiaoyu Liu (@elizabethxiaoyu) <jiushi.lxy@antgroup.com>, Yuxiang Fu (@tmac4096) <kunfu.fyx@antgroup.com>, Yanyi Liang <eason.lyy@antgroup.com>, Hao Zou (@BruceZH0915) <situ.zh@antgroup.com>, Siyuan Zheng (@andrewcoder666) <zhengsiyuan.zsy@antgroup.com>, yuanshanhshan (@xunayuan) <yuanshanshan.yss@antgroup.com>",
       "editorialStatus": "Final",
       "created": "2025-03-07",
       "requires": [],
@@ -10847,6 +11373,7 @@
       "id": "ERC-7913",
       "number": 7913,
       "title": "Signature Verifiers",
+      "specAuthors": "Hadrien Croubois (@Amxx), Ernesto García (@ernestognw), Francisco Giordano (@frangio), Aryeh Greenberg (@arr00)",
       "editorialStatus": "Final",
       "created": "2025-03-21",
       "requires": [],
@@ -10867,6 +11394,7 @@
       "id": "ERC-7920",
       "number": 7920,
       "title": "Composite EIP-712 Signatures",
+      "specAuthors": "Sola Ogunsakin (@sola92)",
       "editorialStatus": "Draft",
       "created": "2025-03-20",
       "requires": [
@@ -10889,6 +11417,7 @@
       "id": "ERC-7929",
       "number": 7929,
       "title": "PermaLink Asset Bound Token",
+      "specAuthors": "Mihai Onila (@MihaiORO), Nick Zeman (@NickZCZ), Narcis Cotaie (@NarcisCRO)",
       "editorialStatus": "Draft",
       "created": "2025-04-01",
       "requires": [
@@ -10910,6 +11439,7 @@
       "id": "ERC-7930",
       "number": 7930,
       "title": "Interoperable Addresses",
+      "specAuthors": "Teddy (@0xteddybear), Joxes (@0xJoxess), Nick Johnson (@Arachnid), Francisco Giordano (@frangio), Skeletor Spaceman (@skeletor-spaceman), Racu (@0xRacoon), TiTi (@0xtiti), Gori (@0xGorilla), Ardy (@0xArdy), Onizuka (@onizuka-wl), Sam Kaufman (@SampkaML), Marco Stronati (@paracetamolo), Yuliya Alexiev (@yuliyaalexiev), Jeff Lau (@jefflau), Sam Wilson (@samwilsn), Vitalik Buterin (@vbuterin), Thomas Clowes (@clowestab), Mono (@0xMonoAx), Prem Makeig (@nxt3d), Orca (@0xrcinus)",
       "editorialStatus": "Review",
       "created": "2025-02-02",
       "requires": [],
@@ -10929,6 +11459,7 @@
       "id": "ERC-7936",
       "number": 7936,
       "title": "Versioned Proxy Contract Interface",
+      "specAuthors": "Raphina Liu (@Stamp9), Monica Jin (@mokita-j), Martin Monperrus (@monperrus)",
       "editorialStatus": "Review",
       "created": "2025-04-17",
       "requires": [],
@@ -10946,6 +11477,7 @@
       "id": "ERC-7943",
       "number": 7943,
       "title": "uRWA - Universal Real World Asset Interface",
+      "specAuthors": "Dario Lo Buglio (@xaler5), Tino Martinez Molina (@tinom9), Mihai Colceriu (@mihaic195)",
       "editorialStatus": "Final",
       "created": "2025-06-10",
       "requires": [
@@ -10973,6 +11505,7 @@
       "id": "ERC-7945",
       "number": 7945,
       "title": "Confidential Transactions Supported Token",
+      "specAuthors": "Siyuan Zheng (@andrewcoder666) <zhengsiyuan.zsy@antgroup.com>, Zhe Han (@iampkuhz) <hanzhe.hz@ant-intl.com>, Xiaoyu Liu (@elizabethxiaoyu) <jiushi.lxy@antgroup.com>, Wenwei Ma (@madyinglight) <huiwei.mww@antgroup.com>, Jun Meng Tan (@chadxeth) <junmeng.t@antgroup.com>, Yuxiang Fu (@tmac4096) <kunfu.fyx@antgroup.com>, Kecheng Gao (@thanks-v-me-50) <gaokecheng.gkc@antgroup.com>, Alwin Ng Jun Wei (@alwinngjw) <alwin.ng@antgroup.com>, Chenxin Wang (@3235773541) <wcx465603@antgroup.com>, Xiang Gao (@GaoYiRu) <gaoxiang.gao@antgroup.com>, yuanshanhshan (@xunayuan) <yuanshanshan.yss@antgroup.com>, Hao Zou (@BruceZH0915) <situ.zh@antgroup.com>, Yanyi Liang <eason.lyy@antgroup.com>, Yuehua Zhang (@astroyhzcc) <ruoying.zyh@antgroup.com>",
       "editorialStatus": "Final",
       "created": "2025-05-09",
       "requires": [
@@ -10992,6 +11525,7 @@
       "id": "ERC-7946",
       "number": 7946,
       "title": "Unidirectional Wallet Uplink aka UWULink",
+      "specAuthors": "Moody Salem (@moodysalem), Tina Zheng (@tinaszheng)",
       "editorialStatus": "Draft",
       "created": "2025-05-10",
       "requires": [
@@ -11020,6 +11554,7 @@
       "id": "ERC-7947",
       "number": 7947,
       "title": "Account Abstraction Recovery Interface",
+      "specAuthors": "Artem Chystiakov (@arvolear) <artem@rarilabs.com>",
       "editorialStatus": "Draft",
       "created": "2025-05-07",
       "requires": [],
@@ -11038,6 +11573,7 @@
       "id": "ERC-7950",
       "number": 7950,
       "title": "Encode chain id with transaction hash",
+      "specAuthors": "Lauri Peltonen (@microbecode)",
       "editorialStatus": "Final",
       "created": "2025-05-22",
       "requires": [
@@ -11057,6 +11593,7 @@
       "id": "ERC-7955",
       "number": 7955,
       "title": "Permissionless CREATE2 Factory",
+      "specAuthors": "Nicholas Rodrigues Lordello (@nlordell), Richard Meissner (@rmeissner), Valentin Seehausen (@vseehausen)",
       "editorialStatus": "Draft",
       "created": "2025-05-15",
       "requires": [
@@ -11081,6 +11618,7 @@
       "id": "ERC-7962",
       "number": 7962,
       "title": "Key Hash Based Tokens",
+      "specAuthors": "Alex Tian (@dugubuyan), Zhixiong Pan (@nake13), Geoffrey (@stbrahms) <geoffrey@datadance.ai>, liyingxuan (@LiYingxuan) <liyingxuan@datadance.ai>",
       "editorialStatus": "Review",
       "created": "2025-05-16",
       "requires": [
@@ -11108,6 +11646,7 @@
       "id": "ERC-7963",
       "number": 7963,
       "title": "Oracle-Permissioned ERC-20 with ZK Proofs",
+      "specAuthors": "Siyuan Zheng (@andrewcoder666) <zhengsiyuan.zsy@antgroup.com>, Xiaoyu Liu (@elizabethxiaoyu) <jiushi.lxy@antgroup.com>, Wenwei Ma (@madyinglight) <huiwei.mww@antgroup.com>, Jun Meng Tan (@chadxgpt) <junmeng.t@antgroup.com>, Yuxiang Fu (@tmac4096) <kunfu.fyx@antgroup.com>, Kecheng Gao (@thanks-v-me-50) <gaokecheng.gkc@antgroup.com>, Alwin Ng Jun Wei (@alwinngjw) <alwin.ng@antgroup.com>, Chenxin Wang (@3235773541) <wcx465603@antgroup.com>, Xiang Gao (@GaoYiRu) <gaoxiang.gao@antgroup.com>, yuanshanhshan (@xunayuan) <yuanshanshan.yss@antgroup.com>, Hao Zou (@BruceZH0915) <situ.zh@antgroup.com>, Yanyi Liang <eason.lyy@antgroup.com>, Yuehua Zhang (@astroyhzcc) <ruoying.zyh@antgroup.com>",
       "editorialStatus": "Last Call",
       "created": "2025-05-13",
       "requires": [
@@ -11129,6 +11668,7 @@
       "id": "ERC-7964",
       "number": 7964,
       "title": "Crosschain EIP-712 Signatures",
+      "specAuthors": "Ernesto García (@ernestognw), Hadrien Croubois (@Amxx)",
       "editorialStatus": "Draft",
       "created": "2025-06-05",
       "requires": [
@@ -11154,6 +11694,7 @@
       "id": "ERC-7965",
       "number": 7965,
       "title": "Proof-based Broadcast in ERC-7786 Gateways",
+      "specAuthors": "Ernesto García (@ernestognw)",
       "editorialStatus": "Draft",
       "created": "2025-06-06",
       "requires": [
@@ -11178,6 +11719,7 @@
       "id": "ERC-7968",
       "number": 7968,
       "title": "Owner-Authorized Token Transfer Protocol",
+      "specAuthors": "Julius Lauterbach (@Julius278)",
       "editorialStatus": "Draft",
       "created": "2025-06-11",
       "requires": [
@@ -11198,6 +11740,7 @@
       "id": "ERC-7969",
       "number": 7969,
       "title": "DomainKeys Identified Mail (DKIM) Registry",
+      "specAuthors": "Mike Fu (@fumeng00mike), Matthew Yu (@0xknon), Ernesto García (@ernestognw)",
       "editorialStatus": "Draft",
       "created": "2025-06-11",
       "requires": [],
@@ -11216,6 +11759,7 @@
       "id": "ERC-7984",
       "number": 7984,
       "title": "Confidential Fungible Token",
+      "specAuthors": "Aryeh Greenberg (@arr00), Ernesto García (@ernestognw), Hadrien Croubois (@Amxx), Ghazi Ben Amor (@GBAZama), Clement Danjou (@immortal-tofu), Joseph Andre Turk (@jatZama), Silas Davis (@silasdavis), Nicolas Pasquier (@npasquie)",
       "editorialStatus": "Draft",
       "created": "2025-07-03",
       "requires": [
@@ -11236,6 +11780,7 @@
       "id": "ERC-7985",
       "number": 7985,
       "title": "Gateway Attributes for Message Control",
+      "specAuthors": "Ernesto García (@ernestognw), Kalman Lajko (@LajkoKalman), Valera Grinenko (@0xValera)",
       "editorialStatus": "Draft",
       "created": "2024-07-04",
       "requires": [
@@ -11255,6 +11800,7 @@
       "id": "ERC-7988",
       "number": 7988,
       "title": "Minimal Avatar Smart Wallet (MASW)",
+      "specAuthors": "0xMostafas (@MostafaS) <0xmostafas@proton.me>",
       "editorialStatus": "Draft",
       "created": "2025-07-08",
       "requires": [
@@ -11276,6 +11822,7 @@
       "id": "ERC-7992",
       "number": 7992,
       "title": "Verifiable ML Model Inference (ZKML)",
+      "specAuthors": "Aryaethn (@aryaethn)",
       "editorialStatus": "Draft",
       "created": "2025-07-23",
       "requires": [
@@ -11299,6 +11846,7 @@
       "id": "ERC-7994",
       "number": 7994,
       "title": "Purpose-Bound ERC-20 with Conditional Unlock",
+      "specAuthors": "Anushka Yadav (@64anushka), Akash Kothawade (@akash3927), Atishek Singh (@atisheksingh)",
       "editorialStatus": "Final",
       "created": "2025-07-29",
       "requires": [
@@ -11320,6 +11868,7 @@
       "id": "ERC-7996",
       "number": 7996,
       "title": "Contract Feature Detection",
+      "specAuthors": "raffy.eth (@adraffy)",
       "editorialStatus": "Draft",
       "created": "2025-07-07",
       "requires": [
@@ -11339,6 +11888,7 @@
       "id": "ERC-8000",
       "number": 8000,
       "title": "Operator contract for non delegated EOAs",
+      "specAuthors": "Marcelo Morgado (@marcelomorgado), Manoj Patidar (@patidarmanoj10)",
       "editorialStatus": "Draft",
       "created": "2025-07-02",
       "requires": [
@@ -11362,6 +11912,7 @@
       "id": "ERC-8001",
       "number": 8001,
       "title": "Agent Coordination Framework",
+      "specAuthors": "Kwame Bryan (@KBryan)",
       "editorialStatus": "Final",
       "created": "2025-08-02",
       "requires": [
@@ -11389,6 +11940,7 @@
       "id": "ERC-8002",
       "number": 8002,
       "title": "Simplified Payment Verification Gateway",
+      "specAuthors": "Artem Chystiakov (@arvolear), Oleh Komendant (@Hrom131)",
       "editorialStatus": "Draft",
       "created": "2025-08-07",
       "requires": [],
@@ -11404,6 +11956,7 @@
       "id": "ERC-8004",
       "number": 8004,
       "title": "Trustless Agents",
+      "specAuthors": "Marco De Rossi (@MarcoMetaMask), Davide Crapis (@dcrapis) <davide@ethereum.org>, Jordan Ellis <jordanellis@google.com>, Erik Reppel <erik.reppel@coinbase.com>",
       "editorialStatus": "Draft",
       "created": "2025-08-13",
       "requires": [
@@ -11430,6 +11983,7 @@
       "id": "ERC-8017",
       "number": 8017,
       "title": "Payout Race",
+      "specAuthors": "Kyle Thornton (@kyle) <kyle@cowrie.io>",
       "editorialStatus": "Draft",
       "created": "2025-08-31",
       "requires": [
@@ -11451,6 +12005,7 @@
       "id": "ERC-8019",
       "number": 8019,
       "title": "Minimal Wallet-Managed Auto-Login for SIWE",
+      "specAuthors": "Ivo Georgiev (@Ivshti), Vijay Krishnavanshi (@vijaykrishnavanshi)",
       "editorialStatus": "Review",
       "created": "2025-09-02",
       "requires": [
@@ -11474,6 +12029,7 @@
       "id": "ERC-8023",
       "number": 8023,
       "title": "Multi-step Contract Ownership",
+      "specAuthors": "David Kim (@PowerStream3604)",
       "editorialStatus": "Draft",
       "created": "2025-09-16",
       "requires": [],
@@ -11491,6 +12047,7 @@
       "id": "ERC-8033",
       "number": 8033,
       "title": "Agent Council Oracles",
+      "specAuthors": "Rohan Parikh (@phiraml), Jon Michael Ross (@jonmross)",
       "editorialStatus": "Draft",
       "created": "2025-09-28",
       "requires": [
@@ -11513,6 +12070,7 @@
       "id": "ERC-8034",
       "number": 8034,
       "title": "Referable NFT Royalties",
+      "specAuthors": "Ruiqiang Li (@richard-620) <richard.620.research@gmail.com>, Qin Wang <qin.wang@data61.csiro.au>, Shiping Chen <shiping.chen@data61.csiro.au>, Saber Yu (@OniReimu), Brian Yecies <byecies@uow.edu.au>, John Le <johnle@uow.edu.au>",
       "editorialStatus": "Final",
       "created": "2025-10-02",
       "requires": [
@@ -11538,6 +12096,7 @@
       "id": "ERC-8040",
       "number": 8040,
       "title": "ESG Tokenization Protocol",
+      "specAuthors": "Leandro Lemos (@agronetlabs) <leandro@agronet.io>",
       "editorialStatus": "Draft",
       "created": "2025-09-06",
       "requires": [
@@ -11561,6 +12120,7 @@
       "id": "ERC-8041",
       "number": 8041,
       "title": "Fixed-Supply Agent NFT Collections",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2025-10-11",
       "requires": [
@@ -11585,6 +12145,7 @@
       "id": "ERC-8042",
       "number": 8042,
       "title": "Diamond Storage",
+      "specAuthors": "Nick Mudge (@mudgen)",
       "editorialStatus": "Final",
       "created": "2025-10-11",
       "requires": [
@@ -11606,6 +12167,7 @@
       "id": "ERC-8047",
       "number": 8047,
       "title": "Forensic Token (Forest)",
+      "specAuthors": "Sirawit Techavanitch (@MASDXI) <sirawit_tec@live4.utcc.ac.th>, Supachate Innet <supachate_inn@utcc.ac.th>",
       "editorialStatus": "Draft",
       "created": "2025-10-15",
       "requires": [
@@ -11631,6 +12193,7 @@
       "id": "ERC-8048",
       "number": 8048,
       "title": "Onchain Metadata for Token Registries",
+      "specAuthors": "Prem Makeig (@nxt3d), Rafael Abuawad (@rabuawad)",
       "editorialStatus": "Draft",
       "created": "2025-09-30",
       "requires": [
@@ -11658,6 +12221,7 @@
       "id": "ERC-8049",
       "number": 8049,
       "title": "Contract-Level Onchain Metadata",
+      "specAuthors": "Prem Makeig (@nxt3d), Rafael Abuawad (@rabuawad)",
       "editorialStatus": "Draft",
       "created": "2025-10-10",
       "requires": [
@@ -11684,6 +12248,7 @@
       "id": "ERC-8054",
       "number": 8054,
       "title": "Forkable ERC-20 Token",
+      "specAuthors": "Kevin (@kevzzsk), Fuxing (@fuxingloh)",
       "editorialStatus": "Draft",
       "created": "2025-10-10",
       "requires": [
@@ -11704,6 +12269,7 @@
       "id": "ERC-8056",
       "number": 8056,
       "title": "Scaled UI Amount Extension for ERC-20 Tokens",
+      "specAuthors": "Chris Ridmann (@cridmann) <chris@superstate.co>, Daniel Gretzke (@gretzke), Gilbert Shih <chung.shih@robinhood.com>, Tino Martinez Molina (@tinom9), Markus Osterlund (@robriks) <markus.osterlund@coinbase.com>",
       "editorialStatus": "Draft",
       "created": "2025-10-20",
       "requires": [
@@ -11727,6 +12293,7 @@
       "id": "ERC-8063",
       "number": 8063,
       "title": "Groups - Membership Tokens",
+      "specAuthors": "Cheng Qian (@jamesavechives) <contact@deakee.com>",
       "editorialStatus": "Final",
       "created": "2025-10-28",
       "requires": [
@@ -11751,6 +12318,7 @@
       "id": "ERC-8065",
       "number": 8065,
       "title": "Zero Knowledge Token Wrapper",
+      "specAuthors": "Jiahui Cui (@doublespending), 0xZPL (@0xZPL)",
       "editorialStatus": "Draft",
       "created": "2025-10-18",
       "requires": [
@@ -11780,6 +12348,7 @@
       "id": "ERC-8074",
       "number": 8074,
       "title": "Self-Describing Bytes via EIP-712 Selectors",
+      "specAuthors": "Andrew Richardson (@awrichar)",
       "editorialStatus": "Draft",
       "created": "2025-10-30",
       "requires": [
@@ -11802,6 +12371,7 @@
       "id": "ERC-8084",
       "number": 8084,
       "title": "Zero-knowledge proof metadata",
+      "specAuthors": "cococay (@zwowo1997)",
       "editorialStatus": "Draft",
       "created": "2025-11-10",
       "requires": [],
@@ -11819,6 +12389,7 @@
       "id": "ERC-8085",
       "number": 8085,
       "title": "Dual-Mode Fungible Tokens",
+      "specAuthors": "Rowan (@0xRowan)",
       "editorialStatus": "Draft",
       "created": "2025-11-15",
       "requires": [
@@ -11840,6 +12411,7 @@
       "id": "ERC-8086",
       "number": 8086,
       "title": "Privacy Token",
+      "specAuthors": "Rowan (@0xRowan)",
       "editorialStatus": "Draft",
       "created": "2025-11-19",
       "requires": [],
@@ -11859,6 +12431,7 @@
       "id": "ERC-8092",
       "number": 8092,
       "title": "Associated Accounts",
+      "specAuthors": "Steve Katzman (@stevieraykatz), Amie Corso (@amiecorso), Stephan Cilliers (@stephancill)",
       "editorialStatus": "Draft",
       "created": "2025-11-25",
       "requires": [
@@ -11884,6 +12457,7 @@
       "id": "ERC-8100",
       "number": 8100,
       "title": "Representable Contract State",
+      "specAuthors": "Christian Fries (@cfries), Peter Kohl-Landgraf (@pekola), Raphael Prandtl (@RKP1101)",
       "editorialStatus": "Draft",
       "created": "2025-12-01",
       "requires": [
@@ -11907,6 +12481,7 @@
       "id": "ERC-8106",
       "number": 8106,
       "title": "RWA Event-based Compliance Framework",
+      "specAuthors": "Andrew Wang (@wz14) <zhuowangy2k@outlook.com>, Jack Yin (@0xjackey) <0xjackey@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2025-12-16",
       "requires": [
@@ -11926,6 +12501,7 @@
       "id": "ERC-8107",
       "number": 8107,
       "title": "ENS Trust Registry for Agent Coordination",
+      "specAuthors": "Kwame Bryan (@KBryan)",
       "editorialStatus": "Review",
       "created": "2025-12-16",
       "requires": [
@@ -11958,6 +12534,7 @@
       "id": "ERC-8109",
       "number": 8109,
       "title": "Diamonds, Simplified",
+      "specAuthors": "Nick Mudge (@mudgen)",
       "editorialStatus": "Withdrawn",
       "created": "2025-12-21",
       "requires": [],
@@ -11980,6 +12557,7 @@
       "id": "ERC-8110",
       "number": 8110,
       "title": "Domain Architecture for Diamonds",
+      "specAuthors": "Hoang (@0x76agabond)",
       "editorialStatus": "Draft",
       "created": "2025-12-20",
       "requires": [
@@ -12001,6 +12579,7 @@
       "id": "ERC-8111",
       "number": 8111,
       "title": "Bound Signatures",
+      "specAuthors": "William Morriss (@wjmelements)",
       "editorialStatus": "Review",
       "created": "2025-12-23",
       "requires": [],
@@ -12019,6 +12598,7 @@
       "id": "ERC-8113",
       "number": 8113,
       "title": "Series Accounting for Incentivized Vaults",
+      "specAuthors": "Yash Saraswat (@0xpanicError)",
       "editorialStatus": "Draft",
       "created": "2025-12-25",
       "requires": [
@@ -12040,6 +12620,7 @@
       "id": "ERC-8117",
       "number": 8117,
       "title": "Anti-Poisoning Compact EVM Address Format",
+      "specAuthors": "Zainan Victor Zhou (@xinbenlv)",
       "editorialStatus": "Draft",
       "created": "2025-12-30",
       "requires": [
@@ -12063,6 +12644,7 @@
       "id": "ERC-8119",
       "number": 8119,
       "title": "Parameterized Storage Keys",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2025-01-06",
       "requires": [],
@@ -12078,6 +12660,7 @@
       "id": "ERC-8121",
       "number": 8121,
       "title": "Cross-Chain Function Calls via Hooks",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2025-12-12",
       "requires": [
@@ -12099,6 +12682,7 @@
       "id": "ERC-8122",
       "number": 8122,
       "title": "Minimal Agent Registry",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2025-12-17",
       "requires": [
@@ -12128,6 +12712,7 @@
       "id": "ERC-8126",
       "number": 8126,
       "title": "AI Agent Verification",
+      "specAuthors": "Leigh Cronian (@cybercentry) <leigh.cronian@cybercentry.co.uk>, Chris Johnson <chris@virtuals.io>",
       "editorialStatus": "Final",
       "created": "2026-01-15",
       "requires": [
@@ -12159,6 +12744,7 @@
       "id": "ERC-8127",
       "number": 8127,
       "title": "Human Readable Token Identifiers",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2026-01-14",
       "requires": [
@@ -12183,6 +12769,7 @@
       "id": "ERC-8143",
       "number": 8143,
       "title": "Smart Credential Resolution Interface",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2025-12-15",
       "requires": [
@@ -12205,6 +12792,7 @@
       "id": "ERC-8152",
       "number": 8152,
       "title": "Content-Addressable Logic Modules (CALM)",
+      "specAuthors": "Radek Svarz (@radeksvarz), Nick Mudge (@mudgen), William Morriss (@wjmelements)",
       "editorialStatus": "Review",
       "created": "2026-01-18",
       "requires": [],
@@ -12236,6 +12824,7 @@
       "id": "ERC-8153",
       "number": 8153,
       "title": "Facet-Based Diamonds",
+      "specAuthors": "Nick Mudge (@mudgen)",
       "editorialStatus": "Final",
       "created": "2026-02-07",
       "requires": [
@@ -12259,6 +12848,7 @@
       "id": "ERC-8161",
       "number": 8161,
       "title": "Transferable Tokenized Vault Requests",
+      "specAuthors": "Cain O'Sullivan (@cosullivan), Jeroen Offerijns (@hieronx)",
       "editorialStatus": "Final",
       "created": "2025-02-12",
       "requires": [
@@ -12280,6 +12870,7 @@
       "id": "ERC-8167",
       "number": 8167,
       "title": "Modular Dispatch Proxies",
+      "specAuthors": "William Morriss (@wjmelements), Radek Svarz (@radeksvarz)",
       "editorialStatus": "Final",
       "created": "2026-02-16",
       "requires": [],
@@ -12300,6 +12891,7 @@
       "id": "ERC-8176",
       "number": 8176,
       "title": "Descriptor Attestations for ERC-7730",
+      "specAuthors": "Bartosz Rozwarski (@llbartekll)",
       "editorialStatus": "Draft",
       "created": "2026-02-26",
       "requires": [
@@ -12323,6 +12915,7 @@
       "id": "ERC-8179",
       "number": 8179,
       "title": "Blob Space Segments",
+      "specAuthors": "Vitalik Buterin (@vbuterin), Skeletor Spaceman (@skeletor-spaceman)",
       "editorialStatus": "Draft",
       "created": "2026-02-08",
       "requires": [
@@ -12346,6 +12939,7 @@
       "id": "ERC-8180",
       "number": 8180,
       "title": "Blob Authenticated Messaging",
+      "specAuthors": "Vitalik Buterin (@vbuterin), Skeletor Spaceman (@skeletor-spaceman), Orca (@0xrcinus)",
       "editorialStatus": "Draft",
       "created": "2026-02-21",
       "requires": [
@@ -12371,6 +12965,7 @@
       "id": "ERC-8183",
       "number": 8183,
       "title": "Agentic Commerce",
+      "specAuthors": "Davide Crapis (@dcrapis), Bryan Lim (@ai-virtual-b), Tay Weixiong (@twx-virtuals), Chooi Zuhwa (@Zuhwa)",
       "editorialStatus": "Draft",
       "created": "2026-02-25",
       "requires": [
@@ -12393,6 +12988,7 @@
       "id": "ERC-8187",
       "number": 8187,
       "title": "Token Puller",
+      "specAuthors": "Guillermo Narvaja (@gnarvaja)",
       "editorialStatus": "Draft",
       "created": "2026-02-27",
       "requires": [
@@ -12424,6 +13020,7 @@
       "id": "ERC-8196",
       "number": 8196,
       "title": "AI Agent Authenticated Wallet",
+      "specAuthors": "Leigh Cronian (@cybercentry) <leigh.cronian@cybercentry.co.uk>, Chris Johnson <chris@virtuals.io>",
       "editorialStatus": "Final",
       "created": "2026-03-14",
       "requires": [
@@ -12449,6 +13046,7 @@
       "id": "ERC-8199",
       "number": 8199,
       "title": "Sandboxed Smart Wallet",
+      "specAuthors": "David Kim (@PowerStream3604)",
       "editorialStatus": "Draft",
       "created": "2026-03-19",
       "requires": [
@@ -12473,6 +13071,7 @@
       "id": "ERC-8217",
       "number": 8217,
       "title": "Agent NFT Identity Bindings",
+      "specAuthors": "Prem Makeig (@nxt3d)",
       "editorialStatus": "Draft",
       "created": "2026-04-05",
       "requires": [
@@ -12497,6 +13096,7 @@
       "id": "ERC-8226",
       "number": 8226,
       "title": "Regulated Agent Mandate",
+      "specAuthors": "Ludovico Rossi (@ludovicor-eth) <ludovico@brickken.com>, Dario Lo Buglio (@xaler5) <dario@brickken.com>, Thamer Dridi (@thamerdridi) <thamer@brickken.com>, Nabil El Alami Khalifi (@nabil-brickken) <nabil@brickken.com>",
       "editorialStatus": "Draft",
       "created": "2026-04-12",
       "requires": [
@@ -12527,6 +13127,7 @@
       "id": "ERC-8255",
       "number": 8255,
       "title": "Expiring Token Approvals",
+      "specAuthors": "Moody Salem (@moodysalem) <moody.salem@gmail.com>",
       "editorialStatus": "Draft",
       "created": "2026-05-06",
       "requires": [
@@ -12548,6 +13149,7 @@
       "id": "ERC-8257",
       "number": 8257,
       "title": "Agent Tool Registry",
+      "specAuthors": "Cody Sears (@CodySearsOS), Ryan Ghods (@ryanio)",
       "editorialStatus": "Draft",
       "created": "2026-04-17",
       "requires": [
@@ -12582,6 +13184,7 @@
       "id": "ERC-8259",
       "number": 8259,
       "title": "AI Agent Identity & Threat Registry",
+      "specAuthors": "Ibonon (@ibonon)",
       "editorialStatus": "Draft",
       "created": "2026-05-07",
       "requires": [],
@@ -12599,6 +13202,7 @@
       "id": "ERC-8262",
       "number": 8262,
       "title": "Zero-Knowledge Compliance Oracle",
+      "specAuthors": "DROO (@DROOdotFOO), Bloo (@bloo-berries), Merkle Bonsai (@Jabher), Jan (@sssngth)",
       "editorialStatus": "Review",
       "created": "2026-04-07",
       "requires": [
@@ -12627,6 +13231,7 @@
       "id": "ERC-8273",
       "number": 8273,
       "title": "Attestation-Gated Agentic Actions",
+      "specAuthors": "Yunan Li, Qingzhi Zha (@rickzha610), Xianrui Qin (@xrqin), Vitto Rivabella (@eversmile12)",
       "editorialStatus": "Draft",
       "created": "2025-05-26",
       "requires": [
@@ -12657,6 +13262,7 @@
       "id": "ERC-8286",
       "number": 8286,
       "title": "Modular Accounts for Frame Transactions",
+      "specAuthors": "Chiranjeev Mishra (@chiranjeev13), Pedro Gomes (@pedrouid), Alex Forshtat (@forshtat)",
       "editorialStatus": "Draft",
       "created": "2026-06-04",
       "requires": [
@@ -12681,6 +13287,7 @@
       "id": "ERC-8290",
       "number": 8290,
       "title": "Shielded Note Teleportation",
+      "specAuthors": "georgeh (@geovgy)",
       "editorialStatus": "Draft",
       "created": "2026-06-05",
       "requires": [],
@@ -12700,6 +13307,7 @@
       "id": "ERC-8320",
       "number": 8320,
       "title": "Regulated Asset Claim",
+      "specAuthors": "Edwin Mata <edwin@brickken.com>, Ludovico Rossi (@ludovicor-eth) <ludovico@brickken.com>, Dario Lo Buglio (@xaler5) <dario@brickken.com>, Thamer Dridi (@thamerdridi) <thamer@brickken.com>, Nabil El Alami Khalifi (@nabil-brickken) <nabil@brickken.com>",
       "editorialStatus": "Draft",
       "created": "2026-07-03",
       "requires": [
@@ -12728,6 +13336,7 @@
       "id": "ERC-8325",
       "number": 8325,
       "title": "Asset Anchor Registry",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Final",
       "created": "2026-07-04",
       "requires": [
@@ -12751,6 +13360,7 @@
       "id": "ERC-8326",
       "number": 8326,
       "title": "Canonical Document Bundle Anchor",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Final",
       "created": "2026-07-05",
       "requires": [
@@ -12774,6 +13384,7 @@
       "id": "ERC-8327",
       "number": 8327,
       "title": "Directional Transfer Domain Registry",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Final",
       "created": "2026-07-05",
       "requires": [
@@ -12798,6 +13409,7 @@
       "id": "ERC-8328",
       "number": 8328,
       "title": "Subject-Linked Compliance Event Log",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Final",
       "created": "2026-07-05",
       "requires": [
@@ -12820,6 +13432,7 @@
       "id": "ERC-8329",
       "number": 8329,
       "title": "Subject-Linked Impact Snapshot Log",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Final",
       "created": "2026-07-05",
       "requires": [
@@ -12839,6 +13452,7 @@
       "id": "ERC-8330",
       "number": 8330,
       "title": "Subject-Linked NAV Snapshot Oracle",
+      "specAuthors": "Chris Turner <c.turner@kula.com>, David Hay (@david-hay), Reagan Simpson (@krumg111), Collins Musyimi (@Musyimi97)",
       "editorialStatus": "Last Call",
       "created": "2026-07-05",
       "requires": [
@@ -12861,6 +13475,7 @@
       "id": "ERC-8348",
       "number": 8348,
       "title": "Financial Lease",
+      "specAuthors": "Javier Mateos (@javierpmateos)",
       "editorialStatus": "Draft",
       "created": "2026-07-23",
       "requires": [
@@ -12895,6 +13510,7 @@
       "id": "ERC-8349",
       "number": 8349,
       "title": "Index-Based Multi-Facet Proxy",
+      "specAuthors": "Artem Buchikhin (@Arhemius)",
       "editorialStatus": "Draft",
       "created": "2026-07-25",
       "requires": [
@@ -12918,6 +13534,7 @@
       "id": "ERC-8350",
       "number": 8350,
       "title": "Agent Memory State Registry",
+      "specAuthors": "Everest An (@everest-an), XiaoHai (@XiaoHai67890), Luo (@lucas1968), Eric",
       "editorialStatus": "Draft",
       "created": "2026-07-14",
       "requires": [
@@ -12942,6 +13559,7 @@
       "id": "ERC-8354",
       "number": 8354,
       "title": "Confidential Agent Policy Verdicts",
+      "specAuthors": "Muhammad Zidan Fatonie (@mzf11125), Faisal Firdani (@zexoverz), Maulana Asykari Muhammad (@WeissCurry)",
       "editorialStatus": "Draft",
       "created": "2026-07-16",
       "requires": [
@@ -12971,6 +13589,7 @@
       "id": "ERC-8376",
       "number": 8376,
       "title": "Token Launch Abuse Detection and Remediation",
+      "specAuthors": "Leigh Cronian (@cybercentry) <leigh.cronian@cybercentry.co.uk>, Chris Johnson <chris@virtuals.io>",
       "editorialStatus": "Review",
       "created": "2026-08-07",
       "requires": [
@@ -12996,6 +13615,7 @@
       "id": "ERC-8377",
       "number": 8377,
       "title": "Reference-Relative Slippage Bounds",
+      "specAuthors": "Faisal Firdani (@zexoverz)",
       "editorialStatus": "Draft",
       "created": "2026-08-05",
       "requires": [
@@ -13019,6 +13639,7 @@
       "id": "ERC-8410",
       "number": 8410,
       "title": "Portable Execution Plan Artifact",
+      "specAuthors": "Moody Salem (@moodysalem)",
       "editorialStatus": "Draft",
       "created": "2026-09-04",
       "requires": [
@@ -13042,6 +13663,7 @@
       "id": "ERC-8426",
       "number": 8426,
       "title": "Wallet Pass Extension for NFTs",
+      "specAuthors": "Hunt (@huntclubhero) <hunt@halldon.com>",
       "editorialStatus": "Draft",
       "created": "2026-08-07",
       "requires": [
@@ -13074,6 +13696,7 @@
       "id": "ERC-8436",
       "number": 8436,
       "title": "Agent Collective Decision Framework",
+      "specAuthors": "Gary Yang (@garyyang-finchip)",
       "editorialStatus": "Draft",
       "created": "2026-10-04",
       "requires": [
@@ -13104,6 +13727,7 @@
       "id": "ERC-8441",
       "number": 8441,
       "title": "Hybrid post-quantum stealth address scheme",
+      "specAuthors": "namnc (@namnc), Pierre (@dmpierre), kassandra.eth (@kassandraoftroy)",
       "editorialStatus": "Draft",
       "created": "2026-08-28",
       "requires": [
@@ -13126,6 +13750,7 @@
       "id": "ERC-8444",
       "number": 8444,
       "title": "Agentic Resource Discovery (ARD) Onchain",
+      "specAuthors": "Gary Yang (@garyyang-finchip)",
       "editorialStatus": "Draft",
       "created": "2026-10-12",
       "requires": [
@@ -13152,6 +13777,7 @@
       "id": "ERC-8501",
       "number": 8501,
       "title": "Generative Engine Optimization Framework",
+      "specAuthors": "Gary Yang (@garyyang-finchip)",
       "editorialStatus": "Draft",
       "created": "2026-11-14",
       "requires": [
