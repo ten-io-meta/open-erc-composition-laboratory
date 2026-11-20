@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "OECL_OPEN_ERC_PROPOSAL_INDEX_V1",
+  "source": "ethereum/ERCs",
+  "retrieval": "GitHub REST open pull requests and changed-file pinned markdown",
+  "scannedOpenPullRequests": 0,
+  "examinedDocumentProposals": 0,
+  "errors": [],
+  "coverage": "NOT_YET_MATERIALIZED",
+  "note": "Unmerged proposal index placeholder; never an official ERC acceptance signal",
+  "proposals": []
+}
