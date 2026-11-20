@@ -41,7 +41,7 @@ for(const file of files) {
  const summary=(abstract?.[1]??"").replace(/<[^>]*>/g," ").replace(/\[[^\]]+\]\([^)]+\)/g," ")
  .replace(/[#*_]/g,"").replace(/\s+/g," ").trim().slice(0,340);
  profiles.push({
-   id:"ERC-"+n,number:n,title:meta.title??null,
+   id:"ERC-"+n,number:n,title:meta.title??null,specAuthors:meta.author??null,
    editorialStatus:meta.status??null,created:meta.created??null,
    requires:requires.map(x=>"ERC-"+x),
    references:references.map(x=>"ERC-"+x),

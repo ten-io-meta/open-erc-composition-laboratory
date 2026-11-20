@@ -2,20 +2,34 @@
 
 import { useState, type FormEvent } from "react";
 import index from "@/data/officialErcIndex.json";
+import proposalIndex from "@/data/openErcProposalIndex.json";
 
 type ERCSpec = {
  id:string;status:"FETCHED"|"OPEN_PROPOSAL_PR"|"SOURCE_UNAVAILABLE"|"NOT_IN_OFFICIAL_SNAPSHOT";
  title:string|null;editorialStatus:string|null;summary:string|null;discussionUrl:string|null;requires:string[];references:string[];
- url:string;sourceRevision:string;
+ url:string;sourceRevision:string;specAuthors:string|null;documentCreatedAt:string|null;proposalAttribution:null|{pullRequestNumber:number;submittedBy:string|null;openedAt:string|null;updatedAt:string|null;sourceCommitSha:string;sourcePullRequestUrl:string};
+};
+type ScienceWorkOrder = {
+ workOrderSchema:string;participants:string[];documentarySignal:string;verdict:string;
+ currentExperiment:{
+  status:string;registrationId:string|null;harness:string;executionScript:string|null;
+  foundationProtocolId:string|null;historicalResult:string|null;historicalScientificPolarity:string|null;
+  pinnedSources:Array<{participantId:string;repository:string;revision:string}>;nextAction:string
+ };
+ existingScientificEvidence:null|{compatibilityPolarity:string;harmonyStatus:string;unresolvedBoundaries:number;compositionValueStatus:string;basis:string};
+ requiredExperiments:Array<{id:string;requirement:string}>;
+ verifiedEmergentProperties:string[];
+ note:string;
 };
 type ErcResearch = {
  status:string;
  protocols:string[];
  provenance:{repository:string;treeSha:string;commitSha:string;indexedDocuments:number;forum:string};
  standards:ERCSpec[];
- forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string}>}>;
+ forum:Array<{status:string;query:string;topics:Array<{id:number;title:string;url:string;createdAt:string|null;lastActivityAt:string|null;author:string|null;firstPostUpdatedAt:string|null;firstPostVersion:number|null;postCount:number|null;metadataStatus:string;originalPostPreview:string|null;discoveryKind:"SEARCH_HIT"|"DECLARED_DISCUSSION"}>}>;
  documentaryRelations:Array<{kind:string;source:string;target:string;explanation:string;evidenceUrl:string}>;
  scientificProjection:{compatibility:string;harmony:string;valueStatus:string;findingCount:number;basis:string}|null;
+ scienceWorkOrder:ScienceWorkOrder;
  newExperimentExecuted:boolean;
  emergentPropertiesVerified:string[];
  conclusion:string;
@@ -62,7 +76,14 @@ export function ErcResearchExplorer() {
        <div className="rounded-2xl bg-[#eff4f0] px-5 py-4 text-right">
          <div className="font-mono text-3xl font-semibold text-[#174c38]">{index.count}</div>
          <div className="max-w-[170px] text-xs leading-5 text-[#68746b]">official ERC documents indexed</div>
-         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Merged documents only · open PRs discovered separately</div>
+         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">Merged documents</div>
+         <div className="mt-4 border-t border-[#d7e2da] pt-3 font-mono text-xl font-semibold text-[#174c38]">
+           {proposalIndex.examinedDocumentProposals || "—"}
+         </div>
+         <div className="max-w-[170px] text-xs leading-5 text-[#68746b]">Open proposal documents</div>
+         <div className="mt-1 font-mono text-[9px] uppercase text-[#7a867e]">
+           Unmerged · {proposalIndex.coverage}
+         </div>
        </div>
      </div>
      <form onSubmit={compare} className="mt-8 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
@@ -97,6 +118,13 @@ export function ErcResearchExplorer() {
                <div className="font-mono text-[11px] text-[#174c38]">{doc.id} · {doc.status}</div>
                <h4 className="mt-2 text-lg font-semibold">{doc.title??"Source not available in official snapshot"}</h4>
                <p className="mt-2 text-xs text-[#68746b]">Editorial status: {doc.editorialStatus??"Unknown"}</p>
+               <p className="mt-1 text-xs text-[#68746b]">Specification author(s): {doc.specAuthors??"Not available"}</p>
+               <p className="mt-1 text-xs text-[#68746b]">Created: {doc.documentCreatedAt??"Unknown"}</p>
+               {doc.proposalAttribution&&<p className="mt-2 text-xs text-[#68746b]">
+                 Open PR #{doc.proposalAttribution.pullRequestNumber} · Submitted by {doc.proposalAttribution.submittedBy??"Unknown"}
+                 · {doc.proposalAttribution.openedAt?.slice(0,10)??"Unknown date"}
+                 · Source revision {doc.proposalAttribution.sourceCommitSha.slice(0,12)}
+               </p>}
                {doc.summary&&<p className="mt-3 text-sm leading-6 text-[#515b54]">{doc.summary}</p>}
                <p className="mt-2 text-xs text-[#68746b]">Declared requires: {doc.requires.length?doc.requires.join(", "):"None found"}</p>
                <p className="mt-2 text-xs text-[#68746b]">Text references: {doc.references.length?doc.references.slice(0,12).join(", "):"None found"}</p>
@@ -144,12 +172,63 @@ export function ErcResearchExplorer() {
                  <div className="font-mono text-xs text-[#667067]">{group.query} · {group.status}</div>
                  {group.topics.length?(
                    <ul className="mt-2 space-y-2">{group.topics.map(t=>(
-                     <li key={t.id}><a href={t.url} target="_blank" rel="noopener noreferrer" className="text-sm text-[#174c38] underline">{t.title}</a></li>
+                     <li key={t.id} className="space-y-1">
+                       <a href={t.url} target="_blank" rel="noopener noreferrer" className="text-sm text-[#174c38] underline">{t.title}</a>
+                       <p className="text-[11px] text-[#68746b]">
+                         {t.author?"Started by @"+t.author+" · ":""}
+                         {t.createdAt?"Created "+t.createdAt.slice(0,10)+" · ":""}
+                         {t.lastActivityAt?"Last activity "+t.lastActivityAt.slice(0,10)+" · ":""}
+                         {t.metadataStatus==="VERIFIED_TOPIC"?"Verified topic metadata":"Search metadata only"}
+                         {t.firstPostVersion!==null?" · First post version "+t.firstPostVersion:""}
+                         {" · "}{t.discoveryKind==="DECLARED_DISCUSSION"?"Linked from specification":"Discourse search result"}
+                       </p>
+                       {t.originalPostPreview&&(
+                         <p className="mt-1 rounded-lg bg-white p-2 text-xs leading-5 text-[#67716b]">
+                           First post preview (unverified commentary): {t.originalPostPreview}
+                         </p>
+                       )}
+                     </li>
                    ))}</ul>
                  ):<p className="mt-1 text-xs text-[#777e77]">{group.status==="SEARCHED"?"No matching topics returned; not proof no discussion exists.":"Forum unavailable; evidence incomplete."}</p>}
                </div>
              ))}
            </div>
+         </div>
+         <div className="rounded-2xl border border-[#b9cabc] bg-[#f4f8f4] p-5 md:p-7">
+           <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#174c38]">OECL scientific work order</p>
+           <h4 className="mt-2 text-xl font-semibold">From research to executable composition evidence</h4>
+           <div className="mt-4 flex flex-wrap gap-2">
+             <span className="rounded-full bg-white px-3 py-2 font-mono text-[10px] text-[#174c38]">{report.scienceWorkOrder.documentarySignal}</span>
+             <span className="rounded-full bg-white px-3 py-2 font-mono text-[10px] text-[#174c38]">{report.scienceWorkOrder.currentExperiment.status}</span>
+             <span className="rounded-full bg-white px-3 py-2 font-mono text-[10px] text-[#174c38]">{report.scienceWorkOrder.verdict}</span>
+           </div>
+           {report.scienceWorkOrder.currentExperiment.registrationId ? (
+             <div className="mt-5 space-y-2 text-sm">
+               <p>Reviewed offline joint harness: <strong>{report.scienceWorkOrder.currentExperiment.registrationId}</strong></p>
+               <p>Shared foundation: {report.scienceWorkOrder.currentExperiment.foundationProtocolId}</p>
+               <p>Historical joint execution polarity: <strong>{report.scienceWorkOrder.currentExperiment.historicalScientificPolarity??"Unknown"}</strong></p>
+               {report.scienceWorkOrder.currentExperiment.pinnedSources.map(pin=>(
+                 <p key={pin.participantId} className="break-all font-mono text-xs text-[#5f6b62]">
+                   {pin.participantId} · {pin.repository}@{pin.revision.slice(0,12)}
+                 </p>
+               ))}
+               <p className="text-xs text-[#69736a]">A registered neutral harness is not a proof of runtime compatibility or emergence. Its code may run only in reviewed isolated CI.</p>
+             </div>
+           ):(
+             <p className="mt-4 text-sm text-[#69736a]">
+               No independently reviewed executable recipe is registered for this pair. The next step is to select implementation revisions, prepare joint execution and establish relevant invariant boundaries.
+             </p>
+           )}
+           <h5 className="mt-6 font-semibold">Experiments required before declaring emergence</h5>
+           <ol className="mt-3 grid gap-2 md:grid-cols-2">
+             {report.scienceWorkOrder.requiredExperiments.map((item,i)=>(
+               <li key={item.id} className="rounded-xl border border-[#d6e2d8] bg-white p-3">
+                 <div className="font-mono text-[10px] text-[#174c38]">{String(i+1).padStart(2,"0")} · {item.id}</div>
+                 <p className="mt-2 text-xs leading-5 text-[#5f6b62]">{item.requirement}</p>
+               </li>
+             ))}
+           </ol>
+           <p className="mt-4 text-xs leading-5 text-[#748079]">{report.scienceWorkOrder.note}</p>
          </div>
          <div className="border-t border-[#dce1da] pt-5">
            <h4 className="text-lg font-semibold">Questions for the next reproducible experiment</h4>

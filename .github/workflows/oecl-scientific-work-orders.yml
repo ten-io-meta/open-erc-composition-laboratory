@@ -1,0 +1,68 @@
+name: OECL scientific evidence admission and pinned joint-EVM control
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-emergence-evidence/**"
+      - "web/src/server/oeclScientificWorkOrder.ts"
+      - "web/src/data/registeredExperimentIndex.json"
+      - "scripts/check-emergence-evidence-gate.ts"
+      - "scripts/check-registered-experiment-index.ts"
+      - ".github/workflows/oecl-scientific-work-orders.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence-logic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Ensure web work orders match actual OECL registered executors and pinned sources
+        run: npx tsx scripts/check-registered-experiment-index.ts
+      - name: Verify six-run emergent property falsification and zero false scientific claims
+        run: npx tsx scripts/check-emergence-evidence-gate.ts
+      - name: Compile all existing OECL scientific engines
+        run: npx tsc --noEmit
+  pinned-real-joint-control:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: erc-8004/erc-8004-contracts
+          ref: b9e466c250744a7e06b13dff9d3c2844ed64f825
+          path: external/github/erc-8004/erc-8004-contracts
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: external/github/ten-io-meta/erc8060-native-eth-value
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Execute existing exact-pinned shared EVM ERC-8004 x ERC-8060 recipe
+        run: |
+          npx tsx scripts/check-real-erc8004-erc8060-joint-harness-runtime.ts | tee /tmp/oecl-joint-control.txt
+          grep -q "RESULT: PASS" /tmp/oecl-joint-control.txt
+          grep -q "BILATERAL_EXECUTION_OBSERVED_WITHOUT_COMPOSITION_POLARITY" /tmp/oecl-joint-control.txt
+      - name: Publish raw runtime logs as evidence; not emergent property certification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-8004-8060-real-joint-evidence-not-emergence
+          path: /tmp/oecl-joint-control.txt
+          if-no-files-found: warn

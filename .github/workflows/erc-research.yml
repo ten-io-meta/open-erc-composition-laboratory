@@ -4,6 +4,7 @@ on:
     paths:
       - 'web/**'
       - 'scripts/sync-official-erc-index.mjs'
+      - 'scripts/check-open-proposal-source-index.mjs'
       - '.github/workflows/erc-research.yml'
   workflow_dispatch:
   schedule:
@@ -21,7 +22,10 @@ jobs:
           node-version: '22'
       - name: Verify all pinned official ERC documentary records
         run: node scripts/check-official-erc-corpus.mjs
+      - name: Verify complete open proposal source snapshot and excluded inconsistencies
+        run: node scripts/check-open-proposal-source-index.mjs
       - name: Refresh official ERC GitHub index (read-only; never auto-deploy)
+        if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/sync-official-erc-index.mjs
