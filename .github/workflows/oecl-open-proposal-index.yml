@@ -4,6 +4,7 @@ on:
     paths:
       - "scripts/index-open-erc-proposals.mjs"
       - ".github/workflows/oecl-open-proposal-index.yml"
+      - "web/src/data/openErcProposalIndex.json"
   workflow_dispatch:
   schedule:
     - cron: "43 4 * * 3"
@@ -20,7 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify pinned open ERC proposals on pull requests without remote API calls
+        if: github.event_name == 'pull_request'
+        run: node scripts/check-open-proposal-source-index.mjs
       - name: Discover official repository open PRs without labeling them merged ERCs
+        if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/index-open-erc-proposals.mjs
