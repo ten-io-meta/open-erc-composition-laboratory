@@ -22,6 +22,7 @@ const ids=new Set(standards.map(x=>x.id));
 if(standards.length<400||ids.size!==standards.length)throw Error("Official ERC inventory incomplete or duplicated: "+standards.length);
 const revision=execFileSync("git",["-C",root,"rev-parse","HEAD"],{encoding:"utf8"}).trim();
 if(!/^[0-9a-f]{40}$/.test(revision))throw Error("Missing pinned official ERC Git revision");
+for(const standard of standards)standard.sourceUrl="https://github.com/ethereum/ERCs/blob/"+revision+"/ERCS/erc-"+standard.number+".md";
 let discussionCoverage={status:"UNAVAILABLE",attemptedPages:pages,fetchedPages:0,lastError:null};
 const forums=new Map();
 for(let page=0;page<pages;page++){
