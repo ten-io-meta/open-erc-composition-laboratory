@@ -62,11 +62,11 @@ async function loadDocument(id: string): Promise<ErcDocument> {
   const n = idNumber(id);
   const url = "https://github.com/ethereum/ERCs/blob/master/ERCS/erc-" + n + ".md";
   const base: ErcDocument = { id, status:"SOURCE_UNAVAILABLE", title:null,
-    editorialStatus:null, requires:[], references:[], url, sourceRevision:index.sourceTreeSha };
+    editorialStatus:null, requires:[], references:[], url, sourceRevision:index.sourceCommitSha };
   if (!known.has(n)) return {...base,status:"NOT_IN_OFFICIAL_SNAPSHOT"};
   try {
     const response = await fetch(
-      "https://raw.githubusercontent.com/ethereum/ERCs/" + index.sourceTreeSha + "/ERCS/erc-" + n + ".md",
+      "https://raw.githubusercontent.com/ethereum/ERCs/" + index.sourceCommitSha + "/ERCS/erc-" + n + ".md",
       { next:{revalidate:21600}, signal:AbortSignal.timeout(8000), headers:{"Accept":"text/plain"} }
     );
     if (!response.ok) return base;
@@ -130,7 +130,7 @@ export async function researchErcPair(a:string,b:string) {
   return {
     status:"DOCUMENTARY_RESEARCH_ONLY" as const,
     protocols:[a,b],
-    provenance:{repository:"ethereum/ERCs",treeSha:index.sourceTreeSha,
+    provenance:{repository:"ethereum/ERCs",treeSha:index.sourceTreeSha,commitSha:index.sourceCommitSha,
       indexedDocuments:index.count,forum:"ethereum-magicians.org"},
     standards:[left,right],
     forum:[forumA,forumB],
