@@ -1,6 +1,6 @@
 {
   "schemaVersion": "OECL_PUBLIC_ERC_DOCUMENTARY_CORPUS_V1",
-  "generatedAt": "2026-11-20T22:06:38.558Z",
+  "generatedAt": "2026-11-20T22:09:59.142Z",
   "source": {
     "repository": "ethereum/ERCs",
     "revision": "99123078478fb56b1b5a5abcbb6b6207dba70832",
@@ -88,7 +88,7 @@
       "summary": "This ERC describes the implementation, as deployed to the main ethereum network on 2017-05-04, of a registrar contract to govern the allocation of names in the Ethereum Name Service (ENS). The corresponding source code is here. For more background, refer to EIP-137. > Registrars are responsible for allocating domain na",
       "requires": [],
       "mentions": [
-        "ERC-26",
+        "REF-26-UNCLASSIFIED",
         "ERC-137"
       ],
       "discussionUrl": null,
@@ -104,7 +104,7 @@
       "created": "2018-01-23",
       "summary": "Creates a standard method to publish and detect what interfaces a smart contract implements.",
       "requires": [
-        "ERC-214"
+        "REF-214-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -172,7 +172,7 @@
       "summary": "This ERC proposes a specification about how to handle signed data in Ethereum contracts.",
       "requires": [],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/191",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-191.md",
@@ -290,9 +290,9 @@
         "ERC-20",
         "ERC-173",
         "ERC-223",
-        "ERC-677",
+        "REF-677-UNCLASSIFIED",
         "ERC-777",
-        "ERC-827"
+        "REF-827-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/eips/issues/721",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-721.md",
@@ -311,7 +311,7 @@
         "ERC-173"
       ],
       "mentions": [
-        "ERC-1014"
+        "REF-1014-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/discussion-for-eip725/12158",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-725.md",
@@ -332,7 +332,7 @@
         "ERC-20",
         "ERC-165",
         "ERC-223",
-        "ERC-672",
+        "REF-672-UNCLASSIFIED",
         "ERC-820"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/777",
@@ -363,11 +363,11 @@
       "summary": "This standard defines a universal registry smart contract where any address (contract or regular account) can register which interface it supports and which smart contract is responsible for its implementation. This standard keeps backward compatibility with [ERC-165].",
       "requires": [
         "ERC-165",
-        "ERC-214"
+        "REF-214-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-155",
-        "ERC-672",
+        "REF-155-UNCLASSIFIED",
+        "REF-672-UNCLASSIFIED",
         "ERC-1820"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/820",
@@ -534,7 +534,7 @@
       "mentions": [
         "ERC-181",
         "ERC-777",
-        "ERC-780"
+        "REF-780-UNCLASSIFIED"
       ],
       "discussionUrl": null,
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-926.md",
@@ -639,7 +639,7 @@
       "summary": "Broadly applicable status codes for smart contracts.",
       "requires": [],
       "mentions": [
-        "ERC-658",
+        "REF-658-UNCLASSIFIED",
         "ERC-1444"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-1066-ethereum-status-codes-esc/",
@@ -658,10 +658,10 @@
         "ERC-20",
         "ERC-191",
         "ERC-1271",
-        "ERC-1344"
+        "REF-1344-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-877"
+        "REF-877-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc1077-and-1078-the-magic-of-executable-signed-messages-to-login-and-do-actions/351",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1077.md",
@@ -682,7 +682,7 @@
         "ERC-1077"
       ],
       "mentions": [
-        "ERC-720"
+        "REF-720-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc1077-and-1078-the-magic-of-executable-signed-messages-to-login-and-do-actions/351",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1078.md",
@@ -699,7 +699,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-791"
+        "REF-791-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-1080-recoverabletoken-standard/364",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1080.md",
@@ -815,7 +815,7 @@
       "created": "2018-06-22",
       "summary": "To simply and cheaply clone contract functionality in an immutable way, this standard specifies a minimal bytecode implementation that delegates all calls to a known, fixed address.",
       "requires": [
-        "ERC-211"
+        "REF-211-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://github.com/optionality/clone-factory/issues/10",
@@ -883,7 +883,7 @@
       "summary": "This EIP extends EIP-55 by optionally adding a chain id defined by EIP-155 to the checksum calculation.",
       "requires": [
         "ERC-55",
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1121",
@@ -961,11 +961,11 @@
       "mentions": [
         "ERC-20",
         "ERC-223",
-        "ERC-677",
+        "REF-677-UNCLASSIFIED",
         "ERC-725",
         "ERC-777",
-        "ERC-827",
-        "ERC-1300"
+        "REF-827-UNCLASSIFIED",
+        "REF-1300-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1261",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1261.md",
@@ -981,7 +981,7 @@
       "summary": "Externally Owned Accounts (EOA) can sign messages with their associated private keys, but currently contracts cannot. We propose a standard way for any contracts to verify whether a signature on a behalf of a given contract is valid. This is possible via the implementation of a isValidSignature(hash, signature) functio",
       "requires": [],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1271",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1271.md",
@@ -1050,7 +1050,7 @@
       ],
       "mentions": [
         "ERC-223",
-        "ERC-677",
+        "REF-677-UNCLASSIFIED",
         "ERC-721"
       ],
       "discussionUrl": "https://github.com/ethereum/eips/issues/1363",
@@ -1168,8 +1168,8 @@
       ],
       "mentions": [
         "ERC-884",
-        "ERC-1643",
-        "ERC-1644",
+        "REF-1643-UNCLASSIFIED",
+        "REF-1644-UNCLASSIFIED",
         "ERC-1820",
         "ERC-2612",
         "ERC-3643",
@@ -1193,10 +1193,10 @@
       ],
       "mentions": [
         "ERC-777",
-        "ERC-1400",
-        "ERC-1404",
-        "ERC-1410",
-        "ERC-1411",
+        "REF-1400-UNCLASSIFIED",
+        "REF-1404-UNCLASSIFIED",
+        "REF-1410-UNCLASSIFIED",
+        "REF-1411-UNCLASSIFIED",
         "ERC-1444",
         "ERC-1450"
       ],
@@ -1288,8 +1288,8 @@
       "mentions": [
         "ERC-165",
         "ERC-721",
-        "ERC-930",
-        "ERC-1412",
+        "REF-930-UNCLASSIFIED",
+        "REF-1412-UNCLASSIFIED",
         "ERC-2535"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1538",
@@ -1352,7 +1352,7 @@
       "created": "2018-11-18",
       "summary": "Communicating with dapps currently requires paying ETH for gas, which limits dapp adoption to ether users. Therefore, contract owners may wish to pay for the gas to increase user acquisition, or let their users pay for gas with fiat money. The Gas Station Network makes smart contracts accessible to non-ether users by a",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-2771"
       ],
       "mentions": [],
@@ -1372,8 +1372,8 @@
         "ERC-165"
       ],
       "mentions": [
-        "ERC-735",
-        "ERC-780"
+        "REF-735-UNCLASSIFIED",
+        "REF-780-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1616",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1616.md",
@@ -1422,7 +1422,7 @@
       "created": "2019-01-13",
       "summary": "A standard way of representing web3 browser URLs for decentralized applications.",
       "requires": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-831"
@@ -1476,9 +1476,9 @@
       "mentions": [
         "ERC-600",
         "ERC-601",
-        "ERC-1102",
+        "REF-1102-UNCLASSIFIED",
         "ERC-1581",
-        "ERC-2255"
+        "REF-2255-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-erc-app-keys-application-specific-wallet-accounts/2742",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1775.md",
@@ -1493,11 +1493,11 @@
       "created": "2019-03-03",
       "summary": "Reusable Verifiable Claims using EIP 712 Signed Typed Data.",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-735",
-        "ERC-780",
+        "REF-735-UNCLASSIFIED",
+        "REF-780-UNCLASSIFIED",
         "ERC-1056"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-1812-ethereum-verifiable-claims/2814",
@@ -1514,11 +1514,11 @@
       "summary": "This standard defines a universal registry smart contract where any address (contract or regular account) can register which interface it supports and which smart contract is responsible for its implementation. This standard keeps backward compatibility with [ERC-165].",
       "requires": [
         "ERC-165",
-        "ERC-214"
+        "REF-214-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-155",
-        "ERC-672",
+        "REF-155-UNCLASSIFIED",
+        "REF-672-UNCLASSIFIED",
         "ERC-820"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/pull/1820",
@@ -1568,7 +1568,7 @@
       "summary": "The EVM and related languages such as Solidity need consensus on an extensible Type System in order to further evolve into the Singleton Operating System (The World Computer).",
       "requires": [],
       "mentions": [
-        "ERC-2158"
+        "REF-2158-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/1882",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-1900.md",
@@ -1600,8 +1600,8 @@
       "summary": "A standard interface for \"Verifier\" contracts which verify zk-SNARKs.",
       "requires": [
         "ERC-165",
-        "ERC-196",
-        "ERC-197"
+        "REF-196-UNCLASSIFIED",
+        "REF-197-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -1621,8 +1621,8 @@
       "summary": "A standard interface for a \"Verifier Registry\"'\" contract, through which all zk-SNARK verification activity can be registered.",
       "requires": [
         "ERC-165",
-        "ERC-196",
-        "ERC-197"
+        "REF-196-UNCLASSIFIED",
+        "REF-197-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -1855,7 +1855,7 @@
       "created": "2019-07-16",
       "summary": "We are proposing Alias - a semantic standard for identifying on-chain resources by human-readable qualifiers, supporting any type of data.",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-1900",
         "ERC-2157"
       ],
@@ -2013,7 +2013,7 @@
       "created": "2019-11-05",
       "summary": "A transaction hash is not very meaningful on its own, because it looks just like any other hash, and it might lack important information for reading a transaction. This standard includes all needed information for displaying a transaction and its details, such as chainId, method signature called, and events signatures ",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-681"
       ],
       "mentions": [],
@@ -2030,14 +2030,14 @@
       "created": "2020-01-15",
       "summary": "Some DApps needs one, and only one, instance of an contract, which have the same address on any chain. A permissionless factory for deploy of keyless deterministic contracts addresses based on its bytecode.",
       "requires": [
-        "ERC-1014"
+        "REF-1014-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-1191",
-        "ERC-1344",
+        "REF-1344-UNCLASSIFIED",
         "ERC-1820",
-        "ERC-2429"
+        "REF-2429-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-2470-singleton-factory/3933",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-2470.md",
@@ -2107,7 +2107,7 @@
       "requires": [
         "ERC-137",
         "ERC-634",
-        "ERC-1193",
+        "REF-1193-UNCLASSIFIED",
         "ERC-2304"
       ],
       "mentions": [],
@@ -2178,7 +2178,7 @@
       "summary": "Arguably one of the main reasons for the success of EIP-20 tokens lies in the interplay between approve and transferFrom, which allows for tokens to not only be transferred between externally owned accounts (EOA), but to be used in other contracts under application specific conditions by abstracting away msg.sender as ",
       "requires": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-777"
@@ -2279,7 +2279,7 @@
       ],
       "mentions": [
         "ERC-191",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-2535"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/2766",
@@ -2295,11 +2295,11 @@
       "created": "2020-07-01",
       "summary": "Standardized contract interface for extensible meta-transaction forwarding.",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-2771"
       ],
       "mentions": [
-        "ERC-150"
+        "REF-150-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-2770-meta-transactions-forwarder-contract/5391",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-2770.md",
@@ -2397,7 +2397,7 @@
         "ERC-20"
       ],
       "mentions": [
-        "ERC-1404"
+        "REF-1404-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/2983",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-2980.md",
@@ -2464,10 +2464,10 @@
       "summary": "A set of functions to enable meta-transactions and atomic interactions with ERC-20 token contracts via signatures conforming to the EIP-712 typed message signing specification. This enables the user to: - delegate the gas payment to someone else, - pay gas in the token itself rather than in ETH, - perform one or more t",
       "requires": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-677",
+        "REF-677-UNCLASSIFIED",
         "ERC-777",
         "ERC-2612"
       ],
@@ -2502,7 +2502,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-667"
+        "REF-667-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-3156-flash-loans-review-discussion/5077",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-3156.md",
@@ -2521,7 +2521,7 @@
       ],
       "mentions": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://github.com/ethereum/EIPs/issues/3225",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-3224.md",
@@ -2538,7 +2538,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-667",
+        "REF-667-UNCLASSIFIED",
         "ERC-3156"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-3234-batch-flash-loans/5271",
@@ -2574,11 +2574,11 @@
       "created": "2021-04-20",
       "summary": "This standard addresses an extension to the ERC-721 specification by allowing signatures on NFTs representing works of art. This provides improved provenance by creating functionality for an artist to designate an original and signed limited-edition prints of their work.",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721"
       ],
       "mentions": [
-        "ERC-3340"
+        "REF-3340-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-3340-nft-editions-standard-extension/6044",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-3440.md",
@@ -2774,7 +2774,7 @@
       "requires": [],
       "mentions": [
         "ERC-55",
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/chain-specific-addresses/6449",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-3770.md",
@@ -2803,16 +2803,16 @@
       "created": "2021-09-29",
       "summary": "Historically, users could interact with Ethereum only by sending transactions from special accounts controlled by private keys, with transaction validation entirely enforced by fixed protocol rules. Account abstraction is an alternative model that allows each account to supply its own validation logic executed as smart",
       "requires": [
-        "ERC-712",
-        "ERC-7702"
+        "REF-712-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-1153",
-        "ERC-1559",
-        "ERC-2028",
+        "REF-1153-UNCLASSIFIED",
+        "REF-1559-UNCLASSIFIED",
+        "REF-2028-UNCLASSIFIED",
         "ERC-7201",
-        "ERC-7623"
+        "REF-7623-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-4337-account-abstraction-via-entry-point-contract-specification/7160",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-4337.md",
@@ -2867,7 +2867,7 @@
       "requires": [
         "ERC-55",
         "ERC-137",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-191",
         "ERC-1271",
         "ERC-1328"
@@ -2875,7 +2875,7 @@
       "mentions": [
         "ERC-20",
         "ERC-181",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155"
       ],
@@ -2931,7 +2931,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/discussion-eip-4430-described-transactions/8762",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-4430.md",
@@ -2947,7 +2947,7 @@
       "summary": "The \"Permit\" approval flow outlined in ERC-2612 has proven a very valuable advancement in UX by creating gasless approvals for ERC20 tokens. This EIP extends the pattern to ERC-721 NFTs. This EIP borrows heavily from ERC-2612. This requires a separate EIP due to the difference in structure between ERC-20 and ERC-721 to",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721"
       ],
       "mentions": [
@@ -3028,8 +3028,8 @@
       "requires": [],
       "mentions": [
         "ERC-191",
-        "ERC-712",
-        "ERC-2718"
+        "REF-712-UNCLASSIFIED",
+        "REF-2718-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/add-qr-code-scanning-between-software-wallet-cold-signer-hardware-wallet/6568",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-4527.md",
@@ -3151,7 +3151,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-165",
         "ERC-721"
       ],
@@ -3376,7 +3376,7 @@
       "summary": "Proposes a standard API for account-bound Tokens (ABT) within smart contracts. An ABT is a non-fungible token bound to a single account. ABTs don't implement a canonical interface for transfers. This EIP defines basic functionality to mint, assign, revoke and track ABTs.",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1271"
       ],
@@ -3600,7 +3600,7 @@
         "ERC-2612"
       ],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-4626"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5095-principal-token-standard/9259",
@@ -3670,11 +3670,11 @@
       "created": "2022-06-06",
       "summary": "This proposal specifies a JSON schema for describing lists of remote procedure call (RPC) providers for Ethereum-like chains, including their supported EIP-155 CHAINID.",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-1577"
       ],
       "mentions": [
-        "ERC-3085"
+        "REF-3085-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5139-remote-procedure-call-provider-lists/9517",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5139.md",
@@ -3799,8 +3799,8 @@
       "mentions": [
         "ERC-20",
         "ERC-777",
-        "ERC-1559",
-        "ERC-3074",
+        "REF-1559-UNCLASSIFIED",
+        "REF-3074-UNCLASSIFIED",
         "ERC-4337"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-account-abstraction-via-endorsed-operations/9799",
@@ -3833,7 +3833,7 @@
       "created": "2022-06-23",
       "summary": "Define a standard for \"blueprint\" contracts, or contracts which represent initcode that is stored on-chain.",
       "requires": [
-        "ERC-170"
+        "REF-170-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-5202-standard-factory-contract-format/9851",
@@ -3938,8 +3938,8 @@
       "created": "2022-07-14",
       "summary": "This EIP complements EIP-712 by standardizing how contracts should publish the fields and values that describe their domain. This enables applications to retrieve this description and generate appropriate domain separators in a general way, and thus integrate EIP-712 signatures securely and scalably.",
       "requires": [
-        "ERC-155",
-        "ERC-712",
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
         "ERC-2612"
       ],
       "mentions": [],
@@ -3962,9 +3962,9 @@
         "ERC-165",
         "ERC-600",
         "ERC-601",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
-        "ERC-867",
+        "REF-867-UNCLASSIFIED",
         "ERC-1967",
         "ERC-5267",
         "ERC-5568",
@@ -4005,8 +4005,8 @@
         "ERC-1155"
       ],
       "mentions": [
-        "ERC-712",
-        "ERC-5198"
+        "REF-712-UNCLASSIFIED",
+        "REF-5198-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-eip-5198-ens-as-token-holder/10374",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5298.md",
@@ -4056,8 +4056,8 @@
       "summary": "This EIP standardizes a JSON format for storing off-chain information about NFT authors. Specifically, it adds a new field which provides a list of author names, addresses, and proofs of authorship consent: proofs that the authors have agreed to be named as authors. Note that a proof of authorship consent is not a proo",
       "requires": [
         "ERC-55",
-        "ERC-155",
-        "ERC-712",
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155"
       ],
@@ -4118,7 +4118,7 @@
         "ERC-165"
       ],
       "mentions": [
-        "ERC-5629"
+        "REF-5629-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-interface-for-security-contract/10303",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5437.md",
@@ -4134,7 +4134,7 @@
       "summary": "This EIP establishes a general protocol for permitting and approving function calls in the same transaction relying on ERC-5750. Unlike a few prior art (ERC-2612 for ERC-20, ERC-4494 for ERC-721 that usually only permit for a single behavior (transfer for ERC-20 and safeTransferFrom for ERC-721) and a single approver i",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-5750"
       ],
@@ -4144,7 +4144,7 @@
         "ERC-1155",
         "ERC-2612",
         "ERC-4494",
-        "ERC-5081"
+        "REF-5081-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-5453-endorsement-standard/10355",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5453.md",
@@ -4341,7 +4341,7 @@
       "created": "2022-08-26",
       "summary": "This EIP proposes a set of methods and standards for a role-based registry of indicators aimed for usage in revocations.",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5539-revocation-list-registry/10573",
@@ -4379,7 +4379,7 @@
         "ERC-5218"
       ],
       "mentions": [
-        "ERC-5999"
+        "REF-5999-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5999-legal-use-sharing-repurposing-and-remixing-standard-compatible-with-creative-commons/10553",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5554.md",
@@ -4394,7 +4394,7 @@
       "created": "2022-06-23",
       "summary": "The following standard provides a mechanism in which smart contracts can request various tasks to be resolved by an external handler. This provides a mechanism in which protocols can reduce the gas fees associated with storing data on mainnet by deferring the handling of it to another system/network. These external han",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-3668"
@@ -4433,7 +4433,7 @@
         "ERC-20",
         "ERC-721",
         "ERC-4337",
-        "ERC-5566",
+        "REF-5566-UNCLASSIFIED",
         "ERC-6538"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5566-stealth-addresses-for-smart-contract-wallets/10614",
@@ -4449,7 +4449,7 @@
       "created": "2022-08-31",
       "summary": "This ERC introduces a minimalistic machine-readable (binary) format to signal to wallets that an action needs to be taken by the user using a well-known function and revert reason. It provides just enough data to be extendable by future ERCs and to take in arbitrary parameters (up to 64 kB of data). Example use cases c",
       "requires": [
-        "ERC-140"
+        "REF-140-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-165",
@@ -4660,7 +4660,7 @@
         "ERC-721"
       ],
       "mentions": [
-        "ERC-5369"
+        "REF-5369-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5643-subscription-nfts/10802",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5643.md",
@@ -4719,7 +4719,7 @@
         "ERC-1155"
       ],
       "mentions": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5700-bindable-token-standard/11077",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5700.md",
@@ -4770,7 +4770,7 @@
       "summary": "An interface for soulbound tokens (SBT), which are non-transferable tokens representing a person's identity, credentials, affiliations, and reputation. Our interface can handle a combination of fungible and non-fungible tokens in an organized way. It provides a set of core methods that can be used to manage the lifecyc",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-3525",
         "ERC-4906",
@@ -4798,7 +4798,7 @@
         "ERC-1271"
       ],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-5732-simple-commit-interface-to-support-commit-reveal-schemes/11115",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5732.md",
@@ -4874,7 +4874,7 @@
         "ERC-721"
       ],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/multiresource-tokens/11326",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5773.md",
@@ -4908,7 +4908,7 @@
       "created": "2022-07-04",
       "summary": "Many DAOs (decentralized autonomous organizations) rely on tokens to represent one's voting power. In order to perform this task effectively, the token contracts need to include specific mechanisms such as checkpoints and delegation. The existing implementations are not standardized. This ERC proposes to standardize th",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-6372"
       ],
       "mentions": [
@@ -4966,7 +4966,7 @@
         "ERC-3475"
       ],
       "mentions": [
-        "ERC-5815"
+        "REF-5815-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5815-kyc-certification-issuer-and-verifier-standard/11513",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5851.md",
@@ -4982,7 +4982,7 @@
       "summary": "This EIP standardizes a mechanism of a social recovery where a token may be transferred from an inaccessible account to a new account, given enough approvals from other identities. This approval is not purely technical, but rather needs human intervention. These humans are - based on the Soul Bound Token proposal - cal",
       "requires": [],
       "mentions": [
-        "ERC-5806"
+        "REF-5806-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-5806-delegate-transaction/11409",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-5883.md",
@@ -4997,7 +4997,7 @@
       "created": "2022-11-09",
       "summary": "This EIP proposes a standard for creating \"hooks\" that allow a smart contract function to be called automatically in response to a trigger fired by another contract, by using a public relayer network as a messaging bus. While there are many similar solutions in existence already, this proposal describes a simple yet po",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-721",
@@ -5055,7 +5055,7 @@
         "ERC-721"
       ],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-6059-parent-governed-nestable-non-fungible-tokens/11914",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-6059.md",
@@ -5146,7 +5146,7 @@
         "ERC-20",
         "ERC-165",
         "ERC-721",
-        "ERC-1014",
+        "REF-1014-UNCLASSIFIED",
         "ERC-1155"
       ],
       "mentions": [],
@@ -5390,7 +5390,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/add-eip-6358-omniverse-distributed-ledger-technology/12625",
@@ -5423,7 +5423,7 @@
       "summary": "Many contracts rely on some clock for enforcing delays and storing historical data. While some contracts rely on block numbers, others use timestamps. There is currently no easy way to discover which time-tracking function a contract internally uses. This EIP proposes to standardize an interface for contracts to expose",
       "requires": [],
       "mentions": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-6372-contract-clock/12689",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-6372.md",
@@ -5457,7 +5457,7 @@
       "created": "2023-01-08",
       "summary": "This EIP introduces the evalEIP712Buffer function, which takes an EIP-712 buffer and returns a human-readable text description.",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -5517,7 +5517,7 @@
         "ERC-1271"
       ],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-6492-signature-validation-for-pre-deploy-contracts/12903",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-6492.md",
@@ -5546,7 +5546,7 @@
       "created": "2023-01-24",
       "summary": "This specification defines a standardized way of storing and retrieving an entity's stealth meta-address, by extending ERC-5564. An entity may register their stealth meta-address directly. A third party can also register on behalf of an entity using a valid EIP-712 or EIP-1271 signature. Once registered, the stealth me",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-5564"
       ],
@@ -5690,7 +5690,7 @@
       "created": "2023-03-20",
       "summary": "The document describes a JSON token list that ensures that two or more Layer 1, Layer 2, or Sidechains can identify tokens from a different Layer 1, Layer 2, or Sidechain.",
       "requires": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -5895,7 +5895,7 @@
       "created": "2023-04-10",
       "summary": "Numerous protocols employ distinct EIP-712 schemas, leading to unavoidable inconsistencies across the ecosystem. To address this issue, we propose a standardized approach for dApps to implement an on-chain view function called visualizeEIP712Message. This function takes an abi encoded EIP-712 payload message as input a",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -6102,8 +6102,8 @@
       "summary": "This Ethereum Improvement Proposal aims to solve the issue of creator attribution for Non-Fungible Token (NFT) standards (ERC-721, ERC-1155). To achieve this, this EIP proposes a mechanism where the NFT creator signs the required parameters for the NFT creation, including the NFT metadata in a hash along with any other",
       "requires": [
         "ERC-55",
-        "ERC-155",
-        "ERC-712",
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155"
       ],
@@ -6213,7 +6213,7 @@
         "ERC-1271"
       ],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-3668"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-social-recovery-interface/14494",
@@ -6251,7 +6251,7 @@
         "ERC-721"
       ],
       "mentions": [
-        "ERC-4096",
+        "REF-4096-UNCLASSIFIED",
         "ERC-4906"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc721-multi-metadata-extension/14629",
@@ -6286,7 +6286,7 @@
       "summary": "We define the NatSpec annotation @custom:storage-location to document storage namespaces and their location in storage in Solidity or Vyper source code. Additionally, we define a formula to derive a location from an arbitrary identifier. The formula is chosen to be safe against collisions with the storage layouts used ",
       "requires": [],
       "mentions": [
-        "ERC-1234"
+        "REF-1234-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7201-namespaced-storage-layout/14796",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7201.md",
@@ -6388,7 +6388,7 @@
       "created": "2023-07-03",
       "summary": "An Ethereum Access Token (EAT) is an EIP-712 conformant, signed message, used by off-chain services to grant Ethereum accounts access to specific on-chain resources. EATs share similarities with JSON Web Tokens (JWTs); both are used for short-lived authorizations. However Ethereum Access Tokens are specifically designe",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7272-ethereum-access-token/14945",
@@ -6496,7 +6496,7 @@
       ],
       "mentions": [
         "ERC-3156",
-        "ERC-7400"
+        "REF-7400-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc7400-flash-loans/15211",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7399.md",
@@ -6515,7 +6515,7 @@
         "ERC-721"
       ],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-6059"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-6059-parent-governed-nestable-non-fungible-tokens/11914",
@@ -6747,7 +6747,7 @@
       "summary": "This specification introduces a new interface that extends ERC-721 and ERC-1155 to enable the discovery and use of onchain and offchain redeemables for NFTs. Onchain getters and events facilitate discovery of redeemable campaigns and their requirements. New onchain mints use an interface that gives context to the minti",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155",
         "ERC-1271"
@@ -6769,7 +6769,7 @@
       "created": "2023-08-31",
       "summary": "This EIP standardizes a system for managing on-chain metadata (hints), enabling claim interpretation, reliability, and verification. It structures these hints within defined namespaces and lists, enabling structured organization and retrieval, as well as permissioned write access. The system permits namespace owners to",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-trusted-hint-registry/15615",
@@ -6854,9 +6854,9 @@
       "created": "2023-09-04",
       "summary": "With the PUSH0 opcode (EIP-3855), introduced with the Shanghai upgrade, we optimized the previous Minimal Proxy Contract (ERC-1167) by 200 gas at deployment and 5 gas at runtime, while retaining the same functionality.",
       "requires": [
-        "ERC-211",
+        "REF-211-UNCLASSIFIED",
         "ERC-1167",
-        "ERC-3855"
+        "REF-3855-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7511-minimal-proxy-contract-with-push0/15662",
@@ -6872,11 +6872,11 @@
       "created": "2023-09-05",
       "summary": "The proposal aims to create a standard for an onchain representation of audit reports that can be parsed by contracts to extract relevant information about the audits, such as who performed the audits and what standards have been verified.",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155",
         "ERC-1271",
@@ -6936,7 +6936,7 @@
       "summary": "This proposal is a security token standard that extends ERC-1155 to provide a flexible framework for managing compliant real-asset security tokens. It introduces the concept of partitions, where each tokenId represents a distinct partition with its own set of rights and privileges. This makes it suitable for various us",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1155",
         "ERC-1271",
         "ERC-5267"
@@ -7032,7 +7032,7 @@
         "ERC-4626"
       ],
       "mentions": [
-        "ERC-7808"
+        "REF-7808-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7808-eth-native-asset-address-convention/15989",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7528.md",
@@ -7232,13 +7232,13 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-1153",
+        "REF-1153-UNCLASSIFIED",
         "ERC-4337",
-        "ERC-7623",
-        "ERC-7702",
+        "REF-7623-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7769",
-        "ERC-7843",
-        "ERC-7951"
+        "REF-7843-UNCLASSIFIED",
+        "REF-7951-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7562-account-abstraction-validation-scope-rules/16683",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7562.md",
@@ -7320,7 +7320,7 @@
       "summary": "The interfaces in this proposal model a functional transaction scheme to establish a secure delivery-versus-payment across two blockchains, where a) no intermediary is required and b) one of the two chains can securely interact with a stateless \"decryption oracle\". Here, delivery-versus-payment refers to the exchange o",
       "requires": [],
       "mentions": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7573-conditional-upon-transfer-decryption-for-delivery-versus-payment/17232",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7573.md",
@@ -7425,7 +7425,7 @@
         "ERC-4337"
       ],
       "mentions": [
-        "ERC-1559"
+        "REF-1559-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7582-modular-accounts-with-delegated-validation/17640",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7582.md",
@@ -7475,7 +7475,7 @@
       "created": "2024-01-01",
       "summary": "This EIP introduces a standard for attaching metadata to blobs carried by blob transactions, as outlined in EIP-4844. The metadata is represented as a JSON object adhering to a predefined schema, and its string representation is placed in the data field of the blob transaction.",
       "requires": [
-        "ERC-4844"
+        "REF-4844-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc7588-attaching-metadata-to-blobs-carried-by-blob-transactions/17873",
@@ -7599,7 +7599,7 @@
       "summary": "The \"permit\" approval flow for both ERC-20 and ERC-721 are large improvements for the existing UX of the token underlying each ERC. This ERC extends the \"permit\" pattern to ERC-1155 tokens, borrowing heavily upon both ERC-4494 and ERC-2612. The structure of ERC-1155 tokens requires a new ERC to account for the token st",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1155",
         "ERC-1271",
         "ERC-2098",
@@ -7998,7 +7998,7 @@
       "summary": "This specification defines the minimum interface required to temporarily approve ERC-20 tokens for spending within the same transaction.",
       "requires": [
         "ERC-20",
-        "ERC-1153"
+        "REF-1153-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/add-erc-7674-transient-approval-extension-for-erc-20/19521",
@@ -8015,7 +8015,7 @@
       "summary": "With EIP-5792, apps can communicate with wallets about advanced features via capabilities. This proposal defines a capability that allows apps to request that ERC-4337 wallets communicate with a specified paymaster web service. To support this, we also define a standardized API for paymaster web services.",
       "requires": [
         "ERC-4337",
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7677-paymaster-web-service-capability/19530",
@@ -8070,7 +8070,7 @@
       "created": "2024-04-09",
       "summary": "An EIP-5792 compliant capability that allows wallets to indicate to apps that they have access to funds beyond those that can be accounted for by looking up balances onchain given the wallet's address. A wallet's ability to access auxiliary funds is communicated to apps as part of its response to an EIP-5792 walletgetC",
       "requires": [
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -8161,7 +8161,7 @@
       "created": "2024-04-30",
       "summary": "The following standard provides a mechanism by which smart contracts can route storage to external providers. In particular, protocols can reduce the gas fees associated with storing data on mainnet by routing the handling of storage operations to another system or network. These storage routers act as an extension to ",
       "requires": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-137",
@@ -8184,7 +8184,7 @@
         "ERC-7579"
       ],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-4337",
         "ERC-7715"
       ],
@@ -8206,9 +8206,9 @@
       ],
       "mentions": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
-        "ERC-1193"
+        "REF-1193-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7715-grant-permissions-from-wallets/20100",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7715.md",
@@ -8306,8 +8306,8 @@
       "created": "2024-02-07",
       "summary": "This specification defines a JSON format carrying additional information required to correctly display structured data for human verification on wallet screens or for machine consumption e.g. by transaction simulation engines. The ERC-7730 specification enriches type data contained in the ABIs and schemas of structured",
       "requires": [
-        "ERC-155",
-        "ERC-712"
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -8315,7 +8315,7 @@
         "ERC-1822",
         "ERC-2771",
         "ERC-4337",
-        "ERC-5792",
+        "REF-5792-UNCLASSIFIED",
         "ERC-7930",
         "ERC-7984"
       ],
@@ -8365,7 +8365,7 @@
       "summary": "This proposal defines a standard to prevent signature replays across multiple smart accounts when they are owned by a single Externally Owned Account (EOA). This is achieved through a defensive rehashing scheme for ERC-1271 verification using specific nested EIP-712 typed structures, which preserves the readability of ",
       "requires": [
         "ERC-191",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-5267"
       ],
@@ -8383,7 +8383,7 @@
       "created": "2024-06-03",
       "summary": "A set of functions to enable meta-transactions and atomic interactions with contracts implementing an operator model, via signatures conforming to the EIP-712 typed message signing specification.",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271"
       ],
       "mentions": [
@@ -8422,7 +8422,7 @@
       "summary": "This EIP defines a standard interface for indexing smart contracts on Ethereum by their bytecode hash. This enables trustless discovery and verification of contract code, facilitating use cases like bytecode signing, whitelisting, and decentralized distribution mechanisms.",
       "requires": [],
       "mentions": [
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7744-code-index/20569",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7744.md",
@@ -8481,10 +8481,10 @@
       "created": "2024-07-29",
       "summary": "Tamperproof Web Immutable Secure Transaction (TWIST) introduces a new RPC method to be implemented by wallets, walletsignedRequest, that enables dapps to interact with wallets in a tamperproof manner via \"signed requests\". The dapp associates a public key with its DNS record and uses the corresponding private key to si",
       "requires": [
-        "ERC-1193"
+        "REF-1193-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7754-tamperproof-web-immutable-transaction-twit/20767",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7754.md",
@@ -8500,7 +8500,7 @@
       "summary": "A set of functions to enable meta-transactions and atomic interactions with ERC-20 token contracts via signatures conforming to the EIP-712 typed message signing specification. This enables the user to: - delegate the gas payment to someone else, - pay for gas in the token itself rather than in ETH, - perform one or mo",
       "requires": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-777",
@@ -8523,7 +8523,7 @@
       ],
       "mentions": [
         "ERC-1167",
-        "ERC-3855"
+        "REF-3855-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7760-minimal-upgradeable-proxies/20868",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7760.md",
@@ -8572,12 +8572,12 @@
       "created": "2024-08-23",
       "summary": "Defines new JSON-RPC API methods which enable ERC-4337 wallets to communicate with UserOpeation mempool nodes and bundlers, matching the functionality that exists for Ethereum transactions. Additionally, a set of debug JSON-RPC API methods is defined in order to facilitate development, testing and debugging issues with",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-4337",
         "ERC-7562"
       ],
       "mentions": [
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7769-json-rpc-for-erc-4337-account-abstraction/21126",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7769.md",
@@ -8659,7 +8659,7 @@
       "summary": "This proposal outlines the interfaces to make delegated EOAs interoperable after the merge of EIP-7702. With EIP-7702, EOAs will be able to enable execution abstraction, which leads to a more feature-rich account, including gas sponsorship, batch execution, and more. However, there is a need to help facilitate storage ",
       "requires": [
         "ERC-7201",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-2535"
@@ -8766,7 +8766,7 @@
         "ERC-20",
         "ERC-721",
         "ERC-1155",
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7795-wallet-call-token-capabilities/21426",
@@ -8784,7 +8784,7 @@
       "requires": [],
       "mentions": [
         "ERC-4337",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/send-transaction-conditional-rpc-api/21480",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7796.md",
@@ -8818,12 +8818,12 @@
       "created": "2024-10-08",
       "summary": "This ERC improves on [EIP-712] signatures to better support smart contract accounts by 1) introducing signing domains as a way to prevent replay attacks when private keys are shared across accounts, and 2) allowing dapps and wallets to coordinate on the method that will be used to authenticate the signature. [EIP-712]:",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-1271",
         "ERC-6492",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7739"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7803-eip-712-extensions-for-account-abstraction/21436",
@@ -8839,11 +8839,11 @@
       "created": "2024-11-02",
       "summary": "This proposal defines a standard interface for intent-centric smart accounts. It enables externally owned accounts (EOAs) to delegate contract code to a smart account implementation, allowing them to sign intents. These intents can then be executed by solvers (or relayers) on behalf of the account owner, streamlining i",
       "requires": [
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-4337",
         "ERC-6900",
         "ERC-7521",
@@ -8863,9 +8863,9 @@
       "summary": "This ERC introduces a new RPC call, walletgetAssets, for wallets to declare to the Dapp what assets are owned by the user. This allows for more accurate asset discovery and the use of assets that aren’t available on-chain but can be provided by the wallet",
       "requires": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7811-wallet-asset-discovery/21639",
@@ -8944,8 +8944,8 @@
         "ERC-7579"
       ],
       "mentions": [
-        "ERC-5792",
-        "ERC-7702"
+        "REF-5792-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7821-minimal-batch-executor-interface/21776",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7821.md",
@@ -8974,7 +8974,7 @@
       "created": "2024-11-27",
       "summary": "This proposal defines an Interoperable Name, a chain-specific address format with the structure @ . The can be an address, or an ENS name. The can be a [CAIP-350] chain identifier, or it can be a human-readable label. This specification defines how such labels can be resolved to chain-specific metadata, via the Ethereu",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-7930"
       ],
       "mentions": [],
@@ -9010,7 +9010,7 @@
       "requires": [
         "ERC-55",
         "ERC-137",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-165",
         "ERC-2304"
       ],
@@ -9046,8 +9046,8 @@
       "created": "2024-12-06",
       "summary": "This proposal defines complementary JSON-RPC methods to EIP-5792's walletsendCalls to enable an Application to sign over a call bundle (instead of the Wallet). Methods defined in this proposal are purposed for the Application to sign over calls and submit them to the Wallet with an accompanying signature. This is in co",
       "requires": [
-        "ERC-1193",
-        "ERC-5792"
+        "REF-1193-UNCLASSIFIED",
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-4337"
@@ -9083,7 +9083,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-2930",
+        "REF-2930-UNCLASSIFIED",
         "ERC-7683"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7841-cross-chain-message-format-and-mailbox/22185",
@@ -9116,10 +9116,10 @@
       "summary": "This ERC introduces a new wallet connection JSON-RPC method focused on extensibility, walletconnect. It leverages the modular capabilities approach defined in ERC-5792 to streamline connections and authentication into a single interaction.",
       "requires": [],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-191",
         "ERC-4361",
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7846-wallet-connection-api/22245",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7846.md",
@@ -9153,7 +9153,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-681",
         "ERC-831"
       ],
@@ -9248,8 +9248,8 @@
       "summary": "Defines a new JSON-RPC method walletsign which enables apps to ask a wallet to sign EIP-191 messages. Applications can use this JSON-RPC method to request a signature over any version of signeddata as defined by EIP-191. The new JSON-RPC method allows for support of future EIP-191 signeddata versions. The new JSON-RPC ",
       "requires": [
         "ERC-191",
-        "ERC-712",
-        "ERC-5792"
+        "REF-712-UNCLASSIFIED",
+        "REF-5792-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/new-erc-wallet-signing-api/22718",
@@ -9271,7 +9271,7 @@
         "ERC-165",
         "ERC-721",
         "ERC-1967",
-        "ERC-3085"
+        "REF-3085-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7876-unified-network-configuration/22763",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7876.md",
@@ -9306,7 +9306,7 @@
       "summary": "This EIP introduces a protocol that enables smart contracts to redirect write operations to external systems. The protocol defines a standardized way for contracts to indicate that an operation should be handled by either a contract deployed to an L2 chain, to the L1, or an off-chain database, providing an entry point ",
       "requires": [],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-3668"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/operation-router/22633",
@@ -9393,7 +9393,7 @@
       "summary": "This ERC introduces a new wallet RPC, walletaddSubAccount, which allows an app to request a wallet track a smart account that the wallet owns. It also allows apps to request the wallet to provision a new account, owned by the universal wallet with a signer provided by the caller.",
       "requires": [],
       "mentions": [
-        "ERC-5792",
+        "REF-5792-UNCLASSIFIED",
         "ERC-7846"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/wallet-addsubaccount/23013",
@@ -9431,15 +9431,15 @@
       "created": "2025-03-01",
       "summary": "EIP-8141 and its extensions define a new EIP-2718 transaction type for account abstraction with a rich and innovative set of features. The wallets adopting EIP-8141 must have a mechanism to expose these features to their users and applications. Previously, a limited subset of these features has been available through E",
       "requires": [
-        "ERC-5792",
-        "ERC-7702",
-        "ERC-7906",
-        "ERC-8141",
-        "ERC-8250",
-        "ERC-8272"
+        "REF-5792-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED",
+        "REF-7906-UNCLASSIFIED",
+        "REF-8141-UNCLASSIFIED",
+        "REF-8250-UNCLASSIFIED",
+        "REF-8272-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-2718",
+        "REF-2718-UNCLASSIFIED",
         "ERC-4337",
         "ERC-7677"
       ],
@@ -9472,7 +9472,7 @@
       "requires": [],
       "mentions": [
         "ERC-191",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-7562"
       ],
@@ -9490,7 +9490,7 @@
       "summary": "This ERC provides a standard for signing multiple typed-data messages with a single signature by encoding them into a Merkle tree. This allows components to independently verify messages, without requiring full knowledge of the others. It provides a significant UX improvement by reducing the number of signature prompts",
       "requires": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-2612"
@@ -9602,17 +9602,17 @@
       "created": "2025-05-10",
       "summary": "Universal Wallet Uplink (UWULink) is a protocol that allows applications (dApps) to request a wallet to make a batch of contract calls in a single atomic transaction without establishing a two-way connection or revealing the user's address to the requester. The protocol defines a compact binary message format using Pro",
       "requires": [
-        "ERC-155",
-        "ERC-7702"
+        "REF-155-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
         "ERC-681",
         "ERC-831",
-        "ERC-1102",
-        "ERC-1193",
+        "REF-1102-UNCLASSIFIED",
+        "REF-1193-UNCLASSIFIED",
         "ERC-1328",
-        "ERC-5792"
+        "REF-5792-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7946-unidirectional-wallet-uplink-aka-uwulink/24282",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7946.md",
@@ -9629,7 +9629,7 @@
       "requires": [],
       "mentions": [
         "ERC-4337",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/eip-7947-account-abstraction-recovery-interface-aari/24080",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7947.md",
@@ -9644,7 +9644,7 @@
       "created": "2025-05-22",
       "summary": "This standard proposes a way to encode the combination of a chain ID and a transaction hash into one string.",
       "requires": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/a-new-standard-for-encoding-chain-id-transaction-hash/23782",
@@ -9660,13 +9660,13 @@
       "created": "2025-05-15",
       "summary": "This ERC defines a permissionless and deterministic deployment mechanism across all EVM-compatible chains. It uses the EIP-7702 Set Code for EOAs (0x4) transaction type to deploy a universal CREATE2 factory contract to a fixed address (0xC0DEb853af168215879d284cc8B4d0A645fA9b0E) with known bytecode. The factory can the",
       "requires": [
-        "ERC-1014",
-        "ERC-7702"
+        "REF-1014-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-55",
-        "ERC-155",
-        "ERC-3855"
+        "REF-155-UNCLASSIFIED",
+        "REF-3855-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/multi-chain-deployment-process-for-a-permissionless-contract-factory/24318",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7955.md",
@@ -9682,7 +9682,7 @@
       "summary": "This EIP proposes two token interfaces: ERC-KeyHash721 for non-fungible tokens (NFTs) and ERC-KeyHash20 for fungible tokens (similar to ERC-20). Both of them utilize cryptographic key hashes (\"keyHash\", or keccak256(key)) instead of Ethereum addresses to manage ownership. This enhances privacy by authorizing by the pub",
       "requires": [
         "ERC-20",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-5267"
       ],
@@ -9720,13 +9720,13 @@
       "created": "2025-06-05",
       "summary": "This ERC defines a standard approach for creating and verifying crosschain signatures using [EIP-712]. By omitting the chainId field from the EIP-712 domain, a signature can be valid across multiple chains. Chain-specific operations are encoded as an array of structured messages, where each chain receives the array of ",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-5267"
       ],
       "mentions": [
         "ERC-6492",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/universal-cross-chain-signatures-for-account-abstraction/24452",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7964.md",
@@ -9745,7 +9745,7 @@
         "ERC-7930"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-7201",
         "ERC-7888"
       ],
@@ -9765,7 +9765,7 @@
         "ERC-20"
       ],
       "mentions": [
-        "ERC-7951"
+        "REF-7951-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-7951-owner-authorized-token-transfer-protocol/24526",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7968.md",
@@ -9831,11 +9831,11 @@
       "created": "2025-07-08",
       "summary": "Minimal Avatar Smart Wallet (MASW) is an immutable delegate‑wallet that any EOA can designate via EIP‑7702 (txType 0x04). Once designated, the wallet's code remains active for every subsequent transaction until the owner sends a new 0x04 to clear or replace it. During each delegated call the EOA is the avatar and MASW'",
       "requires": [
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-tbd-minimal-avatar-smart-wallet-masw-delegate-wallet-for-eip-7702/24761",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-7988.md",
@@ -9904,12 +9904,12 @@
       "created": "2025-07-02",
       "summary": "This standard defines a contract interface that enables externally owned accounts (EOAs) to perform batch call executions via a standard Operator contract, without requiring them to delegate control or convert into smart contract accounts.",
       "requires": [
-        "ERC-1153",
+        "REF-1153-UNCLASSIFIED",
         "ERC-2771"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8000-operator-contract-for-non-delegated-eoas/25003",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8000.md",
@@ -9924,7 +9924,7 @@
       "created": "2025-08-02",
       "summary": "ERC-8001 defines a minimal, single-chain primitive for multi-party agent coordination. An initiator posts an intent and each participant provides a verifiable acceptance attestation. Once the required set of acceptances is present and fresh, the intent is executable. The standard specifies typed data, lifecycle, mandat",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-2098",
         "ERC-5267"
@@ -9960,13 +9960,13 @@
       "created": "2025-08-13",
       "summary": "This protocol proposes to use blockchains to discover, choose, and interact with agents across organizational boundaries without pre-existing trust, thus enabling open-ended agent economies. Trust models are pluggable and tiered, with security proportional to value at risk, from low-stake tasks like ordering pizza to h",
       "requires": [
-        "ERC-155",
-        "ERC-712",
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1271"
       ],
       "mentions": [
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8004-trustless-agents/25098",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8004.md",
@@ -10003,9 +10003,9 @@
         "ERC-4361"
       ],
       "mentions": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-6492",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7710"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8019-minimal-wallet-managed-auto-login-for-siwe/25348",
@@ -10058,7 +10058,7 @@
       "summary": "This ERC proposes Royalty Distribution, a standalone royalty distribution for Referable Non-Fungible Tokens (rNFTs). It enables royalty distribution to multiple recipients at the primary level and referenced NFTs in the directed acyclic graph (DAG), with a single depth limit to control propagation. The standard is inde",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-5521"
       ],
       "mentions": [
@@ -10268,7 +10268,7 @@
       ],
       "mentions": [
         "ERC-4626",
-        "ERC-7503"
+        "REF-7503-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8065-zero-knowledge-token-wrapper/26006",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8065.md",
@@ -10283,7 +10283,7 @@
       "created": "2025-10-30",
       "summary": "This ERC standardizes a convention for tagging ABI-encoded structures placed inside bytes parameters with a compact type selector derived from the EIP-712 type string. It also defines a canonical multi-payload wrapper, allowing multiple typed payloads to be carried in a single bytes parameter.",
       "requires": [
-        "ERC-712"
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-721",
@@ -10338,7 +10338,7 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-8004"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8086-privacy-token/26623",
@@ -10354,7 +10354,7 @@
       "created": "2025-11-25",
       "summary": "This specification defines a standard for establishing and verifying associations between blockchain accounts. This allows addresses to publicly declare, prove and revoke a relationship with other addresses by sharing a standardized payload. For onchain applications, this payload may be signed by both parties for third",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-6492",
         "ERC-7930"
@@ -10373,7 +10373,7 @@
       "created": "2025-12-01",
       "summary": "This ERC introduces IXMLRepresentableState, a standard interface and XML binding schema that allows an EVM smart contract to define a static XML template with machine-readable bindings to its state and view functions. Off-chain renderers use this template to build a canonical XML representation of the contract's state ",
       "requires": [
-        "ERC-155"
+        "REF-155-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-20",
@@ -10412,7 +10412,7 @@
       "requires": [
         "ERC-137",
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-5267",
         "ERC-8001"
@@ -10420,7 +10420,7 @@
       "mentions": [
         "ERC-721",
         "ERC-1155",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-ens-trust-registry-for-agent-coordination/27200",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8107.md",
@@ -10511,7 +10511,7 @@
       ],
       "mentions": [
         "ERC-4337",
-        "ERC-7939"
+        "REF-7939-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8117-compressed-display-format-for-evm-addresses/27360",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8117.md",
@@ -10580,9 +10580,9 @@
       "created": "2026-01-15",
       "summary": "This ERC defines a standard interface for verifying AI agents on Ethereum that have been registered via ERC-8004. It enables AI agents to undergo several specialized verification processes defined in this proposal: Ethereum Token Verification (ETV), Media Content Verification (MCV), Solidity Code Verification (SCV), We",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-191",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-3009",
         "ERC-8004"
@@ -10607,7 +10607,7 @@
         "ERC-7930"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
         "ERC-1155",
         "ERC-6909",
@@ -10647,16 +10647,16 @@
       "requires": [],
       "mentions": [
         "ERC-20",
-        "ERC-214",
+        "REF-214-UNCLASSIFIED",
         "ERC-1167",
         "ERC-1822",
         "ERC-2535",
-        "ERC-3855",
-        "ERC-6049",
-        "ERC-6780",
+        "REF-3855-UNCLASSIFIED",
+        "REF-6049-UNCLASSIFIED",
+        "REF-6780-UNCLASSIFIED",
         "ERC-7201",
-        "ERC-7863",
-        "ERC-7939",
+        "REF-7863-UNCLASSIFIED",
+        "REF-7939-UNCLASSIFIED",
         "ERC-8042",
         "ERC-8153",
         "ERC-8167"
@@ -10715,7 +10715,7 @@
       "mentions": [
         "ERC-2535",
         "ERC-7201",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-8042"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8167-modular-dispatch-proxies/27781",
@@ -10731,7 +10731,7 @@
       "created": "2026-02-26",
       "summary": "This ERC defines an attestation format for ERC-7730 clear signing descriptor files using the Ethereum Attestation Service (EAS). An attestation is a signed claim by a specific party that they have reviewed a descriptor with a specific content hash. Attestations use a canonical EAS schema (bytes32 descriptorHash) regist",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-7730"
       ],
@@ -10749,13 +10749,13 @@
       "created": "2026-02-08",
       "summary": "This ERC defines a minimal interface for on-chain declaration of field element sub-ranges (\"segments\") within EIP-4844 blobs. A single function, declareBlobSegment, emits an event binding a [startFE, endFE) half-open range to the blob's versioned hash, allowing unambiguous sub-blob coordination across protocols. Zero s",
       "requires": [
-        "ERC-4844"
+        "REF-4844-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-165",
-        "ERC-2929",
+        "REF-2929-UNCLASSIFIED",
         "ERC-7588",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8179-blob-space-segments-bss/27867",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8179.md",
@@ -10770,12 +10770,12 @@
       "created": "2026-02-21",
       "summary": "This ERC defines interfaces for decentralized authenticated messaging over EIP-4844 blobs. The core registration interface extends ERC-8179 (Blob Space Segments) with a decoder pointer and a signature registry pointer: the decoder is an untrusted on-chain contract that extracts messages from payloads; the signature reg",
       "requires": [
-        "ERC-4844",
+        "REF-4844-UNCLASSIFIED",
         "ERC-8179"
       ],
       "mentions": [
-        "ERC-155",
-        "ERC-712",
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
         "ERC-3722",
         "ERC-7847"
       ],
@@ -10813,7 +10813,7 @@
       "summary": "This ERC proposes a standardized interface for \"Puller\" contracts that enable approved spenders to initiate token transfers from an owner's account without requiring the owner to maintain liquid balances. The Puller handles custom logic for sourcing tokens (e.g., withdrawing or borrowing from lending protocols, liquida",
       "requires": [
         "ERC-20",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-2612",
         "ERC-5267",
@@ -10836,9 +10836,9 @@
       "created": "2026-03-14",
       "summary": "This ERC defines a standard interface for AI agent-authenticated wallets. These wallets execute transactions only when accompanied by verifiable cryptographic proof that the action complies with a specific policy defined by the asset owner. It serves as Layer 2 (Execute) in a modular trust stack designed for secure aut",
       "requires": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-191",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-4337",
         "ERC-8126"
       ],
@@ -10898,7 +10898,7 @@
       "summary": "This standard defines a compliance delegation layer for AI agents operating on tokenized regulated assets. It specifies how a verified principal can delegate scoped, time-bounded, and financially limited authority to an on-chain agent, and how a regulated token, or the principal's own account, verifies the mandate on e",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271"
       ],
       "mentions": [
@@ -10906,7 +10906,7 @@
         "ERC-721",
         "ERC-1155",
         "ERC-3643",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7943",
         "ERC-8004"
       ],
@@ -10940,21 +10940,21 @@
       "created": "2026-04-17",
       "summary": "This ERC specifies a permissionless onchain registry for AI agent tools. Each registration commits a metadata URI and a content hash; invocation access is gated by an optional external predicate contract. Registrations are anchored to a canonical offchain manifest through origin-binding (the manifest is served at a wel",
       "requires": [
-        "ERC-150",
+        "REF-150-UNCLASSIFIED",
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1967"
       ],
       "mentions": [
         "ERC-20",
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
-        "ERC-1153",
+        "REF-1153-UNCLASSIFIED",
         "ERC-1155",
         "ERC-4337",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-8004",
-        "ERC-8038"
+        "REF-8038-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8257-agent-tool-registry/28457",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8257.md",
@@ -10989,13 +10989,13 @@
       ],
       "mentions": [
         "ERC-20",
-        "ERC-170",
+        "REF-170-UNCLASSIFIED",
         "ERC-1271",
         "ERC-3643",
         "ERC-4337",
         "ERC-5564",
         "ERC-6538",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7812"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8262-zero-knowledge-compliance-oracle/28543",
@@ -11012,7 +11012,7 @@
       "summary": "This ERC defines a standard interface for an on-chain Agent Attestation Registry. The registry manages attestations issued by Attestors. Each attestation has a complete lifecycle, issuance and transaction-scoped consumption, and is described by an AttestationRecord containing: - subjectId / subjectType: identifies the ",
       "requires": [
         "ERC-165",
-        "ERC-1153"
+        "REF-1153-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-721",
@@ -11021,7 +11021,7 @@
         "ERC-4973",
         "ERC-5192",
         "ERC-5484",
-        "ERC-7702",
+        "REF-7702-UNCLASSIFIED",
         "ERC-7715",
         "ERC-8004"
       ],
@@ -11039,12 +11039,12 @@
       "summary": "ERC-7579 standardizes a core module system for modular smart accounts: module types, the module lifecycle, installation, and account configuration. This proposal extends that system to EIP-8141 native account abstraction by defining the validation flow for frame transactions. It reuses ERC-7579's module structure uncha",
       "requires": [
         "ERC-7579",
-        "ERC-8141"
+        "REF-8141-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-4337",
-        "ERC-7702",
-        "ERC-8250"
+        "REF-7702-UNCLASSIFIED",
+        "REF-8250-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8286-modular-accounts-for-frame-transactions/28695",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8286.md",
@@ -11060,9 +11060,9 @@
       "summary": "This standard defines a method for exporting a shielded note from one UTXO-based privacy protocol and importing it into another without publicly withdrawing and re-depositing the underlying asset. Similar to EIP-7503, sender creates a note in source pool bound to a destination-specific burn address. A destination proto",
       "requires": [],
       "mentions": [
-        "ERC-155",
-        "ERC-712",
-        "ERC-7503"
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED",
+        "REF-7503-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8290-shielded-note-teleportation/28721",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8290.md",
@@ -11078,7 +11078,7 @@
       "summary": "This standard defines a registry interface for signed, versioned claims about on-chain assets. A claim says what an asset is, what it is worth, what a fund will allocate to, who may hold it, or what backs it. Each claim is published by an authorized author, then validated and activated by separate parties. The registry",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271"
       ],
       "mentions": [
@@ -11228,7 +11228,7 @@
         "ERC-8325"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-1155",
         "ERC-2615",
         "ERC-3475",
@@ -11255,7 +11255,7 @@
         "ERC-173",
         "ERC-2535",
         "ERC-7201",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8349-index-based-multi-facet-proxy/29054",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8349.md",
@@ -11270,9 +11270,9 @@
       "created": "2026-07-14",
       "summary": "This ERC defines a minimal registry interface for committing authorized state transitions of autonomous-agent memory without placing raw memory in calldata. Each transition is represented by an ExperienceDelta, identified by an EIP-712 struct hash, and applied to a linear per-space state machine. A memory space has a c",
       "requires": [
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "mentions": [
         "ERC-1967"
@@ -11291,7 +11291,7 @@
       "summary": "This proposal defines a minimal interface for consuming a confidential policy verdict: a zero-knowledge proof that a proposed agent action was evaluated against a committed policy and permitted, where the policy itself is never revealed on-chain. A Policy Domain registers a commitment to its ruleset as a statement in t",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-721",
         "ERC-1271",
         "ERC-7812",
@@ -11313,8 +11313,8 @@
       "requires": [
         "ERC-20",
         "ERC-165",
-        "ERC-214",
-        "ERC-7997"
+        "REF-214-UNCLASSIFIED",
+        "REF-7997-UNCLASSIFIED"
       ],
       "mentions": [],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8376-token-launch-abuse-detection-and-remediation/29359",
@@ -11350,12 +11350,12 @@
       "created": "2026-09-04",
       "summary": "This ERC defines a format for passing prepared execution plans from tools to wallets through an AI agent. A producer stores a plan and returns an artifact reference containing its location, byte length, and integrity digest. The agent passes the reference to the wallet, which retrieves and validates the plan directly. ",
       "requires": [
-        "ERC-155",
-        "ERC-712"
+        "REF-155-UNCLASSIFIED",
+        "REF-712-UNCLASSIFIED"
       ],
       "mentions": [
-        "ERC-5792",
-        "ERC-7702"
+        "REF-5792-UNCLASSIFIED",
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8410-portable-execution-plan-artifact/29587",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8410.md",
@@ -11377,11 +11377,11 @@
         "ERC-6492"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-1155",
         "ERC-4906",
         "ERC-4907",
-        "ERC-7702"
+        "REF-7702-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8426-wallet-pass-extension-for-nfts/29358",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8426.md",
@@ -11397,12 +11397,12 @@
       "summary": "This ERC defines a framework through which qualified participants — autonomous agents, humans or contracts — form collective decisions with a defined effect, within explicit authorization, under verifiable and composable rules. It specifies: 1. a Decision Policy: an immutable, content-addressed rule template that fixes",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271",
         "ERC-6372"
       ],
       "mentions": [
-        "ERC-170",
+        "REF-170-UNCLASSIFIED",
         "ERC-1967",
         "ERC-8004",
         "ERC-8033",
@@ -11425,7 +11425,7 @@
         "ERC-6538"
       ],
       "mentions": [
-        "ERC-7623"
+        "REF-7623-UNCLASSIFIED"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8441-hybrid-post-quantum-stealth-address-scheme/29923",
       "sourceUrl": "https://github.com/ethereum/ERCs/blob/99123078478fb56b1b5a5abcbb6b6207dba70832/ERCS/erc-8441.md",
@@ -11441,11 +11441,11 @@
       "summary": "This ERC defines an onchain registry of value records for agentic resources. A value record binds an ARD entry, as defined by the Agentic Resource Discovery (ARD) specification maintained by the ards-project working group, to an onchain anchor — a token-bound executable skill, a token-bound task tender, an address-anch",
       "requires": [
         "ERC-165",
-        "ERC-712",
+        "REF-712-UNCLASSIFIED",
         "ERC-1271"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721",
         "ERC-8004"
       ],
@@ -11466,7 +11466,7 @@
         "ERC-6372"
       ],
       "mentions": [
-        "ERC-155",
+        "REF-155-UNCLASSIFIED",
         "ERC-721"
       ],
       "discussionUrl": "https://ethereum-magicians.org/t/erc-8501-generative-engine-optimization-framework/30396",
