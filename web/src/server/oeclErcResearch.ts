@@ -155,7 +155,8 @@ async function loadDocument(id: string): Promise<ErcDocument> {
     summary:profile.summary,discussionUrl:profile.discussionUrl,
     requires:profile.requires,references:profile.references,
     url:profile.sourceUrl,sourceRevision:profile.sourceRevision,
-    specAuthors:profile.specAuthors??null,documentCreatedAt:profile.created??null,
+    specAuthors:("specAuthors" in profile&&typeof profile.specAuthors==="string")?profile.specAuthors:null,
+    documentCreatedAt:profile.created??null,
     proposalAttribution:null
   };
 }
