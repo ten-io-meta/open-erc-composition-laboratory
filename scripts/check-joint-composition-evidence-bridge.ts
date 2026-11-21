@@ -57,10 +57,7 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         },
         compositionRecipeSelection: {
             status: "SELECTED",
-            selectedRegistration: {
-                registrationId: "R-1",
-                buildRecipe: () => ({ recipeId: "RECIPE-1" })
-            },
+            selectedRegistrationId: "R-1",
             matchingRegistrationIds: ["R-1"], reasons: []
         },
         jointContractHarnessExecution: {
