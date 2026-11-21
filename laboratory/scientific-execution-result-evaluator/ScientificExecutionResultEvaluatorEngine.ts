@@ -1,5 +1,6 @@
 import { ScientificCompositionConstraintEvaluatorEngine } from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
 import { ScientificDiscoveredCandidateAdmissionEngine } from "../scientific-candidate-admission/ScientificDiscoveredCandidateAdmissionEngine.js";
+import { CrossProtocolCompositionEngine } from "../scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
 
 import type {
     ScientificExecutionOutcome
@@ -213,7 +214,16 @@ export class ScientificExecutionResultEvaluatorEngine {
         // The guard independently recomputes identity/constraint eligibility,
         // rather than trusting a serialized "admitted: true" claim.
         const discovered = outcome.discoveredCandidateEvidence;
-        if (!discovered) return "INCONCLUSIVE";
+        if (!discovered?.discoveryInput) return "INCONCLUSIVE";
+        // A declared discovery result is not trusted just because it has
+        // the right JSON shape. Recompute it with the actual OECL discovery
+        // algorithm from source-attribution inputs.
+        const recomputedDiscovery = new CrossProtocolCompositionEngine()
+            .discover(discovered.discoveryInput);
+        if (recomputedDiscovery.errors.length ||
+            discovered.discovery.errors.length ||
+            JSON.stringify(recomputedDiscovery) !== JSON.stringify(discovered.discovery))
+            return "INCONCLUSIVE";
         const admission = new ScientificDiscoveredCandidateAdmissionEngine().assess(
             outcome.targetId, discovered.discovery, discovered.specifications, requirement
         );
