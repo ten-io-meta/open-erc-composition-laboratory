@@ -10,7 +10,7 @@ const baseline=JSON.parse(raw);
 const evaluate=e=>check({sourceA:a,sourceB:b,evidence:e,rawEvidence:Buffer.from(JSON.stringify(e))});
 const result=evaluate(baseline);
 assert.equal(result.properties.length,4);
-assert.equal(result.sourceLineage.facts.length,5);
+assert.equal(result.sourceLineage.facts.length,8);
 assert.equal(result.scientificPolarity,"INCONCLUSIVE");
 const cases=[
  ["NFT payout mismatch",e=>{e.observations.alicePayoutNetOfGas="1";}],
