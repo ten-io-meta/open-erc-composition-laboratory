@@ -1,4 +1,5 @@
 import { ScientificCompositionConstraintEvaluatorEngine } from "../scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
+import { ScientificDiscoveredCandidateAdmissionEngine } from "../scientific-candidate-admission/ScientificDiscoveredCandidateAdmissionEngine.js";
 
 import type {
     ScientificExecutionOutcome
@@ -206,6 +207,17 @@ export class ScientificExecutionResultEvaluatorEngine {
             evaluation.candidateId !== outcome.targetId ||
             requirement.candidate.candidateId !== outcome.targetId
         ) return "INCONCLUSIVE";
+
+        // Proof of execution is not proof of discovery. Require the original
+        // candidate and READY specification from OECL's discovery pipeline.
+        // The guard independently recomputes identity/constraint eligibility,
+        // rather than trusting a serialized "admitted: true" claim.
+        const discovered = outcome.discoveredCandidateEvidence;
+        if (!discovered) return "INCONCLUSIVE";
+        const admission = new ScientificDiscoveredCandidateAdmissionEngine().assess(
+            outcome.targetId, discovered.discovery, discovered.specifications, requirement
+        );
+        if (admission.status !== "ELIGIBLE_FOR_REVIEW") return "INCONCLUSIVE";
 
         const sourceBindings = requirement.participantSources;
         const sources = workspace.sourceMaterializations;
