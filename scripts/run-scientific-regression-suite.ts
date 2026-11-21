@@ -30,11 +30,16 @@ interface RegressionSuiteResult {
         passed: number;
         failed: number;
         excluded: number;
+        integrationRouted: number;
+        credentialBlocked: number;
         empty: number;
         durationMs: number;
     };
     excluded: string[];
+    integrationRouted: string[];
+    credentialBlocked: string[];
     empty: string[];
+    coreValid: boolean;
     results: RegressionResult[];
     typescript: {
         valid: boolean;
@@ -42,6 +47,29 @@ interface RegressionSuiteResult {
         durationMs: number;
     };
 }
+
+/**
+ * These tests are NOT parameterless unit regressions. They are executed with
+ * real pinned EVM artifacts and source paths in joint-pinned-references.yml.
+ * Report routing explicitly: do not mislabel missing CLI parameters as code
+ * failures and never claim those probes passed in this suite.
+ */
+const integrationRoutedChecks = new Set([
+    "check-pinned-behavioral-native-witness.ts",
+    "check-pinned-burn-semantic-distinction.ts",
+    "check-pinned-candidate-admission.ts",
+    "check-pinned-interaction-hypothesis.ts",
+    "check-pinned-joint-native-source-admission.ts",
+    "check-pinned-native-joint-recipe.ts",
+    "check-pinned-real-scientific-discovery.ts"
+]);
+
+const credentialGatedChecks = new Set([
+    "check-live-the-graph-agent0-erc8004.ts",
+    "check-live-the-graph-product-discovery.ts",
+    "check-live-the-graph-protocol-attribution.ts",
+    "check-live-the-graph-subgraph-inspection.ts"
+]);
 
 const excludedChecks =
     new Set<string>([
@@ -195,6 +223,9 @@ async function main() {
     const empty:
         string[] = [];
 
+    const integrationRouted:string[]=[];
+    const credentialBlocked:string[]=[];
+
     const controlled:
         string[] = [];
 
@@ -234,6 +265,14 @@ async function main() {
 
         }
 
+        if (integrationRoutedChecks.has(script)) {
+            integrationRouted.push(script);
+            continue;
+        }
+        if (credentialGatedChecks.has(script) && !process.env.THE_GRAPH_API_KEY) {
+            credentialBlocked.push(script);
+            continue;
+        }
         controlled.push(
             script
         );
@@ -255,6 +294,8 @@ async function main() {
     console.log(
         `Empty checks: ${empty.length}`
     );
+    console.log(`Routed to pinned joint-EVM workflow (NOT RUN here): ${integrationRouted.length}`);
+    console.log(`Blocked missing live API credential (NOT RUN): ${credentialBlocked.length}`);
 
     console.log("");
 
@@ -339,10 +380,16 @@ async function main() {
     const typescriptValid =
         typescript.exitCode === 0;
 
-    const valid =
+    const coreValid =
         failed === 0 &&
         typescriptValid &&
         empty.length === 0;
+
+    // The full scientific suite remains INCOMPLETE until the routed external
+    // tests and live credentials have also been independently verified.
+    const valid = coreValid &&
+        integrationRouted.length === 0 &&
+        credentialBlocked.length === 0;
 
     const result:
         RegressionSuiteResult = {
@@ -369,6 +416,8 @@ async function main() {
 
                 excluded:
                     excluded.length,
+                integrationRouted:integrationRouted.length,
+                credentialBlocked:credentialBlocked.length,
 
                 empty:
                     empty.length,
@@ -380,8 +429,10 @@ async function main() {
             },
 
             excluded,
-
+            integrationRouted,
+            credentialBlocked,
             empty,
+            coreValid,
 
             results,
 
@@ -438,8 +489,11 @@ async function main() {
         `TypeScript: ${typescriptValid ? "PASS" : "FAIL"}`
     );
 
+    console.log(`Core regression: ${coreValid ? "PASS" : "FAIL"}`);
+    console.log(`Integration routed (NOT RUN): ${integrationRouted.length}`);
+    console.log(`Credential blocked (NOT RUN): ${credentialBlocked.length}`);
     console.log(
-        `Suite: ${valid ? "PASS" : "FAIL"}`
+        `Suite: ${valid ? "PASS" : "INCOMPLETE_OR_FAIL"}`
     );
 
     console.log("");
