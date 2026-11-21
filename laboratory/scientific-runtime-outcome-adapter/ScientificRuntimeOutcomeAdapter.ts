@@ -296,6 +296,18 @@ export class ScientificRuntimeOutcomeAdapter {
 
     ...outcome,
 
+    /* Preserve joint-runtime evidence as structured fields. */
+    ...(execution.stepType === "COMPOSITION_EXECUTION" ? {
+        jointCompositionEvidence: {
+            runtime: execution.runtime,
+            compositionExecutionRequirement: execution.compositionExecutionRequirement,
+            compositionWorkspaceMaterialization: execution.compositionWorkspaceMaterialization,
+            compositionRecipeSelection: execution.compositionRecipeSelection,
+            jointContractHarnessExecution: execution.jointContractHarnessExecution,
+            compositionConstraintEvaluation: execution.compositionConstraintEvaluation
+        }
+    } : {}),
+
     sourceConclusionId:
         execution.sourceConclusionId ??
         outcome.sourceConclusionId,
