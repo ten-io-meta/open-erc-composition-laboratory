@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OECL scientific web
 
-## Getting Started
+This Next.js interface **displays upstream scientific evidence**. It does not admit new composition candidates or infer compatibility from a user-selected pair.
 
-First, run the development server:
+## Pinned scientific dossier: ERC-8060 × ERC-8098
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The workbench defaults to ERC-8060 × ERC-8098. Select **Inspect available evidence** to see the report created by OECL's pinned local-EVM workflow.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- UI: src/components/ScientificDossierResults.tsx
+- Read-only API: GET /api/scientific/dossier?protocolA=ERC-8060&protocolB=ERC-8098
+- JSON download: append &download=1
+- Pinned payload: src/data/erc8060Erc8098ScientificDossier.json
+- Server integrity gate: src/server/oeclScientificDossier.ts
+- Evidence source: https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/44963511127
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The payload was projected from real compiler AST and pinned local-EVM artifacts. It reports the source-only hypothesis, bounded emergent-property observation, scientific questions, observed adversarial scenarios, untested threats, exact source revisions, and original artifact digests.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Scientific boundary:** INCONCLUSIVE, NOT_ADMITTED. The native scientific candidate was not admitted. The ten questions have scoped local observations, but source coverage is incomplete and the observations are not independent public-chain replay or a full security proof. A local constraint SUPPORT never becomes global SUPPORTS in this web projection.
 
-## Learn More
+The snapshot is pinned with a SHA-256 over JSON.stringify of the imported JSON. If modified without revising the server manifest, the API rejects it. The website's digest confirms snapshot consistency, **not** independent validity of all source artifacts; source evidence remains available in the GitHub Actions run.
 
-To learn more about Next.js, take a look at the following resources:
+Other ERC pairs keep the original /api/scientific/pair materialized projection. The dossier route returns 404 NO_VERIFIED_DOSSIER for unpinned pairs; this is not an incompatibility result.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Local verification
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+From web/:
 
-## Deploy on Vercel
+    npm ci
+    node scripts/check-scientific-dossier.mjs
+    npm run lint
+    npm run build
+    npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The dedicated GitHub workflow .github/workflows/web-scientific-dossier.yml tests these steps on pull requests.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future: new user-initiated analyses
+
+Not yet implemented. Do not execute arbitrary repository-supplied code inside the Next.js server.
+
+A separately reviewed job service should accept validated repository URLs and immutable commit SHAs; enforce time, size, and network limits; obtain sources in a sandbox; run AST-first source analysis; register experiments only when sources and constraints are bound; and emit machine-readable provenance bundles.
+
+The interface should expose QUEUED, RUNNING, INCONCLUSIVE, COMPLETED, and FAILED states. It must show the scientific outcome from the native evaluator, not compute it in the UI.
+
+All source reads and EVM experiments must be isolated from the public request handler. Until the job service and its abuse controls are reviewed, requests remain read-only.
