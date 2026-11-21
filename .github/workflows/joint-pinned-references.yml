@@ -59,6 +59,9 @@ jobs:
       - name: Build pinned compiler-AST structural capability and restriction graph before EVM execution
         run: node oecl/scripts/check-solidity-structural-graph.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-structural-graph.json
 
+      - name: Discover typed complementarity independently from compiler AST before EVM
+        run: node oecl/scripts/check-graph-behavioral-discovery.cjs joint-evidence/erc8060-erc8098-structural-graph.json joint-evidence/erc8060-erc8098-ast-hypothesis.json
+
       - name: Execute ERC-8060 and ERC-8098 in one local EVM
         working-directory: source-8060
         env:
