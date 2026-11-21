@@ -42,6 +42,8 @@ jobs:
           cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
 
       - name: Execute ERC-8060 and ERC-8098 in one local EVM
         working-directory: source-8060
@@ -54,6 +56,12 @@ jobs:
         env:
           OECL_FAILURE_MATRIX_PATH: ../joint-evidence/erc8060-erc8098-failure-matrix.json
         run: npx hardhat test test/OECLInteractionFailureMatrix.test.js
+
+      - name: Test rejecting final ETH payout and reentrant receiver callbacks
+        working-directory: source-8060
+        env:
+          OECL_ETH_CALLBACK_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-eth-callbacks.json
+        run: npx hardhat test test/OECLAdversarialEthReceiver.test.js
 
       - name: Validate all four adversarial experiments and source-bound rollback evidence
         run: node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-failure-matrix.json
