@@ -89,7 +89,20 @@ const controls=[
   ["internal_liability_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
     'totalRedeemableValue -= redeemable;',
     'if (false) { totalRedeemableValue -= redeemable; }'
-  );}]
+  );},
+  ["contradictory_owner_guard",(s)=>{s[0].text=s[0].text.replace(
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");\n        require(ownerOf(tokenId) != msg.sender, "Opposite guard");'
+  );}],
+  ["reversed_contradictory_owner_guard",(s)=>{s[0].text=s[0].text.replace(
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");\n        require(msg.sender != ownerOf(tokenId), "Impossible caller");'
+  );}],
+  ["inherited_burn_overridden_with_revert",(s)=>{s[1].text=s[1].text.replace(/\}\s*$/,
+    'function burn(uint256 amount) public override { revert("disabled"); }\n}');}],
+  ["inherited_burn_overridden_with_no_effect",(s)=>{s[1].text=s[1].text.replace(/\}\s*$/,
+    'function burn(uint256 amount) public override { require(amount > 0); }\n}');}]
+
 ];
 for(const [label,change] of controls) {
   const s=structuredClone(sources),d=structuredClone(dep);
