@@ -31,3 +31,6 @@ jobs:
 
       - name: Native behavioral invariant and final polarity regression
         run: npx tsx scripts/check-native-behavioral-constraints.ts
+
+      - name: Discovered candidate source and specification admission regression
+        run: npx tsx scripts/check-discovered-candidate-admission.ts
