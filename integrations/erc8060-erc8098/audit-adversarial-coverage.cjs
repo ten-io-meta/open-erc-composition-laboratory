@@ -38,7 +38,7 @@ assert.equal(multiholder.data.holders.length,2);
 assert.equal(multiholder.data.afterFirst.nft1Owner,null);
 assert.equal(multiholder.data.afterFirst.nft2Owner,multiholder.data.holders[1]);
 assert.equal(multiholder.data.afterSecond.nft2Owner,null);
-assert.equal(multiholder.data.afterSecond.nftObligationsWei,"0");
+assert.equal(multiholder.data.afterSecond.obligationsWei,"0");
 assert.equal(multiholder.data.afterSecond.backingWei,"0");
 assert.equal(multiholder.data.afterSecond.tokenSupply,"98000000000000000000");
 const tested=[
