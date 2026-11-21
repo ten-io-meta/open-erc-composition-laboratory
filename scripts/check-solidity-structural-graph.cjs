@@ -151,7 +151,7 @@ const report={
     dependency:{package:"@openzeppelin/contracts",version:pkg.version,
       integrity:aLock.integrity,sourceUnits:[ozCore,ozBurnable]},
     compilerBuildInfoFile:buildFile,
-    compilerBuildInfoSha256:sourceHash(JSON.stringify(build))
+    compilerBuildInfoSha256:sourceHash(fs.readFileSync(path.join(buildDir,buildFile)))
   },
   verifiedStructuralPaths:[
     "NFT_PUBLIC_BURN_TO_INTERNAL_BURN",
