@@ -20,8 +20,8 @@ function connect(i) {
   }
 }
 function inspect(i) {
-  const {graph,ast,evm,witness,recognized,native,admission,discovery,raw}=i;
-  if(![raw?.graph,raw?.ast,raw?.evm,raw?.witness,raw?.recognized,raw?.native]
+  const {graph,ast,evm,witness,recognized,native,nativeStudy,admission,discovery,raw}=i;
+  if(![raw?.graph,raw?.ast,raw?.evm,raw?.witness,raw?.recognized,raw?.native,raw?.nativeStudy]
     .every(x=>typeof x==="string"&&x.length>0))
     return rejection("MISSING_INDEPENDENT_ARTIFACT_BYTES");
   const derived=analyze(graph);
@@ -35,6 +35,42 @@ function inspect(i) {
      !eq(ast.normalizedParticipants,derived.participants)||
      ast.graphEvidence?.sha256!==hash(raw.graph))
     return rejection("AST_HYPOTHESIS_NOT_VERIFIABLY_DERIVED");
+  // The native source-only discovery and its ten-question research plan
+  // MUST be anchored to the same pre-execution AST artifact. They are not
+  // interchangeable with the later observed native invariant constraints.
+  const nDiscovery=nativeStudy?.discovery;
+  const nSpecification=nativeStudy?.specification?.specifications?.[0];
+  const expectedQuestionIds=new Set(nSpecification?.questions?.map(x=>x.questionId)||[]);
+  const scopedFacts=new Set(derived.participants.flatMap(p=>p.provenance.map(f=>f.factId)));
+  if(nativeStudy?.schemaVersion!=="OECL_NATIVE_AST_BEHAVIORAL_STUDY_V1"||
+     nativeStudy.inputArtifactDigests?.graph!==hash(raw.graph)||
+     nativeStudy.inputArtifactDigests?.sourceHypothesis!==hash(raw.ast)||
+     nativeStudy.nativeCandidatesGenerated!==0||
+     nativeStudy.admission!=="NOT_ADMITTED"||
+     nativeStudy.finalScientificResult!=="INCONCLUSIVE"||
+     nDiscovery?.errors?.length!==0||
+     nDiscovery?.candidateCount!==0||
+     nDiscovery?.sourceGraphSha256!==hash(raw.graph)||
+     nDiscovery?.hypotheses?.length!==1||
+     nDiscovery.hypotheses[0].hypothesisId!==derived.hypotheses[0].hypothesisId||
+     nDiscovery.hypotheses[0].state!=="SOURCE_ONLY_UNEVALUATED"||
+     nativeStudy.specification?.errors?.length!==0||
+     nativeStudy.specification?.candidateCount!==0||
+     nativeStudy.specification?.specifications?.length!==1||
+     nSpecification?.hypothesisId!==derived.hypotheses[0].hypothesisId||
+     nSpecification.sourceGraphSha256!==hash(raw.graph)||
+     nSpecification.status!=="INSUFFICIENT_EVIDENCE"||
+     nSpecification.nativeCandidateId!==null||
+     nSpecification.candidateAdmission!=="NOT_ADMITTED"||
+     nSpecification.scientificPolarity!=="INCONCLUSIVE"||
+     nSpecification.questions?.length!==10||
+     expectedQuestionIds.size!==10||
+     nSpecification.participantAQuestionIds?.length!==4||
+     nSpecification.participantBQuestionIds?.length!==4||
+     nSpecification.jointQuestionIds?.length!==2||
+     !nSpecification.questions.every(q=>q.status==="NOT_EVALUATED"&&
+       q.sourceFactIds?.length>0&&q.sourceFactIds.every(f=>scopedFacts.has(f))))
+    return rejection("NATIVE_SOURCE_STUDY_NOT_BOUND_TO_AST");
   const sources=graph.provenance?.primary,dep=graph.provenance?.dependency;
   if(!Array.isArray(sources)||sources.length!==2||!dep?.integrity||
      dep.package!=="@openzeppelin/contracts"||dep.version!=="4.9.6")
@@ -200,8 +236,11 @@ function inspect(i) {
     dependency:{package:dep.package,version:dep.version,
       integrity:dep.integrity,sourceSha256:{ERC20:hashes.OZ_ERC20,ERC20Burnable:hashes.OZ_BURNABLE}},
     witnessTransaction:evm.transactions.jointRedemption,
-    artifactHashes:{graph:hash(raw.graph),hypothesis:hash(raw.ast),evm:hash(raw.evm),
-      witness:hash(raw.witness),recognized:hash(raw.recognized),native:hash(raw.native)},
+    artifactHashes:{graph:hash(raw.graph),hypothesis:hash(raw.ast),nativeStudy:hash(raw.nativeStudy),
+      evm:hash(raw.evm),witness:hash(raw.witness),
+      recognized:hash(raw.recognized),native:hash(raw.native)},
+    nativeSourceSpecification:{status:nSpecification.status,questionCount:nSpecification.questions.length,
+      candidateAdmission:nSpecification.candidateAdmission},
     nativeConstraintObservations:3,
     nativeDiscoveredCandidateCount:0,
     remainingUnknowns:[
