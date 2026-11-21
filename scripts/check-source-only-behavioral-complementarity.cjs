@@ -89,7 +89,7 @@ const controls=[
   ["internal_liability_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
     'totalRedeemableValue -= redeemable;',
     'if (false) { totalRedeemableValue -= redeemable; }'
-  );},
+  );}],
   ["contradictory_owner_guard",(s)=>{s[0].text=s[0].text.replace(
     'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
     'require(ownerOf(tokenId) == msg.sender, "Not token owner");\n        require(ownerOf(tokenId) != msg.sender, "Opposite guard");'
