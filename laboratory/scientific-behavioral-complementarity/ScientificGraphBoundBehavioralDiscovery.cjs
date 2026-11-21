@@ -38,8 +38,8 @@ function analyze(graph) {
   const functions=new Map(graph.functions.map(x=>[x.id,x]));
   const signature=(fn,name,visibility)=>
     fn.name===name&&fn.kind==="function"&&fn.implemented&&
-    (!visibility||visibility.includes(fn.visibility))&&fn.parameterTypes?.length===1&&
-    fn.parameterTypes[0].includes("uint256");
+    (!visibility||visibility.includes(fn.visibility))&&fn.parameterTypes?.length>=1&&
+    fn.parameterTypes[fn.parameterTypes.length-1].includes("uint256");
   const inherited=(contract,name)=>graph.contracts.some(x=>
     x.name===name&&contract.linearizedBaseContracts?.includes(x.id));
   const edge=(kind,from,to)=>graph.edges.find(x=>
