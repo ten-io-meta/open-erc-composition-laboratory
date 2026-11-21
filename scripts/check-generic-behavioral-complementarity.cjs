@@ -95,8 +95,12 @@ reject("duplicate_source",x=>{x[1].sourceId=x[0].sourceId;x[1].revision=x[0].rev
 const synthetic=structuredClone(participants);
 synthetic[0].sourceId="example/voucher-cancellation";
 synthetic[1].sourceId="example/credit-destruction";
-for(const p of synthetic) {
-  for(const f of p.provenance)f.sourceId=p.sourceId;
+for(let i=0;i<synthetic.length;i++) {
+  const p=synthetic[i], originalId=participants[i].sourceId;
+  for(const f of p.provenance) {
+    if(f.sourceId===originalId) f.sourceId=p.sourceId;
+    if(f.attributedParticipantId===originalId) f.attributedParticipantId=p.sourceId;
+  }
 }
 const portable=discover({participants:synthetic});
 assert.deepEqual(portable.errors,[]);
