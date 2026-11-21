@@ -46,3 +46,23 @@ promote the target of an OECL scientific conclusion.
 4. Re-run the candidate-specific joint experiment, including counterexamples,
    and reconcile the emitted constraint observations.
 5. Apply the final evidence gate and review both preservation and violations.
+
+## Independent-source admission gate
+
+The workflow separately executes `check-source-admission.cjs`, which
+checks the **actual ERC-8060 Git HEAD**, the `@openzeppelin/contracts`
+version and locked integrity (`4.9.6`), and the SHA-256 of the local
+second-participant source against the EVM execution receipt.
+
+OpenZeppelin is an independently maintained dependency for ERC-20 behavior,
+**not** an independent ERC-8098 implementation. Its presence does not meet
+the full-source admission requirement. The resulting machine-readable
+`*.admission.json` report is deliberately:
+
+- `compositionCandidateAdmission: BLOCKED_INDEPENDENT_ERC8098_SOURCE_MISSING`
+- `allowedScientificPolarity: INCONCLUSIVE`
+
+The four regression cases also confirm that forged independent-source status,
+incorrect ERC-8060 revision or altered second-participant source hashes
+cannot pass the admission checks. This is a provenance safeguard rather
+than an independent ERC-8098 audit.
