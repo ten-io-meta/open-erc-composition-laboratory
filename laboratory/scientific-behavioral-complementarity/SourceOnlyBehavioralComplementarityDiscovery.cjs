@@ -92,6 +92,18 @@ function plainlyImpossibleExecution(body) {
     /\brevert\s*\(/.test(body) ||
     /\bif\s*\(\s*true\s*\)\s*\{\s*(?:revert\s*\(|(?:require|assert)\s*\(\s*false\b)/.test(body);
 }
+// Conservative contradiction checks. A contradictory owner guard and a
+// local override of a dependency's burn invalidate this narrow inference.
+// More complex constraints remain unknown until call-graph/SAT analysis.
+function contradictoryOwnerGuards(body) {
+  return /\brequire\s*\(\s*(?:ownerOf\s*\(\s*tokenId\s*\)\s*!=\s*msg\.sender|msg\.sender\s*!=\s*ownerOf\s*\(\s*tokenId\s*\))/.test(body);
+}
+function unverifiedBurnOverride(sourceText) {
+  // A derived function shadows the inherited dependency regardless of
+  // whether its body actually delegates to super. Do not silently inherit
+  // that capability without analyzing the override.
+  return /\bfunction\s+burn\s*\(\s*uint256\s+amount\s*\)[^;{]*\{/.test(sourceText);
+}
 function extract(source, dependency) {
   if (!source || !source.text || !source.id || !source.revision ||
       !source.file || !/^[a-f0-9]{40}$/i.test(source.revision)) return [];
@@ -116,7 +128,8 @@ function extract(source, dependency) {
     /function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,130}?\{\s*(?:revert\s*\(|require\s*\(\s*false\b)/.test(sourceCode.matchText);
   if (all(nft) && !terminalEntryRevert &&
       !plainlyImpossibleExecution(burnBody.matchText) &&
-      !plainlyImpossibleExecution(internalBurnBody.matchText)) results.push({
+      !plainlyImpossibleExecution(internalBurnBody.matchText) &&
+      !contradictoryOwnerGuards(burnBody.matchText)) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
     effects:["NFT_DESTRUCTION","ETH_VALUE_PAYOUT","ETH_LIABILITY_DECREASE"],
     restrictions:["NFT_OWNER_AUTHORIZATION","BACKING_SOLVENCY","PAYOUT_MUST_SUCCEED"],
@@ -131,7 +144,8 @@ function extract(source, dependency) {
   // Absence of a source-level mint entry is NOT formal proof of an
   // immutable supply; proxies, inherited internals and upgrades need audit.
   const unsafeMint=/function\s+(?:mint|increaseSupply)\s*\(/.test(sourceCode.matchText);
-  if (all(erc20) && !unsafeMint) results.push({
+  if (all(erc20) && !unsafeMint &&
+      !unverifiedBurnOverride(sourceCode.matchText)) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
     effects:["FUNGIBLE_SUPPLY_DESTRUCTION"],
     restrictions:["FUNGIBLE_BALANCE_AND_ALLOWANCE","NO_EXPOSED_MINT_IN_PRIMARY_SOURCE"],
