@@ -37,3 +37,6 @@ jobs:
 
       - name: Inherited capability exact-source and negative regression
         run: npx tsx scripts/check-inherited-capability-projection.ts
+
+      - name: Pinned Solidity import closure safety regression
+        run: npx tsx scripts/check-pinned-solidity-import-closure.ts
