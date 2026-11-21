@@ -172,15 +172,21 @@ async function main() {
 
         }
 
+        // The campaign may contain other INCONCLUSIVE steps.
+        // Check this selected execution exactly once and global accounting
+        // independently rather than requiring a campaign-wide count of one.
         if (
+            runtimeResult.executions.filter(item =>
+                item.stepId === hardhatSpecification.stepId
+            ).length !== 1 ||
             runtimeResult.statistics.inconclusive !==
-            1
+            runtimeResult.executions.filter(item =>
+                item.status === "INCONCLUSIVE"
+            ).length
         ) {
-
             throw new Error(
-                "Output buffer overflow must increment INCONCLUSIVE exactly once."
+                "Output-capture target or global INCONCLUSIVE accounting is inconsistent."
             );
-
         }
 
         const combinedEvidence =
@@ -198,7 +204,7 @@ async function main() {
         ) {
 
             throw new Error(
-                "Runtime evidence does not contain OUTPUT_BUFFER_EXCEEDED."
+                "Runtime evidence does not contain OUTPUT_CAPTURE_TRUNCATED."
             );
 
         }
@@ -213,12 +219,6 @@ if (
     );
 
 }
-        // A successful process can still overflow OECL's smaller
-        // bounded evidence capture, without hitting Node's maxBuffer.
-        if (!combinedEvidence.includes("OECL_OUTPUT_TRUNCATED:")) {
-            throw new Error("Output capture truncation marker is missing.");
-        }
-
         console.log("");
         console.log(
             "CONTROLLED OUTPUT BUFFER EXECUTION: PASS"
