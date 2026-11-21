@@ -59,8 +59,8 @@ export class GitHubRepositoryLoader {
                 {encoding:"utf8"}
             );
             const normalize = (value:string) => value.trim()
-                .replace(/\\.git$/,"")
-                .replace(/^git@github\\.com:/,"https://github.com/");
+                .replace(/\.git$/,"")
+                .replace(/^git@github\.com:/,"https://github.com/");
             if (normalize(actualOrigin) !== normalize(url)) {
                 throw new Error("EXTERNAL_SOURCE_REMOTE_MISMATCH: "+localPath);
             }
