@@ -37,6 +37,27 @@ function verifySources(a, b) {
   const sourceB = fs.readFileSync(path.join(b,"contracts/ERC8098Reference.sol"));
   const lock = JSON.parse(fs.readFileSync(path.join(b,"package-lock.json"),"utf8"));
   const oz = lock.packages?.["node_modules/@openzeppelin/contracts"];
+  const lock8060 = JSON.parse(fs.readFileSync(path.join(a,"package-lock.json"),"utf8"));
+  const oz8060 = lock8060.packages?.["node_modules/@openzeppelin/contracts"];
+  assert.equal(oz8060?.version, oz?.version, "Two source lockfiles use different OpenZeppelin versions");
+  assert.equal(oz8060?.integrity, oz?.integrity, "Two source lockfiles disagree on OpenZeppelin integrity");
+  const installedOZRoot = path.join(a,"node_modules/@openzeppelin/contracts");
+  const installedOZ = JSON.parse(fs.readFileSync(path.join(installedOZRoot,"package.json"),"utf8"));
+  assert.equal(installedOZ.version, "4.9.6", "Installed inherited dependency version mismatch");
+  const inheritedERC20Path = "token/ERC20/ERC20.sol";
+  const inheritedBurnablePath = "token/ERC20/extensions/ERC20Burnable.sol";
+  const inheritedERC20 = fs.readFileSync(path.join(installedOZRoot,inheritedERC20Path));
+  const inheritedBurnable = fs.readFileSync(path.join(installedOZRoot,inheritedBurnablePath));
+  const ozCoreText = inheritedERC20.toString("utf8");
+  const ozBurnableText = inheritedBurnable.toString("utf8");
+  assert.match(ozCoreText,/function _burn\(address account, uint256 amount\) internal virtual/);
+  assert.match(ozCoreText,/_totalSupply -= amount;/);
+  assert.match(ozCoreText,/function _mint\(address account, uint256 amount\) internal virtual/);
+  assert.match(ozCoreText,/_totalSupply \+= amount;/);
+  assert.match(ozBurnableText,/function burn\(uint256 amount\) public virtual/);
+  assert.match(ozBurnableText,/_burn\(_msgSender\(\), amount\);/);
+  assert.match(ozBurnableText,/_spendAllowance\(account, _msgSender\(\), amount\);/);
+  assert.match(ozBurnableText,/_burn\(account, amount\);/);
   assert.equal(oz?.version, "4.9.6", "Inherited OpenZeppelin release differs");
   assert.match(oz.integrity, /^sha512-[A-Za-z0-9+/]+=*$/, "Missing OpenZeppelin integrity");
   // Source-based facts do not imply full execution proof. These are explicit
@@ -51,7 +72,13 @@ function verifySources(a, b) {
     {id:"B-CONSTRUCTOR-MINT",side:"B",repository:"ten-io-meta/erc8098-reference",
       revision:SHA_B,file:"contracts/ERC8098Reference.sol", ...locate(sourceB,"_mint(initialHolder, initialSupply);","ERC8098 constructor mint")},
     {id:"B-ERC20-INHERITANCE",side:"B",repository:"ten-io-meta/erc8098-reference",
-      revision:SHA_B,file:"contracts/ERC8098Reference.sol", ...locate(sourceB,"contract ERC8098Reference is ERC20, ERC20Burnable", "ERC8098 OZ inheritance")}
+      revision:SHA_B,file:"contracts/ERC8098Reference.sol", ...locate(sourceB,"contract ERC8098Reference is ERC20, ERC20Burnable", "ERC8098 OZ inheritance")},
+    {id:"B-INHERITED-BURN-SUPPLY-DEBIT",side:"B",repository:"OpenZeppelin/openzeppelin-contracts",
+      revision:"4.9.6",file:inheritedERC20Path, ...locate(inheritedERC20,"_totalSupply -= amount;", "OpenZeppelin ERC20 burn supply debit")},
+    {id:"B-INHERITED-MINT-SUPPLY-CREDIT",side:"B",repository:"OpenZeppelin/openzeppelin-contracts",
+      revision:"4.9.6",file:inheritedERC20Path, ...locate(inheritedERC20,"_totalSupply += amount;", "OpenZeppelin ERC20 mint supply credit")},
+    {id:"B-INHERITED-BURN-CALL",side:"B",repository:"OpenZeppelin/openzeppelin-contracts",
+      revision:"4.9.6",file:inheritedBurnablePath, ...locate(inheritedBurnable,"_burn(_msgSender(), amount);", "OpenZeppelin ERC20Burnable burn call")}
   ];
   assert.equal((sourceB.toString().match(/\b_mint\s*\(/g)||[]).length,1,
     "Reference implementation contains a second direct _mint call");
@@ -59,7 +86,7 @@ function verifySources(a, b) {
     "Unexpected public mint or upgrade selector");
   return {
     facts,
-    sourceHashes: { A:hash(sourceA), B:hash(sourceB)},
+    sourceHashes: { A:hash(sourceA), B:hash(sourceB), OZ_ERC20:hash(inheritedERC20), OZ_BURNABLE:hash(inheritedBurnable)},
     inheritedDependency: {
       package:"@openzeppelin/contracts",version:oz.version,integrity:oz.integrity,
       verifiedBehavior:"Dependency identity pinned by lockfile; inherited ERC20 runtime behavior is checked by EVM tests; exhaustive inherited supply proof is NOT claimed"
@@ -99,7 +126,7 @@ function check({sourceA, sourceB, evidence, rawEvidence}) {
     {id:"INV-8060-BACKING-SOLVENT",side:"A",sourceFactIds:["A-BACKING-OBLIGATION","A-SURPLUS"],
       verified:initialBacking-finalBacking===amount && initialBacking>=amount && finalBacking>=obligations && o.nftSolventAfter===true,
       observation:{beforeWei:initialBacking.toString(),afterWei:finalBacking.toString(),remainingObligationWei:obligations.toString()}},
-    {id:"INV-8098-MONOTONE-SUPPLY",side:"B",sourceFactIds:["B-CONSTRUCTOR-MINT","B-ERC20-INHERITANCE"],
+    {id:"INV-8098-MONOTONE-SUPPLY",side:"B",sourceFactIds:["B-CONSTRUCTOR-MINT","B-ERC20-INHERITANCE","B-INHERITED-BURN-SUPPLY-DEBIT","B-INHERITED-MINT-SUPPLY-CREDIT","B-INHERITED-BURN-CALL"],
       verified:initialSupply>=supplyBefore && supplyBefore>=supplyAfter && supplyBefore-supplyAfter===supplyDecrease && supplyDecrease>0n,
       observation:{initialUnits:initialSupply.toString(),beforeUnits:supplyBefore.toString(),afterUnits:supplyAfter.toString(),burnedUnits:supplyDecrease.toString()}},
     {id:"INV-JOINT-ATOMIC-BURNS",side:"JOINT",sourceFactIds:["A-BACKING-OBLIGATION","B-ERC20-INHERITANCE"],
