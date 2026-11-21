@@ -52,14 +52,18 @@ jobs:
           cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLMultiHolderSolvency.test.js source-8060/test/
 
+      - name: Compile pinned source trees into compiler-resolved Solidity AST
+        working-directory: source-8060
+        run: npx hardhat compile
+
+      - name: Build pinned compiler-AST structural capability and restriction graph before EVM execution
+        run: node oecl/scripts/check-solidity-structural-graph.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-structural-graph.json
+
       - name: Execute ERC-8060 and ERC-8098 in one local EVM
         working-directory: source-8060
         env:
           OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
         run: npx hardhat test test/OECLPinnedReferences.test.js
-
-      - name: Build pinned compiler-AST structural capability and restriction graph
-        run: node oecl/scripts/check-solidity-structural-graph.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-structural-graph.json
 
       - name: Execute four isolated adversarial interaction experiments
         working-directory: source-8060
