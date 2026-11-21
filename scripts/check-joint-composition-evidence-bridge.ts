@@ -1,3 +1,4 @@
+import { syntheticNativeDiscovery } from "./fixtures/build-synthetic-native-discovery.js";
 import assert from "node:assert/strict";
 import { ScientificCompositionConstraintEvaluatorEngine } from "../laboratory/scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
 import { ScientificExecutionResultEvaluatorEngine } from "../laboratory/scientific-execution-result-evaluator/ScientificExecutionResultEvaluatorEngine.js";
@@ -7,9 +8,10 @@ import type { ScientificCompositionConstraint } from "../laboratory/scientific-c
 import type { ScientificCompositionConstraintObservation } from "../laboratory/scientific-composition-constraint-evaluation/ScientificCompositionConstraintObservation.js";
 
 /** Fake repositories and transactions are for gating regression ONLY. Not proof of ERC interoperability. */
-const candidateId = "CANDIDATE-TEST-A-B";
 const repoA = { participantSide: "A", participantKind: "PROTOCOL", participantId: "A", sourceId: "SOURCE-A", repository: "org/a", sourceRevision: "a".repeat(40) } as const;
 const repoB = { participantSide: "B", participantKind: "PROTOCOL", participantId: "B", sourceId: "SOURCE-B", repository: "org/b", sourceRevision: "b".repeat(40) } as const;
+const discovered = syntheticNativeDiscovery(repoA,repoB);
+const candidateId = discovered.candidate.candidateId;
 const constraints: ScientificCompositionConstraint[] = [repoA, repoB].map(source => ({
     constraintId: source.participantSide + "-1",
     candidateId,
@@ -41,16 +43,7 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         evidence: ["runtime-assertion:" + c.constraintId, "tx:0x" + "1".repeat(64)]
     }));
     const evaluated = new ScientificCompositionConstraintEvaluatorEngine().evaluate(constraints, observations);
-    const candidate = {
-        candidateId, participantA: {kind:"PROTOCOL",id:"A"}, participantB: {kind:"PROTOCOL",id:"B"},
-        mechanism:"SHARED_RECURRENT_CONCEPT", conceptId:"SYNTHETIC-COMMON-CASE",
-        supportingCapabilityIdsA:["A-CAP"],supportingCapabilityIdsB:["B-CAP"],
-        provenance:[
-            {kind:"PROTOCOL_CONCEPT",sourceId:repoA.sourceId,sourceRevision:repoA.sourceRevision,evidenceId:"DISCOVERY-A"},
-            {kind:"PROTOCOL_CONCEPT",sourceId:repoB.sourceId,sourceRevision:repoB.sourceRevision,evidenceId:"DISCOVERY-B"}
-        ],
-        evaluationStatus:"UNEVALUATED"
-    };
+    const candidate = structuredClone(discovered.candidate);
     const spec = {
         specificationId:"SPEC-1",candidateId,mechanism:candidate.mechanism,candidateSnapshot:candidate,
         status:"READY",sourceIds:[repoA.sourceId,repoB.sourceId],targetEvidenceIds:["DISCOVERY-A","DISCOVERY-B"],
@@ -103,7 +96,7 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         selectedExecutableTarget:null, status:"INCONCLUSIVE", scientificResult:"INCONCLUSIVE",
         executedAt:null, evidence:[], observations:[], errors:[], explanation:"",
         jointCompositionEvidence: joint,
-        discoveredCandidateEvidence: {discovery:{candidates:[candidate],errors:[]},specifications:{specifications:[spec],errors:[]}}
+        discoveredCandidateEvidence: {discoveryInput:structuredClone(discovered.discoveryInput),discovery:structuredClone(discovered.discovery),specifications:{specifications:[spec],errors:[]}}
     } as unknown as ScientificExecutionOutcome;
 }
 
