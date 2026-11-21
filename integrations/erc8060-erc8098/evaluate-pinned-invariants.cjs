@@ -115,7 +115,12 @@ function check({sourceA, sourceB, evidence, rawEvidence}) {
   const payout=toValue(o.alicePayoutNetOfGas,"alicePayoutNetOfGas");
   const initialBacking=toValue(o.nftBackingBefore,"nftBackingBefore");
   const finalBacking=toValue(o.nftBackingAfter,"nftBackingAfter");
+  const obligationBefore=toValue(o.nftObligationBefore,"nftObligationBefore");
   const obligations=toValue(o.nftObligationAfter,"nftObligationAfter");
+  const obligationDecrease=toValue(o.nftObligationDecrease,"nftObligationDecrease");
+  assert.ok(obligationBefore>=obligations,"NFT obligations increased during burn");
+  assert.equal(obligationBefore-obligations,amount,"Wrong NFT liability transition");
+  assert.equal(obligationDecrease,amount,"Reported NFT liability delta does not equal redemption");
   const supplyBefore=toValue(o.erc20SupplyBefore,"erc20SupplyBefore");
   const supplyAfter=toValue(o.erc20SupplyAfter,"erc20SupplyAfter");
   const supplyDecrease=toValue(o.supplyDecrease,"supplyDecrease");
@@ -125,7 +130,9 @@ function check({sourceA, sourceB, evidence, rawEvidence}) {
       verified:payout===amount && amount>0n, observation:{paidWei:payout.toString(),redeemedWei:amount.toString()}},
     {id:"INV-8060-BACKING-SOLVENT",side:"A",sourceFactIds:["A-BACKING-OBLIGATION","A-SURPLUS"],
       verified:initialBacking-finalBacking===amount && initialBacking>=amount && finalBacking>=obligations && o.nftSolventAfter===true,
-      observation:{beforeWei:initialBacking.toString(),afterWei:finalBacking.toString(),remainingObligationWei:obligations.toString()}},
+      observation:{beforeWei:initialBacking.toString(),afterWei:finalBacking.toString(),remainingObligationWei:obligations.toString(),
+        obligationsBeforeWei:obligationBefore.toString(),obligationsAfterWei:obligations.toString(),
+        obligationsDecreasedWei:obligationDecrease.toString()}},
     {id:"INV-8098-MONOTONE-SUPPLY",side:"B",sourceFactIds:["B-CONSTRUCTOR-MINT","B-ERC20-INHERITANCE","B-INHERITED-BURN-SUPPLY-DEBIT","B-INHERITED-MINT-SUPPLY-CREDIT","B-INHERITED-BURN-CALL"],
       verified:initialSupply>=supplyBefore && supplyBefore>=supplyAfter && supplyBefore-supplyAfter===supplyDecrease && supplyDecrease>0n,
       observation:{initialUnits:initialSupply.toString(),beforeUnits:supplyBefore.toString(),afterUnits:supplyAfter.toString(),burnedUnits:supplyDecrease.toString()}},
