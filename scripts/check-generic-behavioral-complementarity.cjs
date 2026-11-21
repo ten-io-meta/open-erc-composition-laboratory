@@ -90,6 +90,12 @@ reject("missing_consistency",x=>{x[1].restrictions=x[1].restrictions.filter(y=>y
 reject("no_decrease_effect",x=>{x[0].effects[0].kind="INCREASE";});
 reject("same_resource_class",x=>{x[1].assetClass=x[0].assetClass;});
 reject("duplicate_source",x=>{x[1].sourceId=x[0].sourceId;x[1].revision=x[0].revision;});
+reject("duplicate_fact_identity",x=>{x[0].provenance.push(structuredClone(x[0].provenance[0]));});
+reject("invalid_fact_digest",x=>{x[0].provenance[0].sourceSha256="unverified";});
+reject("invented_inherited_anchor",x=>{const f=x[1].provenance.find(y=>y.attributedParticipantId);f.inheritanceAnchorFactId="NOT_AN_ACTUAL_PRIMARY_SOURCE_FACT";});
+reject("forged_dependency_attribution",x=>{const f=x[1].provenance.find(y=>y.attributedParticipantId);f.attributedParticipantId=x[0].sourceId;});
+reject("repeated_effect_reference",x=>{const e=x[0].effects[0];e.sourceFactIds.push(e.sourceFactIds[0]);});
+reject("unattributed_restriction",x=>{x[1].restrictions[0].sourceFactIds=["NONEXISTENT_FACT"];});
 // Demonstrate portability to an unrelated domain using typed synthetic,
 // source-revision-bound observations, without ERC names or EVM fixtures.
 const synthetic=structuredClone(participants);
