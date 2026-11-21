@@ -122,6 +122,12 @@ check("successful joint execution without discovery stays inconclusive",undiscov
 const fakeDiscovery = buildOutcome();
 fakeDiscovery.discoveredCandidateEvidence!.discovery.candidates[0].provenance=[];
 check("unproven discovery provenance stays inconclusive",fakeDiscovery,"INCONCLUSIVE");
+const forgedDiscovery = buildOutcome();
+forgedDiscovery.discoveredCandidateEvidence!.discovery.candidates[0].supportingCapabilityIdsA.push("FORGED");
+check("hand-modified discovered candidate rejected by deterministic rediscovery",forgedDiscovery,"INCONCLUSIVE");
+const fakeInput = buildOutcome();
+fakeInput.discoveredCandidateEvidence!.discoveryInput.protocolConceptResults = [];
+check("source attribution inputs missing despite claimed discovery",fakeInput,"INCONCLUSIVE");
 const a = buildOutcome();
 a.jointCompositionEvidence!.compositionExecutionRequirement!.participantSources[1].sourceRevision = "0".repeat(40);
 check("changed source revision cannot support", a, "INCONCLUSIVE");
