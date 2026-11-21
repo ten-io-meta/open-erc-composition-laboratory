@@ -67,11 +67,39 @@ function scopedBody(source, signature) {
   return {...source,matchText:" ".repeat(open)+scoped+" ".repeat(text.length-end-1)};
 }
 
+// Exclude source facts placed inside syntactically constant-false blocks.
+// This is a conservative lexical filter, not general Solidity path analysis.
+function maskConstantFalseBlocks(text) {
+  const re=/\bif\s*\(\s*(?:false|0\s*==\s*1|1\s*==\s*0)\s*\)\s*\{/g;
+  let output=text,match;
+  while((match=re.exec(text))!==null) {
+    const open=match.index+match[0].lastIndexOf("{");
+    let depth=0,close=-1;
+    for(let i=open;i<text.length;i++) {
+      if(text[i]==="{")depth++;
+      else if(text[i]==="}"&&--depth===0){close=i;break;}
+    }
+    if(close<0)return null;
+    output=output.slice(0,match.index)+text.slice(match.index,close+1).replace(/[^\n]/g," ")+output.slice(close+1);
+    re.lastIndex=close+1;
+  }
+  return output;
+}
+function plainlyImpossibleExecution(body) {
+  // Known unconditional failure idioms invalidate the proposed effect.
+  // Unknown branch predicates are deliberately not considered proven.
+  return /\b(?:require|assert)\s*\(\s*false\s*[,)]/.test(body) ||
+    /\brevert\s*\(/.test(body) ||
+    /\bif\s*\(\s*true\s*\)\s*\{\s*(?:revert\s*\(|(?:require|assert)\s*\(\s*false\b)/.test(body);
+}
 function extract(source, dependency) {
   if (!source || !source.text || !source.id || !source.revision ||
       !source.file || !/^[a-f0-9]{40}$/i.test(source.revision)) return [];
-  const sourceCode={...source,matchText:maskComments(source.text)};
-  const dependencyCode=dependency?.text?{...dependency,matchText:maskComments(dependency.text)}:dependency;
+  const maskedSource=maskConstantFalseBlocks(maskComments(source.text));
+  const maskedDependency=dependency?.text?maskConstantFalseBlocks(maskComments(dependency.text)):null;
+  if(maskedSource===null||(dependency?.text&&maskedDependency===null))return [];
+  const sourceCode={...source,matchText:maskedSource};
+  const dependencyCode=dependency?.text?{...dependency,matchText:maskedDependency}:dependency;
   const burnBody=scopedBody(sourceCode,/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[^;{]*\{/);
   const internalBurnBody=scopedBody(sourceCode,/function\s+_burn\s*\(\s*uint256\s+tokenId\s*\)[^;{]*\{/);
   const results = [];
@@ -86,7 +114,9 @@ function extract(source, dependency) {
   ];
   const terminalEntryRevert =
     /function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,130}?\{\s*(?:revert\s*\(|require\s*\(\s*false\b)/.test(sourceCode.matchText);
-  if (all(nft) && !terminalEntryRevert) results.push({
+  if (all(nft) && !terminalEntryRevert &&
+      !plainlyImpossibleExecution(burnBody.matchText) &&
+      !plainlyImpossibleExecution(internalBurnBody.matchText)) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
     effects:["NFT_DESTRUCTION","ETH_VALUE_PAYOUT","ETH_LIABILITY_DECREASE"],
     restrictions:["NFT_OWNER_AUTHORIZATION","BACKING_SOLVENCY","PAYOUT_MUST_SUCCEED"],
