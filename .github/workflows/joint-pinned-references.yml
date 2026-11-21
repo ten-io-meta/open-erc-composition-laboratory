@@ -63,6 +63,9 @@ jobs:
           OECL_ETH_CALLBACK_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-eth-callbacks.json
         run: npx hardhat test test/OECLAdversarialEthReceiver.test.js
 
+      - name: Validate payment rejection and nested callback security receipts
+        run: node oecl/integrations/erc8060-erc8098/check-eth-callback-experiments.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-eth-callbacks.json
+
       - name: Validate all four adversarial experiments and source-bound rollback evidence
         run: node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-failure-matrix.json
 
