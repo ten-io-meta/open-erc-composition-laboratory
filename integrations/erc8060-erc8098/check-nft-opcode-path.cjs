@@ -197,8 +197,13 @@ function main(a,b,tracePath){
     ["nft_wrong_redeemed_amount",x=>{x.measured.nftLiabilityAfterWei=x.measured.nftLiabilityBeforeWei;}],
     ["nft_wrong_fungible_delta",x=>{x.measured.fungibleSupplyAfterUnits=x.measured.fungibleSupplyBeforeUnits;}],
     ["nft_removed_sstores",x=>{x.instructions=x.instructions.filter(s=>s.op!=="SSTORE");}],
-    ["nft_broken_call_target",x=>{const ins=x.instructions.find(s=>s.depth===1&&
-      ["CALL","STATICCALL"].includes(s.op));if(ins)ins.target="0".repeat(40);}],
+    ["nft_broken_call_target",x=>{
+      const nftTarget=x.contractAddresses.nft.slice(2).toLowerCase();
+      const calls=x.instructions.filter(s=>s.depth===1&&
+        ["CALL","STATICCALL"].includes(s.op)&&s.target===nftTarget);
+      assert.ok(calls.length>0,"No NFT call to mutate in adversarial trace");
+      for(const ins of calls)ins.target="0".repeat(40);
+    }],
     ["nft_bad_trace_depth",x=>{x.instructions[1].depth=99;}],
     ["nft_promoted_claim",x=>{x.scientificPolarity="SUPPORTS";}]
   ];
