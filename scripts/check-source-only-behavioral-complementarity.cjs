@@ -53,7 +53,23 @@ const controls=[
   ["entire_nft_source_commented_out",(s)=>{s[0].text="/*\\n"+s[0].text+"\\n*/";}],
   ["erc20_burn_import_only_comment",(s)=>{s[1].text=s[1].text.replace('import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";','// import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";');}],
   ["dependency_burn_only_comment",(s,d)=>{d.text=d.text.replace("_burn(_msgSender(), amount);","// _burn(_msgSender(), amount);");}],
-  ["nft_burn_unconditionally_reverts",(s)=>{s[0].text=s[0].text.replace('require(ownerOf(tokenId) == msg.sender, "Not token owner");','revert("disabled");\\n        require(ownerOf(tokenId) == msg.sender, "Not token owner");');}]
+  ["nft_burn_unconditionally_reverts",(s)=>{s[0].text=s[0].text.replace('require(ownerOf(tokenId) == msg.sender, "Not token owner");','revert("disabled");\\n        require(ownerOf(tokenId) == msg.sender, "Not token owner");');}],
+  ["owner_check_in_unrelated_method",(s)=>{s[0].text=s[0].text.replace(
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
+    'require(true, "permissive");'
+  ).replace(/\}\s*$/, 'function unrelatedOwnerCheck(uint256 tokenId) external view { require(ownerOf(tokenId) == msg.sender, "Not token owner"); }\\n}');}],
+  ["payout_in_unrelated_method",(s)=>{s[0].text=s[0].text.replace(
+    'payable(msg.sender).call{value: redeemable}("")',
+    'payable(msg.sender).call{value: 0}("")'
+  ).replace(/\}\s*$/, 'function unrelatedPayout(uint256 redeemable) external { payable(msg.sender).call{value: redeemable}(""); }\\n}');}],
+  ["solvency_check_in_unrelated_method",(s)=>{s[0].text=s[0].text.replace(
+    'address(this).balance >= redeemable',
+    'address(this).balance < redeemable'
+  ).replace(/\}\s*$/, 'function unrelatedSolvency(uint256 redeemable) external view { require(address(this).balance >= redeemable); }\\n}');}],
+  ["liability_decrease_in_unrelated_method",(s)=>{s[0].text=s[0].text.replace(
+    'totalRedeemableValue -= redeemable;',
+    'totalRedeemableValue += redeemable;'
+  ).replace(/\}\s*$/, 'function unrelatedLiability(uint256 redeemable) internal { totalRedeemableValue -= redeemable; }\\n}');}]
 ];
 for(const [label,change] of controls) {
   const s=structuredClone(sources),d=structuredClone(dep);
