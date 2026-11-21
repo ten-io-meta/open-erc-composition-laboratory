@@ -47,6 +47,7 @@ jobs:
           cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLNftOpcodePath.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLInheritedBurnAuthorization.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
@@ -76,6 +77,15 @@ jobs:
         env:
           OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
         run: npx hardhat test test/OECLPinnedReferences.test.js
+
+      - name: Observe actual nested NFT EVM opcodes during pinned joint redemption
+        working-directory: source-8060
+        env:
+          OECL_NFT_OPCODE_TRACE_PATH: ../joint-evidence/erc8060-erc8098-nft-opcode-trace.json
+        run: npx hardhat test test/OECLNftOpcodePath.test.js
+
+      - name: Attest nested NFT opcodes to pinned compiler source maps and modifier storage transitions
+        run: node oecl/integrations/erc8060-erc8098/check-nft-opcode-path.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-nft-opcode-trace.json
 
       - name: Execute four isolated adversarial interaction experiments
         working-directory: source-8060
