@@ -13,6 +13,7 @@ import { ScientificStructuralProtocolRelationEvidenceEngine } from "../laborator
 import { CrossProtocolCompositionEngine } from "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
 import { ScientificSolidityInheritanceGraphEngine } from "../laboratory/scientific-solidity-inheritance/ScientificSolidityInheritanceGraphEngine.js";
 import { ScientificInheritedCapabilityProjectionEngine } from "../laboratory/scientific-inherited-capability/ScientificInheritedCapabilityProjectionEngine.js";
+import { ScientificPinnedSolidityImportClosureEngine } from "../laboratory/scientific-solidity-inheritance/ScientificPinnedSolidityImportClosure.js";
 import type { ScientificSourceObservation } from "../laboratory/scientific-source-observation/ScientificSourceObservation.js";
 
 const sources=[
@@ -37,6 +38,7 @@ async function main(){
     const structuralResults=[];
     const protocolConceptResults=[];
     const participantFacts=[];
+    const pinnedSourceImports:string[]=[];
     for (let i=0;i<2;i++){
         const source=sources[i],root=roots[i];
         assert.equal(git(root),source.revision,"Unexpected source revision for "+source.id);
@@ -52,6 +54,7 @@ async function main(){
         const facts=extractor.extract(observation);
         assert.ok(facts.length>0,"No scientific facts extracted for "+source.id);
         participantFacts.push(...facts);
+        pinnedSourceImports.push(...[...raw.matchAll(/^\\s*import\\s+(?:[^;]*?\\s+from\\s+)?["\x27]([^"\x27]+)["\x27]\\s*;/gm)].map(x=>x[1]));
         const semantic=new ScientificSemanticDerivationEngine().derive({
             sourceId:source.sourceId,sourceRevision:source.revision,facts
         });
@@ -89,29 +92,38 @@ async function main(){
     const ozRoot=join(roots[0],"node_modules/@openzeppelin/contracts");
     const lock=JSON.parse(await readFile(join(roots[0],"package-lock.json"),"utf8"));
     assert.equal(lock.packages?.["node_modules/@openzeppelin/contracts"]?.version,"4.9.6");
-    const inheritedFiles=[
-        "token/ERC20/ERC20.sol",
-        "token/ERC20/extensions/ERC20Burnable.sol",
-        "token/ERC721/ERC721.sol",
-        "token/ERC721/extensions/ERC721URIStorage.sol"
-    ];
+    const lock8098=JSON.parse(await readFile(join(roots[1],"package-lock.json"),"utf8"));
+    const package8060=lock.packages?.["node_modules/@openzeppelin/contracts"];
+    const package8098=lock8098.packages?.["node_modules/@openzeppelin/contracts"];
+    assert.equal(package8060?.version,package8098?.version,"OpenZeppelin versions differ");
+    assert.equal(package8060?.integrity,package8098?.integrity,"OpenZeppelin lock integrity mismatch");
+    assert.match(package8060.integrity,/^sha512-[A-Za-z0-9+/]+=*$/,"Unpinned OZ package");
+    const closure=new ScientificPinnedSolidityImportClosureEngine().resolve({
+        packageRoot:ozRoot,
+        initialImports:pinnedSourceImports,
+        packagePrefix:"@openzeppelin/contracts/",
+        maxFiles:128
+    });
+    assert.equal(closure.status,"RESOLVED","Pinned OpenZeppelin import closure has unresolved imports: "+closure.unresolved.join("; "));
     const inheritedFacts=[];
     const inheritedSources=[];
-    for(const file of inheritedFiles){
-        const raw=await readFile(join(ozRoot,file),"utf8");
+    for(const file of closure.files){
         const observed:ScientificSourceObservation={
-            observationId:"PINNED-INHERITED-"+file.replace(/[^a-z0-9]/gi,"-"),
+            observationId:"PINNED-INHERITED-"+file.filePath.replace(/[^a-z0-9]/gi,"-"),
             sourceId:"NPM-OPENZEPPELIN-CONTRACTS",
             sourceType:"NPM_PACKAGE",sourceRevision:"4.9.6",kind:"CONTRACT_SOURCE",
-            locator:{sourceLocation:"@openzeppelin/contracts@4.9.6",filePath:file,
-                startLine:1,endLine:raw.split(/\\r?\\n/).length},
-            rawText:raw
+            locator:{sourceLocation:"@openzeppelin/contracts@4.9.6",filePath:file.filePath,
+                startLine:1,endLine:file.rawText.split(/\\r?\\n/).length},
+            rawText:file.rawText
         };
         const facts=extractor.extract(observed);
-        assert.ok(facts.length>0,"Inherited dependency facts missing: "+file);
         inheritedFacts.push(...facts);
-        inheritedSources.push({file,sha256:sha256(raw),facts:facts.length});
+        inheritedSources.push({
+            file:file.filePath,sha256:file.sourceSha256,
+            facts:facts.length,imports:file.imports
+        });
     }
+    assert.ok(inheritedSources.length>=4,"No complete dependency import closure");
     const inheritanceGraph=new ScientificSolidityInheritanceGraphEngine().build({
         facts:[...participantFacts,...inheritedFacts]
     });
@@ -125,6 +137,8 @@ async function main(){
     assert.ok(foundEdge("ERC8098Reference","ERC20Burnable"),"ERC8098 -> ERC20Burnable inheritance unresolved");
     assert.ok(foundEdge("ERC8060Reference","ERC721URIStorage"),"ERC8060 -> ERC721URIStorage inheritance unresolved");
     assert.ok(foundEdge("ERC721URIStorage","ERC721"),"ERC721URIStorage -> ERC721 inheritance unresolved");
+    assert.ok(foundEdge("ERC8060Reference","Ownable"),"Ownable import closure unresolved");
+    assert.ok(foundEdge("ERC8060Reference","ReentrancyGuard"),"ReentrancyGuard import closure unresolved");
 
     const capabilityProjector=new ScientificInheritedCapabilityProjectionEngine();
     const allFacts=[...participantFacts,...inheritedFacts];
@@ -144,6 +158,7 @@ async function main(){
             symbols:["burn","_burn"]
         });
         assert.deepEqual(projection.errors,[]);
+        assert.equal(projection.status,"RESOLVED","Inherited source graph not closed for "+root.id+": "+projection.unresolved.join("; "));
         const burnFacts=projection.capabilities.filter(x=>x.symbol==="burn");
         assert.ok(burnFacts.length>=1,"No source-backed burn declaration for "+root.id);
         if(root.id==="ERC-8098") {
@@ -188,6 +203,7 @@ async function main(){
         package:"@openzeppelin/contracts",version:"4.9.6",
         integrity:lock.packages["node_modules/@openzeppelin/contracts"].integrity,
         sources:inheritedSources,
+        importClosure:{status:closure.status,unresolved:closure.unresolved,fileCount:closure.files.length},
         verifiedInheritanceEdges:inheritanceGraph.edges.filter(edge=>
             ["ERC8060Reference","ERC721URIStorage","ERC8098Reference","ERC20Burnable"].includes(edge.subjectContainerSymbol)
         ).map(edge=>({
@@ -224,7 +240,8 @@ async function main(){
         sourceKinds:["PINNED_SOLIDITY_SOURCE_FACTS","NATIVE_SEMANTIC_CAPABILITY_ATTRIBUTION",
             "NATIVE_CONCEPT_ABSTRACTION","NATIVE_PROTOCOL_CONCEPT_ATTRIBUTION",
             "NATIVE_PROTOCOL_IDENTITY","NATIVE_STRUCTURAL_PROTOCOL_RELATION",
-            "PINNED_INHERITANCE_GRAPH","SOURCE_ANCHORED_INHERITED_FUNCTION_PROJECTION"],
+            "PINNED_INHERITANCE_GRAPH","SOURCE_ANCHORED_INHERITED_FUNCTION_PROJECTION",
+            "RECURSIVE_PINNED_IMPORT_CLOSURE"],
         discovery,
         matchedPairCandidates:pair,
         structuralCandidateCount:pair.length,
