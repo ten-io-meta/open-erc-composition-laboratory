@@ -30,8 +30,10 @@ type Bundle={
     nativeStudy:any;bridge:any;evm:any;witness:any;native:any;
     rollback:any;rollbackValidated:any;recognized:any;
     inheritedAuth:any;inheritedAuthValidated:any;
+    nftTrace:any;nftTraceValidated:any;
     raw:{nativeStudy:string;evm:string;witness:string;native:string;rollback:string;
-      recognized:string;inheritedAuth:string;inheritedAuthValidated:string};
+      recognized:string;inheritedAuth:string;inheritedAuthValidated:string;
+      nftTrace:string;nftTraceValidated:string};
 };
 const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
 const uint=(x:unknown):x is string=>typeof x==="string"&&/^(0|[1-9][0-9]*)$/.test(x);
@@ -97,7 +99,7 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
            b.bridge.sourceRoles[0].sourceId!==origin.participants[0].sourceId||
            b.bridge.sourceRoles[1].sourceId!==origin.participants[1].sourceId)
             return fail("PARTICIPANT_ROLE_MAPPING_NOT_SUPPORTED");
-        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized","inheritedAuth","inheritedAuthValidated"] as const){
+        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized","inheritedAuth","inheritedAuthValidated","nftTrace","nftTraceValidated"] as const){
             if(typeof b.raw?.[key]!=="string")return fail("MISSING_RAW_EVIDENCE_BYTES");
             try {
                 if(!equals(JSON.parse(b.raw[key]),b[key]))
@@ -215,13 +217,50 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
            self.after.attackerAllowance!=="0")
             return fail("INHERITED_BURN_AUTHORIZATION_MEASUREMENTS_INVALID");
         const directAuthorization=true;
+        const trace=b.nftTrace,traceValidated=b.nftTraceValidated;
+        const requiredAnchors=[
+            "NFT_LIABILITY_SSTORE","NFT_REENTRANCY_ENTER_SSTORE",
+            "NFT_REENTRANCY_EXIT_SSTORE","NFT_OWNER_GUARD_EXECUTED_SOURCE"
+        ];
+        if(trace?.schemaVersion!=="OECL_PINNED_NFT_OPCODE_EXECUTION_TRACE_V1"||
+           trace.origin!=="HARDHAT_DEBUG_TRACE_TRANSACTION_OPCODE_SEQUENCE"||
+           trace.chainId!==31337||trace.transactionStatus!==1||
+           !tx(trace.transactionHash)||
+           trace.scientificPolarity!=="INCONCLUSIVE"||
+           trace.candidateAdmission!=="NOT_ADMITTED"||
+           trace.source?.repository!==b.bridge.sourceRoles[0].sourceId||
+           trace.source.revision!==b.bridge.sourceRoles[0].revision||
+           trace.source.sha256!==b.bridge.sourceRoles[0].sourceSha256||
+           traceValidated?.schemaVersion!=="OECL_NFT_COMPILER_SOURCE_EXECUTION_WITNESS_V1"||
+           traceValidated.sourceRevisionA!==trace.source.revision||
+           traceValidated.sourceRevisionB!==b.bridge.sourceRoles[1].revision||
+           traceValidated.sourceSha256!==trace.source.sha256||
+           traceValidated.rawTraceSha256!==sha(b.raw.nftTrace)||
+           traceValidated.jointTransactionHash!==trace.transactionHash||
+           traceValidated.scientificPolarity!=="INCONCLUSIVE"||
+           traceValidated.candidateAdmission!=="NOT_ADMITTED"||
+           traceValidated.observed?.nftLiabilityDebitSstore<1||
+           traceValidated.observed.modifierEntrySstore<1||
+           traceValidated.observed.modifierExitSstore<1||
+           traceValidated.observed.ownerGuardOpcodes<1||
+           !Array.isArray(traceValidated.sourceMappedAnchors)||
+           requiredAnchors.some(kind=>!traceValidated.sourceMappedAnchors.some(
+               (a:any)=>a.kind===kind&&a.depth>=2&&
+               (kind==="NFT_OWNER_GUARD_EXECUTED_SOURCE"||a.op==="SSTORE")))||
+           !uint(trace.measured?.nftLiabilityBeforeWei)||
+           !uint(trace.measured.nftLiabilityAfterWei)||
+           BigInt(trace.measured.nftLiabilityBeforeWei)-
+             BigInt(trace.measured.nftLiabilityAfterWei)!==BigInt(receipt.ethRedeemed))
+           return fail("NESTED_NFT_COMPILER_SOURCE_EXECUTION_TRACE_UNVERIFIED");
+        const tracedNft=true;
         const joint=receipt.sameTransactionContainsBothBurns===true&&
             Number.isSafeInteger(receipt.nftBurnLogIndex)&&
             Number.isSafeInteger(receipt.erc20BurnLogIndex)&&
             receipt.nftBurnLogIndex!==receipt.erc20BurnLogIndex&&
             b.recognized.property?.witnessTransaction===b.evm.transactions.jointRedemption;
         const rollback=cases.size===4&&b.rollbackValidated.counts.revertedReceipts===4;
-        const ref=(name:string)=>"SHA256:"+sha(name==="inheritedAuth"?b.raw.inheritedAuth:
+        const ref=(name:string)=>"SHA256:"+sha(name==="nftTrace"?b.raw.nftTrace:
+            name==="inheritedAuth"?b.raw.inheritedAuth:
             name==="rollback"?b.raw.rollback:
             name==="native"?b.raw.native:
             name==="witness"?b.raw.witness:
@@ -236,10 +275,10 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
             "A:AVAILABILITY":{supported:solvency,partial:true,refs:[ref("native"),ref("evm")],
                 scope:"Backing >= remaining NFT liabilities measured after joint redemption",
                 missing:["No exhaustive solvency proof for every reachable NFT state"]},
-            "A:STATE_CONSISTENCY":{supported:false,partial:joint&&solvency,
-                refs:[ref("evm"),ref("witness")],
-                scope:"AST internal burn edge plus local successful receipt (indirect)",
-                missing:["No independent internal-call execution trace across modifiers and branches"]},
+            "A:STATE_CONSISTENCY":{supported:tracedNft&&joint&&solvency,partial:joint&&solvency,
+                refs:[ref("nftTrace"),ref("evm"),ref("witness")],
+                scope:"Separate pinned local EVM debug trace observes source-mapped NFT liability debit, owner guard and modifier enter/exit opcodes",
+                missing:["No formal proof of every path or independent public-chain trace replay"]},
             "A:RESOURCE_DECREASE":{supported:joint&&liabilityDelta,partial:!liabilityDelta&&joint,
                 refs:[ref("evm"),ref("witness")],
                 scope:"Both NFT liabilities before/after and precise redemption delta checked in pinned Hardhat receipt",
