@@ -159,6 +159,77 @@ export class ScientificExecutionResultEvaluatorEngine {
 
     }
 
+    /**
+     * A joint test finishing is not sufficient. Only a complete, exact,
+     * candidate-scoped constraint evaluation may establish polarity.
+     */
+    private evaluateJointComposition(
+        outcome: ScientificExecutionOutcome
+    ): ScientificExecutionOutcome["scientificResult"] {
+        const joint = outcome.jointCompositionEvidence;
+        if (
+            outcome.stepType !== "COMPOSITION_EXECUTION" ||
+            outcome.status !== "INCONCLUSIVE" ||
+            outcome.errors.length !== 0 ||
+            !joint ||
+            joint.runtime !== "OECL_NATIVE_COMPOSITION_JOINT_CONTRACT_EXECUTION"
+        ) return "INCONCLUSIVE";
+
+        const requirement = joint.compositionExecutionRequirement;
+        const workspace = joint.compositionWorkspaceMaterialization;
+        const selection = joint.compositionRecipeSelection;
+        const harness = joint.jointContractHarnessExecution;
+        const evaluation = joint.compositionConstraintEvaluation;
+        if (
+            !requirement || !workspace || !selection || !harness || !evaluation ||
+            workspace.status !== "MATERIALIZED" ||
+            selection.status !== "SELECTED" ||
+            !selection.selectedRegistrationId ||
+            selection.matchingRegistrationIds.length !== 1 ||
+            selection.matchingRegistrationIds[0] !== selection.selectedRegistrationId ||
+            harness.status !== "EXECUTED" ||
+            !harness.driverReport ||
+            harness.driverReport.sharedRuntime !== true ||
+            evaluation.errors.length !== 0 ||
+            evaluation.candidateId !== outcome.targetId ||
+            requirement.candidate.candidateId !== outcome.targetId
+        ) return "INCONCLUSIVE";
+
+        const constraints = requirement.constraints;
+        const results = evaluation.evaluations;
+        if (
+            constraints.length === 0 ||
+            constraints.length !== results.length ||
+            !requirement.participantAConstraintIds.length ||
+            !requirement.participantBConstraintIds.length
+        ) return "INCONCLUSIVE";
+
+        const expected = new Map(constraints.map(value => [value.constraintId, value]));
+        const seen = new Set<string>();
+        for (const result of results) {
+            const constraint = expected.get(result.constraintId);
+            if (
+                !constraint || seen.has(result.constraintId) ||
+                result.candidateId !== outcome.targetId ||
+                result.participantSide !== constraint.participantSide
+            ) return "INCONCLUSIVE";
+            seen.add(result.constraintId);
+            if (
+                result.status !== "UNEVALUATED" &&
+                (result.observationIds.length === 0 || result.evidence.length === 0)
+            ) return "INCONCLUSIVE";
+        }
+        if (
+            evaluation.scientificPolarity === "CHALLENGE" &&
+            results.some(value => value.status === "VIOLATED")
+        ) return "CHALLENGES";
+        if (
+            evaluation.scientificPolarity === "SUPPORT" &&
+            results.every(value => value.status === "PRESERVED")
+        ) return "SUPPORTS";
+        return "INCONCLUSIVE";
+    }
+
     private evaluateOutcome(
         index: number,
         outcome:
@@ -229,24 +300,8 @@ const challengeCondition =
                 "COMPOSITION_CANDIDATE"
         ) {
 
-            /*
-             * Scientific composition execution safety boundary.
-             *
-             * OECL currently has no validated joint-composition
-             * runtime. Existing executable paths resolve and execute
-             * individual repository targets and therefore cannot
-             * establish scientific support or challenge for a
-             * composition candidate.
-             *
-             * Until an explicit validated joint-composition execution
-             * path exists, every executed COMPOSITION_CANDIDATE
-             * outcome remains scientifically inconclusive.
-             *
-             * NOT_EXECUTED and BLOCKED are handled immediately above
-             * and remain NOT_EVALUATED.
-             */
             scientificResult =
-                "INCONCLUSIVE";
+                this.evaluateJointComposition(outcome);
 
         } else if (
             hasScientificChallengeSignal
