@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
+import {CrossProtocolCompositionEngine} from
+  "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
+import {ScientificCompositionEvaluationSpecificationEngine} from
+  "../laboratory/scientific-composition-evaluation-specification/ScientificCompositionEvaluationSpecificationEngine.js";
 import { ScientificCompositionConstraintEvaluatorEngine } from
   "../laboratory/scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
 import type { ScientificCompositionConstraint } from
@@ -13,10 +17,10 @@ const {connect}=require("../laboratory/scientific-behavioral-complementarity/Sci
 type ObjectRecord=Record<string,any>;
 async function main(){
   const args=process.argv.slice(2);
-  assert.equal(args.length,9, "Expected graph, AST hypothesis, EVM receipt, source witnesses, recognized property, native evaluation, native admission, real native discovery, output");
-  const [graphPath,astPath,evmPath,witnessPath,recognizedPath,nativePath,admissionPath,discoveryPath,outPath]=args;
-  const keys=["graph","ast","evm","witness","recognized","native","admission","discovery"] as const;
-  const rawContents=await Promise.all(args.slice(0,8).map(p=>readFile(p,"utf8")));
+  assert.equal(args.length,10, "Expected graph, AST hypothesis, EVM receipt, source witnesses, recognized property, native evaluation, native admission, real native discovery, native AST study, output");
+  const [graphPath,astPath,evmPath,witnessPath,recognizedPath,nativePath,admissionPath,discoveryPath,nativeStudyPath,outPath]=args;
+  const keys=["graph","ast","evm","witness","recognized","native","admission","discovery","nativeStudy"] as const;
+  const rawContents=await Promise.all(args.slice(0,9).map(p=>readFile(p,"utf8")));
   const inputs: ObjectRecord={raw:{}};
   keys.forEach((key,i)=>{inputs[key]=JSON.parse(rawContents[i]);inputs.raw[key]=rawContents[i];});
   // Native scientific constraint evaluation is independently re-run here,
@@ -30,6 +34,21 @@ async function main(){
     "Native scientific constraint evaluation changed when independently recomputed");
   assert.equal(recomputed.scientificPolarity,"SUPPORT",
     "Only the three bounded local property constraints may return SUPPORT");
+  // Native source discovery and scientific specification are rederived
+  // independently here, preventing a forged study JSON from passing solely
+  // because its names and counts look plausible.
+  const nativeSourceDiscovery=new CrossProtocolCompositionEngine();
+  const nativeSourceSpecification=new ScientificCompositionEvaluationSpecificationEngine();
+  const sourceNative=nativeSourceDiscovery.discoverBehavioralSourceHypotheses({
+    graph:inputs.graph,sourceHypothesisArtifact:inputs.ast,rawGraph:inputs.raw.graph
+  });
+  assert.deepEqual(inputs.nativeStudy.discovery,sourceNative,
+    "Native source-only discovery was not reproducible");
+  const sourceSpecification=nativeSourceSpecification.buildBehavioralHypothesisSpecification({
+    discovery:sourceNative,normalizedParticipants:inputs.ast.normalizedParticipants
+  });
+  assert.deepEqual(inputs.nativeStudy.specification,sourceSpecification,
+    "Native source-derived evaluation specification was modified");
   const positive=connect(inputs);
   assert.equal(positive.status,"SCOPED_OBSERVATION_CONSISTENT",
     "AST hypothesis, EVM receipt and scientific evaluation did not join: "+positive.reason);
@@ -70,7 +89,13 @@ async function main(){
     ["native_approved_candidate",x=>{x.admission.candidateAdmission.status="ELIGIBLE_FOR_REVIEW";}],
     ["native_discovery_invented_pair",x=>{x.discovery.matchedPairCandidates=[{id:"FORGED"}];}],
     ["native_measurement_differs_from_receipt",x=>{x.native.observations[0].numericMeasurements.paidWei="99";}],
-    ["missing_native_evidence_bytes",x=>{x.raw.native="";}]
+    ["missing_native_evidence_bytes",x=>{x.raw.native="";}],
+    ["missing_native_source_study",x=>{x.raw.nativeStudy="";}],
+    ["forged_native_source_study_sha",x=>{x.nativeStudy.inputArtifactDigests.graph="0".repeat(64);}],
+    ["forged_native_source_hypothesis_id",x=>{x.nativeStudy.discovery.hypotheses[0].hypothesisId="FORGED";}],
+    ["falsely_ready_native_specification",x=>{x.nativeStudy.specification.specifications[0].status="READY";}],
+    ["native_spec_missing_joint_question",x=>{x.nativeStudy.specification.specifications[0].questions.pop();}],
+    ["native_spec_fabricated_evidence_fact",x=>{x.nativeStudy.specification.specifications[0].questions[0].sourceFactIds=["AST:FAKE"];}]
   ];
   for(const [label,mutate] of attacks){
     const altered=structuredClone(inputs);
@@ -83,6 +108,12 @@ async function main(){
     ...positive,
     schemaVersion:"OECL_AST_EVM_NATIVE_BRIDGE_REPORT_V1",
     inputPaths:keys.map((key,i)=>({kind:key,path:args[i]})),
+    nativeSourceSpecification:{
+      specificationId:inputs.nativeStudy.specification.specifications[0].specificationId,
+      status:inputs.nativeStudy.specification.specifications[0].status,
+      questionCount:inputs.nativeStudy.specification.specifications[0].questions.length,
+      pending:inputs.nativeStudy.specification.specifications[0].unresolvedRequirements
+    },
     nativeLocalEvaluation:{
       result:recomputed.scientificPolarity,
       total:recomputed.statistics.total,preserved:recomputed.statistics.preserved,
