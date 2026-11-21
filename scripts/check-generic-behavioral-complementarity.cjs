@@ -27,7 +27,22 @@ for(const entry of original.provenance) {
   evidenceBySource.set(entry.sourceId,group);
 }
 function participant(entry,assetClass,required) {
-  const facts=evidenceBySource.get(entry.id)||[];
+  const facts=[...(evidenceBySource.get(entry.id)||[])];
+  // The inherited ERC20Burnable declaration belongs to OpenZeppelin.
+  // Attribute it through the observed primary-source import, preserving
+  // its actual origin rather than laundering it into the ERC source.
+  if(assetClass==="FUNGIBLE") {
+    const imported=original.provenance.find(x=>x.kind==="INHERITED_FUNGIBLE_BURN");
+    const anchor=facts.find(x=>x.factId.startsWith("BURNABLE_IMPORT@"));
+    assert.ok(imported && anchor,"Inherited burn is missing a declared import anchor");
+    facts.push({
+      factId:imported.kind+"@"+imported.line,
+      sourceId:imported.sourceId,sourceRevision:imported.sourceRevision,
+      sourceSha256:imported.sourceSha256,
+      attributedParticipantId:entry.id,
+      inheritanceAnchorFactId:anchor.factId
+    });
+  }
   const byKind=new Map(facts.map(x=>[x.factId.split("@")[0],x]));
   assert.ok(required.every(x=>byKind.has(x)),"Missing source facts for "+entry.id);
   const selected=k=>[byKind.get(k).factId];
@@ -46,7 +61,7 @@ function participant(entry,assetClass,required) {
   };
 }
 const a=original.participants.find(x=>original.provenance.some(p=>p.sourceId===x.id&&p.kind==="NFT_BURN_ENTRY"));
-const b=original.participants.find(x=>original.provenance.some(p=>p.sourceId===x.id&&p.kind==="INHERITED_FUNGIBLE_BURN"));
+const b=original.participants.find(x=>original.provenance.some(p=>p.sourceId===x.id&&p.kind==="BURNABLE_IMPORT"));
 assert.ok(a&&b&&a.id!==b.id);
 const participants=[
   participant(a,"NON_FUNGIBLE",["NFT_BURN_ENTRY","OWNER_GUARD","SOLVENCY_GUARD","LIABILITY_DECREASE"]),
