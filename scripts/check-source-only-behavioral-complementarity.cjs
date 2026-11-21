@@ -101,7 +101,21 @@ const controls=[
   ["inherited_burn_overridden_with_revert",(s)=>{s[1].text=s[1].text.replace(/\}\s*$/,
     'function burn(uint256 amount) public override { revert("disabled"); }\n}');}],
   ["inherited_burn_overridden_with_no_effect",(s)=>{s[1].text=s[1].text.replace(/\}\s*$/,
-    'function burn(uint256 amount) public override { require(amount > 0); }\n}');}]
+    'function burn(uint256 amount) public override { require(amount > 0); }\n}');},
+  ["internal_burn_not_called",(s)=>{s[0].text=s[0].text.replace(
+    '_burn(tokenId);','uint256 localId = tokenId;');}],
+  ["internal_burn_call_unreachable",(s)=>{s[0].text=s[0].text.replace(
+    '_burn(tokenId);','if (false) { _burn(tokenId); }');}],
+  ["local_modifier_always_reverts",(s)=>{s[0].text=s[0].text.replace(
+    'external\n        nonReentrant','external\n        nonReentrant\n        denyExecution'
+  ).replace(/\}\s*$/, 'modifier denyExecution() { require(false, "blocked"); _; }\n}');}],
+  ["local_modifier_no_placeholder",(s)=>{s[0].text=s[0].text.replace(
+    'external\n        nonReentrant','external\n        nonReentrant\n        denyExecution'
+  ).replace(/\}\s*$/, 'modifier denyExecution() { require(true, "allowed"); }\n}');}],
+  ["local_modifier_owner_contradiction",(s)=>{s[0].text=s[0].text.replace(
+    'external\n        nonReentrant','external\n        nonReentrant\n        denyExecution'
+  ).replace(/\}\s*$/, 'modifier denyExecution() { require(msg.sender != ownerOf(tokenId)); _; }\n}');}]
+
 
 ];
 for(const [label,change] of controls) {
