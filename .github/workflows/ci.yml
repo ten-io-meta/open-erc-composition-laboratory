@@ -28,3 +28,6 @@ jobs:
 
       - name: Joint composition evidence regression
         run: npx tsx scripts/check-joint-composition-evidence-bridge.ts
+
+      - name: Native behavioral invariant and final polarity regression
+        run: npx tsx scripts/check-native-behavioral-constraints.ts
