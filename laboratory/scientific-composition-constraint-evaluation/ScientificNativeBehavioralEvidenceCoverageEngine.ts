@@ -81,6 +81,13 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
            b.bridge.sourceRoles[0].sourceId!==origin.participants[0].sourceId||
            b.bridge.sourceRoles[1].sourceId!==origin.participants[1].sourceId)
             return fail("PARTICIPANT_ROLE_MAPPING_NOT_SUPPORTED");
+        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized"] as const){
+            if(typeof b.raw?.[key]!=="string")return fail("MISSING_RAW_EVIDENCE_BYTES");
+            try {
+                if(!equals(JSON.parse(b.raw[key]),b[key]))
+                    return fail("ARTIFACT_CONTENT_DIFFERS_FROM_SOURCE_BYTES");
+            } catch {return fail("INVALID_ARTIFACT_JSON_BYTES");}
+        }
         const digests=[
             ["nativeStudy","nativeStudy"],["evm","evm"],["witness","witness"],
             ["native","native"],["recognized","recognized"]
@@ -100,6 +107,14 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
               !equals(c.measuredStateBefore,c.measuredStateAfter)||
               c.revertedReceiptStatus!==0||!tx(c.attemptedTransactionHash)))
             return fail("ROLLBACK_EXPERIMENTS_NOT_SOURCE_BOUND_OR_INDEPENDENTLY_VALIDATED");
+        if(b.rollbackValidated.sourceRevisionA!==b.bridge.sourceRoles[0].revision||
+           b.rollbackValidated.sourceRevisionB!==b.bridge.sourceRoles[1].revision||
+           b.rollback.cases.some((c:any)=>
+              c.sourceProvenance?.participantA!==
+                b.bridge.sourceRoles[0].sourceId+"@"+b.bridge.sourceRoles[0].revision||
+              c.sourceProvenance?.participantB!==
+                b.bridge.sourceRoles[1].sourceId+"@"+b.bridge.sourceRoles[1].revision))
+            return fail("ROLLBACK_CASE_SOURCE_REVISIONS_NOT_BOUND");
         const receipt=b.evm?.observations;
         const nativeConstraints=b.native?.constraints;
         const nativeObservations=b.native?.observations;
