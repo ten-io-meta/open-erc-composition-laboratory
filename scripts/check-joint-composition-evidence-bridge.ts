@@ -41,10 +41,32 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         evidence: ["runtime-assertion:" + c.constraintId, "tx:0x" + "1".repeat(64)]
     }));
     const evaluated = new ScientificCompositionConstraintEvaluatorEngine().evaluate(constraints, observations);
+    const candidate = {
+        candidateId, participantA: {kind:"PROTOCOL",id:"A"}, participantB: {kind:"PROTOCOL",id:"B"},
+        mechanism:"SHARED_RECURRENT_CONCEPT", conceptId:"SYNTHETIC-COMMON-CASE",
+        supportingCapabilityIdsA:["A-CAP"],supportingCapabilityIdsB:["B-CAP"],
+        provenance:[
+            {kind:"PROTOCOL_CONCEPT",sourceId:repoA.sourceId,sourceRevision:repoA.sourceRevision,evidenceId:"DISCOVERY-A"},
+            {kind:"PROTOCOL_CONCEPT",sourceId:repoB.sourceId,sourceRevision:repoB.sourceRevision,evidenceId:"DISCOVERY-B"}
+        ],
+        evaluationStatus:"UNEVALUATED"
+    };
+    const spec = {
+        specificationId:"SPEC-1",candidateId,mechanism:candidate.mechanism,candidateSnapshot:candidate,
+        status:"READY",sourceIds:[repoA.sourceId,repoB.sourceId],targetEvidenceIds:["DISCOVERY-A","DISCOVERY-B"],
+        constraints,participantAConstraintIds:["A-1"],participantBConstraintIds:["B-1"],
+        unresolvedGuardFactIds:[],
+        scientificCriteria:{
+            relation:"PRESERVES_OBSERVED_CONSTRAINTS",
+            support:{expectedPolarity:"SUPPORT",condition:"ALL_OBSERVED_PARTICIPANT_CONSTRAINTS_PRESERVED"},
+            challenge:{expectedPolarity:"CHALLENGE",condition:"ANY_OBSERVED_PARTICIPANT_CONSTRAINT_VIOLATED"},
+            inconclusive:{whenNoScientificPolarity:true}
+        }
+    };
     const requirement = {
         requirementId: "REQ-1",
         evaluationSpecificationId: "SPEC-1",
-        candidate: { candidateId, participantA: {kind:"PROTOCOL", id:"A"}, participantB: {kind:"PROTOCOL", id:"B"} },
+        candidate,
         constraints, participantAConstraintIds: ["A-1"], participantBConstraintIds: ["B-1"],
         unresolvedGuardFactIds: [], participantSources: [repoA, repoB]
     };
@@ -80,7 +102,8 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         stepId:"STEP-1", stepType:"COMPOSITION_EXECUTION", repository:null,
         selectedExecutableTarget:null, status:"INCONCLUSIVE", scientificResult:"INCONCLUSIVE",
         executedAt:null, evidence:[], observations:[], errors:[], explanation:"",
-        jointCompositionEvidence: joint
+        jointCompositionEvidence: joint,
+        discoveredCandidateEvidence: {discovery:{candidates:[candidate],errors:[]},specifications:{specifications:[spec],errors:[]}}
     } as unknown as ScientificExecutionOutcome;
 }
 
@@ -100,6 +123,12 @@ function check(label: string, input: ScientificExecutionOutcome, expected: strin
 }
 check("complete two-source joint evidence", buildOutcome(), "SUPPORTS");
 check("actual sourced constraint violation", buildOutcome("CHALLENGE"), "CHALLENGES");
+const undiscovered = buildOutcome();
+undiscovered.discoveredCandidateEvidence = undefined;
+check("successful joint execution without discovery stays inconclusive",undiscovered,"INCONCLUSIVE");
+const fakeDiscovery = buildOutcome();
+fakeDiscovery.discoveredCandidateEvidence!.discovery.candidates[0].provenance=[];
+check("unproven discovery provenance stays inconclusive",fakeDiscovery,"INCONCLUSIVE");
 const a = buildOutcome();
 a.jointCompositionEvidence!.compositionExecutionRequirement!.participantSources[1].sourceRevision = "0".repeat(40);
 check("changed source revision cannot support", a, "INCONCLUSIVE");
