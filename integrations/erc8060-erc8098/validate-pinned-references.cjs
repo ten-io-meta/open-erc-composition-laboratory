@@ -38,7 +38,14 @@ function validate(source8060, source8098, evidenceFile) {
   const backingAfter = BigInt(observed.nftBackingAfter);
   const redeem = BigInt(observed.ethRedeemed);
   const payout = BigInt(observed.alicePayoutNetOfGas);
+  for(const key of ["nftObligationBefore","nftObligationAfter","nftObligationDecrease"])
+    assert.match(observed[key], /^(0|[1-9][0-9]*)$/, "Invalid "+key);
+  const obligationBefore=BigInt(observed.nftObligationBefore);
   const obligation = BigInt(observed.nftObligationAfter);
+  const obligationDecrease=BigInt(observed.nftObligationDecrease);
+  assert.ok(obligationBefore>=redeem && obligationBefore>=obligation);
+  assert.equal(obligationBefore-obligation,redeem,"NFT liabilities did not decrease by redeemable amount");
+  assert.equal(obligationDecrease,redeem,"NFT obligation delta must match payout");
   assert.ok(backingBefore >= redeem);
   assert.equal(backingBefore - backingAfter, redeem, "NFT backing change mismatches redemption");
   assert.equal(payout, redeem, "NFT owner ETH payment differs from actual redemption");
