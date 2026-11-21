@@ -96,7 +96,11 @@ function validate(a,b,report){
   const guardText=build.input.sources[guardUnit]?.content;
   assert.equal(typeof guardText,"string");
   const enter=guardText.indexOf("_status = _ENTERED;");
-  const leave=guardText.indexOf("_status = _NOT_ENTERED;");
+  // The same source statement exists in ReentrancyGuard's constructor and
+  // _nonReentrantAfter(). Runtime execution must resolve to the latter.
+  const afterMarker=guardText.indexOf("function _nonReentrantAfter()");
+  assert.ok(afterMarker>=0,"No inherited modifier exit implementation");
+  const leave=guardText.indexOf("_status = _NOT_ENTERED;",afterMarker);
   assert.ok(enter>=0&&leave>=0);
   const overlaps=(mapping,start,len)=>
     mapping.offset < start+len && mapping.offset+mapping.size>start;
