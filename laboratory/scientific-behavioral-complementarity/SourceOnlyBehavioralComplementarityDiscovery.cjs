@@ -8,8 +8,33 @@
  */
 const crypto = require("node:crypto");
 const digest = value => crypto.createHash("sha256").update(value).digest("hex");
+// Ignore comments without altering offsets or newlines: source claims hidden
+// inside comments must never be treated as executable Solidity facts.
+function maskComments(text) {
+  let state="code",out="";
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(state==="line"){
+      if(c==="\n"){state="code";out+=c;} else out+=" ";
+    } else if(state==="block"){
+      if(c==="*"&&n==="/"){out+="  ";i++;state="code";}
+      else out+=c==="\n"?"\n":" ";
+    } else if(state==="string"){
+      out+=c;
+      if(c==="\\"){if(i+1<text.length)out+=text[++i];}
+      else if(c==="\"")state="code";
+    } else if(state==="quote"){
+      out+=c;
+      if(c==="\\"){if(i+1<text.length)out+=text[++i];}
+      else if(c==="'")state="code";
+    } else if(c==="/"&&n==="/"){out+="  ";i++;state="line";}
+    else if(c==="/"&&n==="*"){out+="  ";i++;state="block";}
+    else {out+=c;if(c==="\"")state="string";else if(c==="'")state="quote";}
+  }
+  return out;
+}
 const fact = (source,pattern,kind) => {
-  const match = pattern.exec(source.text);
+  const match = pattern.exec(source.matchText ?? source.text);
   if (!match) return null;
   const line = source.text.slice(0,match.index).split("\n").length;
   return {kind,sourceId:source.id,sourceRevision:source.revision,
@@ -20,31 +45,35 @@ const all = values => values.every(Boolean);
 function extract(source, dependency) {
   if (!source || !source.text || !source.id || !source.revision ||
       !source.file || !/^[a-f0-9]{40}$/i.test(source.revision)) return [];
+  const sourceCode={...source,matchText:maskComments(source.text)};
+  const dependencyCode=dependency?.text?{...dependency,matchText:maskComments(dependency.text)}:dependency;
   const results = [];
   // Redemptive NFT destruction: these separate source facts supply a
   // hypothesis, but their coexistence is not a proof of control flow.
   const nft = [
-    fact(source,/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,100}?external\b/,"NFT_BURN_ENTRY"),
-    fact(source,/require\s*\(\s*ownerOf\s*\(\s*tokenId\s*\)\s*==\s*msg\.sender/,"OWNER_GUARD"),
-    fact(source,/function\s+_burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,220}?\{[\s\S]{0,550}?totalRedeemableValue\s*-=\s*redeemable/,"LIABILITY_DECREASE"),
-    fact(source,/\.call\s*\{\s*value\s*:\s*redeemable\s*\}/,"ETH_PAYOUT"),
-    fact(source,/address\s*\(\s*this\s*\)\.balance\s*>=\s*redeemable/,"SOLVENCY_GUARD")
+    fact(sourceCode,/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,100}?external\b/,"NFT_BURN_ENTRY"),
+    fact(sourceCode,/require\s*\(\s*ownerOf\s*\(\s*tokenId\s*\)\s*==\s*msg\.sender/,"OWNER_GUARD"),
+    fact(sourceCode,/function\s+_burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,220}?\{[\s\S]{0,550}?totalRedeemableValue\s*-=\s*redeemable/,"LIABILITY_DECREASE"),
+    fact(sourceCode,/\.call\s*\{\s*value\s*:\s*redeemable\s*\}/,"ETH_PAYOUT"),
+    fact(sourceCode,/address\s*\(\s*this\s*\)\.balance\s*>=\s*redeemable/,"SOLVENCY_GUARD")
   ];
-  if (all(nft)) results.push({
+  const terminalEntryRevert =
+    /function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,130}?\{\s*(?:revert\s*\(|require\s*\(\s*false\b)/.test(sourceCode.matchText);
+  if (all(nft) && !terminalEntryRevert) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
     effects:["NFT_DESTRUCTION","ETH_VALUE_PAYOUT","ETH_LIABILITY_DECREASE"],
     restrictions:["NFT_OWNER_AUTHORIZATION","BACKING_SOLVENCY","PAYOUT_MUST_SUCCEED"],
     evidence:nft
   });
   const erc20 = [
-    fact(source,/contract\s+\w+\s+is\s+ERC20\s*,\s*ERC20Burnable\b/,"ERC20_BURNABLE_INHERITANCE"),
-    fact(source,/constructor\s*\([\s\S]{0,350}?\)\s*ERC20\s*\([\s\S]{0,150}?\)\s*\{[\s\S]{0,250}?_mint\s*\(/,"CONSTRUCTOR_ALLOCATION"),
-    dependency && fact(dependency,/function\s+burn\s*\(\s*uint256\s+amount\s*\)[\s\S]{0,130}?public\s+virtual\s*\{[\s\S]{0,130}?_burn\s*\(\s*_msgSender\s*\(\s*\)\s*,\s*amount\s*\)/,"INHERITED_FUNGIBLE_BURN"),
-    fact(source,/import\s+["']@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20Burnable\.sol["']/,"BURNABLE_IMPORT")
+    fact(sourceCode,/contract\s+\w+\s+is\s+ERC20\s*,\s*ERC20Burnable\b/,"ERC20_BURNABLE_INHERITANCE"),
+    fact(sourceCode,/constructor\s*\([\s\S]{0,350}?\)\s*ERC20\s*\([\s\S]{0,150}?\)\s*\{[\s\S]{0,250}?_mint\s*\(/,"CONSTRUCTOR_ALLOCATION"),
+    dependencyCode && fact(dependencyCode,/function\s+burn\s*\(\s*uint256\s+amount\s*\)[\s\S]{0,130}?public\s+virtual\s*\{[\s\S]{0,130}?_burn\s*\(\s*_msgSender\s*\(\s*\)\s*,\s*amount\s*\)/,"INHERITED_FUNGIBLE_BURN"),
+    fact(sourceCode,/import\s+["']@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20Burnable\.sol["']/,"BURNABLE_IMPORT")
   ];
   // Absence of a source-level mint entry is NOT formal proof of an
   // immutable supply; proxies, inherited internals and upgrades need audit.
-  const unsafeMint=/function\s+(?:mint|increaseSupply)\s*\(/.test(source.text);
+  const unsafeMint=/function\s+(?:mint|increaseSupply)\s*\(/.test(sourceCode.matchText);
   if (all(erc20) && !unsafeMint) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
     effects:["FUNGIBLE_SUPPLY_DESTRUCTION"],
