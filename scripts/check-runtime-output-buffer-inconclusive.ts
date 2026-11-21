@@ -193,7 +193,7 @@ async function main() {
 
         if (
             !combinedEvidence.includes(
-                "EXECUTION_CAUSE:OUTPUT_BUFFER_EXCEEDED"
+                "EXECUTION_CAUSE:OUTPUT_CAPTURE_TRUNCATED"
             )
         ) {
 
@@ -213,19 +213,10 @@ if (
     );
 
 }
-        if (
-            !combinedEvidence.includes(
-                "ERR_CHILD_PROCESS_STDIO_MAXBUFFER"
-            ) &&
-            !combinedEvidence.includes(
-                "maxBuffer length exceeded"
-            )
-        ) {
-
-            throw new Error(
-                "Runtime evidence does not contain the maxBuffer failure signature."
-            );
-
+        // A successful process can still overflow OECL's smaller
+        // bounded evidence capture, without hitting Node's maxBuffer.
+        if (!combinedEvidence.includes("OECL_OUTPUT_TRUNCATED:")) {
+            throw new Error("Output capture truncation marker is missing.");
         }
 
         console.log("");
