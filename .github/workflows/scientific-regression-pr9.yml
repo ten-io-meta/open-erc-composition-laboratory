@@ -10,6 +10,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Checkout clean pinned external scientific baseline
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-reservable
+          ref: 5b7a407553ccf280ab4f751a792771b660ad287a
+          path: external/github/ten-io-meta/erc8060-reservable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
