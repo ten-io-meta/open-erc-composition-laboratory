@@ -166,15 +166,18 @@ async function main() {
 
         }
 
+        // Count the selected outcome exactly once without conflating it
+        // with unrelated INCONCLUSIVE steps in the whole campaign.
         if (
+            result.executions.filter(item =>
+                item.stepId === hardhatSpecification.stepId
+            ).length !== 1 ||
             result.statistics.inconclusive !==
-            1
+            result.executions.filter(item =>
+                item.status === "INCONCLUSIVE"
+            ).length
         ) {
-
-            throw new Error(
-                "Hook failure must increment INCONCLUSIVE exactly once."
-            );
-
+            throw new Error("Hook failure accounting mismatch.");
         }
 
         const combinedEvidence =
