@@ -29,6 +29,9 @@ export type ScientificRuntimeExecutionStatus =
 
 export interface ScientificCompositionRecipeSelectionSnapshot {
 
+    /** Scope attested by selected recipe registration, not by the driver. */
+    evaluationSurfaceCompleteness?: "COMPLETE_FOR_CANDIDATE_EVALUATION" | "PARTIAL";
+
     status:
         "SELECTED" | "NO_MATCH" | "AMBIGUOUS";
 
