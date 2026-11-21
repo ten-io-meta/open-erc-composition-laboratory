@@ -34,13 +34,13 @@ describe("OECL real-EVM joint execution: ERC-8060 and pinned external ERC-8098 r
     const { alice, nft, token, joint, units, mint } = await setup();
     const [valueBefore] = await nft.functions["valueOf(uint256)"](1);
     const backingBefore = await ethers.provider.getBalance(nft.address);
-    const aliceBalanceBefore = await ethers.provider.getBalance(alice.address);
     const jointBalanceBefore = await ethers.provider.getBalance(joint.address);
     const totalBefore = await token.totalSupply();
     expect(backingBefore.gte(await nft.totalRedeemableValue())).to.equal(true);
     expect(valueBefore.eq(ethers.utils.parseEther("0.1"))).to.equal(true);
     await (await nft.connect(alice).approve(joint.address, 1)).wait();
     await (await token.connect(alice).approve(joint.address, units)).wait();
+    const aliceBalanceBefore = await ethers.provider.getBalance(alice.address);
     const receipt = await (await joint.connect(alice).redeem(1)).wait();
     const executionTx = await ethers.provider.getTransaction(receipt.transactionHash);
     const paidGas = receipt.gasUsed.mul(receipt.effectiveGasPrice || executionTx.gasPrice);
@@ -121,6 +121,7 @@ describe("OECL real-EVM joint execution: ERC-8060 and pinned external ERC-8098 r
 
   it("rejects unauthorized redemption and leaves both protocols unchanged", async function () {
     const { alice, attacker, nft, token, joint } = await setup();
+    const nftBackingBefore = await ethers.provider.getBalance(nft.address);
     const supply = await token.totalSupply();
     const obligations = await nft.totalRedeemableValue();
     await mustRevert(joint.connect(attacker).redeem(1));
