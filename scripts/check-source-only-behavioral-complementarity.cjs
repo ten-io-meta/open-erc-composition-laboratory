@@ -83,8 +83,8 @@ const controls=[
     'if (false) { require(ownerOf(tokenId) == msg.sender, "Not token owner"); }'
   );}],
   ["eth_payout_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
-    'payable(msg.sender).call{value: redeemable}("")',
-    'payable(msg.sender).call{value: 0}("");\n        if(false) { payable(msg.sender).call{value: redeemable}("")'
+    '(bool success, ) = payable(msg.sender).call{value: redeemable}("");',
+    '(bool success, ) = payable(msg.sender).call{value: 0}("");\n        if(false) { payable(msg.sender).call{value: redeemable}(""); }'
   );}],
   ["internal_liability_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
     'totalRedeemableValue -= redeemable;',
