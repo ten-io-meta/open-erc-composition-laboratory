@@ -69,7 +69,27 @@ const controls=[
   ["liability_decrease_in_unrelated_method",(s)=>{s[0].text=s[0].text.replace(
     'totalRedeemableValue -= redeemable;',
     'totalRedeemableValue += redeemable;'
-  ).replace(/\}\s*$/, 'function unrelatedLiability(uint256 redeemable) internal { totalRedeemableValue -= redeemable; }\\n}');}]
+  ).replace(/\}\s*$/, 'function unrelatedLiability(uint256 redeemable) internal { totalRedeemableValue -= redeemable; }\\n}');}],
+  ["abort_after_authorization",(s)=>{s[0].text=s[0].text.replace(
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");\n        uint256 marker = 1;\n        require(false, "blocked");'
+  );}],
+  ["assert_false_before_payout",(s)=>{s[0].text=s[0].text.replace(
+    '(bool success, ) = payable(msg.sender).call{value: redeemable}("");',
+    'assert(false);\n        (bool success, ) = payable(msg.sender).call{value: redeemable}("");'
+  );}],
+  ["owner_guard_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
+    'require(ownerOf(tokenId) == msg.sender, "Not token owner");',
+    'if (false) { require(ownerOf(tokenId) == msg.sender, "Not token owner"); }'
+  );}],
+  ["eth_payout_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
+    'payable(msg.sender).call{value: redeemable}("")',
+    'payable(msg.sender).call{value: 0}("");\n        if(false) { payable(msg.sender).call{value: redeemable}("")'
+  );}],
+  ["internal_liability_only_inside_if_false",(s)=>{s[0].text=s[0].text.replace(
+    'totalRedeemableValue -= redeemable;',
+    'if (false) { totalRedeemableValue -= redeemable; }'
+  );}]
 ];
 for(const [label,change] of controls) {
   const s=structuredClone(sources),d=structuredClone(dep);
