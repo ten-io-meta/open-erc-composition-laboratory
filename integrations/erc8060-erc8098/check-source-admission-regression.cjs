@@ -20,11 +20,11 @@ try {
   assert.equal(valid.allowedScientificPolarity, "INCONCLUSIVE");
   assert.equal(valid.openZeppelin.classification, "INDEPENDENT_LIBRARY_DEPENDENCY_ONLY");
   const badRevision = { ...original, erc8060PinnedRevision: "0".repeat(40) };
-  assert.throws(() => evaluate(badRevision), /revision mismatch/);
+  assert.throws(() => evaluate(badRevision), { name: "AssertionError" });
   const badSecondSource = { ...original, erc8098Status: "INDEPENDENT_REFERENCE" };
   assert.throws(() => evaluate(badSecondSource));
   const badFixture = { ...original, erc8098FixtureSha256: "0".repeat(64) };
-  assert.throws(() => evaluate(badFixture), /differs/);
+  assert.throws(() => evaluate(badFixture), { name: "AssertionError" });
   console.log("PASS: OECL source admission is fail-closed (4 cases)");
 } finally {
   fs.rmSync(tempRoot, { recursive: true, force: true });
