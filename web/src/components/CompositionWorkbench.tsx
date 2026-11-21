@@ -74,7 +74,7 @@ export function CompositionWorkbench() {
 
 
   return (
-    <section className="mt-8 rounded-[28px] border border-[#cfd7d2] bg-white p-6 md:p-8">
+    <section id="composition-workbench" className="mt-8 scroll-mt-8 rounded-[28px] border border-[#cfd7d2] bg-white p-6 md:p-8">
 
       <div>
 
