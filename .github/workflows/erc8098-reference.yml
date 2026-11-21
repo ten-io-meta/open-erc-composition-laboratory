@@ -1,0 +1,43 @@
+name: ERC-8098 Reference Candidate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  erc8098-conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout reference candidate
+        uses: actions/checkout@v4
+        with:
+          path: candidate
+
+      - name: Checkout pinned Hardhat toolchain
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: toolchain
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pinned toolchain
+        working-directory: toolchain
+        run: npm ci
+
+      - name: Install only reference candidate in isolated worktree
+        run: |
+          cp candidate/reference/erc8098/contracts/ERC8098Reference.sol toolchain/contracts/
+          cp candidate/reference/erc8098/test/ERC8098Reference.test.js toolchain/test/
+
+      - name: Compile reference Solidity
+        working-directory: toolchain
+        run: npx hardhat compile
+
+      - name: Run ERC-8098 reference candidate conformance tests
+        working-directory: toolchain
+        run: npx hardhat test test/ERC8098Reference.test.js
