@@ -33,11 +33,12 @@ describe("OECL 8060 x 8098: atomic failure matrix", function () {
 
   async function snapshot(ctx) {
     const { alice, nft, token, joint } = ctx;
+    const [nftValue] = await nft.functions["valueOf(uint256)"](1);
     return {
       owner: await nft.ownerOf(1),
       nftBackingWei: (await ethers.provider.getBalance(nft.address)).toString(),
       redeemableWei: (await nft.totalRedeemableValue()).toString(),
-      nftValueWei: (await nft.valueOf(1)).toString(),
+      nftValueWei: nftValue.toString(),
       nftApproval: await nft.getApproved(1),
       tokenSupply: (await token.totalSupply()).toString(),
       aliceTokenBalance: (await token.balanceOf(alice.address)).toString(),
