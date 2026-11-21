@@ -62,6 +62,10 @@ jobs:
       - name: Discover typed complementarity independently from compiler AST before EVM
         run: node oecl/scripts/check-graph-behavioral-discovery.cjs joint-evidence/erc8060-erc8098-structural-graph.json joint-evidence/erc8060-erc8098-ast-hypothesis.json
 
+      - name: Install OECL native scientific evaluator
+        working-directory: oecl
+        run: npm ci
+
       - name: Discover source-only behavioral hypotheses and draft evaluation specification in native OECL
         working-directory: oecl
         run: npx tsx scripts/check-native-ast-behavioral-specification.ts ../joint-evidence/erc8060-erc8098-structural-graph.json ../joint-evidence/erc8060-erc8098-ast-hypothesis.json ../joint-evidence/erc8060-erc8098-native-ast-study.json
@@ -101,10 +105,6 @@ jobs:
 
       - name: Validate both source revisions and transaction evidence
         run: node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
-
-      - name: Install OECL native scientific evaluator
-        working-directory: oecl
-        run: npm ci
 
       - name: Extract pinned Solidity constraints and evaluate native evidence coverage
         working-directory: oecl
