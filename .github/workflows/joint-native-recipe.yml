@@ -1,0 +1,36 @@
+name: OECL Native Pinned Joint Recipe
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  native-selector-and-executor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OECL
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+      - name: Checkout pinned ERC-8060
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+      - name: Checkout pinned ERC-8098
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install OECL scientific runtime
+        working-directory: oecl
+        run: npm ci
+      - name: Verify native selector and execute pinned joint EVM harness
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-native-joint-recipe.ts ../source-8060 ../source-8098
