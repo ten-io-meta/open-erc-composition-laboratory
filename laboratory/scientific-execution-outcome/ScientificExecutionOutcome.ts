@@ -1,5 +1,6 @@
 import type { ScientificRuntimeExecution } from "../scientific-execution-runtime/ScientificRuntimeExecution.js";
 import type { ScientificCrossProtocolCompositionResult } from "../scientific-cross-protocol-composition/ScientificCrossProtocolCompositionResult.js";
+import type { CrossProtocolCompositionInput } from "../scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
 import type { ScientificCompositionEvaluationSpecificationResult } from "../scientific-composition-evaluation-specification/ScientificCompositionEvaluationSpecificationResult.js";
 
 import type {
@@ -29,6 +30,7 @@ export interface ScientificExecutionOutcome {
      * This source is never reconstructed from successful EVM receipts.
      */
     discoveredCandidateEvidence?: {
+        discoveryInput: CrossProtocolCompositionInput;
         discovery: ScientificCrossProtocolCompositionResult;
         specifications: ScientificCompositionEvaluationSpecificationResult;
     };
