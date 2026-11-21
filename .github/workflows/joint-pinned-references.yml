@@ -58,6 +58,9 @@ jobs:
           OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
         run: npx hardhat test test/OECLPinnedReferences.test.js
 
+      - name: Build pinned compiler-AST structural capability and restriction graph
+        run: node oecl/scripts/check-solidity-structural-graph.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-structural-graph.json
+
       - name: Execute four isolated adversarial interaction experiments
         working-directory: source-8060
         env:
