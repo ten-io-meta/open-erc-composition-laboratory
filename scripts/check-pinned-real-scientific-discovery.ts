@@ -54,7 +54,7 @@ async function main(){
         const facts=extractor.extract(observation);
         assert.ok(facts.length>0,"No scientific facts extracted for "+source.id);
         participantFacts.push(...facts);
-        pinnedSourceImports.push(...[...raw.matchAll(/^\\s*import\\s+(?:[^;]*?\\s+from\\s+)?["\x27]([^"\x27]+)["\x27]\\s*;/gm)].map(x=>x[1]));
+        pinnedSourceImports.push(...[...raw.matchAll(/^\s*import\s+(?:[^;]*?\s+from\s+)?["']([^"']+)["']\s*;/gm)].map(x=>x[1]));
         const semantic=new ScientificSemanticDerivationEngine().derive({
             sourceId:source.sourceId,sourceRevision:source.revision,facts
         });
