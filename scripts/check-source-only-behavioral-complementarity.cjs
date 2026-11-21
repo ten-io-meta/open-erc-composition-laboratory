@@ -48,7 +48,12 @@ const controls=[
   ["erc20_burnable_inheritance_removed",(s)=>{s[1].text=s[1].text.replace("ERC20, ERC20Burnable","ERC20");}],
   ["erc20_initial_allocation_removed",(s)=>{s[1].text=s[1].text.replace("_mint(initialHolder, initialSupply)","_transfer(initialHolder, initialHolder, initialSupply)");}],
   ["unexpected_public_mint",(s)=>{s[1].text+="\nfunction mint(uint256 amount) external {}\n";}],
-  ["dependency_burn_removed",(s,d)=>{d.text=d.text.replace("_burn(_msgSender(), amount)","_transfer(_msgSender(), address(0), amount)");}]
+  ["dependency_burn_removed",(s,d)=>{d.text=d.text.replace("_burn(_msgSender(), amount)","_transfer(_msgSender(), address(0), amount)");}],
+  ["owner_guard_only_a_comment",(s)=>{s[0].text=s[0].text.replace("require(ownerOf(tokenId) == msg.sender, \"Not token owner\");","// require(ownerOf(tokenId) == msg.sender, \"Not token owner\");");}],
+  ["entire_nft_source_commented_out",(s)=>{s[0].text="/*\\n"+s[0].text+"\\n*/";}],
+  ["erc20_burn_import_only_comment",(s)=>{s[1].text=s[1].text.replace('import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";','// import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";');}],
+  ["dependency_burn_only_comment",(s,d)=>{d.text=d.text.replace("_burn(_msgSender(), amount);","// _burn(_msgSender(), amount);");}],
+  ["nft_burn_unconditionally_reverts",(s)=>{s[0].text=s[0].text.replace('require(ownerOf(tokenId) == msg.sender, "Not token owner");','revert("disabled");\\n        require(ownerOf(tokenId) == msg.sender, "Not token owner");');}]
 ];
 for(const [label,change] of controls) {
   const s=structuredClone(sources),d=structuredClone(dep);
