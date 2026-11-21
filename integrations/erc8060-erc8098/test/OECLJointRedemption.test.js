@@ -52,6 +52,24 @@ describe("OECL real-EVM joint execution: ERC-8060 and experimental ERC-8098-styl
     await mustRevert(nft.ownerOf(1));
     await mustRevert(joint.connect(alice).redeem(1));
     await mustRevert(nft.connect(alice).burn(1));
+    // Observe both independent burn events in the exact same transaction receipt.
+    const nftBurnTopic = nft.interface.getEventTopic("Burned");
+    const tokenTransferTopic = token.interface.getEventTopic("Transfer");
+    const nftBurnLogs = receipt.logs.filter(log =>
+      log.address.toLowerCase() === nft.address.toLowerCase() &&
+      log.topics[0] === nftBurnTopic
+    );
+    const erc20BurnLogs = receipt.logs.filter(log => {
+      if (log.address.toLowerCase() !== token.address.toLowerCase() ||
+          log.topics[0] !== tokenTransferTopic) return false;
+      const parsed = token.interface.parseLog(log);
+      return parsed.args.from.toLowerCase() === joint.address.toLowerCase() &&
+        parsed.args.to === ethers.constants.AddressZero &&
+        parsed.args.value.eq(units);
+    });
+    expect(receipt.status).to.equal(1);
+    expect(nftBurnLogs.length).to.equal(1);
+    expect(erc20BurnLogs.length).to.equal(1);
     const event = receipt.events.find(event => event.event === "JointRedeemed");
     expect(event.args.ethPaid.eq(valueBefore)).to.equal(true);
     expect(event.args.unitsBurned.eq(units)).to.equal(true);
@@ -69,7 +87,8 @@ describe("OECL real-EVM joint execution: ERC-8060 and experimental ERC-8098-styl
       contracts: { nft: nft.address, monotoneSupply: token.address, joint: joint.address },
       transactions: { mint: mint.transactionHash, jointRedemption: receipt.transactionHash },
       observations: {
-        sameTransactionContainsBothBurns: true,
+        sameTransactionContainsBothBurns: nftBurnLogs.length === 1 && erc20BurnLogs.length === 1,
+        jointReceiptBlockNumber: receipt.blockNumber,
         nftSolventAfter: nftBalanceAfter.gte(nftReserveAfter),
         nftObligationAfter: nftReserveAfter.toString(),
         erc20SupplyBefore: totalBefore.toString(),
