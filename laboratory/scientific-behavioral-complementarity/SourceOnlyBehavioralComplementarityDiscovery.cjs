@@ -104,6 +104,23 @@ function unverifiedBurnOverride(sourceText) {
   // that capability without analyzing the override.
   return /\bfunction\s+burn\s*\(\s*uint256\s+amount\s*\)[^;{]*\{/.test(sourceText);
 }
+// Conservative local call graph: prove direct reachability of the state
+// effect from the public entry; external/inherited modifier semantics remain
+// unknown until their declarations are resolved separately.
+function localModifierBlocksEntry(source,header) {
+  const tokens=header.replace(/function\s+burn\s*\([^)]*\)/,"")
+    .match(/\b[A-Za-z_]\w*\b/g)||[];
+  for(const name of tokens) {
+    if(["external","public","payable","nonpayable","virtual","override","returns"].includes(name))continue;
+    const definition=new RegExp("\\bmodifier\\s+"+name+"\\s*(?:\\([^)]*\\))?\\s*\\{");
+    if(!definition.test(source.matchText))continue; // inherited/unknown, no success assertion
+    const body=scopedBody(source,definition).matchText;
+    if(plainlyImpossibleExecution(body) ||
+       /\brequire\s*\(\s*msg\.sender\s*!=\s*ownerOf\s*\(\s*tokenId\s*\)/.test(body) ||
+       !/\b_\s*;/.test(body))return true;
+  }
+  return false;
+}
 function extract(source, dependency) {
   if (!source || !source.text || !source.id || !source.revision ||
       !source.file || !/^[a-f0-9]{40}$/i.test(source.revision)) return [];
@@ -124,10 +141,14 @@ function extract(source, dependency) {
     fact(burnBody,/\.call\s*\{\s*value\s*:\s*redeemable\s*\}/,"ETH_PAYOUT"),
     fact(burnBody,/address\s*\(\s*this\s*\)\.balance\s*>=\s*redeemable/,"SOLVENCY_GUARD")
   ];
+  const burnHeader=/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)([^;{]*)\{/.exec(sourceCode.matchText);
+  const hasInternalBurnCall=/\b_burn\s*\(\s*tokenId\s*\)/.test(burnBody.matchText);
+  const blockedLocalModifier=burnHeader?
+    localModifierBlocksEntry(sourceCode,burnHeader[0]):true;
   const terminalEntryRevert =
     /function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,130}?\{\s*(?:revert\s*\(|require\s*\(\s*false\b)/.test(sourceCode.matchText);
-  if (all(nft) && !terminalEntryRevert &&
-      !plainlyImpossibleExecution(burnBody.matchText) &&
+  if (all(nft) && hasInternalBurnCall && !blockedLocalModifier &&
+      !terminalEntryRevert && !plainlyImpossibleExecution(burnBody.matchText) &&
       !plainlyImpossibleExecution(internalBurnBody.matchText) &&
       !contradictoryOwnerGuards(burnBody.matchText)) results.push({
     participant:{id:source.id,revision:source.revision,file:source.file},
