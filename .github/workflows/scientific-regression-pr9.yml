@@ -17,11 +17,36 @@ jobs:
           ref: 5b7a407553ccf280ab4f751a792771b660ad287a
           path: external/github/ten-io-meta/erc8060-reservable
 
+      - name: Checkout Solady external regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: Vectorized/solady
+          ref: 258f67cc71e39cff307b726939ade17e9d8bcf5c
+          path: external/github/Vectorized/solady
+
+      - name: Checkout ERC-8060 source regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: external/github/ten-io-meta/erc8060-native-eth-value
+
+      - name: Checkout ERC-8004 source regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: erc-8004/erc-8004-contracts
+          ref: b9e466c250744a7e06b13dff9d3c2844ed64f825
+          path: external/github/erc-8004/erc-8004-contracts
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Install
         run: npm ci
+      - name: Install pinned ERC-8060 OpenZeppelin dependencies
+        working-directory: external/github/ten-io-meta/erc8060-native-eth-value
+        run: npm ci
+
       - name: Run complete existing scientific regression suite
         run: npm run scientific:regression
