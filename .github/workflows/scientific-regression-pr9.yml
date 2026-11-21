@@ -48,6 +48,10 @@ jobs:
         working-directory: external/github/ten-io-meta/erc8060-native-eth-value
         run: npm ci
 
+      - name: Install pinned ERC-8060 Reservable Hardhat dependencies
+        working-directory: external/github/ten-io-meta/erc8060-reservable
+        run: npm ci
+
       - name: Run complete existing scientific regression suite
         run: npm run scientific:regression
 
