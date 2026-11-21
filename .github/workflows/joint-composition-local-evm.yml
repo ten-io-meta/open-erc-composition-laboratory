@@ -44,6 +44,11 @@ jobs:
       - name: Validate receipt and preserve scientific uncertainty
         run: node oecl/integrations/erc8060-erc8098/validate-local-evidence.cjs joint-evidence/erc8060-experimental-8098.json
 
+      - name: Verify source revisions and classify ERC-8098 admission
+        run: |
+          node oecl/integrations/erc8060-erc8098/check-source-admission.cjs source-8060 oecl joint-evidence/erc8060-experimental-8098.json
+          node -e "const a=require('./joint-evidence/erc8060-experimental-8098.admission.json'); if(a.allowedScientificPolarity!=='INCONCLUSIVE'||a.compositionCandidateAdmission!=='BLOCKED_INDEPENDENT_ERC8098_SOURCE_MISSING') process.exit(1)"
+
       - name: Upload reproducible local EVM experiment evidence
         if: always()
         uses: actions/upload-artifact@v4
