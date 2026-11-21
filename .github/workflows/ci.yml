@@ -34,3 +34,6 @@ jobs:
 
       - name: Discovered candidate source and specification admission regression
         run: npx tsx scripts/check-discovered-candidate-admission.ts
+
+      - name: Inherited capability exact-source and negative regression
+        run: npx tsx scripts/check-inherited-capability-projection.ts
