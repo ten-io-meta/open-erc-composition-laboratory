@@ -142,7 +142,7 @@ export function CompositionWorkbench() {
 
         <div className="mt-7 border-t border-[#e2e7e4] pt-6">
 
-          isPinnedDossier ? (
+          {isPinnedDossier ? (
             <ScientificDossierResults
               protocolA={normalizedA}
               protocolB={normalizedB}
@@ -152,7 +152,7 @@ export function CompositionWorkbench() {
               protocolA={normalizedA}
               protocolB={normalizedB}
             />
-          )
+          )}
 
         </div>
 
