@@ -41,12 +41,19 @@ jobs:
           cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
 
       - name: Execute ERC-8060 and ERC-8098 in one local EVM
         working-directory: source-8060
         env:
           OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
         run: npx hardhat test test/OECLPinnedReferences.test.js
+
+      - name: Execute four isolated adversarial interaction experiments
+        working-directory: source-8060
+        env:
+          OECL_FAILURE_MATRIX_PATH: ../joint-evidence/erc8060-erc8098-failure-matrix.json
+        run: npx hardhat test test/OECLInteractionFailureMatrix.test.js
 
       - name: Validate both source revisions and transaction evidence
         run: node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
