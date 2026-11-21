@@ -48,6 +48,7 @@ jobs:
           cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInheritedBurnAuthorization.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
           cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLMultiHolderSolvency.test.js source-8060/test/
@@ -81,6 +82,15 @@ jobs:
         env:
           OECL_FAILURE_MATRIX_PATH: ../joint-evidence/erc8060-erc8098-failure-matrix.json
         run: npx hardhat test test/OECLInteractionFailureMatrix.test.js
+
+      - name: Observe inherited ERC20Burnable authorization outside the coordinator
+        working-directory: source-8060
+        env:
+          OECL_INHERITED_BURN_AUTH_PATH: ../joint-evidence/erc8060-erc8098-inherited-burn-auth.json
+        run: npx hardhat test test/OECLInheritedBurnAuthorization.test.js
+
+      - name: Verify source-anchored direct burn and delegated burnFrom authorization
+        run: node oecl/integrations/erc8060-erc8098/check-inherited-burn-auth.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-inherited-burn-auth.json
 
       - name: Test rejecting final ETH payout and reentrant receiver callbacks
         working-directory: source-8060
