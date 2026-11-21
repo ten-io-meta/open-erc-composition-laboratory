@@ -985,9 +985,11 @@ if (
 
                 const selectionSnapshot = {
 
-                    evaluationSurfaceCompleteness: completeSelectionSurface
-                        ? "COMPLETE_FOR_CANDIDATE_EVALUATION" as const
-                        : "PARTIAL" as const,
+                    ...(selectedSurface !== undefined ? {
+                        evaluationSurfaceCompleteness: completeSelectionSurface
+                            ? "COMPLETE_FOR_CANDIDATE_EVALUATION" as const
+                            : "PARTIAL" as const
+                    } : {}),
 
                     status:
                         selection.status,
