@@ -298,6 +298,8 @@ export class ScientificExecutionResultEvaluatorEngine {
         ) return "CHALLENGES";
         if (
             recomputed.scientificPolarity === "SUPPORT" &&
+            selection.evaluationSurfaceCompleteness === "COMPLETE_FOR_CANDIDATE_EVALUATION" &&
+            requirement.unresolvedGuardFactIds.length === 0 &&
             recomputed.evaluations.every(x => x.status === "PRESERVED") &&
             recomputed.statistics.preserved === constraints.length
         ) return "SUPPORTS";
