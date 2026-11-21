@@ -29,12 +29,28 @@ export interface NativeBehavioralCoverageResult {
 type Bundle={
     nativeStudy:any;bridge:any;evm:any;witness:any;native:any;
     rollback:any;rollbackValidated:any;recognized:any;
-    raw:{nativeStudy:string;evm:string;witness:string;native:string;rollback:string;recognized:string};
+    inheritedAuth:any;inheritedAuthValidated:any;
+    raw:{nativeStudy:string;evm:string;witness:string;native:string;rollback:string;
+      recognized:string;inheritedAuth:string;inheritedAuthValidated:string};
 };
 const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
 const uint=(x:unknown):x is string=>typeof x==="string"&&/^(0|[1-9][0-9]*)$/.test(x);
 const tx=(x:unknown)=>typeof x==="string"&&/^0x[0-9a-f]{64}$/i.test(x);
 const equals=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
+const jointSafeLiabilities=(receipt:any,property:any)=>{
+    if(!receipt||!property||property.verdict!=="OBSERVED_CONSISTENT")return false;
+    const checks=property.checks;
+    const before=receipt.nftObligationBefore;
+    const after=receipt.nftObligationAfter;
+    const delta=receipt.nftObligationDecrease;
+    const amount=receipt.ethRedeemed;
+    return [before,after,delta,amount].every(uint)&&
+        BigInt(amount)>0n&&BigInt(before)-BigInt(after)===BigInt(delta)&&
+        BigInt(delta)===BigInt(amount)&&
+        checks?.obligationsBeforeWei===before&&
+        checks?.obligationsAfterWei===after&&
+        checks?.obligationsDecreasedWei===delta;
+};
 /**
  * Native scientific observation coverage. Scope is one pinned local-Hardhat
  * experiment, NOT independent chain replay or exhaustive path verification.
@@ -81,7 +97,7 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
            b.bridge.sourceRoles[0].sourceId!==origin.participants[0].sourceId||
            b.bridge.sourceRoles[1].sourceId!==origin.participants[1].sourceId)
             return fail("PARTICIPANT_ROLE_MAPPING_NOT_SUPPORTED");
-        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized"] as const){
+        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized","inheritedAuth","inheritedAuthValidated"] as const){
             if(typeof b.raw?.[key]!=="string")return fail("MISSING_RAW_EVIDENCE_BYTES");
             try {
                 if(!equals(JSON.parse(b.raw[key]),b[key]))
@@ -145,13 +161,68 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
             uint(receipt.supplyDecrease)&&BigInt(receipt.supplyDecrease)>0n&&
             BigInt(receipt.erc20SupplyBefore)-BigInt(receipt.erc20SupplyAfter)===
                 BigInt(receipt.supplyDecrease);
+        const liabilityFact=b.witness.properties?.find((p:any)=>p.invariantId==="INV-8060-BACKING-SOLVENT");
+        const liabilityDelta=jointSafeLiabilities(receipt,liabilityFact);
+        const auth=b.inheritedAuth,validated=b.inheritedAuthValidated;
+        const permitted=auth?.approvedDelegatedBurn;
+        const self=auth?.selfBurn;
+        const rejectSelf=auth?.insufficientSelfBalance;
+        const rejectDelegated=auth?.unapprovedDelegatedBurn;
+        if(!auth||!validated||
+           auth.schemaVersion!=="OECL_PINNED_INHERITED_ERC20_BURN_AUTH_V1"||
+           auth.classification!=="SCOPED_LOCAL_EVM_DIRECT_INHERITED_BURN_AUTHORIZATION"||
+           auth.candidateAdmission!=="NOT_ADMITTED"||
+           auth.scientificPolarity!=="INCONCLUSIVE"||
+           auth.chainId!==31337||
+           auth.source?.repository!==b.bridge.sourceRoles[1].sourceId||
+           auth.source.revision!==b.bridge.sourceRoles[1].revision||
+           auth.source.sha256!==b.bridge.sourceRoles[1].sourceSha256||
+           auth.dependency?.version!==b.bridge.dependency.version||
+           validated.schemaVersion!=="OECL_INHERITED_ERC20_BURN_AUTH_VALIDATED_V1"||
+           validated.sourceReportSha256!==sha(b.raw.inheritedAuth)||
+           validated.sourceSha256!==auth.source.sha256||
+           validated.sourceRevisionB!==auth.source.revision||
+           validated.inheritedBurnableSha256!==b.bridge.dependency.sourceSha256.ERC20Burnable||
+           validated.packageIntegrity!==b.bridge.dependency.integrity||
+           validated.scopedObservations?.selfBurnSourceIsMsgSender!==true||
+           validated.scopedObservations.zeroBalanceExternalCallerRejected!==true||
+           validated.scopedObservations.burnFromWithoutAllowanceRejected!==true||
+           validated.scopedObservations.burnFromWithAllowanceObserved!==true||
+           validated.scopedObservations.eachExecutedBurnDecreasesSupplyByUnits!==true||
+           validated.admission!=="NOT_ADMITTED"||
+           validated.scientificPolarity!=="INCONCLUSIVE"||
+           !self||!permitted||!rejectSelf||!rejectDelegated||
+           !tx(self.transactionHash)||!tx(permitted.transactionHash)||
+           self.transactionHash===permitted.transactionHash||
+           self.receiptStatus!==1||permitted.receiptStatus!==1||
+           rejectSelf.reverted!==true||rejectDelegated.reverted!==true||
+           !equals(rejectSelf.before,rejectSelf.after)||
+           !equals(rejectDelegated.before,rejectDelegated.after))
+            return fail("INHERITED_BURN_AUTHORIZATION_NOT_PINNED_OR_VALIDATED");
+        const authState=(v:any)=>v&&["supply","aliceBalance","attackerBalance","attackerAllowance"]
+            .every(k=>uint(v[k]));
+        const amount=auth.burnUnits;
+        if(!uint(amount)||BigInt(amount)===0n||
+           !authState(self.before)||!authState(self.after)||
+           !authState(permitted.before)||!authState(permitted.after)||
+           !authState(rejectSelf.before)||!authState(rejectDelegated.before)||
+           BigInt(self.before.supply)-BigInt(self.after.supply)!==BigInt(amount)||
+           BigInt(self.before.aliceBalance)-BigInt(self.after.aliceBalance)!==BigInt(amount)||
+           BigInt(permitted.before.supply)-BigInt(permitted.after.supply)!==BigInt(amount)||
+           BigInt(permitted.before.aliceBalance)-BigInt(permitted.after.aliceBalance)!==BigInt(amount)||
+           permitted.before.attackerAllowance!==amount||
+           permitted.after.attackerAllowance!=="0"||
+           self.after.attackerAllowance!=="0")
+            return fail("INHERITED_BURN_AUTHORIZATION_MEASUREMENTS_INVALID");
+        const directAuthorization=true;
         const joint=receipt.sameTransactionContainsBothBurns===true&&
             Number.isSafeInteger(receipt.nftBurnLogIndex)&&
             Number.isSafeInteger(receipt.erc20BurnLogIndex)&&
             receipt.nftBurnLogIndex!==receipt.erc20BurnLogIndex&&
             b.recognized.property?.witnessTransaction===b.evm.transactions.jointRedemption;
         const rollback=cases.size===4&&b.rollbackValidated.counts.revertedReceipts===4;
-        const ref=(name:string)=>"SHA256:"+sha(name==="rollback"?b.raw.rollback:
+        const ref=(name:string)=>"SHA256:"+sha(name==="inheritedAuth"?b.raw.inheritedAuth:
+            name==="rollback"?b.raw.rollback:
             name==="native"?b.raw.native:
             name==="witness"?b.raw.witness:
             name==="recognized"?b.raw.recognized:b.raw.evm);
@@ -169,16 +240,15 @@ export class ScientificNativeBehavioralEvidenceCoverageEngine {
                 refs:[ref("evm"),ref("witness")],
                 scope:"AST internal burn edge plus local successful receipt (indirect)",
                 missing:["No independent internal-call execution trace across modifiers and branches"]},
-            "A:RESOURCE_DECREASE":{supported:false,partial:joint&&
-                uint(receipt.ethRedeemed)&&BigInt(receipt.ethRedeemed)>0n,
+            "A:RESOURCE_DECREASE":{supported:joint&&liabilityDelta,partial:!liabilityDelta&&joint,
                 refs:[ref("evm"),ref("witness")],
-                scope:"ETH redemption and final NFT liabilities measured",
-                missing:["NFT liability amount before burn absent from primary success receipt"]},
-            "B:AUTHORIZATION":{supported:false,
-                partial:rollback&&!!cases.get("REVERT-ERC20-APPROVAL"),
-                refs:[ref("rollback")],
-                scope:"Coordinator allowance failure reverted, not direct proof of inherited burn caller authority",
-                missing:["No isolated ERC20Burnable authorization-path execution trace"]},
+                scope:"Both NFT liabilities before/after and precise redemption delta checked in pinned Hardhat receipt",
+                missing:["No independent trace proving all dynamic burn paths or full future liability conservation"]},
+            "B:AUTHORIZATION":{supported:directAuthorization,
+                partial:!directAuthorization&&rollback,
+                refs:[ref("inheritedAuth"),ref("rollback")],
+                scope:"Independent local EVM burn(msg.sender) and burnFrom allowance success/revert cases",
+                missing:["No formal proof for every inherited caller or delegatecall route; coordinator allowance is separate"]},
             "B:AVAILABILITY":{supported:rollback&&supply&&
                 !!cases.get("REVERT-ERC20-BALANCE"),partial:true,
                 refs:[ref("rollback"),ref("evm")],
