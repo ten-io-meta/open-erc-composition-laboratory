@@ -73,7 +73,9 @@ async function run() {
                 const f=byFact.get(id)!;
                 return {repository:f.repository,revision:f.revision,filePath:f.file,
                     sourceSha256:f.repository==="OpenZeppelin/openzeppelin-contracts"
-                    ? witness.sourceLineage.sourceHashes.OZ_ERC20
+                    ? (f.file.includes("ERC20Burnable.sol")
+                        ? witness.sourceLineage.sourceHashes.OZ_BURNABLE
+                        : witness.sourceLineage.sourceHashes.OZ_ERC20)
                     : definition.side==="A"
                         ? witness.sourceLineage.sourceHashes.A
                         : witness.sourceLineage.sourceHashes.B};
