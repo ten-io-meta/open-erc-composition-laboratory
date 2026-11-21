@@ -106,7 +106,9 @@ function inspect(i) {
     {sourceId:fungible.sourceId,revision:fungible.revision,sourceSha256:hashes.B,assetClass:"FUNGIBLE"}
   ];
   if(bound.participants.length!==boundPairs.length||
-     boundPairs.some(p=>bound.participants.filter(q=>eq(q,p)).length!==1)||
+     boundPairs.some(p=>bound.participants.filter(q=>q.sourceId===p.sourceId&&
+       q.revision===p.revision&&q.sourceSha256===p.sourceSha256&&
+       q.assetClass===p.assetClass).length!==1)||
      bound.inheritedDependencies?.length!==1||
      !eq(bound.inheritedDependencies[0],{
        sourceId:"@openzeppelin/contracts",sourceRevision:dep.version,
