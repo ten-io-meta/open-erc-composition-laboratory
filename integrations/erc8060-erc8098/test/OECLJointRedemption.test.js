@@ -32,7 +32,7 @@ describe("OECL real-EVM joint execution: ERC-8060 and experimental ERC-8098-styl
 
   it("performs one atomic interaction and preserves the accounting and monotone supply invariants", async function () {
     const { alice, nft, token, joint, units, mint } = await setup();
-    const valueBefore = await nft.valueOf(1);
+    const [valueBefore] = await nft.functions["valueOf(uint256)"](1);
     const backingBefore = await ethers.provider.getBalance(nft.address);
     const totalBefore = await token.totalSupply();
     expect(backingBefore.gte(await nft.totalRedeemableValue())).to.equal(true);
