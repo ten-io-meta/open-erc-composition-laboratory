@@ -124,6 +124,26 @@ async function main(){
         });
     }
     assert.ok(inheritedSources.length>=4,"No complete dependency import closure");
+    // Run the original scientific semantic extractor on actual pinned OZ facts.
+    // Its output belongs to OpenZeppelin, not automatically to ERC-8098 or
+    // ERC-8060. Inherited function reachability is reported separately.
+    const ozSemantic=new ScientificSemanticDerivationEngine().derive({
+        sourceId:"NPM-OPENZEPPELIN-CONTRACTS",sourceRevision:"4.9.6",facts:inheritedFacts
+    });
+    assert.deepEqual(ozSemantic.errors,[],"Inherited source semantic derivation failed");
+    const ozConcepts=new ScientificConceptAbstractionEngine().abstract(ozSemantic);
+    assert.deepEqual(ozConcepts.errors,[],"Inherited source lexical concept abstraction failed");
+    const inheritedSemanticSourceAnalysis={
+        sourceId:"NPM-OPENZEPPELIN-CONTRACTS",
+        sourceRevision:"4.9.6",
+        sourceFacts:inheritedFacts.length,
+        recurrentConcepts:ozConcepts.concepts.map(concept=>({
+            conceptId:concept.conceptId,label:concept.label,
+            lexicalCapabilityIds:concept.lexicalCapabilityIds
+        })),
+        attributionStatus:"DEPENDENCY_ORIGIN_ONLY_NOT_AUTOMATICALLY_PROJECTED_TO_ERC_PROTOCOL",
+        scientificPolarity:"INCONCLUSIVE"
+    };
     const inheritanceGraph=new ScientificSolidityInheritanceGraphEngine().build({
         facts:[...participantFacts,...inheritedFacts]
     });
@@ -236,6 +256,7 @@ async function main(){
         schemaVersion:"OECL_REAL_PINNED_SCIENTIFIC_DISCOVERY_V1",
         participants,
         inheritedEvidence,
+        inheritedSemanticSourceAnalysis,
         inheritedCapabilityObservations,
         sourceKinds:["PINNED_SOLIDITY_SOURCE_FACTS","NATIVE_SEMANTIC_CAPABILITY_ATTRIBUTION",
             "NATIVE_CONCEPT_ABSTRACTION","NATIVE_PROTOCOL_CONCEPT_ATTRIBUTION",
@@ -263,6 +284,9 @@ async function main(){
             protocolConcepts:p.attributedProtocolConcepts.map(x=>x.conceptId)})),
         candidateCount:pair.length,status:report.epistemicStatus,scientificPolarity:report.scientificPolarity,
         inheritedPaths:paths,
+        importedSources:closure.files.length,
+        inheritedSourceFacts:inheritedFacts.length,
+        inheritedSourceConcepts:ozConcepts.concepts.map(x=>x.label),
         functionBurnProvenance:inheritedCapabilityObservations.map(x=>({
             id:x.protocolId,status:x.status,unresolved:x.unresolved.length,
             burn:x.burnCapabilityProvenance.filter(y=>y.symbol==="burn").map(y=>({
