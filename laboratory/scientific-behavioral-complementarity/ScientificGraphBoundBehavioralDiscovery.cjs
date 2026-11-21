@@ -109,7 +109,8 @@ function analyze(graph) {
     deps.sourceUnits?.includes(unit)&&!!expectedHashForUnit(unit);
   if(!dependencyUnit(bBurn[0].unit)||!dependencyUnit(cBurn[0].unit)||
      !dependencyUnit(cMint[0].unit) ||
-     !dependencyUnit(functions.get(senderCall.to)?.unit||""))
+     !String(functions.get(senderCall.to)?.unit||"").startsWith("@openzeppelin/contracts/") ||
+     !expectedHashForUnit(functions.get(senderCall.to).unit))
     return failure("INHERITED_FACT_OUTSIDE_LOCKED_DEPENDENCY");
   const sourceFact=(p,kind,item,originUnit=p.unit,anchor=null)=>{
     const location=item?.location;
