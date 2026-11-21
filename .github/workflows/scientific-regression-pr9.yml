@@ -50,3 +50,11 @@ jobs:
 
       - name: Run complete existing scientific regression suite
         run: npm run scientific:regression
+
+      - name: Upload complete scientific regression results even if checks fail
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-scientific-regression-results
+          path: scientific-regression-suite-results.json
+          if-no-files-found: warn
