@@ -73,6 +73,9 @@ jobs:
           OECL_MULTIHOLDER_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-multiholder.json
         run: npx hardhat test test/OECLMultiHolderSolvency.test.js
 
+      - name: Verify pinned two-holder surplus and redemption accounting receipt
+        run: node oecl/integrations/erc8060-erc8098/check-multiholder-solvency.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-multiholder.json
+
       - name: Validate all four adversarial experiments and source-bound rollback evidence
         run: node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-failure-matrix.json
 
