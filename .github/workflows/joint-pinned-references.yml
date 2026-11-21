@@ -65,6 +65,10 @@ jobs:
       - name: Adversarial tests for incomplete and manipulated invariant evidence
         run: node oecl/integrations/erc8060-erc8098/check-pinned-invariant-regression.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
 
+      - name: Evaluate source-bound behavioral witnesses in OECL native constraint engine
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-behavioral-native-witness.ts ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-pinned.json
+
       - name: Upload joint transaction and provenance receipts
         if: always()
         uses: actions/upload-artifact@v4
