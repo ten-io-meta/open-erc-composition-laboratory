@@ -5,14 +5,14 @@ import {ScientificNativeBehavioralEvidenceCoverageEngine} from
  "../laboratory/scientific-composition-constraint-evaluation/ScientificNativeBehavioralEvidenceCoverageEngine.js";
 
 const keys=["nativeStudy","bridge","evm","witness","native","rollback",
-  "rollbackValidated","recognized","inheritedAuth","inheritedAuthValidated"] as const;
+  "rollbackValidated","recognized","inheritedAuth","inheritedAuthValidated","nftTrace","nftTraceValidated"] as const;
 type Bundle=Parameters<ScientificNativeBehavioralEvidenceCoverageEngine["evaluate"]>[0];
 const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
 async function main(){
     const args=process.argv.slice(2);
-    assert.equal(args.length,11,
+    assert.equal(args.length,13,
         "Expected study, bridge, EVM, witness, native constraints, rollback, validated rollback, recognized property, inherited burn, validated inherited burn, output");
-    const rawTexts=await Promise.all(args.slice(0,10).map(p=>readFile(p,"utf8")));
+    const rawTexts=await Promise.all(args.slice(0,12).map(p=>readFile(p,"utf8")));
     const data:any={raw:{}};
     keys.forEach((k,i)=>{
         data[k]=JSON.parse(rawTexts[i]);
@@ -23,8 +23,8 @@ async function main(){
     assert.deepEqual(observed.errors,[]);
     assert.equal(observed.status,"PARTIAL_OBSERVATION");
     assert.equal(observed.statistics.total,10);
-    assert.equal(observed.statistics.scopedObserved,9);
-    assert.equal(observed.statistics.partial,1);
+    assert.equal(observed.statistics.scopedObserved,10);
+    assert.equal(observed.statistics.partial,0);
     assert.equal(observed.statistics.missing,0);
     assert.equal(observed.allQuestionsResolved,false);
     assert.equal(observed.sourceCoverageComplete,false);
@@ -33,7 +33,7 @@ async function main(){
     const status=(side:string,category:string)=>observed.observations.find(
         x=>x.participantSide===side&&x.category===category)?.status;
     assert.equal(status("A","RESOURCE_DECREASE"),"SCOPED_OBSERVED");
-    assert.equal(status("A","STATE_CONSISTENCY"),"PARTIAL_EVIDENCE");
+    assert.equal(status("A","STATE_CONSISTENCY"),"SCOPED_OBSERVED");
     assert.equal(status("B","AUTHORIZATION"),"SCOPED_OBSERVED");
     assert.equal(status("B","RESOURCE_DECREASE"),"SCOPED_OBSERVED");
     assert.equal(status("JOINT","ATOMIC_EXECUTION"),"SCOPED_OBSERVED");
@@ -72,7 +72,15 @@ async function main(){
       ["forged_inherited_burn_supply",x=>{x.inheritedAuth.selfBurn.after.supply="123";}],
       ["forged_inherited_allowance",x=>{x.inheritedAuth.approvedDelegatedBurn.after.attackerAllowance="3";}],
       ["wrong_inherited_burn_dependency_sha",x=>{x.inheritedAuthValidated.inheritedBurnableSha256="0".repeat(64);}],
-      ["fabricated_inherited_burn_permission",x=>{x.inheritedAuth.unapprovedDelegatedBurn.reverted=false;}]
+      ["fabricated_inherited_burn_permission",x=>{x.inheritedAuth.unapprovedDelegatedBurn.reverted=false;}],
+      ["missing_raw_nft_trace",x=>{x.raw.nftTrace="";}],
+      ["changed_nft_trace_transaction",x=>{x.nftTrace.transactionHash="0x"+"0".repeat(64);}],
+      ["wrong_nft_compiler_source_hash",x=>{x.nftTrace.source.sha256="0".repeat(64);}],
+      ["wrong_nft_trace_digest",x=>{x.nftTraceValidated.rawTraceSha256="0".repeat(64);}],
+      ["nft_trace_no_liability_sstore",x=>{x.nftTraceValidated.observed.nftLiabilityDebitSstore=0;}],
+      ["nft_trace_no_modifier_exit",x=>{x.nftTraceValidated.sourceMappedAnchors=
+          x.nftTraceValidated.sourceMappedAnchors.filter((a:any)=>a.kind!=="NFT_REENTRANCY_EXIT_SSTORE");}],
+      ["nft_trace_source_revision_swap",x=>{x.nftTraceValidated.sourceRevisionA="f".repeat(40);}]
     ];
     for(const [label,mutate] of cases){
         const changed=structuredClone(data);
@@ -92,10 +100,11 @@ async function main(){
             "Partial evidence does not satisfy a source-derived evaluation question.",
             "Observed means only bounded pinned local-EVM evidence, not public-chain independent replay.",
             "NFT liability decrease is measured only for the pinned local EVM execution.",
-            "Native candidate discovery and READY specification remain separate and blocked."
+            "Native candidate discovery and READY specification remain separate and blocked.",
+            "All ten observations cover selected pinned local EVM executions only, not complete execution-path reachability."
         ]
     };
-    await writeFile(args[10],JSON.stringify(report,null,2)+"\n");
+    await writeFile(args[12],JSON.stringify(report,null,2)+"\n");
     console.log("OECL_NATIVE_AST_QUESTION_COVERAGE:"+JSON.stringify({
         total:report.statistics.total,
         scopedObserved:report.statistics.scopedObserved,
