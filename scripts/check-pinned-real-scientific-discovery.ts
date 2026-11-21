@@ -6,6 +6,8 @@ import { createHash } from "node:crypto";
 import { SolidityScientificSourceFactExtractor } from "../laboratory/scientific-source-fact/SolidityScientificSourceFactExtractor.js";
 import { ScientificSemanticDerivationEngine } from "../laboratory/scientific-semantic-derivation/ScientificSemanticDerivationEngine.js";
 import { ScientificCapabilityAttributionEngine } from "../laboratory/scientific-capability-attribution/ScientificCapabilityAttributionEngine.js";
+import { ScientificConceptAbstractionEngine } from "../laboratory/scientific-concept-abstraction/ScientificConceptAbstractionEngine.js";
+import { ScientificProtocolConceptAttributionEngine } from "../laboratory/scientific-protocol-concept-attribution/ScientificProtocolConceptAttributionEngine.js";
 import { ScientificProtocolIdentityAttributionEngine } from "../laboratory/scientific-protocol-identity/ScientificProtocolIdentityAttributionEngine.js";
 import { ScientificStructuralProtocolRelationEvidenceEngine } from "../laboratory/scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidenceEngine.js";
 import { CrossProtocolCompositionEngine } from "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
@@ -31,6 +33,7 @@ async function main(){
     const extractor=new SolidityScientificSourceFactExtractor();
     const participants=[];
     const structuralResults=[];
+    const protocolConceptResults=[];
     for (let i=0;i<2;i++){
         const source=sources[i],root=roots[i];
         assert.equal(git(root),source.revision,"Unexpected source revision for "+source.id);
@@ -55,6 +58,13 @@ async function main(){
             attribution:attributed,observations:[observation]
         });
         assert.deepEqual(protocols.errors,[],"Protocol identity attribution failed for "+source.id);
+        const concepts=new ScientificConceptAbstractionEngine().abstract(semantic);
+        assert.deepEqual(concepts.errors,[],"Lexical concept abstraction failed for "+source.id);
+        const protocolConcepts=new ScientificProtocolConceptAttributionEngine().attribute({
+            concepts,protocols
+        });
+        assert.deepEqual(protocolConcepts.errors,[],"Protocol concept attribution failed for "+source.id);
+        protocolConceptResults.push(protocolConcepts);
         const relations=new ScientificStructuralProtocolRelationEvidenceEngine().extract({
             sourceId:source.sourceId,sourceRevision:source.revision,facts,
             protocolAttributedCapabilities:protocols.protocolAttributedCapabilities
@@ -66,6 +76,8 @@ async function main(){
             revision:source.revision,path:source.path,sourceSha256:sha256(raw),
             extractedFacts:facts.length,
             protocolAttributedCapabilities:protocols.protocolAttributedCapabilities.length,
+            recurrentLexicalConcepts:concepts.concepts.map(c=>c.label),
+            attributedProtocolConcepts:protocolConcepts.protocolConcepts.map(c=>({conceptId:c.conceptId,protocolId:c.protocolId,evidence:c.evidence})),
             structuralRelations:relations.relations
         });
     }
@@ -74,7 +86,7 @@ async function main(){
     // by semantic + source attribution stages above. Do not invent common
     // lexical concepts or manually supply a compatibility hypothesis.
     const discoveryInput={
-        protocolConceptResults:[],
+        protocolConceptResults,
         protocolRelationEvidenceResults:[],
         structuralProtocolRelationEvidenceResults:structuralResults
     };
@@ -91,6 +103,7 @@ async function main(){
         schemaVersion:"OECL_REAL_PINNED_SCIENTIFIC_DISCOVERY_V1",
         participants,
         sourceKinds:["PINNED_SOLIDITY_SOURCE_FACTS","NATIVE_SEMANTIC_CAPABILITY_ATTRIBUTION",
+            "NATIVE_CONCEPT_ABSTRACTION","NATIVE_PROTOCOL_CONCEPT_ATTRIBUTION",
             "NATIVE_PROTOCOL_IDENTITY","NATIVE_STRUCTURAL_PROTOCOL_RELATION"],
         discovery,
         matchedPairCandidates:pair,
@@ -101,14 +114,16 @@ async function main(){
             "A common structural ERC-family dependency is required for the native foundation mechanism",
             "The recurring concept mechanism requires two distinct independently attributed capabilities per protocol",
             "A local joint coordinator is an experimental implementation, not independent documentary extension evidence",
-            "No source-grounded recurring concept attribution is supplied or invented by this audit",
+            "Only lexical concepts independently produced by native attribution are eligible; no hand-authored concept inputs are permitted",
             "A matching READY specification and complete test scope remain mandatory"
         ]
     };
     await writeFile(output,JSON.stringify(report,null,2)+"\n");
     console.log("OECL_REAL_SOURCE_DISCOVERY:"+JSON.stringify({
         facts:participants.map(p=>({protocol:p.protocolId,facts:p.extractedFacts,capabilities:p.protocolAttributedCapabilities,
-            dependencies:p.structuralRelations.map(x=>x.objectProtocolId)})),
+            dependencies:p.structuralRelations.map(x=>x.objectProtocolId),
+            lexicalConcepts:p.recurrentLexicalConcepts,
+            protocolConcepts:p.attributedProtocolConcepts.map(x=>x.conceptId)})),
         candidateCount:pair.length,status:report.epistemicStatus,scientificPolarity:report.scientificPolarity
     }));
 }
