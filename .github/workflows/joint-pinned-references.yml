@@ -176,6 +176,12 @@ jobs:
       - name: Audit tested and untested adversarial classes without security certification
         run: node oecl/integrations/erc8060-erc8098/audit-adversarial-coverage.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-eth-callbacks.json joint-evidence/erc8060-erc8098-multiholder.json joint-evidence/erc8060-erc8098-adversarial-audit.json
 
+      - name: Build fail-closed user-facing scientific dossier from verified source and EVM evidence
+        run: node oecl/scripts/build-user-scientific-dossier.cjs joint-evidence joint-evidence/erc8060-erc8098-user-dossier.json
+
+      - name: Reject manipulated evidence and fabricated scientific verdicts in user dossier
+        run: node oecl/scripts/check-user-scientific-dossier.cjs joint-evidence
+
       - name: Upload joint transaction and provenance receipts
         if: always()
         uses: actions/upload-artifact@v4
