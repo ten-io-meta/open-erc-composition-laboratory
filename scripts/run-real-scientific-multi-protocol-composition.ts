@@ -195,6 +195,14 @@ import {
 } from "../laboratory/scientific-composition-complementarity/ScientificCompositionComplementarityEngine.js";
 
 import {
+    CrossProtocolCompositionEngine
+} from "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
+
+import {
+    ScientificStructuralFoundationCompositionCandidateEngine
+} from "../laboratory/scientific-structural-foundation-candidate/ScientificStructuralFoundationCompositionCandidateEngine.js";
+
+import {
     ScientificCompositionCompatibilityEngine
 } from "../laboratory/scientific-composition-compatibility/ScientificCompositionCompatibilityEngine.js";
 
@@ -1423,6 +1431,51 @@ async function main(): Promise<void> {
     );
 
 
+    /*
+     * Reconnect existing real-source structural discovery to the
+     * candidate evaluation graph. Shared ERC foundations (e.g. 721)
+     * open UNEVALUATED hypotheses only, never compatibility SUPPORT.
+     */
+    const structuralDiscovery =
+        new CrossProtocolCompositionEngine()
+            .discover({
+                protocolConceptResults: [],
+                protocolRelationEvidenceResults: [],
+                structuralProtocolRelationEvidenceResults:
+                    sources.map(source => source.structuralRelations)
+            });
+
+    requireNoErrors(
+        "Real cross-source structural discovery",
+        structuralDiscovery.errors
+    );
+
+    const structuralFoundation =
+        new ScientificStructuralFoundationCompositionCandidateEngine()
+            .normalize(structuralDiscovery);
+
+    requireNoErrors(
+        "Real structural foundation candidate normalization",
+        structuralFoundation.errors
+    );
+
+    // Restrict the research to participants established in this run.
+    // This filters scope, not scientific evidence or outcomes.
+    const evaluatedParticipantIds =
+        new Set(profiles.map(profile => profile.protocolId));
+
+    const selectedStructuralCandidates =
+        structuralFoundation.candidates.filter(
+            candidate =>
+                evaluatedParticipantIds.has(candidate.participantAId) &&
+                evaluatedParticipantIds.has(candidate.participantBId)
+        );
+
+    console.log(
+        "Real evidence-backed structural candidates: " +
+        selectedStructuralCandidates.length
+    );
+
     const compositionCandidateSet =
         new ScientificCompositionCandidateSetEngine()
             .build({
@@ -1438,7 +1491,10 @@ async function main(): Promise<void> {
                     complementarity.matches,
 
                 documentaryCandidates:
-                    documentaryCandidates.candidates
+                    documentaryCandidates.candidates,
+
+                structuralFoundationCandidates:
+                    selectedStructuralCandidates
 
             });
 
@@ -3669,6 +3725,11 @@ async function main(): Promise<void> {
                 needs: profile.needs,
                 boundaries: profile.boundaries
             })),
+            structuralDiscovery: {
+                sourceCandidates: structuralDiscovery.candidates,
+                normalizedCandidates: selectedStructuralCandidates,
+                kind: "SHARED_PROTOCOL_FOUNDATION_UNEVALUATED"
+            },
             compatibility: {
                 assessmentScope: "CANDIDATE_BOUNDARIES_AND_GLOBAL_HARMONY",
                 candidateEvaluations: candidateEvaluationGraph.graph?.edges ?? [],
