@@ -128,11 +128,11 @@ async function main(){
 
     const capabilityProjector=new ScientificInheritedCapabilityProjectionEngine();
     const allFacts=[...participantFacts,...inheritedFacts];
-    const roots=[
+    const participantRoots=[
         {id:"ERC-8060",symbol:"ERC8060Reference",sourceId:sources[0].sourceId,revision:sources[0].revision},
         {id:"ERC-8098",symbol:"ERC8098Reference",sourceId:sources[1].sourceId,revision:sources[1].revision}
     ];
-    const inheritedCapabilityObservations=roots.map(root=>{
+    const inheritedCapabilityObservations=participantRoots.map(root=>{
         const nodes=inheritanceGraph.containers.filter(x=>
             x.containerSymbol===root.symbol && x.sourceId===root.sourceId &&
             x.sourceRevision===root.revision
