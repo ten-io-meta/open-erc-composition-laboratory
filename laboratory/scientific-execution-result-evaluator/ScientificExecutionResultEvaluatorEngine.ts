@@ -260,7 +260,17 @@ export class ScientificExecutionResultEvaluatorEngine {
                 constraint.sourceRevision?.toLowerCase() !== source.sourceRevision.toLowerCase() ||
                 constraint.participantId !== source.participantId ||
                 constraint.participantKind !== source.participantKind ||
-                constraint.basis !== "SOLIDITY_REQUIRE_STATEMENT" ||
+                !["SOLIDITY_REQUIRE_STATEMENT", "SOURCE_DERIVED_BEHAVIORAL_INVARIANT"].includes(constraint.basis) ||
+                (
+                    constraint.basis === "SOURCE_DERIVED_BEHAVIORAL_INVARIANT" &&
+                    (
+                        constraint.behavioralPredicate?.kind !== "UNSIGNED_INTEGER_RELATION" ||
+                        !constraint.behavioralPredicate?.leftMetric ||
+                        !constraint.behavioralPredicate?.rightMetric ||
+                        !["EQ","LTE","GTE"].includes(constraint.behavioralPredicate?.operator ?? "") ||
+                        !/^[a-f0-9]{40}$/i.test(constraint.sourceRevision ?? "")
+                    )
+                ) ||
                 !constraint.factId.trim() || !constraint.rawText.trim() ||
                 !constraint.locator?.filePath
             ) return "INCONCLUSIVE";
@@ -270,6 +280,21 @@ export class ScientificExecutionResultEvaluatorEngine {
         // exact structured observations emitted by the actual joint driver.
         const observations = harness.driverReport.constraintObservations ?? [];
         if (observations.length === 0) return "INCONCLUSIVE";
+        // Behavioral observations must refer to the same real EVM transaction
+        // seen by both contract participants, not an unrelated test run.
+        const txA = new Set(harness.driverReport.participantA.transactionHashes.map(x => x.toLowerCase()));
+        const txB = new Set(harness.driverReport.participantB.transactionHashes.map(x => x.toLowerCase()));
+        for (const observation of observations) {
+            const constraint = constraints.find(x => x.constraintId === observation.constraintId);
+            if (!constraint) return "INCONCLUSIVE";
+            if (constraint.basis === "SOURCE_DERIVED_BEHAVIORAL_INVARIANT") {
+                const tx = observation.transactionHash?.toLowerCase();
+                if (!tx || !txA.has(tx) || !txB.has(tx) ||
+                    observation.sourceRevision?.toLowerCase() !== constraint.sourceRevision?.toLowerCase())
+                    return "INCONCLUSIVE";
+            }
+        }
+
         const recomputed = new ScientificCompositionConstraintEvaluatorEngine()
             .evaluate(constraints, observations);
         if (
