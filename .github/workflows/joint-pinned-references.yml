@@ -141,6 +141,10 @@ jobs:
       - name: Evaluate generic source hypothesis against separately produced EVM evidence
         run: node oecl/integrations/erc8060-erc8098/check-generic-hypothesis-evidence.cjs joint-evidence/erc8060-erc8098-generic-effects.json joint-evidence/erc8060-erc8098-emergent-property.json joint-evidence/erc8060-erc8098-generic-evaluation.json
 
+      - name: Reconcile AST source hypothesis with pinned EVM and native scientific constraints
+        working-directory: oecl
+        run: npx tsx scripts/check-ast-evm-native-bridge.ts ../joint-evidence/erc8060-erc8098-structural-graph.json ../joint-evidence/erc8060-erc8098-ast-hypothesis.json ../joint-evidence/erc8060-erc8098-pinned.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-emergent-property.json ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.candidate-admission.json ../joint-evidence/erc8060-erc8098-source-discovery.json ../joint-evidence/erc8060-erc8098-ast-evm-native-bridge.json
+
       - name: Audit tested and untested adversarial classes without security certification
         run: node oecl/integrations/erc8060-erc8098/audit-adversarial-coverage.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-eth-callbacks.json joint-evidence/erc8060-erc8098-multiholder.json joint-evidence/erc8060-erc8098-adversarial-audit.json
 
