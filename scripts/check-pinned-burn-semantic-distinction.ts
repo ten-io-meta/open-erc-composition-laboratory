@@ -50,8 +50,12 @@ async function main() {
     const fungible=locate("ERC-8098","ERC20Burnable");
     assert.equal(nft.depth,0);
     assert.equal(nft.sourceRevision,a.revision);
+    assert.match(nft.sourceRawText,/function\\s+burn\\s*\\(\\s*uint256\\s+tokenId\\s*\\)/,
+        "ERC8060 must destroy one specific NFT tokenId");
     assert.equal(fungible.depth,1);
     assert.equal(fungible.sourceRevision,"4.9.6");
+    assert.match(fungible.sourceRawText,/function\\s+burn\\s*\\(\\s*uint256\\s+amount\\s*\\)/,
+        "ERC8098's inherited burn must consume fungible amount");
     assert.deepEqual(fungible.inheritanceContainers,["ERC8098Reference","ERC20Burnable"]);
     const dependencySource=discovery.inheritedEvidence.sources.find((x:{file:string})=>x.file==="token/ERC20/extensions/ERC20Burnable.sol");
     assert.ok(dependencySource&&/^[a-f0-9]{64}$/.test(dependencySource.sha256));
