@@ -49,13 +49,15 @@ describe("OECL pinned inherited ERC20Burnable authorization — isolated local E
     try{await (await token.connect(attacker).burn(amount,{gasLimit:5000000})).wait();}
     catch{selfBlocked=true;}
     expect(selfBlocked,"attacker must not burn somebody else's balance with burn()").to.equal(true);
-    expect(await snap()).to.deep.equal(beforeInsufficient);
+    const afterInsufficient=await snap();
+    expect(afterInsufficient).to.deep.equal(beforeInsufficient);
     const beforeUnauthorized=await snap();
     let delegatedBlocked=false;
     try{await (await token.connect(attacker).burnFrom(alice.address,amount,{gasLimit:5000000})).wait();}
     catch{delegatedBlocked=true;}
     expect(delegatedBlocked,"burnFrom must require allowance").to.equal(true);
-    expect(await snap()).to.deep.equal(beforeUnauthorized);
+    const afterUnauthorized=await snap();
+    expect(afterUnauthorized).to.deep.equal(beforeUnauthorized);
     const approval=await (await token.connect(alice).approve(attacker.address,amount)).wait();
     const beforeDelegated=await snap();
     expect(beforeDelegated.attackerAllowance).to.equal(amount.toString());
@@ -82,10 +84,10 @@ describe("OECL pinned inherited ERC20Burnable authorization — isolated local E
       burnUnits:amount.toString(),
       selfBurn:{transactionHash:selfReceipt.transactionHash,receiptStatus:selfReceipt.status,
         zeroAddressBurnLogIndex:selfLogIndex,before:beforeSelf,after:afterSelf},
-      insufficientSelfBalance:{reverted:selfBlocked,before:beforeInsufficient,after:beforeInsufficient},
+      insufficientSelfBalance:{reverted:selfBlocked,before:beforeInsufficient,after:afterInsufficient},
       // The snapshot after insufficient and unauthorized attempts is identical
       // only before approving; preserve each independent point in the timeline.
-      unapprovedDelegatedBurn:{reverted:delegatedBlocked,before:beforeUnauthorized,after:beforeUnauthorized},
+      unapprovedDelegatedBurn:{reverted:delegatedBlocked,before:beforeUnauthorized,after:afterUnauthorized},
       approvalTransaction:approval.transactionHash,
       approvedDelegatedBurn:{transactionHash:delegatedReceipt.transactionHash,
         receiptStatus:delegatedReceipt.status,zeroAddressBurnLogIndex:delegatedLogIndex,
