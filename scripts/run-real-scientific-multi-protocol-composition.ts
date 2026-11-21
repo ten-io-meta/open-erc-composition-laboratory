@@ -5271,6 +5271,108 @@ async function main(): Promise<void> {
         realDecisionTraceLineageBinding.trace;
 
     /*
+     * Session 2: deterministic research dossier from existing engines.
+     * This is a projection, not a new scientific decision engine.
+     * In dossier mode no multi-contract observations are manufactured,
+     * and optional The Graph live binding is not attempted.
+     */
+    const dossierPath = process.env.OECL_COMPOSITION_REPORT_PATH?.trim();
+    if (dossierPath) {
+        const { writeFile, mkdir } = await import("node:fs/promises");
+        const { resolve, dirname } = await import("node:path");
+
+        const upstreamFindings = compositionValue.assessments
+            .flatMap(assessment => assessment.findings);
+
+        const dossier = {
+            schemaVersion: "OECL_COMPOSITION_RESEARCH_DOSSIER_V1",
+            generatedAt: new Date().toISOString(),
+            researchMode: "PINNED_GITHUB_SOURCE_DISCOVERY_NO_GLOBAL_EXPERIMENT",
+            requestedErcIds: requestedErcIds.length > 0
+                ? requestedErcIds
+                : sourceSpecs.flatMap(source => source.targetProtocolIds),
+            evaluatedErcIds: profiles.map(profile => profile.protocolId),
+            unresolvedProtocolIdentities: [...new Set(missingProtocolIds)],
+            objective,
+            sourceProvenance: sources.map(source => ({
+                sourceId: source.sourceId,
+                repository: source.spec.owner + "/" + source.spec.repo,
+                expectedRevision: source.spec.expectedRevision,
+                observedRevision: source.sourceRevision ?? null,
+                requestedProtocolIds: source.spec.targetProtocolIds
+            })),
+            participantContributions: profiles.map(profile => ({
+                protocolId: profile.protocolId,
+                sourceId: profile.sourceId,
+                sourceRevision: profile.sourceRevision ?? null,
+                contributions: profile.contributions,
+                needs: profile.needs,
+                boundaries: profile.boundaries
+            })),
+            compatibility: {
+                assessmentScope: "CANDIDATE_BOUNDARIES_NOT_GLOBAL_VIABILITY",
+                candidateEvaluations: candidateEvaluationGraph.graph?.edges ?? [],
+                globalHarmony: compositionHarmony.assessments,
+                explanation: "Candidate SUPPORT is not proof of simultaneous global composition."
+            },
+            compositionProperties: {
+                valueAssessments: compositionValue.assessments,
+                verifiedEmergentProperties: upstreamFindings.filter(
+                    finding => finding.kind === "EMERGENT_PROPERTY"
+                ),
+                note: "Findings are produced solely by existing composition-value rules; no hypothetical emergent properties are promoted."
+            },
+            risksAndBoundaries: {
+                regions: compositionEnvelopes.envelopes.flatMap(
+                    envelope => envelope.boundaryRegions
+                ),
+                evidenceGaps: candidateEvidenceGaps.diagnostics
+            },
+            configurations: {
+                solutions: nProtocolCompositionSolutions.solutions,
+                globallySupportedSubsets: compositionHarmony.assessments
+                    .flatMap(item => item.supportedSubsets)
+            },
+            evidence: {
+                provenanceCatalog: scientificDecisionTraceWithLineage.evidenceCatalog,
+                decisionTrace: scientificDecisionTraceWithLineage,
+                lineage: realEvidenceLineage,
+                globalObservationCount: 0,
+                globalExecutionStatus: "NOT_PERFORMED_IN_THIS_MODE"
+            },
+            restrictions: [
+                "Only pinned source repositories from this runner were examined.",
+                "Ethereum Magicians discussions were not queried.",
+                "No joint multi-protocol execution was performed.",
+                "Live The Graph verification was not executed in dossier-only mode.",
+                "No uncalibrated compatibility probability is reported.",
+                "READY configurations are not supported configurations."
+            ],
+            decisionAuthority: "UPSTREAM_SCIENTIFIC_ENGINES_ONLY"
+        };
+
+        const destination = resolve(dossierPath);
+        await mkdir(dirname(destination), { recursive: true });
+        await writeFile(
+            destination,
+            JSON.stringify(dossier, null, 2) + "\n",
+            "utf8"
+        );
+        console.log("OECL composition research dossier: " + destination);
+        console.log(
+            "Harmony: " +
+            compositionHarmony.assessments.map(a => a.harmonyStatus).join(", ")
+        );
+        console.log(
+            "Verified emergent findings: " +
+            dossier.compositionProperties.verifiedEmergentProperties.length
+        );
+        console.log("Global experiments: NOT PERFORMED in dossier mode");
+        return;
+    }
+
+
+    /*
      * =========================================================
      * REAL ERC-8004 GITHUB <-> THE GRAPH EVIDENCE BINDING
      * =========================================================
