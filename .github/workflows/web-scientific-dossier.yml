@@ -1,0 +1,35 @@
+name: OECL Web Scientific Dossier
+
+on:
+  push:
+    paths:
+      - 'web/**'
+      - '.github/workflows/web-scientific-dossier.yml'
+  pull_request:
+    paths:
+      - 'web/**'
+      - '.github/workflows/web-scientific-dossier.yml'
+
+jobs:
+  dossier-web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install exact web dependencies
+        run: npm ci
+      - name: Test pinned dossier digest, scope and negative controls
+        run: node scripts/check-scientific-dossier.mjs
+      - name: Lint web
+        run: npm run lint
+      - name: Compile production web
+        run: npm run build
