@@ -39,6 +39,9 @@ jobs:
       - name: Propose behavioral complementarity from source only, before joint EVM assembly
         run: node oecl/scripts/check-source-only-behavioral-complementarity.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-source-only-hypothesis.json
 
+      - name: Discover generic behavioral complementarity from normalized source effects
+        run: node oecl/scripts/check-generic-behavioral-complementarity.cjs joint-evidence/erc8060-erc8098-source-only-hypothesis.json joint-evidence/erc8060-erc8098-generic-effects.json
+
       - name: Build joint test workspace from both immutable checkouts
         run: |
           cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
