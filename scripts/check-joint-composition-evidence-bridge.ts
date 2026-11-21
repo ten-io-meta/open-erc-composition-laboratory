@@ -58,6 +58,7 @@ function buildOutcome(polarity: "SUPPORT" | "CHALLENGE" = "SUPPORT"): Scientific
         compositionRecipeSelection: {
             status: "SELECTED",
             selectedRegistrationId: "R-1",
+            evaluationSurfaceCompleteness: "COMPLETE_FOR_CANDIDATE_EVALUATION",
             matchingRegistrationIds: ["R-1"], reasons: []
         },
         jointContractHarnessExecution: {
@@ -123,6 +124,12 @@ check("ambiguous recipe cannot support", g, "INCONCLUSIVE");
 const h = buildOutcome();
 h.jointCompositionEvidence!.jointContractHarnessExecution!.driverReport!.sharedRuntime = false;
 check("non-shared runtime cannot support", h, "INCONCLUSIVE");
+const incompleteSurface = buildOutcome();
+incompleteSurface.jointCompositionEvidence!.compositionRecipeSelection!.evaluationSurfaceCompleteness = "PARTIAL";
+check("partial bilateral evaluation surface cannot support", incompleteSurface, "INCONCLUSIVE");
+const unresolved = buildOutcome();
+unresolved.jointCompositionEvidence!.compositionExecutionRequirement!.unresolvedGuardFactIds = ["UNRESOLVED-GUARD"];
+check("unresolved source guard cannot support", unresolved, "INCONCLUSIVE");
 const i = buildOutcome();
 i.jointCompositionEvidence!.jointContractHarnessExecution!.driverReport!.constraintObservations![1].evidence = [];
 check("empty execution evidence cannot support", i, "INCONCLUSIVE");
