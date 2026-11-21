@@ -1,3 +1,5 @@
+import type { ScientificRuntimeExecution } from "../scientific-execution-runtime/ScientificRuntimeExecution.js";
+
 import type {
     ScientificExecutableTargetIdentity
 } from "../scientific-execution-target-resolution/ScientificExecutableTargetIdentity.js";
@@ -21,6 +23,13 @@ export type ScientificExecutionOutcomeScientificResult =
 export interface ScientificExecutionOutcome {
 
     outcomeId: string;
+
+    /** Structured runtime provenance; never inferred from log strings. */
+    jointCompositionEvidence?: Pick<ScientificRuntimeExecution,
+        "compositionExecutionRequirement" | "compositionWorkspaceMaterialization" |
+        "compositionRecipeSelection" | "jointContractHarnessExecution" |
+        "compositionConstraintEvaluation" | "runtime"
+    >;
 
     executionPlanId: string;
 
