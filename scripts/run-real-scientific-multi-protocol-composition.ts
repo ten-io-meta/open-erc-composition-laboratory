@@ -195,6 +195,14 @@ import {
 } from "../laboratory/scientific-composition-complementarity/ScientificCompositionComplementarityEngine.js";
 
 import {
+    CrossProtocolCompositionEngine
+} from "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
+
+import {
+    ScientificStructuralFoundationCompositionCandidateEngine
+} from "../laboratory/scientific-structural-foundation-candidate/ScientificStructuralFoundationCompositionCandidateEngine.js";
+
+import {
     ScientificCompositionCompatibilityEngine
 } from "../laboratory/scientific-composition-compatibility/ScientificCompositionCompatibilityEngine.js";
 
@@ -580,7 +588,7 @@ async function main(): Promise<void> {
      *
      * No functional meaning is assigned to these IDs here.
      */
-    const sourceSpecs:
+    let sourceSpecs:
         RealSourceSpec[] = [
 
             {
@@ -634,6 +642,43 @@ async function main(): Promise<void> {
 
         ];
 
+
+    /*
+     * Optional explicit protocol selection, from this pinned corpus only.
+     * Other standards must first be admitted through independent evidence.
+     */
+    const requestedErcIds = (process.env.OECL_SELECTED_ERC_IDS ?? "")
+        .split(",")
+        .map(value => value.trim().toUpperCase())
+        .filter(Boolean);
+
+    if (requestedErcIds.length > 0) {
+        const unique = new Set(requestedErcIds);
+        const available = new Set(sourceSpecs.flatMap(
+            source => source.targetProtocolIds
+        ));
+
+        if (
+            unique.size !== requestedErcIds.length ||
+            unique.size < 2 ||
+            requestedErcIds.some(id => !/^ERC-\d+$/.test(id)) ||
+            requestedErcIds.some(id => !available.has(id))
+        ) {
+            throw new Error(
+                "OECL_SELECTED_ERC_IDS must contain at least 2 distinct ERCs from the pinned corpus: " +
+                [...available].sort().join(", ")
+            );
+        }
+
+        sourceSpecs = sourceSpecs
+            .map(source => ({
+                ...source,
+                targetProtocolIds: source.targetProtocolIds.filter(
+                    id => unique.has(id)
+                )
+            }))
+            .filter(source => source.targetProtocolIds.length > 0);
+    }
 
     const sources = [];
 
@@ -1298,1649 +1343,6 @@ async function main(): Promise<void> {
      */
 
 
-    const graphDiscoveryProfiles =
-        profiles
-            .filter(
-                profile =>
-                    profile.protocolId !==
-                    "ERC-8004"
-            );
-
-
-    if (
-        graphDiscoveryProfiles.length !==
-        7
-    ) {
-
-        throw new Error(
-            `Expected 7 real non-ERC8004 profiles for Graph discovery, found ${graphDiscoveryProfiles.length}.`
-        );
-
-    }
-
-
-    const graphDiscoveryBasePlan =
-        new ScientificTheGraphProductDiscoveryEngine()
-            .plan(
-                graphDiscoveryProfiles
-            );
-
-
-    requireNoErrors(
-        "Real profile-derived Graph discovery base plan",
-        graphDiscoveryBasePlan.errors
-    );
-
-
-    const graphDiscoveryExpansion =
-        new ScientificTheGraphProfileDiscoveryEngine()
-            .expand(
-                graphDiscoveryProfiles,
-                graphDiscoveryBasePlan.requests,
-                4
-            );
-
-
-    requireNoErrors(
-        "Real profile-derived Graph discovery expansion",
-        graphDiscoveryExpansion.errors
-    );
-
-
-    if (
-        graphDiscoveryExpansion.requests.length !==
-        graphDiscoveryProfiles.length
-    ) {
-
-        throw new Error(
-            `Expected ${graphDiscoveryProfiles.length} expanded Graph discovery requests, found ${graphDiscoveryExpansion.requests.length}.`
-        );
-
-    }
-
-
-    const profileDiscoveryApiKey =
-        process.env.THE_GRAPH_API_KEY
-            ?.trim();
-
-
-    if (
-        profileDiscoveryApiKey ===
-            undefined ||
-        profileDiscoveryApiKey.length ===
-            0
-    ) {
-
-        throw new Error(
-            "THE_GRAPH_API_KEY is required for real profile-derived Graph discovery."
-        );
-
-    }
-
-
-    const profileDiscoveryClient =
-        new ScientificTheGraphSubgraphMcpLiveClient(
-            profileDiscoveryApiKey
-        );
-
-
-    let realProfileGraphDiscovery;
-
-
-    try {
-
-        realProfileGraphDiscovery =
-            await new ScientificTheGraphSubgraphMcpKeywordProvider(
-                profileDiscoveryClient,
-                "LIVE"
-            )
-                .discover(
-                    graphDiscoveryExpansion.requests
-                );
-
-    }
-    finally {
-
-        await profileDiscoveryClient.close();
-
-    }
-
-
-    requireNoErrors(
-        "Real profile-derived Subgraph MCP discovery",
-        realProfileGraphDiscovery.errors
-    );
-
-
-    if (
-        realProfileGraphDiscovery.searches.some(
-            search =>
-                search.providerMode !==
-                "LIVE"
-        )
-    ) {
-
-        throw new Error(
-            "Real profile-derived Graph discovery contains non-LIVE observations."
-        );
-
-    }
-
-
-    const expectedSearchCount =
-        graphDiscoveryExpansion.requests
-            .reduce(
-                (
-                    total,
-                    request
-                ) =>
-                    total +
-                    request.searchTerms.length,
-                0
-            );
-
-
-    if (
-        realProfileGraphDiscovery.searches.length !==
-        expectedSearchCount
-    ) {
-
-        throw new Error(
-            `Expected ${expectedSearchCount} LIVE MCP searches, found ${realProfileGraphDiscovery.searches.length}.`
-        );
-
-    }
-
-
-    const discoverySerialized =
-        JSON.stringify(
-            {
-                expansion:
-                    graphDiscoveryExpansion,
-                discovery:
-                    realProfileGraphDiscovery
-            }
-        );
-
-
-    if (
-        discoverySerialized.includes(
-            profileDiscoveryApiKey
-        )
-    ) {
-
-        throw new Error(
-            "API key leaked into real profile-derived Graph discovery output."
-        );
-
-    }
-
-
-    if (
-        discoverySerialized.includes(
-            "scientificPolarity"
-        ) ||
-        discoverySerialized.includes(
-            "compatibilityPolarity"
-        ) ||
-        discoverySerialized.includes(
-            '"SUPPORT"'
-        ) ||
-        discoverySerialized.includes(
-            '"CHALLENGE"'
-        ) ||
-        discoverySerialized.includes(
-            '"FULL"'
-        ) ||
-        discoverySerialized.includes(
-            '"PARTIAL"'
-        )
-    ) {
-
-        throw new Error(
-            "Profile-derived Graph discovery manufactured scientific polarity."
-        );
-
-    }
-
-
-    console.log("");
-    console.log(
-        "============================================================"
-    );
-    console.log(
-        "REAL PROFILE-DERIVED THE GRAPH DISCOVERY"
-    );
-    console.log(
-        "============================================================"
-    );
-
-
-    let rawProfileDiscoveryHits =
-        0;
-
-    const globallyDiscoveredSubgraphIds =
-        new Set<string>();
-
-
-    for (
-        const profile
-        of graphDiscoveryProfiles
-    ) {
-
-        const request =
-            graphDiscoveryExpansion.requests
-                .find(
-                    candidate =>
-                        candidate.profileId ===
-                        profile.profileId
-                );
-
-
-        if (
-            request ===
-            undefined
-        ) {
-
-            throw new Error(
-                `Missing expanded Graph discovery request for real profile ${profile.protocolId}.`
-            );
-
-        }
-
-
-        const searches =
-            realProfileGraphDiscovery.searches
-                .filter(
-                    search =>
-                        search.requestId ===
-                        request.requestId
-                )
-                .sort(
-                    (
-                        a,
-                        b
-                    ) =>
-                        a.searchTerm.localeCompare(
-                            b.searchTerm
-                        )
-                );
-
-
-        const protocolSubgraphIds =
-            new Set<string>();
-
-
-        console.log("");
-        console.log(
-            profile.protocolId
-        );
-
-
-        console.log(
-            `  source:   ${profile.sourceId}`
-        );
-
-        console.log(
-            `  revision: ${profile.sourceRevision ?? "NO-REVISION"}`
-        );
-
-        console.log(
-            `  terms:    ${request.searchTerms.join(", ")}`
-        );
-
-
-        for (
-            const search
-            of searches
-        ) {
-
-            console.log(
-                `  SEARCH ${search.searchTerm}: returned=${search.returned} total=${search.total}`
-            );
-
-
-            rawProfileDiscoveryHits +=
-                search.hits.length;
-
-
-            for (
-                const hit
-                of search.hits
-            ) {
-
-                protocolSubgraphIds.add(
-                    hit.subgraphId
-                );
-
-                globallyDiscoveredSubgraphIds.add(
-                    hit.subgraphId
-                );
-
-            }
-
-
-            for (
-                const hit
-                of search.hits.slice(
-                    0,
-                    3
-                )
-            ) {
-
-                console.log(
-                    `    rank=${hit.providerRank} name=${hit.displayName}`
-                );
-
-                console.log(
-                    `    subgraph=${hit.subgraphId}`
-                );
-
-                console.log(
-                    `    deployment=${hit.ipfsHash}`
-                );
-
-            }
-
-
-            if (
-                search.hits.length >
-                3
-            ) {
-
-                console.log(
-                    `    ... ${search.hits.length - 3} additional hits`
-                );
-
-            }
-
-        }
-
-
-        console.log(
-            `  distinct discovered subgraphs: ${protocolSubgraphIds.size}`
-        );
-
-    }
-
-
-    console.log("");
-    console.log(
-        "REAL PROFILE-DERIVED DISCOVERY SUMMARY"
-    );
-    console.log(
-        "--------------------------------------"
-    );
-
-    console.log(
-        `real profiles searched:       ${graphDiscoveryProfiles.length}`
-    );
-
-    console.log(
-        `profile-derived terms:        ${graphDiscoveryExpansion.terms.length}`
-    );
-
-    console.log(
-        `LIVE MCP searches:            ${realProfileGraphDiscovery.searches.length}`
-    );
-
-    console.log(
-        `raw provider hits:            ${rawProfileDiscoveryHits}`
-    );
-
-    console.log(
-        `distinct discovered subgraphs:${globallyDiscoveredSubgraphIds.size}`
-    );
-
-
-    console.log("");
-    console.log(
-        "SCIENTIFIC INTERPRETATION"
-    );
-    console.log(
-        "-------------------------"
-    );
-
-    console.log(
-        "Search terms were derived from real GitHub-backed OECL protocol profiles."
-    );
-
-    console.log(
-        "A Subgraph MCP hit is discovery evidence only."
-    );
-
-    console.log(
-        "No returned product is attributed to an ERC until exact provider evidence passes the protocol-attribution gate."
-    );
-
-    console.log(
-        "No hit, no match, or unattributed hit is converted into incompatibility."
-    );
-
-
-    /*
-     * =========================================================
-     * REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE
-     * =========================================================
-     *
-     * Keyword discovery is intentionally broad.
-     *
-     * Only exact protocol-identity hits or exact deployments
-     * independently returned by at least two distinct
-     * profile-derived terms are prioritized for schema
-     * inspection.
-     *
-     * This is an operational cost/precision gate only.
-     */
-
-
-    const realGraphDiscoveryTriage =
-        new ScientificTheGraphDiscoveryTriageEngine()
-            .triage({
-
-                requests:
-                    graphDiscoveryExpansion.requests,
-
-                terms:
-                    graphDiscoveryExpansion.terms,
-
-                discovery:
-                    realProfileGraphDiscovery
-
-            });
-
-
-    requireNoErrors(
-        "Real The Graph discovery candidate triage",
-        realGraphDiscoveryTriage.errors
-    );
-
-
-    const triageSerialized =
-        JSON.stringify(
-            realGraphDiscoveryTriage
-        );
-
-
-    if (
-        triageSerialized.includes(
-            "scientificPolarity"
-        ) ||
-        triageSerialized.includes(
-            "compatibilityPolarity"
-        ) ||
-        triageSerialized.includes(
-            '"SUPPORT"'
-        ) ||
-        triageSerialized.includes(
-            '"CHALLENGE"'
-        ) ||
-        triageSerialized.includes(
-            '"FULL"'
-        ) ||
-        triageSerialized.includes(
-            '"PARTIAL"'
-        )
-    ) {
-
-        throw new Error(
-            "The Graph discovery triage manufactured scientific polarity."
-        );
-
-    }
-
-
-    console.log("");
-    console.log(
-        "============================================================"
-    );
-
-    console.log(
-        "REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE"
-    );
-
-    console.log(
-        "============================================================"
-    );
-
-
-    console.log(
-        `raw deployment candidates: ${realGraphDiscoveryTriage.candidates.length}`
-    );
-
-    console.log(
-        `prioritized for inspection:${realGraphDiscoveryTriage.prioritized.length}`
-    );
-
-    console.log(
-        `deferred low-specificity:  ${realGraphDiscoveryTriage.deferred.length}`
-    );
-
-
-    for (
-        const profile
-        of graphDiscoveryProfiles
-    ) {
-
-        const candidates =
-            realGraphDiscoveryTriage.candidates
-                .filter(
-                    candidate =>
-                        candidate.protocolId ===
-                        profile.protocolId
-                );
-
-
-        const prioritized =
-            candidates
-                .filter(
-                    candidate =>
-                        candidate.status ===
-                        "PRIORITIZED_FOR_INSPECTION"
-                )
-                .sort(
-                    (
-                        a,
-                        b
-                    ) =>
-                        (
-                            b.derivedTermCount -
-                            a.derivedTermCount
-                        ) ||
-                        (
-                            b.totalDistinctTermCount -
-                            a.totalDistinctTermCount
-                        ) ||
-                        a.subgraphId.localeCompare(
-                            b.subgraphId
-                        )
-                );
-
-
-        const deferred =
-            candidates.filter(
-                candidate =>
-                    candidate.status ===
-                    "DEFERRED_LOW_SPECIFICITY"
-            );
-
-
-        console.log("");
-        console.log(
-            profile.protocolId
-        );
-
-        console.log(
-            `  candidates:  ${candidates.length}`
-        );
-
-        console.log(
-            `  prioritized: ${prioritized.length}`
-        );
-
-        console.log(
-            `  deferred:    ${deferred.length}`
-        );
-
-
-        for (
-            const candidate
-            of prioritized.slice(
-                0,
-                5
-            )
-        ) {
-
-            console.log(
-                `  PRIORITY ${candidate.displayNames.join(" | ")}`
-            );
-
-            console.log(
-                `    subgraph: ${candidate.subgraphId}`
-            );
-
-            console.log(
-                `    deployment: ${candidate.ipfsHash}`
-            );
-
-            console.log(
-                `    matched terms: ${candidate.matchedTerms.join(", ")}`
-            );
-
-            console.log(
-                `    derived terms: ${candidate.derivedTermCount}`
-            );
-
-            console.log(
-                `    identity match: ${candidate.identityMatch}`
-            );
-
-            console.log(
-                `    basis: ${candidate.triageBasis}`
-            );
-
-        }
-
-
-        if (
-            prioritized.length >
-            5
-        ) {
-
-            console.log(
-                `  ... ${prioritized.length - 5} additional prioritized candidates`
-            );
-
-        }
-
-    }
-
-
-    console.log("");
-    console.log(
-        "TRIAGE INTERPRETATION"
-    );
-
-    console.log(
-        "---------------------"
-    );
-
-    console.log(
-        "Single generic keyword hits remain preserved but are not promoted to expensive schema inspection."
-    );
-
-    console.log(
-        "Priority means only that a candidate has stronger discovery provenance."
-    );
-
-    console.log(
-        "Protocol attribution still requires exact schema evidence through the existing attribution gate."
-    );
-
-
-    /*
-     * =========================================================
-     * REAL THE GRAPH BOUNDED INSPECTION AND ATTRIBUTION
-     * =========================================================
-     *
-     * The planner consumes the exact LIVE discovery and triage
-     * results from this same run.
-     *
-     * Selected deployments are inspected using the exact IPFS
-     * deployment identity observed by Subgraph MCP.
-     *
-     * Each successfully inspected schema is then evaluated by
-     * the existing explicit protocol-attribution gate.
-     *
-     * ATTRIBUTED is source association only.
-     * UNATTRIBUTED is not incompatibility and not a claim that
-     * no Graph product for the protocol exists elsewhere.
-     */
-
-
-    const realGraphInspectionPlan =
-        new ScientificTheGraphInspectionPlanEngine()
-            .plan(
-                {
-
-                    requests:
-                        graphDiscoveryExpansion.requests,
-
-                    terms:
-                        graphDiscoveryExpansion.terms,
-
-                    discovery:
-                        realProfileGraphDiscovery,
-
-                    triage:
-                        realGraphDiscoveryTriage
-
-                },
-                2
-            );
-
-
-    requireNoErrors(
-        "Real The Graph bounded inspection plan",
-        realGraphInspectionPlan.errors
-    );
-
-
-    if (
-        realGraphInspectionPlan.items.some(
-            item =>
-                item.providerMode !==
-                "LIVE"
-        )
-    ) {
-
-        throw new Error(
-            "Real Graph inspection plan contains a non-LIVE item."
-        );
-
-    }
-
-
-    for (
-        const item
-        of realGraphInspectionPlan.items
-    ) {
-
-        const profile =
-            graphDiscoveryProfiles.find(
-                candidate =>
-                    candidate.profileId ===
-                        item.profileId
-            );
-
-
-        if (
-            profile ===
-            undefined
-        ) {
-
-            throw new Error(
-                `Graph inspection plan references unavailable profile ${item.profileId}.`
-            );
-
-        }
-
-
-        if (
-            profile.protocolId !==
-                item.protocolId ||
-            profile.sourceId !==
-                item.sourceId ||
-            profile.sourceRevision !==
-                item.sourceRevision
-        ) {
-
-            throw new Error(
-                `Graph inspection plan item ${item.planItemId} does not preserve exact source-scoped profile identity.`
-            );
-
-        }
-
-    }
-
-
-    console.log("");
-    console.log(
-        "============================================================"
-    );
-
-    console.log(
-        "REAL THE GRAPH BOUNDED INSPECTION PLAN"
-    );
-
-    console.log(
-        "============================================================"
-    );
-
-
-    console.log(
-        `planned exact deployments: ${realGraphInspectionPlan.items.length}`
-    );
-
-
-    for (
-        const profile
-        of graphDiscoveryProfiles
-    ) {
-
-        const items =
-            realGraphInspectionPlan.items
-                .filter(
-                    item =>
-                        item.protocolId ===
-                        profile.protocolId
-                );
-
-
-        console.log("");
-        console.log(
-            profile.protocolId
-        );
-
-        console.log(
-            `  planned: ${items.length}`
-        );
-
-
-        for (
-            const item
-            of items
-        ) {
-
-            console.log(
-                `  PLAN term=${item.supportingTerm} total=${item.providerSearchTotal} rank=${item.providerRank}`
-            );
-
-            console.log(
-                `    selection:  ${item.selectionBasis}`
-            );
-
-            console.log(
-                `    subgraph:   ${item.subgraphId}`
-            );
-
-            console.log(
-                `    deployment: ${item.ipfsHash}`
-            );
-
-        }
-
-    }
-
-
-    const graphInspectionClient =
-        new ScientificTheGraphSubgraphMcpLiveClient(
-            profileDiscoveryApiKey
-        );
-
-
-    const successfulGraphInspections:
-        Array<{
-
-            planItemId:
-                string;
-
-            inspection:
-                ScientificTheGraphSubgraphInspection;
-
-        }> =
-        [];
-
-
-    const graphInspectionFailures:
-        Array<{
-
-            planItemId:
-                string;
-
-            protocolId:
-                string;
-
-            subgraphId:
-                string;
-
-            ipfsHash:
-                string;
-
-            errors:
-                string[];
-
-        }> =
-        [];
-
-
-    try {
-
-        const graphInspectionEngine =
-            new ScientificTheGraphSubgraphInspectionEngine(
-                graphInspectionClient,
-                "LIVE"
-            );
-
-
-        /*
-         * Inspect one selected deployment at a time.
-         *
-         * A provider/schema failure for one candidate remains an
-         * explicit unavailable-evidence result and does not turn
-         * every other candidate into a failed batch.
-         */
-        for (
-            const item
-            of realGraphInspectionPlan.items
-        ) {
-
-            const inspectionResult =
-                await graphInspectionEngine.inspect([
-                    {
-
-                        requestId:
-                            item.planItemId,
-
-                        subgraphId:
-                            item.subgraphId,
-
-                        ipfsHash:
-                            item.ipfsHash
-
-                    }
-                ]);
-
-
-            if (
-                inspectionResult.errors.length >
-                    0 ||
-                inspectionResult.inspections.length !==
-                    1
-            ) {
-
-                graphInspectionFailures.push({
-
-                    planItemId:
-                        item.planItemId,
-
-                    protocolId:
-                        item.protocolId,
-
-                    subgraphId:
-                        item.subgraphId,
-
-                    ipfsHash:
-                        item.ipfsHash,
-
-                    errors:
-                        inspectionResult.errors.length >
-                            0
-                                ? inspectionResult.errors
-                                : [
-                                    `Expected exactly one inspection, found ${inspectionResult.inspections.length}.`
-                                ]
-
-                });
-
-
-                continue;
-
-            }
-
-
-            const inspection =
-                inspectionResult.inspections[0];
-
-
-            if (
-                inspection.providerMode !==
-                    "LIVE" ||
-                inspection.subgraphId !==
-                    item.subgraphId ||
-                inspection.ipfsHash !==
-                    item.ipfsHash ||
-                inspection.requestId !==
-                    item.planItemId
-            ) {
-
-                throw new Error(
-                    `LIVE inspection provenance mismatch for plan item ${item.planItemId}.`
-                );
-
-            }
-
-
-            successfulGraphInspections.push({
-
-                planItemId:
-                    item.planItemId,
-
-                inspection
-
-            });
-
-        }
-
-    }
-    finally {
-
-        await graphInspectionClient.close();
-
-    }
-
-
-    if (
-        realGraphInspectionPlan.items.length >
-            0 &&
-        successfulGraphInspections.length ===
-            0
-    ) {
-
-        throw new Error(
-            "No planned The Graph deployment could be inspected LIVE."
-        );
-
-    }
-
-
-    const planItemById =
-        new Map(
-            realGraphInspectionPlan.items.map(
-                item => [
-                    item.planItemId,
-                    item
-                ]
-            )
-        );
-
-
-    const graphAttributionInputs =
-        successfulGraphInspections.map(
-            successful => {
-
-                const planItem =
-                    planItemById.get(
-                        successful.planItemId
-                    );
-
-
-                if (
-                    planItem ===
-                    undefined
-                ) {
-
-                    throw new Error(
-                        `Successful Graph inspection ${successful.planItemId} has no plan item.`
-                    );
-
-                }
-
-
-                const profile =
-                    graphDiscoveryProfiles.find(
-                        candidate =>
-                            candidate.profileId ===
-                                planItem.profileId
-                    );
-
-
-                if (
-                    profile ===
-                    undefined
-                ) {
-
-                    throw new Error(
-                        `Successful Graph inspection ${successful.planItemId} has no exact protocol profile.`
-                    );
-
-                }
-
-
-                if (
-                    profile.protocolId !==
-                        planItem.protocolId ||
-                    profile.sourceId !==
-                        planItem.sourceId ||
-                    profile.sourceRevision !==
-                        planItem.sourceRevision
-                ) {
-
-                    throw new Error(
-                        `Successful Graph inspection ${successful.planItemId} lost source-scoped profile identity.`
-                    );
-
-                }
-
-
-                return {
-
-                    profile,
-
-                    inspection:
-                        successful.inspection
-
-                };
-
-            }
-        );
-
-
-    const realGraphProtocolAttribution =
-        new ScientificTheGraphProtocolAttributionEngine()
-            .assess(
-                graphAttributionInputs
-            );
-
-
-    requireNoErrors(
-        "Real bounded The Graph protocol attribution",
-        realGraphProtocolAttribution.errors
-    );
-
-
-    if (
-        realGraphProtocolAttribution.assessments.length !==
-        successfulGraphInspections.length
-    ) {
-
-        throw new Error(
-            `Expected ${successfulGraphInspections.length} Graph attribution assessments, found ${realGraphProtocolAttribution.assessments.length}.`
-        );
-
-    }
-
-
-    /*
-     * =========================================================
-     * FINAL V2 SELECTIVE PROTOCOL-ATTRIBUTION DECISION
-     * =========================================================
-     *
-     * Project each exact LIVE schema attribution through the
-     * production POSITIVE / NEGATIVE / ABSTAIN decision layer.
-     *
-     * These decisions remain scoped to protocol attribution in
-     * the exact inspected schema. They do not manufacture
-     * compatibility, composition or scientific polarity.
-     */
-    const realGraphProtocolAttributionDecisions =
-        realGraphProtocolAttribution.assessments.map(
-            assessment =>
-                projectScientificTheGraphProtocolAttributionDecision(
-                    assessment
-                )
-        );
-
-
-    if (
-        realGraphProtocolAttributionDecisions.length !==
-        realGraphProtocolAttribution.assessments.length
-    ) {
-
-        throw new Error(
-            "Selective Graph attribution decision count does not match LIVE attribution assessment count."
-        );
-
-    }
-
-
-    for (
-        let index =
-            0;
-        index <
-            realGraphProtocolAttribution.assessments.length;
-        index++
-    ) {
-
-        const assessment =
-            realGraphProtocolAttribution.assessments[index];
-
-        const decision =
-            realGraphProtocolAttributionDecisions[index];
-
-
-        if (
-            decision.assessmentId !==
-                assessment.assessmentId ||
-            decision.protocolId !==
-                assessment.protocolId ||
-            decision.profileId !==
-                assessment.profileId ||
-            decision.normativeSourceId !==
-                assessment.normativeSourceId ||
-            decision.normativeSourceRevision !==
-                assessment.normativeSourceRevision ||
-            decision.subgraphId !==
-                assessment.subgraphId ||
-            decision.ipfsHash !==
-                assessment.ipfsHash ||
-            decision.providerMode !==
-                assessment.providerMode ||
-            decision.schemaObservationId !==
-                assessment.schemaObservationId ||
-            decision.schemaHash !==
-                assessment.schemaHash
-        ) {
-
-            throw new Error(
-                `Selective attribution decision lost exact LIVE provenance for assessment ${assessment.assessmentId}.`
-            );
-
-        }
-
-
-        if (
-            decision.decisionBasis ===
-            "INCONSISTENT_ATTRIBUTION_ASSESSMENT"
-        ) {
-
-            throw new Error(
-                `LIVE attribution assessment ${assessment.assessmentId} is internally inconsistent under the production decision projector.`
-            );
-
-        }
-
-
-        if (
-            assessment.status ===
-                "ATTRIBUTED" &&
-            decision.decision !==
-                "POSITIVE"
-        ) {
-
-            throw new Error(
-                `Accepted LIVE attribution ${assessment.assessmentId} did not project to POSITIVE.`
-            );
-
-        }
-
-    }
-
-
-    const positiveGraphDecisions =
-        realGraphProtocolAttributionDecisions.filter(
-            decision =>
-                decision.decision ===
-                "POSITIVE"
-        );
-
-
-    const negativeGraphDecisions =
-        realGraphProtocolAttributionDecisions.filter(
-            decision =>
-                decision.decision ===
-                "NEGATIVE"
-        );
-
-
-    const abstainedGraphDecisions =
-        realGraphProtocolAttributionDecisions.filter(
-            decision =>
-                decision.decision ===
-                "ABSTAIN"
-        );
-
-
-    const graphDecisionSerialization =
-        JSON.stringify(
-            realGraphProtocolAttributionDecisions
-        );
-
-
-    if (
-        graphDecisionSerialization.includes(
-            "scientificPolarity"
-        ) ||
-        graphDecisionSerialization.includes(
-            "compatibilityPolarity"
-        ) ||
-        graphDecisionSerialization.includes(
-            '"SUPPORT"'
-        ) ||
-        graphDecisionSerialization.includes(
-            '"CHALLENGE"'
-        ) ||
-        graphDecisionSerialization.includes(
-            '"FULL"'
-        ) ||
-        graphDecisionSerialization.includes(
-            '"PARTIAL"'
-        )
-    ) {
-
-        throw new Error(
-            "Selective LIVE Graph attribution decisions manufactured scientific polarity."
-        );
-
-    }
-
-
-    console.log("");
-    console.log(
-        "============================================================"
-    );
-
-    console.log(
-        "REAL THE GRAPH SELECTIVE ATTRIBUTION DECISIONS"
-    );
-
-    console.log(
-        "============================================================"
-    );
-
-    console.log(
-        `LIVE assessments: ${realGraphProtocolAttributionDecisions.length}`
-    );
-
-    console.log(
-        `POSITIVE:         ${positiveGraphDecisions.length}`
-    );
-
-    console.log(
-        `NEGATIVE:         ${negativeGraphDecisions.length}`
-    );
-
-    console.log(
-        `ABSTAIN:          ${abstainedGraphDecisions.length}`
-    );
-
-
-    for (
-        const decision
-        of realGraphProtocolAttributionDecisions
-    ) {
-
-        console.log(
-            `${decision.protocolId} ${decision.decision} ${decision.decisionBasis}`
-        );
-
-        console.log(
-            `  subgraph:   ${decision.subgraphId}`
-        );
-
-        console.log(
-            `  deployment: ${decision.ipfsHash}`
-        );
-
-    }
-
-    const fullInspectionSerialization =
-        JSON.stringify(
-            successfulGraphInspections
-        );
-
-
-    if (
-        fullInspectionSerialization.includes(
-            profileDiscoveryApiKey
-        )
-    ) {
-
-        throw new Error(
-            "API key leaked into bounded Graph inspection evidence."
-        );
-
-    }
-
-
-    const operationalAttributionProjection =
-        {
-
-            plan:
-                realGraphInspectionPlan.items.map(
-                    item => ({
-                        protocolId:
-                            item.protocolId,
-                        subgraphId:
-                            item.subgraphId,
-                        ipfsHash:
-                            item.ipfsHash,
-                        selectionBasis:
-                            item.selectionBasis
-                    })
-                ),
-
-            assessments:
-                realGraphProtocolAttribution.assessments.map(
-                    assessment => ({
-                        protocolId:
-                            assessment.protocolId,
-                        subgraphId:
-                            assessment.subgraphId,
-                        ipfsHash:
-                            assessment.ipfsHash,
-                        status:
-                            assessment.status,
-                        attributionBasis:
-                            assessment.attributionBasis
-                    })
-                ),
-
-            failures:
-                graphInspectionFailures
-
-        };
-
-
-    const operationalAttributionSerialization =
-        JSON.stringify(
-            operationalAttributionProjection
-        );
-
-
-    if (
-        operationalAttributionSerialization.includes(
-            "scientificPolarity"
-        ) ||
-        operationalAttributionSerialization.includes(
-            "compatibilityPolarity"
-        ) ||
-        operationalAttributionSerialization.includes(
-            '"SUPPORT"'
-        ) ||
-        operationalAttributionSerialization.includes(
-            '"CHALLENGE"'
-        ) ||
-        operationalAttributionSerialization.includes(
-            '"FULL"'
-        ) ||
-        operationalAttributionSerialization.includes(
-            '"PARTIAL"'
-        )
-    ) {
-
-        throw new Error(
-            "Bounded Graph inspection or attribution manufactured scientific polarity."
-        );
-
-    }
-
-
-    const attributedAssessments =
-        realGraphProtocolAttribution.assessments
-            .filter(
-                assessment =>
-                    assessment.status ===
-                    "ATTRIBUTED"
-            );
-
-
-    const unattributedAssessments =
-        realGraphProtocolAttribution.assessments
-            .filter(
-                assessment =>
-                    assessment.status ===
-                    "UNATTRIBUTED"
-            );
-
-
-    console.log("");
-    console.log(
-        "============================================================"
-    );
-
-    console.log(
-        "REAL THE GRAPH BOUNDED INSPECTION AND ATTRIBUTION"
-    );
-
-    console.log(
-        "============================================================"
-    );
-
-
-    console.log(
-        `planned deployments:      ${realGraphInspectionPlan.items.length}`
-    );
-
-    console.log(
-        `inspection succeeded:     ${successfulGraphInspections.length}`
-    );
-
-    console.log(
-        `inspection failed:        ${graphInspectionFailures.length}`
-    );
-
-    console.log(
-        `explicitly attributed:    ${attributedAssessments.length}`
-    );
-
-    console.log(
-        `explicitly unattributed:  ${unattributedAssessments.length}`
-    );
-
-
-    for (
-        const planItem
-        of realGraphInspectionPlan.items
-    ) {
-
-        const failure =
-            graphInspectionFailures.find(
-                candidate =>
-                    candidate.planItemId ===
-                    planItem.planItemId
-            );
-
-
-        if (
-            failure !==
-            undefined
-        ) {
-
-            console.log("");
-            console.log(
-                `${planItem.protocolId}: INSPECTION_FAILED`
-            );
-
-            console.log(
-                `  term:       ${planItem.supportingTerm}`
-            );
-
-            console.log(
-                `  subgraph:   ${planItem.subgraphId}`
-            );
-
-            console.log(
-                `  deployment: ${planItem.ipfsHash}`
-            );
-
-            console.log(
-                `  errors:     ${failure.errors.join(" | ")}`
-            );
-
-
-            continue;
-
-        }
-
-
-        const assessment =
-            realGraphProtocolAttribution.assessments
-                .find(
-                    candidate =>
-                        candidate.protocolId ===
-                            planItem.protocolId &&
-                        candidate.profileId ===
-                            planItem.profileId &&
-                        candidate.subgraphId ===
-                            planItem.subgraphId &&
-                        candidate.ipfsHash ===
-                            planItem.ipfsHash
-                );
-
-
-        if (
-            assessment ===
-            undefined
-        ) {
-
-            throw new Error(
-                `Missing protocol attribution assessment for successful plan item ${planItem.planItemId}.`
-            );
-
-        }
-
-
-        const successfulInspection =
-            successfulGraphInspections.find(
-                candidate =>
-                    candidate.planItemId ===
-                    planItem.planItemId
-            );
-
-
-        if (
-            successfulInspection ===
-            undefined
-        ) {
-
-            throw new Error(
-                `Missing successful inspection for assessment ${assessment.assessmentId}.`
-            );
-
-        }
-
-
-        console.log("");
-        console.log(
-            `${planItem.protocolId}: ${assessment.status}`
-        );
-
-        console.log(
-            `  term:       ${planItem.supportingTerm}`
-        );
-
-        console.log(
-            `  term total: ${planItem.providerSearchTotal}`
-        );
-
-        console.log(
-            `  rank:       ${planItem.providerRank}`
-        );
-
-        console.log(
-            `  subgraph:   ${planItem.subgraphId}`
-        );
-
-        console.log(
-            `  deployment: ${planItem.ipfsHash}`
-        );
-
-        console.log(
-            `  schema:     ${assessment.schemaHash}`
-        );
-
-        console.log(
-            `  30d queries:${successfulInspection.inspection.queryActivityObservation.totalQueryCount}`
-        );
-
-        console.log(
-            `  identifiers checked: ${assessment.identifiersChecked.join(", ")}`
-        );
-
-        console.log(
-            `  matches: ${assessment.matchedIdentifiers.length > 0
-                ? assessment.matchedIdentifiers.map(match => `${match.identifier}(${match.occurrenceCount})`).join(", ")
-                : "NONE"}`
-        );
-
-        console.log(
-            `  basis: ${assessment.attributionBasis}`
-        );
-
-    }
-
-
-    console.log("");
-    console.log(
-        "BOUNDED GRAPH ATTRIBUTION INTERPRETATION"
-    );
-
-    console.log(
-        "----------------------------------------"
-    );
-
-    console.log(
-        "ATTRIBUTED means the exact inspected deployment schema explicitly identifies the target ERC."
-    );
-
-    console.log(
-        "UNATTRIBUTED means this exact selected schema did not contain an accepted explicit protocol identifier."
-    );
-
-    console.log(
-        "UNATTRIBUTED does not mean the ERC is incompatible, unsupported by The Graph globally, or absent from every possible Graph product."
-    );
-
-    console.log(
-        "INSPECTION_FAILED means provider evidence was unavailable for that selected deployment and remains unresolved."
-    );
-
-    console.log(
-        "No inspection or attribution result modifies composition compatibility, solver state or Harmony."
-    );
-
-
     const documentaryCandidates =
         new ScientificDocumentaryCompositionCandidateEngine()
             .discover({
@@ -3029,6 +1431,51 @@ async function main(): Promise<void> {
     );
 
 
+    /*
+     * Reconnect existing real-source structural discovery to the
+     * candidate evaluation graph. Shared ERC foundations (e.g. 721)
+     * open UNEVALUATED hypotheses only, never compatibility SUPPORT.
+     */
+    const structuralDiscovery =
+        new CrossProtocolCompositionEngine()
+            .discover({
+                protocolConceptResults: [],
+                protocolRelationEvidenceResults: [],
+                structuralProtocolRelationEvidenceResults:
+                    sources.map(source => source.structuralRelations)
+            });
+
+    requireNoErrors(
+        "Real cross-source structural discovery",
+        structuralDiscovery.errors
+    );
+
+    const structuralFoundation =
+        new ScientificStructuralFoundationCompositionCandidateEngine()
+            .normalize(structuralDiscovery);
+
+    requireNoErrors(
+        "Real structural foundation candidate normalization",
+        structuralFoundation.errors
+    );
+
+    // Restrict the research to participants established in this run.
+    // This filters scope, not scientific evidence or outcomes.
+    const evaluatedParticipantIds =
+        new Set(profiles.map(profile => profile.protocolId));
+
+    const selectedStructuralCandidates =
+        structuralFoundation.candidates.filter(
+            candidate =>
+                evaluatedParticipantIds.has(candidate.participantAId) &&
+                evaluatedParticipantIds.has(candidate.participantBId)
+        );
+
+    console.log(
+        "Real evidence-backed structural candidates: " +
+        selectedStructuralCandidates.length
+    );
+
     const compositionCandidateSet =
         new ScientificCompositionCandidateSetEngine()
             .build({
@@ -3044,7 +1491,10 @@ async function main(): Promise<void> {
                     complementarity.matches,
 
                 documentaryCandidates:
-                    documentaryCandidates.candidates
+                    documentaryCandidates.candidates,
+
+                structuralFoundationCandidates:
+                    selectedStructuralCandidates
 
             });
 
@@ -5232,6 +3682,1757 @@ async function main(): Promise<void> {
 
     const scientificDecisionTraceWithLineage =
         realDecisionTraceLineageBinding.trace;
+
+
+    /*
+     * Independently usable scientific research dossier.
+     *
+     * The entire real-source N-protocol scientific core above has run:
+     * candidate boundaries -> solver -> global evidence -> Harmony ->
+     * composition value -> trace -> provenance. No Graph credentials
+     * or simulated observations were injected to reach this stage.
+     */
+    const dossierPath = process.env.OECL_COMPOSITION_REPORT_PATH?.trim();
+    if (dossierPath) {
+        const { writeFile, mkdir } = await import("node:fs/promises");
+        const { resolve, dirname } = await import("node:path");
+
+        const findings = compositionValue.assessments.flatMap(
+            assessment => assessment.findings
+        );
+        const report = {
+            schemaVersion: "OECL_COMPOSITION_RESEARCH_DOSSIER_V1",
+            generatedAt: new Date().toISOString(),
+            researchMode: "PINNED_GITHUB_SCIENTIFIC_COMPOSITION_NO_GLOBAL_EXPERIMENT",
+            requestedErcIds: requestedErcIds.length > 0
+                ? requestedErcIds
+                : sourceSpecs.flatMap(source => source.targetProtocolIds),
+            evaluatedErcIds: profiles.map(profile => profile.protocolId),
+            missingProtocolIdentities: [...new Set(missingProtocolIds)],
+            objective,
+            sourceProvenance: sources.map(source => ({
+                sourceId: source.sourceId,
+                repository: source.spec.owner + "/" + source.spec.repo,
+                expectedRevision: source.spec.expectedRevision,
+                observedRevision: source.sourceRevision ?? null,
+                requestedProtocolIds: source.spec.targetProtocolIds
+            })),
+            participantContributions: profiles.map(profile => ({
+                protocolId: profile.protocolId,
+                sourceId: profile.sourceId,
+                sourceRevision: profile.sourceRevision ?? null,
+                contributions: profile.contributions,
+                needs: profile.needs,
+                boundaries: profile.boundaries
+            })),
+            structuralDiscovery: {
+                sourceCandidates: structuralDiscovery.candidates,
+                normalizedCandidates: selectedStructuralCandidates,
+                kind: "SHARED_PROTOCOL_FOUNDATION_UNEVALUATED"
+            },
+            compatibility: {
+                assessmentScope: "CANDIDATE_BOUNDARIES_AND_GLOBAL_HARMONY",
+                candidateEvaluations: candidateEvaluationGraph.graph?.edges ?? [],
+                globalHarmony: compositionHarmony.assessments,
+                note: "Candidates and READY configurations do not establish globally verified compatibility."
+            },
+            compositionProperties: {
+                valueAssessments: compositionValue.assessments,
+                verifiedEmergentProperties: findings.filter(
+                    finding => finding.kind === "EMERGENT_PROPERTY"
+                ),
+                note: "Only existing science engines can emit findings. No properties are fabricated."
+            },
+            risksAndBoundaries: {
+                regions: compositionEnvelopes.envelopes.flatMap(
+                    envelope => envelope.boundaryRegions
+                ),
+                gaps: candidateEvidenceGaps.diagnostics
+            },
+            configurations: {
+                solutions: nProtocolCompositionSolutions.solutions,
+                globallySupportedSubsets: compositionHarmony.assessments.flatMap(
+                    assessment => assessment.supportedSubsets
+                )
+            },
+            evidence: {
+                provenanceCatalog: scientificDecisionTraceWithLineage.evidenceCatalog,
+                decisionTrace: scientificDecisionTraceWithLineage,
+                lineage: realEvidenceLineage,
+                globalObservationCount: 0,
+                globalExecutionStatus: "NOT_PERFORMED_IN_DOSSIER_MODE"
+            },
+            scientificFinalReportStatus: "NOT_GENERATED_NO_JOINT_COMPOSITION_EXECUTION",
+            restrictions: [
+                "Only explicitly pinned source revisions in this runner were analyzed.",
+                "No Ethereum Magicians posts were consulted.",
+                "No joint multi-protocol runtime execution or observations were supplied.",
+                "Live The Graph discovery was not executed in this mode.",
+                "No globally supported subset or verified emergent property is inferred from candidate readiness.",
+                "No uncalibrated compatibility percentage is reported."
+            ],
+            decisionAuthority: "UPSTREAM_SCIENTIFIC_ENGINES_ONLY"
+        };
+        const destination = resolve(dossierPath);
+        await mkdir(dirname(destination), { recursive: true });
+        await writeFile(destination, JSON.stringify(report, null, 2) + "\n", "utf8");
+        console.log("OECL scientific composition dossier: " + destination);
+        console.log(
+            "Harmony: " +
+            compositionHarmony.assessments.map(a => a.harmonyStatus).join(", ")
+        );
+        console.log(
+            "Verified emergent properties: " +
+            report.compositionProperties.verifiedEmergentProperties.length
+        );
+        console.log("Global experiment: NOT PERFORMED");
+        return;
+    }
+
+    /* Optional live The Graph research follows only after the core. */
+
+    const graphDiscoveryProfiles =
+        profiles
+            .filter(
+                profile =>
+                    profile.protocolId !==
+                    "ERC-8004"
+            );
+
+
+    if (
+        graphDiscoveryProfiles.length !==
+        7
+    ) {
+
+        throw new Error(
+            `Expected 7 real non-ERC8004 profiles for Graph discovery, found ${graphDiscoveryProfiles.length}.`
+        );
+
+    }
+
+
+    const graphDiscoveryBasePlan =
+        new ScientificTheGraphProductDiscoveryEngine()
+            .plan(
+                graphDiscoveryProfiles
+            );
+
+
+    requireNoErrors(
+        "Real profile-derived Graph discovery base plan",
+        graphDiscoveryBasePlan.errors
+    );
+
+
+    const graphDiscoveryExpansion =
+        new ScientificTheGraphProfileDiscoveryEngine()
+            .expand(
+                graphDiscoveryProfiles,
+                graphDiscoveryBasePlan.requests,
+                4
+            );
+
+
+    requireNoErrors(
+        "Real profile-derived Graph discovery expansion",
+        graphDiscoveryExpansion.errors
+    );
+
+
+    if (
+        graphDiscoveryExpansion.requests.length !==
+        graphDiscoveryProfiles.length
+    ) {
+
+        throw new Error(
+            `Expected ${graphDiscoveryProfiles.length} expanded Graph discovery requests, found ${graphDiscoveryExpansion.requests.length}.`
+        );
+
+    }
+
+
+    const profileDiscoveryApiKey =
+        process.env.THE_GRAPH_API_KEY
+            ?.trim();
+
+
+    if (
+        profileDiscoveryApiKey ===
+            undefined ||
+        profileDiscoveryApiKey.length ===
+            0
+    ) {
+
+        throw new Error(
+            "THE_GRAPH_API_KEY is required for real profile-derived Graph discovery."
+        );
+
+    }
+
+
+    const profileDiscoveryClient =
+        new ScientificTheGraphSubgraphMcpLiveClient(
+            profileDiscoveryApiKey
+        );
+
+
+    let realProfileGraphDiscovery;
+
+
+    try {
+
+        realProfileGraphDiscovery =
+            await new ScientificTheGraphSubgraphMcpKeywordProvider(
+                profileDiscoveryClient,
+                "LIVE"
+            )
+                .discover(
+                    graphDiscoveryExpansion.requests
+                );
+
+    }
+    finally {
+
+        await profileDiscoveryClient.close();
+
+    }
+
+
+    requireNoErrors(
+        "Real profile-derived Subgraph MCP discovery",
+        realProfileGraphDiscovery.errors
+    );
+
+
+    if (
+        realProfileGraphDiscovery.searches.some(
+            search =>
+                search.providerMode !==
+                "LIVE"
+        )
+    ) {
+
+        throw new Error(
+            "Real profile-derived Graph discovery contains non-LIVE observations."
+        );
+
+    }
+
+
+    const expectedSearchCount =
+        graphDiscoveryExpansion.requests
+            .reduce(
+                (
+                    total,
+                    request
+                ) =>
+                    total +
+                    request.searchTerms.length,
+                0
+            );
+
+
+    if (
+        realProfileGraphDiscovery.searches.length !==
+        expectedSearchCount
+    ) {
+
+        throw new Error(
+            `Expected ${expectedSearchCount} LIVE MCP searches, found ${realProfileGraphDiscovery.searches.length}.`
+        );
+
+    }
+
+
+    const discoverySerialized =
+        JSON.stringify(
+            {
+                expansion:
+                    graphDiscoveryExpansion,
+                discovery:
+                    realProfileGraphDiscovery
+            }
+        );
+
+
+    if (
+        discoverySerialized.includes(
+            profileDiscoveryApiKey
+        )
+    ) {
+
+        throw new Error(
+            "API key leaked into real profile-derived Graph discovery output."
+        );
+
+    }
+
+
+    if (
+        discoverySerialized.includes(
+            "scientificPolarity"
+        ) ||
+        discoverySerialized.includes(
+            "compatibilityPolarity"
+        ) ||
+        discoverySerialized.includes(
+            '"SUPPORT"'
+        ) ||
+        discoverySerialized.includes(
+            '"CHALLENGE"'
+        ) ||
+        discoverySerialized.includes(
+            '"FULL"'
+        ) ||
+        discoverySerialized.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "Profile-derived Graph discovery manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+    console.log(
+        "REAL PROFILE-DERIVED THE GRAPH DISCOVERY"
+    );
+    console.log(
+        "============================================================"
+    );
+
+
+    let rawProfileDiscoveryHits =
+        0;
+
+    const globallyDiscoveredSubgraphIds =
+        new Set<string>();
+
+
+    for (
+        const profile
+        of graphDiscoveryProfiles
+    ) {
+
+        const request =
+            graphDiscoveryExpansion.requests
+                .find(
+                    candidate =>
+                        candidate.profileId ===
+                        profile.profileId
+                );
+
+
+        if (
+            request ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Missing expanded Graph discovery request for real profile ${profile.protocolId}.`
+            );
+
+        }
+
+
+        const searches =
+            realProfileGraphDiscovery.searches
+                .filter(
+                    search =>
+                        search.requestId ===
+                        request.requestId
+                )
+                .sort(
+                    (
+                        a,
+                        b
+                    ) =>
+                        a.searchTerm.localeCompare(
+                            b.searchTerm
+                        )
+                );
+
+
+        const protocolSubgraphIds =
+            new Set<string>();
+
+
+        console.log("");
+        console.log(
+            profile.protocolId
+        );
+
+
+        console.log(
+            `  source:   ${profile.sourceId}`
+        );
+
+        console.log(
+            `  revision: ${profile.sourceRevision ?? "NO-REVISION"}`
+        );
+
+        console.log(
+            `  terms:    ${request.searchTerms.join(", ")}`
+        );
+
+
+        for (
+            const search
+            of searches
+        ) {
+
+            console.log(
+                `  SEARCH ${search.searchTerm}: returned=${search.returned} total=${search.total}`
+            );
+
+
+            rawProfileDiscoveryHits +=
+                search.hits.length;
+
+
+            for (
+                const hit
+                of search.hits
+            ) {
+
+                protocolSubgraphIds.add(
+                    hit.subgraphId
+                );
+
+                globallyDiscoveredSubgraphIds.add(
+                    hit.subgraphId
+                );
+
+            }
+
+
+            for (
+                const hit
+                of search.hits.slice(
+                    0,
+                    3
+                )
+            ) {
+
+                console.log(
+                    `    rank=${hit.providerRank} name=${hit.displayName}`
+                );
+
+                console.log(
+                    `    subgraph=${hit.subgraphId}`
+                );
+
+                console.log(
+                    `    deployment=${hit.ipfsHash}`
+                );
+
+            }
+
+
+            if (
+                search.hits.length >
+                3
+            ) {
+
+                console.log(
+                    `    ... ${search.hits.length - 3} additional hits`
+                );
+
+            }
+
+        }
+
+
+        console.log(
+            `  distinct discovered subgraphs: ${protocolSubgraphIds.size}`
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "REAL PROFILE-DERIVED DISCOVERY SUMMARY"
+    );
+    console.log(
+        "--------------------------------------"
+    );
+
+    console.log(
+        `real profiles searched:       ${graphDiscoveryProfiles.length}`
+    );
+
+    console.log(
+        `profile-derived terms:        ${graphDiscoveryExpansion.terms.length}`
+    );
+
+    console.log(
+        `LIVE MCP searches:            ${realProfileGraphDiscovery.searches.length}`
+    );
+
+    console.log(
+        `raw provider hits:            ${rawProfileDiscoveryHits}`
+    );
+
+    console.log(
+        `distinct discovered subgraphs:${globallyDiscoveredSubgraphIds.size}`
+    );
+
+
+    console.log("");
+    console.log(
+        "SCIENTIFIC INTERPRETATION"
+    );
+    console.log(
+        "-------------------------"
+    );
+
+    console.log(
+        "Search terms were derived from real GitHub-backed OECL protocol profiles."
+    );
+
+    console.log(
+        "A Subgraph MCP hit is discovery evidence only."
+    );
+
+    console.log(
+        "No returned product is attributed to an ERC until exact provider evidence passes the protocol-attribution gate."
+    );
+
+    console.log(
+        "No hit, no match, or unattributed hit is converted into incompatibility."
+    );
+
+
+    /*
+     * =========================================================
+     * REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE
+     * =========================================================
+     *
+     * Keyword discovery is intentionally broad.
+     *
+     * Only exact protocol-identity hits or exact deployments
+     * independently returned by at least two distinct
+     * profile-derived terms are prioritized for schema
+     * inspection.
+     *
+     * This is an operational cost/precision gate only.
+     */
+
+
+    const realGraphDiscoveryTriage =
+        new ScientificTheGraphDiscoveryTriageEngine()
+            .triage({
+
+                requests:
+                    graphDiscoveryExpansion.requests,
+
+                terms:
+                    graphDiscoveryExpansion.terms,
+
+                discovery:
+                    realProfileGraphDiscovery
+
+            });
+
+
+    requireNoErrors(
+        "Real The Graph discovery candidate triage",
+        realGraphDiscoveryTriage.errors
+    );
+
+
+    const triageSerialized =
+        JSON.stringify(
+            realGraphDiscoveryTriage
+        );
+
+
+    if (
+        triageSerialized.includes(
+            "scientificPolarity"
+        ) ||
+        triageSerialized.includes(
+            "compatibilityPolarity"
+        ) ||
+        triageSerialized.includes(
+            '"SUPPORT"'
+        ) ||
+        triageSerialized.includes(
+            '"CHALLENGE"'
+        ) ||
+        triageSerialized.includes(
+            '"FULL"'
+        ) ||
+        triageSerialized.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "The Graph discovery triage manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH DISCOVERY CANDIDATE TRIAGE"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `raw deployment candidates: ${realGraphDiscoveryTriage.candidates.length}`
+    );
+
+    console.log(
+        `prioritized for inspection:${realGraphDiscoveryTriage.prioritized.length}`
+    );
+
+    console.log(
+        `deferred low-specificity:  ${realGraphDiscoveryTriage.deferred.length}`
+    );
+
+
+    for (
+        const profile
+        of graphDiscoveryProfiles
+    ) {
+
+        const candidates =
+            realGraphDiscoveryTriage.candidates
+                .filter(
+                    candidate =>
+                        candidate.protocolId ===
+                        profile.protocolId
+                );
+
+
+        const prioritized =
+            candidates
+                .filter(
+                    candidate =>
+                        candidate.status ===
+                        "PRIORITIZED_FOR_INSPECTION"
+                )
+                .sort(
+                    (
+                        a,
+                        b
+                    ) =>
+                        (
+                            b.derivedTermCount -
+                            a.derivedTermCount
+                        ) ||
+                        (
+                            b.totalDistinctTermCount -
+                            a.totalDistinctTermCount
+                        ) ||
+                        a.subgraphId.localeCompare(
+                            b.subgraphId
+                        )
+                );
+
+
+        const deferred =
+            candidates.filter(
+                candidate =>
+                    candidate.status ===
+                    "DEFERRED_LOW_SPECIFICITY"
+            );
+
+
+        console.log("");
+        console.log(
+            profile.protocolId
+        );
+
+        console.log(
+            `  candidates:  ${candidates.length}`
+        );
+
+        console.log(
+            `  prioritized: ${prioritized.length}`
+        );
+
+        console.log(
+            `  deferred:    ${deferred.length}`
+        );
+
+
+        for (
+            const candidate
+            of prioritized.slice(
+                0,
+                5
+            )
+        ) {
+
+            console.log(
+                `  PRIORITY ${candidate.displayNames.join(" | ")}`
+            );
+
+            console.log(
+                `    subgraph: ${candidate.subgraphId}`
+            );
+
+            console.log(
+                `    deployment: ${candidate.ipfsHash}`
+            );
+
+            console.log(
+                `    matched terms: ${candidate.matchedTerms.join(", ")}`
+            );
+
+            console.log(
+                `    derived terms: ${candidate.derivedTermCount}`
+            );
+
+            console.log(
+                `    identity match: ${candidate.identityMatch}`
+            );
+
+            console.log(
+                `    basis: ${candidate.triageBasis}`
+            );
+
+        }
+
+
+        if (
+            prioritized.length >
+            5
+        ) {
+
+            console.log(
+                `  ... ${prioritized.length - 5} additional prioritized candidates`
+            );
+
+        }
+
+    }
+
+
+    console.log("");
+    console.log(
+        "TRIAGE INTERPRETATION"
+    );
+
+    console.log(
+        "---------------------"
+    );
+
+    console.log(
+        "Single generic keyword hits remain preserved but are not promoted to expensive schema inspection."
+    );
+
+    console.log(
+        "Priority means only that a candidate has stronger discovery provenance."
+    );
+
+    console.log(
+        "Protocol attribution still requires exact schema evidence through the existing attribution gate."
+    );
+
+
+    /*
+     * =========================================================
+     * REAL THE GRAPH BOUNDED INSPECTION AND ATTRIBUTION
+     * =========================================================
+     *
+     * The planner consumes the exact LIVE discovery and triage
+     * results from this same run.
+     *
+     * Selected deployments are inspected using the exact IPFS
+     * deployment identity observed by Subgraph MCP.
+     *
+     * Each successfully inspected schema is then evaluated by
+     * the existing explicit protocol-attribution gate.
+     *
+     * ATTRIBUTED is source association only.
+     * UNATTRIBUTED is not incompatibility and not a claim that
+     * no Graph product for the protocol exists elsewhere.
+     */
+
+
+    const realGraphInspectionPlan =
+        new ScientificTheGraphInspectionPlanEngine()
+            .plan(
+                {
+
+                    requests:
+                        graphDiscoveryExpansion.requests,
+
+                    terms:
+                        graphDiscoveryExpansion.terms,
+
+                    discovery:
+                        realProfileGraphDiscovery,
+
+                    triage:
+                        realGraphDiscoveryTriage
+
+                },
+                2
+            );
+
+
+    requireNoErrors(
+        "Real The Graph bounded inspection plan",
+        realGraphInspectionPlan.errors
+    );
+
+
+    if (
+        realGraphInspectionPlan.items.some(
+            item =>
+                item.providerMode !==
+                "LIVE"
+        )
+    ) {
+
+        throw new Error(
+            "Real Graph inspection plan contains a non-LIVE item."
+        );
+
+    }
+
+
+    for (
+        const item
+        of realGraphInspectionPlan.items
+    ) {
+
+        const profile =
+            graphDiscoveryProfiles.find(
+                candidate =>
+                    candidate.profileId ===
+                        item.profileId
+            );
+
+
+        if (
+            profile ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Graph inspection plan references unavailable profile ${item.profileId}.`
+            );
+
+        }
+
+
+        if (
+            profile.protocolId !==
+                item.protocolId ||
+            profile.sourceId !==
+                item.sourceId ||
+            profile.sourceRevision !==
+                item.sourceRevision
+        ) {
+
+            throw new Error(
+                `Graph inspection plan item ${item.planItemId} does not preserve exact source-scoped profile identity.`
+            );
+
+        }
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH BOUNDED INSPECTION PLAN"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `planned exact deployments: ${realGraphInspectionPlan.items.length}`
+    );
+
+
+    for (
+        const profile
+        of graphDiscoveryProfiles
+    ) {
+
+        const items =
+            realGraphInspectionPlan.items
+                .filter(
+                    item =>
+                        item.protocolId ===
+                        profile.protocolId
+                );
+
+
+        console.log("");
+        console.log(
+            profile.protocolId
+        );
+
+        console.log(
+            `  planned: ${items.length}`
+        );
+
+
+        for (
+            const item
+            of items
+        ) {
+
+            console.log(
+                `  PLAN term=${item.supportingTerm} total=${item.providerSearchTotal} rank=${item.providerRank}`
+            );
+
+            console.log(
+                `    selection:  ${item.selectionBasis}`
+            );
+
+            console.log(
+                `    subgraph:   ${item.subgraphId}`
+            );
+
+            console.log(
+                `    deployment: ${item.ipfsHash}`
+            );
+
+        }
+
+    }
+
+
+    const graphInspectionClient =
+        new ScientificTheGraphSubgraphMcpLiveClient(
+            profileDiscoveryApiKey
+        );
+
+
+    const successfulGraphInspections:
+        Array<{
+
+            planItemId:
+                string;
+
+            inspection:
+                ScientificTheGraphSubgraphInspection;
+
+        }> =
+        [];
+
+
+    const graphInspectionFailures:
+        Array<{
+
+            planItemId:
+                string;
+
+            protocolId:
+                string;
+
+            subgraphId:
+                string;
+
+            ipfsHash:
+                string;
+
+            errors:
+                string[];
+
+        }> =
+        [];
+
+
+    try {
+
+        const graphInspectionEngine =
+            new ScientificTheGraphSubgraphInspectionEngine(
+                graphInspectionClient,
+                "LIVE"
+            );
+
+
+        /*
+         * Inspect one selected deployment at a time.
+         *
+         * A provider/schema failure for one candidate remains an
+         * explicit unavailable-evidence result and does not turn
+         * every other candidate into a failed batch.
+         */
+        for (
+            const item
+            of realGraphInspectionPlan.items
+        ) {
+
+            const inspectionResult =
+                await graphInspectionEngine.inspect([
+                    {
+
+                        requestId:
+                            item.planItemId,
+
+                        subgraphId:
+                            item.subgraphId,
+
+                        ipfsHash:
+                            item.ipfsHash
+
+                    }
+                ]);
+
+
+            if (
+                inspectionResult.errors.length >
+                    0 ||
+                inspectionResult.inspections.length !==
+                    1
+            ) {
+
+                graphInspectionFailures.push({
+
+                    planItemId:
+                        item.planItemId,
+
+                    protocolId:
+                        item.protocolId,
+
+                    subgraphId:
+                        item.subgraphId,
+
+                    ipfsHash:
+                        item.ipfsHash,
+
+                    errors:
+                        inspectionResult.errors.length >
+                            0
+                                ? inspectionResult.errors
+                                : [
+                                    `Expected exactly one inspection, found ${inspectionResult.inspections.length}.`
+                                ]
+
+                });
+
+
+                continue;
+
+            }
+
+
+            const inspection =
+                inspectionResult.inspections[0];
+
+
+            if (
+                inspection.providerMode !==
+                    "LIVE" ||
+                inspection.subgraphId !==
+                    item.subgraphId ||
+                inspection.ipfsHash !==
+                    item.ipfsHash ||
+                inspection.requestId !==
+                    item.planItemId
+            ) {
+
+                throw new Error(
+                    `LIVE inspection provenance mismatch for plan item ${item.planItemId}.`
+                );
+
+            }
+
+
+            successfulGraphInspections.push({
+
+                planItemId:
+                    item.planItemId,
+
+                inspection
+
+            });
+
+        }
+
+    }
+    finally {
+
+        await graphInspectionClient.close();
+
+    }
+
+
+    if (
+        realGraphInspectionPlan.items.length >
+            0 &&
+        successfulGraphInspections.length ===
+            0
+    ) {
+
+        throw new Error(
+            "No planned The Graph deployment could be inspected LIVE."
+        );
+
+    }
+
+
+    const planItemById =
+        new Map(
+            realGraphInspectionPlan.items.map(
+                item => [
+                    item.planItemId,
+                    item
+                ]
+            )
+        );
+
+
+    const graphAttributionInputs =
+        successfulGraphInspections.map(
+            successful => {
+
+                const planItem =
+                    planItemById.get(
+                        successful.planItemId
+                    );
+
+
+                if (
+                    planItem ===
+                    undefined
+                ) {
+
+                    throw new Error(
+                        `Successful Graph inspection ${successful.planItemId} has no plan item.`
+                    );
+
+                }
+
+
+                const profile =
+                    graphDiscoveryProfiles.find(
+                        candidate =>
+                            candidate.profileId ===
+                                planItem.profileId
+                    );
+
+
+                if (
+                    profile ===
+                    undefined
+                ) {
+
+                    throw new Error(
+                        `Successful Graph inspection ${successful.planItemId} has no exact protocol profile.`
+                    );
+
+                }
+
+
+                if (
+                    profile.protocolId !==
+                        planItem.protocolId ||
+                    profile.sourceId !==
+                        planItem.sourceId ||
+                    profile.sourceRevision !==
+                        planItem.sourceRevision
+                ) {
+
+                    throw new Error(
+                        `Successful Graph inspection ${successful.planItemId} lost source-scoped profile identity.`
+                    );
+
+                }
+
+
+                return {
+
+                    profile,
+
+                    inspection:
+                        successful.inspection
+
+                };
+
+            }
+        );
+
+
+    const realGraphProtocolAttribution =
+        new ScientificTheGraphProtocolAttributionEngine()
+            .assess(
+                graphAttributionInputs
+            );
+
+
+    requireNoErrors(
+        "Real bounded The Graph protocol attribution",
+        realGraphProtocolAttribution.errors
+    );
+
+
+    if (
+        realGraphProtocolAttribution.assessments.length !==
+        successfulGraphInspections.length
+    ) {
+
+        throw new Error(
+            `Expected ${successfulGraphInspections.length} Graph attribution assessments, found ${realGraphProtocolAttribution.assessments.length}.`
+        );
+
+    }
+
+
+    /*
+     * =========================================================
+     * FINAL V2 SELECTIVE PROTOCOL-ATTRIBUTION DECISION
+     * =========================================================
+     *
+     * Project each exact LIVE schema attribution through the
+     * production POSITIVE / NEGATIVE / ABSTAIN decision layer.
+     *
+     * These decisions remain scoped to protocol attribution in
+     * the exact inspected schema. They do not manufacture
+     * compatibility, composition or scientific polarity.
+     */
+    const realGraphProtocolAttributionDecisions =
+        realGraphProtocolAttribution.assessments.map(
+            assessment =>
+                projectScientificTheGraphProtocolAttributionDecision(
+                    assessment
+                )
+        );
+
+
+    if (
+        realGraphProtocolAttributionDecisions.length !==
+        realGraphProtocolAttribution.assessments.length
+    ) {
+
+        throw new Error(
+            "Selective Graph attribution decision count does not match LIVE attribution assessment count."
+        );
+
+    }
+
+
+    for (
+        let index =
+            0;
+        index <
+            realGraphProtocolAttribution.assessments.length;
+        index++
+    ) {
+
+        const assessment =
+            realGraphProtocolAttribution.assessments[index];
+
+        const decision =
+            realGraphProtocolAttributionDecisions[index];
+
+
+        if (
+            decision.assessmentId !==
+                assessment.assessmentId ||
+            decision.protocolId !==
+                assessment.protocolId ||
+            decision.profileId !==
+                assessment.profileId ||
+            decision.normativeSourceId !==
+                assessment.normativeSourceId ||
+            decision.normativeSourceRevision !==
+                assessment.normativeSourceRevision ||
+            decision.subgraphId !==
+                assessment.subgraphId ||
+            decision.ipfsHash !==
+                assessment.ipfsHash ||
+            decision.providerMode !==
+                assessment.providerMode ||
+            decision.schemaObservationId !==
+                assessment.schemaObservationId ||
+            decision.schemaHash !==
+                assessment.schemaHash
+        ) {
+
+            throw new Error(
+                `Selective attribution decision lost exact LIVE provenance for assessment ${assessment.assessmentId}.`
+            );
+
+        }
+
+
+        if (
+            decision.decisionBasis ===
+            "INCONSISTENT_ATTRIBUTION_ASSESSMENT"
+        ) {
+
+            throw new Error(
+                `LIVE attribution assessment ${assessment.assessmentId} is internally inconsistent under the production decision projector.`
+            );
+
+        }
+
+
+        if (
+            assessment.status ===
+                "ATTRIBUTED" &&
+            decision.decision !==
+                "POSITIVE"
+        ) {
+
+            throw new Error(
+                `Accepted LIVE attribution ${assessment.assessmentId} did not project to POSITIVE.`
+            );
+
+        }
+
+    }
+
+
+    const positiveGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "POSITIVE"
+        );
+
+
+    const negativeGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "NEGATIVE"
+        );
+
+
+    const abstainedGraphDecisions =
+        realGraphProtocolAttributionDecisions.filter(
+            decision =>
+                decision.decision ===
+                "ABSTAIN"
+        );
+
+
+    const graphDecisionSerialization =
+        JSON.stringify(
+            realGraphProtocolAttributionDecisions
+        );
+
+
+    if (
+        graphDecisionSerialization.includes(
+            "scientificPolarity"
+        ) ||
+        graphDecisionSerialization.includes(
+            "compatibilityPolarity"
+        ) ||
+        graphDecisionSerialization.includes(
+            '"SUPPORT"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"CHALLENGE"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"FULL"'
+        ) ||
+        graphDecisionSerialization.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "Selective LIVE Graph attribution decisions manufactured scientific polarity."
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH SELECTIVE ATTRIBUTION DECISIONS"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        `LIVE assessments: ${realGraphProtocolAttributionDecisions.length}`
+    );
+
+    console.log(
+        `POSITIVE:         ${positiveGraphDecisions.length}`
+    );
+
+    console.log(
+        `NEGATIVE:         ${negativeGraphDecisions.length}`
+    );
+
+    console.log(
+        `ABSTAIN:          ${abstainedGraphDecisions.length}`
+    );
+
+
+    for (
+        const decision
+        of realGraphProtocolAttributionDecisions
+    ) {
+
+        console.log(
+            `${decision.protocolId} ${decision.decision} ${decision.decisionBasis}`
+        );
+
+        console.log(
+            `  subgraph:   ${decision.subgraphId}`
+        );
+
+        console.log(
+            `  deployment: ${decision.ipfsHash}`
+        );
+
+    }
+
+    const fullInspectionSerialization =
+        JSON.stringify(
+            successfulGraphInspections
+        );
+
+
+    if (
+        fullInspectionSerialization.includes(
+            profileDiscoveryApiKey
+        )
+    ) {
+
+        throw new Error(
+            "API key leaked into bounded Graph inspection evidence."
+        );
+
+    }
+
+
+    const operationalAttributionProjection =
+        {
+
+            plan:
+                realGraphInspectionPlan.items.map(
+                    item => ({
+                        protocolId:
+                            item.protocolId,
+                        subgraphId:
+                            item.subgraphId,
+                        ipfsHash:
+                            item.ipfsHash,
+                        selectionBasis:
+                            item.selectionBasis
+                    })
+                ),
+
+            assessments:
+                realGraphProtocolAttribution.assessments.map(
+                    assessment => ({
+                        protocolId:
+                            assessment.protocolId,
+                        subgraphId:
+                            assessment.subgraphId,
+                        ipfsHash:
+                            assessment.ipfsHash,
+                        status:
+                            assessment.status,
+                        attributionBasis:
+                            assessment.attributionBasis
+                    })
+                ),
+
+            failures:
+                graphInspectionFailures
+
+        };
+
+
+    const operationalAttributionSerialization =
+        JSON.stringify(
+            operationalAttributionProjection
+        );
+
+
+    if (
+        operationalAttributionSerialization.includes(
+            "scientificPolarity"
+        ) ||
+        operationalAttributionSerialization.includes(
+            "compatibilityPolarity"
+        ) ||
+        operationalAttributionSerialization.includes(
+            '"SUPPORT"'
+        ) ||
+        operationalAttributionSerialization.includes(
+            '"CHALLENGE"'
+        ) ||
+        operationalAttributionSerialization.includes(
+            '"FULL"'
+        ) ||
+        operationalAttributionSerialization.includes(
+            '"PARTIAL"'
+        )
+    ) {
+
+        throw new Error(
+            "Bounded Graph inspection or attribution manufactured scientific polarity."
+        );
+
+    }
+
+
+    const attributedAssessments =
+        realGraphProtocolAttribution.assessments
+            .filter(
+                assessment =>
+                    assessment.status ===
+                    "ATTRIBUTED"
+            );
+
+
+    const unattributedAssessments =
+        realGraphProtocolAttribution.assessments
+            .filter(
+                assessment =>
+                    assessment.status ===
+                    "UNATTRIBUTED"
+            );
+
+
+    console.log("");
+    console.log(
+        "============================================================"
+    );
+
+    console.log(
+        "REAL THE GRAPH BOUNDED INSPECTION AND ATTRIBUTION"
+    );
+
+    console.log(
+        "============================================================"
+    );
+
+
+    console.log(
+        `planned deployments:      ${realGraphInspectionPlan.items.length}`
+    );
+
+    console.log(
+        `inspection succeeded:     ${successfulGraphInspections.length}`
+    );
+
+    console.log(
+        `inspection failed:        ${graphInspectionFailures.length}`
+    );
+
+    console.log(
+        `explicitly attributed:    ${attributedAssessments.length}`
+    );
+
+    console.log(
+        `explicitly unattributed:  ${unattributedAssessments.length}`
+    );
+
+
+    for (
+        const planItem
+        of realGraphInspectionPlan.items
+    ) {
+
+        const failure =
+            graphInspectionFailures.find(
+                candidate =>
+                    candidate.planItemId ===
+                    planItem.planItemId
+            );
+
+
+        if (
+            failure !==
+            undefined
+        ) {
+
+            console.log("");
+            console.log(
+                `${planItem.protocolId}: INSPECTION_FAILED`
+            );
+
+            console.log(
+                `  term:       ${planItem.supportingTerm}`
+            );
+
+            console.log(
+                `  subgraph:   ${planItem.subgraphId}`
+            );
+
+            console.log(
+                `  deployment: ${planItem.ipfsHash}`
+            );
+
+            console.log(
+                `  errors:     ${failure.errors.join(" | ")}`
+            );
+
+
+            continue;
+
+        }
+
+
+        const assessment =
+            realGraphProtocolAttribution.assessments
+                .find(
+                    candidate =>
+                        candidate.protocolId ===
+                            planItem.protocolId &&
+                        candidate.profileId ===
+                            planItem.profileId &&
+                        candidate.subgraphId ===
+                            planItem.subgraphId &&
+                        candidate.ipfsHash ===
+                            planItem.ipfsHash
+                );
+
+
+        if (
+            assessment ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Missing protocol attribution assessment for successful plan item ${planItem.planItemId}.`
+            );
+
+        }
+
+
+        const successfulInspection =
+            successfulGraphInspections.find(
+                candidate =>
+                    candidate.planItemId ===
+                    planItem.planItemId
+            );
+
+
+        if (
+            successfulInspection ===
+            undefined
+        ) {
+
+            throw new Error(
+                `Missing successful inspection for assessment ${assessment.assessmentId}.`
+            );
+
+        }
+
+
+        console.log("");
+        console.log(
+            `${planItem.protocolId}: ${assessment.status}`
+        );
+
+        console.log(
+            `  term:       ${planItem.supportingTerm}`
+        );
+
+        console.log(
+            `  term total: ${planItem.providerSearchTotal}`
+        );
+
+        console.log(
+            `  rank:       ${planItem.providerRank}`
+        );
+
+        console.log(
+            `  subgraph:   ${planItem.subgraphId}`
+        );
+
+        console.log(
+            `  deployment: ${planItem.ipfsHash}`
+        );
+
+        console.log(
+            `  schema:     ${assessment.schemaHash}`
+        );
+
+        console.log(
+            `  30d queries:${successfulInspection.inspection.queryActivityObservation.totalQueryCount}`
+        );
+
+        console.log(
+            `  identifiers checked: ${assessment.identifiersChecked.join(", ")}`
+        );
+
+        console.log(
+            `  matches: ${assessment.matchedIdentifiers.length > 0
+                ? assessment.matchedIdentifiers.map(match => `${match.identifier}(${match.occurrenceCount})`).join(", ")
+                : "NONE"}`
+        );
+
+        console.log(
+            `  basis: ${assessment.attributionBasis}`
+        );
+
+    }
+
+
+    console.log("");
+    console.log(
+        "BOUNDED GRAPH ATTRIBUTION INTERPRETATION"
+    );
+
+    console.log(
+        "----------------------------------------"
+    );
+
+    console.log(
+        "ATTRIBUTED means the exact inspected deployment schema explicitly identifies the target ERC."
+    );
+
+    console.log(
+        "UNATTRIBUTED means this exact selected schema did not contain an accepted explicit protocol identifier."
+    );
+
+    console.log(
+        "UNATTRIBUTED does not mean the ERC is incompatible, unsupported by The Graph globally, or absent from every possible Graph product."
+    );
+
+    console.log(
+        "INSPECTION_FAILED means provider evidence was unavailable for that selected deployment and remains unresolved."
+    );
+
+    console.log(
+        "No inspection or attribution result modifies composition compatibility, solver state or Harmony."
+    );
+
 
     /*
      * =========================================================

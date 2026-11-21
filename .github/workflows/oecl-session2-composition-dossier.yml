@@ -1,0 +1,57 @@
+name: OECL Session 2 - Evidence First Composition Dossier
+
+on:
+  pull_request:
+    paths:
+      - "scripts/run-real-scientific-multi-protocol-composition.ts"
+      - "scripts/check-session2-composition-report.ts"
+      - ".github/workflows/oecl-session2-composition-dossier.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-composition-dossier:
+    name: Pinned real-source composition dossier (no invented execution)
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    env:
+      OECL_SELECTED_ERC_IDS: ERC-8004,ERC-8060
+      OECL_COMPOSITION_REPORT_PATH: session2-artifacts/erc8004-erc8060-dossier.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: TypeScript check
+        run: npx tsc --noEmit
+      - name: Execute pinned GitHub research and existing composition engines
+        shell: bash
+        run: |
+          mkdir -p session2-artifacts
+          if timeout 600s npx tsx scripts/run-real-scientific-multi-protocol-composition.ts > session2-artifacts/research.log 2>&1; then
+            echo "Real-source research script: PASS" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Real-source research script: FAIL" >> "$GITHUB_STEP_SUMMARY"
+            tail -n 100 session2-artifacts/research.log
+            exit 1
+          fi
+          tail -n 38 session2-artifacts/research.log
+      - name: Assert scientific dossier never overstates evidence
+        run: npx tsx scripts/check-session2-composition-report.ts "$OECL_COMPOSITION_REPORT_PATH"
+      - name: Record diagnostic interpretation
+        shell: bash
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "This dossier uses pinned GitHub source revisions and existing scientific engines." >> "$GITHUB_STEP_SUMMARY"
+          echo "It is not a verified end-to-end onchain composition or an automated public web research job." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-session2-scientific-dossier-and-logs
+          path: session2-artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
