@@ -95,6 +95,9 @@ jobs:
         working-directory: oecl
         run: npx tsx scripts/check-pinned-interaction-hypothesis.ts ../joint-evidence/erc8060-erc8098-burn-semantics.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-interaction-hypothesis.json
 
+      - name: Assemble four scoped scientific interaction questions with EVM evidence
+        run: node oecl/integrations/erc8060-erc8098/check-interaction-experiment-suite.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-interaction-hypothesis.json joint-evidence/erc8060-erc8098-experiment-suite.json
+
       - name: Upload joint transaction and provenance receipts
         if: always()
         uses: actions/upload-artifact@v4
