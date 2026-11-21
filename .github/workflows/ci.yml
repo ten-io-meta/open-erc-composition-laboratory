@@ -40,3 +40,6 @@ jobs:
 
       - name: Pinned Solidity import closure safety regression
         run: npx tsx scripts/check-pinned-solidity-import-closure.ts
+
+      - name: Pinned GitHub loader detached worktree and origin security regression
+        run: npx tsx scripts/check-github-loader-pinned-worktree.ts
