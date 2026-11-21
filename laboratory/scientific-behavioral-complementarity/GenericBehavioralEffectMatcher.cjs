@@ -19,8 +19,12 @@ function discover(input) {
     if(!p || !p.sourceId || !p.revision || !p.assetClass || !VALID_CLASSES.has(p.assetClass) ||
        !Array.isArray(p.effects) || !Array.isArray(p.restrictions) ||
        !Array.isArray(p.provenance) || !p.provenance.length ||
-       !p.provenance.every(e=>e.sourceId===p.sourceId && e.sourceRevision===p.revision &&
-         !!e.factId && !!e.sourceSha256)) errors.push("Invalid or unattributed participant facts.");
+       !p.provenance.every(e=>!!e.factId && !!e.sourceSha256 &&
+         ((e.sourceId===p.sourceId && e.sourceRevision===p.revision) ||
+          (e.attributedParticipantId===p.sourceId && e.sourceId!==p.sourceId &&
+           !!e.sourceRevision && !!e.inheritanceAnchorFactId &&
+           p.provenance.some(root=>root.factId===e.inheritanceAnchorFactId &&
+             root.sourceId===p.sourceId && root.sourceRevision===p.revision))))) errors.push("Invalid or unattributed participant facts.");
   }
   if(!distinct(input.participants.map(p=>p.sourceId+"@"+p.revision)))
     errors.push("Duplicate participant source identity.");
