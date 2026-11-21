@@ -10,6 +10,10 @@ on:
       - 'web/**'
       - '.github/workflows/web-scientific-dossier.yml'
 
+concurrency:
+  group: oecl-web-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   dossier-web:
     runs-on: ubuntu-latest
