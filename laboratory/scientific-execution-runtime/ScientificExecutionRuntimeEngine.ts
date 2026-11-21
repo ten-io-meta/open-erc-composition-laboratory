@@ -977,7 +977,17 @@ if (
                         );
 
 
+                const selectedSurface = selection.selectedRegistration?.evaluationSurface?.participantSurfaces;
+                const completeSelectionSurface = selectedSurface?.length === 2 &&
+                    selectedSurface.filter(x => x.participantSide === "A").length === 1 &&
+                    selectedSurface.filter(x => x.participantSide === "B").length === 1 &&
+                    selectedSurface.every(x => x.completeness === "COMPLETE_FOR_CANDIDATE_EVALUATION");
+
                 const selectionSnapshot = {
+
+                    evaluationSurfaceCompleteness: completeSelectionSurface
+                        ? "COMPLETE_FOR_CANDIDATE_EVALUATION" as const
+                        : "PARTIAL" as const,
 
                     status:
                         selection.status,
