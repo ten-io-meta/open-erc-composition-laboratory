@@ -43,7 +43,9 @@ try{
     symlinkSync(join(tmp,"private.sol"),join(root,"outside.sol"));
     assert.equal(input(["@example/solidity/outside.sol"]).status,"INCOMPLETE");
     // Syntax outside actual Solidity import statements must not be accepted.
-    put("notes.sol",'pragma solidity ^0.8.20;\n// import "./missing.sol";\nstring constant example = "import \\"./missing.sol\\";";');
+    put("notes.sol", `pragma solidity ^0.8.20;
+// import "./missing.sol";
+string constant example = "import './missing.sol';";`);
     assert.equal(input(["@example/solidity/notes.sol"]).status,"RESOLVED");
     console.log("PASS: full pinned Solidity import closure and adversarial path, cycle, missing dependency checks");
 }finally{rmSync(tmp,{recursive:true,force:true});}
