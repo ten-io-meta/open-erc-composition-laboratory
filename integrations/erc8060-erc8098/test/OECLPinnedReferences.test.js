@@ -36,7 +36,8 @@ describe("OECL real-EVM joint execution: ERC-8060 and pinned external ERC-8098 r
     const backingBefore = await ethers.provider.getBalance(nft.address);
     const jointBalanceBefore = await ethers.provider.getBalance(joint.address);
     const totalBefore = await token.totalSupply();
-    expect(backingBefore.gte(await nft.totalRedeemableValue())).to.equal(true);
+    const nftObligationBefore = await nft.totalRedeemableValue();
+    expect(backingBefore.gte(nftObligationBefore)).to.equal(true);
     expect(valueBefore.eq(ethers.utils.parseEther("0.1"))).to.equal(true);
     await (await nft.connect(alice).approve(joint.address, 1)).wait();
     await (await token.connect(alice).approve(joint.address, units)).wait();
@@ -51,6 +52,7 @@ describe("OECL real-EVM joint execution: ERC-8060 and pinned external ERC-8098 r
     const nftBalanceAfter = await ethers.provider.getBalance(nft.address);
     expect(totalAfter.eq(totalBefore.sub(units))).to.equal(true);
     expect(nftReserveAfter.eq(0)).to.equal(true);
+    expect(nftObligationBefore.sub(nftReserveAfter).eq(valueBefore)).to.equal(true);
     expect(nftBalanceAfter.gte(nftReserveAfter)).to.equal(true);
     expect(nftBalanceAfter.eq(backingBefore.sub(valueBefore))).to.equal(true);
     expect((await ethers.provider.getBalance(joint.address)).eq(jointBalanceBefore)).to.equal(true);
@@ -100,7 +102,9 @@ describe("OECL real-EVM joint execution: ERC-8060 and pinned external ERC-8098 r
         erc20BurnLogIndex: erc20BurnLogs[0].logIndex,
         jointReceiptBlockNumber: receipt.blockNumber,
         nftSolventAfter: nftBalanceAfter.gte(nftReserveAfter),
+        nftObligationBefore: nftObligationBefore.toString(),
         nftObligationAfter: nftReserveAfter.toString(),
+        nftObligationDecrease: nftObligationBefore.sub(nftReserveAfter).toString(),
         nftBackingBefore: backingBefore.toString(),
         nftBackingAfter: nftBalanceAfter.toString(),
         ethRedeemed: valueBefore.toString(),
