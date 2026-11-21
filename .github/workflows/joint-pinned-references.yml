@@ -119,6 +119,9 @@ jobs:
       - name: Assemble four scoped scientific interaction questions with EVM evidence
         run: node oecl/integrations/erc8060-erc8098/check-interaction-experiment-suite.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-interaction-hypothesis.json joint-evidence/erc8060-erc8098-experiment-suite.json
 
+      - name: Recognize bounded emergent property from source and actual EVM evidence
+        run: node oecl/integrations/erc8060-erc8098/recognize-scoped-emergent-property.cjs joint-evidence/erc8060-erc8098-source-discovery.json joint-evidence/erc8060-erc8098-pinned.invariants.json joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-interaction-hypothesis.json joint-evidence/erc8060-erc8098-emergent-property.json
+
       - name: Audit tested and untested adversarial classes without security certification
         run: node oecl/integrations/erc8060-erc8098/audit-adversarial-coverage.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-eth-callbacks.json joint-evidence/erc8060-erc8098-multiholder.json joint-evidence/erc8060-erc8098-adversarial-audit.json
 
