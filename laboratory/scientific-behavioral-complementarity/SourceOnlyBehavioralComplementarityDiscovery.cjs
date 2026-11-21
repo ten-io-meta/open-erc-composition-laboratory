@@ -42,20 +42,47 @@ const fact = (source,pattern,kind) => {
     excerpt:match[0].slice(0,240)};
 };
 const all = values => values.every(Boolean);
+// Keep offsets stable and limit behavioral claims to the method that
+// actually contains the guard/effect. Unrelated helper methods are not proof.
+function scopedBody(source, signature) {
+  const text=source.matchText;
+  const match=signature.exec(text);
+  if(!match)return {...source,matchText:" ".repeat(text.length)};
+  const open=text.indexOf("{",match.index+match[0].length-1);
+  if(open<0)return {...source,matchText:" ".repeat(text.length)};
+  let depth=0,quote=null,end=-1;
+  for(let i=open;i<text.length;i++){
+    const c=text[i];
+    if(quote){
+      if(c==="\\"){i++;continue;}
+      if(c===quote)quote=null;
+      continue;
+    }
+    if(c==="\""||c==="'"){quote=c;continue;}
+    if(c==="{")depth++;
+    if(c==="}"&&--depth===0){end=i;break;}
+  }
+  if(end<0)return {...source,matchText:" ".repeat(text.length)};
+  const scoped=text.slice(open,end+1);
+  return {...source,matchText:" ".repeat(open)+scoped+" ".repeat(text.length-end-1)};
+}
+
 function extract(source, dependency) {
   if (!source || !source.text || !source.id || !source.revision ||
       !source.file || !/^[a-f0-9]{40}$/i.test(source.revision)) return [];
   const sourceCode={...source,matchText:maskComments(source.text)};
   const dependencyCode=dependency?.text?{...dependency,matchText:maskComments(dependency.text)}:dependency;
+  const burnBody=scopedBody(sourceCode,/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[^;{]*\{/);
+  const internalBurnBody=scopedBody(sourceCode,/function\s+_burn\s*\(\s*uint256\s+tokenId\s*\)[^;{]*\{/);
   const results = [];
   // Redemptive NFT destruction: these separate source facts supply a
   // hypothesis, but their coexistence is not a proof of control flow.
   const nft = [
     fact(sourceCode,/function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,100}?external\b/,"NFT_BURN_ENTRY"),
-    fact(sourceCode,/require\s*\(\s*ownerOf\s*\(\s*tokenId\s*\)\s*==\s*msg\.sender/,"OWNER_GUARD"),
-    fact(sourceCode,/function\s+_burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,220}?\{[\s\S]{0,550}?totalRedeemableValue\s*-=\s*redeemable/,"LIABILITY_DECREASE"),
-    fact(sourceCode,/\.call\s*\{\s*value\s*:\s*redeemable\s*\}/,"ETH_PAYOUT"),
-    fact(sourceCode,/address\s*\(\s*this\s*\)\.balance\s*>=\s*redeemable/,"SOLVENCY_GUARD")
+    fact(burnBody,/require\s*\(\s*ownerOf\s*\(\s*tokenId\s*\)\s*==\s*msg\.sender/,"OWNER_GUARD"),
+    fact(internalBurnBody,/totalRedeemableValue\s*-=\s*redeemable/,"LIABILITY_DECREASE"),
+    fact(burnBody,/\.call\s*\{\s*value\s*:\s*redeemable\s*\}/,"ETH_PAYOUT"),
+    fact(burnBody,/address\s*\(\s*this\s*\)\.balance\s*>=\s*redeemable/,"SOLVENCY_GUARD")
   ];
   const terminalEntryRevert =
     /function\s+burn\s*\(\s*uint256\s+tokenId\s*\)[\s\S]{0,130}?\{\s*(?:revert\s*\(|require\s*\(\s*false\b)/.test(sourceCode.matchText);
