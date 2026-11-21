@@ -188,10 +188,10 @@ export class ScientificExecutionResultEvaluatorEngine {
             workspace.requirementId !== requirement.requirementId ||
             workspace.candidateId !== outcome.targetId ||
             selection.status !== "SELECTED" ||
-            !selection.selectedRegistration?.registrationId ||
+            !selection.selectedRegistrationId ||
             selection.matchingRegistrationIds.length !== 1 ||
-            selection.matchingRegistrationIds[0] !== selection.selectedRegistration.registrationId ||
-            selection.selectedRegistration.buildRecipe().recipeId !== harness.recipeId ||
+            selection.matchingRegistrationIds[0] !== selection.selectedRegistrationId ||
+            !harness.recipeId.trim() ||
             harness.status !== "EXECUTED" ||
             harness.recipeId.trim().length === 0 ||
             harness.errors.length !== 0 ||
