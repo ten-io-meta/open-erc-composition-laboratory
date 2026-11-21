@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@modelcontextprotocol/client": ["./node_modules/@modelcontextprotocol/client"]
     }
   },
   "include": [
