@@ -15,6 +15,9 @@ assert.equal(result.scientificPolarity,"INCONCLUSIVE");
 const cases=[
  ["NFT payout mismatch",e=>{e.observations.alicePayoutNetOfGas="1";}],
  ["NFT backing mismatch",e=>{e.observations.nftBackingAfter="1";}],
+ ["NFT liability before missing",e=>{delete e.observations.nftObligationBefore;}],
+ ["NFT liability decrease forged",e=>{e.observations.nftObligationDecrease="1";}],
+ ["NFT obligation before changed",e=>{e.observations.nftObligationBefore="110000000000000000";}],
  ["NFT backing below obligations",e=>{e.observations.nftObligationAfter="99999999999999999999";}],
  ["ERC-8098 supply remint",e=>{e.observations.erc20SupplyAfter="101000000000000000000";}],
  ["ERC-8098 supply decrease tamper",e=>{e.observations.supplyDecrease="3";}],
