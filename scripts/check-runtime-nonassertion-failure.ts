@@ -146,15 +146,18 @@ async function main() {
 
         }
 
+        // Other campaign steps may be INCONCLUSIVE; the targeted
+        // non-assertion test must remain FAILURE.
         if (
+            result.executions.filter(item =>
+                item.stepId === hardhatSpecification.stepId
+            ).length !== 1 ||
             result.statistics.inconclusive !==
-            0
+            result.executions.filter(item =>
+                item.status === "INCONCLUSIVE"
+            ).length
         ) {
-
-            throw new Error(
-                "Non-assertion test failure must not increment INCONCLUSIVE."
-            );
-
+            throw new Error("Non-assertion failure accounting mismatch.");
         }
 
         const combinedEvidence =
