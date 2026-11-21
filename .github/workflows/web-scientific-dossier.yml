@@ -33,3 +33,5 @@ jobs:
         run: npm run lint
       - name: Compile production web
         run: npm run build
+      - name: Smoke-test production dossier API and download
+        run: node scripts/smoke-scientific-dossier.mjs
