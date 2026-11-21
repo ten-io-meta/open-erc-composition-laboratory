@@ -211,6 +211,55 @@ export class ScientificCompositionConstraintEvaluatorEngine {
             }
 
 
+            if (constraint.basis === "SOURCE_DERIVED_BEHAVIORAL_INVARIANT") {
+                const predicate = constraint.behavioralPredicate;
+                const values = observation.numericMeasurements;
+                const revision = constraint.sourceRevision;
+                const tx = observation.transactionHash;
+                const unsigned = /^(0|[1-9][0-9]*)$/;
+                if (
+                    !predicate ||
+                    predicate.kind !== "UNSIGNED_INTEGER_RELATION" ||
+                    !predicate.leftMetric.trim() ||
+                    !predicate.rightMetric.trim() ||
+                    predicate.leftMetric === predicate.rightMetric ||
+                    !["EQ", "LTE", "GTE"].includes(predicate.operator) ||
+                    !revision || !/^[a-f0-9]{40}$/i.test(revision) ||
+                    observation.sourceRevision?.toLowerCase() !== revision.toLowerCase() ||
+                    !tx || !/^0x[a-f0-9]{64}$/i.test(tx) ||
+                    !values ||
+                    !unsigned.test(values[predicate.leftMetric] ?? "") ||
+                    !unsigned.test(values[predicate.rightMetric] ?? "")
+                ) {
+                    errors.push(
+                        `Behavioral observation ${observation.observationId} is missing exact source, transaction or valid unsigned operands.`
+                    );
+                    continue;
+                }
+                const left = BigInt(values[predicate.leftMetric]);
+                const right = BigInt(values[predicate.rightMetric]);
+                const held = predicate.operator === "EQ"
+                    ? left === right
+                    : predicate.operator === "LTE"
+                        ? left <= right
+                        : left >= right;
+                const computedVerdict = held ? "PRESERVED" : "VIOLATED";
+                if (observation.verdict !== computedVerdict) {
+                    errors.push(
+                        `Behavioral observation ${observation.observationId} advertises a verdict different from the measured relation.`
+                    );
+                    continue;
+                }
+            } else if (constraint.basis === "SOLIDITY_REQUIRE_STATEMENT") {
+                if (constraint.behavioralPredicate !== undefined) {
+                    errors.push(`Require-statement constraint ${constraint.constraintId} cannot declare a behavioral predicate.`);
+                    continue;
+                }
+            } else {
+                errors.push(`Unknown behavioral constraint basis for ${constraint.constraintId}.`);
+                continue;
+            }
+
             const existing =
                 observationsByConstraint.get(
                     observation.constraintId
