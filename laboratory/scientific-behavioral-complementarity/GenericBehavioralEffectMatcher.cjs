@@ -26,6 +26,24 @@ function discover(input) {
            p.provenance.some(root=>root.factId===e.inheritanceAnchorFactId &&
              root.sourceId===p.sourceId && root.sourceRevision===p.revision))))) errors.push("Invalid or unattributed participant facts.");
   }
+  // Provenance is a claim about independently attributed facts, not merely
+  // an arbitrary string set. Do not let duplicate IDs or malformed source
+  // hashes create illusory evidence coverage.
+  for(const p of input.participants) {
+    if(!p || !Array.isArray(p.provenance)) continue;
+    const ids=p.provenance.map(e=>e.factId);
+    if(!distinct(ids) || p.provenance.some(e=>
+      !/^[a-f0-9]{64}$/i.test(e.sourceSha256||"") ||
+      !e.sourceRevision || !e.sourceId ||
+      (e.attributedParticipantId && (!e.inheritanceAnchorFactId ||
+       e.sourceId===p.sourceId))))
+      errors.push("Duplicate, malformed or inconsistently attributed source evidence.");
+    if(p.effects?.some(e=>!Array.isArray(e.sourceFactIds) ||
+      !distinct(e.sourceFactIds)) ||
+       p.restrictions?.some(e=>!Array.isArray(e.sourceFactIds) ||
+      !distinct(e.sourceFactIds)))
+      errors.push("Duplicated or malformed semantic evidence references.");
+  }
   if(!distinct(input.participants.map(p=>p.sourceId+"@"+p.revision)))
     errors.push("Duplicate participant source identity.");
   if(errors.length) return {hypotheses:[],errors};
