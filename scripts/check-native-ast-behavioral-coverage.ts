@@ -5,14 +5,14 @@ import {ScientificNativeBehavioralEvidenceCoverageEngine} from
  "../laboratory/scientific-composition-constraint-evaluation/ScientificNativeBehavioralEvidenceCoverageEngine.js";
 
 const keys=["nativeStudy","bridge","evm","witness","native","rollback",
-  "rollbackValidated","recognized"] as const;
+  "rollbackValidated","recognized","inheritedAuth","inheritedAuthValidated"] as const;
 type Bundle=Parameters<ScientificNativeBehavioralEvidenceCoverageEngine["evaluate"]>[0];
 const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
 async function main(){
     const args=process.argv.slice(2);
-    assert.equal(args.length,9,
-        "Expected native study, bridge, EVM, witness, native constraints, rollback, validated rollback, recognized property, output");
-    const rawTexts=await Promise.all(args.slice(0,8).map(p=>readFile(p,"utf8")));
+    assert.equal(args.length,11,
+        "Expected study, bridge, EVM, witness, native constraints, rollback, validated rollback, recognized property, inherited burn, validated inherited burn, output");
+    const rawTexts=await Promise.all(args.slice(0,10).map(p=>readFile(p,"utf8")));
     const data:any={raw:{}};
     keys.forEach((k,i)=>{
         data[k]=JSON.parse(rawTexts[i]);
@@ -23,8 +23,8 @@ async function main(){
     assert.deepEqual(observed.errors,[]);
     assert.equal(observed.status,"PARTIAL_OBSERVATION");
     assert.equal(observed.statistics.total,10);
-    assert.equal(observed.statistics.scopedObserved,7);
-    assert.equal(observed.statistics.partial,3);
+    assert.equal(observed.statistics.scopedObserved,9);
+    assert.equal(observed.statistics.partial,1);
     assert.equal(observed.statistics.missing,0);
     assert.equal(observed.allQuestionsResolved,false);
     assert.equal(observed.sourceCoverageComplete,false);
@@ -32,9 +32,9 @@ async function main(){
     assert.equal(observed.finalScientificResult,"INCONCLUSIVE");
     const status=(side:string,category:string)=>observed.observations.find(
         x=>x.participantSide===side&&x.category===category)?.status;
-    assert.equal(status("A","RESOURCE_DECREASE"),"PARTIAL_EVIDENCE");
+    assert.equal(status("A","RESOURCE_DECREASE"),"SCOPED_OBSERVED");
     assert.equal(status("A","STATE_CONSISTENCY"),"PARTIAL_EVIDENCE");
-    assert.equal(status("B","AUTHORIZATION"),"PARTIAL_EVIDENCE");
+    assert.equal(status("B","AUTHORIZATION"),"SCOPED_OBSERVED");
     assert.equal(status("B","RESOURCE_DECREASE"),"SCOPED_OBSERVED");
     assert.equal(status("JOINT","ATOMIC_EXECUTION"),"SCOPED_OBSERVED");
     assert.equal(status("JOINT","JOINT_ROLLBACK"),"SCOPED_OBSERVED");
@@ -60,7 +60,19 @@ async function main(){
       ["recognized_missing_rollback_digest",x=>{x.recognized.sourceArtifacts[3].sha256="0".repeat(64);}],
       ["native_spec_missing_question",x=>{x.nativeStudy.specification.specifications[0].questions.pop();}],
       ["native_spec_forged_source_fact",x=>{x.nativeStudy.specification.specifications[0].questions[0].sourceFactIds=["AST:FORGED"];}],
-      ["missing_original_evm_bytes",x=>{x.raw.evm="";}]
+      ["missing_original_evm_bytes",x=>{x.raw.evm="";}],
+      ["missing_nft_liability_before",x=>{delete x.evm.observations.nftObligationBefore;}],
+      ["forged_nft_liability_delta",x=>{x.evm.observations.nftObligationDecrease="1";}],
+      ["missing_invariant_liability_before",x=>{
+          x.witness.properties.find((p:any)=>p.invariantId==="INV-8060-BACKING-SOLVENT").checks.obligationsBeforeWei="";
+      }],
+      ["forged_inherited_auth_source",x=>{x.inheritedAuth.source.sha256="0".repeat(64);}],
+      ["forged_inherited_auth_raw",x=>{x.raw.inheritedAuth="{}";}],
+      ["forged_inherited_auth_validator_digest",x=>{x.inheritedAuthValidated.sourceReportSha256="0".repeat(64);}],
+      ["forged_inherited_burn_supply",x=>{x.inheritedAuth.selfBurn.after.supply="123";}],
+      ["forged_inherited_allowance",x=>{x.inheritedAuth.approvedDelegatedBurn.after.attackerAllowance="3";}],
+      ["wrong_inherited_burn_dependency_sha",x=>{x.inheritedAuthValidated.inheritedBurnableSha256="0".repeat(64);}],
+      ["fabricated_inherited_burn_permission",x=>{x.inheritedAuth.unapprovedDelegatedBurn.reverted=false;}]
     ];
     for(const [label,mutate] of cases){
         const changed=structuredClone(data);
@@ -79,11 +91,11 @@ async function main(){
         limitations:[
             "Partial evidence does not satisfy a source-derived evaluation question.",
             "Observed means only bounded pinned local-EVM evidence, not public-chain independent replay.",
-            "NFT liability decrease lacks before-value in primary success receipt.",
+            "NFT liability decrease is measured only for the pinned local EVM execution.",
             "Native candidate discovery and READY specification remain separate and blocked."
         ]
     };
-    await writeFile(args[8],JSON.stringify(report,null,2)+"\n");
+    await writeFile(args[10],JSON.stringify(report,null,2)+"\n");
     console.log("OECL_NATIVE_AST_QUESTION_COVERAGE:"+JSON.stringify({
         total:report.statistics.total,
         scopedObserved:report.statistics.scopedObserved,
