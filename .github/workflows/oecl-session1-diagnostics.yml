@@ -142,6 +142,8 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: web/package-lock.json
+      - name: Install root dependencies used by shared laboratory imports
+        run: npm ci
       - name: Install existing web dependencies
         run: npm ci --prefix web
       - name: Build existing Next.js web (no deployment)
