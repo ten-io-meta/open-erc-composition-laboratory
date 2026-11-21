@@ -26,13 +26,17 @@ function sourceMapper(build,unit,name){
     for(let j=0;j<fields.length&&j<5;j++){
       if(fields[j]!=="")current[j]=j===3?fields[j]:Number(fields[j]);
     }
-    positions.set(pc,{offset:current[0],size:current[1],fileId:current[2]});
+    // Solidity's deployment bytecode ends in CBOR metadata. The compiler
+    // source map covers executable opcodes, not the trailing data bytes.
+    if(count<entries.length)
+      positions.set(pc,{offset:current[0],size:current[1],fileId:current[2]});
     const opcode=bytes[pc];
     pc+=1+(opcode>=0x60&&opcode<=0x7f?opcode-0x5f:0);
     count++;
   }
-  assert.ok(count>=100&&Math.abs(entries.length-count)<3,
-    "Compiler instruction count and sourceMap differ");
+  assert.ok(count>=100&&entries.length>=100&&count>=entries.length-2,
+    "Compiler executable source map extends beyond decoded bytecode: "+JSON.stringify({
+      decodedInstructions:count,sourceMapEntries:entries.length}));
   return positions;
 }
 function validate(a,b,report){
