@@ -2343,6 +2343,47 @@ const toolchainAvailable =
 
             }
 
+            // A test runner may exit zero after producing more output than
+            // OECL can retain as scientific evidence. Never promote an
+            // incomplete captured trace to a successful scientific execution.
+            if (
+                stdout.length > MAX_CAPTURED_OUTPUT_CHARS ||
+                stderr.length > MAX_CAPTURED_OUTPUT_CHARS
+            ) {
+                return {
+                    runtimeExecutionId: this.executionId(index),
+                    executionPlanId: plan.executionPlanId,
+                    executionTaskId: plan.executionTaskId,
+                    experimentId: plan.experimentId,
+                    targetId: plan.targetId,
+                    sourceConclusionId: plan.sourceConclusionId,
+                    sourceIds: [...(plan.sourceIds ?? [])],
+                    targetEvidenceIds: [...(plan.targetEvidenceIds ?? [])],
+                    stepId: step.stepId,
+                    stepType: step.stepType,
+                    status: "INCONCLUSIVE",
+                    runtime: "OECL_EXTERNAL_TEST_EXECUTION",
+                    repository: specification.repository,
+                    selectedExecutableTarget: specification.selectedExecutableTarget,
+                    startedAt,
+                    finishedAt: new Date().toISOString(),
+                    evidence: [
+                        `REPOSITORY:${specification.repository}`,
+                        `WORKING_DIRECTORY:${specification.workingDirectory}`,
+                        `COMMAND:${executionCommand}`,
+                        "EXIT_CODE:0",
+                        "EXECUTION_CAUSE:OUTPUT_CAPTURE_TRUNCATED",
+                        `STDOUT:${truncateCapturedOutput(stdout)}`,
+                        `STDERR:${truncateCapturedOutput(stderr)}`
+                    ],
+                    observations: [
+                        "The process exited successfully but its output exceeded the bounded scientific evidence capture; the result is inconclusive."
+                    ],
+                    errors: [],
+                    explanation: "Output exceeded the evidence capture limit, so successful process exit alone cannot certify the scientific result."
+                };
+            }
+
             return {
 
                 runtimeExecutionId:
