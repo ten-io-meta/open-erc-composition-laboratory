@@ -66,3 +66,44 @@ The four regression cases also confirm that forged independent-source status,
 incorrect ERC-8060 revision or altered second-participant source hashes
 cannot pass the admission checks. This is a provenance safeguard rather
 than an independent ERC-8098 audit.
+
+
+## Pinned ERC-8060 × ERC-8098: source-bound invariant witnesses
+
+The `joint-pinned-references.yml` workflow now checks out **two autonomous
+GitHub implementations** at exact commits. The earlier experimental 8098
+fixture is retained only as a separately labelled historical control.
+
+After real local-EVM contract tests and the original transaction receipt
+validation, `evaluate-pinned-invariants.cjs` creates
+`erc8060-erc8098-pinned.invariants.json`. It links four observed properties
+to eight exact source facts:
+
+- ERC-8060: redemption payout, reduction of NFT backing obligations and
+  the limited surplus-withdrawal source guard
+- ERC-8098: constructor-only mint in the reference candidate, the
+  declared ERC-20 and ERC20Burnable inheritance
+- OpenZeppelin Contracts **4.9.6**: installed and lockfile-checked ERC20
+  `_totalSupply -= amount`, ERC20 `_totalSupply += amount`, and the
+  ERC20Burnable `_burn` dispatch
+
+Source excerpts include file paths, line numbers, pinned revisions and
+SHA-256 digests. The runtime observations are attributed to the single
+successful local-EVM transaction hash. The emitted property witnesses
+cover exact gas-adjusted NFT holder payout, remaining NFT solvency,
+non-increasing ERC-20 supply, and burn event co-occurrence. The
+`check-pinned-invariant-regression.cjs` verifier rejects thirteen mutated
+receipts that falsify accounting, supply, source identities or event linkage.
+
+**Scientific boundary:** this report is a *reproducible observation from a
+test-generated JSON receipt*, not independent replay of chain data and not a
+formal proof of inherited OpenZeppelin logic. The current native scientific
+constraint model recognizes source `require(...)` guards, but these four
+property witnesses have **not** been admitted as discovered
+candidate-specific constraints. The evaluation surface stays `PARTIAL`
+and the correct scientific outcome stays `INCONCLUSIVE`. Only a later
+discovered candidate with validated complete scope and constraint-level
+machine evidence could produce a scoped `SUPPORTS` result.
+
+No changes to the independent ERC repositories and no deployments to a
+public network are performed.
