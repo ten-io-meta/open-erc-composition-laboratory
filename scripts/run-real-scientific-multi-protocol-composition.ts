@@ -1335,6 +1335,135 @@ async function main(): Promise<void> {
      */
 
 
+    /*
+     * Source-only dossier mode for selected pinned ERCs.
+     *
+     * The old large real multi-protocol runner combines documentary
+     * research with mandatory live The Graph stages. Until these are
+     * independently orchestrated, report precisely the stage reached
+     * rather than skipping those gates or manufacturing global results.
+     */
+    const dossierPath = process.env.OECL_COMPOSITION_REPORT_PATH?.trim();
+    if (dossierPath) {
+        const selectedDocumentaryRelations = sources.flatMap(
+            source => source.documentationRelations.relations
+        );
+        const documentary = new ScientificDocumentaryCompositionCandidateEngine()
+            .discover({
+                profiles,
+                relations: selectedDocumentaryRelations
+            });
+        requireNoErrors(
+            "Pinned source documentary discovery",
+            documentary.errors
+        );
+
+        const complement = new ScientificCompositionComplementarityEngine()
+            .discover({ objective, profiles });
+        requireNoErrors(
+            "Pinned source complementarity",
+            complement.errors
+        );
+
+        const candidates = new ScientificCompositionCandidateSetEngine()
+            .build({
+                participantIds: profiles.map(profile => profile.protocolId),
+                functionalMatches: complement.matches,
+                documentaryCandidates: documentary.candidates
+            });
+        requireNoErrors(
+            "Pinned source composition candidates",
+            candidates.errors
+        );
+
+        const dossier = {
+            schemaVersion: "OECL_COMPOSITION_RESEARCH_DOSSIER_V1",
+            generatedAt: new Date().toISOString(),
+            researchMode: "PINNED_GITHUB_SOURCE_DISCOVERY_ONLY",
+            requestedErcIds: requestedErcIds.length > 0
+                ? requestedErcIds
+                : sourceSpecs.flatMap(source => source.targetProtocolIds),
+            evaluatedErcIds: profiles.map(profile => profile.protocolId),
+            missingProtocolIdentities: [...new Set(missingProtocolIds)],
+            objective,
+            sourceProvenance: sources.map(source => ({
+                sourceId: source.sourceId,
+                repository: source.spec.owner + "/" + source.spec.repo,
+                expectedRevision: source.spec.expectedRevision,
+                observedRevision: source.sourceRevision ?? null,
+                selectedErcIds: source.spec.targetProtocolIds
+            })),
+            participantContributions: profiles.map(profile => ({
+                protocolId: profile.protocolId,
+                sourceId: profile.sourceId,
+                sourceRevision: profile.sourceRevision ?? null,
+                contributions: profile.contributions,
+                needs: profile.needs,
+                boundaries: profile.boundaries
+            })),
+            compatibility: {
+                status: "NOT_EVALUATED",
+                documentaryCandidates: documentary.candidates,
+                functionalMatches: complement.matches,
+                candidateSet: candidates.candidates,
+                globalHarmony: [],
+                note: "Documentary and functional candidates are hypotheses, not verified compatibility."
+            },
+            compositionProperties: {
+                status: "NOT_EVALUATED",
+                hypotheses: [],
+                verifiedEmergentProperties: []
+            },
+            risksAndBoundaries: {
+                knownProtocolBoundaries: profiles.flatMap(
+                    profile => profile.boundaries
+                ),
+                candidateBoundaryEvaluations: [],
+                status: "NOT_EVALUATED"
+            },
+            configurations: {
+                status: "NOT_EVALUATED",
+                globallySupportedSubsets: [],
+                proposedConfigurations: []
+            },
+            evidence: {
+                sourceObservations: sources.flatMap(
+                    source => source.github.sourceObservations
+                ),
+                sourceFacts: sources.flatMap(
+                    source => source.github.sourceFacts
+                ),
+                globalObservationCount: 0,
+                globalExecutionStatus: "NOT_PERFORMED",
+                scientificDecisionTraceStatus: "NOT_COMPUTED_IN_SOURCE_ONLY_MODE"
+            },
+            restrictions: [
+                "This is a source-stage dossier, not a complete scientific composition report.",
+                "The Graph integration is a separate, currently mandatory stage in the legacy full runner.",
+                "No joint runtime experiment or globally supported composition is demonstrated.",
+                "Ethereum Magicians has not been consulted.",
+                "No compatibility probability or emergent property is estimated without an experiment.",
+                "The N-protocol solver, Harmony and composition-value engines are not run in this source-only mode."
+            ],
+            decisionAuthority: "UPSTREAM_EVIDENCE_ONLY"
+        };
+
+        const { writeFile, mkdir } = await import("node:fs/promises");
+        const { resolve, dirname } = await import("node:path");
+        const destination = resolve(dossierPath);
+        await mkdir(dirname(destination), { recursive: true });
+        await writeFile(
+            destination,
+            JSON.stringify(dossier, null, 2) + "\n",
+            "utf8"
+        );
+        console.log("OECL source-stage dossier: " + destination);
+        console.log("Documentary candidates: " + documentary.candidates.length);
+        console.log("Functional matches: " + complement.matches.length);
+        console.log("Global evaluation: NOT PERFORMED");
+        return;
+    }
+
     const graphDiscoveryProfiles =
         profiles
             .filter(
@@ -5269,108 +5398,6 @@ async function main(): Promise<void> {
 
     const scientificDecisionTraceWithLineage =
         realDecisionTraceLineageBinding.trace;
-
-    /*
-     * Session 2: deterministic research dossier from existing engines.
-     * This is a projection, not a new scientific decision engine.
-     * In dossier mode no multi-contract observations are manufactured,
-     * and optional The Graph live binding is not attempted.
-     */
-    const dossierPath = process.env.OECL_COMPOSITION_REPORT_PATH?.trim();
-    if (dossierPath) {
-        const { writeFile, mkdir } = await import("node:fs/promises");
-        const { resolve, dirname } = await import("node:path");
-
-        const upstreamFindings = compositionValue.assessments
-            .flatMap(assessment => assessment.findings);
-
-        const dossier = {
-            schemaVersion: "OECL_COMPOSITION_RESEARCH_DOSSIER_V1",
-            generatedAt: new Date().toISOString(),
-            researchMode: "PINNED_GITHUB_SOURCE_DISCOVERY_NO_GLOBAL_EXPERIMENT",
-            requestedErcIds: requestedErcIds.length > 0
-                ? requestedErcIds
-                : sourceSpecs.flatMap(source => source.targetProtocolIds),
-            evaluatedErcIds: profiles.map(profile => profile.protocolId),
-            unresolvedProtocolIdentities: [...new Set(missingProtocolIds)],
-            objective,
-            sourceProvenance: sources.map(source => ({
-                sourceId: source.sourceId,
-                repository: source.spec.owner + "/" + source.spec.repo,
-                expectedRevision: source.spec.expectedRevision,
-                observedRevision: source.sourceRevision ?? null,
-                requestedProtocolIds: source.spec.targetProtocolIds
-            })),
-            participantContributions: profiles.map(profile => ({
-                protocolId: profile.protocolId,
-                sourceId: profile.sourceId,
-                sourceRevision: profile.sourceRevision ?? null,
-                contributions: profile.contributions,
-                needs: profile.needs,
-                boundaries: profile.boundaries
-            })),
-            compatibility: {
-                assessmentScope: "CANDIDATE_BOUNDARIES_NOT_GLOBAL_VIABILITY",
-                candidateEvaluations: candidateEvaluationGraph.graph?.edges ?? [],
-                globalHarmony: compositionHarmony.assessments,
-                explanation: "Candidate SUPPORT is not proof of simultaneous global composition."
-            },
-            compositionProperties: {
-                valueAssessments: compositionValue.assessments,
-                verifiedEmergentProperties: upstreamFindings.filter(
-                    finding => finding.kind === "EMERGENT_PROPERTY"
-                ),
-                note: "Findings are produced solely by existing composition-value rules; no hypothetical emergent properties are promoted."
-            },
-            risksAndBoundaries: {
-                regions: compositionEnvelopes.envelopes.flatMap(
-                    envelope => envelope.boundaryRegions
-                ),
-                evidenceGaps: candidateEvidenceGaps.diagnostics
-            },
-            configurations: {
-                solutions: nProtocolCompositionSolutions.solutions,
-                globallySupportedSubsets: compositionHarmony.assessments
-                    .flatMap(item => item.supportedSubsets)
-            },
-            evidence: {
-                provenanceCatalog: scientificDecisionTraceWithLineage.evidenceCatalog,
-                decisionTrace: scientificDecisionTraceWithLineage,
-                lineage: realEvidenceLineage,
-                globalObservationCount: 0,
-                globalExecutionStatus: "NOT_PERFORMED_IN_THIS_MODE"
-            },
-            restrictions: [
-                "Only pinned source repositories from this runner were examined.",
-                "Ethereum Magicians discussions were not queried.",
-                "No joint multi-protocol execution was performed.",
-                "Live The Graph verification was not executed in dossier-only mode.",
-                "No uncalibrated compatibility probability is reported.",
-                "READY configurations are not supported configurations."
-            ],
-            decisionAuthority: "UPSTREAM_SCIENTIFIC_ENGINES_ONLY"
-        };
-
-        const destination = resolve(dossierPath);
-        await mkdir(dirname(destination), { recursive: true });
-        await writeFile(
-            destination,
-            JSON.stringify(dossier, null, 2) + "\n",
-            "utf8"
-        );
-        console.log("OECL composition research dossier: " + destination);
-        console.log(
-            "Harmony: " +
-            compositionHarmony.assessments.map(a => a.harmonyStatus).join(", ")
-        );
-        console.log(
-            "Verified emergent findings: " +
-            dossier.compositionProperties.verifiedEmergentProperties.length
-        );
-        console.log("Global experiments: NOT PERFORMED in dossier mode");
-        return;
-    }
-
 
     /*
      * =========================================================
