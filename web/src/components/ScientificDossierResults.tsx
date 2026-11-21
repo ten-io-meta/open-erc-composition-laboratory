@@ -12,7 +12,7 @@ type Response = {
 
 function formatEtherFromWei(wei: string): string {
   const value = BigInt(wei);
-  const base = 10n ** 18n;
+  const base = BigInt("1000000000000000000");
   const whole = value / base;
   const decimals = (value % base).toString().padStart(18, "0").replace(/0+$/, "");
   return whole.toString() + (decimals ? "." + decimals : "");
