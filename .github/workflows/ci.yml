@@ -25,3 +25,6 @@ jobs:
 
       - name: Run positive experiment
         run: npm run experiment:positive
+
+      - name: Joint composition evidence regression
+        run: npx tsx scripts/check-joint-composition-evidence-bridge.ts
