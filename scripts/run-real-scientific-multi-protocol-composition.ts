@@ -580,7 +580,7 @@ async function main(): Promise<void> {
      *
      * No functional meaning is assigned to these IDs here.
      */
-    const sourceSpecs:
+    let sourceSpecs:
         RealSourceSpec[] = [
 
             {
@@ -634,6 +634,43 @@ async function main(): Promise<void> {
 
         ];
 
+
+    /*
+     * Optional explicit protocol selection, from this pinned corpus only.
+     * Other standards must first be admitted through independent evidence.
+     */
+    const requestedErcIds = (process.env.OECL_SELECTED_ERC_IDS ?? "")
+        .split(",")
+        .map(value => value.trim().toUpperCase())
+        .filter(Boolean);
+
+    if (requestedErcIds.length > 0) {
+        const unique = new Set(requestedErcIds);
+        const available = new Set(sourceSpecs.flatMap(
+            source => source.targetProtocolIds
+        ));
+
+        if (
+            unique.size !== requestedErcIds.length ||
+            unique.size < 2 ||
+            requestedErcIds.some(id => !/^ERC-\d+$/.test(id)) ||
+            requestedErcIds.some(id => !available.has(id))
+        ) {
+            throw new Error(
+                "OECL_SELECTED_ERC_IDS must contain at least 2 distinct ERCs from the pinned corpus: " +
+                [...available].sort().join(", ")
+            );
+        }
+
+        sourceSpecs = sourceSpecs
+            .map(source => ({
+                ...source,
+                targetProtocolIds: source.targetProtocolIds.filter(
+                    id => unique.has(id)
+                )
+            }))
+            .filter(source => source.targetProtocolIds.length > 0);
+    }
 
     const sources = [];
 
