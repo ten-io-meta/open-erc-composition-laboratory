@@ -1,3 +1,4 @@
+import { syntheticNativeDiscovery } from "./fixtures/build-synthetic-native-discovery.js";
 import assert from "node:assert/strict";
 import { ScientificCompositionConstraintEvaluatorEngine } from "../laboratory/scientific-composition-constraint-evaluation/ScientificCompositionConstraintEvaluatorEngine.js";
 import { ScientificExecutionResultEvaluatorEngine } from "../laboratory/scientific-execution-result-evaluator/ScientificExecutionResultEvaluatorEngine.js";
@@ -7,13 +8,14 @@ import type { ScientificExecutionOutcome } from "../laboratory/scientific-execut
 import type { ScientificExecutionOutcomeResult } from "../laboratory/scientific-execution-outcome/ScientificExecutionOutcomeResult.js";
 
 /** Regression fixture only. Fictitious tx and sources are NEVER real ERC evidence. */
-const candidateId = "BEHAVIORAL-REGRESSION-ONLY";
 const tx = "0x" + "f".repeat(64);
 const shaA = "a".repeat(40), shaB = "b".repeat(40);
 const sources = [
     { participantSide: "A" as const, participantKind: "PROTOCOL" as const, participantId: "ERC-A", sourceId: "SOURCE-A", repository: "fixture/A", sourceRevision: shaA },
     { participantSide: "B" as const, participantKind: "PROTOCOL" as const, participantId: "ERC-B", sourceId: "SOURCE-B", repository: "fixture/B", sourceRevision: shaB }
 ];
+const discovered=syntheticNativeDiscovery(sources[0],sources[1]);
+const candidateId=discovered.candidate.candidateId;
 const constraints: ScientificCompositionConstraint[] = [
     { constraintId: "SOLVENCY", candidateId, participantSide: "A", participantKind: "PROTOCOL",
       participantId: "ERC-A", sourceId: "SOURCE-A", sourceRevision: shaA, factId: "A-FACT",
@@ -77,16 +79,7 @@ function finalResult(c:ScientificCompositionConstraint[],obs:ScientificCompositi
         ...source,requiredRevision:source.sourceRevision,observedRevision:source.sourceRevision,
         localPath:"/fake/source-"+i,worktreeClean:true as const
     }));
-    const candidate={
-        candidateId,participantA:{kind:"PROTOCOL",id:"ERC-A"},
-        participantB:{kind:"PROTOCOL",id:"ERC-B"},
-        mechanism:"SHARED_RECURRENT_CONCEPT",conceptId:"SYNTHETIC-INVARIANT",
-        supportingCapabilityIdsA:["A-CAP"],supportingCapabilityIdsB:["B-CAP"],
-        provenance:[
-            {kind:"PROTOCOL_CONCEPT",sourceId:"SOURCE-A",sourceRevision:shaA,evidenceId:"DISCOVERY-FACT-A"},
-            {kind:"PROTOCOL_CONCEPT",sourceId:"SOURCE-B",sourceRevision:shaB,evidenceId:"DISCOVERY-FACT-B"}
-        ],evaluationStatus:"UNEVALUATED"
-    };
+    const candidate=structuredClone(discovered.candidate);
     const spec={
         specificationId:"SPEC-TEST",candidateId,mechanism:candidate.mechanism,
         candidateSnapshot:candidate,status:"READY",
@@ -129,7 +122,7 @@ function finalResult(c:ScientificCompositionConstraint[],obs:ScientificCompositi
         selectedExecutableTarget:null,status:"INCONCLUSIVE",scientificResult:"INCONCLUSIVE",
         executedAt:null,evidence:[],observations:[],errors:[],explanation:"",
         jointCompositionEvidence:evidence,
-        discoveredCandidateEvidence:{discovery:{candidates:[candidate],errors:[]},specifications:{specifications:[spec],errors:[]}}
+        discoveredCandidateEvidence:{discoveryInput:structuredClone(discovered.discoveryInput),discovery:structuredClone(discovered.discovery),specifications:{specifications:[spec],errors:[]}}
     } as unknown as ScientificExecutionOutcome;
     const evaluated=new ScientificExecutionResultEvaluatorEngine().build("REG",{
         generatedAt:"",campaignId:"REG",outcomes:[outcome],
