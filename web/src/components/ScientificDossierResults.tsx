@@ -31,8 +31,6 @@ export function ScientificDossierResults({
 
   useEffect(() => {
     const controller = new AbortController();
-    setData(null);
-    setError(null);
     const url = "/api/scientific/dossier?protocolA=" +
       encodeURIComponent(protocolA) + "&protocolB=" + encodeURIComponent(protocolB);
     fetch(url, { signal: controller.signal, cache: "no-store" })
