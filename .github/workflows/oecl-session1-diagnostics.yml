@@ -1,0 +1,152 @@
+name: OECL Session 1 - Scientific E2E Diagnostics
+
+# Diagnostic only: no deployment, write token, contract transactions, or main changes.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/oecl-session1-diagnostics.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scientific-components:
+    name: Existing scientific controls (not E2E proof)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: TypeScript (whole root project)
+        run: npx tsc --noEmit
+      - name: Run existing independent controls and capture results
+        shell: bash
+        run: |
+          mkdir -p session1-logs
+          scripts=(
+            check-scientific-composition-constraint-evaluator-runtime.ts
+            check-scientific-composition-candidate-compatibility-runtime.ts
+            check-scientific-n-protocol-composition-solver-runtime.ts
+            check-scientific-composition-global-evaluation-runtime.ts
+            check-scientific-composition-harmony-runtime.ts
+            check-scientific-composition-value-runtime.ts
+            check-v21-final-scientific-report-runtime.ts
+            check-v21-candidate-composition-dossier-runtime.ts
+            check-v21-real-inconclusive-control-runtime.ts
+            check-v21-real-positive-control-decision-runtime.ts
+          )
+          printf '## Scientific component checks (existing tests)\n\n' >> "$GITHUB_STEP_SUMMARY"
+          failed=0
+          for script in "${scripts[@]}"; do
+            echo "::group::$script"
+            if timeout 90s npx tsx "scripts/$script" > "session1-logs/${script%.ts}.log" 2>&1; then
+              status=PASS
+            else
+              status=FAIL
+              failed=$((failed + 1))
+            fi
+            tail -n 28 "session1-logs/${script%.ts}.log"
+            echo " $status | $script" >> "$GITHUB_STEP_SUMMARY"
+            echo "::endgroup::"
+          done
+          printf '\n**Important:** these are mostly fixture/control tests; PASS is not proof of live ERC composition.\n' >> "$GITHUB_STEP_SUMMARY"
+          echo "FAILED_SCRIPTS=$failed"
+          if [ "$failed" -gt 0 ]; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: session1-scientific-control-logs
+          path: session1-logs/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  v2-orchestration:
+    name: Main V2 orchestration (real sources; bounded run)
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Execute canonical V2 pipeline (up to 9 minutes)
+        shell: bash
+        run: |
+          echo '## Main V2 orchestration' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This command follows the existing run-oecl-v2.ts; it does not claim the separate N-protocol/Harmony engines have been connected.' >> "$GITHUB_STEP_SUMMARY"
+          if timeout 540s npm run v2 > session1-v2.log 2>&1; then
+            status=PASS
+          else
+            status=FAIL
+          fi
+          tail -n 75 session1-v2.log
+          echo "Pipeline command result: **$status**" >> "$GITHUB_STEP_SUMMARY"
+          echo "Selected generated outputs:" >> "$GITHUB_STEP_SUMMARY"
+          find . -maxdepth 2 -type f \( -path './scientific-*-results/*.json' -o -path './reports/*' -o -path './analysis-results/*.json' \) | head -n 60 >> "$GITHUB_STEP_SUMMARY" || true
+          if [ "$status" = FAIL ]; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: session1-v2-main-pipeline-log
+          path: session1-v2.log
+          if-no-files-found: ignore
+          retention-days: 7
+
+  structural-sources:
+    name: Real-source discovery (GitHub connectivity)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Test structural ERC source attribution
+        shell: bash
+        run: |
+          echo '## Real GitHub source discovery' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This checks structural documentary candidate discovery, **not** actual on-chain composition.' >> "$GITHUB_STEP_SUMMARY"
+          if timeout 480s npx tsx scripts/check-v21-real-control-structural-foundation-runtime.ts > session1-structural.log 2>&1; then
+            status=PASS
+          else
+            status=FAIL
+          fi
+          tail -n 80 session1-structural.log
+          echo "Structural source check: **$status**" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$status" = FAIL ]; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: session1-structural-source-log
+          path: session1-structural.log
+          if-no-files-found: ignore
+          retention-days: 7
+
+  web-readiness:
+    name: Current web compile (not dynamic research)
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install root dependencies used by shared laboratory imports
+        run: npm ci
+      - name: Install existing web dependencies
+        run: npm ci --prefix web
+      - name: Build existing Next.js web (no deployment)
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npm run build --prefix web
