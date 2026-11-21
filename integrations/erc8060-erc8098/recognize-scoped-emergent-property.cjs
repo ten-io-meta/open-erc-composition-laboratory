@@ -36,7 +36,7 @@ const pinned = (d,s) => d?.participants?.length===2 &&
 // Detect a bounded property from measured before/after quantities, matching
 // source-anchored assertions, independently observed burns and rollback tests.
 // Do not rely on a pre-authored property label as sufficient positive evidence.
-function recognize(d,w,s,r,h) {
+function recognize(d,w,s,r,h,actualSuccessSha256) {
   if (!pinned(d,s) || d.matchedPairCandidates?.length!==0 ||
       w.schemaVersion!=="OECL_PINNED_INVARIANT_WITNESS_V1" ||
       w.scientificPolarity!=="INCONCLUSIVE" ||
@@ -90,10 +90,44 @@ function recognize(d,w,s,r,h) {
        JSON.stringify(x.measuredStateBefore)!==JSON.stringify(x.measuredStateAfter) ||
        x.sourceProvenance?.participantA!=="ten-io-meta/erc8060-native-eth-value@"+shaA ||
        x.sourceProvenance?.participantB!=="ten-io-meta/erc8098-reference@"+shaB)) return null;
+  // Bind the observed transaction to the actual source bytes recorded by
+  // the independent pinned-source witness. A valid result label alone cannot
+  // be used as evidence for a different hypothesis or contract revision.
+  const lineage=w.sourceLineage;
+  const hashes=lineage?.sourceHashes;
+  const dep=lineage?.inheritedDependency;
+  const hex64=x=>typeof x==="string"&&/^[a-f0-9]{64}$/i.test(x);
+  const a=d.participants.find(p=>p.protocolId==="ERC-8060");
+  const b=d.participants.find(p=>p.protocolId==="ERC-8098");
+  if(!a||!b||!hashes||!hex64(hashes.A)||!hex64(hashes.B)||
+     !hex64(hashes.OZ_BURNABLE)||!hex64(w.evidenceSha256)||
+     w.evidenceSha256!==actualSuccessSha256||
+     hashes.B!==s.erc8098SourceSha256 ||
+     dep?.package!=="@openzeppelin/contracts"||
+     dep.version!=="4.9.6"||!dep.integrity||
+     !lineage.facts?.some(f=>f.side==="A"&&f.repository===a.repository&&f.revision===a.revision)||
+     !lineage.facts?.some(f=>f.side==="B"&&f.repository===b.repository&&f.revision===b.revision)||
+     !lineage.facts?.some(f=>f.side==="B"&&f.revision===dep.version&&
+       f.file==="token/ERC20/extensions/ERC20Burnable.sol"))return null;
+  const sourceBinding={
+    origin:"PINNED_SOURCE_LINEAGE_AND_LOCAL_EVM_RECEIPT",
+    participants:[
+      {sourceId:a.repository,revision:a.revision,assetClass:"NON_FUNGIBLE",sourceSha256:hashes.A},
+      {sourceId:b.repository,revision:b.revision,assetClass:"FUNGIBLE",sourceSha256:hashes.B}
+    ],
+    inheritedDependencies:[
+      {sourceId:"@openzeppelin/contracts",sourceRevision:dep.version,
+       attributedParticipantId:b.repository,sourceSha256:hashes.OZ_BURNABLE,
+       packageIntegrity:dep.integrity}
+    ],
+    chainId:s.chainId,witnessTransaction:t,
+    successEvidenceSha256:actualSuccessSha256
+  };
   return {
     kind:"SCOPED_ATOMIC_CROSS_ASSET_REDEMPTION_WITH_MONOTONE_SUPPLY",
     status:"OBSERVED_IN_PINNED_LOCAL_EVM",
     witnessTransaction:t,
+    sourceBinding,
     observations:{
       nftValueRedeemedWei:redeemed.toString(),
       fungibleSupplyDestroyedUnits:destroyed.toString(),
@@ -104,7 +138,7 @@ function recognize(d,w,s,r,h) {
     }
   };
 }
-const recognized=recognize(discovery,witness,success,rollback,hypothesis);
+const recognized=recognize(discovery,witness,success,rollback,hypothesis,files[2].sha256);
 assert.ok(recognized,"No bounded source-and-EVM-backed emergent interaction recognized");
 // Mutations prove the detector depends on observed evidence, not a target label.
 const probes=[
@@ -116,12 +150,16 @@ const probes=[
   ["altered_rollback",(d,w,s,r)=>{r.cases[0].measuredStateAfter.tokenSupply="999";}],
   ["forged_source_revision",(d)=>{d.participants[0].revision="0".repeat(40);}],
   ["missing_native_fact",(d,w)=>{w.properties[0].sourceFactIds=["NOT-A-SOURCE-FACT"];}],
-  ["missing_joint_property",(d,w)=>{w.properties=w.properties.filter(x=>x.invariantId!=="INV-JOINT-ATOMIC-BURNS");}]
+  ["missing_joint_property",(d,w)=>{w.properties=w.properties.filter(x=>x.invariantId!=="INV-JOINT-ATOMIC-BURNS");}],
+  ["invariant_witness_from_other_receipt",(d,w)=>{w.evidenceSha256="0".repeat(64);}],
+  ["participant_source_hash_inconsistent",(d,w)=>{w.sourceLineage.sourceHashes.B="0".repeat(64);}],
+  ["missing_dependent_burn_lineage",(d,w)=>{w.sourceLineage.facts=w.sourceLineage.facts.filter(x=>x.file!=="token/ERC20/extensions/ERC20Burnable.sol");}],
+  ["altered_dependency_version",(d,w)=>{w.sourceLineage.inheritedDependency.version="5.0.0";}]
 ];
 for(const [label,mutate] of probes) {
   const inputs=structuredClone([discovery,witness,success,rollback,hypothesis]);
   mutate(...inputs);
-  assert.equal(recognize(...inputs),null,"Forged evidence falsely recognized: "+label);
+  assert.equal(recognize(...inputs,files[2].sha256),null,"Forged evidence falsely recognized: "+label);
 }
 const report={
   schemaVersion:"OECL_SOURCE_BOUND_EMERGENT_PROPERTY_RECOGNITION_V1",
