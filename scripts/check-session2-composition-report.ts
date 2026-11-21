@@ -20,8 +20,42 @@ assert.ok(report.sourceProvenance.every((s: any) =>
 ));
 assert.ok(report.participantContributions.some((p: any) => p.protocolId === "ERC-8004"));
 assert.ok(report.participantContributions.some((p: any) => p.protocolId === "ERC-8060"));
+assert.equal(report.structuralDiscovery.normalizedCandidates.length, 1);
+const structural = report.structuralDiscovery.normalizedCandidates[0];
+assert.deepEqual(
+    [structural.participantAId, structural.participantBId],
+    ["ERC-8004", "ERC-8060"]
+);
+assert.equal(structural.foundationProtocolId, "ERC-721");
+assert.equal(structural.mechanism, "SHARED_PROTOCOL_FOUNDATION");
+assert.equal(structural.evaluationStatus, "UNEVALUATED");
+assert.ok(structural.provenance.length >= 2);
+assert.ok(
+    structural.provenance.every((p: any) =>
+        report.sourceProvenance.some((source: any) =>
+            source.sourceId === p.sourceId &&
+            source.observedRevision === p.sourceRevision
+        )
+    ),
+    "Every structural relation must be traceable to pinned source revisions"
+);
+
 assert.ok(Array.isArray(report.compatibility.candidateEvaluations));
 assert.ok(Array.isArray(report.compatibility.globalHarmony));
+assert.equal(report.compatibility.candidateEvaluations.length, 1);
+const evaluation = report.compatibility.candidateEvaluations[0];
+assert.equal(evaluation.kind, "STRUCTURAL_FOUNDATION");
+assert.equal(evaluation.compatibilityPolarity, "INCONCLUSIVE");
+assert.equal(evaluation.compatibilityEvidenceIds.length, 0);
+assert.ok(evaluation.discoveryEvidenceIds.length > 0);
+assert.equal(report.compositionProperties.valueAssessments.length, 1);
+assert.equal(
+    report.compositionProperties.valueAssessments[0].valueEvaluationStatus,
+    "NOT_ESTABLISHED"
+);
+assert.equal(report.configurations.solutions.length, 1);
+
+
 assert.ok(Array.isArray(report.compositionProperties.valueAssessments));
 assert.ok(Array.isArray(report.risksAndBoundaries.regions));
 assert.ok(Array.isArray(report.risksAndBoundaries.gaps));
