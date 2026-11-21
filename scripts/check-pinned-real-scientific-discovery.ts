@@ -12,6 +12,7 @@ import { ScientificProtocolIdentityAttributionEngine } from "../laboratory/scien
 import { ScientificStructuralProtocolRelationEvidenceEngine } from "../laboratory/scientific-protocol-relation-evidence/ScientificStructuralProtocolRelationEvidenceEngine.js";
 import { CrossProtocolCompositionEngine } from "../laboratory/scientific-cross-protocol-composition/CrossProtocolCompositionEngine.js";
 import { ScientificSolidityInheritanceGraphEngine } from "../laboratory/scientific-solidity-inheritance/ScientificSolidityInheritanceGraphEngine.js";
+import { ScientificInheritedCapabilityProjectionEngine } from "../laboratory/scientific-inherited-capability/ScientificInheritedCapabilityProjectionEngine.js";
 import type { ScientificSourceObservation } from "../laboratory/scientific-source-observation/ScientificSourceObservation.js";
 
 const sources=[
@@ -125,6 +126,57 @@ async function main(){
     assert.ok(foundEdge("ERC8060Reference","ERC721URIStorage"),"ERC8060 -> ERC721URIStorage inheritance unresolved");
     assert.ok(foundEdge("ERC721URIStorage","ERC721"),"ERC721URIStorage -> ERC721 inheritance unresolved");
 
+    const capabilityProjector=new ScientificInheritedCapabilityProjectionEngine();
+    const allFacts=[...participantFacts,...inheritedFacts];
+    const roots=[
+        {id:"ERC-8060",symbol:"ERC8060Reference",sourceId:sources[0].sourceId,revision:sources[0].revision},
+        {id:"ERC-8098",symbol:"ERC8098Reference",sourceId:sources[1].sourceId,revision:sources[1].revision}
+    ];
+    const inheritedCapabilityObservations=roots.map(root=>{
+        const nodes=inheritanceGraph.containers.filter(x=>
+            x.containerSymbol===root.symbol && x.sourceId===root.sourceId &&
+            x.sourceRevision===root.revision
+        );
+        assert.equal(nodes.length,1,"Unique exact participant container not found");
+        const projection=capabilityProjector.project({
+            graph:inheritanceGraph,facts:allFacts,
+            rootDeclarationFactId:nodes[0].declarationFactId,
+            symbols:["burn","_burn"]
+        });
+        assert.deepEqual(projection.errors,[]);
+        const burnFacts=projection.capabilities.filter(x=>x.symbol==="burn");
+        assert.ok(burnFacts.length>=1,"No source-backed burn declaration for "+root.id);
+        if(root.id==="ERC-8098") {
+            assert.ok(burnFacts.some(x=>x.containerSymbol==="ERC20Burnable" &&
+                x.depth>0 && x.inheritanceEdgeIds.length===x.depth &&
+                x.sourceRevision==="4.9.6"),"Inherited ERC20Burnable burn was not attributed");
+        } else {
+            assert.ok(burnFacts.some(x=>x.containerSymbol==="ERC8060Reference" &&
+                x.depth===0 && x.sourceRevision===root.revision),
+                "Direct ERC8060 NFT burn was not attributed");
+        }
+        return {
+            protocolId:root.id,
+            status:projection.status,
+            unresolved:projection.unresolved,
+            burnCapabilityProvenance:projection.capabilities.map(x=>({
+                symbol:x.symbol,
+                sourceId:x.sourceId,sourceRevision:x.sourceRevision,
+                containerSymbol:x.containerSymbol,sourceFactId:x.declarationFactId,
+                sourceLocator:x.sourceLocator,sourceRawText:x.sourceRawText,
+                depth:x.depth,inheritanceEdgeIds:x.inheritanceEdgeIds,
+                inheritanceContainers:x.inheritanceContainers
+            })),
+            limitation:"These are Solidity function declaration facts, not proof of equivalent ERC20/ERC721 burn semantics or two independent recurrent capabilities."
+        };
+    });
+    assert.ok(inheritedCapabilityObservations.every(x=>
+        x.burnCapabilityProvenance.some(y=>y.symbol==="burn")
+    ));
+    // Presence of one public burn and one internal _burn is not two independent
+    // protocol-level capabilities and must NOT open a recurrent-concept candidate.
+    // Keep these observations separate from discoveryInput until a reviewed
+    // native semantic model can justify an independently recurring concept.
     const paths={
         "ERC-8060":["ERC8060Reference","ERC721URIStorage","ERC721"],
         "ERC-8098":["ERC8098Reference","ERC20Burnable","ERC20"]
@@ -168,10 +220,11 @@ async function main(){
         schemaVersion:"OECL_REAL_PINNED_SCIENTIFIC_DISCOVERY_V1",
         participants,
         inheritedEvidence,
+        inheritedCapabilityObservations,
         sourceKinds:["PINNED_SOLIDITY_SOURCE_FACTS","NATIVE_SEMANTIC_CAPABILITY_ATTRIBUTION",
             "NATIVE_CONCEPT_ABSTRACTION","NATIVE_PROTOCOL_CONCEPT_ATTRIBUTION",
             "NATIVE_PROTOCOL_IDENTITY","NATIVE_STRUCTURAL_PROTOCOL_RELATION",
-            "PINNED_INHERITANCE_GRAPH"],
+            "PINNED_INHERITANCE_GRAPH","SOURCE_ANCHORED_INHERITED_FUNCTION_PROJECTION"],
         discovery,
         matchedPairCandidates:pair,
         structuralCandidateCount:pair.length,
@@ -192,7 +245,13 @@ async function main(){
             lexicalConcepts:p.recurrentLexicalConcepts,
             protocolConcepts:p.attributedProtocolConcepts.map(x=>x.conceptId)})),
         candidateCount:pair.length,status:report.epistemicStatus,scientificPolarity:report.scientificPolarity,
-        inheritedPaths:paths
+        inheritedPaths:paths,
+        functionBurnProvenance:inheritedCapabilityObservations.map(x=>({
+            id:x.protocolId,status:x.status,unresolved:x.unresolved.length,
+            burn:x.burnCapabilityProvenance.filter(y=>y.symbol==="burn").map(y=>({
+                container:y.containerSymbol,sourceRevision:y.sourceRevision,depth:y.depth
+            }))
+        }))
     }));
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
