@@ -77,11 +77,34 @@ function finalResult(c:ScientificCompositionConstraint[],obs:ScientificCompositi
         ...source,requiredRevision:source.sourceRevision,observedRevision:source.sourceRevision,
         localPath:"/fake/source-"+i,worktreeClean:true as const
     }));
+    const candidate={
+        candidateId,participantA:{kind:"PROTOCOL",id:"ERC-A"},
+        participantB:{kind:"PROTOCOL",id:"ERC-B"},
+        mechanism:"SHARED_RECURRENT_CONCEPT",conceptId:"SYNTHETIC-INVARIANT",
+        supportingCapabilityIdsA:["A-CAP"],supportingCapabilityIdsB:["B-CAP"],
+        provenance:[
+            {kind:"PROTOCOL_CONCEPT",sourceId:"SOURCE-A",sourceRevision:shaA,evidenceId:"DISCOVERY-FACT-A"},
+            {kind:"PROTOCOL_CONCEPT",sourceId:"SOURCE-B",sourceRevision:shaB,evidenceId:"DISCOVERY-FACT-B"}
+        ],evaluationStatus:"UNEVALUATED"
+    };
+    const spec={
+        specificationId:"SPEC-TEST",candidateId,mechanism:candidate.mechanism,
+        candidateSnapshot:candidate,status:"READY",
+        sourceIds:["SOURCE-A","SOURCE-B"],targetEvidenceIds:["DISCOVERY-FACT-A","DISCOVERY-FACT-B"],
+        constraints:c,participantAConstraintIds:["SOLVENCY"],participantBConstraintIds:["NONINCREASE"],
+        unresolvedGuardFactIds:[],
+        scientificCriteria:{
+            relation:"PRESERVES_OBSERVED_CONSTRAINTS",
+            support:{expectedPolarity:"SUPPORT",condition:"ALL_OBSERVED_PARTICIPANT_CONSTRAINTS_PRESERVED"},
+            challenge:{expectedPolarity:"CHALLENGE",condition:"ANY_OBSERVED_PARTICIPANT_CONSTRAINT_VIOLATED"},
+            inconclusive:{whenNoScientificPolarity:true}
+        }
+    };
     const evidence={
         runtime:"OECL_NATIVE_COMPOSITION_JOINT_CONTRACT_EXECUTION",
         compositionExecutionRequirement:{
             requirementId:"REQ-TEST",evaluationSpecificationId:"SPEC-TEST",
-            candidate:{ candidateId,participantA:{kind:"PROTOCOL",id:"ERC-A"},participantB:{kind:"PROTOCOL",id:"ERC-B"}},
+            candidate,
             constraints:c,participantAConstraintIds:["SOLVENCY"],participantBConstraintIds:["NONINCREASE"],
             unresolvedGuardFactIds:[],participantSources:sources
         },
@@ -105,7 +128,8 @@ function finalResult(c:ScientificCompositionConstraint[],obs:ScientificCompositi
         stepId:"STEP-1",stepType:"COMPOSITION_EXECUTION",repository:null,
         selectedExecutableTarget:null,status:"INCONCLUSIVE",scientificResult:"INCONCLUSIVE",
         executedAt:null,evidence:[],observations:[],errors:[],explanation:"",
-        jointCompositionEvidence:evidence
+        jointCompositionEvidence:evidence,
+        discoveredCandidateEvidence:{discovery:{candidates:[candidate],errors:[]},specifications:{specifications:[spec],errors:[]}}
     } as unknown as ScientificExecutionOutcome;
     const evaluated=new ScientificExecutionResultEvaluatorEngine().build("REG",{
         generatedAt:"",campaignId:"REG",outcomes:[outcome],
