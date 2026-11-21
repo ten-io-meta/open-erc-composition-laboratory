@@ -73,6 +73,10 @@ jobs:
         working-directory: oecl
         run: npx tsx scripts/check-pinned-candidate-admission.ts ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json
 
+      - name: Discover genuine structural protocol candidates from both pinned Solidity sources
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-real-scientific-discovery.ts ../source-8060 ../source-8098 ../joint-evidence/erc8060-erc8098-source-discovery.json
+
       - name: Upload joint transaction and provenance receipts
         if: always()
         uses: actions/upload-artifact@v4
