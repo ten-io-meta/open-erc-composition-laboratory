@@ -1,0 +1,60 @@
+name: OECL Joint Pinned ERC-8060 and ERC-8098
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  two-pinned-references:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OECL evidence producer
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+
+      - name: Checkout pinned ERC-8060
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+
+      - name: Checkout pinned ERC-8098
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pinned EVM dependencies
+        working-directory: source-8060
+        run: npm ci
+
+      - name: Build joint test workspace from both immutable checkouts
+        run: |
+          cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+
+      - name: Execute ERC-8060 and ERC-8098 in one local EVM
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
+        run: npx hardhat test test/OECLPinnedReferences.test.js
+
+      - name: Validate both source revisions and transaction evidence
+        run: node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Upload joint transaction and provenance receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-two-pinned-references
+          path: joint-evidence/*.json
+          if-no-files-found: warn
