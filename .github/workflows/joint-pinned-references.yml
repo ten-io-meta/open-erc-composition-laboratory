@@ -69,6 +69,10 @@ jobs:
         working-directory: oecl
         run: npx tsx scripts/check-pinned-behavioral-native-witness.ts ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-pinned.json
 
+      - name: Apply discovery admission gate to pinned local-EVM candidate
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-candidate-admission.ts ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json
+
       - name: Upload joint transaction and provenance receipts
         if: always()
         uses: actions/upload-artifact@v4
