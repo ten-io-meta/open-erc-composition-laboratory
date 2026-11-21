@@ -62,6 +62,10 @@ jobs:
       - name: Discover typed complementarity independently from compiler AST before EVM
         run: node oecl/scripts/check-graph-behavioral-discovery.cjs joint-evidence/erc8060-erc8098-structural-graph.json joint-evidence/erc8060-erc8098-ast-hypothesis.json
 
+      - name: Discover source-only behavioral hypotheses and draft evaluation specification in native OECL
+        working-directory: oecl
+        run: npx tsx scripts/check-native-ast-behavioral-specification.ts ../joint-evidence/erc8060-erc8098-structural-graph.json ../joint-evidence/erc8060-erc8098-ast-hypothesis.json ../joint-evidence/erc8060-erc8098-native-ast-study.json
+
       - name: Execute ERC-8060 and ERC-8098 in one local EVM
         working-directory: source-8060
         env:
