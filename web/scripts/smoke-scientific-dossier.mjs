@@ -67,7 +67,21 @@ try {
   assert.equal(refusedBody.status, "NOT_CONFIGURED");
   const unknownStatus = await fetch(base + "/api/scientific/jobs/123e4567-e89b-42d3-a456-426614174000");
   assert.equal(unknownStatus.status, 503);
-  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export, disabled jobs");  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export");
+  const sourceConfig = await fetch(base + "/api/scientific/source-jobs");
+  assert.equal(sourceConfig.status, 200);
+  const sourceSettings = await sourceConfig.json();
+  assert.equal(sourceSettings.enabled, false);
+  assert.equal(sourceSettings.acceptsArbitraryRepositories, false);
+  assert.equal(sourceSettings.runsEvm, false);
+  assert.equal(sourceSettings.sources.length, 6);
+  const sourceRejected = await fetch(base + "/api/scientific/source-jobs", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sourceA: "ERC-8060", sourceB: "ERC-20-BURNABLE" }),
+  });
+  assert.equal(sourceRejected.status, 503);
+  const sourceStatus = await fetch(base + "/api/scientific/source-jobs/123e4567-e89b-42d3-a456-426614174000");
+  assert.equal(sourceStatus.status, 503);
+  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned dossier, disabled pinned + generic source jobs, rejected dispatch and ZIP-safe status");  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export");
 } finally {
   if (server.pid) {
     try { process.kill(-server.pid, "SIGTERM"); } catch { /* Already exited. */ }
