@@ -12,7 +12,7 @@ permissions:
 jobs:
   isolated-modern-evm:
     runs-on: ubuntu-latest
-    timeout-minutes: 24
+    timeout-minutes: 30
     steps:
       - name: Checkout OECL experimental runner
         uses: actions/checkout@v4
@@ -80,6 +80,18 @@ jobs:
         working-directory: oecl/integrations/modern-evm-toolchain
         run: node scripts/adversarial-matrix.mjs
 
+      - name: Modern Ethers6 direct and delegated ERC20Burnable authorization evidence
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/burn-authorization-parity.mjs
+
+      - name: Modern Ethers6 two-holder maximum-surplus and sequential burn evidence
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/multi-holder-parity.mjs
+
+      - name: Modern Ethers6 pinned NFT local debug opcode observation
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/nft-opcode-parity.mjs
+
       - name: Install separately pinned audited Hardhat 2 Ethers 5 toolchain for historical controls
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
@@ -99,6 +111,9 @@ jobs:
           cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
           cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInheritedBurnAuthorization.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLMultiHolderSolvency.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLNftOpcodePath.test.js source-8060/test/
 
       - name: Re-execute independent historical Ethers5 positive, four failure, and two callback controls
         working-directory: source-8060
@@ -106,14 +121,20 @@ jobs:
           OECL_JOINT_EVIDENCE_PATH: ../historical-evidence/historical-positive.json
           OECL_FAILURE_MATRIX_PATH: ../historical-evidence/historical-failures.json
           OECL_ETH_CALLBACK_EVIDENCE_PATH: ../historical-evidence/historical-callbacks.json
+          OECL_INHERITED_BURN_AUTH_PATH: ../historical-evidence/historical-inherited-burn.json
+          OECL_MULTIHOLDER_EVIDENCE_PATH: ../historical-evidence/historical-multiholder.json
+          OECL_NFT_OPCODE_TRACE_PATH: ../historical-evidence/historical-nft-opcode.json
         run: |
-          ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js test/OECLInteractionFailureMatrix.test.js test/OECLAdversarialEthReceiver.test.js
+          ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js test/OECLInteractionFailureMatrix.test.js test/OECLAdversarialEthReceiver.test.js test/OECLInheritedBurnAuthorization.test.js test/OECLMultiHolderSolvency.test.js test/OECLNftOpcodePath.test.js
 
       - name: Validate source bound historical receipts before comparison
         run: |
           node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 historical-evidence/historical-positive.json
           node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 historical-evidence/historical-failures.json
           node oecl/integrations/erc8060-erc8098/check-eth-callback-experiments.cjs source-8060 source-8098 historical-evidence/historical-callbacks.json
+          node oecl/integrations/erc8060-erc8098/check-inherited-burn-auth.cjs source-8060 source-8098 historical-evidence/historical-inherited-burn.json
+          node oecl/integrations/erc8060-erc8098/check-multiholder-solvency.cjs source-8060 source-8098 historical-evidence/historical-multiholder.json
+          node oecl/integrations/erc8060-erc8098/check-nft-opcode-path.cjs source-8060 source-8098 historical-evidence/historical-nft-opcode.json
 
       - name: Compare independent historic and modern EVM receipts by normalized observed invariants
         env:
@@ -125,6 +146,30 @@ jobs:
             historical-evidence/historical-failures.json \
             historical-evidence/historical-callbacks.json \
             oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
+
+      - name: Compare three additional historical and modern scientific experiment families
+        env:
+          OECL_EXTENDED_PARITY_PATH: historical-evidence/extended-parity.json
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-extended-pinned-evidence.cjs \
+            historical-evidence/historical-inherited-burn.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-burn-authorization.json \
+            historical-evidence/historical-multiholder.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-multiholder.json \
+            historical-evidence/historical-nft-opcode.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
+            historical-evidence/historical-nft-opcode.validated.json
+
+      - name: Reject twelve forged extended parity and provenance claims
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-extended-pinned-evidence-negative.cjs \
+            historical-evidence/historical-inherited-burn.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-burn-authorization.json \
+            historical-evidence/historical-multiholder.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-multiholder.json \
+            historical-evidence/historical-nft-opcode.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
+            historical-evidence/historical-nft-opcode.validated.json
 
       - name: Reject nine forged cross-runtime comparison claims
         run: |
