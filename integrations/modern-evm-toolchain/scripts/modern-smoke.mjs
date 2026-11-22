@@ -21,7 +21,8 @@ await (await nft.connect(alice).mint("ipfs://oecl-modern-smoke", {
   value: ethers.parseEther("0.12"),
 })).wait();
 const beforeSupply = await token.totalSupply();
-const value = await nft.valueOf(1n);
+// Explicit ABI selector avoids the Ethers 6 / JavaScript valueOf() name collision.
+const value = await nft.getFunction("valueOf(uint256)").staticCall(1n);
 const beforeHolder = await ethers.provider.getBalance(alice.address);
 const beforeBacking = await ethers.provider.getBalance(await nft.getAddress());
 await (await nft.connect(alice).approve(await joint.getAddress(), 1n)).wait();
