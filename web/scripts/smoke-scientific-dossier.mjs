@@ -126,7 +126,7 @@ try {
   const independentJson = await fetch(base +
     "/api/scientific/independent-evm?sourceA=ERC-8060&sourceB=ERC-20-BURNABLE&download=1");
   assert.equal(independentJson.status,200);
-  assert.match(independentJson.headers.get("content-disposition")??"","attachment");
+  assert.match(independentJson.headers.get("content-disposition")??"",/attachment/);
   assert.deepEqual(await independentJson.json(),independent.report);
   const unknownEvm = await fetch(base +
     "/api/scientific/independent-evm?sourceA=ERC-8060&sourceB=ERC-8098");
