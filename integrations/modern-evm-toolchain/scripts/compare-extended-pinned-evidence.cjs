@@ -14,6 +14,8 @@ function compare(burnOld,burnNew,solventOld,solventNew,opcodeOld,opcodeNew,opcod
   assert.equal(burnNew.schemaVersion,"OECL_MODERN_INHERITED_BURN_PARITY_V1");
   assert.equal(burnOld.source.revision,B);
   assert.equal(burnNew.sourceRevision,B);
+  assert.match(burnOld.source.sha256,/^[a-f0-9]{64}$/);
+  assert.equal(burnOld.source.sha256,burnNew.sourceSha256,"Must test same pinned ERC8098 source bytes");
   assert.equal(burnOld.chainId,31337);
   assert.equal(burnNew.chainId,31337);
   assert.equal(burnOld.dependency.version,"4.9.6");
