@@ -1,13 +1,34 @@
 name: OECL Joint Pinned ERC-8060 and ERC-8098
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('OECL-REQUEST-{0}', inputs.request_id) || format('OECL-JOINT-{0}', github.run_id) }}
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: 'UUID correlation ID for controlled pinned reproduction'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'workflow_dispatch' && 'oecl-pinned-reproduction' || github.run_id }}
+  cancel-in-progress: false
 
 jobs:
   two-pinned-references:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate authorized-format manual request identifier
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+        run: |
+          node -e 'const id=process.env.OECL_REQUEST_ID || ""; if(!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id)){console.error("INVALID_OECL_REQUEST_ID");process.exit(1)}'
+
       - name: Checkout OECL evidence producer
         uses: actions/checkout@v4
         with:
@@ -181,6 +202,15 @@ jobs:
 
       - name: Reject manipulated evidence and fabricated scientific verdicts in user dossier
         run: node oecl/scripts/check-user-scientific-dossier.cjs joint-evidence
+
+      - name: Record workflow-dispatch provenance with the evidence bundle
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+          OECL_WORKFLOW_RUN: ${{ github.run_id }}
+          OECL_WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          node -e 'const fs=require("node:fs");fs.writeFileSync("joint-evidence/erc8060-erc8098-dispatch-provenance.json",JSON.stringify({schemaVersion:"OECL_PINNED_REPRO_DISPATCH_V1",requestId:process.env.OECL_REQUEST_ID,runId:process.env.OECL_WORKFLOW_RUN,workflowSha:process.env.OECL_WORKFLOW_SHA,mode:"CONTROLLED_PINNED_REPRODUCTION",scientificVerdict:"NOT_EVALUATED_BY_DISPATCH"},null,2)+"\\n")'
 
       - name: Upload joint transaction and provenance receipts
         if: always()

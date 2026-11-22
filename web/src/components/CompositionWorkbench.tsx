@@ -8,6 +8,7 @@ import {
   ScientificPairResults,
 } from "@/components/ScientificPairResults";
 import { ScientificDossierResults } from "@/components/ScientificDossierResults";
+import { PinnedAnalysisJobLauncher } from "@/components/PinnedAnalysisJobLauncher";
 
 
 function normalize(
@@ -137,6 +138,8 @@ export function CompositionWorkbench() {
 
       </div>
 
+
+      <PinnedAnalysisJobLauncher isSelected={isPinnedDossier} />
 
       {submitted && (
 

@@ -33,6 +33,8 @@ jobs:
         run: npm ci
       - name: Test pinned dossier digest, scope and negative controls
         run: node scripts/check-scientific-dossier.mjs
+      - name: Verify controlled on-demand job policy and mock GitHub dispatch
+        run: node --experimental-strip-types scripts/check-on-demand-jobs.mjs
       - name: Lint web
         run: npm run lint
       - name: Compile production web

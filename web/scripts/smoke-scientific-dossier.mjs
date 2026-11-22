@@ -54,7 +54,20 @@ try {
   const downloaded = await file.json();
   assert.deepEqual(downloaded, body.dossier);
 
-  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export");
+  // The on-demand service is intentionally fail-closed without credentials.
+  const availability = await fetch(base + "/api/scientific/jobs");
+  assert.equal(availability.status, 200);
+  const config = await availability.json();
+  assert.equal(config.arbitraryRepositoryAnalysisAvailable, false);
+  assert.equal(config.requiresResearchAccessKey, true);
+  assert.equal(config.enabled, false);
+  const refused = await fetch(base + "/api/scientific/jobs", { method: "POST" });
+  assert.equal(refused.status, 503);
+  const refusedBody = await refused.json();
+  assert.equal(refusedBody.status, "NOT_CONFIGURED");
+  const unknownStatus = await fetch(base + "/api/scientific/jobs/123e4567-e89b-42d3-a456-426614174000");
+  assert.equal(unknownStatus.status, 503);
+  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export, disabled jobs");  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export");
 } finally {
   if (server.pid) {
     try { process.kill(-server.pid, "SIGTERM"); } catch { /* Already exited. */ }
