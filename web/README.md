@@ -17,6 +17,8 @@ The payload was projected from real compiler AST and pinned local-EVM artifacts.
 
 **Scientific boundary:** INCONCLUSIVE, NOT_ADMITTED. The native scientific candidate was not admitted. The ten questions have scoped local observations, but source coverage is incomplete and the observations are not independent public-chain replay or a full security proof. A local constraint SUPPORT never becomes global SUPPORTS in this web projection.
 
+The upstream research-only security and evidence review is maintained in [PR #9 review](../docs/reviews/pr9-final-security-evidence-review.md). It explicitly distinguishes the 11 observed scenario classes from 9 untested classes, including adversarial asset implementations, concurrency, and public-chain replay. Reconciliation of the PR #9 branch with this web layer changes neither the pinned JSON payload nor its SHA-256; the dossier remains an immutable historical report, not a live scientific re-evaluation.
+
 The snapshot is pinned with a SHA-256 over JSON.stringify of the imported JSON. If modified without revising the server manifest, the API rejects it. The website's digest confirms snapshot consistency, **not** independent validity of all source artifacts; source evidence remains available in the GitHub Actions run.
 
 Other ERC pairs keep the original /api/scientific/pair materialized projection. The dossier route returns 404 NO_VERIFIED_DOSSIER for unpinned pairs; this is not an incompatibility result.
