@@ -64,6 +64,7 @@ jobs:
           cp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
           cp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
           cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol oecl/integrations/modern-evm-toolchain/contracts/
           cmp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8060Reference.sol
           cmp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8098Reference.sol
 
@@ -74,6 +75,10 @@ jobs:
       - name: Run Ethers6 local experiment with numerical checks
         working-directory: oecl/integrations/modern-evm-toolchain
         run: node scripts/modern-smoke.mjs
+
+      - name: Reproduce bounded adversarial rollback and callback controls with Ethers6
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/adversarial-matrix.mjs
 
       - name: Require zero advisory in new modern environment
         run: |
