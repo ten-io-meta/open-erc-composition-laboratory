@@ -21,6 +21,7 @@ contract OECLAdversarialBurnableCaller is IERC721Receiver {
     IOECLApproveToken public immutable fungible;
     IOECLRedeemCaller public immutable coordinator;
     uint8 public mode; // 0 normal; 1 reject; 2 attempt nested redeem
+    uint256 public ownedTokenId;
     bool public nestedRejected;
 
     constructor(address nft_, address token_, address coordinator_) {
@@ -36,6 +37,7 @@ contract OECLAdversarialBurnableCaller is IERC721Receiver {
 
     function mintAndApprove(uint256 tokenId, uint256 amount) external payable {
         nft.mint{value: msg.value}("ipfs://oecl-independent-evm");
+        ownedTokenId = tokenId;
         nft.approve(address(coordinator), tokenId);
         require(fungible.approve(address(coordinator), amount), "Approval failed");
     }
@@ -52,7 +54,7 @@ contract OECLAdversarialBurnableCaller is IERC721Receiver {
         if (mode == 1) revert("Intentional receiver rejection");
         if (mode == 2) {
             (bool ok, ) = address(coordinator).call(
-                abi.encodeWithSelector(IOECLRedeemCaller.redeem.selector, uint256(1))
+                abi.encodeWithSelector(IOECLRedeemCaller.redeem.selector, ownedTokenId)
             );
             require(!ok, "Unexpected nested success");
             nestedRejected = true;
