@@ -66,7 +66,7 @@ function verifyRun(run:RunMetadata,expect:{
     reject("JOB_CORRELATION_MISMATCH");
 }
 function approvedArchiveLocation(value:string|null){
-  if(!value)reject("SIGNED_ARCHIVE_URL_MISSING");
+  if(value===null || value==="")throw new SourceGraphGatewayError("SIGNED_ARCHIVE_URL_MISSING");
   let location:URL;
   try{location=new URL(value);}catch{return reject("SIGNED_ARCHIVE_URL_INVALID");}
   const host=location.hostname.toLowerCase();
@@ -81,9 +81,11 @@ function approvedArchiveLocation(value:string|null){
 }
 async function boundedBytes(response:Response){
   const length=Number(response.headers.get("content-length")||"0");
-  if(!response.ok || (length && length>maxArchiveSize) || !response.body)
+  if(!response.ok || (length && length>maxArchiveSize))
     reject("ARCHIVE_RESPONSE_INVALID");
-  const reader=response.body.getReader();
+  const stream=response.body;
+  if(stream===null)throw new SourceGraphGatewayError("ARCHIVE_RESPONSE_INVALID");
+  const reader=stream.getReader();
   let total=0;
   const buffers:Uint8Array[]=[];
   try{
