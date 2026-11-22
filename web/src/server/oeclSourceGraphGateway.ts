@@ -29,7 +29,8 @@ type ArtifactMeta = {id:number;name:string;expired:boolean;size_in_bytes:number}
 const maxArchiveSize=1_500_000;
 
 export class SourceGraphGatewayError extends Error {
-  constructor(readonly code: string) { super(code); }
+  readonly code: string;
+  constructor(code: string) { super(code); this.code=code; }
 }
 const reject=(code:string):never=>{throw new SourceGraphGatewayError(code);};
 function apiHeaders(token:string) {
