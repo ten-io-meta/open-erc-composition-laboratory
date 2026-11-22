@@ -1,0 +1,53 @@
+name: OECL Pinned Experimental Toolchain Audit
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-pinned-toolchain-audit.yml'
+      - 'scripts/audit-experimental-toolchain.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locked-external-dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout OECL audit scripts
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout immutable scientific ERC-8060 source AND original lockfile
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+
+      - name: Setup Node 22 for lockfile diagnostic only
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Inspect pinned lockfile without installing or executing third-party dependencies
+        run: |
+          mkdir -p reports
+          cd dependency-source
+          npm audit --package-lock-only --json --audit-level=low > ../reports/all.json || true
+          npm audit --package-lock-only --omit=dev --json --audit-level=low > ../reports/prod.json || true
+          cd ..
+          node oecl/scripts/audit-experimental-toolchain.cjs reports/all.json reports/prod.json dependency-source/package-lock.json
+
+      - name: Upload complete advisory details and SHA-256 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-experimental-toolchain-audit
+          path: reports/*.json
+          if-no-files-found: warn
+          retention-days: 14
