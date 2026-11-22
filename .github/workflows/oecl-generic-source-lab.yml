@@ -7,6 +7,8 @@ on:
       - 'laboratory/scientific-open-source-worker/**'
       - 'scripts/check-generic-source-worker.cjs'
       - 'scripts/check-source-graph-view.cjs'
+      - 'scripts/check-ast-path-feasibility.cjs'
+      - 'scripts/check-source-path-feasibility-artifacts.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   pull_request:
@@ -14,6 +16,8 @@ on:
       - 'laboratory/scientific-open-source-worker/**'
       - 'scripts/check-generic-source-worker.cjs'
       - 'scripts/check-source-graph-view.cjs'
+      - 'scripts/check-ast-path-feasibility.cjs'
+      - 'scripts/check-source-path-feasibility-artifacts.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   workflow_dispatch:
@@ -71,6 +75,9 @@ jobs:
       - name: Run generic source and provenance falsification controls
         run: node oecl/scripts/check-generic-source-worker.cjs
 
+      - name: Falsify contradictory guards, inherited modifiers and AST path assumptions
+        run: node oecl/scripts/check-ast-path-feasibility.cjs
+
       - name: Reject invalid workflow request before any source fetch
         if: github.event_name == 'workflow_dispatch'
         env:
@@ -102,6 +109,10 @@ jobs:
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-1155 ERC-20 dependency-source source-output/pair-1155-20
           node -e 'const fs=require("node:fs");for(const folder of ["pair-8060-8098","pair-8060-20burnable","pair-8098-20"]){const r=JSON.parse(fs.readFileSync("source-output/"+folder+"/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses<1){console.error("OECL_GENERIC_DISCOVERY_REGRESSION:"+folder);process.exit(1)}}'
           node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-1155-20/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses!==0||r.discoveryReason!=="NO_ADMISSIBLE_SOURCE_RELATION_DISCOVERED"){console.error("OECL_NEGATIVE_DISCOVERY_MUST_REMAIN_INCONCLUSIVE");process.exit(1)}'
+
+      - name: Check path feasibility reports and executable-EVM experiment proposals on real pinned sources
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/scripts/check-source-path-feasibility-artifacts.cjs source-output
 
       - name: Verify and project four independently sourced AST graphs for browser exploration
         if: github.event_name != 'workflow_dispatch'
