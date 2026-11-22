@@ -90,6 +90,9 @@ jobs:
       - name: Challenge recorded receipt with adversarial source and verdict mutations
         run: |
           node oecl/integrations/erc8060-erc20-burnable/check-independent-negative-controls.cjs source-8060 oecl evidence/source evidence/erc8060-erc20-burnable-evm.json
+      - name: Project source-attributed independent local EVM and native-property report for web
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/project-verified-web-report.cjs evidence/erc8060-erc20-burnable-evm.json evidence/erc8060-erc20-burnable-native-properties.json evidence/erc8060-erc20-burnable-native-bridge.json evidence/erc8060-erc20-burnable-web-summary.json
       - name: Upload independently sourced AST, EVM and native-boundary evidence
         if: always()
         uses: actions/upload-artifact@v4
