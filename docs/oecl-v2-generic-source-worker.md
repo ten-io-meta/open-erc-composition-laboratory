@@ -107,9 +107,11 @@ named `oecl-generic-ast-evidence` for that exact run ID can it report
 `SOURCE_ARTIFACT_AVAILABLE`. This is an **artifact existence state**, not a
 scientific conclusion or independent verification of source output bytes.
 The web never upgrades this to `SUPPORTS`, `ADMITTED` or a claim of
-security certification. In this iteration, new graph and hypothesis
-artifacts are available through the GitHub run link; they are **not yet**
-ingested into an interactive web graph.
+security certification. PR #14 adds read-only, SHA-256-pinned AST example
+views and a separately authenticated live-archive verification gateway that
+can project the compiler facts into the SVG explorer. Live source reports are
+still unavailable without a verified workflow run and trusted artifacts;
+no execution feasibility or general compatibility is thereby proven.
 
 The server-side feature flag is `OECL_ENABLE_GENERIC_SOURCE_ANALYSIS=true`.
 It also requires `OECL_ANALYSIS_ACCESS_KEY` and
@@ -136,7 +138,7 @@ user submissions.
 
 Remaining milestones:
 
-1. Independent artifact validation/ingestion into the OECL web interface.
+1. Independent content validation and comprehensive ingestion tests for new AST run archives, beyond bounded presence and source report consistency.
 2. Stronger path-feasibility analysis for conditions/modifiers/inheritance,
    including contradictory restrictions and negative controls.
 3. Cross-protocol experimental test synthesis with a separately isolated

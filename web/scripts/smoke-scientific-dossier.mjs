@@ -81,7 +81,37 @@ try {
   assert.equal(sourceRejected.status, 503);
   const sourceStatus = await fetch(base + "/api/scientific/source-jobs/123e4567-e89b-42d3-a456-426614174000");
   assert.equal(sourceStatus.status, 503);
-  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned dossier, disabled pinned + generic source jobs, rejected dispatch and ZIP-safe status");  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned, reversed, invalid, unknown, JSON export");
+  const verifiedPairs = [
+    ["ERC-8060", "ERC-8098", 1],
+    ["ERC-8060", "ERC-20-BURNABLE", 1],
+    ["ERC-8098", "ERC-20", 1],
+    ["ERC-1155", "ERC-20", 0],
+  ];
+  for (const [a,b,count] of verifiedPairs) {
+    const r = await fetch(base + "/api/scientific/source-views?sourceA=" +
+      encodeURIComponent(a) + "&sourceB=" + encodeURIComponent(b));
+    assert.equal(r.status, 200, "Verified AST view unavailable for "+a+" × "+b);
+    assert.equal(r.headers.get("x-oecl-snapshot-sha256"),
+      "02e1ad9afaf2a68fb3ac60990887bed74ef4bd5f223d6e5fff1ce9a4a7919037");
+    const body = await r.json();
+    assert.equal(body.status, "VERIFIED_SOURCE_GRAPH");
+    assert.equal(body.view.scientificVerdict, "INCONCLUSIVE");
+    assert.equal(body.view.candidateAdmission, "NOT_ADMITTED");
+    assert.equal(body.view.hypotheses.length, count);
+    assert.ok(body.view.nodes.length > 0);
+    assert.equal(body.view.selected[0].id, a);
+    assert.equal(body.view.selected[1].id, b);
+  }
+  const notMaterialized = await fetch(base +
+    "/api/scientific/source-views?sourceA=ERC-20&sourceB=ERC-721");
+  assert.equal(notMaterialized.status, 404);
+  const badExample = await fetch(base +
+    "/api/scientific/source-views?sourceA=ERC-9999&sourceB=ERC-20");
+  assert.equal(badExample.status, 400);
+  const disabledLiveGraph = await fetch(base +
+    "/api/scientific/source-jobs/123e4567-e89b-42d3-a456-426614174000/view?sourceA=ERC-8060&sourceB=ERC-8098");
+  assert.equal(disabledLiveGraph.status, 503);
+  console.log("OECL_WEB_HTTP_SMOKE: PASS — four real source-only AST graphs, negative control, disabled live evidence and pinned dossier");
 } finally {
   if (server.pid) {
     try { process.kill(-server.pid, "SIGTERM"); } catch { /* Already exited. */ }
