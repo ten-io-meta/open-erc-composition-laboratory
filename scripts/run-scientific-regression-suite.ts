@@ -50,9 +50,10 @@ interface RegressionSuiteResult {
 
 /**
  * These tests are NOT parameterless unit regressions. They are executed with
- * real pinned EVM artifacts and source paths in joint-pinned-references.yml.
- * Report routing explicitly: do not mislabel missing CLI parameters as code
- * failures and never claim those probes passed in this suite.
+ * real pinned EVM artifacts and source paths in joint-pinned-references.yml
+ * or oecl-independent-burnable-evm.yml. Report routing explicitly: never
+ * mislabel missing CLI parameters as code failures or claim these probes
+ * passed in this standalone suite.
  */
 const integrationRoutedChecks = new Set([
     // These require compiler-resolved AST, pinned EVM receipts, and the
@@ -67,7 +68,10 @@ const integrationRoutedChecks = new Set([
     "check-pinned-interaction-hypothesis.ts",
     "check-pinned-joint-native-source-admission.ts",
     "check-pinned-native-joint-recipe.ts",
-    "check-pinned-real-scientific-discovery.ts"
+    "check-pinned-real-scientific-discovery.ts",
+    // Requires independently generated ERC-8060 x ERC20Burnable AST/EVM evidence.
+    // Executed with six pinned inputs in oecl-independent-burnable-evm.yml.
+    "check-independent-burnable-native-properties.ts"
 ]);
 
 const credentialGatedChecks = new Set([
@@ -300,7 +304,7 @@ async function main() {
     console.log(
         `Empty checks: ${empty.length}`
     );
-    console.log(`Routed to pinned joint-EVM workflow (NOT RUN here): ${integrationRouted.length}`);
+    console.log(`Routed to pinned integration workflows (NOT RUN here): ${integrationRouted.length}`);
     console.log(`Blocked missing live API credential (NOT RUN): ${credentialBlocked.length}`);
 
     console.log("");
@@ -499,7 +503,7 @@ async function main() {
     console.log(`Integration routed (NOT RUN): ${integrationRouted.length}`);
     console.log(`Credential blocked (NOT RUN): ${credentialBlocked.length}`);
     console.log(
-        `Suite: ${valid ? "PASS" : "INCOMPLETE_OR_FAIL"}`
+        `Suite: ${valid ? "PASS" : coreValid ? "CORE_PASS_FULL_INCOMPLETE" : "FAIL"}`
     );
 
     console.log("");
@@ -508,8 +512,11 @@ async function main() {
         "Result: ./scientific-regression-suite-results.json"
     );
 
+    // Keep full-suite validity false while credentials/integration remain unrun.
+    // CI should fail only for a real failure of the core regression; external
+    // workflows are independently responsible for their pinned integration checks.
     if (
-        !valid
+        !coreValid
     ) {
 
         process.exitCode =
