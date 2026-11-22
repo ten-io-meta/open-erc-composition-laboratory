@@ -60,7 +60,12 @@ async function approveBoth(ctx){
   await(await ctx.token.connect(ctx.alice).approve(ctx.addresses.coordinator,units)).wait();
 }
 function evidence(ctx,label,pre,post,receipt,expected){
-  const decimal=k=>String(BigInt(pre[k])-BigInt(post[k]));
+  const delta=(keys)=>{
+    const get=(state)=>keys.map(k=>state[k]).find(x=>x!==undefined&&x!==null);
+    const before=get(pre),after=get(post);
+    assert.ok(before!==undefined&&after!==undefined,"Required comparable state is missing");
+    return String(BigInt(before)-BigInt(after));
+  };
   return {
     scenario:label,expected,sourcePair:["ERC-8060","ERC-20-BURNABLE"],
     chainId:31337,contractAddresses:ctx.addresses,
@@ -72,9 +77,9 @@ function evidence(ctx,label,pre,post,receipt,expected){
     before:pre,after:post,
     observations:{
       sourceOnly:false,experimentLocalEvm:true,
-      nftObligationDeltaWei:decimal("obligationWei"),
-      tokenSupplyDeltaBaseUnits:decimal("tokenTotalSupply"),
-      nftBackingDeltaWei:decimal("backingWei")
+      nftObligationDeltaWei:delta(["obligationWei","obligations","reserve"]),
+      tokenSupplyDeltaBaseUnits:delta(["tokenTotalSupply","supply"]),
+      nftBackingDeltaWei:delta(["backingWei","backing","balance"])
     }
   };
 }
