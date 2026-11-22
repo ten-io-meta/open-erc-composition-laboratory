@@ -12,7 +12,7 @@ permissions:
 jobs:
   isolated-modern-evm:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 24
     steps:
       - name: Checkout OECL experimental runner
         uses: actions/checkout@v4
@@ -80,6 +80,52 @@ jobs:
         working-directory: oecl/integrations/modern-evm-toolchain
         run: node scripts/adversarial-matrix.mjs
 
+      - name: Install separately pinned audited Hardhat 2 Ethers 5 toolchain for historical controls
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund --audit=false
+          npm audit --audit-level=moderate
+
+      - name: Prepare original-source historical positive and adversarial EVM fixtures
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+          mkdir -p historical-evidence
+          cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
+
+      - name: Re-execute independent historical Ethers5 positive, four failure, and two callback controls
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../historical-evidence/historical-positive.json
+          OECL_FAILURE_MATRIX_PATH: ../historical-evidence/historical-failures.json
+          OECL_ETH_CALLBACK_EVIDENCE_PATH: ../historical-evidence/historical-callbacks.json
+        run: |
+          ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js test/OECLInteractionFailureMatrix.test.js test/OECLAdversarialEthReceiver.test.js
+
+      - name: Validate source bound historical receipts before comparison
+        run: |
+          node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 historical-evidence/historical-positive.json
+          node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 historical-evidence/historical-failures.json
+          node oecl/integrations/erc8060-erc8098/check-eth-callback-experiments.cjs source-8060 source-8098 historical-evidence/historical-callbacks.json
+
+      - name: Compare independent historic and modern EVM receipts by normalized observed invariants
+        env:
+          OECL_EVIDENCE_COMPARISON_PATH: historical-evidence/bounded-comparison.json
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-pinned-evidence.cjs \
+            historical-evidence/historical-positive.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-smoke.json \
+            historical-evidence/historical-failures.json \
+            historical-evidence/historical-callbacks.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
+
       - name: Require zero advisory in new modern environment
         run: |
           node -e 'const v=require("./modern-toolchain-audit.json").metadata.vulnerabilities; if(v.total!==0){console.error("MODERN_ZERO_ADVISORY_GATE_BLOCKED",JSON.stringify(v));process.exit(1)}; console.log("MODERN_ZERO_ADVISORY_GATE_PASS")'
@@ -93,5 +139,6 @@ jobs:
             oecl/integrations/modern-evm-toolchain/package-lock.json
             oecl/integrations/modern-evm-toolchain/reports/*.json
             modern-toolchain-audit.json
+            historical-evidence/*.json
           if-no-files-found: warn
           retention-days: 14
