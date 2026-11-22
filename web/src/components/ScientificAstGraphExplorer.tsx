@@ -22,6 +22,21 @@ export type AstGraphView = {
   guards:Array<{participant:string;functionId:number;condition:string;
     sourceUnit:string;line:number;kind:string}>;
   unresolvedCount:number;limitations:string[];
+  pathFeasibility?:{
+    scientificVerdict:string;candidateAdmission:string;evmExecuted:false;
+    pathArtifactSha256:string;limitations:string[];
+    hypotheses:Array<{
+      hypothesisId:string;kind:string;pathScreen:string;
+      participants:Array<{participant:string;pathScreen:string;
+        flags:string[];blockers:Array<{kind:string;symbol?:string|null}>;
+        functions:Array<{functionId:number;functionName:string;
+          variants:Array<{guards:Array<{kind:string;condition:string;
+            sourceUnit:string;line:number}>;unknowns:string[]}>;
+          modifiers:Array<{name:string;guards:Array<{condition:string;line:number}>}>}>}>;
+      evmPlan:{status:string;requires?:string;reason?:string;
+        scenarios?:string[];invariants?:string[]};
+    }>;
+  };
 };
 
 const palette:Record<string,[string,string]>={
@@ -195,6 +210,71 @@ export function ScientificAstGraphExplorer({view}:{view:AstGraphView}){
           </details>
         </div>)}
       </div>}
+    {view.pathFeasibility&&
+      <section className="space-y-3 rounded-xl border border-[#cbdad0] bg-[#f7faf7] p-4"
+        aria-label="Source-only path feasibility analysis">
+        <h4 className="font-semibold">Can these call paths actually execute?</h4>
+        <p className="text-xs leading-5 text-[#5b6e60]">
+          Source-only constraint screening, not EVM execution. A path marked
+          NOT_PROVEN_EXECUTABLE is neither confirmed to work nor proven blocked.
+        </p>
+        {view.pathFeasibility.hypotheses.map(h=>
+          <div key={h.hypothesisId} className="rounded-lg border border-[#dbe3dd] bg-white p-3">
+            <p className="text-sm font-semibold">{h.kind.replaceAll("_"," ")}</p>
+            <p className="mt-1 break-words font-mono text-xs text-[#7b663e]">
+              {h.pathScreen}
+            </p>
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
+              {h.participants.map(p=><div key={p.participant}
+                className="rounded-lg bg-[#f4f7f5] p-3">
+                <p className="text-xs font-semibold">{p.participant}</p>
+                <p className="mt-1 break-words font-mono text-[10px] text-[#66766a]">
+                  {p.pathScreen}
+                </p>
+                {p.flags.length>0&&<p className="mt-2 text-xs text-[#5b6e60]">
+                  Conditions: {p.flags.map(x=>x.replaceAll("_"," ").toLowerCase()).join("; ")}
+                </p>}
+                {p.blockers.map((block,i)=><p key={i} className="mt-2 text-xs text-[#9b392e]">
+                  Modeled blocker: {block.kind.replaceAll("_"," ")}
+                  {block.symbol?" · "+block.symbol:""}
+                </p>)}
+                {p.functions.map(fn=><details key={fn.functionId}
+                  className="mt-2 text-xs text-[#5b6e60]">
+                  <summary className="cursor-pointer font-medium">
+                    {fn.functionName}() · source guards
+                  </summary>
+                  <ul className="mt-1 list-disc space-y-1 pl-4">
+                    {fn.variants.flatMap(v=>v.guards).map((g,i)=><li key={i}>
+                      <code>{g.condition}</code> ({g.sourceUnit}:{g.line})
+                    </li>)}
+                    {fn.modifiers.flatMap(m=>m.guards.map(g=>
+                      ({...g,name:m.name}))).map((g,i)=><li key={"m"+i}>
+                      Modifier {g.name}: <code>{g.condition}</code>
+                    </li>)}
+                  </ul>
+                </details>)}
+              </div>)}
+            </div>
+            <details className="mt-3 text-xs text-[#596a5e]">
+              <summary className="cursor-pointer font-semibold">
+                Independent EVM experiment design — not executed
+              </summary>
+              <p className="mt-2 font-mono text-[10px]">
+                {h.evmPlan.status} {h.evmPlan.requires||h.evmPlan.reason}
+              </p>
+              <ul className="mt-2 list-disc space-y-1 pl-4">
+                {(h.evmPlan.scenarios||[]).map(s=><li key={s}>{s.replaceAll("-"," ")}</li>)}
+              </ul>
+            </details>
+          </div>)}
+        <p className="break-all font-mono text-[10px] text-[#617268]">
+          Path evidence SHA-256: {view.pathFeasibility.pathArtifactSha256}
+        </p>
+        <p className="text-[11px] text-[#617268]">
+          Final scientific verdict: {view.pathFeasibility.scientificVerdict};
+          candidate: {view.pathFeasibility.candidateAdmission}.
+        </p>
+      </section>}
     {view.guards.length>0&&<details className="rounded-xl border border-[#dee5df] p-4">
       <summary className="cursor-pointer text-sm font-semibold">
         AST restrictions · {view.guards.length} guards
