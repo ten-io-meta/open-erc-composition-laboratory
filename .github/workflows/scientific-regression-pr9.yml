@@ -56,9 +56,12 @@ jobs:
           echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  external/github/ten-io-meta/erc8060-native-eth-value/package-lock.json" | sha256sum --check
           ln -s ../../../../integrations/secure-evm-toolchain/node_modules external/github/ten-io-meta/erc8060-native-eth-value/node_modules
 
-      - name: Install pinned ERC-8060 Reservable Hardhat dependencies
-        working-directory: external/github/ten-io-meta/erc8060-reservable
-        run: npm ci
+      - name: Verify pinned Reservable source-only baseline without installing vulnerable legacy test tools
+        run: |
+          test "$(git -C external/github/ten-io-meta/erc8060-reservable rev-parse HEAD)" = "5b7a407553ccf280ab4f751a792771b660ad287a"
+          test -f external/github/ten-io-meta/erc8060-reservable/package-lock.json
+          test -f external/github/ten-io-meta/erc8060-reservable/package.json
+          echo "RESERVABLE_PINNED_SOURCE_ONLY_BASELINE: no npm install or Hardhat execution in this step"
 
       - name: Run complete existing scientific regression suite
         run: npm run scientific:regression
