@@ -63,6 +63,40 @@ export async function recentSourceRuns(
   }
   return json.workflow_runs as SourceRun[];
 }
+/** The workflow can succeed without uploading usable source evidence.
+ * Verify the exact run's named, nonempty, unexpired artifact separately.
+ * Artifact-list presence is not SHA validation or source proof.
+ */
+export async function hasPublishedSourceArtifact(
+  runId: number, token: string, transport: Transport = fetch,
+): Promise<boolean> {
+  if (!Number.isSafeInteger(runId) || runId <= 0)
+    throw new GenericSourceJobError("INVALID_SOURCE_RUN_ID");
+  const url = "https://api.github.com/repos/" + repo +
+    "/actions/runs/" + runId + "/artifacts?per_page=100";
+  const response = await transport(url, {
+    method: "GET", headers: headers(token),
+    cache: "no-store", signal: AbortSignal.timeout(10000),
+  });
+  if (!response.ok)
+    throw new GenericSourceJobError("SOURCE_ARTIFACT_LOOKUP_FAILED");
+  const body: unknown = await response.json();
+  if (!body || typeof body !== "object" ||
+      !("artifacts" in body) || !Array.isArray(body.artifacts))
+    throw new GenericSourceJobError("SOURCE_ARTIFACT_RESPONSE_INVALID");
+  return body.artifacts.some((item: unknown) => {
+    if (!item || typeof item !== "object") return false;
+    const artifact = item as Record<string, unknown>;
+    return artifact.name === "oecl-generic-ast-evidence" &&
+      artifact.expired === false &&
+      typeof artifact.size_in_bytes === "number" &&
+      Number.isSafeInteger(artifact.size_in_bytes) &&
+      artifact.size_in_bytes > 0 &&
+      typeof artifact.id === "number" &&
+      Number.isSafeInteger(artifact.id) && artifact.id > 0;
+  });
+}
+
 export function capacityAvailable(runs: SourceRun[], now = Date.now()) {
   const ours = runs.filter(run =>
     run.event === "workflow_dispatch" &&
@@ -114,15 +148,16 @@ export function sourceJobState(runs: SourceRun[], id: string) {
     };
   }
   const state = run.status === "completed"
-    ? (run.conclusion === "success" ? "SOURCE_ARTIFACT_AVAILABLE" : "EXECUTION_FAILED")
+    ? (run.conclusion === "success" ? "AWAITING_SOURCE_ARTIFACT" : "EXECUTION_FAILED")
     : run.status === "in_progress" ? "RUNNING" : "QUEUED";
   return {
     requestId: id,
     state,
     scientificVerdict: null,
+    runId: run.id,
     runUrl: "https://github.com/" + repo + "/actions/runs/" + run.id,
-    message: state === "SOURCE_ARTIFACT_AVAILABLE"
-      ? "The isolated source-only workflow succeeded. Inspect its AST graph, hypotheses and limits in the artifacts. No composition candidate is admitted."
+    message: state === "AWAITING_SOURCE_ARTIFACT"
+      ? "GitHub reports a successful source-only workflow; its evidence artifact is not yet confirmed."
       : state === "EXECUTION_FAILED"
       ? "The source-only worker failed or could not compile the source. No compatibility result is inferred."
       : "The pinned-source analysis workflow is queued or running.",
