@@ -17,6 +17,8 @@
     "solc": "0.8.26"
   },
   "overrides": {
-    "ws": "8.21.0"
+    "ws": "8.21.0",
+    "tmp": "0.2.6",
+    "serialize-javascript": "7.1.3"
   }
 }
