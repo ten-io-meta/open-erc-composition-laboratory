@@ -95,7 +95,9 @@ jobs:
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-8098 dependency-source source-output/pair-8060-8098
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE dependency-source source-output/pair-8060-20burnable
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-20 dependency-source source-output/pair-8098-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-1155 ERC-20 dependency-source source-output/pair-1155-20
           node -e 'const fs=require("node:fs");for(const folder of ["pair-8060-8098","pair-8060-20burnable","pair-8098-20"]){const r=JSON.parse(fs.readFileSync("source-output/"+folder+"/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses<1){console.error("OECL_GENERIC_DISCOVERY_REGRESSION:"+folder);process.exit(1)}}'
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-1155-20/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses!==0||r.discoveryReason!=="NO_ADMISSIBLE_SOURCE_RELATION_DISCOVERED"){console.error("OECL_NEGATIVE_DISCOVERY_MUST_REMAIN_INCONCLUSIVE");process.exit(1)}}'
 
       - name: Upload source-only graph and provenance artifacts
         if: always()
