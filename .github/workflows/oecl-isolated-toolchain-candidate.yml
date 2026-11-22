@@ -85,6 +85,11 @@ jobs:
         run: |
           node -e 'const a=require("../../../secure-toolchain-audit.json");const v=a.metadata.vulnerabilities; if(v.high||v.critical){console.error("CANDIDATE_TOOLCHAIN_HIGH_VULNERABILITIES",JSON.stringify(v));process.exit(1)}; console.log("CANDIDATE_TOOLCHAIN_HIGH_GATE_PASS",JSON.stringify(v))'
 
+      - name: Emit exact candidate lockfile chunks for separately reviewed reproducible pin
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          node -e 'const fs=require("node:fs");const s=fs.readFileSync("package-lock.json","utf8");console.log("OECL_LOCK_LENGTH:"+s.length);for(let i=0;i<s.length;i+=2500){console.log("OECL_LOCK_CHUNK:"+String(i/2500).padStart(4,"0")+":"+JSON.stringify(s.slice(i,i+2500)))}'
+
       - name: Upload new lock candidate and isolated receipts, not the immutable source lock
         if: always()
         uses: actions/upload-artifact@v4
