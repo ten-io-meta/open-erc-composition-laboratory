@@ -19,7 +19,7 @@ const MAX_DAILY_DISPATCHES = 3;
 export const ANALYSIS_SCENARIO = "PINNED_ERC8060_ERC8098_REPRODUCTION";
 export const ANALYSIS_SCOPE = "PINNED_LOCAL_HARDHAT_EVM";
 export type JobState = "AWAITING_GITHUB_RUN" | "QUEUED" | "RUNNING" |
-  "EVIDENCE_AVAILABLE" | "EXECUTION_FAILED";
+  "AWAITING_EVIDENCE" | "EVIDENCE_AVAILABLE" | "EXECUTION_FAILED";
 
 export type GitHubRun = {
   id: number;
@@ -84,6 +84,44 @@ export async function listAnalysisRuns(
 }
 
 /**
+ * A green workflow does not prove that GitHub actually published the evidence.
+ * Verify that the artifact is listed for the exact run ID before presenting
+ * EVIDENCE_AVAILABLE. This proves listing/size only, NOT replay or scientific
+ * validity of its contents.
+ */
+export async function hasPublishedEvidenceArtifact(
+  runId: number,
+  token: string,
+  transport: Transport = fetch,
+): Promise<boolean> {
+  if (!Number.isSafeInteger(runId) || runId <= 0)
+    throw new GitHubAnalysisError("INVALID_RUN_ID");
+  const url = "https://api.github.com/repos/" + REPO +
+    "/actions/runs/" + runId + "/artifacts?per_page=100";
+  const res = await transport(url, {
+    method: "GET",
+    headers: headers(token),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10000),
+  });
+  if (!res.ok) throw new GitHubAnalysisError("GITHUB_ARTIFACT_LOOKUP_FAILED");
+  const body: unknown = await res.json();
+  if (!body || typeof body !== "object" ||
+      !("artifacts" in body) || !Array.isArray(body.artifacts)) {
+    throw new GitHubAnalysisError("GITHUB_ARTIFACT_RESPONSE_INVALID");
+  }
+  return body.artifacts.some((artifact: unknown) => {
+    if (!artifact || typeof artifact !== "object") return false;
+    const a = artifact as Record<string, unknown>;
+    return a.name === "oecl-two-pinned-references" &&
+      a.expired === false &&
+      typeof a.size_in_bytes === "number" &&
+      Number.isSafeInteger(a.size_in_bytes) && a.size_in_bytes > 0 &&
+      typeof a.id === "number" && Number.isSafeInteger(a.id) && a.id > 0;
+  });
+}
+
+/**
  * GitHub's list API supplies an advisory quota. Parallel requests can race.
  * For public use a shared atomic quota + authenticated per-user identities
  * MUST replace this closed-beta gate.
@@ -140,14 +178,14 @@ export function locatePinnedJob(runs: GitHubRun[], id: string) {
     };
   }
   const state: JobState = run.status === "completed"
-    ? (run.conclusion === "success" ? "EVIDENCE_AVAILABLE" : "EXECUTION_FAILED")
+    ? (run.conclusion === "success" ? "AWAITING_EVIDENCE" : "EXECUTION_FAILED")
     : run.status === "in_progress" ? "RUNNING" : "QUEUED";
   return {
     id, state, scientificVerdict: null, candidateAdmission: null,
     runId: run.id,
     runUrl: "https://github.com/" + REPO + "/actions/runs/" + run.id,
-    message: state === "EVIDENCE_AVAILABLE"
-      ? "Workflow passed. Retrieve its new evidence bundle; independent scientific admission is not implied."
+    message: state === "AWAITING_EVIDENCE"
+      ? "Workflow succeeded; the evidence artifact has not yet been independently confirmed in GitHub's artifact list."
       : state === "EXECUTION_FAILED"
         ? "Experiment workflow failed; no scientific result can be inferred."
         : "The pinned experiment is pending or running on GitHub Actions.",
