@@ -160,6 +160,17 @@ jobs:
             oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
             historical-evidence/historical-nft-opcode.validated.json
 
+      - name: Reject twelve forged extended parity and provenance claims
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-extended-pinned-evidence-negative.cjs \
+            historical-evidence/historical-inherited-burn.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-burn-authorization.json \
+            historical-evidence/historical-multiholder.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-multiholder.json \
+            historical-evidence/historical-nft-opcode.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
+            historical-evidence/historical-nft-opcode.validated.json
+
       - name: Reject nine forged cross-runtime comparison claims
         run: |
           node oecl/integrations/modern-evm-toolchain/scripts/compare-pinned-evidence-negative.cjs \
