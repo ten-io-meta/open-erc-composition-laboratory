@@ -1,0 +1,98 @@
+name: OECL Isolated EVM Toolchain Candidate
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-isolated-toolchain-candidate.yml'
+      - 'integrations/secure-evm-toolchain/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout OECL candidate (no persisted credentials)
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout immutable ERC-8060 reference
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+
+      - name: Checkout immutable ERC-8098 reference
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+          persist-credentials: false
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Resolve isolated candidate toolchain without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-fund --audit=false
+          npm ci --ignore-scripts --no-fund --audit=false
+          node -e 'const h=require("hardhat/package.json");const e=require("ethers/package.json");const s=require("solc");if(h.version!=="2.29.2"||e.version!=="5.8.0"||!s.version().startsWith("0.8.26+"))process.exit(1);console.log("TOOLCHAIN_VERSIONS_VERIFIED:",h.version,e.version,s.version())'
+
+      - name: Capture candidate audit including transitive dependencies
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm audit --json --audit-level=low > ../../../secure-toolchain-audit.json || true
+          node -e 'const a=require("../../../secure-toolchain-audit.json");if(!a.metadata?.vulnerabilities)process.exit(1);console.log("CANDIDATE_AUDIT:",JSON.stringify(a.metadata.vulnerabilities))'
+
+      - name: Verify original scientific sources and original lock SHA
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "ORIGINAL_RESEARCH_LOCK_SHA256:"
+          sha256sum source-8060/package-lock.json
+          echo "CANDIDATE_TOOLCHAIN_LOCK_SHA256:"
+          sha256sum oecl/integrations/secure-evm-toolchain/package-lock.json
+          node -e 'const pkg=require("./oecl/integrations/secure-evm-toolchain/node_modules/@openzeppelin/contracts/package.json");if(pkg.version!=="4.9.6")process.exit(1)'
+
+      - name: Mount isolated toolchain in temporary ERC-8060 worktree (no source rewrite)
+        run: |
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+          mkdir -p secure-evidence
+          cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+
+      - name: Run pinned local EVM composition with compatible isolated toolchain
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../secure-evidence/erc8060-erc8098-pinned.json
+        run: |
+          ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js
+
+      - name: Require zero high/critical advisory on candidate toolchain
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          node -e 'const a=require("../../../secure-toolchain-audit.json");const v=a.metadata.vulnerabilities; if(v.high||v.critical){console.error("CANDIDATE_TOOLCHAIN_HIGH_VULNERABILITIES",JSON.stringify(v));process.exit(1)}; console.log("CANDIDATE_TOOLCHAIN_HIGH_GATE_PASS",JSON.stringify(v))'
+
+      - name: Upload new lock candidate and isolated receipts, not the immutable source lock
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-isolated-toolchain-candidate
+          path: |
+            oecl/integrations/secure-evm-toolchain/package-lock.json
+            secure-toolchain-audit.json
+            secure-evidence/*.json
+          if-no-files-found: warn
+          retention-days: 14
