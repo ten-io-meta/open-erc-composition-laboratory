@@ -11,6 +11,7 @@ const path=require("node:path");
 const crypto=require("node:crypto");
 const {buildGraph}=require("../scientific-solidity-graph/ScientificSolidityAstGraph.cjs");
 const {discoverGenericPair}=require("./GenericAstPairHypotheses.cjs");
+const {evaluateFeasibility}=require("./ScientificAstPathFeasibility.cjs");
 const REGISTRY=require("./source-registry.json");
 const MAX_FILE_BYTES=256*1024,MAX_TOTAL_BYTES=2*1024*1024;
 const MAX_FILES=110,MAX_GITHUB_TREE=4500;
@@ -175,7 +176,7 @@ async function collectSources(pair,dependencyRoot,fetcher=fetch,env=process.env)
   }
   return {deps,files,roots};
 }
-function compileAst(collected){
+function compileAstBundle(collected){
   const compiler=collected.deps.solc;
   const version=compiler.version();
   if(!/^0\.8\.(2[0-9]|3[0-9])\+/.test(version))
@@ -188,9 +189,11 @@ function compileAst(collected){
   const output=JSON.parse(compiler.compile(JSON.stringify(input)));
   const fatal=(output.errors||[]).filter(e=>e.severity==="error");
   if(fatal.length)throw Error("COMPILER_AST_FAILED:"+fatal.slice(0,3).map(e=>e.errorCode||e.type).join(","));
-  return buildGraph({input,output,solcVersion:version});
+  const buildInfo={input,output,solcVersion:version};
+  return {graph:buildGraph(buildInfo),buildInfo};
 }
-function resultRecord(pair,collected,graph,hypotheses){
+function compileAst(collected){ return compileAstBundle(collected).graph; }
+function resultRecord(pair,collected,graph,hypotheses,feasibility){
   const report={
     schemaVersion:"OECL_OPEN_GENERIC_AST_RESULT_V1",
     scientificVerdict:"INCONCLUSIVE",candidateAdmission:"NOT_ADMITTED",
@@ -204,6 +207,10 @@ function resultRecord(pair,collected,graph,hypotheses){
     dependencyIntegrity:collected.deps.integrity,
     graphSha256:sha256(Buffer.from(JSON.stringify(graph))),
     hypothesisArtifactSha256:sha256(Buffer.from(JSON.stringify(hypotheses))),
+    pathFeasibilityArtifactSha256:sha256(Buffer.from(JSON.stringify(feasibility))),
+    pathScreen:{sourceOnly:true,evmExecuted:false,
+      blockedModeledPaths:feasibility.hypotheses.filter(h=>h.pathScreen==="AT_LEAST_ONE_MODELED_PATH_BLOCKED").length,
+      unprovenExecutablePaths:feasibility.hypotheses.filter(h=>h.pathScreen==="NOT_PROVEN_EXECUTABLE").length},
     counts:{sourceUnits:collected.files.size,contracts:graph.contracts.length,
       callableFunctions:graph.functions.length,
       stateDecreases:graph.writes.filter(w=>w.kind==="DECREASE").length,
@@ -221,13 +228,15 @@ function resultRecord(pair,collected,graph,hypotheses){
 async function analyzePair(a,b,root,fetcher=fetch,env=process.env){
   const pair=choosePair(a,b);
   const collected=await collectSources(pair,root,fetcher,env);
-  const graph=compileAst(collected);
+  const {graph,buildInfo}=compileAstBundle(collected);
   const primary=pair.map((e,i)=>({
     id:e.id,contract:e.contract,unit:collected.roots[i]
   }));
   const discovery=discoverGenericPair(graph,primary);
   if(discovery.errors.length)throw Error("SOURCE_DISCOVERY_INVALID:"+discovery.errors.join(","));
-  return {graph,discovery,report:resultRecord(pair,collected,graph,discovery)};
+  const feasibility=evaluateFeasibility(buildInfo,graph,discovery);
+  return {graph,discovery,feasibility,
+    report:resultRecord(pair,collected,graph,discovery,feasibility)};
 }
 async function runCli(){
   const [a,b,dependencyRoot,outDir]=process.argv.slice(2);
@@ -235,9 +244,10 @@ async function runCli(){
     "Usage: node run-generic-source-worker.cjs <ERC-A> <ERC-B> <audited-dependency-root> <output-dir>");
   fs.mkdirSync(outDir,{recursive:true});
   try{
-    const {graph,discovery,report}=await analyzePair(a,b,dependencyRoot);
+    const {graph,discovery,feasibility,report}=await analyzePair(a,b,dependencyRoot);
     for(const [filename,artifact] of [["structural-ast-graph",graph],
-      ["generic-source-hypotheses",discovery],["source-scientific-report",report]]){
+      ["generic-source-hypotheses",discovery],["path-feasibility",feasibility],
+      ["source-scientific-report",report]]){
       fs.writeFileSync(path.join(outDir,filename+".json"),
         JSON.stringify(artifact,null,2)+"\n");
     }
@@ -256,4 +266,4 @@ async function runCli(){
 }
 if(require.main===module)runCli();
 module.exports={choosePair,strictPath,resolveImport,imports,lockedTree,
-  githubSource,collectSources,compileAst,resultRecord,analyzePair,sha1GitBlob};
+  githubSource,collectSources,compileAst,compileAstBundle,resultRecord,analyzePair,sha1GitBlob};

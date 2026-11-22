@@ -15,9 +15,13 @@ for(const folder of cases){
   const graph=read("structural-ast-graph");
   const hypothesis=read("generic-source-hypotheses");
   const report=read("source-scientific-report");
+  const feasibility=read("path-feasibility");
   const run={mode:"CI_REGRESSION",runId:Number(process.env.GITHUB_RUN_ID),
     workflowSha:process.env.GITHUB_SHA,requestId:null};
-  const view=projectGraphBundle(graph,hypothesis,report,run);
+  const view=projectGraphBundle(graph,hypothesis,report,run,feasibility);
+  assert.equal(view.pathFeasibility?.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(view.pathFeasibility?.evmExecuted,false);
+  assert.equal(view.pathFeasibility?.hypotheses.length,hypothesis.hypotheses.length);
   assert.equal(view.scientificVerdict,"INCONCLUSIVE");
   assert.equal(view.candidateAdmission,"NOT_ADMITTED");
   assert.equal(view.sourceOnly,true);
@@ -25,6 +29,14 @@ for(const folder of cases){
   assert.ok(view.nodes.length>=2);
   assert.equal(view.hypotheses.length,folder==="pair-1155-20"?0:1);
   assert.equal(view.hypotheses.length,report.counts.hypotheses);
+  const forged=structuredClone(feasibility);
+  forged.scientificVerdict="SUPPORTS";
+  assert.throws(()=>projectGraphBundle(graph,hypothesis,report,run,forged));
+  const changed=structuredClone(feasibility);
+  if(changed.hypotheses.length)changed.hypotheses[0].pathScreen="EXECUTABLE";
+  else changed.limitations.push("FORGED");
+  assert.throws(()=>projectGraphBundle(graph,hypothesis,report,run,changed));
+
   if(folder==="pair-1155-20")
     assert.equal(view.discoveryReason,"NO_ADMISSIBLE_SOURCE_RELATION_DISCOVERED");
   const attack=(mutate)=>{

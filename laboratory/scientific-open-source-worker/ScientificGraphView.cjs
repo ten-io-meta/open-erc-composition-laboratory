@@ -6,7 +6,8 @@ const hash=x=>crypto.createHash("sha256").update(x).digest("hex");
 const hex=x=>typeof x==="string"&&/^[0-9a-f]{64}$/.test(x);
 const requireFact=(v,m)=>{if(!v)throw Error("OECL_GRAPH_EVIDENCE_REJECTED:"+m)};
 const locEq=(a,b)=>a?.unit===b?.unit&&a?.line===b?.line&&a?.start===b?.start;
-function projectGraphBundle(graph,discovery,report,run){
+/** @param {any} feasibility Source-only, provenance-checked path screen. */
+function projectGraphBundle(graph,discovery,report,run,feasibility=null){
   requireFact(graph?.schemaVersion==="OECL_SOLIDITY_COMPILER_AST_GRAPH_V1"&&
     graph.status==="STRUCTURAL_OBSERVATION_ONLY"&&graph.scientificPolarity==="INCONCLUSIVE"&&
     graph.candidateAdmission==="NOT_ADMITTED"&&Array.isArray(graph.functions)&&
@@ -28,6 +29,45 @@ function projectGraphBundle(graph,discovery,report,run){
     discovery.sourceGraphSha256===graphSha256&&
     report.hypothesisArtifactSha256===discoverySha256,"ARTIFACT_DIGEST_MISMATCH");
   assert.deepStrictEqual(report.hypotheses,discovery.hypotheses);
+  let reviewedPath=null;
+  if(report.pathFeasibilityArtifactSha256!==undefined){
+    requireFact(feasibility?.schemaVersion==="OECL_AST_PATH_FEASIBILITY_V1"&&
+      feasibility.scientificVerdict==="INCONCLUSIVE"&&
+      feasibility.candidateAdmission==="NOT_ADMITTED"&&
+      feasibility.evmExecuted===false&&
+      feasibility.pathAnalysisScope==="SOURCE_ONLY_PARTIAL_CONSTRAINT_MODEL"&&
+      feasibility.sourceGraphSha256===graphSha256&&
+      feasibility.discoverySha256===discoverySha256&&
+      hash(JSON.stringify(feasibility))===report.pathFeasibilityArtifactSha256&&
+      Array.isArray(feasibility.hypotheses)&&
+      feasibility.hypotheses.length===discovery.hypotheses.length,
+      "AST_PATH_ARTIFACT_NOT_VERIFIED");
+    for(let i=0;i<feasibility.hypotheses.length;i++){
+      const p=feasibility.hypotheses[i],h=discovery.hypotheses[i];
+      requireFact(p.hypothesisId===h.hypothesisId&&p.kind===h.kind&&
+        ["AT_LEAST_ONE_MODELED_PATH_BLOCKED","NOT_PROVEN_EXECUTABLE",
+          "NO_EXECUTABLE_ROUTE_SPECIFIED"].includes(p.pathScreen)&&
+        p.evmPlan?.status==="DESIGN_ONLY_NOT_EXECUTED"&&
+        Array.isArray(p.participants),
+        "PATH_SCREEN_MISATTRIBUTED");
+      for(const participant of p.participants){
+        requireFact(h.evidence.some(e=>e.participant===participant.participant)&&
+          ["PROVEN_BLOCKED_WITHIN_MODELED_AST_PATH","NOT_PROVEN_EXECUTABLE"]
+            .includes(participant.pathScreen)&&
+          Array.isArray(participant.functions)&&Array.isArray(participant.flags),
+          "PATH_PARTICIPANT_NOT_SOURCE_BOUND");
+      }
+    }
+    reviewedPath={
+      scientificVerdict:"INCONCLUSIVE",candidateAdmission:"NOT_ADMITTED",
+      evmExecuted:false,sourceOnly:true,
+      pathArtifactSha256:report.pathFeasibilityArtifactSha256,
+      hypotheses:feasibility.hypotheses,
+      limitations:feasibility.limitations
+    };
+  }else{
+    requireFact(feasibility==null,"UNEXPECTED_UNBOUND_PATH_REPORT");
+  }
   requireFact(report.counts?.sourceUnits===graph.sources.length&&
     report.counts?.contracts===graph.contracts.length&&
     report.counts?.callableFunctions===graph.functions.length&&
@@ -169,6 +209,7 @@ function projectGraphBundle(graph,discovery,report,run){
     selected:selected.map(({contractId,...item})=>item),counts:report.counts,
     discoveryReason:report.discoveryReason,
     hypotheses,guards,nodes:[...nodes.values()],edges:[...edges.values()],
+    ...(reviewedPath?{pathFeasibility:reviewedPath}:{}),
     unresolvedCount:graph.unresolved?.length||0,
     limitations:report.scientificLimitations.map(x=>String(x).slice(0,400))};
 }

@@ -92,7 +92,7 @@ try {
       encodeURIComponent(a) + "&sourceB=" + encodeURIComponent(b));
     assert.equal(r.status, 200, "Verified AST view unavailable for "+a+" × "+b);
     assert.equal(r.headers.get("x-oecl-snapshot-sha256"),
-      "02e1ad9afaf2a68fb3ac60990887bed74ef4bd5f223d6e5fff1ce9a4a7919037");
+      "93c27209e59493996106305f1652f106e51db8aa24ae7e3ae2d99c8fbd02f978");
     const body = await r.json();
     assert.equal(body.status, "VERIFIED_SOURCE_GRAPH");
     assert.equal(body.view.scientificVerdict, "INCONCLUSIVE");

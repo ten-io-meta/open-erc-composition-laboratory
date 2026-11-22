@@ -6,10 +6,10 @@ import {readScientificArchive,extractSourceEvidence} from "../src/server/oeclSci
 
 const fixture=JSON.parse(readFileSync(new URL("../src/data/oeclAstExamples.json",import.meta.url),"utf8"));
 const digest=createHash("sha256").update(JSON.stringify(fixture)).digest("hex");
-assert.equal(digest,"02e1ad9afaf2a68fb3ac60990887bed74ef4bd5f223d6e5fff1ce9a4a7919037");
+assert.equal(digest,"93c27209e59493996106305f1652f106e51db8aa24ae7e3ae2d99c8fbd02f978");
 assert.equal(fixture.schemaVersion,"OECL_VERIFIED_AST_GRAPH_SAMPLES_V1");
-assert.equal(fixture.runId,44966583987);
-assert.equal(fixture.workflowSha,"36541e50d765f7a678d051f15dfafadbab66c5d7");
+assert.equal(fixture.runId,44968168041);
+assert.equal(fixture.workflowSha,"8ca66ecf07522a1ca2b33da20635249147f3a0db");
 assert.equal(fixture.views.length,4);
 const names=new Set();
 for(const view of fixture.views){
@@ -18,6 +18,10 @@ for(const view of fixture.views){
   assert.equal(view.candidateAdmission,"NOT_ADMITTED");
   assert.equal(view.sourceOnly,true);
   assert.equal(view.evmExecuted,false);
+  assert.equal(view.pathFeasibility?.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(view.pathFeasibility?.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(view.pathFeasibility?.evmExecuted,false);
+  assert.equal(view.pathFeasibility?.hypotheses.length,view.hypotheses.length);
   assert.equal(view.provenance.runId,fixture.runId);
   assert.equal(view.provenance.workflowSha,fixture.workflowSha);
   assert.match(view.provenance.graphSha256,/^[a-f0-9]{64}$/);
