@@ -126,6 +126,15 @@ jobs:
             historical-evidence/historical-callbacks.json \
             oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
 
+      - name: Reject nine forged cross-runtime comparison claims
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-pinned-evidence-negative.cjs \
+            historical-evidence/historical-positive.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-smoke.json \
+            historical-evidence/historical-failures.json \
+            historical-evidence/historical-callbacks.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
+
       - name: Require zero advisory in new modern environment
         run: |
           node -e 'const v=require("./modern-toolchain-audit.json").metadata.vulnerabilities; if(v.total!==0){console.error("MODERN_ZERO_ADVISORY_GATE_BLOCKED",JSON.stringify(v));process.exit(1)}; console.log("MODERN_ZERO_ADVISORY_GATE_PASS")'
