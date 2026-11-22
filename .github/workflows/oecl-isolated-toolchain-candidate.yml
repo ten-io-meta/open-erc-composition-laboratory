@@ -53,7 +53,7 @@ jobs:
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
           npm audit --json --audit-level=low > ../../../secure-toolchain-audit.json || true
-          node -e 'const a=require("../../../secure-toolchain-audit.json");if(!a.metadata?.vulnerabilities)process.exit(1);console.log("CANDIDATE_AUDIT:",JSON.stringify(a.metadata.vulnerabilities))'
+          node -e 'const a=require("../../../secure-toolchain-audit.json");if(!a.metadata?.vulnerabilities)process.exit(1);console.log("CANDIDATE_AUDIT:",JSON.stringify(a.metadata.vulnerabilities));console.log("CANDIDATE_HIGH_PACKAGES:",JSON.stringify(Object.entries(a.vulnerabilities).filter(([n,v])=>["high","critical"].includes(v.severity)).map(([n,v])=>({name:n,severity:v.severity,range:v.range,via:v.via,fixAvailable:v.fixAvailable}))))'
 
       - name: Verify original scientific sources and original lock SHA
         run: |
