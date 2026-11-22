@@ -30,10 +30,13 @@ async function setup() {
 async function fullSnapshot({alice,nft,token,joint}, owner) {
   return {
     owner: await nft.ownerOf(1n),
+    nftApproval: await nft.getApproved(1n),
+    nftValueWei: String(await nft.getFunction("valueOf(uint256)").staticCall(1n)),
     obligations: String(await nft.totalRedeemableValue()),
     nftWei: String(await ethers.provider.getBalance(await nft.getAddress())),
     tokenSupply: String(await token.totalSupply()),
     holderUnits: String(await token.balanceOf(owner||alice.address)),
+    tokenAllowance: String(await token.allowance(alice.address, await joint.getAddress())),
     jointWei: String(await ethers.provider.getBalance(await joint.getAddress())),
     jointUnits: String(await token.balanceOf(await joint.getAddress())),
   };
@@ -56,8 +59,10 @@ async function rejected(label, action, before, after, requireMinedReceipt = fals
     assert.match(hash, /^0x[a-f0-9]{64}$/i, label + ": mined revert must have transaction hash");
     assert.ok(receipt, label + ": expected mined reverted EVM transaction");
   }
-  assert.deepEqual(await after(), before, label + ": rollback snapshot must remain unchanged");
+  const stateAfter = await after();
+  assert.deepEqual(stateAfter, before, label + ": rollback snapshot must remain unchanged");
   checks.push({ label, status: "REJECTED_WITH_STATE_UNCHANGED",
+    stateBefore: before, stateAfter,
     transactionHash: hash, receiptStatus: receipt?.status ?? null,
     rollbackVerified: true });
 }
@@ -68,6 +73,7 @@ async function approvals(ctx, nft=true, token=true) {
 
 {
   const ctx = await setup();
+  await approvals(ctx);
   const before = await fullSnapshot(ctx);
   await rejected("UNAUTHORIZED_OWNER_REDEEM_REJECTED",
     () => ctx.joint.connect(ctx.attacker).redeem(1n, {gasLimit:5_000_000}),
