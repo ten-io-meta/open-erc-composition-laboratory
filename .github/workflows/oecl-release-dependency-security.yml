@@ -1,0 +1,64 @@
+name: OECL Release Dependency Security
+
+on:
+  push:
+    paths:
+      - 'web/package.json'
+      - 'web/package-lock.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/check-release-dependency-audit.cjs'
+      - '.github/workflows/oecl-release-dependency-security.yml'
+  pull_request:
+    paths:
+      - 'web/package.json'
+      - 'web/package-lock.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/check-release-dependency-audit.cjs'
+      - '.github/workflows/oecl-release-dependency-security.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  web-dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install exact lockfile without package lifecycle scripts
+        working-directory: web
+        run: npm ci --ignore-scripts
+      - name: Inventory all web dependencies including build-only packages
+        working-directory: web
+        run: |
+          npm audit --json > ../audit-web-full.json || true
+          node ../scripts/check-release-dependency-audit.cjs ../audit-web-full.json web-all report
+      - name: Block release on high or critical production web dependencies
+        working-directory: web
+        run: |
+          npm audit --omit=dev --json > ../audit-web-production.json || true
+          node ../scripts/check-release-dependency-audit.cjs ../audit-web-production.json web-production gate
+
+  core-dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install exact OECL lockfile without package lifecycle scripts
+        run: npm ci --ignore-scripts
+      - name: Block release on high or critical OECL runtime dependencies
+        run: |
+          npm audit --omit=dev --json > audit-core-production.json || true
+          node scripts/check-release-dependency-audit.cjs audit-core-production.json oecl-core-production gate
