@@ -89,6 +89,13 @@ jobs:
         run: |
           (cd oecl/integrations/modern-evm-toolchain && node scripts/independent-burnable-matrix.mjs)
           node oecl/integrations/modern-evm-toolchain/scripts/compare-independent-burnable.cjs evidence/historical-independent-burnable.json oecl/integrations/modern-evm-toolchain/reports/modern-independent-burnable.json source-8060 source-openzeppelin oecl/integrations/modern-evm-toolchain evidence/independent-burnable-modern-parity.json
+      - name: Reject fifteen intentionally forged independent ERC20Burnable observations
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-independent-burnable-negative.cjs \
+            evidence/historical-independent-burnable.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-independent-burnable.json \
+            source-8060 source-openzeppelin oecl/integrations/modern-evm-toolchain
+
       - name: Run real OECL native executor with both historical and modern bilateral EVM drivers
         run: |
           (cd oecl && OECL_AUDITED_EVM_TOOLCHAIN_READY=1 npx tsx scripts/check-pinned-modern-native-joint-parity.ts ../source-8060 ../source-8098 integrations/modern-evm-toolchain ../evidence/pinned-modern-native-harness-parity.json)
