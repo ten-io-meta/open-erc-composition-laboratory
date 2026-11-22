@@ -157,6 +157,25 @@ fixture.f1.body.statements=[expression(atom("amount",301,"==",0),100),
 const inverted=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
 assert.equal(inverted.hypotheses[0].participants[0].pathScreen,
   "PROVEN_BLOCKED_WITHIN_MODELED_AST_PATH");
+// A conditional abort with an else branch is NOT a pure prerequisite:
+// the continuing else branch can mutate the tracked variable. Treat it as
+// unknown even if distant require guards would otherwise look contradictory.
+fixture=sample();
+fixture.f1.body.statements=[
+  expression(atom("amount",301,"==",0),100),
+  {nodeType:"IfStatement",src:"130:48:0",
+    condition:atom("amount",301,"==",1),
+    trueBody:{nodeType:"RevertStatement",src:"140:8:0"},
+    falseBody:{nodeType:"ExpressionStatement",src:"152:15:0",
+      expression:{nodeType:"Assignment",operator:"="}}
+  },
+  expression(atom("amount",301,"==",2),180),call(200)
+];
+const mutatingElse=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
+assert.equal(mutatingElse.hypotheses[0].participants[0].pathScreen,
+  "NOT_PROVEN_EXECUTABLE",
+  "A possible variable write in an else branch must break contradictory-guard proof");
+
 // Constant false always aborts.
 fixture=sample();
 fixture.f1.body.statements=[expression({nodeType:"Literal",kind:"bool",value:"false"},100),call(200)];

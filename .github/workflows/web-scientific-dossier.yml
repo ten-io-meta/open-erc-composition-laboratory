@@ -4,10 +4,14 @@ on:
   push:
     paths:
       - 'web/**'
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'integrations/erc8060-erc20-burnable/**'
       - '.github/workflows/web-scientific-dossier.yml'
   pull_request:
     paths:
       - 'web/**'
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'integrations/erc8060-erc20-burnable/**'
       - '.github/workflows/web-scientific-dossier.yml'
 
 concurrency:
