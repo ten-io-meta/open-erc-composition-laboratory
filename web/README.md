@@ -64,8 +64,11 @@ of arbitrary ERC pairs.
 The server intentionally **does not** execute Solidity, accept user-supplied
 code, trust a URL from a web request, decide compatibility or mint a science
 candidate. No status other than a verified native evaluator can claim a
-scientific verdict. `EVIDENCE_AVAILABLE` means that the workflow succeeded;
-it does not mean `SUPPORTS` or `ADMITTED`.
+scientific verdict. A successful workflow initially reports `AWAITING_EVIDENCE`;
+only a separate GitHub artifact-list verification confirming the expected
+nonempty, unexpired artifact for the exact workflow run can report
+`EVIDENCE_AVAILABLE`. Artifact listing is **not** a source-integrity replay,
+scientific `SUPPORTS`, or candidate `ADMITTED`.
 
 ### Activation (only AFTER reviews and merging to the default branch)
 
@@ -97,6 +100,8 @@ the beta dispatcher publicly without those controls.
 If any variable is absent, the server returns `NOT_CONFIGURED`, and
 `POST` returns 503 without contacting GitHub. Invalid keys return 401;
 unknown workflow run IDs are `AWAITING_GITHUB_RUN`, never fabricated success.
+A green workflow without an independently listed artifact stays `AWAITING_EVIDENCE`
+(and GitHub lookup errors return 502), never an invented evidence receipt.
 
 ### Verification
 
