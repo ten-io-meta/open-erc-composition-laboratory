@@ -5,10 +5,14 @@ on:
   push:
     paths:
       - 'integrations/erc8060-erc20-burnable/**'
+      - 'scripts/check-independent-burnable-native-properties.ts'
+      - 'scripts/run-scientific-regression-suite.ts'
       - '.github/workflows/oecl-independent-burnable-evm.yml'
   pull_request:
     paths:
       - 'integrations/erc8060-erc20-burnable/**'
+      - 'scripts/check-independent-burnable-native-properties.ts'
+      - 'scripts/run-scientific-regression-suite.ts'
       - '.github/workflows/oecl-independent-burnable-evm.yml'
 
 permissions:
