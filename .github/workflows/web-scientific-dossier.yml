@@ -51,3 +51,5 @@ jobs:
         run: npm run build
       - name: Smoke-test production dossier API and download
         run: node scripts/smoke-scientific-dossier.mjs
+      - name: Exercise production user journey in headless Chrome
+        run: node scripts/check-browser-user-journey.mjs
