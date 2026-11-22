@@ -19,7 +19,7 @@ The source worker's real GitHub Actions regression generated four projections:
 | ERC-8098 × ERC-20 | 1 | INCONCLUSIVE |
 | ERC-1155 × ERC-20 | 0 | INCONCLUSIVE |
 
-CI run: https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/44966583987
+CI run: https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/44968168041
 
 The projector `laboratory/scientific-open-source-worker/ScientificGraphView.cjs`
 validates the source graph and hypothesis digests against the raw scientific
@@ -31,9 +31,9 @@ The four CI-produced views were promoted into the immutable web snapshot
 `web/src/data/oeclAstExamples.json`. Server validation rejects any change
 to the canonical snapshot JSON without a corresponding audited update:
 
-- SHA-256: `02e1ad9afaf2a68fb3ac60990887bed74ef4bd5f223d6e5fff1ce9a4a7919037`
-- Source workflow SHA: `36541e50d765f7a678d051f15dfafadbab66c5d7`
-- CI run: `44966583987`
+- SHA-256: `93c27209e59493996106305f1652f106e51db8aa24ae7e3ae2d99c8fbd02f978`
+- Source workflow SHA: `8ca66ecf07522a1ca2b33da20635249147f3a0db`
+- CI run: `44968168041`
 
 `GET /api/scientific/source-views?sourceA=ERC-8060&sourceB=ERC-8098`
 serves one verified example with no GitHub credential requirement. A registered
