@@ -1,7 +1,6 @@
 import { extractSourceEvidence, readScientificArchive, ScientificArchiveError } from "./oeclScientificArchive";
 import { acceptedSourcePair } from "./oeclGenericSourceJobs";
 // Pure CommonJS projection shared with the isolated worker; no Solidity execution.
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 import { projectGraphBundle } from "../../../laboratory/scientific-open-source-worker/ScientificGraphView.cjs";
 
 const ownerRepo = "ten-io-meta/open-erc-composition-laboratory";
