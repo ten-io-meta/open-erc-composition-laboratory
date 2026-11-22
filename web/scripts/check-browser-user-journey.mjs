@@ -87,15 +87,41 @@ async function test(){
   await expectUi('document.querySelector("#composition-workbench")!==null',"composition workbench");
   await expectUi('[...document.querySelectorAll("button")].some(x=>x.textContent?.includes("Explore verified AST example"))',"hydrated source laboratory");
   assert.equal(await evalJs('document.body.innerText.includes("Fresh analysis is disabled")'),true);
+  assert.equal(await evalJs('document.querySelector("label[for=oecl-protocol-a]")?.innerText.trim()'),"ERC protocol A");
+  assert.equal(await evalJs('document.querySelector("label[for=oecl-protocol-b]")?.innerText.trim()'),"ERC protocol B");
+  const gateway=await fetch(base+"/api/live/evidence/erc8004");
+  const liveState=await gateway.json();
+  if(gateway.status===503&&liveState.status==="NOT_CONFIGURED"){
+    await expectUi('document.body.innerText.includes("Live ERC-8004 verification is not configured")',
+      "live gateway explicitly tells visitor that no receipt was created");
+    assert.equal(await evalJs('document.body.innerText.toLowerCase().includes("target networks (design)")'),true);
+    console.log("OECL_BROWSER_UNCONFIGURED_GATEWAY_TRUTHFUL_PASS");
+  }
   await click("Inspect available evidence");
   await expectUi('document.querySelector("[aria-label=\\"Pinned scientific evidence report\\"]")!==null',"pinned 8060 x 8098 dossier");
   assert.equal(await evalJs('document.querySelector("[aria-label=\\"Pinned scientific evidence report\\"]").innerText.includes("INCONCLUSIVE")'),true);
+  const dossier=await fetch(base+"/api/scientific/dossier?protocolA=ERC-8060&protocolB=ERC-8098&download=1");
+  assert.equal(dossier.status,200,"Dossier JSON export must be accessible");
+  assert.match(dossier.headers.get("content-disposition")||"",/attachment; filename=/);
+  const dossierJson=await dossier.json();
+  assert.equal(dossierJson.verdict,"INCONCLUSIVE");
+  assert.equal(dossierJson.candidateAdmission,"NOT_ADMITTED");
+  const expanded=await evalJs('(()=>{const d=[...document.querySelectorAll("details")].find(x=>x.querySelector("summary")?.textContent?.includes("scientific questions and evidence"));if(!d)return false;d.open=true;return d.open&&d.textContent.includes("Evidence:");})()');
+  assert.equal(expanded,true,"Scientific questions disclosure must expand actual source evidence");
+  console.log("OECL_BROWSER_DOSSIER_DISCLOSURE_AND_JSON_PASS");
   console.log("OECL_BROWSER_DOSSIER_PASS");
 
   await click("Explore verified AST example");
   await expectUi('document.querySelector("[aria-label=\\"Interactive verified Solidity AST graph\\"]")!==null',"source-only graph");
   const count=await evalJs('document.querySelectorAll("svg [role=button]").length');
   assert.ok(count>2,"Interactive AST nodes must be visible");
+  await click("Hypotheses");
+  assert.equal(await evalJs('[...document.querySelectorAll("button")].some(x=>x.textContent?.trim()==="Hypotheses"&&x.getAttribute("aria-pressed")==="true")'),true);
+  const keyboard=await evalJs('(()=>{const n=document.querySelector("svg [role=button]");if(!n)return false;n.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",bubbles:true}));return true})()');
+  assert.equal(keyboard,true,"Graph nodes should be keyboard navigable");
+  await expectUi('document.querySelector("[aria-label=\\\"Selected AST node\\\"]")!==null',
+    "keyboard-focused AST node details");
+  console.log("OECL_BROWSER_GRAPH_FILTER_AND_KEYBOARD_PASS");
   console.log("OECL_BROWSER_AST_GRAPH_PASS:"+count);
 
   await click("Explore verified independent EVM evidence");
@@ -111,6 +137,18 @@ async function test(){
   await click("Explore verified AST example");
   await expectUi('document.body.innerText.includes("No supported relation discovered under the current rules")',"negative control without hypothetical compatibility");
   console.log("OECL_BROWSER_NEGATIVE_CONTROL_PASS");
+
+  const graphDiscover=await fetch(base+"/api/live/the-graph/discover?protocol=ERC-8004");
+  const graphState=await graphDiscover.json();
+  if(graphDiscover.status===503&&graphState.status==="NOT_CONFIGURED"){
+    const advanced=await evalJs('(()=>{const s=[...document.querySelectorAll("summary")].find(x=>x.textContent?.includes("Advanced protocol discovery"));if(!s)return false;s.click();return s.parentElement?.open===true})()');
+    assert.equal(advanced,true,"Advanced protocol discovery disclosure must open");
+    await click("Discover");
+    await expectUi('document.body.innerText.includes("Live The Graph search is not configured here")',
+      "The Graph missing configuration is not misrepresented as zero results");
+    assert.equal(await evalJs('document.body.innerText.includes("0 subgraphs discovered.")'),false);
+    console.log("OECL_BROWSER_GRAPH_UNCONFIGURED_TRUTHFUL_PASS");
+  }
 
   await send("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:1,mobile:true});
   await sleep(600);
