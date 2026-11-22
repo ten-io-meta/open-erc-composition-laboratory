@@ -124,7 +124,11 @@ function resolveImport(unit,imp){
   if(!imp.startsWith("./")&&!imp.startsWith("../"))
     throw Error("UNSUPPORTED_EXTERNAL_PACKAGE_IMPORT:"+imp);
   const candidate=path.posix.normalize(path.posix.join(path.posix.dirname(unit),imp));
-  if(!strictPath(candidate)||!candidate.endsWith(".sol"))
+  if(!candidate.endsWith(".sol")||
+      !(unit.startsWith("@openzeppelin/contracts/")
+        ? candidate.startsWith("@openzeppelin/contracts/") &&
+          strictPath(candidate.slice("@openzeppelin/contracts/".length))
+        : strictPath(candidate)))
     throw Error("IMPORT_TRAVERSAL");
   if(unit.startsWith("github/")){
     const namespace=unit.split("/").slice(0,2).join("/")+"/";
