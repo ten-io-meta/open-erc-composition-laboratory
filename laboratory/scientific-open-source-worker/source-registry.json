@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "OECL_GENERIC_SOURCE_REGISTRY_V1",
+  "openzeppelin": {
+    "package": "@openzeppelin/contracts",
+    "version": "4.9.6",
+    "lockSource": "ten-io-meta/erc8060-native-eth-value",
+    "lockRevision": "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+  },
+  "sources": [
+    {
+      "id": "ERC-8060",
+      "label": "ERC-8060 value-backed NFT",
+      "kind": "github",
+      "repository": "ten-io-meta/erc8060-native-eth-value",
+      "revision": "c7eed906835ab39fbc8439eb0493e5a5371b23a2",
+      "file": "contracts/ERC8060Reference.sol",
+      "contract": "ERC8060Reference"
+    },
+    {
+      "id": "ERC-8098",
+      "label": "ERC-8098 non-increasing supply",
+      "kind": "github",
+      "repository": "ten-io-meta/erc8098-reference",
+      "revision": "68a05289bd68d89db8453c49500e0a1ae6cd11ec",
+      "file": "contracts/ERC8098Reference.sol",
+      "contract": "ERC8098Reference"
+    },
+    {
+      "id": "ERC-20",
+      "label": "ERC-20 base implementation (OpenZeppelin 4.9.6)",
+      "kind": "openzeppelin",
+      "file": "token/ERC20/ERC20.sol",
+      "contract": "ERC20"
+    },
+    {
+      "id": "ERC-721",
+      "label": "ERC-721 base implementation (OpenZeppelin 4.9.6)",
+      "kind": "openzeppelin",
+      "file": "token/ERC721/ERC721.sol",
+      "contract": "ERC721"
+    },
+    {
+      "id": "ERC-1155",
+      "label": "ERC-1155 base implementation (OpenZeppelin 4.9.6)",
+      "kind": "openzeppelin",
+      "file": "token/ERC1155/ERC1155.sol",
+      "contract": "ERC1155"
+    },
+    {
+      "id": "ERC-20-BURNABLE",
+      "label": "ERC-20 Burnable extension (not a separate ERC)",
+      "kind": "openzeppelin",
+      "file": "token/ERC20/extensions/ERC20Burnable.sol",
+      "contract": "ERC20Burnable"
+    }
+  ]
+}

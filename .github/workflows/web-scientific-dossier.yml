@@ -35,6 +35,8 @@ jobs:
         run: node scripts/check-scientific-dossier.mjs
       - name: Verify controlled on-demand job policy and mock GitHub dispatch
         run: node --experimental-strip-types scripts/check-on-demand-jobs.mjs
+      - name: Verify generic source-job dispatch and source selection policy
+        run: node scripts/check-generic-source-jobs.cjs
       - name: Lint web
         run: npm run lint
       - name: Compile production web
