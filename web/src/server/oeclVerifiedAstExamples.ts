@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
 import pinned from "@/data/oeclAstExamples.json";
 
-const EXPECTED_DIGEST="02e1ad9afaf2a68fb3ac60990887bed74ef4bd5f223d6e5fff1ce9a4a7919037";
-const EXPECTED_RUN=44966583987;
-const EXPECTED_SHA="36541e50d765f7a678d051f15dfafadbab66c5d7";
+const EXPECTED_DIGEST="93c27209e59493996106305f1652f106e51db8aa24ae7e3ae2d99c8fbd02f978";
+const EXPECTED_RUN=44968168041;
+const EXPECTED_SHA="8ca66ecf07522a1ca2b33da20635249147f3a0db";
 export type AstGraphSample=(typeof pinned.views)[number];
 
 export function getVerifiedAstExample(sourceA:string,sourceB:string):AstGraphSample|null {
@@ -19,6 +19,12 @@ export function getVerifiedAstExample(sourceA:string,sourceB:string):AstGraphSam
        v.sourceOnly!==true||v.evmExecuted!==false||
        v.provenance.runId!==EXPECTED_RUN||v.provenance.workflowSha!==EXPECTED_SHA))
     throw Error("OECL_AST_SAMPLE_INTEGRITY_MISMATCH");
+  if(pinned.views.some(v=>
+    v.pathFeasibility?.scientificVerdict!=="INCONCLUSIVE" ||
+    v.pathFeasibility?.candidateAdmission!=="NOT_ADMITTED" ||
+    v.pathFeasibility?.evmExecuted!==false ||
+    v.pathFeasibility?.hypotheses.length!==v.hypotheses.length))
+    throw Error("OECL_AST_PATH_SAMPLE_INTEGRITY_MISMATCH");
   return pinned.views.find(v=>v.selected[0].id===sourceA&&v.selected[1].id===sourceB)||null;
 }
 export const AST_EXAMPLES_SHA256=EXPECTED_DIGEST;
