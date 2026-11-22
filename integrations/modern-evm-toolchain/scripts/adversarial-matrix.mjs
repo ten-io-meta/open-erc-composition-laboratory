@@ -38,13 +38,28 @@ async function fullSnapshot({alice,nft,token,joint}, owner) {
     jointUnits: String(await token.balanceOf(await joint.getAddress())),
   };
 }
-async function rejected(label, action, before, after) {
+async function rejected(label, action, before, after, requireMinedReceipt = false) {
   let failure = null;
-  try { const response = await action(); if(response?.wait) await response.wait(); }
-  catch (error) { failure = error; }
+  let hash = null;
+  try {
+    const response = await action();
+    hash = response?.hash ?? null;
+    if (response?.wait) await response.wait();
+  } catch (error) {
+    failure = error;
+    hash ||= error.transactionHash ?? error.receipt?.hash ?? error.transaction?.hash ?? null;
+  }
   assert.ok(failure, label + ": expected revert");
+  const receipt = hash ? await ethers.provider.getTransactionReceipt(hash) : null;
+  if (receipt) assert.equal(receipt.status, 0, label + ": mined revert status");
+  if (requireMinedReceipt) {
+    assert.match(hash, /^0x[a-f0-9]{64}$/i, label + ": mined revert must have transaction hash");
+    assert.ok(receipt, label + ": expected mined reverted EVM transaction");
+  }
   assert.deepEqual(await after(), before, label + ": rollback snapshot must remain unchanged");
-  checks.push({ label, status: "REJECTED_WITH_STATE_UNCHANGED" });
+  checks.push({ label, status: "REJECTED_WITH_STATE_UNCHANGED",
+    transactionHash: hash, receiptStatus: receipt?.status ?? null,
+    rollbackVerified: true });
 }
 async function approvals(ctx, nft=true, token=true) {
   if (nft) await (await ctx.nft.connect(ctx.alice).approve(await ctx.joint.getAddress(), 1n)).wait();
@@ -120,7 +135,7 @@ async function receiverSnapshot(ctx) {
   const before = await receiverSnapshot(ctx);
   await rejected("REJECTED_ETH_RECEIVER_FULL_ROLLBACK",
     () => ctx.receiver.execute(1n,{gasLimit:5_000_000}),
-    before, () => receiverSnapshot(ctx));
+    before, () => receiverSnapshot(ctx), true);
 }
 {
   const ctx = await receiverSetup(2);
@@ -152,7 +167,15 @@ async function receiverSnapshot(ctx) {
   );
   assert.equal(nftBurns.length,1);
   assert.equal(tokenBurns.length,1);
-  checks.push({label:"REENTRANCY_BLOCKED_SINGLE_OUTER_PAYOUT",status:"OBSERVED",receipt:receipt.hash});
+  checks.push({ label: "REENTRANCY_BLOCKED_SINGLE_OUTER_PAYOUT",
+    status: "OBSERVED", receipt: receipt.hash, receiptStatus: receipt.status,
+    callbackAttempted: true, nestedCallSucceeded: false,
+    nestedRevertReason: reason, nftBurnEvents: nftBurns.length,
+    erc20BurnEvents: tokenBurns.length,
+    valuePaidWei: REDEEM.toString(),
+    supplyDecrease: UNITS.toString(),
+    receiverEthAfter: String(await ethers.provider.getBalance(await ctx.receiver.getAddress())),
+    obligationsAfter: String(await ctx.nft.totalRedeemableValue()) });
 }
 const report={
   schemaVersion:"OECL_MODERN_LOCAL_ADVERSARIAL_MATRIX_V1",
@@ -160,6 +183,7 @@ const report={
   scientificVerdict:"INCONCLUSIVE",candidateAdmission:"NOT_ADMITTED",
   sourceA:"ten-io-meta/erc8060-native-eth-value@c7eed906835ab39fbc8439eb0493e5a5371b23a2",
   sourceB:"ten-io-meta/erc8098-reference@68a05289bd68d89db8453c49500e0a1ae6cd11ec",
+  chainId: Number((await ethers.provider.getNetwork()).chainId),
   checks,
   limitations:"Fixture-only, local 31337 EVM, not independent scientific admission or complete security proof"
 };
