@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import crypto from "node:crypto";
 import { network } from "hardhat";
 const { ethers }=await network.connect();
 const [deployer,alice,attacker]=await ethers.getSigners();
@@ -67,6 +68,7 @@ const report={
   schemaVersion:"OECL_MODERN_INHERITED_BURN_PARITY_V1",
   candidateAdmission:"NOT_ADMITTED",scientificPolarity:"INCONCLUSIVE",
   sourceRevision:"68a05289bd68d89db8453c49500e0a1ae6cd11ec",
+  sourceSha256:crypto.createHash("sha256").update(fs.readFileSync("contracts/ERC8098Reference.sol")).digest("hex"),
   chainId:Number((await ethers.provider.getNetwork()).chainId),
   burnUnits:units.toString(),
   dependency:{package:"@openzeppelin/contracts",version:"4.9.6",contract:"ERC20Burnable"},
