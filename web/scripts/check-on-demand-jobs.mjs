@@ -4,6 +4,7 @@ import {
   ANALYSIS_SCOPE,
   dispatchPinnedAnalysis,
   evaluateCapacity,
+  hasPublishedEvidenceArtifact,
   isDispatchConfigured,
   isJobId,
   listAnalysisRuns,
@@ -87,7 +88,26 @@ assert.equal(locatePinnedJob([],id).state,"AWAITING_GITHUB_RUN");
 assert.equal(locatePinnedJob([githubRun(id,"queued")],id).state,"QUEUED");
 assert.equal(locatePinnedJob([githubRun(id,"in_progress")],id).state,"RUNNING");
 const complete = locatePinnedJob([githubRun(id,"completed","success")],id);
-assert.equal(complete.state,"EVIDENCE_AVAILABLE");
+assert.equal(complete.state,"AWAITING_EVIDENCE");
+// A successful workflow is only evidence of completed execution. Require an
+// independently listed, nonempty, unexpired artifact for this exact run.
+const goodArtifact = {id: 71235, name: "oecl-two-pinned-references", expired: false, size_in_bytes: 3800};
+const artifactReply = artifacts => async (url, init) => {
+  assert.equal(url, "https://api.github.com/repos/ten-io-meta/open-erc-composition-laboratory/actions/runs/481234/artifacts?per_page=100");
+  assert.equal(init.method, "GET");
+  return new Response(JSON.stringify({artifacts}), {status: 200});
+};
+assert.equal(await hasPublishedEvidenceArtifact(481234, token, artifactReply([goodArtifact])), true);
+for (const forged of [
+  [],
+  [{...goodArtifact, name: "other-artifact"}],
+  [{...goodArtifact, expired: true}],
+  [{...goodArtifact, size_in_bytes: 0}],
+  [{...goodArtifact, id: null}],
+]) assert.equal(await hasPublishedEvidenceArtifact(481234, token, artifactReply(forged)), false);
+await assert.rejects(hasPublishedEvidenceArtifact(0, token, artifactReply([goodArtifact])), /INVALID_RUN_ID/);
+await assert.rejects(hasPublishedEvidenceArtifact(481234, token, async () => new Response("forbidden", {status: 403})), /GITHUB_ARTIFACT_LOOKUP_FAILED/);
+await assert.rejects(hasPublishedEvidenceArtifact(481234, token, async () => new Response("{}", {status: 200})), /GITHUB_ARTIFACT_RESPONSE_INVALID/);
 assert.equal(complete.scientificVerdict,null);
 assert.equal(complete.candidateAdmission,null);
 assert.equal(complete.runUrl,
@@ -97,4 +117,4 @@ assert.equal(locatePinnedJob([githubRun(id,"completed","cancelled")],id).state,"
 const wrongEvent = {...githubRun(id,"completed","success"),event:"push"};
 assert.equal(locatePinnedJob([wrongEvent],id).state,"AWAITING_GITHUB_RUN");
 assert.throws(() => locatePinnedJob([], "../evil"), /INVALID_JOB_ID/);
-console.log("OECL_ON_DEMAND_POLICY: PASS · fixed recipe, access key, immutable dispatch, quotas, job states and forged URL rejection");
+console.log("OECL_ON_DEMAND_POLICY: PASS · fixed recipe, authenticated dispatch, quotas, artifact existence checks, job states, forged URL rejection");

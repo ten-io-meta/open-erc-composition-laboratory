@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isJobId, validAccessKey } from "@/server/oeclOnDemandJobs";
 import {
-  genericSourceAvailable, recentSourceRuns, sourceJobState,
+  genericSourceAvailable, hasPublishedSourceArtifact, recentSourceRuns, sourceJobState,
 } from "@/server/oeclGenericSourceJobs";
 
 export const runtime = "nodejs";
@@ -19,8 +19,21 @@ export async function GET(request: NextRequest, context: {
   if (!isJobId(id))
     return NextResponse.json({ status: "INVALID_JOB_ID" }, { status: 400, headers });
   try {
-    const runs = await recentSourceRuns(process.env.OECL_GITHUB_ACTIONS_TOKEN!);
-    return NextResponse.json({ status: "SOURCE_JOB_STATE", ...sourceJobState(runs,id) }, { headers });
+    const token = process.env.OECL_GITHUB_ACTIONS_TOKEN!;
+    const runs = await recentSourceRuns(token);
+    const state = sourceJobState(runs,id);
+    if (state.state === "AWAITING_SOURCE_ARTIFACT" && state.runId) {
+      const published = await hasPublishedSourceArtifact(state.runId, token);
+      if (published) {
+        return NextResponse.json({
+          status: "SOURCE_JOB_STATE",
+          ...state,
+          state: "SOURCE_ARTIFACT_AVAILABLE",
+          message: "GitHub lists an unexpired, nonempty source AST artifact for this exact run. Scientific validation of its contents is not implied.",
+        }, { headers });
+      }
+    }
+    return NextResponse.json({ status: "SOURCE_JOB_STATE", ...state }, { headers });
   } catch {
     return NextResponse.json({
       status: "SOURCE_JOB_STATUS_UNAVAILABLE", scientificVerdict: null,
