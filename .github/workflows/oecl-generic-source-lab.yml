@@ -1,0 +1,107 @@
+name: OECL Generic Solidity Source AST Laboratory
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('OECL-SOURCE-REQUEST-{0}', inputs.request_id) || format('OECL-SOURCE-REGRESSION-{0}', github.run_id) }}
+
+on:
+  push:
+    paths:
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'scripts/check-generic-source-worker.cjs'
+      - '.github/workflows/oecl-generic-source-lab.yml'
+  pull_request:
+    paths:
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'scripts/check-generic-source-worker.cjs'
+      - '.github/workflows/oecl-generic-source-lab.yml'
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: 'UUIDv4 used only for job correlation'
+        required: true
+        type: string
+      source_a:
+        description: 'First immutable registered source'
+        required: true
+        type: choice
+        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE]
+      source_b:
+        description: 'Second immutable registered source'
+        required: true
+        type: choice
+        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'workflow_dispatch' && 'oecl-source-laboratory-controlled' || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  independent-source-worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout trusted OECL AST worker
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout immutable dependency toolchain source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+
+      - name: Setup audited Node toolchain
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies from pinned manifest without third-party lifecycle scripts
+        working-directory: dependency-source
+        run: npm ci --ignore-scripts
+
+      - name: Run generic source and provenance falsification controls
+        run: node oecl/scripts/check-generic-source-worker.cjs
+
+      - name: Reject invalid workflow request before any source fetch
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+          OECL_SOURCE_A: ${{ inputs.source_a }}
+          OECL_SOURCE_B: ${{ inputs.source_b }}
+        run: |
+          node -e 'const id=process.env.OECL_REQUEST_ID||"";const a=process.env.OECL_SOURCE_A,b=process.env.OECL_SOURCE_B;const registry=require("./oecl/laboratory/scientific-open-source-worker/source-registry.json");if(!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id)||a===b||![a,b].every(id=>registry.sources.some(s=>s.id===id))){console.error("OECL_INVALID_GENERIC_REQUEST");process.exit(1)}'
+
+      - name: Discover sources and generate independent AST hypotheses
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+          OECL_SOURCE_A: ${{ inputs.source_a }}
+          OECL_SOURCE_B: ${{ inputs.source_b }}
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs "$OECL_SOURCE_A" "$OECL_SOURCE_B" dependency-source source-output
+          node -e 'const fs=require("node:fs");fs.writeFileSync("source-output/request.json",JSON.stringify({schemaVersion:"OECL_GENERIC_SOURCE_REQUEST_V1",requestId:process.env.OECL_REQUEST_ID,runId:process.env.GITHUB_RUN_ID,workflowSha:process.env.GITHUB_SHA,sourceA:process.env.OECL_SOURCE_A,sourceB:process.env.OECL_SOURCE_B,scientificVerdict:"INCONCLUSIVE",candidateAdmission:"NOT_ADMITTED"},null,2)+"\n")'
+
+      - name: Run real source acquisition and AST discovery on independent pairs
+        if: github.event_name != 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-8098 dependency-source source-output/pair-8060-8098
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE dependency-source source-output/pair-8060-20burnable
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-20 dependency-source source-output/pair-8098-20
+          node -e 'const fs=require("node:fs");for(const folder of ["pair-8060-8098","pair-8060-20burnable","pair-8098-20"]){const r=JSON.parse(fs.readFileSync("source-output/"+folder+"/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses<1){console.error("OECL_GENERIC_DISCOVERY_REGRESSION:"+folder);process.exit(1)}}'
+
+      - name: Upload source-only graph and provenance artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-ast-evidence
+          path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14
