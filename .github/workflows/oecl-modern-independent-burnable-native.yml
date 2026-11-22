@@ -1,0 +1,107 @@
+name: OECL Modern Independent Burnable and Native Harness Migration
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-modern-independent-burnable-native.yml'
+      - 'integrations/modern-evm-toolchain/**'
+      - 'integrations/erc8060-erc20-burnable/**'
+      - 'laboratory/scientific-joint-contract-harness/controls/ScientificErc8060Erc8098ModernPinnedRecipe.ts'
+      - 'scripts/check-pinned-modern-native-joint-parity.ts'
+permissions:
+  contents: read
+jobs:
+  cross-runtime-independent-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: OpenZeppelin/openzeppelin-contracts
+          ref: dc44c9f1a4c3b10af99492eed84f83ed244203f6
+          path: source-openzeppelin
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install original scientific native engine and audited legacy and modern EVM locks
+        run: |
+          (cd oecl && npm ci --ignore-scripts --no-fund)
+          (cd oecl/integrations/secure-evm-toolchain && npm ci --ignore-scripts --no-fund --audit=false && npm audit --audit-level=moderate)
+          (cd oecl/integrations/modern-evm-toolchain && npm ci --ignore-scripts --no-fund --audit=false && npm audit --audit-level=low)
+      - name: Prove exact source pins and upstream independent OpenZeppelin bytes
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          test "$(git -C source-openzeppelin rev-parse HEAD)" = "dc44c9f1a4c3b10af99492eed84f83ed244203f6"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol source-openzeppelin/contracts/token/ERC20/ERC20.sol
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol source-openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol
+          cmp oecl/integrations/modern-evm-toolchain/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol source-openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol
+      - name: Derive exact independent AST hypothesis before EVM
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p evidence
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE source-8060 evidence/source
+          node oecl/integrations/erc8060-erc20-burnable/verify-independent-evidence.cjs gate source-8060 oecl evidence/source
+      - name: Execute all ten original independent Hardhat2 Ethers5 cases
+        run: |
+          for f in OECLBurnableFixture.sol OECL8060BurnableCoordinator.sol OECLAdversarialBurnableCaller.sol; do
+            cp "oecl/integrations/erc8060-erc20-burnable/solidity/$f" "source-8060/contracts/$f"
+            cmp "source-8060/contracts/$f" "oecl/integrations/erc8060-erc20-burnable/solidity/$f"
+          done
+          cp oecl/integrations/erc8060-erc20-burnable/test/OECLIndependentBurnableEVM.test.js source-8060/test/
+          (cd source-8060 && OECL_BURNABLE_EVM_REPORT_PATH=../evidence/historical-independent-burnable.json ./node_modules/.bin/hardhat test test/OECLIndependentBurnableEVM.test.js)
+      - name: Verify historic EVM, source, adversarial mutants and native constraint evaluations
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/verify-independent-evidence.cjs verify source-8060 oecl evidence/source evidence/historical-independent-burnable.json evidence/independent-native-bridge.json
+          node oecl/integrations/erc8060-erc20-burnable/check-independent-negative-controls.cjs source-8060 oecl evidence/source evidence/historical-independent-burnable.json
+          (cd oecl && npx tsx scripts/check-independent-burnable-native-properties.ts ../evidence/independent-native-bridge.json ../evidence/historical-independent-burnable.json ../evidence/source/source-scientific-report.json ../source-8060 ../source-openzeppelin ../evidence/independent-native-properties.json)
+      - name: Compile identical participant and experiment-only sources on Hardhat3
+        run: |
+          mkdir -p oecl/integrations/modern-evm-toolchain/contracts
+          cp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol oecl/integrations/modern-evm-toolchain/contracts/
+          for f in OECLBurnableFixture.sol OECL8060BurnableCoordinator.sol OECLAdversarialBurnableCaller.sol; do
+            cp "source-8060/contracts/$f" "oecl/integrations/modern-evm-toolchain/contracts/$f"
+            cmp "oecl/integrations/erc8060-erc20-burnable/solidity/$f" "oecl/integrations/modern-evm-toolchain/contracts/$f"
+          done
+          (cd oecl/integrations/modern-evm-toolchain && ./node_modules/.bin/hardhat compile)
+      - name: Execute ten modern independent EVM cases and compare all historic state observations
+        run: |
+          (cd oecl/integrations/modern-evm-toolchain && node scripts/independent-burnable-matrix.mjs)
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-independent-burnable.cjs evidence/historical-independent-burnable.json oecl/integrations/modern-evm-toolchain/reports/modern-independent-burnable.json source-8060 source-openzeppelin oecl/integrations/modern-evm-toolchain evidence/independent-burnable-modern-parity.json
+      - name: Run real OECL native executor with both historical and modern bilateral EVM drivers
+        run: |
+          (cd oecl && OECL_AUDITED_EVM_TOOLCHAIN_READY=1 npx tsx scripts/check-pinned-modern-native-joint-parity.ts ../source-8060 ../source-8098 integrations/modern-evm-toolchain ../evidence/pinned-modern-native-harness-parity.json)
+      - name: Require absolute zero reported modern npm advisories including low
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: npm audit --audit-level=low
+      - name: Archive provenance and independent modern EVM and native outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-independent-burnable-native-modern-migration
+          path: |
+            evidence/**/*.json
+            oecl/integrations/modern-evm-toolchain/reports/*.json
+          if-no-files-found: warn
+          retention-days: 14
