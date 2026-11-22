@@ -42,10 +42,9 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Trial regenerate lock for controlled transitive advisory patches
+      - name: Install exact audited lockfile without package scripts
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
-          npm install --package-lock-only --ignore-scripts --no-fund --audit=false
           npm ci --ignore-scripts --no-fund --audit=false
           node -e 'const h=require("hardhat/package.json");const e=require("ethers/package.json");const s=require("solc");if(h.version!=="2.29.2"||e.version!=="5.8.0"||!s.version().startsWith("0.8.26+"))process.exit(1);console.log("TOOLCHAIN_VERSIONS_VERIFIED:",h.version,e.version,s.version())'
 
@@ -80,15 +79,10 @@ jobs:
         run: |
           ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js
 
-      - name: Require zero high/critical advisory on candidate toolchain
+      - name: Require zero moderate/high/critical advisories on candidate toolchain
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
-          node -e 'const a=require("../../../secure-toolchain-audit.json");const v=a.metadata.vulnerabilities; if(v.high||v.critical){console.error("CANDIDATE_TOOLCHAIN_HIGH_VULNERABILITIES",JSON.stringify(v));process.exit(1)}; console.log("CANDIDATE_TOOLCHAIN_HIGH_GATE_PASS",JSON.stringify(v))'
-
-      - name: Dump candidate lock for reviewed pinning only
-        working-directory: oecl/integrations/secure-evm-toolchain
-        run: |
-          node -e 'const fs=require("node:fs");const s=fs.readFileSync("package-lock.json","utf8");console.log("OECL_LOCK_LENGTH:"+s.length);for(let i=0;i<s.length;i+=2500)console.log("OECL_LOCK_CHUNK:"+String(i/2500).padStart(4,"0")+":"+JSON.stringify(s.slice(i,i+2500)))'
+          node -e 'const a=require("../../../secure-toolchain-audit.json");const v=a.metadata.vulnerabilities; if(v.moderate||v.high||v.critical){console.error("CANDIDATE_TOOLCHAIN_MODERATE_OR_HIGH_VULNERABILITIES",JSON.stringify(v));process.exit(1)}; console.log("CANDIDATE_TOOLCHAIN_MODERATE_HIGH_GATE_PASS",JSON.stringify(v))'
 
       - name: Upload new lock candidate and isolated receipts, not the immutable source lock
         if: always()
