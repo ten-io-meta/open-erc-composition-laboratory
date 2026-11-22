@@ -4,6 +4,7 @@ run-name: ${{ github.event_name == 'workflow_dispatch' && format('OECL-SOURCE-RE
 on:
   push:
     paths:
+      - 'integrations/secure-evm-toolchain/**'
       - 'laboratory/scientific-open-source-worker/**'
       - 'scripts/check-generic-source-worker.cjs'
       - 'scripts/check-source-graph-view.cjs'
@@ -13,6 +14,7 @@ on:
       - '.github/workflows/oecl-generic-source-lab.yml'
   pull_request:
     paths:
+      - 'integrations/secure-evm-toolchain/**'
       - 'laboratory/scientific-open-source-worker/**'
       - 'scripts/check-generic-source-worker.cjs'
       - 'scripts/check-source-graph-view.cjs'
@@ -68,9 +70,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install dependencies from pinned manifest without third-party lifecycle scripts
-        working-directory: dependency-source
-        run: npm ci --ignore-scripts
+      - name: Install audited isolated compiler toolchain with exact OECL lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Mount isolated compiler and OpenZeppelin into immutable research checkout
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const fs=require("node:fs");const o=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const s=require("./dependency-source/node_modules/solc");if(o.version!=="4.9.6"||!s.version().startsWith("0.8.26+"))process.exit(1);console.log("OECL_SECURE_AST_TOOLCHAIN:",o.version,s.version())'
 
       - name: Run generic source and provenance falsification controls
         run: node oecl/scripts/check-generic-source-worker.cjs

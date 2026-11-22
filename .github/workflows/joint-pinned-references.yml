@@ -53,9 +53,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install pinned EVM dependencies
-        working-directory: source-8060
-        run: npm ci
+      - name: Install audited EVM toolchain from isolated committed lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Attach EVM tools to pinned sources without modifying participant provenance
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
 
       - name: Propose behavioral complementarity from source only, before joint EVM assembly
         run: node oecl/scripts/check-source-only-behavioral-complementarity.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-source-only-hypothesis.json

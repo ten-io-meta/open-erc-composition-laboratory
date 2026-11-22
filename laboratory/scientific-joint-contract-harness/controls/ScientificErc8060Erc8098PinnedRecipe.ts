@@ -79,9 +79,14 @@ try {
 `;
     return {
         recipeId: "RECIPE-PINNED-ERC8060-ERC8098-LOCAL-EVM",
-        preparationSteps: [
-            {stepId:"INSTALL-PINNED-8060-TOOLCHAIN",participantSide:"A",command:"npm",args:["ci"]}
-        ],
+        // CI may prepare the audited, exact-lock EVM tooling in an isolated workspace.
+        // All other callers retain the historical pinned npm ci recipe unchanged.
+        // This is only an operational test-recipe switch, never scientific admission.
+        preparationSteps: process.env.OECL_AUDITED_EVM_TOOLCHAIN_READY === "1"
+            ? []
+            : [
+                {stepId:"INSTALL-PINNED-8060-TOOLCHAIN",participantSide:"A",command:"npm",args:["ci"]}
+            ],
         driver:{participantSide:"A",fileName:"oecl-pinned-8060-8098-driver.cjs",source:driverSource}
     };
 }

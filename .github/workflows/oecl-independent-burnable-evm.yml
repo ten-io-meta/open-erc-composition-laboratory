@@ -4,6 +4,7 @@ run-name: OECL-INDEPENDENT-BURNABLE-${{ github.run_id }}
 on:
   push:
     paths:
+      - 'integrations/secure-evm-toolchain/**'
       - 'integrations/erc8060-erc20-burnable/**'
       - 'scripts/check-independent-burnable-native-properties.ts'
       - 'scripts/run-scientific-regression-suite.ts'
@@ -11,6 +12,7 @@ on:
       - '.github/workflows/oecl-independent-burnable-evm.yml'
   pull_request:
     paths:
+      - 'integrations/secure-evm-toolchain/**'
       - 'integrations/erc8060-erc20-burnable/**'
       - 'scripts/check-independent-burnable-native-properties.ts'
       - 'scripts/run-scientific-regression-suite.ts'
@@ -52,9 +54,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install immutable Hardhat and OpenZeppelin source dependencies
-        working-directory: source-8060
-        run: npm ci --ignore-scripts
+      - name: Install audited isolated EVM tooling from committed security lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Mount audited runtime while retaining immutable ERC-8060 lock
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
       - name: Verify OpenZeppelin NPM package matches the immutable tagged source bytes
         run: |
           cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol source-openzeppelin/contracts/token/ERC20/ERC20.sol
