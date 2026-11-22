@@ -499,7 +499,7 @@ async function main() {
     console.log(`Integration routed (NOT RUN): ${integrationRouted.length}`);
     console.log(`Credential blocked (NOT RUN): ${credentialBlocked.length}`);
     console.log(
-        `Suite: ${valid ? "PASS" : "INCOMPLETE_OR_FAIL"}`
+        `Suite: ${valid ? "PASS" : coreValid ? "CORE_PASS_FULL_INCOMPLETE" : "FAIL"}`
     );
 
     console.log("");
@@ -508,8 +508,11 @@ async function main() {
         "Result: ./scientific-regression-suite-results.json"
     );
 
+    // Report outstanding integrations/credentials without treating missing
+    // prerequisites as a failure of the independently tested core.
+    // The JSON "valid" flag remains false until full external coverage.
     if (
-        !valid
+        !coreValid
     ) {
 
         process.exitCode =
