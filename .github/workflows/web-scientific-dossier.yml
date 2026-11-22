@@ -4,10 +4,14 @@ on:
   push:
     paths:
       - 'web/**'
+      # AST graph renderer and scientific feasibility data are consumed by the web.
+      - 'laboratory/scientific-open-source-worker/**'
       - '.github/workflows/web-scientific-dossier.yml'
   pull_request:
     paths:
       - 'web/**'
+      # AST graph renderer and scientific feasibility data are consumed by the web.
+      - 'laboratory/scientific-open-source-worker/**'
       - '.github/workflows/web-scientific-dossier.yml'
 
 concurrency:
