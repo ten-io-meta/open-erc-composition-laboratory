@@ -113,6 +113,43 @@ fixture.m.body.statements=fixture.m.body.statements.filter(x=>x.nodeType!=="Plac
 const missing=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
 assert.ok(missing.hypotheses[0].participants[1].blockers.some(x=>
   x.kind==="MODIFIER_SUPPRESSES_FUNCTION_BODY"));
+// Contradictory inherited modifier guards suppress access before the body.
+fixture=sample();
+fixture.m.body.statements=[
+  expression(atom("quota",777,">",9),865),
+  expression(atom("quota",777,"<",2),895),
+  {nodeType:"PlaceholderStatement",src:"930:4:0"}
+];
+const modifierConflict=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
+assert.equal(modifierConflict.hypotheses[0].participants[1].pathScreen,
+  "PROVEN_BLOCKED_WITHIN_MODELED_AST_PATH");
+assert.ok(modifierConflict.hypotheses[0].participants[1].blockers.some(x=>
+  x.kind==="CONTRADICTORY_INTERVAL_GUARDS"));
+// A blocked call site must not condemn an alternative unblocked source site.
+fixture=sample();
+fixture.f1.body.statements=[
+  expression(atom("amount",301,">",10),100),
+  call(120),
+  expression(atom("amount",301,"<",5),150),
+  call(200)
+];
+fixture.graph.edges.push({kind:"CALLS",from:11,to:12,location:loc(120)});
+fixture.discovery.sourceGraphSha256=sha(JSON.stringify(fixture.graph));
+const alternative=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
+assert.equal(alternative.hypotheses[0].participants[0].pathScreen,
+  "NOT_PROVEN_EXECUTABLE");
+// Nested branch effects are unresolved, never silently marked reachable.
+fixture=sample();
+fixture.f1.body.statements=[expression(atom("amount",301,">",10),100),
+  {nodeType:"IfStatement",src:"180:60:0",condition:atom("amount",301,"<",5),
+    trueBody:{nodeType:"Block",src:"191:45:0",statements:[call(200)]}}
+];
+const conditional=evaluateFeasibility(fixture.build,fixture.graph,fixture.discovery);
+assert.equal(conditional.hypotheses[0].participants[0].pathScreen,
+  "NOT_PROVEN_EXECUTABLE");
+assert.ok(conditional.hypotheses[0].participants[0].flags.includes(
+  "SOURCE_PATH_HAS_UNMODELED_CONTEXT"));
+
 // Conditional reverts are necessary guards on the continuing path.
 fixture=sample();
 fixture.f1.body.statements=[expression(atom("amount",301,"==",0),100),
