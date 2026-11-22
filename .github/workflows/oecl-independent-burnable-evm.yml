@@ -35,12 +35,26 @@ jobs:
           ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
           path: source-8060
           persist-credentials: false
+      - name: Checkout upstream OpenZeppelin 4.9.6 immutable tag commit
+        uses: actions/checkout@v4
+        with:
+          repository: OpenZeppelin/openzeppelin-contracts
+          ref: dc44c9f1a4c3b10af99492eed84f83ed244203f6
+          path: source-openzeppelin
+          persist-credentials: false
       - name: Setup pinned Node 22 toolchain
         uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Install immutable Hardhat and OpenZeppelin source dependencies
         working-directory: source-8060
+        run: npm ci --ignore-scripts
+      - name: Verify OpenZeppelin NPM package matches the immutable tagged source bytes
+        run: |
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol source-openzeppelin/contracts/token/ERC20/ERC20.sol
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol source-openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol
+      - name: Install exact native OECL scientific evaluator
+        working-directory: oecl
         run: npm ci --ignore-scripts
       - name: Generate fresh independent ERC-8060 x ERC20 Burnable source hypothesis and path-feasibility report
         env:
@@ -69,6 +83,10 @@ jobs:
       - name: Verify independent local EVM receipts against source, compiler, code and rollback evidence
         run: |
           node oecl/integrations/erc8060-erc20-burnable/verify-independent-evidence.cjs verify source-8060 oecl evidence/source evidence/erc8060-erc20-burnable-evm.json evidence/erc8060-erc20-burnable-native-bridge.json
+      - name: Evaluate real source-bound properties in OECL native scientific constraint engine
+        working-directory: oecl
+        run: |
+          npx tsx scripts/check-independent-burnable-native-properties.ts ../evidence/erc8060-erc20-burnable-native-bridge.json ../evidence/erc8060-erc20-burnable-evm.json ../evidence/source/source-scientific-report.json ../source-8060 ../source-openzeppelin ../evidence/erc8060-erc20-burnable-native-properties.json
       - name: Challenge recorded receipt with adversarial source and verdict mutations
         run: |
           node oecl/integrations/erc8060-erc20-burnable/check-independent-negative-controls.cjs source-8060 oecl evidence/source evidence/erc8060-erc20-burnable-evm.json
