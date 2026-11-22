@@ -72,6 +72,16 @@ type Bundle = {
 };
 
 
+function evidenceGatewayError(body: unknown): string {
+  const status = body && typeof body === "object" && "status" in body
+    ? (body as { status?: unknown }).status
+    : null;
+  if (status === "NOT_CONFIGURED") {
+    return "Live ERC-8004 verification is not configured on this deployment. No mainnet observations were checked and no EvidenceReceipts were issued. Pinned scientific examples below remain available.";
+  }
+  return "Live ERC-8004 verification could not complete. No fresh evidence has been admitted from this request.";
+}
+
 function networkLabel(
   network: string
 ) {
@@ -146,6 +156,7 @@ export function EvidenceReceiptGateway() {
   async function load() {
 
     setLoading(true);
+    setData(null);
     setError(null);
 
     try {
@@ -162,19 +173,21 @@ export function EvidenceReceiptGateway() {
         (await response.json()) as Bundle;
 
       if (!response.ok) {
-        throw new Error(
-          "Evidence receipt request failed."
-        );
+        throw new Error(evidenceGatewayError(body));
+      }
+      if (!Array.isArray(body.receipts) || typeof body.coverage !== "string") {
+        throw new Error("The evidence response is incomplete. No receipt is accepted.");
       }
 
       setData(body);
 
     } catch (cause) {
 
+      setData(null);
       setError(
         cause instanceof Error
           ? cause.message
-          : "Evidence receipt request failed."
+          : "Live evidence retrieval failed. No evidence was admitted."
       );
 
     } finally {
@@ -204,9 +217,10 @@ export function EvidenceReceiptGateway() {
               (await response.json()) as Bundle;
 
             if (!response.ok) {
-              throw new Error(
-                "Evidence receipt request failed."
-              );
+              throw new Error(evidenceGatewayError(body));
+            }
+            if (!Array.isArray(body.receipts) || typeof body.coverage !== "string") {
+              throw new Error("The evidence response is incomplete. No receipt is accepted.");
             }
 
             if (!cancelled) {
@@ -218,10 +232,11 @@ export function EvidenceReceiptGateway() {
           cause => {
 
             if (!cancelled) {
+              setData(null);
               setError(
                 cause instanceof Error
                   ? cause.message
-                  : "Evidence receipt request failed."
+                  : "Live evidence retrieval failed. No evidence was admitted."
               );
             }
           }
@@ -264,9 +279,10 @@ export function EvidenceReceiptGateway() {
             </h2>
 
             <p className="mt-4 max-w-2xl text-[15px] leading-7 text-[#70746f]">
-              OECL reuses one standardized ERC-8004 observation across five
-              mainnet targets, checks each result against independent chain
-              state, and emits one machine-readable EvidenceReceipt per network.
+              When live verification is configured, OECL can check one
+              standardized ERC-8004 observation against independent chain
+              state across five target networks and issue EvidenceReceipts.
+              Until those checks finish, no receipt is admitted.
             </p>
 
           </div>
@@ -315,7 +331,7 @@ export function EvidenceReceiptGateway() {
         <div className="border-b border-[#dfe1dc] px-6 py-6 lg:border-b-0 lg:border-r lg:px-9">
 
           <div className="font-mono text-[9px] uppercase tracking-[0.17em] text-[#8a8e88]">
-            Network targets
+            Target networks (design)
           </div>
 
           <div className="mt-2 text-[34px] font-medium tracking-[-0.04em]">
@@ -378,7 +394,8 @@ export function EvidenceReceiptGateway() {
 
       {error && (
 
-        <div className="border-b border-[#dfe1dc] px-6 py-4 text-sm text-[#9b3128] md:px-9">
+        <div role="status" aria-live="polite"
+          className="border-b border-[#dfe1dc] bg-[#fffaf0] px-6 py-4 text-sm text-[#785a2e] md:px-9">
           {error}
         </div>
 
