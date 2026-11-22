@@ -14,8 +14,17 @@ import {
 import type { ScientificCompositionExecutionRequirement } from "../laboratory/scientific-composition-experiment/ScientificCompositionExecutionRequirement.js";
 import type { ScientificCompositionWorkspaceMaterialization } from "../laboratory/scientific-composition-workspace-materialization/ScientificCompositionWorkspaceMaterialization.js";
 
-const [a,b,modernRoot,outfile]=process.argv.slice(2);
-assert.ok(a&&b&&modernRoot&&outfile,"Usage: <pinned 8060> <pinned 8098> <isolated modern runtime> <receipt outfile>");
+const args=process.argv.slice(2);
+// The core scientific regression executes argumentless scripts as a discovery
+// check. This externally pinned, credential/source-checkout-dependent EVM
+// integration is exercised by its dedicated mandatory GitHub workflow.
+// Never report it as executed inside an argumentless core suite.
+if (args.length===0) {
+    console.log("OECL_NATIVE_MODERN_INTEGRATION_ROUTED_NOT_RUN: required two pinned checkouts and two runtime/evidence paths; dedicated workflow owns execution");
+    process.exit(0);
+}
+assert.equal(args.length,4,"Usage: <pinned 8060> <pinned 8098> <isolated modern runtime> <receipt outfile>");
+const [a,b,modernRoot,outfile]=args;
 const paths=[resolve(a),resolve(b)];
 const rev=(dir:string)=>execFileSync("git",["-C",dir,"rev-parse","HEAD"],{encoding:"utf8"}).trim();
 assert.equal(rev(paths[0]),ERC8060_PINNED_REVISION);
