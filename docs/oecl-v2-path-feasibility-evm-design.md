@@ -121,8 +121,9 @@ New artifacts produced for each source pair:
 
 The browser graph projector now refuses a new source report that announces
 path feasibility without its matching artifact/hash and original hypothesis
-identities. Historical pinned graph examples without that new report are
-unchanged. A newly verified job can display source blockers, permissions
+identities. The four public source graph examples were regenerated from CI with the
+validated path-feasibility report included. Historical underlying source
+revisions, graph hypotheses and INCONCLUSIVE verdicts remain unchanged. A newly verified job can display source blockers, permissions
 and *unexecuted* EVM plans below the graph.
 
 Falsification controls check contradicting numeric/boolean guard segments,
