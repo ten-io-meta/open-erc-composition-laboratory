@@ -70,9 +70,12 @@ function evidenceBase(ctx,scenario,pre,post,receipt,expected){
     before:pre,after:post,
     observations:{
       sourceOnly:false,experimentLocalEvm:true,
-      nftObligationDeltaWei:BigInt(pre.obligationWei)-BigInt(post.obligationWei)+"",
-      tokenSupplyDeltaBaseUnits:BigInt(pre.tokenTotalSupply)-BigInt(post.tokenTotalSupply)+"",
-      nftBackingDeltaWei:BigInt(pre.backingWei)-BigInt(post.backingWei)+""
+      nftObligationDeltaWei:String(BigInt(pre.obligationWei??pre.obligations??pre.reserve)-
+        BigInt(post.obligationWei??post.obligations??post.reserve)),
+      tokenSupplyDeltaBaseUnits:String(BigInt(pre.tokenTotalSupply??pre.supply)-
+        BigInt(post.tokenTotalSupply??post.supply)),
+      nftBackingDeltaWei:String(BigInt(pre.backingWei??pre.backing??pre.balance)-
+        BigInt(post.backingWei??post.backing??post.balance))
     }
   };
 }
