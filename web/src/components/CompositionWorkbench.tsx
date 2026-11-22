@@ -9,6 +9,7 @@ import {
 } from "@/components/ScientificPairResults";
 import { ScientificDossierResults } from "@/components/ScientificDossierResults";
 import { PinnedAnalysisJobLauncher } from "@/components/PinnedAnalysisJobLauncher";
+import { GenericSourceLabLauncher } from "@/components/GenericSourceLabLauncher";
 
 
 function normalize(
@@ -140,6 +141,8 @@ export function CompositionWorkbench() {
 
 
       <PinnedAnalysisJobLauncher isSelected={isPinnedDossier} />
+
+      <GenericSourceLabLauncher />
 
       {submitted && (
 
