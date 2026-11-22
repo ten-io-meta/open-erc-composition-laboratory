@@ -101,5 +101,11 @@ export function extractSourceEvidence(
   ] as const;
   const documents = required.map(filename => archive.get(prefix+filename));
   if(documents.some(item=>!item || typeof item!=="object")) fail("ARTIFACT_DOCUMENT_MISSING");
-  return {graph:documents[0],discovery:documents[1],report:documents[2]};
+  const report=documents[2] as Record<string,unknown>;
+  const pathFeasibility=archive.get(prefix+"path-feasibility.json");
+  if(report.pathFeasibilityArtifactSha256!==undefined&&
+     (!pathFeasibility||typeof pathFeasibility!=="object"))
+    fail("PATH_FEASIBILITY_DOCUMENT_MISSING");
+  return {graph:documents[0],discovery:documents[1],report:documents[2],
+    pathFeasibility};
 }
