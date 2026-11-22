@@ -32,8 +32,13 @@ async function deploy(){
   await(await token.transfer(alice.address,units)).wait();
   const receipt=await(await nft.connect(alice).mint("ipfs://oecl-independent-burnable",
     {value:wei("0.12")})).wait();
+  const runtimeCodeHashes={
+    erc8060:ethers.utils.keccak256(await ethers.provider.getCode(nft.address)),
+    erc20BurnableFixture:ethers.utils.keccak256(await ethers.provider.getCode(token.address)),
+    coordinator:ethers.utils.keccak256(await ethers.provider.getCode(coordinator.address))
+  };
   return {deployer,alice,attacker,nft,token,coordinator,units,mintHash:receipt.transactionHash,
-    holder:alice.address};
+    holder:alice.address,runtimeCodeHashes};
 }
 async function state(ctx){
   const {nft,token,coordinator,holder,alice}=ctx;
@@ -64,7 +69,8 @@ function evidenceBase(ctx,scenario,pre,post,receipt,expected){
     scenario,expected,sourcePair:["ERC-8060","ERC-20-BURNABLE"],
     chainId:31337,
     contractAddresses:{nft:ctx.nft.address,token:ctx.token.address,coordinator:ctx.coordinator.address},
-    actor:ctx.holder,transactionHash:receipt?.transactionHash||null,
+    actor:ctx.holder,runtimeCodeHashes:ctx.runtimeCodeHashes,
+    transactionHash:receipt?.transactionHash||null,
     receiptStatus:receipt?.status??null,blockNumber:receipt?.blockNumber??null,
     gasUsed:receipt?bn(receipt.gasUsed):null,
     before:pre,after:post,
