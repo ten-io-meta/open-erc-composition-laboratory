@@ -1,0 +1,15 @@
+{
+  "name": "oecl-hardhat3-ethers6-research-only",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Exploratory local fixture runner, never substitute for validated historical EVM evidence",
+  "dependencies": {
+    "@openzeppelin/contracts": "4.9.6"
+  },
+  "devDependencies": {
+    "hardhat": "3.22.0",
+    "@nomicfoundation/hardhat-ethers": "4.2.1",
+    "ethers": "6.17.0"
+  }
+}
