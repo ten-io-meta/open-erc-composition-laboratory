@@ -57,7 +57,7 @@ jobs:
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
           npm ci --ignore-scripts --no-fund
-          npm audit --audit-level=high
+          npm audit --audit-level=moderate
 
       - name: Attach EVM tools to pinned sources without modifying participant provenance
         run: |
