@@ -56,6 +56,8 @@ export function ProtocolDiscovery() {
     event.preventDefault();
     setLoading(true);
     setError(null);
+    // Never display previous successful search results under a new query.
+    setResult(null);
     setInspection(null);
 
     try {
