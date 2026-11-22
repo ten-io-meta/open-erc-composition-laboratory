@@ -111,7 +111,27 @@ try {
   const disabledLiveGraph = await fetch(base +
     "/api/scientific/source-jobs/123e4567-e89b-42d3-a456-426614174000/view?sourceA=ERC-8060&sourceB=ERC-8098");
   assert.equal(disabledLiveGraph.status, 503);
-  console.log("OECL_WEB_HTTP_SMOKE: PASS — four real source-only AST graphs, negative control, disabled live evidence and pinned dossier");
+  const newEvm = await fetch(base +
+    "/api/scientific/independent-evm?sourceA=ERC-8060&sourceB=ERC-20-BURNABLE");
+  assert.equal(newEvm.status,200);
+  assert.equal(newEvm.headers.get("x-oecl-snapshot-sha256"),
+    "e0ca78bf9fa95925f62a5f100b60c9ed551c26a67c7e5553986e10b006428e66");
+  const independent = await newEvm.json();
+  assert.equal(independent.status,"VERIFIED_INDEPENDENT_EVM_EVIDENCE");
+  assert.equal(independent.report.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(independent.report.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(independent.report.nativeEvaluation.localPropertyPolarity,"SUPPORT");
+  assert.equal(independent.report.nativeEvaluation.nativeCandidateAdmissionPerformed,false);
+  assert.equal(independent.report.cases.length,10);
+  const independentJson = await fetch(base +
+    "/api/scientific/independent-evm?sourceA=ERC-8060&sourceB=ERC-20-BURNABLE&download=1");
+  assert.equal(independentJson.status,200);
+  assert.match(independentJson.headers.get("content-disposition")??"",/attachment/);
+  assert.deepEqual(await independentJson.json(),independent.report);
+  const unknownEvm = await fetch(base +
+    "/api/scientific/independent-evm?sourceA=ERC-8060&sourceB=ERC-8098");
+  assert.equal(unknownEvm.status,404);
+  console.log("OECL_WEB_HTTP_SMOKE: PASS — pinned AST examples, independent EVM + native receipt, disabled worker, read-only JSON exports");
 } finally {
   if (server.pid) {
     try { process.kill(-server.pid, "SIGTERM"); } catch { /* Already exited. */ }

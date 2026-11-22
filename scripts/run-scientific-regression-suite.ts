@@ -50,9 +50,10 @@ interface RegressionSuiteResult {
 
 /**
  * These tests are NOT parameterless unit regressions. They are executed with
- * real pinned EVM artifacts and source paths in joint-pinned-references.yml.
- * Report routing explicitly: do not mislabel missing CLI parameters as code
- * failures and never claim those probes passed in this suite.
+ * real pinned EVM artifacts and source paths in joint-pinned-references.yml
+ * or oecl-independent-burnable-evm.yml. Report routing explicitly: never
+ * mislabel missing CLI parameters as code failures or claim these probes
+ * passed in this standalone suite.
  */
 const integrationRoutedChecks = new Set([
     // These require compiler-resolved AST, pinned EVM receipts, and the
@@ -68,8 +69,8 @@ const integrationRoutedChecks = new Set([
     "check-pinned-joint-native-source-admission.ts",
     "check-pinned-native-joint-recipe.ts",
     "check-pinned-real-scientific-discovery.ts",
-    // Run only with six source-pinned AST/EVM/native arguments in its EVM workflow.
-    // Never treat a parameterless invocation as a core-regression test.
+    // Requires independently generated ERC-8060 x ERC20Burnable AST/EVM evidence.
+    // Executed with six pinned inputs in oecl-independent-burnable-evm.yml.
     "check-independent-burnable-native-properties.ts"
 ]);
 
@@ -511,9 +512,9 @@ async function main() {
         "Result: ./scientific-regression-suite-results.json"
     );
 
-    // Report outstanding integrations/credentials without treating missing
-    // prerequisites as a failure of the independently tested core.
-    // The JSON "valid" flag remains false until full external coverage.
+    // Keep full-suite validity false while credentials/integration remain unrun.
+    // CI should fail only for a real failure of the core regression; external
+    // workflows are independently responsible for their pinned integration checks.
     if (
         !coreValid
     ) {
