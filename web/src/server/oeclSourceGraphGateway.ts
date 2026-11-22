@@ -158,9 +158,9 @@ export async function verifiedSourceView(
        request.candidateAdmission!=="NOT_ADMITTED")
       reject("REQUEST_EVIDENCE_CORRELATION_FAILED");
   }
-  const {graph,discovery,report}=extractSourceEvidence(archive,prefix);
+  const {graph,discovery,report,pathFeasibility}=extractSourceEvidence(archive,prefix);
   try{
-    const view=projectGraphBundle(graph,discovery,report,identity);
+    const view=projectGraphBundle(graph,discovery,report,identity,pathFeasibility??null);
     if(view.selected.map((x:{id:string})=>x.id).join("|")!==
        input.sourceA+"|"+input.sourceB)
       reject("RESULT_SELECTED_PAIR_MISMATCH");
