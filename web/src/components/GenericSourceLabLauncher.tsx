@@ -2,6 +2,7 @@
 
 import { useEffect,useState } from "react";
 import { ScientificAstGraphExplorer,type AstGraphView } from "./ScientificAstGraphExplorer";
+import { IndependentEvmEvidencePanel } from "./IndependentEvmEvidencePanel";
 
 type Entry={id:string;label:string;kind:string};
 type Config={enabled:boolean;sources:Entry[];status:string};
@@ -59,6 +60,7 @@ export function GenericSourceLabLauncher(){
   const [sourceA,setSourceA]=useState("ERC-8060");
   const [sourceB,setSourceB]=useState("ERC-20-BURNABLE");
   const [showExample,setShowExample]=useState(false);
+  const [showIndependentEvm,setShowIndependentEvm]=useState(false);
   const [accessKey,setAccessKey]=useState("");
   const [requestId,setRequestId]=useState<string|null>(null);
   const [job,setJob]=useState<Job|null>(null);
@@ -139,7 +141,7 @@ export function GenericSourceLabLauncher(){
             {item.label}
           </label>
           <select id={item.id} value={item.value} disabled={Boolean(requestId)}
-            onChange={e=>{item.set(e.target.value);setShowExample(false);}}
+            onChange={e=>{item.set(e.target.value);setShowExample(false);setShowIndependentEvm(false);}}
             className="w-full rounded-xl border border-[#cfd7d2] bg-white px-4 py-3 text-sm">
             {config.sources.map(source=><option key={source.id} value={source.id}>
               {source.label}
@@ -157,10 +159,17 @@ export function GenericSourceLabLauncher(){
         className="rounded-xl border border-[#2c7353] px-5 py-3 text-sm font-medium text-[#215d43] disabled:opacity-40">
         Explore verified AST example
       </button>
+      {sourceA==="ERC-8060"&&sourceB==="ERC-20-BURNABLE"&&
+        <button type="button" onClick={()=>setShowIndependentEvm(true)}
+          className="rounded-xl bg-[#215d43] px-5 py-3 text-sm font-medium text-white">
+          Explore verified independent EVM evidence
+        </button>}
       {!sample&&<p className="text-xs text-[#96703e]">
         No verified static example for this pair; use the research worker when enabled.
       </p>}
     </div>}
+    {showIndependentEvm&&sourceA==="ERC-8060"&&sourceB==="ERC-20-BURNABLE"&&
+      <IndependentEvmEvidencePanel/>}
     {showExample&&sample&&<LoadedGraph key={"example:"+sourceA+":"+sourceB}
       sourceA={sourceA} sourceB={sourceB}/>}
 
