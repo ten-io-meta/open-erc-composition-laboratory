@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Node-only CommonJS fixture executes transpiled TS in an isolated test module. */
 "use strict";
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
