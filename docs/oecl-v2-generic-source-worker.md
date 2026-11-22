@@ -101,7 +101,11 @@ The `GenericSourceLabLauncher` component presents choices in the OECL
 composition workbench, polls only an authorized job, and links to the
 original GitHub artifacts when the workflow has completed.
 
-`SOURCE_ARTIFACT_AVAILABLE` is an **execution state**, not a conclusion.
+A green GitHub workflow first reports `AWAITING_SOURCE_ARTIFACT`.
+Only after the status API separately lists a nonempty, unexpired artifact
+named `oecl-generic-ast-evidence` for that exact run ID can it report
+`SOURCE_ARTIFACT_AVAILABLE`. This is an **artifact existence state**, not a
+scientific conclusion or independent verification of source output bytes.
 The web never upgrades this to `SUPPORTS`, `ADMITTED` or a claim of
 security certification. In this iteration, new graph and hypothesis
 artifacts are available through the GitHub run link; they are **not yet**
