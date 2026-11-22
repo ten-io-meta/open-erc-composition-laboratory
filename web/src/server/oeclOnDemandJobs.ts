@@ -50,7 +50,7 @@ export function isJobId(value: string): boolean {
   return /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value);
 }
 
-function headers(token: string): HeadersInit {
+function headers(token: string): Record<string, string> {
   return {
     Accept: "application/vnd.github+json",
     Authorization: "Bearer " + token,
@@ -60,7 +60,8 @@ function headers(token: string): HeadersInit {
 }
 
 export class GitHubAnalysisError extends Error {
-  constructor(public readonly code: string) { super(code); }
+  readonly code: string;
+  constructor(code: string) { super(code); this.code = code; }
 }
 
 export async function listAnalysisRuns(
