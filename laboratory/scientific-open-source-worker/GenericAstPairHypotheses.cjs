@@ -90,7 +90,15 @@ function discoverGenericPair(graph, participants){
       sourceSha256:hashes.get(participants[i].unit),
       primaryContract:participants[i].contract,
       inheritedContractNames:baseNames,exportedFunctionCount:exported.length,
-      observedStateDecreases:[...dedup.values()].slice(0,40)};
+      // Report root-local state changes first, without silently erasing the
+      // inherited state effects that the compiler also observed.
+      observedStateDecreases:[...dedup.values()]
+        .sort((left,right)=>
+          Number(right.stateDecrease.unit===participants[i].unit)-
+          Number(left.stateDecrease.unit===participants[i].unit)||
+          left.publicEntrypoint.name.localeCompare(right.publicEntrypoint.name)||
+          left.stateDecrease.state.localeCompare(right.stateDecrease.state))
+        .slice(0,40)};
   });
   const hypotheses=[];
   const common=profiles[0].inheritedContractNames
