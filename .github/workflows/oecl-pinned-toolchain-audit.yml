@@ -1,0 +1,70 @@
+name: OECL Pinned Experimental Toolchain Audit
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-pinned-toolchain-audit.yml'
+      - 'scripts/audit-experimental-toolchain.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locked-external-dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout OECL audit scripts
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout immutable scientific ERC-8060 source AND original lockfile
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+
+      - name: Checkout untouched Reservable historical regression baseline
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-reservable
+          ref: 5b7a407553ccf280ab4f751a792771b660ad287a
+          path: reservable-source
+          persist-credentials: false
+
+      - name: Setup Node 22 for lockfile diagnostic only
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Inspect pinned lockfile without installing or executing third-party dependencies
+        run: |
+          mkdir -p reports
+          cd dependency-source
+          npm audit --package-lock-only --json --audit-level=low > ../reports/all.json || true
+          npm audit --package-lock-only --omit=dev --json --audit-level=low > ../reports/prod.json || true
+          cd ..
+          node oecl/scripts/audit-experimental-toolchain.cjs reports/all.json reports/prod.json dependency-source/package-lock.json
+
+      - name: Inspect Reservable's immutable regression lock, including development dependencies
+        run: |
+          cd reservable-source
+          npm audit --package-lock-only --json --audit-level=low > ../reports/reservable-all.json || true
+          npm audit --package-lock-only --omit=dev --json --audit-level=low > ../reports/reservable-prod.json || true
+          cd ..
+          node -e 'for(const p of ["reservable-all","reservable-prod"]){const x=require("./reports/"+p+".json");if(!x.metadata?.vulnerabilities)process.exit(1);console.log("OECL_RESERVABLE_AUDIT:"+p+":"+JSON.stringify(x.metadata.vulnerabilities));console.log("OECL_RESERVABLE_PACKAGES:"+p+":"+JSON.stringify(Object.entries(x.vulnerabilities).map(([n,v])=>({name:n,severity:v.severity,via:v.via,fixAvailable:v.fixAvailable}))))}'
+          sha256sum reservable-source/package-lock.json
+
+      - name: Upload complete advisory details and SHA-256 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-experimental-toolchain-audit
+          path: reports/*.json
+          if-no-files-found: warn
+          retention-days: 14

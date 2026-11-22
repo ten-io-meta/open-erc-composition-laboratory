@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OECL scientific web
 
-## Getting Started
+This Next.js interface **displays upstream scientific evidence**. It does not admit new composition candidates or infer compatibility from a user-selected pair.
 
-First, run the development server:
+## Pinned scientific dossier: ERC-8060 × ERC-8098
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The workbench defaults to ERC-8060 × ERC-8098. Select **Inspect available evidence** to see the report created by OECL's pinned local-EVM workflow.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- UI: src/components/ScientificDossierResults.tsx
+- Read-only API: GET /api/scientific/dossier?protocolA=ERC-8060&protocolB=ERC-8098
+- JSON download: append &download=1
+- Pinned payload: src/data/erc8060Erc8098ScientificDossier.json
+- Server integrity gate: src/server/oeclScientificDossier.ts
+- Evidence source: https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/44963511127
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The payload was projected from real compiler AST and pinned local-EVM artifacts. It reports the source-only hypothesis, bounded emergent-property observation, scientific questions, observed adversarial scenarios, untested threats, exact source revisions, and original artifact digests.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Scientific boundary:** INCONCLUSIVE, NOT_ADMITTED. The native scientific candidate was not admitted. The ten questions have scoped local observations, but source coverage is incomplete and the observations are not independent public-chain replay or a full security proof. A local constraint SUPPORT never becomes global SUPPORTS in this web projection.
 
-## Learn More
+The upstream research-only security and evidence review is maintained in [PR #9 review](../docs/reviews/pr9-final-security-evidence-review.md). It explicitly distinguishes the 11 observed scenario classes from 9 untested classes, including adversarial asset implementations, concurrency, and public-chain replay. Reconciliation of the PR #9 branch with this web layer changes neither the pinned JSON payload nor its SHA-256; the dossier remains an immutable historical report, not a live scientific re-evaluation.
 
-To learn more about Next.js, take a look at the following resources:
+The snapshot is pinned with a SHA-256 over JSON.stringify of the imported JSON. If modified without revising the server manifest, the API rejects it. The website's digest confirms snapshot consistency, **not** independent validity of all source artifacts; source evidence remains available in the GitHub Actions run.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Other ERC pairs keep the original /api/scientific/pair materialized projection. The dossier route returns 404 NO_VERIFIED_DOSSIER for unpinned pairs; this is not an incompatibility result.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Local verification
 
-## Deploy on Vercel
+From web/:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    npm ci
+    node scripts/check-scientific-dossier.mjs
+    npm run lint
+    npm run build
+    npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The dedicated GitHub workflow .github/workflows/web-scientific-dossier.yml tests these steps on pull requests.
+
+## Future: new user-initiated analyses
+
+Not yet implemented. Do not execute arbitrary repository-supplied code inside the Next.js server.
+
+A separately reviewed job service should accept validated repository URLs and immutable commit SHAs; enforce time, size, and network limits; obtain sources in a sandbox; run AST-first source analysis; register experiments only when sources and constraints are bound; and emit machine-readable provenance bundles.
+
+The interface should expose QUEUED, RUNNING, INCONCLUSIVE, COMPLETED, and FAILED states. It must show the scientific outcome from the native evaluator, not compute it in the UI.
+
+All source reads and EVM experiments must be isolated from the public request handler. Until the job service and its abuse controls are reviewed, requests remain read-only.
+
+## Controlled on-demand reproduction (research beta)
+
+The first on-demand job is intentionally **restricted to the already reviewed**
+ERC-8060 × ERC-8098 pinned recipe; it is a new run, not an unrestricted analysis
+of arbitrary ERC pairs.
+
+- Browser: `PinnedAnalysisJobLauncher` in the Composition Workbench
+- Discover availability: `GET /api/scientific/jobs`
+- Start an approved fresh run: `POST /api/scientific/jobs` with no request body
+- Follow state: `GET /api/scientific/jobs/{requestId}`
+- Correlation: GitHub Actions workflow_dispatch with run name
+  `OECL-REQUEST-{requestId}`, identified by a random UUIDv4
+- Artifacts: existing pinned joint-EVM workflow uploads the scientific dossier,
+  compiler-AST graph, source witness receipts and adversarial coverage. The
+  request metadata is included in the new run artifact.
+
+The server intentionally **does not** execute Solidity, accept user-supplied
+code, trust a URL from a web request, decide compatibility or mint a science
+candidate. No status other than a verified native evaluator can claim a
+scientific verdict. A successful workflow initially reports `AWAITING_EVIDENCE`;
+only a separate GitHub artifact-list verification confirming the expected
+nonempty, unexpired artifact for the exact workflow run can report
+`EVIDENCE_AVAILABLE`. Artifact listing is **not** a source-integrity replay,
+scientific `SUPPORTS`, or candidate `ADMITTED`.
+
+### Activation (only AFTER reviews and merging to the default branch)
+
+GitHub workflow_dispatch is only supported when the matching workflow exists
+on the repository's default branch. Until then no deployment should claim the
+feature is active.
+
+To activate **privately** on a trusted HTTPS deployment configure these
+server-only variables (never add `NEXT_PUBLIC_`):
+
+- `OECL_ENABLE_PINNED_ANALYSIS=true`
+- `OECL_ANALYSIS_ACCESS_KEY` = unique random high-entropy key, minimum 32 characters
+- `OECL_GITHUB_ACTIONS_TOKEN` = fine-grained GitHub token restricted to this
+  repository, with **Actions: read and write** permission
+
+Do not commit these secrets. The research beta form accepts an access key only
+for authorized testers; it remains in component memory, is not persisted to
+local storage or sent as a URL parameter. Never embed the GitHub token in the
+browser. Rotate secrets after exposure.
+
+The web dispatcher additionally checks GitHub's recent run list, rejecting
+new work when a previous controlled reproduction is queued/running or when
+three controlled runs have started in 24 hours. This is advisory and **not**
+an atomic distributed quota: a proper public deployment needs authenticated
+per-user identities, a shared atomic rate limiter, queue persistence, request
+deduplication, execution budget enforcement and isolated workers. Do not open
+the beta dispatcher publicly without those controls.
+
+If any variable is absent, the server returns `NOT_CONFIGURED`, and
+`POST` returns 503 without contacting GitHub. Invalid keys return 401;
+unknown workflow run IDs are `AWAITING_GITHUB_RUN`, never fabricated success.
+A green workflow without an independently listed artifact stays `AWAITING_EVIDENCE`
+(and GitHub lookup errors return 502), never an invented evidence receipt.
+
+### Verification
+
+Run after installing exact web dependencies:
+
+    node --experimental-strip-types scripts/check-on-demand-jobs.mjs
+    npm run lint
+    npm run build
+    node scripts/smoke-scientific-dossier.mjs
+
+### Next science milestone
+
+Create an isolated source-ingestion worker with allowlisted GitHub origin,
+commit SHA pinning, compiler-locked dependency graph, resource quotas,
+execution timeouts, no inbound secrets, no general outbound network, explicit
+scientific admission gates, immutable artifact publication and a secure job
+store. Only then may arbitrary ERC combinations be requested by normal users.

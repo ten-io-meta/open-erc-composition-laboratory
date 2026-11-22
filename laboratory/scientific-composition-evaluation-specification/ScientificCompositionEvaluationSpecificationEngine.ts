@@ -1,3 +1,7 @@
+import { ScientificNativeBehavioralSpecificationEngine } from "./ScientificNativeBehavioralSpecificationEngine.js";
+import type { NativeBehavioralEvaluationSpecificationResult } from "./ScientificNativeBehavioralSpecificationEngine.js";
+import type { NativeBehavioralDiscoveryResult } from "../scientific-cross-protocol-composition/ScientificNativeBehavioralHypothesisEngine.js";
+
 import type {
     ScientificCompositionCandidate,
     ScientificCompositionParticipant
@@ -91,6 +95,19 @@ interface ParticipantFactScope {
 
 
 export class ScientificCompositionEvaluationSpecificationEngine {
+
+    /**
+     * Draft native source-scoped behavioral study, with no fabricated candidate
+     * or READY scientific specification.
+     */
+    buildBehavioralHypothesisSpecification(input: {
+        discovery: NativeBehavioralDiscoveryResult;
+        normalizedParticipants: any[];
+    }): NativeBehavioralEvaluationSpecificationResult {
+        return new ScientificNativeBehavioralSpecificationEngine().build(input);
+    }
+
+
 
     build(
         input:

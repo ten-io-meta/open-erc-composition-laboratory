@@ -1,0 +1,308 @@
+{
+  "schemaVersion": "OECL_USER_SCIENTIFIC_DOSSIER_V1",
+  "verdict": "INCONCLUSIVE",
+  "candidateAdmission": "NOT_ADMITTED",
+  "scope": "PINNED_LOCAL_HARDHAT_EVM",
+  "universalCompatibilityEstablished": false,
+  "participants": [
+    {
+      "repository": "ten-io-meta/erc8060-native-eth-value",
+      "revision": "c7eed906835ab39fbc8439eb0493e5a5371b23a2",
+      "sourceSha256": "0300a5cb3887b39c232c9ef3416fbaaa45c2eebe55eed46d523c45e7c71894b6",
+      "assetClass": "CLAIM"
+    },
+    {
+      "repository": "ten-io-meta/erc8098-reference",
+      "revision": "68a05289bd68d89db8453c49500e0a1ae6cd11ec",
+      "sourceSha256": "1c7193d4b35b16cdaeaaeb23532e2eeb5b7ed36e869b7f54c2195c51dc6da309",
+      "assetClass": "FUNGIBLE"
+    }
+  ],
+  "discovery": {
+    "hypothesisId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1",
+    "relation": "POTENTIAL_ATOMIC_COUPLED_RESOURCE_DECREASE",
+    "status": "UNEVALUATED_SOURCE_HYPOTHESIS",
+    "origin": "COMPILER_RESOLVED_SOLIDITY_AST_ONLY",
+    "predictedProperties": [
+      "Both admitted resource reductions occur in one atomic transition",
+      "Any failed permission or unavailable resource leaves both ledgers unchanged",
+      "Each participant's independent conservation and backing restrictions are preserved"
+    ],
+    "unknowns": [
+      "No source-only proof of cross-contract authorization or suitable coordinator",
+      "No executed call graph, implementation equivalence, or cross-chain security proof",
+      "Effects and constraints are syntactic source observations pending semantic validation"
+    ]
+  },
+  "experiment": {
+    "chainId": 31337,
+    "transactionHash": "0x6f92c192ea8b32119300758611518cd10885030f543b5d0f3333ab924f2009c2",
+    "property": "SCOPED_ATOMIC_CROSS_ASSET_REDEMPTION_WITH_MONOTONE_SUPPLY",
+    "propertyStatus": "OBSERVED_IN_PINNED_LOCAL_EVM",
+    "ethRedeemedWei": "100000000000000000",
+    "nftObligationDecreaseWei": "100000000000000000",
+    "supplyBeforeBaseUnits": "100000000000000000000",
+    "supplyAfterBaseUnits": "99000000000000000000",
+    "supplyDecreaseBaseUnits": "1000000000000000000",
+    "bothBurnsInSameTransaction": true,
+    "localConstraintResult": "SUPPORT"
+  },
+  "scientificQuestions": {
+    "total": 10,
+    "scopedObserved": 10,
+    "partial": 0,
+    "missing": 0,
+    "sourceCoverageComplete": false,
+    "allQuestionsResolved": false,
+    "observations": [
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:A:AUTHORIZATION",
+        "participantSide": "A",
+        "category": "AUTHORIZATION",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:82ae0eadb2218ea240f2a2d22d85e5bac8507d9ea37df62167a312167131beab"
+        ],
+        "missing": [
+          "Not a general authorization proof across all execution paths"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:A:AVAILABILITY",
+        "participantSide": "A",
+        "category": "AVAILABILITY",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:de4fbb80895fef8d79f1f24ba560063d90f9b09c89ab25ca2875fd1edc459729",
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c"
+        ],
+        "missing": [
+          "No exhaustive solvency proof for every reachable NFT state"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:A:STATE_CONSISTENCY",
+        "participantSide": "A",
+        "category": "STATE_CONSISTENCY",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:eb7f2deb2235a441798555e4ef7d254ab4adaaf6bef01a5ca3b74af56d738656",
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c",
+          "SHA256:4d38b5ded32a3db2f8351c747722c7adadc2ddfacba23f5e21292aa7bc61f835"
+        ],
+        "missing": [
+          "No formal proof of every path or independent public-chain trace replay"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:A:RESOURCE_DECREASE",
+        "participantSide": "A",
+        "category": "RESOURCE_DECREASE",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c",
+          "SHA256:4d38b5ded32a3db2f8351c747722c7adadc2ddfacba23f5e21292aa7bc61f835"
+        ],
+        "missing": [
+          "No independent trace proving all dynamic burn paths or full future liability conservation"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:B:AUTHORIZATION",
+        "participantSide": "B",
+        "category": "AUTHORIZATION",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:6e08c8ffd7d026701a1fc210541b7eb8cd413fcae7e6277e438afabc476b6b5d",
+          "SHA256:82ae0eadb2218ea240f2a2d22d85e5bac8507d9ea37df62167a312167131beab"
+        ],
+        "missing": [
+          "No formal proof for every inherited caller or delegatecall route; coordinator allowance is separate"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:B:AVAILABILITY",
+        "participantSide": "B",
+        "category": "AVAILABILITY",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:82ae0eadb2218ea240f2a2d22d85e5bac8507d9ea37df62167a312167131beab",
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c"
+        ],
+        "missing": [
+          "Not proof for every ERC20 balance or allowance state"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:B:STATE_CONSISTENCY",
+        "participantSide": "B",
+        "category": "STATE_CONSISTENCY",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:de4fbb80895fef8d79f1f24ba560063d90f9b09c89ab25ca2875fd1edc459729",
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c"
+        ],
+        "missing": [
+          "No complete analysis of all inherited state mutation entrypoints"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:B:RESOURCE_DECREASE",
+        "participantSide": "B",
+        "category": "RESOURCE_DECREASE",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c",
+          "SHA256:de4fbb80895fef8d79f1f24ba560063d90f9b09c89ab25ca2875fd1edc459729"
+        ],
+        "missing": [
+          "Not a proof of monotonicity for all future transactions"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:JOINT:ATOMIC_EXECUTION",
+        "participantSide": "JOINT",
+        "category": "ATOMIC_EXECUTION",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:c00ac78dbf44cc9e96ffc547f80563dcbd28293bba7ac65a5f886694ce0b4cae",
+          "SHA256:edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c"
+        ],
+        "missing": [
+          "No independently replayed public-chain receipt or general coordinator feasibility proof"
+        ]
+      },
+      {
+        "questionId": "BEHAVIORAL-COUPLED-DECREASE-139c3088462779afc28577f1:JOINT:JOINT_ROLLBACK",
+        "participantSide": "JOINT",
+        "category": "JOINT_ROLLBACK",
+        "status": "SCOPED_OBSERVED",
+        "evidenceRefs": [
+          "SHA256:82ae0eadb2218ea240f2a2d22d85e5bac8507d9ea37df62167a312167131beab"
+        ],
+        "missing": [
+          "No independent replay of all attempted transactions or exhaustive interleavings"
+        ]
+      }
+    ]
+  },
+  "adversarial": {
+    "status": "PARTIAL_COVERAGE",
+    "observedCaseIds": [
+      "JOINT_SUCCESS",
+      "PAYOUT_EXACT",
+      "NFT_SOLVENCY_AFTER_BURN",
+      "ERC20_MONOTONIC_BURN",
+      "REVERT-ERC20-APPROVAL",
+      "REVERT-ERC20-BALANCE",
+      "REVERT-NFT-APPROVAL",
+      "REVERT-NONOWNER",
+      "REJECTED_ETH_AT_FINAL_PAYMENT",
+      "REENTRANT_RECEIVE_CALLBACK",
+      "TWO_HOLDERS_MAX_SURPLUS_SEQUENTIAL_REDEMPTION"
+    ],
+    "untested": [
+      {
+        "id": "ADVERSARIAL_ERC20_IMPLEMENTATION",
+        "reason": "Not tested: ERC-8098 is a fixed reference and not an arbitrary token."
+      },
+      {
+        "id": "ADVERSARIAL_NFT_IMPLEMENTATION",
+        "reason": "Not tested: ERC-8060 is fixed and not an arbitrary ERC-721."
+      },
+      {
+        "id": "CONCURRENT_MULTIHOLDER_INTERLEAVING",
+        "reason": "Two holders redeemed sequentially; adversarial transaction ordering and same-block races untested."
+      },
+      {
+        "id": "MANY_USERS_AND_APPROVAL_RACES",
+        "reason": "Only tested signers and explicit one-token approvals."
+      },
+      {
+        "id": "GAS_EXHAUSTION_AND_COMPLEX_RECEIVER_CALLBACKS",
+        "reason": "Rejecting ETH and single nested redeem tested; unbounded gas grief not tested."
+      },
+      {
+        "id": "PUBLIC_CHAIN_RECEIPT_REPLAY",
+        "reason": "Observations from local Hardhat EVM; no independent chain replay."
+      },
+      {
+        "id": "FORMAL_VERIFICATION",
+        "reason": "Finite scenario testing, not mathematical proof over all state transitions."
+      },
+      {
+        "id": "GENERAL_PROTOCOL_DISCOVERY",
+        "reason": "The authentic cross-protocol scientific candidate is not admitted."
+      },
+      {
+        "id": "ERC8098_CONSTRUCTOR_AND_UPGRADE_VARIANTS",
+        "reason": "Not tested across other ERC-8098 implementations or proxy upgrades."
+      }
+    ]
+  },
+  "limitations": [
+    "Full executable control-flow and dynamic dispatch not proved",
+    "Candidate-specific complete constraint surface not available",
+    "Independent native cross-protocol candidate discovery and READY specification absent",
+    "CALL_GRAPH_DYNAMIC_DISPATCH_AND_MODIFIER_PATH_FEASIBILITY",
+    "COMPLETE_SOURCE_DERIVED_CONSTRAINT_COVERAGE",
+    "SCOPED_JOINT_TRANSACTION_AND_ROLLBACK_EVIDENCE",
+    "NATIVE_DISCOVERED_COMPOSITION_CANDIDATE_AND_READY_ADMISSION_SPECIFICATION",
+    "LOCAL_EVM_RECEIPT_NOT_INDEPENDENT_PUBLIC_CHAIN_REPLAY",
+    "SOURCE_HYPOTHESIS_IS_NOT_AN_ADMITTED_SCIENTIFIC_CANDIDATE"
+  ],
+  "artifacts": {
+    "graph": {
+      "file": "erc8060-erc8098-structural-graph.json",
+      "sha256": "b5504a371cc726e6677cd9cfcde3ce9fe0d4e7bdb96d4b07088a7e2538069c2b"
+    },
+    "ast": {
+      "file": "erc8060-erc8098-ast-hypothesis.json",
+      "sha256": "3469b02e32e9a668ec59610e735a27def4b73b18e81bb9d2180dac174ebab607"
+    },
+    "study": {
+      "file": "erc8060-erc8098-native-ast-study.json",
+      "sha256": "81c7c3b41452ae5c060d618624e9c4c04fe28cd94303e6930f9fa99ed1fb7a18"
+    },
+    "bridge": {
+      "file": "erc8060-erc8098-ast-evm-native-bridge.json",
+      "sha256": "f9fb81a644bec64fff406cb08814c384d62b2aa9831a86ea7ae9d33fd3fc90d4"
+    },
+    "coverage": {
+      "file": "erc8060-erc8098-native-question-coverage.json",
+      "sha256": "f1a3f09b92cae0e8405befe165dd1cba01d01aefe4e56a94ef3e478660d98077"
+    },
+    "evm": {
+      "file": "erc8060-erc8098-pinned.json",
+      "sha256": "edcafb4e2c8b6997a17575dd98a1887429070078397cdc0ef2b1b95a0bb2d38c"
+    },
+    "witness": {
+      "file": "erc8060-erc8098-pinned.invariants.json",
+      "sha256": "4d38b5ded32a3db2f8351c747722c7adadc2ddfacba23f5e21292aa7bc61f835"
+    },
+    "native": {
+      "file": "erc8060-erc8098-pinned.native-behavioral.json",
+      "sha256": "de4fbb80895fef8d79f1f24ba560063d90f9b09c89ab25ca2875fd1edc459729"
+    },
+    "recognized": {
+      "file": "erc8060-erc8098-emergent-property.json",
+      "sha256": "c00ac78dbf44cc9e96ffc547f80563dcbd28293bba7ac65a5f886694ce0b4cae"
+    },
+    "rollback": {
+      "file": "erc8060-erc8098-failure-matrix.json",
+      "sha256": "82ae0eadb2218ea240f2a2d22d85e5bac8507d9ea37df62167a312167131beab"
+    },
+    "callbacks": {
+      "file": "erc8060-erc8098-eth-callbacks.json",
+      "sha256": "96a5d1b6beffee95da85f7d745636c2baa0595d1f472cc76dd8833c53429ce7a"
+    },
+    "multiholder": {
+      "file": "erc8060-erc8098-multiholder.json",
+      "sha256": "07b3bb2d8172e10f34b661adfb52c5c742f01f4ef3f6c15aeb74e82354d38296"
+    },
+    "audit": {
+      "file": "erc8060-erc8098-adversarial-audit.json",
+      "sha256": "c71757d1baf1dcc178c6787bf9cf145264559f6710e7934dd2f6435e77ec10d1"
+    }
+  }
+}

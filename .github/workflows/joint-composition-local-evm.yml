@@ -1,0 +1,71 @@
+name: OECL Joint Composition Local EVM
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  joint-8060-experimental-8098:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OECL candidate
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout pinned external ERC-8060 reference
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install isolated audited Hardhat toolchain from committed lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Mount isolated EVM tooling without changing pinned ERC-8060 source
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+
+      - name: Install experimental joint fixture without changing external source
+        run: |
+          cp oecl/integrations/erc8060-erc8098/solidity/ERC8098Experimental.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLJointRedemption.test.js source-8060/test/
+
+      - name: Execute real local-EVM cross-contract interaction
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-experimental-8098.json
+        run: npx hardhat test test/OECLJointRedemption.test.js
+
+      - name: Validate receipt and preserve scientific uncertainty
+        run: node oecl/integrations/erc8060-erc8098/validate-local-evidence.cjs joint-evidence/erc8060-experimental-8098.json
+
+      - name: Verify source revisions and classify ERC-8098 admission
+        run: |
+          node oecl/integrations/erc8060-erc8098/check-source-admission.cjs source-8060 oecl joint-evidence/erc8060-experimental-8098.json
+          node -e "const a=require('./joint-evidence/erc8060-experimental-8098.admission.json'); if(a.allowedScientificPolarity!=='INCONCLUSIVE'||a.compositionCandidateAdmission!=='BLOCKED_INDEPENDENT_ERC8098_SOURCE_MISSING') process.exit(1)"
+
+      - name: Reject tampered source provenance and forged ERC-8098 status
+        run: node oecl/integrations/erc8060-erc8098/check-source-admission-regression.cjs source-8060 oecl joint-evidence/erc8060-experimental-8098.json
+
+      - name: Upload reproducible local EVM experiment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-8060-experimental-8098-evidence
+          path: joint-evidence/*.json
+          if-no-files-found: warn

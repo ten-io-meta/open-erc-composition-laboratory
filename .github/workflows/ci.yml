@@ -28,3 +28,21 @@ jobs:
 
       - name: Run positive experiment
         run: npm run experiment:positive
+
+      - name: Joint composition evidence regression
+        run: npx tsx scripts/check-joint-composition-evidence-bridge.ts
+
+      - name: Native behavioral invariant and final polarity regression
+        run: npx tsx scripts/check-native-behavioral-constraints.ts
+
+      - name: Discovered candidate source and specification admission regression
+        run: npx tsx scripts/check-discovered-candidate-admission.ts
+
+      - name: Inherited capability exact-source and negative regression
+        run: npx tsx scripts/check-inherited-capability-projection.ts
+
+      - name: Pinned Solidity import closure safety regression
+        run: npx tsx scripts/check-pinned-solidity-import-closure.ts
+
+      - name: Pinned GitHub loader detached worktree and origin security regression
+        run: npx tsx scripts/check-github-loader-pinned-worktree.ts

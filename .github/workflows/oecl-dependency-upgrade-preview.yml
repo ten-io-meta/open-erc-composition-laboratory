@@ -1,0 +1,66 @@
+name: OECL Dependency Upgrade Preview (No Git Writes)
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oecl-dependency-upgrade-preview.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Generate patched OECL root lockfile without running install scripts
+        run: |
+          npm install --package-lock-only --ignore-scripts --save-exact @modelcontextprotocol/client@2.4.0
+          npm audit fix --package-lock-only --ignore-scripts
+          npm ci --ignore-scripts
+          npx tsc --noEmit
+          npm audit --omit=dev --audit-level=high
+      - name: Generate patched Next.js and React web lockfile
+        working-directory: web
+        run: |
+          npm install --package-lock-only --ignore-scripts --save-exact next@16.4.6 react@19.2.9 react-dom@19.2.9 @modelcontextprotocol/client@2.4.0
+          npm install --package-lock-only --ignore-scripts --save-dev --save-exact eslint-config-next@16.4.6
+          npm audit fix --package-lock-only --ignore-scripts
+          npm ci --ignore-scripts
+          npm audit --omit=dev --audit-level=high
+      - name: Verify web schema and all existing security regressions
+        working-directory: web
+        run: |
+          node scripts/check-scientific-dossier.mjs
+          node --experimental-strip-types scripts/check-on-demand-jobs.mjs
+          node scripts/check-generic-source-jobs.cjs
+          node --experimental-strip-types scripts/check-source-graph-view.mjs
+          node scripts/check-independent-evm.mjs
+          npm run lint
+          npm run build
+          node scripts/smoke-scientific-dossier.mjs
+      - name: Export reviewed package files to logs without writing GitHub branches
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const files = {
+            'root-package': 'package.json',
+            'root-lock': 'package-lock.json',
+            'web-package': 'web/package.json',
+            'web-lock': 'web/package-lock.json'
+          };
+          for(const [label,filename] of Object.entries(files)){
+            const str=fs.readFileSync(filename,'utf8');
+            const size=1500;
+            const chunks=Math.ceil(str.length/size);
+            console.log('OECL_PATCH_BEGIN:'+label+':'+chunks+':'+str.length);
+            for(let i=0;i<chunks;i++)
+              console.log('OECL_PATCH_CHUNK:'+label+':'+i+':'+
+                encodeURIComponent(str.slice(i*size,(i+1)*size)));
+            console.log('OECL_PATCH_END:'+label);
+          }
+          NODE

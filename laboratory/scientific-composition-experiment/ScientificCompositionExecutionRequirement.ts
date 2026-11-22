@@ -168,7 +168,15 @@ export function cloneScientificCompositionExecutionRequirement(
 
                         locator: {
                             ...constraint.locator
-                        }
+                        },
+
+                        ...(constraint.behavioralPredicate
+                            ? { behavioralPredicate: {...constraint.behavioralPredicate} }
+                            : {}),
+
+                        ...(constraint.dependencySources
+                            ? {dependencySources:constraint.dependencySources.map(source=>({...source}))}
+                            : {})
 
                     })
                 )

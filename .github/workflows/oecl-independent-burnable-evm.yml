@@ -1,0 +1,118 @@
+name: OECL Independent ERC8060 x ERC20 Burnable EVM
+run-name: OECL-INDEPENDENT-BURNABLE-${{ github.run_id }}
+
+on:
+  push:
+    paths:
+      - 'integrations/secure-evm-toolchain/**'
+      - 'integrations/erc8060-erc20-burnable/**'
+      - 'scripts/check-independent-burnable-native-properties.ts'
+      - 'scripts/run-scientific-regression-suite.ts'
+      - 'scripts/check-routed-scientific-workflows.ts'
+      - '.github/workflows/oecl-independent-burnable-evm.yml'
+  pull_request:
+    paths:
+      - 'integrations/secure-evm-toolchain/**'
+      - 'integrations/erc8060-erc20-burnable/**'
+      - 'scripts/check-independent-burnable-native-properties.ts'
+      - 'scripts/run-scientific-regression-suite.ts'
+      - 'scripts/check-routed-scientific-workflows.ts'
+      - '.github/workflows/oecl-independent-burnable-evm.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: independent-burnable-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pinned-local-evm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout independent OECL harness
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout unmodified immutable ERC-8060 source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+      - name: Checkout upstream OpenZeppelin 4.9.6 immutable tag commit
+        uses: actions/checkout@v4
+        with:
+          repository: OpenZeppelin/openzeppelin-contracts
+          ref: dc44c9f1a4c3b10af99492eed84f83ed244203f6
+          path: source-openzeppelin
+          persist-credentials: false
+      - name: Setup pinned Node 22 toolchain
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install audited isolated EVM tooling from committed security lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Mount audited runtime while retaining immutable ERC-8060 lock
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+      - name: Verify OpenZeppelin NPM package matches the immutable tagged source bytes
+        run: |
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol source-openzeppelin/contracts/token/ERC20/ERC20.sol
+          cmp source-8060/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol source-openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol
+      - name: Install exact native OECL scientific evaluator
+        working-directory: oecl
+        run: npm ci --ignore-scripts
+      - name: Generate fresh independent ERC-8060 x ERC20 Burnable source hypothesis and path-feasibility report
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE source-8060 evidence/source
+      - name: Gate EVM experiments by exact AST source identity and unadmitted source hypothesis
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/verify-independent-evidence.cjs gate source-8060 oecl evidence/source
+      - name: Install ONLY reviewed OECL test fixtures in temporary local EVM workspace
+        run: |
+          cp oecl/integrations/erc8060-erc20-burnable/solidity/OECLBurnableFixture.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc20-burnable/solidity/OECL8060BurnableCoordinator.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc20-burnable/solidity/OECLAdversarialBurnableCaller.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc20-burnable/test/OECLIndependentBurnableEVM.test.js source-8060/test/
+          cmp oecl/integrations/erc8060-erc20-burnable/solidity/OECLBurnableFixture.sol source-8060/contracts/OECLBurnableFixture.sol
+          cmp oecl/integrations/erc8060-erc20-burnable/test/OECLIndependentBurnableEVM.test.js source-8060/test/OECLIndependentBurnableEVM.test.js
+      - name: Compile pinned participant and separate experiment-only adapter
+        working-directory: source-8060
+        run: npx hardhat compile
+      - name: Execute independent EVM experiment matrix and generate local transaction receipts
+        working-directory: source-8060
+        env:
+          OECL_BURNABLE_EVM_REPORT_PATH: ../evidence/erc8060-erc20-burnable-evm.json
+        run: npx hardhat test test/OECLIndependentBurnableEVM.test.js
+      - name: Verify independent local EVM receipts against source, compiler, code and rollback evidence
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/verify-independent-evidence.cjs verify source-8060 oecl evidence/source evidence/erc8060-erc20-burnable-evm.json evidence/erc8060-erc20-burnable-native-bridge.json
+      - name: Evaluate real source-bound properties in OECL native scientific constraint engine
+        working-directory: oecl
+        run: |
+          npx tsx scripts/check-independent-burnable-native-properties.ts ../evidence/erc8060-erc20-burnable-native-bridge.json ../evidence/erc8060-erc20-burnable-evm.json ../evidence/source/source-scientific-report.json ../source-8060 ../source-openzeppelin ../evidence/erc8060-erc20-burnable-native-properties.json
+      - name: Challenge recorded receipt with adversarial source and verdict mutations
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/check-independent-negative-controls.cjs source-8060 oecl evidence/source evidence/erc8060-erc20-burnable-evm.json
+      - name: Project source-attributed independent local EVM and native-property report for web
+        run: |
+          node oecl/integrations/erc8060-erc20-burnable/project-verified-web-report.cjs evidence/erc8060-erc20-burnable-evm.json evidence/erc8060-erc20-burnable-native-properties.json evidence/erc8060-erc20-burnable-native-bridge.json evidence/erc8060-erc20-burnable-web-summary.json
+      - name: Upload independently sourced AST, EVM and native-boundary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-independent-erc8060-erc20-burnable
+          path: evidence/**/*.json
+          if-no-files-found: warn
+          retention-days: 14

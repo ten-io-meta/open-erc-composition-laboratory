@@ -1,0 +1,51 @@
+name: OECL Native Pinned Joint Recipe
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  native-selector-and-executor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OECL
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+      - name: Checkout pinned ERC-8060
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+      - name: Checkout pinned ERC-8098
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install OECL scientific runtime
+        working-directory: oecl
+        run: npm ci
+      - name: Install separately pinned audited EVM tools for test harness
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Mount audited EVM tooling while preserving original participant locks
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+
+      - name: Verify native selector and execute pinned joint EVM harness
+        working-directory: oecl
+        env:
+          OECL_AUDITED_EVM_TOOLCHAIN_READY: "1"
+        run: npx tsx scripts/check-pinned-native-joint-recipe.ts ../source-8060 ../source-8098

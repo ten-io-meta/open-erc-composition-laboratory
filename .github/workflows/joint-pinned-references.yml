@@ -1,0 +1,230 @@
+name: OECL Joint Pinned ERC-8060 and ERC-8098
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('OECL-REQUEST-{0}', inputs.request_id) || format('OECL-JOINT-{0}', github.run_id) }}
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: 'UUID correlation ID for controlled pinned reproduction'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'workflow_dispatch' && 'oecl-pinned-reproduction' || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  two-pinned-references:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate authorized-format manual request identifier
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+        run: |
+          node -e 'const id=process.env.OECL_REQUEST_ID || ""; if(!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(id)){console.error("INVALID_OECL_REQUEST_ID");process.exit(1)}'
+
+      - name: Checkout OECL evidence producer
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+
+      - name: Checkout pinned ERC-8060
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+
+      - name: Checkout pinned ERC-8098
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install audited EVM toolchain from isolated committed lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Attach EVM tools to pinned sources without modifying participant provenance
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+
+      - name: Propose behavioral complementarity from source only, before joint EVM assembly
+        run: node oecl/scripts/check-source-only-behavioral-complementarity.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-source-only-hypothesis.json
+
+      - name: Discover generic behavioral complementarity from normalized source effects
+        run: node oecl/scripts/check-generic-behavioral-complementarity.cjs joint-evidence/erc8060-erc8098-source-only-hypothesis.json joint-evidence/erc8060-erc8098-generic-effects.json
+
+      - name: Build joint test workspace from both immutable checkouts
+        run: |
+          cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLNftOpcodePath.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInheritedBurnAuthorization.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLMultiHolderSolvency.test.js source-8060/test/
+
+      - name: Compile pinned source trees into compiler-resolved Solidity AST
+        working-directory: source-8060
+        run: npx hardhat compile
+
+      - name: Build pinned compiler-AST structural capability and restriction graph before EVM execution
+        run: node oecl/scripts/check-solidity-structural-graph.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-structural-graph.json
+
+      - name: Discover typed complementarity independently from compiler AST before EVM
+        run: node oecl/scripts/check-graph-behavioral-discovery.cjs joint-evidence/erc8060-erc8098-structural-graph.json joint-evidence/erc8060-erc8098-ast-hypothesis.json
+
+      - name: Install OECL native scientific evaluator
+        working-directory: oecl
+        run: npm ci
+
+      - name: Discover source-only behavioral hypotheses and draft evaluation specification in native OECL
+        working-directory: oecl
+        run: npx tsx scripts/check-native-ast-behavioral-specification.ts ../joint-evidence/erc8060-erc8098-structural-graph.json ../joint-evidence/erc8060-erc8098-ast-hypothesis.json ../joint-evidence/erc8060-erc8098-native-ast-study.json
+
+      - name: Execute ERC-8060 and ERC-8098 in one local EVM
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-pinned.json
+        run: npx hardhat test test/OECLPinnedReferences.test.js
+
+      - name: Observe actual nested NFT EVM opcodes during pinned joint redemption
+        working-directory: source-8060
+        env:
+          OECL_NFT_OPCODE_TRACE_PATH: ../joint-evidence/erc8060-erc8098-nft-opcode-trace.json
+        run: npx hardhat test test/OECLNftOpcodePath.test.js
+
+      - name: Attest nested NFT opcodes to pinned compiler source maps and modifier storage transitions
+        run: node oecl/integrations/erc8060-erc8098/check-nft-opcode-path.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-nft-opcode-trace.json
+
+      - name: Execute four isolated adversarial interaction experiments
+        working-directory: source-8060
+        env:
+          OECL_FAILURE_MATRIX_PATH: ../joint-evidence/erc8060-erc8098-failure-matrix.json
+        run: npx hardhat test test/OECLInteractionFailureMatrix.test.js
+
+      - name: Observe inherited ERC20Burnable authorization outside the coordinator
+        working-directory: source-8060
+        env:
+          OECL_INHERITED_BURN_AUTH_PATH: ../joint-evidence/erc8060-erc8098-inherited-burn-auth.json
+        run: npx hardhat test test/OECLInheritedBurnAuthorization.test.js
+
+      - name: Verify source-anchored direct burn and delegated burnFrom authorization
+        run: node oecl/integrations/erc8060-erc8098/check-inherited-burn-auth.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-inherited-burn-auth.json
+
+      - name: Test rejecting final ETH payout and reentrant receiver callbacks
+        working-directory: source-8060
+        env:
+          OECL_ETH_CALLBACK_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-eth-callbacks.json
+        run: npx hardhat test test/OECLAdversarialEthReceiver.test.js
+
+      - name: Validate payment rejection and nested callback security receipts
+        run: node oecl/integrations/erc8060-erc8098/check-eth-callback-experiments.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-eth-callbacks.json
+
+      - name: Verify multi-holder solvency after maximal legitimate surplus withdrawal
+        working-directory: source-8060
+        env:
+          OECL_MULTIHOLDER_EVIDENCE_PATH: ../joint-evidence/erc8060-erc8098-multiholder.json
+        run: npx hardhat test test/OECLMultiHolderSolvency.test.js
+
+      - name: Verify pinned two-holder surplus and redemption accounting receipt
+        run: node oecl/integrations/erc8060-erc8098/check-multiholder-solvency.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-multiholder.json
+
+      - name: Validate all four adversarial experiments and source-bound rollback evidence
+        run: node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-failure-matrix.json
+
+      - name: Validate both source revisions and transaction evidence
+        run: node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Extract pinned Solidity constraints and evaluate native evidence coverage
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-joint-native-source-admission.ts ../source-8060 ../source-8098 ../joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Produce source-attributed ETH and monotone supply witnesses
+        run: node oecl/integrations/erc8060-erc8098/evaluate-pinned-invariants.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Adversarial tests for incomplete and manipulated invariant evidence
+        run: node oecl/integrations/erc8060-erc8098/check-pinned-invariant-regression.cjs source-8060 source-8098 joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Evaluate source-bound behavioral witnesses in OECL native constraint engine
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-behavioral-native-witness.ts ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-pinned.json
+
+      - name: Apply discovery admission gate to pinned local-EVM candidate
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-candidate-admission.ts ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json
+
+      - name: Discover genuine structural protocol candidates from both pinned Solidity sources
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-real-scientific-discovery.ts ../source-8060 ../source-8098 ../joint-evidence/erc8060-erc8098-source-discovery.json
+
+      - name: Compare source-attributed NFT and ERC20 burn semantics
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-burn-semantic-distinction.ts ../joint-evidence/erc8060-erc8098-source-discovery.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-burn-semantics.json
+
+      - name: Discover cross-capability interaction hypothesis without claiming compatibility
+        working-directory: oecl
+        run: npx tsx scripts/check-pinned-interaction-hypothesis.ts ../joint-evidence/erc8060-erc8098-burn-semantics.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-interaction-hypothesis.json
+
+      - name: Assemble four scoped scientific interaction questions with EVM evidence
+        run: node oecl/integrations/erc8060-erc8098/check-interaction-experiment-suite.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-interaction-hypothesis.json joint-evidence/erc8060-erc8098-experiment-suite.json
+
+      - name: Recognize bounded emergent property from source and actual EVM evidence
+        run: node oecl/integrations/erc8060-erc8098/recognize-scoped-emergent-property.cjs joint-evidence/erc8060-erc8098-source-discovery.json joint-evidence/erc8060-erc8098-pinned.invariants.json joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-interaction-hypothesis.json joint-evidence/erc8060-erc8098-emergent-property.json
+
+      - name: Evaluate generic source hypothesis against separately produced EVM evidence
+        run: node oecl/integrations/erc8060-erc8098/check-generic-hypothesis-evidence.cjs joint-evidence/erc8060-erc8098-generic-effects.json joint-evidence/erc8060-erc8098-emergent-property.json joint-evidence/erc8060-erc8098-generic-evaluation.json
+
+      - name: Reconcile AST source hypothesis with pinned EVM and native scientific constraints
+        working-directory: oecl
+        run: npx tsx scripts/check-ast-evm-native-bridge.ts ../joint-evidence/erc8060-erc8098-structural-graph.json ../joint-evidence/erc8060-erc8098-ast-hypothesis.json ../joint-evidence/erc8060-erc8098-pinned.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-emergent-property.json ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.candidate-admission.json ../joint-evidence/erc8060-erc8098-source-discovery.json ../joint-evidence/erc8060-erc8098-native-ast-study.json ../joint-evidence/erc8060-erc8098-ast-evm-native-bridge.json
+
+      - name: Evaluate ten source-derived scientific questions against bounded local EVM evidence
+        working-directory: oecl
+        run: npx tsx scripts/check-native-ast-behavioral-coverage.ts ../joint-evidence/erc8060-erc8098-native-ast-study.json ../joint-evidence/erc8060-erc8098-ast-evm-native-bridge.json ../joint-evidence/erc8060-erc8098-pinned.json ../joint-evidence/erc8060-erc8098-pinned.invariants.json ../joint-evidence/erc8060-erc8098-pinned.native-behavioral.json ../joint-evidence/erc8060-erc8098-failure-matrix.json ../joint-evidence/erc8060-erc8098-failure-matrix.validated.json ../joint-evidence/erc8060-erc8098-emergent-property.json ../joint-evidence/erc8060-erc8098-inherited-burn-auth.json ../joint-evidence/erc8060-erc8098-inherited-burn-auth.validated.json ../joint-evidence/erc8060-erc8098-nft-opcode-trace.json ../joint-evidence/erc8060-erc8098-nft-opcode-trace.validated.json ../joint-evidence/erc8060-erc8098-native-question-coverage.json
+
+      - name: Audit tested and untested adversarial classes without security certification
+        run: node oecl/integrations/erc8060-erc8098/audit-adversarial-coverage.cjs joint-evidence/erc8060-erc8098-pinned.json joint-evidence/erc8060-erc8098-failure-matrix.json joint-evidence/erc8060-erc8098-eth-callbacks.json joint-evidence/erc8060-erc8098-multiholder.json joint-evidence/erc8060-erc8098-adversarial-audit.json
+
+      - name: Build fail-closed user-facing scientific dossier from verified source and EVM evidence
+        run: node oecl/scripts/build-user-scientific-dossier.cjs joint-evidence joint-evidence/erc8060-erc8098-user-dossier.json
+
+      - name: Reject manipulated evidence and fabricated scientific verdicts in user dossier
+        run: node oecl/scripts/check-user-scientific-dossier.cjs joint-evidence
+
+      - name: Record workflow-dispatch provenance with the evidence bundle
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OECL_REQUEST_ID: ${{ inputs.request_id }}
+          OECL_WORKFLOW_RUN: ${{ github.run_id }}
+          OECL_WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          node -e 'const fs=require("node:fs");fs.writeFileSync("joint-evidence/erc8060-erc8098-dispatch-provenance.json",JSON.stringify({schemaVersion:"OECL_PINNED_REPRO_DISPATCH_V1",requestId:process.env.OECL_REQUEST_ID,runId:process.env.OECL_WORKFLOW_RUN,workflowSha:process.env.OECL_WORKFLOW_SHA,mode:"CONTROLLED_PINNED_REPRODUCTION",scientificVerdict:"NOT_EVALUATED_BY_DISPATCH"},null,2)+"\\n")'
+
+      - name: Upload joint transaction and provenance receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-two-pinned-references
+          path: joint-evidence/*.json
+          if-no-files-found: warn

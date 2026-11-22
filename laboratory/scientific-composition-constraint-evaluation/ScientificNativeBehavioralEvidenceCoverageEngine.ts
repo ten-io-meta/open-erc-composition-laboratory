@@ -1,0 +1,338 @@
+import {createHash} from "node:crypto";
+import type {NativeBehavioralEvaluationSpecification} from
+ "../scientific-composition-evaluation-specification/ScientificNativeBehavioralSpecificationEngine.js";
+
+export type NativeCoverageStatus="SCOPED_OBSERVED"|"PARTIAL_EVIDENCE"|"NO_EVIDENCE";
+export interface NativeBehavioralCoverageObservation {
+    questionId:string;
+    participantSide:"A"|"B"|"JOINT";
+    category:string;
+    sourceFactIds:string[];
+    status:NativeCoverageStatus;
+    evidenceRefs:string[];
+    scope:string;
+    missing:string[];
+}
+export interface NativeBehavioralCoverageResult {
+    schemaVersion:"OECL_NATIVE_AST_BEHAVIORAL_COVERAGE_V1";
+    hypothesisId:string|null;
+    specificationId:string|null;
+    observations:NativeBehavioralCoverageObservation[];
+    statistics:{total:number;scopedObserved:number;partial:number;missing:number};
+    allQuestionsResolved:false;
+    sourceCoverageComplete:false;
+    status:"PARTIAL_OBSERVATION"|"BLOCKED_EVIDENCE";
+    candidateAdmission:"NOT_ADMITTED";
+    finalScientificResult:"INCONCLUSIVE";
+    errors:string[];
+}
+type Bundle={
+    nativeStudy:any;bridge:any;evm:any;witness:any;native:any;
+    rollback:any;rollbackValidated:any;recognized:any;
+    inheritedAuth:any;inheritedAuthValidated:any;
+    nftTrace:any;nftTraceValidated:any;
+    raw:{nativeStudy:string;evm:string;witness:string;native:string;rollback:string;
+      recognized:string;inheritedAuth:string;inheritedAuthValidated:string;
+      nftTrace:string;nftTraceValidated:string};
+};
+const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
+const uint=(x:unknown):x is string=>typeof x==="string"&&/^(0|[1-9][0-9]*)$/.test(x);
+const tx=(x:unknown)=>typeof x==="string"&&/^0x[0-9a-f]{64}$/i.test(x);
+const equals=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
+const jointSafeLiabilities=(receipt:any,property:any)=>{
+    if(!receipt||!property||property.verdict!=="OBSERVED_CONSISTENT")return false;
+    const checks=property.checks;
+    const before=receipt.nftObligationBefore;
+    const after=receipt.nftObligationAfter;
+    const delta=receipt.nftObligationDecrease;
+    const amount=receipt.ethRedeemed;
+    return [before,after,delta,amount].every(uint)&&
+        BigInt(amount)>0n&&BigInt(before)-BigInt(after)===BigInt(delta)&&
+        BigInt(delta)===BigInt(amount)&&
+        checks?.obligationsBeforeWei===before&&
+        checks?.obligationsAfterWei===after&&
+        checks?.obligationsDecreasedWei===delta;
+};
+/**
+ * Native scientific observation coverage. Scope is one pinned local-Hardhat
+ * experiment, NOT independent chain replay or exhaustive path verification.
+ * State observation is distinct from AST syntax, which cannot by itself prove
+ * that a branch or inherited modifier was executed.
+ */
+export class ScientificNativeBehavioralEvidenceCoverageEngine {
+    evaluate(b:Bundle):NativeBehavioralCoverageResult {
+        const spec:NativeBehavioralEvaluationSpecification|undefined=
+            b.nativeStudy?.specification?.specifications?.[0];
+        const fail=(reason:string):NativeBehavioralCoverageResult=>({
+            schemaVersion:"OECL_NATIVE_AST_BEHAVIORAL_COVERAGE_V1",
+            hypothesisId:spec?.hypothesisId??null,specificationId:spec?.specificationId??null,
+            observations:[],statistics:{total:0,scopedObserved:0,partial:0,missing:0},
+            allQuestionsResolved:false,sourceCoverageComplete:false,
+            status:"BLOCKED_EVIDENCE",candidateAdmission:"NOT_ADMITTED",
+            finalScientificResult:"INCONCLUSIVE",errors:[reason]
+        });
+        if(!b.bridge?.matched||b.bridge.status!=="SCOPED_OBSERVATION_CONSISTENT"||
+           b.bridge.candidateAdmission!=="NOT_ADMITTED"||
+           b.bridge.finalScientificResult!=="INCONCLUSIVE"||
+           b.bridge.nativeDiscoveredCandidateCount!==0||
+           b.nativeStudy?.schemaVersion!=="OECL_NATIVE_AST_BEHAVIORAL_STUDY_V1"||
+           b.nativeStudy.nativeCandidatesGenerated!==0||
+           b.nativeStudy.admission!=="NOT_ADMITTED"||
+           b.nativeStudy.finalScientificResult!=="INCONCLUSIVE"||
+           b.nativeStudy.specification?.specifications?.length!==1||
+           b.nativeStudy.specification.errors?.length!==0||
+           !spec||spec.status!=="INSUFFICIENT_EVIDENCE"||
+           spec.candidateAdmission!=="NOT_ADMITTED"||spec.nativeCandidateId!==null||
+           b.bridge.nativeSourceSpecification?.specificationId!==spec.specificationId||
+           b.bridge.nativeSourceSpecification.status!==spec.status||
+           b.bridge.nativeSourceSpecification.questionCount!==10||
+           spec.questions?.length!==10||
+           new Set(spec.questions.map(q=>q.questionId)).size!==10)
+            return fail("SOURCE_DISCOVERY_SPECIFICATION_NOT_INCOMPLETE_AND_BOUND");
+        const origin=b.nativeStudy.discovery?.hypotheses?.[0];
+        if(origin?.hypothesisId!==spec.hypothesisId||
+           origin.participants?.length!==2||
+           origin.participants[0]?.assetClass!=="CLAIM"||
+           origin.participants[1]?.assetClass!=="FUNGIBLE"||
+           b.bridge.hypothesisId!==spec.hypothesisId||
+           b.bridge.sourceRoles?.length!==2||
+           b.bridge.sourceRoles[0].sourceId!==origin.participants[0].sourceId||
+           b.bridge.sourceRoles[1].sourceId!==origin.participants[1].sourceId)
+            return fail("PARTICIPANT_ROLE_MAPPING_NOT_SUPPORTED");
+        for(const key of ["nativeStudy","evm","witness","native","rollback","recognized","inheritedAuth","inheritedAuthValidated","nftTrace","nftTraceValidated"] as const){
+            if(typeof b.raw?.[key]!=="string")return fail("MISSING_RAW_EVIDENCE_BYTES");
+            try {
+                if(!equals(JSON.parse(b.raw[key]),b[key]))
+                    return fail("ARTIFACT_CONTENT_DIFFERS_FROM_SOURCE_BYTES");
+            } catch {return fail("INVALID_ARTIFACT_JSON_BYTES");}
+        }
+        const digests=[
+            ["nativeStudy","nativeStudy"],["evm","evm"],["witness","witness"],
+            ["native","native"],["recognized","recognized"]
+        ] as const;
+        if(digests.some(([key,prop])=>typeof b.raw?.[key]!=="string"||
+           b.bridge.artifactHashes?.[prop]!==sha(b.raw[key])))
+            return fail("SOURCE_OR_EVM_ARTIFACT_BYTES_CHANGED");
+        if(b.recognized?.sourceArtifacts?.[3]?.sha256!==sha(b.raw.rollback)||
+           b.rollbackValidated?.sourceReportSha256!==sha(b.raw.rollback)||
+           b.rollbackValidated?.counts?.cases!==4||
+           b.rollbackValidated?.counts?.revertedReceipts!==4||
+           b.rollbackValidated?.allObservedStatesUnchanged!==true||
+           b.rollback?.schemaVersion!=="OECL_PINNED_FAILURE_EXPERIMENTS_V1"||
+           b.rollback.chainId!==31337||
+           !Array.isArray(b.rollback.cases)||b.rollback.cases.length!==4||
+           b.rollback.cases.some((c:any)=>!c.unchanged||
+              !equals(c.measuredStateBefore,c.measuredStateAfter)||
+              c.revertedReceiptStatus!==0||!tx(c.attemptedTransactionHash)))
+            return fail("ROLLBACK_EXPERIMENTS_NOT_SOURCE_BOUND_OR_INDEPENDENTLY_VALIDATED");
+        if(b.rollbackValidated.sourceRevisionA!==b.bridge.sourceRoles[0].revision||
+           b.rollbackValidated.sourceRevisionB!==b.bridge.sourceRoles[1].revision||
+           b.rollback.cases.some((c:any)=>
+              c.sourceProvenance?.participantA!==
+                b.bridge.sourceRoles[0].sourceId+"@"+b.bridge.sourceRoles[0].revision||
+              c.sourceProvenance?.participantB!==
+                b.bridge.sourceRoles[1].sourceId+"@"+b.bridge.sourceRoles[1].revision))
+            return fail("ROLLBACK_CASE_SOURCE_REVISIONS_NOT_BOUND");
+        const receipt=b.evm?.observations;
+        const nativeConstraints=b.native?.constraints;
+        const nativeObservations=b.native?.observations;
+        if(!receipt||!tx(b.evm?.transactions?.jointRedemption)||
+           !Array.isArray(nativeConstraints)||!Array.isArray(nativeObservations)||
+           nativeConstraints.length!==3||nativeObservations.length!==3||
+           b.native.result?.statistics?.preserved!==3||
+           b.native.result?.scientificPolarity!=="SUPPORT"||
+           b.native.finalScientificResult!=="INCONCLUSIVE"||
+           b.witness?.scientificPolarity!=="INCONCLUSIVE"||
+           b.witness?.sourceTransactions?.joint!==b.evm.transactions.jointRedemption)
+            return fail("NATIVE_LOCAL_WITNESS_NOT_AVAILABLE");
+        const cases=new Map<string,any>(b.rollback.cases.map((c:any)=>[c.experimentId,c]));
+        if(cases.size!==4||!["REVERT-NONOWNER","REVERT-NFT-APPROVAL",
+           "REVERT-ERC20-APPROVAL","REVERT-ERC20-BALANCE"].every(id=>cases.has(id)))
+            return fail("MISSING_MANDATORY_FAILURE_CLASS");
+        const local=(left:string,right:string,side:"A"|"B")=>
+            nativeConstraints.some((c:any)=>c.participantSide===side&&
+                c.behavioralPredicate?.leftMetric===left&&
+                c.behavioralPredicate?.rightMetric===right&&
+                nativeObservations.some((o:any)=>o.constraintId===c.constraintId&&
+                   o.verdict==="PRESERVED"&&o.transactionHash===b.evm.transactions.jointRedemption));
+        const solvency=local("afterWei","remainingObligationWei","A")&&
+            uint(receipt.nftBackingAfter)&&uint(receipt.nftObligationAfter)&&
+            BigInt(receipt.nftBackingAfter)>=BigInt(receipt.nftObligationAfter);
+        const supply=local("afterUnits","beforeUnits","B")&&
+            uint(receipt.erc20SupplyBefore)&&uint(receipt.erc20SupplyAfter)&&
+            uint(receipt.supplyDecrease)&&BigInt(receipt.supplyDecrease)>0n&&
+            BigInt(receipt.erc20SupplyBefore)-BigInt(receipt.erc20SupplyAfter)===
+                BigInt(receipt.supplyDecrease);
+        const liabilityFact=b.witness.properties?.find((p:any)=>p.invariantId==="INV-8060-BACKING-SOLVENT");
+        const liabilityDelta=jointSafeLiabilities(receipt,liabilityFact);
+        const auth=b.inheritedAuth,validated=b.inheritedAuthValidated;
+        const permitted=auth?.approvedDelegatedBurn;
+        const self=auth?.selfBurn;
+        const rejectSelf=auth?.insufficientSelfBalance;
+        const rejectDelegated=auth?.unapprovedDelegatedBurn;
+        if(!auth||!validated||
+           auth.schemaVersion!=="OECL_PINNED_INHERITED_ERC20_BURN_AUTH_V1"||
+           auth.classification!=="SCOPED_LOCAL_EVM_DIRECT_INHERITED_BURN_AUTHORIZATION"||
+           auth.candidateAdmission!=="NOT_ADMITTED"||
+           auth.scientificPolarity!=="INCONCLUSIVE"||
+           auth.chainId!==31337||
+           auth.source?.repository!==b.bridge.sourceRoles[1].sourceId||
+           auth.source.revision!==b.bridge.sourceRoles[1].revision||
+           auth.source.sha256!==b.bridge.sourceRoles[1].sourceSha256||
+           auth.dependency?.version!==b.bridge.dependency.version||
+           validated.schemaVersion!=="OECL_INHERITED_ERC20_BURN_AUTH_VALIDATED_V1"||
+           validated.sourceReportSha256!==sha(b.raw.inheritedAuth)||
+           validated.sourceSha256!==auth.source.sha256||
+           validated.sourceRevisionB!==auth.source.revision||
+           validated.inheritedBurnableSha256!==b.bridge.dependency.sourceSha256.ERC20Burnable||
+           validated.packageIntegrity!==b.bridge.dependency.integrity||
+           validated.scopedObservations?.selfBurnSourceIsMsgSender!==true||
+           validated.scopedObservations.zeroBalanceExternalCallerRejected!==true||
+           validated.scopedObservations.burnFromWithoutAllowanceRejected!==true||
+           validated.scopedObservations.burnFromWithAllowanceObserved!==true||
+           validated.scopedObservations.eachExecutedBurnDecreasesSupplyByUnits!==true||
+           validated.admission!=="NOT_ADMITTED"||
+           validated.scientificPolarity!=="INCONCLUSIVE"||
+           !self||!permitted||!rejectSelf||!rejectDelegated||
+           !tx(self.transactionHash)||!tx(permitted.transactionHash)||
+           self.transactionHash===permitted.transactionHash||
+           self.receiptStatus!==1||permitted.receiptStatus!==1||
+           rejectSelf.reverted!==true||rejectDelegated.reverted!==true||
+           !equals(rejectSelf.before,rejectSelf.after)||
+           !equals(rejectDelegated.before,rejectDelegated.after))
+            return fail("INHERITED_BURN_AUTHORIZATION_NOT_PINNED_OR_VALIDATED");
+        const authState=(v:any)=>v&&["supply","aliceBalance","attackerBalance","attackerAllowance"]
+            .every(k=>uint(v[k]));
+        const amount=auth.burnUnits;
+        if(!uint(amount)||BigInt(amount)===0n||
+           !authState(self.before)||!authState(self.after)||
+           !authState(permitted.before)||!authState(permitted.after)||
+           !authState(rejectSelf.before)||!authState(rejectDelegated.before)||
+           BigInt(self.before.supply)-BigInt(self.after.supply)!==BigInt(amount)||
+           BigInt(self.before.aliceBalance)-BigInt(self.after.aliceBalance)!==BigInt(amount)||
+           BigInt(permitted.before.supply)-BigInt(permitted.after.supply)!==BigInt(amount)||
+           BigInt(permitted.before.aliceBalance)-BigInt(permitted.after.aliceBalance)!==BigInt(amount)||
+           permitted.before.attackerAllowance!==amount||
+           permitted.after.attackerAllowance!=="0"||
+           self.after.attackerAllowance!=="0")
+            return fail("INHERITED_BURN_AUTHORIZATION_MEASUREMENTS_INVALID");
+        const directAuthorization=true;
+        const trace=b.nftTrace,traceValidated=b.nftTraceValidated;
+        const requiredAnchors=[
+            "NFT_LIABILITY_SSTORE","NFT_REENTRANCY_ENTER_SSTORE",
+            "NFT_REENTRANCY_EXIT_SSTORE","NFT_OWNER_GUARD_EXECUTED_SOURCE"
+        ];
+        if(trace?.schemaVersion!=="OECL_PINNED_NFT_OPCODE_EXECUTION_TRACE_V1"||
+           trace.origin!=="HARDHAT_DEBUG_TRACE_TRANSACTION_OPCODE_SEQUENCE"||
+           trace.chainId!==31337||trace.transactionStatus!==1||
+           !tx(trace.transactionHash)||
+           trace.scientificPolarity!=="INCONCLUSIVE"||
+           trace.candidateAdmission!=="NOT_ADMITTED"||
+           trace.source?.repository!==b.bridge.sourceRoles[0].sourceId||
+           trace.source.revision!==b.bridge.sourceRoles[0].revision||
+           trace.source.sha256!==b.bridge.sourceRoles[0].sourceSha256||
+           traceValidated?.schemaVersion!=="OECL_NFT_COMPILER_SOURCE_EXECUTION_WITNESS_V1"||
+           traceValidated.sourceRevisionA!==trace.source.revision||
+           traceValidated.sourceRevisionB!==b.bridge.sourceRoles[1].revision||
+           traceValidated.sourceSha256!==trace.source.sha256||
+           traceValidated.rawTraceSha256!==sha(b.raw.nftTrace)||
+           traceValidated.jointTransactionHash!==trace.transactionHash||
+           traceValidated.scientificPolarity!=="INCONCLUSIVE"||
+           traceValidated.candidateAdmission!=="NOT_ADMITTED"||
+           traceValidated.observed?.nftLiabilityDebitSstore<1||
+           traceValidated.observed.modifierEntrySstore<1||
+           traceValidated.observed.modifierExitSstore<1||
+           traceValidated.observed.ownerGuardOpcodes<1||
+           !Array.isArray(traceValidated.sourceMappedAnchors)||
+           requiredAnchors.some(kind=>!traceValidated.sourceMappedAnchors.some(
+               (a:any)=>a.kind===kind&&a.depth>=2&&
+               (kind==="NFT_OWNER_GUARD_EXECUTED_SOURCE"||a.op==="SSTORE")))||
+           !uint(trace.measured?.nftLiabilityBeforeWei)||
+           !uint(trace.measured.nftLiabilityAfterWei)||
+           BigInt(trace.measured.nftLiabilityBeforeWei)-
+             BigInt(trace.measured.nftLiabilityAfterWei)!==BigInt(receipt.ethRedeemed))
+           return fail("NESTED_NFT_COMPILER_SOURCE_EXECUTION_TRACE_UNVERIFIED");
+        const tracedNft=true;
+        const joint=receipt.sameTransactionContainsBothBurns===true&&
+            Number.isSafeInteger(receipt.nftBurnLogIndex)&&
+            Number.isSafeInteger(receipt.erc20BurnLogIndex)&&
+            receipt.nftBurnLogIndex!==receipt.erc20BurnLogIndex&&
+            b.recognized.property?.witnessTransaction===b.evm.transactions.jointRedemption;
+        const rollback=cases.size===4&&b.rollbackValidated.counts.revertedReceipts===4;
+        const ref=(name:string)=>"SHA256:"+sha(name==="nftTrace"?b.raw.nftTrace:
+            name==="inheritedAuth"?b.raw.inheritedAuth:
+            name==="rollback"?b.raw.rollback:
+            name==="native"?b.raw.native:
+            name==="witness"?b.raw.witness:
+            name==="recognized"?b.raw.recognized:b.raw.evm);
+        const scenarios:Record<string,{
+            supported:boolean;partial:boolean;refs:string[];scope:string;missing:string[]
+        }>={
+            "A:AUTHORIZATION":{supported:rollback&&!!cases.get("REVERT-NONOWNER"),
+                partial:true,refs:[ref("rollback")],
+                scope:"Local unauthorized owner experiment reverts with identical measured state",
+                missing:["Not a general authorization proof across all execution paths"]},
+            "A:AVAILABILITY":{supported:solvency,partial:true,refs:[ref("native"),ref("evm")],
+                scope:"Backing >= remaining NFT liabilities measured after joint redemption",
+                missing:["No exhaustive solvency proof for every reachable NFT state"]},
+            "A:STATE_CONSISTENCY":{supported:tracedNft&&joint&&solvency,partial:joint&&solvency,
+                refs:[ref("nftTrace"),ref("evm"),ref("witness")],
+                scope:"Separate pinned local EVM debug trace observes source-mapped NFT liability debit, owner guard and modifier enter/exit opcodes",
+                missing:["No formal proof of every path or independent public-chain trace replay"]},
+            "A:RESOURCE_DECREASE":{supported:joint&&liabilityDelta,partial:!liabilityDelta&&joint,
+                refs:[ref("evm"),ref("witness")],
+                scope:"Both NFT liabilities before/after and precise redemption delta checked in pinned Hardhat receipt",
+                missing:["No independent trace proving all dynamic burn paths or full future liability conservation"]},
+            "B:AUTHORIZATION":{supported:directAuthorization,
+                partial:!directAuthorization&&rollback,
+                refs:[ref("inheritedAuth"),ref("rollback")],
+                scope:"Independent local EVM burn(msg.sender) and burnFrom allowance success/revert cases",
+                missing:["No formal proof for every inherited caller or delegatecall route; coordinator allowance is separate"]},
+            "B:AVAILABILITY":{supported:rollback&&supply&&
+                !!cases.get("REVERT-ERC20-BALANCE"),partial:true,
+                refs:[ref("rollback"),ref("evm")],
+                scope:"Insufficient fungible balance rollback and positive supply decrease measured locally",
+                missing:["Not proof for every ERC20 balance or allowance state"]},
+            "B:STATE_CONSISTENCY":{supported:supply,partial:true,
+                refs:[ref("native"),ref("evm")],
+                scope:"Native numeric supply invariant preserved in pinned local transaction",
+                missing:["No complete analysis of all inherited state mutation entrypoints"]},
+            "B:RESOURCE_DECREASE":{supported:supply,partial:true,
+                refs:[ref("evm"),ref("native")],
+                scope:"ERC20 supply-before minus supply-after equals observed burned units",
+                missing:["Not a proof of monotonicity for all future transactions"]},
+            "JOINT:ATOMIC_EXECUTION":{supported:joint&&solvency&&supply,partial:true,
+                refs:[ref("recognized"),ref("evm")],
+                scope:"Distinct NFT and ERC20 burn logs in one pinned Hardhat transaction",
+                missing:["No independently replayed public-chain receipt or general coordinator feasibility proof"]},
+            "JOINT:JOINT_ROLLBACK":{supported:rollback,partial:true,
+                refs:[ref("rollback")],
+                scope:"Four scoped reverted local transactions with before/after state equality",
+                missing:["No independent replay of all attempted transactions or exhaustive interleavings"]}
+        };
+        const observations:NativeBehavioralCoverageObservation[]=[];
+        for(const q of spec.questions){
+            const key=q.participantSide+":"+q.category,scenario=scenarios[key];
+            if(!scenario||q.status!=="NOT_EVALUATED"||!q.sourceFactIds?.length||
+               !q.sourceFactIds.every(id=>origin.evidence.some((f:any)=>f.factId===id)))
+                return fail("QUESTION_WITHOUT_SOURCE_FACT_OR_SUPPORTED_SEMANTICS");
+            const status:NativeCoverageStatus=scenario.supported?"SCOPED_OBSERVED":
+                scenario.partial?"PARTIAL_EVIDENCE":"NO_EVIDENCE";
+            observations.push({
+                questionId:q.questionId,participantSide:q.participantSide,
+                category:q.category,sourceFactIds:q.sourceFactIds,
+                status,evidenceRefs:scenario.refs,scope:scenario.scope,
+                missing:scenario.missing
+            });
+        }
+        const statistics={total:observations.length,
+            scopedObserved:observations.filter(o=>o.status==="SCOPED_OBSERVED").length,
+            partial:observations.filter(o=>o.status==="PARTIAL_EVIDENCE").length,
+            missing:observations.filter(o=>o.status==="NO_EVIDENCE").length};
+        return {schemaVersion:"OECL_NATIVE_AST_BEHAVIORAL_COVERAGE_V1",
+            hypothesisId:spec.hypothesisId,specificationId:spec.specificationId,
+            observations,statistics,allQuestionsResolved:false,sourceCoverageComplete:false,
+            status:"PARTIAL_OBSERVATION",candidateAdmission:"NOT_ADMITTED",
+            finalScientificResult:"INCONCLUSIVE",errors:[]};
+    }
+}

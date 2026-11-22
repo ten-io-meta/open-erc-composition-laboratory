@@ -1,0 +1,198 @@
+name: OECL Modern Hardhat3 Ethers6 Zero-Advisory Trial
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-modern-zero-advisory-evm-trial.yml'
+      - 'integrations/modern-evm-toolchain/**'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-modern-evm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout OECL experimental runner
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout exact ERC-8060 participant source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+
+      - name: Checkout exact ERC-8098 participant source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+          persist-credentials: false
+
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify pinned checkout identities and original ERC-8060 lock
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+
+      - name: Install exact committed zero-advisory Hardhat3 Ethers6 lock
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund --audit=false
+
+      - name: Audit all modern dependencies (do not suppress low findings)
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: |
+          npm audit --json --audit-level=low > ../../../modern-toolchain-audit.json || true
+          node -e 'const x=require("../../../modern-toolchain-audit.json");if(!x.metadata?.vulnerabilities)process.exit(1);console.log("MODERN_TOOLCHAIN_AUDIT:"+JSON.stringify(x.metadata.vulnerabilities));console.log("MODERN_TOOLCHAIN_PACKAGES:"+JSON.stringify(Object.entries(x.vulnerabilities).map(([n,v])=>({name:n,severity:v.severity,via:v.via,fixAvailable:v.fixAvailable}))))'
+
+      - name: Copy independently pinned Solidity sources and separate coordinator into trial workspace
+        run: |
+          mkdir -p oecl/integrations/modern-evm-toolchain/contracts
+          cp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cmp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8060Reference.sol
+          cmp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8098Reference.sol
+
+      - name: Compile immutable participants under isolated Hardhat3
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: ./node_modules/.bin/hardhat compile
+
+      - name: Run Ethers6 local experiment with numerical checks
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/modern-smoke.mjs
+
+      - name: Reproduce bounded adversarial rollback and callback controls with Ethers6
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/adversarial-matrix.mjs
+
+      - name: Modern Ethers6 direct and delegated ERC20Burnable authorization evidence
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/burn-authorization-parity.mjs
+
+      - name: Modern Ethers6 two-holder maximum-surplus and sequential burn evidence
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/multi-holder-parity.mjs
+
+      - name: Modern Ethers6 pinned NFT local debug opcode observation
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/nft-opcode-parity.mjs
+
+      - name: Install separately pinned audited Hardhat 2 Ethers 5 toolchain for historical controls
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund --audit=false
+          npm audit --audit-level=moderate
+
+      - name: Prepare original-source historical positive and adversarial EVM fixtures
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules source-8060/node_modules
+          mkdir -p historical-evidence
+          cp source-8098/contracts/ERC8098Reference.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLAdversarialEthReceiver.sol source-8060/contracts/
+          cp oecl/integrations/erc8060-erc8098/test/OECLPinnedReferences.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInteractionFailureMatrix.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLAdversarialEthReceiver.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLInheritedBurnAuthorization.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLMultiHolderSolvency.test.js source-8060/test/
+          cp oecl/integrations/erc8060-erc8098/test/OECLNftOpcodePath.test.js source-8060/test/
+
+      - name: Re-execute independent historical Ethers5 positive, four failure, and two callback controls
+        working-directory: source-8060
+        env:
+          OECL_JOINT_EVIDENCE_PATH: ../historical-evidence/historical-positive.json
+          OECL_FAILURE_MATRIX_PATH: ../historical-evidence/historical-failures.json
+          OECL_ETH_CALLBACK_EVIDENCE_PATH: ../historical-evidence/historical-callbacks.json
+          OECL_INHERITED_BURN_AUTH_PATH: ../historical-evidence/historical-inherited-burn.json
+          OECL_MULTIHOLDER_EVIDENCE_PATH: ../historical-evidence/historical-multiholder.json
+          OECL_NFT_OPCODE_TRACE_PATH: ../historical-evidence/historical-nft-opcode.json
+        run: |
+          ./node_modules/.bin/hardhat test test/OECLPinnedReferences.test.js test/OECLInteractionFailureMatrix.test.js test/OECLAdversarialEthReceiver.test.js test/OECLInheritedBurnAuthorization.test.js test/OECLMultiHolderSolvency.test.js test/OECLNftOpcodePath.test.js
+
+      - name: Validate source bound historical receipts before comparison
+        run: |
+          node oecl/integrations/erc8060-erc8098/validate-pinned-references.cjs source-8060 source-8098 historical-evidence/historical-positive.json
+          node oecl/integrations/erc8060-erc8098/check-failure-matrix.cjs source-8060 source-8098 historical-evidence/historical-failures.json
+          node oecl/integrations/erc8060-erc8098/check-eth-callback-experiments.cjs source-8060 source-8098 historical-evidence/historical-callbacks.json
+          node oecl/integrations/erc8060-erc8098/check-inherited-burn-auth.cjs source-8060 source-8098 historical-evidence/historical-inherited-burn.json
+          node oecl/integrations/erc8060-erc8098/check-multiholder-solvency.cjs source-8060 source-8098 historical-evidence/historical-multiholder.json
+          node oecl/integrations/erc8060-erc8098/check-nft-opcode-path.cjs source-8060 source-8098 historical-evidence/historical-nft-opcode.json
+
+      - name: Compare independent historic and modern EVM receipts by normalized observed invariants
+        env:
+          OECL_EVIDENCE_COMPARISON_PATH: historical-evidence/bounded-comparison.json
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-pinned-evidence.cjs \
+            historical-evidence/historical-positive.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-smoke.json \
+            historical-evidence/historical-failures.json \
+            historical-evidence/historical-callbacks.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
+
+      - name: Compare three additional historical and modern scientific experiment families
+        env:
+          OECL_EXTENDED_PARITY_PATH: historical-evidence/extended-parity.json
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-extended-pinned-evidence.cjs \
+            historical-evidence/historical-inherited-burn.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-burn-authorization.json \
+            historical-evidence/historical-multiholder.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-multiholder.json \
+            historical-evidence/historical-nft-opcode.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
+            historical-evidence/historical-nft-opcode.validated.json
+
+      - name: Reject twelve forged extended parity and provenance claims
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-extended-pinned-evidence-negative.cjs \
+            historical-evidence/historical-inherited-burn.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-burn-authorization.json \
+            historical-evidence/historical-multiholder.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-multiholder.json \
+            historical-evidence/historical-nft-opcode.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-nft-opcode.json \
+            historical-evidence/historical-nft-opcode.validated.json
+
+      - name: Reject nine forged cross-runtime comparison claims
+        run: |
+          node oecl/integrations/modern-evm-toolchain/scripts/compare-pinned-evidence-negative.cjs \
+            historical-evidence/historical-positive.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-smoke.json \
+            historical-evidence/historical-failures.json \
+            historical-evidence/historical-callbacks.json \
+            oecl/integrations/modern-evm-toolchain/reports/modern-adversarial.json
+
+      - name: Require zero advisory in new modern environment
+        run: |
+          node -e 'const v=require("./modern-toolchain-audit.json").metadata.vulnerabilities; if(v.total!==0){console.error("MODERN_ZERO_ADVISORY_GATE_BLOCKED",JSON.stringify(v));process.exit(1)}; console.log("MODERN_ZERO_ADVISORY_GATE_PASS")'
+
+      - name: Preserve trial lock, audit and separate local evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-modern-hardhat3-ethers6-trial
+          path: |
+            oecl/integrations/modern-evm-toolchain/package-lock.json
+            oecl/integrations/modern-evm-toolchain/reports/*.json
+            modern-toolchain-audit.json
+            historical-evidence/*.json
+          if-no-files-found: warn
+          retention-days: 14

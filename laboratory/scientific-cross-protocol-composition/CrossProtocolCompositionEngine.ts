@@ -1,3 +1,6 @@
+import { ScientificNativeBehavioralHypothesisEngine } from "./ScientificNativeBehavioralHypothesisEngine.js";
+import type { NativeBehavioralDiscoveryResult } from "./ScientificNativeBehavioralHypothesisEngine.js";
+
 import type {
     ScientificProtocolConcept
 } from "../scientific-protocol-concept-attribution/ScientificProtocolConcept.js";
@@ -162,6 +165,20 @@ interface ProtocolConceptAggregate {
 
 
 export class CrossProtocolCompositionEngine {
+
+    /**
+     * Native source-only behavioral discovery. Deliberately returns hypotheses,
+     * not ScientificCompositionCandidate objects or evidence-based admissions.
+     */
+    discoverBehavioralSourceHypotheses(input: {
+        graph: unknown;
+        sourceHypothesisArtifact: unknown;
+        rawGraph: string;
+    }): NativeBehavioralDiscoveryResult {
+        return new ScientificNativeBehavioralHypothesisEngine().discover(input);
+    }
+
+
 
     discover(
         input:

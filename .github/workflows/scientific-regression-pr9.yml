@@ -1,0 +1,80 @@
+name: OECL Scientific Regression PR9
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  scientific-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Checkout clean pinned external scientific baseline
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-reservable
+          ref: 5b7a407553ccf280ab4f751a792771b660ad287a
+          path: external/github/ten-io-meta/erc8060-reservable
+
+      - name: Checkout Solady external regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: Vectorized/solady
+          ref: 258f67cc71e39cff307b726939ade17e9d8bcf5c
+          path: external/github/Vectorized/solady
+
+      - name: Checkout ERC-8060 source regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: external/github/ten-io-meta/erc8060-native-eth-value
+
+      - name: Checkout ERC-8004 source regression fixture
+        uses: actions/checkout@v4
+        with:
+          repository: erc-8004/erc-8004-contracts
+          ref: b9e466c250744a7e06b13dff9d3c2844ed64f825
+          path: external/github/erc-8004/erc-8004-contracts
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install
+        run: npm ci
+      - name: Install secure isolated ERC-8060 developer toolchain
+        working-directory: integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+
+      - name: Mount audited toolchain for exact pinned ERC-8060 regression source
+        run: |
+          test "$(git -C external/github/ten-io-meta/erc8060-native-eth-value rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  external/github/ten-io-meta/erc8060-native-eth-value/package-lock.json" | sha256sum --check
+          ln -s ../../../../integrations/secure-evm-toolchain/node_modules external/github/ten-io-meta/erc8060-native-eth-value/node_modules
+
+      - name: Mount audited runtime for controlled Reservable execution without installing archived lock
+        run: |
+          test "$(git -C external/github/ten-io-meta/erc8060-reservable rev-parse HEAD)" = "5b7a407553ccf280ab4f751a792771b660ad287a"
+          test -f external/github/ten-io-meta/erc8060-reservable/package-lock.json
+          test -f external/github/ten-io-meta/erc8060-reservable/package.json
+          # The full 221-check regression executes synthetic Hardhat cases in the
+          # pinned Reservable checkout. Supply audited tools without installing
+          # its archived 38-alert developer lock.
+          ln -s ../../../../integrations/secure-evm-toolchain/node_modules external/github/ten-io-meta/erc8060-reservable/node_modules
+          node -e 'const path=require("node:path");const fs=require("node:fs");const p="external/github/ten-io-meta/erc8060-reservable/node_modules/.bin/hardhat";if(!fs.existsSync(p))throw Error("AUDITED_RESERVABLE_RUNTIME_UNAVAILABLE"); console.log("AUDITED_RESERVABLE_RUNTIME_READY",fs.realpathSync(p))'
+
+
+      - name: Run complete existing scientific regression suite
+        run: npm run scientific:regression
+
+      - name: Upload complete scientific regression results even if checks fail
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-scientific-regression-results
+          path: scientific-regression-suite-results.json
+          if-no-files-found: warn

@@ -63,11 +63,19 @@ export default function Home() {
             </h1>
 
             <p className="mt-8 max-w-3xl text-[17px] leading-8 text-[#70746f] md:text-[18px]">
-              OECL turns standardized live blockchain observations into
+              OECL is designed to turn blockchain observations into
               independently witnessed, machine-readable EvidenceReceipts
-              before agents or research systems are allowed to reason from them.
+              before agents or research systems reason from them. Live verification
+              may be unavailable on an individual deployment.
             </p>
 
+
+            <a href="#composition-workbench" className="mt-9 inline-flex items-center rounded-xl bg-[#174c38] px-5 py-3 text-sm font-medium text-white hover:bg-[#103726]">
+              Explore the ERC-8060 × ERC-8098 scientific dossier
+            </a>
+            <p className="mt-2 text-xs text-[#70746f]">
+              Pinned local-EVM evidence · Not a new live analysis
+            </p>
 
             <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#dcded9] pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#70746f]">
 
@@ -83,7 +91,7 @@ export default function Home() {
           <aside className="border-l border-[#dcded9] pl-6 lg:pt-9">
 
             <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#858983]">
-              Live system
+              Evidence architecture
             </div>
 
 
@@ -107,7 +115,7 @@ export default function Home() {
               </div>
 
               <div className="mt-1 text-xs text-[#70746f]">
-                mainnet targets
+                target networks (planned)
               </div>
 
             </div>

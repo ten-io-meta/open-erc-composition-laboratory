@@ -1,0 +1,55 @@
+name: OECL Web Scientific Dossier
+
+on:
+  push:
+    paths:
+      - 'web/**'
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'integrations/erc8060-erc20-burnable/**'
+      - '.github/workflows/web-scientific-dossier.yml'
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'laboratory/scientific-open-source-worker/**'
+      - 'integrations/erc8060-erc20-burnable/**'
+      - '.github/workflows/web-scientific-dossier.yml'
+
+concurrency:
+  group: oecl-web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dossier-web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install exact web dependencies
+        run: npm ci
+      - name: Test pinned dossier digest, scope and negative controls
+        run: node scripts/check-scientific-dossier.mjs
+      - name: Verify controlled on-demand job policy and mock GitHub dispatch
+        run: node --experimental-strip-types scripts/check-on-demand-jobs.mjs
+      - name: Verify generic source-job dispatch and source selection policy
+        run: node scripts/check-generic-source-jobs.cjs
+      - name: Verify scientific AST snapshots and ZIP integrity
+        run: node --experimental-strip-types scripts/check-source-graph-view.mjs
+      - name: Verify independent EVM receipts and native source property snapshot
+        run: node scripts/check-independent-evm.mjs
+      - name: Lint web
+        run: npm run lint
+      - name: Compile production web
+        run: npm run build
+      - name: Smoke-test production dossier API and download
+        run: node scripts/smoke-scientific-dossier.mjs
+      - name: Exercise production user journey in headless Chrome
+        run: node scripts/check-browser-user-journey.mjs
