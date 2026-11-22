@@ -42,3 +42,73 @@ A separately reviewed job service should accept validated repository URLs and im
 The interface should expose QUEUED, RUNNING, INCONCLUSIVE, COMPLETED, and FAILED states. It must show the scientific outcome from the native evaluator, not compute it in the UI.
 
 All source reads and EVM experiments must be isolated from the public request handler. Until the job service and its abuse controls are reviewed, requests remain read-only.
+
+## Controlled on-demand reproduction (research beta)
+
+The first on-demand job is intentionally **restricted to the already reviewed**
+ERC-8060 × ERC-8098 pinned recipe; it is a new run, not an unrestricted analysis
+of arbitrary ERC pairs.
+
+- Browser: `PinnedAnalysisJobLauncher` in the Composition Workbench
+- Discover availability: `GET /api/scientific/jobs`
+- Start an approved fresh run: `POST /api/scientific/jobs` with no request body
+- Follow state: `GET /api/scientific/jobs/{requestId}`
+- Correlation: GitHub Actions workflow_dispatch with run name
+  `OECL-REQUEST-{requestId}`, identified by a random UUIDv4
+- Artifacts: existing pinned joint-EVM workflow uploads the scientific dossier,
+  compiler-AST graph, source witness receipts and adversarial coverage. The
+  request metadata is included in the new run artifact.
+
+The server intentionally **does not** execute Solidity, accept user-supplied
+code, trust a URL from a web request, decide compatibility or mint a science
+candidate. No status other than a verified native evaluator can claim a
+scientific verdict. `EVIDENCE_AVAILABLE` means that the workflow succeeded;
+it does not mean `SUPPORTS` or `ADMITTED`.
+
+### Activation (only AFTER reviews and merging to the default branch)
+
+GitHub workflow_dispatch is only supported when the matching workflow exists
+on the repository's default branch. Until then no deployment should claim the
+feature is active.
+
+To activate **privately** on a trusted HTTPS deployment configure these
+server-only variables (never add `NEXT_PUBLIC_`):
+
+- `OECL_ENABLE_PINNED_ANALYSIS=true`
+- `OECL_ANALYSIS_ACCESS_KEY` = unique random high-entropy key, minimum 32 characters
+- `OECL_GITHUB_ACTIONS_TOKEN` = fine-grained GitHub token restricted to this
+  repository, with **Actions: read and write** permission
+
+Do not commit these secrets. The research beta form accepts an access key only
+for authorized testers; it remains in component memory, is not persisted to
+local storage or sent as a URL parameter. Never embed the GitHub token in the
+browser. Rotate secrets after exposure.
+
+The web dispatcher additionally checks GitHub's recent run list, rejecting
+new work when a previous controlled reproduction is queued/running or when
+three controlled runs have started in 24 hours. This is advisory and **not**
+an atomic distributed quota: a proper public deployment needs authenticated
+per-user identities, a shared atomic rate limiter, queue persistence, request
+deduplication, execution budget enforcement and isolated workers. Do not open
+the beta dispatcher publicly without those controls.
+
+If any variable is absent, the server returns `NOT_CONFIGURED`, and
+`POST` returns 503 without contacting GitHub. Invalid keys return 401;
+unknown workflow run IDs are `AWAITING_GITHUB_RUN`, never fabricated success.
+
+### Verification
+
+Run after installing exact web dependencies:
+
+    node --experimental-strip-types scripts/check-on-demand-jobs.mjs
+    npm run lint
+    npm run build
+    node scripts/smoke-scientific-dossier.mjs
+
+### Next science milestone
+
+Create an isolated source-ingestion worker with allowlisted GitHub origin,
+commit SHA pinning, compiler-locked dependency graph, resource quotas,
+execution timeouts, no inbound secrets, no general outbound network, explicit
+scientific admission gates, immutable artifact publication and a secure job
+store. Only then may arbitrary ERC combinations be requested by normal users.
