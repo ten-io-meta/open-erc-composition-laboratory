@@ -14,7 +14,7 @@ export const DOSSIER_EVIDENCE_RUN =
 export const DOSSIER_PROTOCOL_PAIR = ["ERC-8060", "ERC-8098"] as const;
 
 export function normalizeErc(value: string | null): string | null {
-  const match = value?.trim().toUpperCase().match(/^ERC-?([1-9][0-9]*)$/);
+  const match = value?.trim().toUpperCase().match(/^(?:ERC-?)?([1-9][0-9]*)$/);
   return match ? "ERC-" + match[1] : null;
 }
 
