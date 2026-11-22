@@ -111,7 +111,13 @@ export function ProtocolDiscovery() {
         </h2>
 
         <form onSubmit={runDiscovery} className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <label htmlFor="oecl-the-graph-protocol" className="sr-only">
+            ERC standard to search on The Graph
+          </label>
           <input
+            id="oecl-the-graph-protocol"
+            type="text"
+            aria-label="ERC standard to search on The Graph"
             value={protocol}
             onChange={(event) => setProtocol(event.target.value.toUpperCase())}
             placeholder="ERC-8004"
@@ -138,9 +144,15 @@ export function ProtocolDiscovery() {
               </span>
             </div>
 
-            {hits.length === 0 ? (
-              <p className="mt-4 text-sm text-[#68706c]">
-                0 subgraphs discovered. No attribution or compatibility conclusion was made.
+            {result.status !== "LIVE" ? (
+              <p role="status" className="mt-4 rounded-xl border border-[#eadfca] bg-[#fffbf2] p-4 text-sm leading-6 text-[#735c30]">
+                {result.status === "NOT_CONFIGURED"
+                  ? "Live The Graph search is not configured here. No subgraph search was performed, so no discovery count or protocol conclusion is available."
+                  : "The Graph search did not complete successfully. No discovery or compatibility conclusion can be inferred."}
+              </p>
+            ) : hits.length === 0 ? (
+              <p role="status" className="mt-4 text-sm text-[#68706c]">
+                The live search returned zero subgraphs for this query. No attribution or compatibility conclusion was made.
               </p>
             ) : (
               <div className="mt-4 grid gap-3">
