@@ -9,7 +9,8 @@ const CENTRAL_FILE = 0x02014b50;
 const LOCAL_FILE = 0x04034b50;
 
 export class ScientificArchiveError extends Error {
-  constructor(readonly code: string) { super(code); }
+  readonly code: string;
+  constructor(code: string) { super(code); this.code=code; }
 }
 function fail(code: string): never { throw new ScientificArchiveError(code); }
 function crc32(input: Buffer): number {
