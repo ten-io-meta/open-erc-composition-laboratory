@@ -39,6 +39,8 @@ jobs:
         run: node scripts/check-generic-source-jobs.cjs
       - name: Verify scientific AST snapshots and ZIP integrity
         run: node --experimental-strip-types scripts/check-source-graph-view.mjs
+      - name: Verify independent EVM receipts and native source property snapshot
+        run: node scripts/check-independent-evm.mjs
       - name: Lint web
         run: npm run lint
       - name: Compile production web
