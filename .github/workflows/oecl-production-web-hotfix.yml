@@ -1,0 +1,35 @@
+name: OECL Production Web Security Hotfix
+on:
+  push:
+    paths:
+      - 'web/**'
+      - '.github/workflows/oecl-production-web-hotfix.yml'
+  pull_request:
+    paths:
+      - 'web/**'
+      - '.github/workflows/oecl-production-web-hotfix.yml'
+permissions:
+  contents: read
+jobs:
+  build-patched-production-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install audited exact web tree
+        working-directory: web
+        run: npm ci --ignore-scripts
+      - name: Check production dependencies have no high or critical advisories
+        working-directory: web
+        run: npm audit --omit=dev --audit-level=high
+      - name: Lint previous main website
+        working-directory: web
+        run: npm run lint
+      - name: Build previous main website on patched Next and React
+        working-directory: web
+        run: npm run build
