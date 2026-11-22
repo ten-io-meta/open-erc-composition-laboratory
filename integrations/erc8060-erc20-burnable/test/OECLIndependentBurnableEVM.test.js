@@ -43,7 +43,15 @@ async function deploy(){
 async function state(ctx){
   const {nft,token,coordinator,holder,alice}=ctx;
   let owner=null,tokenValue=null,approved=null;
-  try{owner=await nft.ownerOf(1);tokenValue=bn(await nft.valueOf(1));approved=await nft.getApproved(1);}
+  try{
+    owner=await nft.ownerOf(1);
+    // ethers v5's Contract object also has JavaScript valueOf(); invoking it
+    // directly returns an object rather than the Solidity uint256.
+    // Use the exact ABI signature to obtain trustworthy historical evidence.
+    const [value]=await nft.functions["valueOf(uint256)"](1);
+    tokenValue=bn(value);
+    approved=await nft.getApproved(1);
+  }
   catch(_){}
   return {
     nftOwner:owner,
