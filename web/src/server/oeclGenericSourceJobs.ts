@@ -143,6 +143,7 @@ export function sourceJobState(runs: SourceRun[], id: string) {
       requestId: id,
       state: "AWAITING_GITHUB_RUN",
       scientificVerdict: null,
+      runId: null,
       runUrl: null,
       message: "GitHub accepted the dispatch, but the workflow run is not yet confirmed.",
     };
