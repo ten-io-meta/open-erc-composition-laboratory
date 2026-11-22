@@ -141,11 +141,13 @@ async function receiverSnapshot(ctx) {
   assert.equal(reason, "ReentrancyGuard: reentrant call");
   const nftBurnEvent = ctx.nft.interface.getEvent("Burned").topicHash;
   const tokenTransfer = ctx.token.interface.getEvent("Transfer").topicHash;
+  const nftAddress = (await ctx.nft.getAddress()).toLowerCase();
+  const tokenAddress = (await ctx.token.getAddress()).toLowerCase();
   const nftBurns = receipt.logs.filter(x =>
-    x.address.toLowerCase()===(await ctx.nft.getAddress()).toLowerCase() && x.topics[0]===nftBurnEvent
+    x.address.toLowerCase()===nftAddress && x.topics[0]===nftBurnEvent
   );
   const tokenBurns = receipt.logs.filter(x =>
-    x.address.toLowerCase()===(await ctx.token.getAddress()).toLowerCase() && x.topics[0]===tokenTransfer &&
+    x.address.toLowerCase()===tokenAddress && x.topics[0]===tokenTransfer &&
     ctx.token.interface.parseLog(x).args.to===ethers.ZeroAddress
   );
   assert.equal(nftBurns.length,1);
