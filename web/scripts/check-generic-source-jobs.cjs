@@ -72,7 +72,30 @@ const fake=async (url,opts={})=>{
   await assert.rejects(api.dispatchGenericSource(id,"ERC-8060","ERC-20",token,blocked),
     /SOURCE_WORKER_CAPACITY_EXHAUSTED/);
   const status=api.sourceJobState([run(id,"completed","success")],id);
-  assert.equal(status.state,"SOURCE_ARTIFACT_AVAILABLE");
+  assert.equal(status.state,"AWAITING_SOURCE_ARTIFACT");
+  assert.equal(status.runId,100123);
+  // A green job is not sufficient evidence; check the named artifact for
+  // this specific GitHub run and reject absent, expired or forged listings.
+  const artifact = {id:8241,name:"oecl-generic-ast-evidence",expired:false,size_in_bytes:4096};
+  const verify = artifacts=>async (url,options)=> {
+    assert.equal(url,"https://api.github.com/repos/ten-io-meta/open-erc-composition-laboratory/actions/runs/100123/artifacts?per_page=100");
+    assert.equal(options.method,"GET");
+    return new Response(JSON.stringify({artifacts}),{status:200});
+  };
+  assert.equal(await api.hasPublishedSourceArtifact(100123,token,verify([artifact])),true);
+  for(const forged of [[],
+    [{...artifact,name:"unrelated"}],
+    [{...artifact,expired:true}],
+    [{...artifact,size_in_bytes:0}],
+    [{...artifact,id:null}]]) {
+    assert.equal(await api.hasPublishedSourceArtifact(100123,token,verify(forged)),false);
+  }
+  await assert.rejects(api.hasPublishedSourceArtifact(0,token,verify([artifact])),
+    /INVALID_SOURCE_RUN_ID/);
+  await assert.rejects(api.hasPublishedSourceArtifact(100123,token,async()=>new Response("{}",{status:403})),
+    /SOURCE_ARTIFACT_LOOKUP_FAILED/);
+  await assert.rejects(api.hasPublishedSourceArtifact(100123,token,async()=>new Response("{}",{status:200})),
+    /SOURCE_ARTIFACT_RESPONSE_INVALID/);
   assert.equal(status.scientificVerdict,null);
   assert.equal(status.runUrl,"https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/100123");
   assert.equal(api.sourceJobState([run(id,"in_progress")],id).state,"RUNNING");
@@ -83,5 +106,5 @@ const fake=async (url,opts={})=>{
   assert.throws(()=>api.sourceJobState([],"../../root"),/INVALID_JOB_ID/);
   await assert.rejects(api.recentSourceRuns(token,async()=>new Response("{}",{status:403})),
     /SOURCE_RUN_LOOKUP_FAILED/);
-  console.log("OECL_GENERIC_SOURCE_DISPATCH: PASS · six source choices, strict no-URL inputs, fake-run defense and null scientific verdict");
+  console.log("OECL_GENERIC_SOURCE_DISPATCH: PASS · six source profiles, guarded dispatch, verified artifact listing, null scientific verdict");
 })().catch(e=>{console.error(e);process.exitCode=1;});

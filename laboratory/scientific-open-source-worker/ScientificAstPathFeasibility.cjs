@@ -173,7 +173,9 @@ function recognizedGuard(stmt){
     return {kind:call.expression.name.toUpperCase(),expr:call.arguments[0],
       rawNode:stmt,immutableCondition:pureMessage};
   }
-  if(stmt?.nodeType==="IfStatement"&&simpleAbort(stmt.trueBody)){
+  // An else branch may mutate the tested variable on the continuing path.
+  // Without proving that branch side-effect free, this is not a pure guard.
+  if(stmt?.nodeType==="IfStatement"&&!stmt.falseBody&&simpleAbort(stmt.trueBody)){
     return {kind:"IF_ABORTS",expr:stmt.condition,rawNode:stmt,
       positive:false,immutableCondition:true};
   }

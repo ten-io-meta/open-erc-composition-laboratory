@@ -17,6 +17,8 @@ The payload was projected from real compiler AST and pinned local-EVM artifacts.
 
 **Scientific boundary:** INCONCLUSIVE, NOT_ADMITTED. The native scientific candidate was not admitted. The ten questions have scoped local observations, but source coverage is incomplete and the observations are not independent public-chain replay or a full security proof. A local constraint SUPPORT never becomes global SUPPORTS in this web projection.
 
+The upstream research-only security and evidence review is maintained in [PR #9 review](../docs/reviews/pr9-final-security-evidence-review.md). It explicitly distinguishes the 11 observed scenario classes from 9 untested classes, including adversarial asset implementations, concurrency, and public-chain replay. Reconciliation of the PR #9 branch with this web layer changes neither the pinned JSON payload nor its SHA-256; the dossier remains an immutable historical report, not a live scientific re-evaluation.
+
 The snapshot is pinned with a SHA-256 over JSON.stringify of the imported JSON. If modified without revising the server manifest, the API rejects it. The website's digest confirms snapshot consistency, **not** independent validity of all source artifacts; source evidence remains available in the GitHub Actions run.
 
 Other ERC pairs keep the original /api/scientific/pair materialized projection. The dossier route returns 404 NO_VERIFIED_DOSSIER for unpinned pairs; this is not an incompatibility result.
@@ -62,8 +64,11 @@ of arbitrary ERC pairs.
 The server intentionally **does not** execute Solidity, accept user-supplied
 code, trust a URL from a web request, decide compatibility or mint a science
 candidate. No status other than a verified native evaluator can claim a
-scientific verdict. `EVIDENCE_AVAILABLE` means that the workflow succeeded;
-it does not mean `SUPPORTS` or `ADMITTED`.
+scientific verdict. A successful workflow initially reports `AWAITING_EVIDENCE`;
+only a separate GitHub artifact-list verification confirming the expected
+nonempty, unexpired artifact for the exact workflow run can report
+`EVIDENCE_AVAILABLE`. Artifact listing is **not** a source-integrity replay,
+scientific `SUPPORTS`, or candidate `ADMITTED`.
 
 ### Activation (only AFTER reviews and merging to the default branch)
 
@@ -95,6 +100,8 @@ the beta dispatcher publicly without those controls.
 If any variable is absent, the server returns `NOT_CONFIGURED`, and
 `POST` returns 503 without contacting GitHub. Invalid keys return 401;
 unknown workflow run IDs are `AWAITING_GITHUB_RUN`, never fabricated success.
+A green workflow without an independently listed artifact stays `AWAITING_EVIDENCE`
+(and GitHub lookup errors return 502), never an invented evidence receipt.
 
 ### Verification
 
