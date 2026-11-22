@@ -71,8 +71,10 @@ For source-only regression, the workflow executes three real pairs:
 1. ERC-8060 × ERC-8098
 2. ERC-8060 × ERC-20 Burnable extension
 3. ERC-8098 × ERC-20
+4. ERC-1155 × ERC-20 — negative control expected to produce no hypothesis
 
-Each run must produce a nonempty AST-derived hypothesis and maintain
+The first three runs must produce at least one AST-derived hypothesis. The
+fourth must produce zero and remain INCONCLUSIVE. All runs maintain
 `INCONCLUSIVE`. Additional adversarial unit tests remove call edges,
 forge source digests, alter pinned blobs, attempt import traversal and
 tamper with scientific verdicts.
