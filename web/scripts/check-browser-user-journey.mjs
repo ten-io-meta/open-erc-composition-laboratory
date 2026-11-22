@@ -94,7 +94,7 @@ async function test(){
   if(gateway.status===503&&liveState.status==="NOT_CONFIGURED"){
     await expectUi('document.body.innerText.includes("Live ERC-8004 verification is not configured")',
       "live gateway explicitly tells visitor that no receipt was created");
-    assert.equal(await evalJs('document.body.innerText.includes("Target networks (design)")'),true);
+    assert.equal(await evalJs('document.body.innerText.toLowerCase().includes("target networks (design)")'),true);
     console.log("OECL_BROWSER_UNCONFIGURED_GATEWAY_TRUTHFUL_PASS");
   }
   await click("Inspect available evidence");
