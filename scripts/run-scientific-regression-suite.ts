@@ -67,7 +67,10 @@ const integrationRoutedChecks = new Set([
     "check-pinned-interaction-hypothesis.ts",
     "check-pinned-joint-native-source-admission.ts",
     "check-pinned-native-joint-recipe.ts",
-    "check-pinned-real-scientific-discovery.ts"
+    "check-pinned-real-scientific-discovery.ts",
+    // Run only with six source-pinned AST/EVM/native arguments in its EVM workflow.
+    // Never treat a parameterless invocation as a core-regression test.
+    "check-independent-burnable-native-properties.ts"
 ]);
 
 const credentialGatedChecks = new Set([
@@ -300,7 +303,7 @@ async function main() {
     console.log(
         `Empty checks: ${empty.length}`
     );
-    console.log(`Routed to pinned joint-EVM workflow (NOT RUN here): ${integrationRouted.length}`);
+    console.log(`Routed to pinned integration workflows (NOT RUN here): ${integrationRouted.length}`);
     console.log(`Blocked missing live API credential (NOT RUN): ${credentialBlocked.length}`);
 
     console.log("");
