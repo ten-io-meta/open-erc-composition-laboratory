@@ -6,6 +6,7 @@ const hash=x=>crypto.createHash("sha256").update(x).digest("hex");
 const hex=x=>typeof x==="string"&&/^[0-9a-f]{64}$/.test(x);
 const requireFact=(v,m)=>{if(!v)throw Error("OECL_GRAPH_EVIDENCE_REJECTED:"+m)};
 const locEq=(a,b)=>a?.unit===b?.unit&&a?.line===b?.line&&a?.start===b?.start;
+/** @param {any} feasibility Source-only, provenance-checked path screen. */
 function projectGraphBundle(graph,discovery,report,run,feasibility=null){
   requireFact(graph?.schemaVersion==="OECL_SOLIDITY_COMPILER_AST_GRAPH_V1"&&
     graph.status==="STRUCTURAL_OBSERVATION_ONLY"&&graph.scientificPolarity==="INCONCLUSIVE"&&
