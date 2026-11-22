@@ -46,7 +46,7 @@ function lockedDependencies(root){
     return fs.readFileSync(filename);
   };
   return {integrity:pkg.integrity,version:pkg.version,readOZ,
-    solc:require(path.join(root,"node_modules/solc"))};
+    solc:require(path.resolve(root,"node_modules/solc"))};
 }
 function apiHeaders(env=process.env){
   return {
