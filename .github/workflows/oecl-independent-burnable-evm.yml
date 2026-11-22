@@ -58,7 +58,7 @@ jobs:
         working-directory: oecl/integrations/secure-evm-toolchain
         run: |
           npm ci --ignore-scripts --no-fund
-          npm audit --audit-level=high
+          npm audit --audit-level=moderate
       - name: Mount audited runtime while retaining immutable ERC-8060 lock
         run: |
           test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
