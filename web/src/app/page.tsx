@@ -69,6 +69,13 @@ export default function Home() {
             </p>
 
 
+            <a href="#composition-workbench" className="mt-9 inline-flex items-center rounded-xl bg-[#174c38] px-5 py-3 text-sm font-medium text-white hover:bg-[#103726]">
+              Explore the ERC-8060 × ERC-8098 scientific dossier
+            </a>
+            <p className="mt-2 text-xs text-[#70746f]">
+              Pinned local-EVM evidence · Not a new live analysis
+            </p>
+
             <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#dcded9] pt-5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#70746f]">
 
               <span>The Graph observes</span>
