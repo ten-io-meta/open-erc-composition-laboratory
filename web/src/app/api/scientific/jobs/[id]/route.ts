@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
+  hasPublishedEvidenceArtifact,
   isDispatchConfigured,
   isJobId,
   listAnalysisRuns,
@@ -26,10 +27,24 @@ export async function GET(
     return NextResponse.json({ status: "INVALID_JOB_ID" }, { status: 400, headers });
   }
   try {
-    const runs = await listAnalysisRuns(process.env.OECL_GITHUB_ACTIONS_TOKEN!);
+    const token = process.env.OECL_GITHUB_ACTIONS_TOKEN!;
+    const runs = await listAnalysisRuns(token);
+    const job = locatePinnedJob(runs, id);
+    if (job.state === "AWAITING_EVIDENCE" && job.runId !== null) {
+      // A completed green workflow is insufficient: confirm that the exact
+      // pinned evidence artifact is published and non-empty for this run.
+      const exists = await hasPublishedEvidenceArtifact(job.runId, token);
+      if (exists) {
+        return NextResponse.json({
+          status: "ANALYSIS_JOB_STATE", ...job,
+          state: "EVIDENCE_AVAILABLE",
+          message: "GitHub lists a non-empty pinned evidence artifact for this exact run. Contents require independent scientific review.",
+        }, { headers });
+      }
+    }
     return NextResponse.json({
       status: "ANALYSIS_JOB_STATE",
-      ...locatePinnedJob(runs, id),
+      ...job,
     }, { headers });
   } catch {
     return NextResponse.json({
