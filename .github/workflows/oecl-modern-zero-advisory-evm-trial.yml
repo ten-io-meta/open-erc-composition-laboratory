@@ -1,0 +1,98 @@
+name: OECL Modern Hardhat3 Ethers6 Zero-Advisory Trial
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/oecl-modern-zero-advisory-evm-trial.yml'
+      - 'integrations/modern-evm-toolchain/**'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-modern-evm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout OECL experimental runner
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+
+      - name: Checkout exact ERC-8060 participant source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: source-8060
+          persist-credentials: false
+
+      - name: Checkout exact ERC-8098 participant source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: source-8098
+          persist-credentials: false
+
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify pinned checkout identities and original ERC-8060 lock
+        run: |
+          test "$(git -C source-8060 rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C source-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  source-8060/package-lock.json" | sha256sum --check
+
+      - name: Resolve new Ethers6 Hardhat3 environment without scripts
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: |
+          npm install --package-lock-only --ignore-scripts --no-fund --audit=false
+          npm ci --ignore-scripts --no-fund --audit=false
+
+      - name: Audit all modern dependencies (do not suppress low findings)
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: |
+          npm audit --json --audit-level=low > ../../../modern-toolchain-audit.json || true
+          node -e 'const x=require("../../../modern-toolchain-audit.json");if(!x.metadata?.vulnerabilities)process.exit(1);console.log("MODERN_TOOLCHAIN_AUDIT:"+JSON.stringify(x.metadata.vulnerabilities));console.log("MODERN_TOOLCHAIN_PACKAGES:"+JSON.stringify(Object.entries(x.vulnerabilities).map(([n,v])=>({name:n,severity:v.severity,via:v.via,fixAvailable:v.fixAvailable}))))'
+
+      - name: Copy independently pinned Solidity sources and separate coordinator into trial workspace
+        run: |
+          mkdir -p oecl/integrations/modern-evm-toolchain/contracts
+          cp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cp oecl/integrations/erc8060-erc8098/solidity/OECLJointRedemption.sol oecl/integrations/modern-evm-toolchain/contracts/
+          cmp source-8060/contracts/ERC8060Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8060Reference.sol
+          cmp source-8098/contracts/ERC8098Reference.sol oecl/integrations/modern-evm-toolchain/contracts/ERC8098Reference.sol
+
+      - name: Compile immutable participants under isolated Hardhat3
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: ./node_modules/.bin/hardhat compile
+
+      - name: Run Ethers6 local experiment with numerical checks
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: node scripts/modern-smoke.mjs
+
+      - name: Dump modern candidate lock for separately reviewed reproducible pin
+        working-directory: oecl/integrations/modern-evm-toolchain
+        run: |
+          node -e 'const fs=require("node:fs");const s=fs.readFileSync("package-lock.json","utf8");console.log("OECL_MODERN_LOCK_LENGTH:"+s.length);for(let i=0;i<s.length;i+=2500)console.log("OECL_MODERN_LOCK_CHUNK:"+String(i/2500).padStart(4,"0")+":"+JSON.stringify(s.slice(i,i+2500)))'
+
+      - name: Require zero advisory in new modern environment
+        run: |
+          node -e 'const v=require("./modern-toolchain-audit.json").metadata.vulnerabilities; if(v.total!==0){console.error("MODERN_ZERO_ADVISORY_GATE_BLOCKED",JSON.stringify(v));process.exit(1)}; console.log("MODERN_ZERO_ADVISORY_GATE_PASS")'
+
+      - name: Preserve trial lock, audit and separate local evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-modern-hardhat3-ethers6-trial
+          path: |
+            oecl/integrations/modern-evm-toolchain/package-lock.json
+            oecl/integrations/modern-evm-toolchain/reports/*.json
+            modern-toolchain-audit.json
+          if-no-files-found: warn
+          retention-days: 14
