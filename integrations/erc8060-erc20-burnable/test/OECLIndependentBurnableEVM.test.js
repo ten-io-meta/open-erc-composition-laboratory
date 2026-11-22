@@ -238,9 +238,8 @@ describe("OECL independently isolated ERC-8060 × OpenZeppelin ERC20Burnable EVM
     await receiver.deployed();
     ctx.holder=receiver.address;
     await(await ctx.token.transfer(receiver.address,ctx.units)).wait();
-    await(await receiver.mintAndApprove(1,ctx.units,{value:wei("0.12")})).wait();
-    // The first token belongs to Alice. A fresh holder needs a new NFT ID.
-    // Use owner tokenID 2 for receiver, so the specific checker below is separate.
+    await(await receiver.mintAndApprove(2,ctx.units,{value:wei("0.12")})).wait();
+    // NFT #1 stays with Alice; the receiver owns NFT #2.
     await(await receiver.configure(1)).wait();
     const before={
       owner:await ctx.nft.ownerOf(2),
