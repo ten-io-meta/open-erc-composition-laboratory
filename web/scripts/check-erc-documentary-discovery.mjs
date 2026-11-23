@@ -137,4 +137,23 @@ await assert.rejects(investigateErcSpecifications("ERC-0","ERC-20",mock),/INVALI
 await assert.rejects(investigateErcSpecifications("ERC-20","ERC-20",mock),/INVALID_ERC_PAIR/);
 assert.ok(calls.every(x=>!x.url.includes("?")));
 console.log("OECL_DOCUMENTARY_FAIL_CLOSED_AND_BOUNDARY_PASS");
+// Public-document cache must coalesce concurrent reads and remain scoped to retrieved hash.
+const cacheDoc=makeDoc("98765",{title:"Bounded-cache test document"});
+let cacheRequests=0;
+const cacheTransport=async()=>{cacheRequests++;return new Response(cacheDoc,{status:200});};
+const concurrent=await Promise.all([
+  readOfficialErc("ERC-98765",cacheTransport,{cache:true}),
+  readOfficialErc("ERC-98765",cacheTransport,{cache:true}),
+  readOfficialErc("ERC-98765",cacheTransport,{cache:true}),
+]);
+assert.equal(cacheRequests,1,"Concurrent public reads should be deduplicated");
+assert.deepEqual(concurrent.map(x=>x.provenance.sha256),[
+  createHash("sha256").update(cacheDoc).digest("hex"),
+  createHash("sha256").update(cacheDoc).digest("hex"),
+  createHash("sha256").update(cacheDoc).digest("hex"),
+]);
+await readOfficialErc("ERC-98765",cacheTransport,{cache:true});
+assert.equal(cacheRequests,1,"Short-lived cached response should avoid repeated GitHub fetches");
+console.log("OECL_DOCUMENTARY_BOUNDED_PUBLIC_CACHE_PASS");
+
 console.log("OECL_DOCUMENTARY_ALL_TESTS_PASS");
