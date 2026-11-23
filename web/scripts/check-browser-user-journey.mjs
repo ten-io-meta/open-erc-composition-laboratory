@@ -193,6 +193,22 @@ async function test(){
   }else assert.equal(documentaryJson.relation.kind,"INCOMPLETE_SPECIFICATIONS");
   console.log("OECL_BROWSER_ANY_ERC_DOCUMENTARY_COMPARISON_PASS");
 
+  await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("PINNED SOURCE AVAILABLE")',
+    "new ERC-4626 x ERC-20 source profiles are eligible for fresh compiler AST");
+  const sourceConfig=await fetch(base+"/api/scientific/source-jobs");
+  assert.equal(sourceConfig.status,200);
+  const sourceJson=await sourceConfig.json();
+  assert.equal(sourceJson.runsEvm,false);
+  assert.equal(sourceJson.sources.length,10);
+  for(const n of ["ERC-165","ERC-2612","ERC-2981","ERC-4626"])
+    assert.ok(sourceJson.sources.some(x=>x.id===n),"new pinned source profile "+n);
+  if(!sourceJson.enabled){
+    assert.equal(await evalJs('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("not activated")'),true);
+    assert.equal(await evalJs('document.querySelector("[data-testid=oecl-fresh-ast] button[type=submit]') ,null);
+  }
+  console.log("OECL_BROWSER_FRESH_SOURCE_PREFLIGHT_PASS");
+
+
   const edited=await evalJs('(()=>{const el=document.getElementById("oecl-protocol-a");if(!(el instanceof HTMLInputElement))return false;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;set.call(el,"ERC-99999");el.dispatchEvent(new Event("input",{bubbles:true}));return true})()');
   assert.equal(edited,true);
   await expectUi('document.getElementById("oecl-protocol-a")?.value==="ERC-99999"',"unlisted ERC user input");
@@ -201,6 +217,11 @@ async function test(){
     "unverified pair does not invent scientific evidence");
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-no-evidence]").innerText.includes("neither a compatibility approval")'),true);
   console.log("OECL_BROWSER_UNSUPPORTED_PAIR_TRUTHFUL_PASS");
+
+  await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("SOURCE REVIEW REQUIRED")',
+    "unregistered ERC needs concrete source and cannot start EVM");
+  console.log("OECL_BROWSER_UNREGISTERED_SOURCE_FAIL_CLOSED_PASS");
+
 
   const graphDiscover=await fetch(base+"/api/live/the-graph/discover?protocol=ERC-8004");
   const graphState=await graphDiscover.json();
