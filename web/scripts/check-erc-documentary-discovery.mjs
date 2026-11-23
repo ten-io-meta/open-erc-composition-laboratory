@@ -65,7 +65,7 @@ assert.equal(pair.relation.kind,"DECLARED_DEPENDENCY");
 assert.match(pair.relation.statements[0],/ERC-4626 explicitly lists ERC-20/);
 assert.equal(pair.standards[0].title,"Tokenized Vaults");
 assert.deepEqual(pair.standards[1].interfaceNames,["transfer"],"ERC-20 nested Token specification must retain methods");
-assert.deepEqual(pair.standards[0].requires,["ERC-20","ERC-2612"]);
+assert.deepEqual(pair.standards[0].requires,["EIP-20","EIP-2612"]);
 assert.deepEqual(pair.standards[0].interfaceNames,["deposit"]);
 assert.equal(pair.standards[0].provenance.sha256,
   createHash("sha256").update(docs.get("4626")).digest("hex"));
@@ -79,7 +79,9 @@ const shared=deriveRelation(
   parseOfficialErc("ERC-4626",docs.get("4626")),
   parseOfficialErc("ERC-7575",makeDoc("7575",{requires:"20, 2612"})));
 assert.equal(shared.kind,"SHARED_DEPENDENCY");
-assert.deepEqual(shared.sharedPrerequisites,["ERC-20","ERC-2612"]);
+assert.deepEqual(shared.sharedPrerequisites,["EIP-20","EIP-2612"]);
+const coreDependency=parseOfficialErc("ERC-165",makeDoc("165",{requires:"214"}));
+assert.deepEqual(coreDependency.requires,["EIP-214"],"Core EIP numbers must not be wrongly called ERCs");
 const unrelated=await investigateErcSpecifications("ERC-20","ERC-721",mock);
 assert.equal(unrelated.relation.kind,"NO_DECLARED_DEPENDENCY");
 assert.equal(unrelated.evmExecuted,false);
