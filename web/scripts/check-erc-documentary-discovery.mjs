@@ -63,6 +63,15 @@ assert.ok(scoped.interfaceNames.includes("supportsInterface"));
 assert.ok(scoped.interfaceNames.includes("interfaceCheck"));
 assert.equal(scoped.interfaceNames.includes("hello"),false,"Tutorial contract methods are not standard interface claims");
 
+const withComment=makeDoc("721",{method:"ownerOf"})+
+  "\n### Worked examples\n#### hello\n"+
+  "\ninterface ERC721 /* is ERC165 */ { function safeTransferFrom(address from,address to,uint256 id) external; }\n";
+const scoped721=parseOfficialErc("ERC-721",withComment);
+assert.ok(scoped721.interfaceNames.includes("ownerOf"));
+assert.ok(scoped721.interfaceNames.includes("safeTransferFrom"));
+assert.equal(scoped721.interfaceNames.includes("hello"),false,"Example section headings are not normative methods");
+
+
 
 const pair=await investigateErcSpecifications("ERC-4626","ERC-20",mock);
 assert.equal(pair.status,"DOCUMENTARY_COMPARISON");
