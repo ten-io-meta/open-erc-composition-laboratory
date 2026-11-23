@@ -166,6 +166,11 @@ jobs:
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/laboratory/scientific-open-source-worker/check-preregistered-8098-4626-falsification.cjs source-output/pair-8098-4626
 
+      - name: Confirm the AST-derived plan is unchanged and two exact local receipts support its strictly decreasing observed paths
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node -e 'const fs=require("node:fs"),p="source-output/pair-8098-4626/ast-hypothesis-experiment.json";const x=JSON.parse(fs.readFileSync(p));if(x.schemaVersion!=="OECL_AST_GENERATED_HYPOTHESIS_EVM_OBSERVATION_V1"||x.observations.length!==2||!x.observations.every(o=>o.strictNumericRelationHolds===true)||x.candidateAdmission!=="NOT_ADMITTED"||x.fullCompatibilityVerdict!=="NOT_EVALUATED")throw Error("AST_SOURCE_HYPOTHESIS_EVM_SCOPE_INVALID");console.log("OECL_AST_SOURCE_HYPOTHESIS_EVM_SCOPE_PASS")'
+
       - name: Verify and project four independently sourced AST graphs for browser exploration
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/scripts/check-source-graph-view.cjs source-output
@@ -204,11 +209,15 @@ jobs:
         run: npm ci --ignore-scripts --no-fund
       - name: Independently recompute the scientist's match and counterexample from this run's local EVM artifact
         run: npx tsx scripts/check-preregistered-scientist-evm-replay.ts source-output/pair-8098-4626/scientist-adversarial-falsification.json laboratory/scientific-open-source-worker/preregistered-8098-4626-falsification.json audit-output/scientist-evm-comparison.json
+      - name: Independently regenerate the AST hypothesis and compare exact same-run EVM observations
+        run: npx tsx scripts/check-ast-generated-scientist-evm-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-generated-evm-review.json
       - name: Archive scientific disagreement without changing EVM evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: oecl-scientist-vs-local-evm-falsification
-          path: audit-output/scientist-evm-comparison.json
+          path: |
+            audit-output/scientist-evm-comparison.json
+            audit-output/scientist-ast-generated-evm-review.json
           if-no-files-found: warn
           retention-days: 14
