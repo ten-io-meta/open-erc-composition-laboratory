@@ -115,6 +115,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-8098 dependency-source source-output/pair-8060-8098
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-4626 dependency-source source-output/pair-8098-4626
+          node -e 'const fs=require("node:fs");const p="source-output/pair-8098-4626/generic-source-hypotheses.json";const r=JSON.parse(fs.readFileSync(p));if(r.verdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.errors.length||!r.hypotheses.length)throw Error("AUTONOMOUS_AST_DISCOVERY_NOT_REPRODUCIBLE");console.log("OECL_8098_4626_AUTONOMOUS_AST_HYPOTHESIS_KINDS",JSON.stringify(r.hypotheses.map(h=>({kind:h.kind,id:h.hypothesisId,evidence:h.evidence?.map(e=>({entry:e.publicEntrypoint?.name,decrease:e.stateDecrease?.state,participant:e.participant}))}))))'
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE dependency-source source-output/pair-8060-20burnable
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-20 dependency-source source-output/pair-8098-20
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-1155 ERC-20 dependency-source source-output/pair-1155-20
