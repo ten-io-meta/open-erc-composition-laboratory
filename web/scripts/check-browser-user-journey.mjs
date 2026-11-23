@@ -97,11 +97,12 @@ async function test(){
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-outcome]").innerText.includes("0.1 ETH")'),true);
   console.log("OECL_BROWSER_IMMEDIATE_FINDINGS_PASS");
 
+  assert.equal(await evalJs('[...document.querySelectorAll("button")].find(x=>x.textContent?.includes("ERC-8004 live chain observations"))?.getAttribute("aria-expanded")'),"false");
+  console.log("OECL_BROWSER_DEFERRED_SECONDARY_DATA_PASS");
   const gateway=await fetch(base+"/api/live/evidence/erc8004");
   const liveState=await gateway.json();
   if(gateway.status===503&&liveState.status==="NOT_CONFIGURED"){
-    const expanded=await evalJs('(()=>{const d=[...document.querySelectorAll("details")].find(x=>x.querySelector("summary")?.textContent?.includes("ERC-8004 live chain observations"));if(!d)return false;d.open=true;return d.open})()');
-    assert.equal(expanded,true);
+    await click("ERC-8004 live chain observations & EvidenceReceipts");
     await expectUi('document.body.innerText.includes("Live ERC-8004 verification is not configured")',
       "Gateway states that no live receipt was created");
     console.log("OECL_BROWSER_UNCONFIGURED_GATEWAY_TRUTHFUL_PASS");
@@ -164,8 +165,7 @@ async function test(){
   const graphDiscover=await fetch(base+"/api/live/the-graph/discover?protocol=ERC-8004");
   const graphState=await graphDiscover.json();
   if(graphDiscover.status===503&&graphState.status==="NOT_CONFIGURED"){
-    const advanced=await evalJs('(()=>{const d=[...document.querySelectorAll("details")].find(x=>x.querySelector("summary")?.textContent?.includes("Advanced protocol discovery"));if(!d)return false;d.open=true;return d.open})()');
-    assert.equal(advanced,true,"Advanced protocol discovery section must open");
+    await click("Advanced protocol discovery via The Graph");
     await click("Discover");
     await expectUi('document.body.innerText.includes("Live The Graph search is not configured here")',
       "The Graph unavailable is not misrepresented as empty");
