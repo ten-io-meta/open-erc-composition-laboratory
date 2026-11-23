@@ -62,6 +62,9 @@ assert.equal(pair.candidateAdmission,"NOT_ADMITTED");
 assert.equal(pair.evmExecuted,false);
 assert.equal(pair.implementationVerified,false);
 assert.equal(pair.relation.kind,"DECLARED_DEPENDENCY");
+assert.ok(pair.researchQuestions.some(q=>q.id==="DECLARED_DEPENDENCY_CONFORMANCE"));
+assert.ok(pair.researchQuestions.some(q=>q.id==="POTENTIAL_ASSET_FLOW_TEST"));
+assert.ok(pair.researchQuestions.every(q=>q.requiredEvidence.length>0));
 assert.match(pair.relation.statements[0],/ERC-4626 explicitly lists ERC-20/);
 assert.equal(pair.standards[0].title,"Tokenized Vaults");
 assert.deepEqual(pair.standards[1].interfaceNames,["transfer"],"ERC-20 nested Token specification must retain methods");
@@ -85,11 +88,13 @@ assert.deepEqual(coreDependency.requires,["EIP-214"],"Core EIP numbers must not 
 const unrelated=await investigateErcSpecifications("ERC-20","ERC-721",mock);
 assert.equal(unrelated.relation.kind,"NO_DECLARED_DEPENDENCY");
 assert.equal(unrelated.evmExecuted,false);
+assert.deepEqual(unrelated.researchQuestions,[],"Unsupported test hypotheses are never fabricated");
 console.log("OECL_DOCUMENTARY_SHARED_AND_UNRELATED_PASS");
 
 const missing=await investigateErcSpecifications("ERC-20","ERC-9999",mock);
 assert.equal(missing.standards[1].availability,"NOT_IN_OFFICIAL_REGISTRY");
 assert.equal(missing.relation.kind,"INCOMPLETE_SPECIFICATIONS");
+assert.deepEqual(missing.researchQuestions,[],"Missing sources cannot produce test designs");
 assert.ok(missing.relation.statements[0].includes("No relationship"));
 const offline=await readOfficialErc("ERC-20",async()=>{throw Error("offline");});
 assert.equal(offline.availability,"SOURCE_UNAVAILABLE");
