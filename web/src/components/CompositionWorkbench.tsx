@@ -391,9 +391,9 @@ export function CompositionWorkbench() {
         </section>}
       </>}
 
-      {!loading && !failure && !graph && pinned && <p role="alert" className="text-sm text-[#805b35]">Expected source evidence was unavailable. Scientific evaluation remains inconclusive.</p>
+      {!loading && !failure && !graph && pinned && <p role="alert" className="text-sm text-[#805b35]">Expected source evidence was unavailable. Scientific evaluation remains inconclusive.</p>}
 
-      <FreshPairSourceAnalysis key={pairKey} sourceA={pair.a} sourceB={pair.b} />}
+      <FreshPairSourceAnalysis key={pairKey} sourceA={pair.a} sourceB={pair.b} />
     </article>
   </section>;
 }
