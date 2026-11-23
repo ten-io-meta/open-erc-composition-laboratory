@@ -73,6 +73,30 @@ The scope remains **two separate owner-authorized EVM actions**; it does NOT pro
 The original 45 registered source-profile pairings remain covered: adding ERC-8098 + ERC-4626 to the dedicated CI source list changes the matrix accounting from **9 configured + 36 remaining** to **10 configured + 35 remaining** (still 45), and shard sizes must be calculated dynamically.
 
 
+## Source-generated adversarial counterexamples and epistemic refinement (23 November 2026)
+
+The source-only AST finder produced the `POTENTIAL_COUPLED_STATE_DECREASE` hypothesis `AST-HYP-7bb4f7ca6a8dfee4feeb62cc`. **Its actual original claim** was only compiler-resolved paths from public `burn` and `redeem` to `_totalSupply` decreases, with source path feasibility `NOT_PROVEN_EXECUTABLE`. It did not claim every call must decrease supply.
+
+The new deterministic self-falsification generator reads the compiler AST and both source-hypothesis reports, verifies source hashes and the previously registered positive experiment, then constructs **four boundary challenges before any local EVM deployment**:
+
+- ERC-8098 `burn(0)`: a successful mined call leaves `totalSupply` unchanged. This **refutes the overly broad extrapolation** that every successful `burn` decreases supply, while not challenging the prior observed positive `burn(10)` case.
+- ERC-4626 `redeem(0)`: a successful mined call leaves share `totalSupply` unchanged. This **refutes the same over-generalization** for `redeem` while not challenging the prior positive `redeem(40)` case.
+- ERC-8098 burn above available caller token balance: unmined read-only EVM `callStatic` revert with tracked state unchanged. This challenges unconditional executability.
+- ERC-4626 redeem above available caller share balance: unmined read-only EVM `callStatic` revert with tracked state unchanged. This also challenges unconditional executability.
+
+New plan SHA-256 `1ce82a7a35403eaf02afe466a40f0cd937cd39d6f09a73060b1d8a751efb60fe`, bound to the previous positive-plan SHA-256 `5888bd5f87df31a440901f5e37944b538ffe87b71e25c1b607777dae50574991`. All inputs, AST path identities, source revisions and generated case IDs are retained in the artifact.
+
+[Verified initial source/EVM workflow #45240150826](https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/45240150826) **PASS** in both independent jobs. The second job verified the archived observations, preregistered SHA-256 provenance and epistemic interpretation. It emitted `OECL_INDEPENDENT_AST_SELF_FALSIFICATION_REPLAY_PASS`: **2 zero-value mined counterexamples and 2 unmined negative reversions**. The original positive AST experiments remain supported **only in the precise tested setting**, not universally.
+
+The scientist's independent reviewer additionally emits **conditioned revision proposals** rather than treating these results as a general vulnerability:
+- A strictly positive eligible-owner invocation of each method decreased the tested token's supply in the pinned fixture.
+- Successful zero-quantity invocations did not decrease it.
+- Above-balance invocations reverted in read-only simulations.
+- No coordinated atomic composition, hostile callback safety, proxy upgrade behavior, or general ERC compatibility is established.
+
+**Scope warning:** this generation uses a small reviewed boundary-rule catalogue (`ZERO_AMOUNT_BOUNDARY`, `ABOVE_OWNED_BALANCE`) and a pair-specific local-EVM adapter. It is authentic machine generation from AST facts **within that finite rule set**, not unlimited autonomous security research, formal verification, or a verified exploit. It does not revise original experimental receipts or user-facing compatibility conclusions. Every refined hypothesis requires human review.
+
+
 ## Next scientific/security gates
 
 - Audit all sources of the legacy \`ResearchConclusionEngine\` \`ESTABLISHED\` label and the \`HypothesisValidationEngine\` \`CONFIRMED\` label. Their heuristic/status thresholds cannot be assumed equivalent to independent experimental truth. Introduce typed challenge/corroboration receipts before any user-facing promotion.
