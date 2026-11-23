@@ -150,4 +150,11 @@ const report={
 };
 mkdirSync(dirname(output),{recursive:true});
 writeFileSync(output,JSON.stringify(report,null,2)+"\n");
+console.log("OECL_ERC_GROUNDED_EXTRACTION_GAPS",JSON.stringify(
+  byErc.filter(x=>x.proposedFalsificationQuestions===0)
+    .map(x=>({id:x.ercId,title:x.title,status:x.officialStatus,
+      requirements:x.sourceMetadata.boundedExtractedRequirementCount,
+      interfaces:x.sourceMetadata.declaredInterfaceNameCount,
+      prerequisites:x.sourceMetadata.declaredPrerequisiteCount}))
+));
 console.log("OECL_ALL_626_ERC_SCIENTIST_AGENDA_PASS",JSON.stringify(report.summary));
