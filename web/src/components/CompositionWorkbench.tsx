@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ScientificAstGraphExplorer, type AstGraphView } from "@/components/ScientificAstGraphExplorer";
 import { ScientificDossierResults } from "@/components/ScientificDossierResults";
 import { IndependentEvmEvidencePanel } from "@/components/IndependentEvmEvidencePanel";
+import { DocumentaryPairExplorer } from "@/components/DocumentaryPairExplorer";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -27,6 +28,12 @@ const examples = [
   { a: "ERC-8060", b: "ERC-20-BURNABLE", title: "NFT redemption × burnable token" },
   { a: "ERC-8098", b: "ERC-20", title: "Monotone supply × ERC-20" },
   { a: "ERC-1155", b: "ERC-20", title: "ERC-1155 × ERC-20 (negative control)" },
+] as const;
+
+const documentaryExamples = [
+  { a: "ERC-4626", b: "ERC-20", title: "Vaults × fungible tokens" },
+  { a: "ERC-7575", b: "ERC-4626", title: "Multi-asset vaults × vaults" },
+  { a: "ERC-721", b: "ERC-165", title: "NFTs × interface detection" },
 ] as const;
 
 const tabs: { id: Tab; label: string }[] = [
@@ -155,10 +162,10 @@ export function CompositionWorkbench() {
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#236246]">01 / Investigate a composition</p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] md:text-3xl">Choose two ERC implementations</h2>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] md:text-3xl">Choose any two ERC standards</h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#607369]">
-          Compare verified Solidity source behavior, inspect the execution evidence and identify what is still unproven.
-          This release retrieves audited snapshots; it does not run a new arbitrary-contract experiment.
+          Investigate published ERC specifications and their declared dependencies, then inspect
+          compiler-grounded Solidity and local EVM evidence when available. Documentary relations are not executable proof.
         </p>
       </div>
       {pill("Read-only scientific evidence")}
@@ -186,16 +193,23 @@ export function CompositionWorkbench() {
     </form>
 
     <div aria-label="Verified example pairs" className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-xs text-[#607369]">Verified examples:</span>
+      <span className="mr-1 text-xs text-[#607369]">Source-tested examples:</span>
       {examples.map(x => <button type="button" key={x.a + x.b} onClick={() => inspect(x.a, x.b)}
         className="rounded-full border border-[#cfdcd2] bg-white px-3 py-2 text-xs font-medium text-[#265841] transition hover:bg-[#eaf4ed] focus:ring-2 focus:ring-[#90c4a1]">
         {x.title}
       </button>)}
     </div>
     <p className="text-xs text-[#68796e]">
-      Four verified AST examples from six registered source profiles. Unlisted ERCs are not automatically analyzed;
-      missing evidence does not imply incompatibility.
+      You can investigate any numeric ERC in the published ethereum/ERCs registry. Full Solidity and EVM evidence
+      is available only for reviewed implementations. Unpublished proposals and missing results are not judged incompatible.
     </p>
+    <div aria-label="Official ERC specification examples" className="flex flex-wrap items-center gap-2">
+      <span className="mr-1 text-xs text-[#607369]">Try other ERCs:</span>
+      {documentaryExamples.map(x => <button type="button" key={x.a + x.b} onClick={() => inspect(x.a, x.b)}
+        className="rounded-full border border-[#d6d7e4] bg-[#f7f7fc] px-3 py-2 text-xs font-medium text-[#4c4e78] hover:bg-[#eaeaf8]">
+        {x.title}
+      </button>)}
+    </div>
     {dirty && <p role="status" className="rounded-xl border border-[#decda8] bg-[#fff9ec] p-3 text-xs text-[#766023]">
       Selection changed. Press <strong>Inspect pair</strong> to update the report; the report below still describes {pair.a} × {pair.b}.
     </p>}
@@ -217,12 +231,14 @@ export function CompositionWorkbench() {
       </p>}
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
-        <h4 className="text-lg font-semibold text-[#694d27]">No verified scientific snapshot for this pair</h4>
+        <h4 className="text-lg font-semibold text-[#694d27]">No pinned Solidity/EVM experiment for this pair</h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          OECL has not evaluated these implementations with its published source artifacts. This is neither a compatibility approval
-          nor proof of incompatibility. Choose one of the four verified examples to inspect meaningful findings.
+          OECL has not tested these implementations in its published EVM suite. This is neither a compatibility approval
+          nor proof of incompatibility. The specification-level discovery below investigates declared dependencies instead.
         </p>
       </div>}
+
+      {!pinned && <DocumentaryPairExplorer key={pairKey} protocolA={pair.a} protocolB={pair.b} />}
 
       {!loading && !failure && graph && <>
         <div data-testid="oecl-outcome" className="grid gap-3 lg:grid-cols-3">
