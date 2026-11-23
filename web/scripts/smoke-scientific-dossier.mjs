@@ -73,7 +73,9 @@ try {
   assert.equal(sourceSettings.enabled, false);
   assert.equal(sourceSettings.acceptsArbitraryRepositories, false);
   assert.equal(sourceSettings.runsEvm, false);
-  assert.equal(sourceSettings.sources.length, 6);
+  assert.equal(sourceSettings.sources.length, 10);
+  for (const id of ["ERC-165", "ERC-2612", "ERC-2981", "ERC-4626"])
+    assert.ok(sourceSettings.sources.some(source => source.id === id));
   const sourceRejected = await fetch(base + "/api/scientific/source-jobs", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ sourceA: "ERC-8060", sourceB: "ERC-20-BURNABLE" }),
