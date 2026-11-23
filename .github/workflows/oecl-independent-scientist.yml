@@ -9,11 +9,13 @@ on:
       - "laboratory/research-conclusions/ResearchConclusionEngine.ts"
       - "laboratory/hypothesis/HypothesisValidationEngine.ts"
       - "laboratory/hypothesis/HypothesisGenerator.ts"
+      - "laboratory/scientific-composition-constraint-evaluation/**"
       - "scripts/check-independent-scientific-reasoning.ts"
       - "scripts/check-scientific-source-independence-bounded.ts"
       - "scripts/check-scientist-independent-source-attestations.ts"
       - "scripts/check-original-research-conclusion-evidence-boundary.ts"
       - "scripts/check-hypothesis-circular-validation.ts"
+      - "scripts/check-scoped-scientist-evm-alignment.ts"
       - "scripts/run-independent-scientific-review.ts"
       - ".github/workflows/oecl-independent-scientist.yml"
   workflow_dispatch:
@@ -45,6 +47,8 @@ jobs:
         run: npx tsx scripts/check-original-research-conclusion-evidence-boundary.ts
       - name: Prove original hypothesis validation cannot confirm itself
         run: npx tsx scripts/check-hypothesis-circular-validation.ts
+      - name: Compare scoped scientific predictions with recomputed numeric EVM reports
+        run: npx tsx scripts/check-scoped-scientist-evm-alignment.ts
       - name: Falsify unsupported hypothesis conclusions without EVM
         run: npx tsx scripts/check-independent-scientific-reasoning.ts
       - name: Verify original scientist can report provisional conclusions without EVM

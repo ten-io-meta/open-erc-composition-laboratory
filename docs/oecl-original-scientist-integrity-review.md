@@ -38,6 +38,14 @@ In the original V2 cycle, learning-derived hypotheses and the hypothesis validat
 - The scientist workflow reruns the archived DOI-0001 historical hypothesis dataset, rejects any circular promotion or unobserved rejection, and archives the regenerated JSON alongside the independent research conclusion. This does **not** change, sign, execute or fabricate EVM receipts.
 - Evidence useful to confirm or refute a hypothesis must be collected separately, with a documented pre-registered test, new provenance, independent source/implementation identity and a reproducible counterfactual.
 
+## Scoped scientific predictions versus EVM measurements
+
+A new side-effect-free `ScientificEvmHypothesisAlignmentEngine` compares a **pre-registered invariant prediction** against a numeric observation, using the existing OECL composition-constraint evaluator to recalculate the predicate from measured operands. A comparison is allowed only when candidate ID, exact 40-character implementation revision, constraint ID, participant side, and named scenario all match.
+
+The comparison **never modifies an EVM observation**. If the predicted outcome and recomputed measured outcome disagree, the output records `REPORTED_MEASUREMENTS_CHALLENGE_PREDICTION`; a matching observation is `REPORTED_MEASUREMENTS_MATCH_PREDICTION`. A mismatched underlying-token versus vault-share scenario, forged verdict, missing receipt hash, or mismatched revision returns `NOT_COMPARABLE`.
+
+**Trust boundary:** this utility checks consistency of **reported** measurements only. It does not query Ethereum or independently authenticate a tx receipt; its output always states `receiptAuthentication:NOT_PERFORMED_BY_COMPARISON_ENGINE`. Only the existing verified pinned-EVM execution/receipt chain can supply an authenticated observation. It never upgrades scientific research to an EVM or universal compatibility verdict.
+
 ## Next scientific/security gates
 
 - Audit all sources of the legacy \`ResearchConclusionEngine\` \`ESTABLISHED\` label and the \`HypothesisValidationEngine\` \`CONFIRMED\` label. Their heuristic/status thresholds cannot be assumed equivalent to independent experimental truth. Introduce typed challenge/corroboration receipts before any user-facing promotion.
