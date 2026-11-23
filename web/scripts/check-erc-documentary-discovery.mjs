@@ -55,6 +55,15 @@ assert.equal(parseOfficialErc("ERC-20",makeDoc("20",{category:"Core"})),null);
 assert.equal(parseOfficialErc("ERC-20",makeDoc("20",{status:"Moved"})),null);
 assert.equal(parseOfficialErc("ERC-20","not an ERC document"),null);
 
+const withExample=makeDoc("165",{method:"supportsInterface"})+
+  "\ncontract Example { function hello() public {} }\n"+
+  "\ninterface IERC165 { function interfaceCheck(bytes4 x) external view returns(bool); }\n";
+const scoped=parseOfficialErc("ERC-165",withExample);
+assert.ok(scoped.interfaceNames.includes("supportsInterface"));
+assert.ok(scoped.interfaceNames.includes("interfaceCheck"));
+assert.equal(scoped.interfaceNames.includes("hello"),false,"Tutorial contract methods are not standard interface claims");
+
+
 const pair=await investigateErcSpecifications("ERC-4626","ERC-20",mock);
 assert.equal(pair.status,"DOCUMENTARY_COMPARISON");
 assert.equal(pair.scientificVerdict,"NOT_EVALUATED");
