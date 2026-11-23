@@ -5,8 +5,12 @@ on:
     paths:
       - "laboratory/scientific-independent-review/**"
       - "laboratory/source-independence/SourceIndependenceSetAssessmentEngine.ts"
+      - "laboratory/source-independence/SourceIndependenceAssessmentEngine.ts"
+      - "laboratory/research-conclusions/ResearchConclusionEngine.ts"
       - "scripts/check-independent-scientific-reasoning.ts"
       - "scripts/check-scientific-source-independence-bounded.ts"
+      - "scripts/check-scientist-independent-source-attestations.ts"
+      - "scripts/check-original-research-conclusion-evidence-boundary.ts"
       - "scripts/run-independent-scientific-review.ts"
       - ".github/workflows/oecl-independent-scientist.yml"
   workflow_dispatch:
@@ -32,6 +36,10 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Falsify independence overflow, contradictory evidence and fake authority
         run: npx tsx scripts/check-scientific-source-independence-bounded.ts
+      - name: Reject contradictory or unanchored upstream source attestations
+        run: npx tsx scripts/check-scientist-independent-source-attestations.ts
+      - name: Reject unjustified established conclusions in original scientist
+        run: npx tsx scripts/check-original-research-conclusion-evidence-boundary.ts
       - name: Falsify unsupported hypothesis conclusions without EVM
         run: npx tsx scripts/check-independent-scientific-reasoning.ts
       - name: Verify original scientist can report provisional conclusions without EVM
