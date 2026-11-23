@@ -137,6 +137,10 @@ jobs:
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/laboratory/scientific-open-source-worker/derive-ast-8098-4626-experiment.cjs source-output/pair-8098-4626
 
+      - name: Self-falsify AST-originated hypothesis with source-derived zero and overbalance boundary challenges BEFORE EVM
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/laboratory/scientific-open-source-worker/propose-ast-self-falsifiers.cjs source-output/pair-8098-4626
+
       - name: Produce independent ERC-4626 × ERC-20 local EVM receipts and negative controls
         if: github.event_name != 'workflow_dispatch'
         working-directory: dependency-source
