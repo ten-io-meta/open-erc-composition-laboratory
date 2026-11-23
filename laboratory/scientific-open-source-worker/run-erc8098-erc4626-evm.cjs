@@ -10,6 +10,7 @@ const output=path.resolve(process.argv[3]||"source-output/pair-8098-4626");
 const hash=s=>crypto.createHash("sha256").update(s).digest("hex");
 const {readPrerecordedPredictions,runPreregisteredFalsification}=require("./run-preregistered-8098-4626-falsification.cjs");
 const {readAstDerivedPlan,checkSourceGeneratedHypothesis}=require("./run-ast-generated-8098-4626-evm.cjs");
+const {loadSelfFalsifiers,runSelfFalsifiers}=require("./run-ast-self-falsifiers-evm.cjs");
 const wrapper=[
 "// SPDX-License-Identifier: MIT",
 "pragma solidity ^0.8.20;",
@@ -44,6 +45,7 @@ async function main(){
   // Freeze the controlled prediction plan before deploying any EVM fixture.
   const preregistration=readPrerecordedPredictions();
   const astRegistration=readAstDerivedPlan(output);
+  const selfFalsificationRegistration=loadSelfFalsifiers(output,astRegistration);
   process.chdir(root);
   const hre=require(path.join(root,"node_modules/hardhat"));
   const [owner,attacker]=await hre.ethers.getSigners();
@@ -100,6 +102,12 @@ async function main(){
     vaultWrapperSha256:hash(wrapper),compilerVersion:compiler.version(),
     openzeppelinVersion:collected.deps.version,
     dependencyIntegrity:collected.deps.integrity
+  });
+  await runSelfFalsifiers({
+    registration:selfFalsificationRegistration,
+    originalRegistration:astRegistration,
+    provider:hre.ethers.provider,
+    ethers:hre.ethers,asset,vault,owner,afterDeposit,snap,output
   });
   async function mustRevert(name,fn){
     const previous=await snap();let reverted=false;
