@@ -55,3 +55,20 @@ Aquí el científico sí puede identificar una tensión formal **antes** de ejec
 5. Emitir un resultado limitado al escenario probado, junto con refutaciones, incertidumbres y efectos entre estándares.
 
 **No se ha identificado ninguna vulnerabilidad explotable mediante estos diseños; tampoco se declara que todos los ERC tengan implementación Solidity ejecutable.**
+
+
+## Resultados ejecutados posteriormente: ERC-7201 y ERC-2535 × ERC-7201
+
+### ERC-7201: comparación de dos oráculos y sonda EVM local
+
+La revisión oficial `e9c1adc6...` fija la expresión de raíz de almacenamiento. OECL calcula cinco raíces con **ethers v5 (Keccak + ABI)** y **ethereum-cryptography (Keccak + empaquetado explícito de uint256)**. Los dos oráculos coinciden para esos identificadores y rechazan tres fórmulas deliberadamente erróneas: sin resta de uno, sin Keccak externo y sustituyendo Keccak por SHA3-256. Una sonda Solidity propia compilada con `solc 0.8.26` devuelve las cinco mismas raíces y emite eventos mediante cinco transacciones minadas en Hardhat 31337. Un segundo trabajo de CI contrasta los artefactos sin reutilizar el oráculo criptográfico de ejecución.
+
+**Limitación:** comprobación real de la fórmula de ERC-7201 para cinco entradas. No valida anotaciones de ningún contrato productivo, ausencia universal de colisiones o certificados de mainnet.
+
+### ERC-2535: Diamond de referencia oficial y facetas de laboratorio
+
+OECL compila `assets/erc-2535/reference/Diamond.sol` de la misma revisión oficial fijada, despliega su `Diamond`, `DiamondCutFacet` y `DiamondLoupeFacet`, y añade dos facetas sintéticas que acceden al mismo slot calculado mediante ERC-7201. El experimento examina la incorporación, sustitución y retirada de selectores; verifica eventos `DiamondCut`, despacho de la función al facet esperado, rechazo de un cambio por un no propietario y rechazo de un selector duplicado. La escritura mediante `delegatecall` modifica el almacenamiento del Diamond, no el de la faceta. El valor permanece al cambiar de faceta y se modifica conforme a la lógica de la versión nueva.
+
+**Limitación:** demuestra esos caminos concretos en EVM local, no que todo Diamond preserve invariantes ni que ERC-2535 y ERC-7201 sean universalmente compatibles. La implementación Diamond está fijada; las dos facetas experimentales son propias y no tienen por qué representar aplicaciones reales. Los tres rechazos en `callStatic` no generan recibos minados.
+
+Los informes declaran `NOT_EVALUATED` para compatibilidad global, `NOT_ADMITTED` para admisión y separan verificación contra proveedor Hardhat de autenticación de consenso Ethereum. No se ha identificado ningún exploit con estas comprobaciones de laboratorio.
