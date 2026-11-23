@@ -43,12 +43,15 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#4a7460]">Available in this release</p>
             <ul className="mt-3 space-y-3 text-sm leading-5 text-[#3a5545]">
               <li><strong>Any published ERC pair</strong> for documented requirements</li>
-              <li><strong>4</strong> reviewed AST composition examples</li>
+              <li><strong>10</strong> reviewed Solidity implementation profiles</li>
+              <li><strong>5</strong> additional AST-pair experiments completed in CI</li>
+              <li><strong>4</strong> reviewed AST graph examples available immediately</li>
               <li><strong>1</strong> scoped ERC-8060 × ERC-8098 dossier</li>
-              <li><strong>10</strong> independent local-EVM receipts for a burnable ERC-20 example</li>
-              <li><strong>0</strong> arbitrary Solidity executions enabled</li>
+              <li><strong>10</strong> original independent local-EVM receipts (8060 × Burnable)</li>
+              <li><strong>7</strong> new mined local-EVM receipts (4626 × 20), plus 3 simulated reverts</li>
+              <li><strong>0</strong> public arbitrary-source EVM executions enabled</li>
             </ul>
-            <p className="mt-3 text-xs leading-5 text-[#7b887d]">Published specifications are document-level evidence; only pinned examples have tested Solidity and local-EVM coverage.</p>
+            <p className="mt-3 text-xs leading-5 text-[#7b887d]">ERC specifications are documentary inputs; fresh compiler runs require reviewed source profiles and authorized isolated execution. Local EVM evidence is scoped to its tested fixtures.</p>
           </aside>
         </section>
 
