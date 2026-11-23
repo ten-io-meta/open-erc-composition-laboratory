@@ -3,6 +3,7 @@ import {createHash} from "node:crypto";
 import {readFileSync,lstatSync,mkdirSync,writeFileSync} from "node:fs";
 import {resolve,join,dirname} from "node:path";
 import {parseOfficialErc} from "../src/server/oeclErcDocumentaryDiscovery.ts";
+import {anchoredSpecCue} from "./oecl-spec-anchor.mjs";
 
 const corpusDir=resolve(process.argv[2]||"official-ercs/ERCS");
 const matrixPath=resolve(process.argv[3]||"audit-output/all-erc-documentary-matrix.json");
@@ -24,7 +25,7 @@ assert.equal(matrix.summary.documentsParsed,626);
 assert.equal(matrix.summary.pairsInspected,195625);
 const ids=new Set(matrix.documents.map(d=>d.id));
 assert.equal(ids.size,626);
-const tasks=[],byErc=[],counts={normative:0,interface:0,prerequisite:0,withoutExtractedRules:0};
+const tasks=[],byErc=[],counts={normative:0,interface:0,prerequisite:0,textAnchored:0,externalNeedsReview:0,withoutExtractedRules:0};
 for(const record of matrix.documents){
   const filename=record.id.toLowerCase()+".md";
   const file=join(corpusDir,filename);
@@ -91,7 +92,27 @@ for(const record of matrix.documents){
       "PREREQUISITE_MAY_BE_CORE_EIP_OR_ERC");
     counts.prerequisite++;
   }
-  // Retain all standards, including those our bounded parser cannot extract.
+  // Extract a source-anchored research cue only after simpler exact metadata rules fail.
+  let anchoredCue=null;
+  if(!evidence.length){
+    anchoredCue=anchoredSpecCue(record.id,text);
+    if(anchoredCue?.evidenceType==="EXTERNAL_SPECIFICATION_REFERENCE"){
+      counts.externalNeedsReview++;
+    }else if(anchoredCue){
+      add("TEXT_ANCHORED_SPECIFICATION_CUE",anchoredCue.sourceExcerpt,
+        "Does a pinned implementation or independently checkable model satisfy the exact cited behavior, including its documented conditions and exceptions?",
+        "An independently reproducible, correctly scoped counterexample to the clarified implementation claim would falsify that claim, not the specification itself.",
+        ["Review the complete cited section, its exceptions and current normative status",
+         "Pin an implementation or formal reference model with exact version and code identity",
+         "Produce suitable positive and negative controls with an authenticated observation"],
+        "SOURCE_TEXT_RESEARCH_QUESTION_NOT_AN_EXECUTABLE_TEST");
+      evidence[evidence.length-1].sourceAnchor=anchoredCue;
+      evidence[evidence.length-1].status="SOURCE_ANCHORED_QUESTION_REQUIRES_SEMANTIC_REVIEW";
+      counts.textAnchored++;
+    }
+  }
+  // Do not invent a falsifiable question if neither the document nor an external
+  // specification supplies a reviewable mechanism in the bounded extractor.
   if(!evidence.length)counts.withoutExtractedRules++;
   assert(evidence.length<=3);
   byErc.push({
@@ -103,8 +124,12 @@ for(const record of matrix.documents){
       declaredInterfaceNameCount:doc.interfaceNames.length,
       boundedExtractedRequirementCount:doc.requirements.length},
     proposedFalsificationQuestions:evidence.length,
-    investigationStatus:evidence.length?"DOCUMENTARY_HYPOTHESES_PROPOSED":
-      "EXTRACTION_LIMIT_NO_GROUNDED_FALSIFICATION_QUESTION",
+    investigationStatus:evidence.length?
+      (anchoredCue?"SOURCE_ANCHORED_QUESTION_NEEDS_SEMANTIC_REVIEW":"DOCUMENTARY_HYPOTHESES_PROPOSED"):
+      (anchoredCue?.evidenceType==="EXTERNAL_SPECIFICATION_REFERENCE"?
+       "EXTERNAL_NORMATIVE_DOCUMENT_REQUIRES_PINNING":
+       "EXTRACTION_LIMIT_NO_GROUNDED_FALSIFICATION_QUESTION"),
+    anchoredFallback:anchoredCue,
     implementationVerdict:"NOT_EVALUATED",evmExecuted:false,
     nextEvidenceStep:record.implementationProfileRegistered?
       "REVIEW_PINNED_IMPLEMENTATION_AND_EXPERIMENT_ADAPTER":
@@ -114,7 +139,7 @@ for(const record of matrix.documents){
 }
 assert.equal(byErc.length,626);
 assert.equal(new Set(tasks.map(x=>x.taskId)).size,tasks.length);
-assert.equal(counts.normative+counts.interface+counts.prerequisite,tasks.length);
+assert.equal(counts.normative+counts.interface+counts.prerequisite+counts.textAnchored,tasks.length);
 assert.equal(counts.withoutExtractedRules,
   byErc.filter(x=>x.proposedFalsificationQuestions===0).length);
 assert(tasks.every(x=>x.evmExecuted===false&&x.scientificVerdict==="NOT_EVALUATED"));
@@ -139,6 +164,9 @@ const report={
   },
   limitations:[
     "All 626 ERC files are included, but a blank extracted rule is an evidence gap, not a scientific hypothesis.",
+    "Fallback source lines are exact-byte anchored research cues, not independently verified normative obligations.",
+    "Withdrawn or stagnant proposals are historic research subjects, not automatically recommended standards.",
+    "External specification references require separate source pinning before conformance claims.",
     "A normative line requires semantic context including exceptions; interface names are not ABI signatures.",
     "Questions are NOT proofs of vulnerabilities, implementation compatibility, or executed falsification.",
     "Prerequisites may refer to core EIPs or external revisions outside this 626-ERC snapshot.",
