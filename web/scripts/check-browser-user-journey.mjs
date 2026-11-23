@@ -97,6 +97,26 @@ async function test(){
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-outcome]").innerText.includes("0.1 ETH")'),true);
   console.log("OECL_BROWSER_IMMEDIATE_FINDINGS_PASS");
 
+  await click("Browse all ERCs");
+  await expectUi('document.querySelector("[data-testid=oecl-catalog-list]")!==null',
+    "ERC directory loads with official entries or clearly labeled partial local fallback");
+  const catalogApi=await fetch(base+"/api/scientific/erc-catalog");
+  assert.equal(catalogApi.status,200);
+  const catalogJson=await catalogApi.json();
+  assert.ok(["COMPLETE_OFFICIAL_INDEX","PARTIAL_LOCAL_INDEX"].includes(catalogJson.status));
+  assert.ok(catalogJson.entries.some(x=>x.id==="ERC-8060"&&x.sourceProfile));
+  if(catalogJson.status==="COMPLETE_OFFICIAL_INDEX"){
+    assert.ok(catalogJson.officialCount>=50);
+    assert.ok(catalogJson.entries.some(x=>x.origin==="OFFICIAL_ERC_REPOSITORY"));
+  }else assert.match(catalogJson.message,/temporarily unavailable/);
+  const filteredCatalog=await evalJs('(()=>{const x=document.getElementById("oecl-catalog-search");if(!(x instanceof HTMLInputElement))return false;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;set.call(x,"8060");x.dispatchEvent(new Event("input",{bubbles:true}));return true})()');
+  assert.equal(filteredCatalog,true);
+  await expectUi('document.querySelector("[data-testid=oecl-catalog-list]")?.innerText.includes("ERC-8060")',
+    "catalog search includes OECL source profile even if not in official repo");
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-catalog-list]")?.innerText.includes("ERC-8060")'),true);
+  await click("Close ERC directory");
+  console.log("OECL_BROWSER_FULL_ERC_DIRECTORY_PASS:"+catalogJson.status+":"+catalogJson.officialCount);
+
   assert.equal(await evalJs('[...document.querySelectorAll("button")].find(x=>x.textContent?.includes("ERC-8004 live chain observations"))?.getAttribute("aria-expanded")'),"false");
   console.log("OECL_BROWSER_DEFERRED_SECONDARY_DATA_PASS");
   const gateway=await fetch(base+"/api/live/evidence/erc8004");
