@@ -72,13 +72,24 @@ export function parseOfficialErc(id:string,text:string):StandardDocument|null{
     .split(/\n\s*\n/)[0]||"").slice(0,500)||null;
   const requires=[...new Set((meta.requires||"").split(",").map(x=>x.trim())
     .filter(x=>/^[1-9][0-9]{0,7}$/.test(x)).map(x=>"EIP-"+x))].slice(0,30);
-  // Document headings / code snippets only. NOT compiler-resolved ABI facts.
-  const names=[...spec.matchAll(/^#{3,5}\s+([A-Za-z][A-Za-z0-9_]{1,54})\s*$/gm)]
-    .map(x=>x[1]).filter(x=>!["Methods","Method","Events","Event","Specification","Interfaces","Interface","Definitions"].includes(x));
-  // Only inspect declarations inside an explicit interface block. Example contracts and
-  // tutorial function snippets are not specifications of the standard interface.
-  const declared=[...spec.matchAll(/\binterface\s+[A-Za-z_][A-Za-z0-9_]*\s*\{([\s\S]*?)\}/g)]
-    .flatMap(block=>[...block[1].matchAll(/\b(?:function|event)\s+([A-Za-z_][A-Za-z0-9_]{1,54})\s*\(/g)].map(x=>x[1]));
+  // Capture method/event headings only when explicitly nested under a
+  // Methods, Events or Functions section. General explanation/example headings
+  // (e.g., ERC-165's hello/world demonstrations) are not API declarations.
+  const names:string[]=[];let inMethods=false;
+  for(const line of spec.split(/\r?\n/)){
+    const h=line.match(/^(#{3,5})\s+(.+?)\s*$/);
+    if(!h)continue;
+    if(h[1].length===3){
+      inMethods=/^(?:Methods?|Events?|Functions?|Required Methods)$/i.test(h[2]);
+      continue;
+    }
+    if(inMethods&&/^[A-Za-z][A-Za-z0-9_]{1,54}$/.test(h[2]))names.push(h[2]);
+  }
+  // Accept functions/events declared inside explicitly named ERC interfaces,
+  // tolerating ERC-721's inline "is ERC165" comment. Ignore unrelated
+  // tutorial interfaces, contracts and functions; this is still documentary.
+  const declared=[...spec.matchAll(/\binterface\s+((?:I?ERC)[1-9][0-9]*[A-Za-z0-9_]*)\s*(?:\/\*[\s\S]*?\*\/\s*)?\{([\s\S]*?)\}/g)]
+    .flatMap(block=>[...block[2].matchAll(/\b(?:function|event)\s+([A-Za-z_][A-Za-z0-9_]{1,54})\s*\(/g)].map(x=>x[1]));
   const interfaceNames=[...new Set([...names,...declared])].slice(0,24);
   const requirements=spec.split(/\r?\n/).filter(s=>/\b(?:MUST|SHALL|SHOULD)\b/.test(s))
     .map(readable).filter(s=>s.length>=24&&s.length<=300).slice(0,6);
