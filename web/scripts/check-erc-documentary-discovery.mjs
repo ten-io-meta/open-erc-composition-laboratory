@@ -125,6 +125,10 @@ assert.equal(missing.standards[1].availability,"NOT_IN_OFFICIAL_REGISTRY");
 assert.equal(missing.relation.kind,"INCOMPLETE_SPECIFICATIONS");
 assert.deepEqual(missing.researchQuestions,[],"Missing sources cannot produce test designs");
 assert.ok(missing.relation.statements[0].includes("No relationship"));
+const fetchedButUnparseable=await readOfficialErc("ERC-20",async()=>new Response("not valid ERC frontmatter",{status:200}));
+assert.equal(fetchedButUnparseable.availability,"UNPARSEABLE_SPECIFICATION",
+  "HTTP 200 with invalid ERC text is not an absent official document");
+assert.equal(fetchedButUnparseable.provenance.sha256,null);
 const offline=await readOfficialErc("ERC-20",async()=>{throw Error("offline");});
 assert.equal(offline.availability,"SOURCE_UNAVAILABLE");
 const oversized=await readOfficialErc("ERC-20",async()=>new Response("x".repeat(400001)));
