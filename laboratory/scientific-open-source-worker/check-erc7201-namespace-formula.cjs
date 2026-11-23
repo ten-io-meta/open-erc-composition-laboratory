@@ -56,8 +56,7 @@ const results=inputCases.map(id=>{
   // formula. This rejects common false positives; it is not a collision proof.
   const skippedMinusOne=asHex(BigInt(ethers.utils.keccak256(
     ethers.utils.defaultAbiCoder.encode(["uint256"],[hashA]))));
-  const skippedOuterHash=asHex(BigInt(hashAOuter)===0n?
-    BigInt(hashA):BigInt(hashA));
+  const skippedOuterHash=asHex(minusA);
   const sha3=asHex(BigInt("0x"+crypto.createHash("sha3-256")
     .update(encodedB).digest("hex")));
   assert.notEqual(rootA,skippedMinusOne,
