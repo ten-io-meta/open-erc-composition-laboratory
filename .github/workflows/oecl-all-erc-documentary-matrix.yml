@@ -5,6 +5,8 @@ on:
     paths:
       - "web/scripts/audit-all-erc-documentary-matrix.mjs"
       - "web/scripts/generate-all-erc-scientific-falsification-agenda.mjs"
+      - "web/scripts/oecl-spec-anchor.mjs"
+      - "web/scripts/check-erc-spec-anchor.mjs"
       - "web/scripts/check-registered-source-pair-matrix.mjs"
       - "web/src/server/oeclErcDocumentaryDiscovery.ts"
       - ".github/workflows/oecl-all-erc-documentary-matrix.yml"
@@ -43,6 +45,7 @@ jobs:
           test "$(git -C official-ercs rev-parse HEAD)" = "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d"
           node --experimental-strip-types oecl/web/scripts/audit-all-erc-documentary-matrix.mjs official-ercs/ERCS audit-output/all-erc-documentary-matrix.json
           node --experimental-strip-types oecl/web/scripts/generate-all-erc-scientific-falsification-agenda.mjs official-ercs/ERCS audit-output/all-erc-documentary-matrix.json audit-output/all-erc-scientific-falsification-agenda.json
+          node oecl/web/scripts/check-erc-spec-anchor.mjs
           node oecl/web/scripts/check-registered-source-pair-matrix.mjs oecl/.github/workflows/oecl-generic-source-lab.yml audit-output/registered-source-pairs.json
       - name: Archive documentary manifest with SHA-256 provenance
         if: always()
