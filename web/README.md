@@ -1,10 +1,24 @@
 # OECL scientific web
 
-This Next.js interface **displays upstream scientific evidence**. It does not admit new composition candidates or infer compatibility from a user-selected pair.
+This Next.js interface **displays pinned scientific evidence and allows documentary exploration of published ERC specifications**. It never admits new native composition candidates or infers implementation compatibility from document metadata.
+
+## Any published ERC: documentary pair investigation
+
+The main workbench accepts any two positive numeric ERC IDs (up to 8 digits). For pairs without a pinned AST/EVM result, it calls:
+
+- `GET /api/scientific/standards-pair?protocolA=ERC-4626&protocolB=ERC-20`
+- Retrieval: `src/server/oeclErcDocumentaryDiscovery.ts`; the input cannot specify a host, URL, repository, branch, contract, or script.
+- Source: official `ethereum/ERCs` repository's `ERCS/erc-N.md` documents on the public `master` branch, with SHA-256 of each retrieved document. This branch is **mutable**, so it is not an immutable source-code attestation.
+- Results: document title/status, summary, declared `requires` prerequisites, labeled interface elements and normative excerpts, with provenance links.
+- Pair relations: explicit declaration that one ERC requires the other; shared declared prerequisites; or no declared direct dependency. Missing/unreachable documents produce an **incomplete-document** state instead of a compatibility claim.
+- Scope: `OFFICIAL_ERC_SPECIFICATIONS_ONLY`, `scientificVerdict: NOT_EVALUATED`, `candidateAdmission: NOT_ADMITTED`, `implementationVerified: false`, `evmExecuted: false`.
+- Unit/security tests: `node --experimental-strip-types web/scripts/check-erc-documentary-discovery.mjs` (run from repository root); integration and browser checks run in the OECL Web Scientific Dossier workflow.
+
+**This broadens discovery but does not run Solidity for any arbitrary ERC.** The ERC number identifies a specification, not a unique implementation or ABI. Arbitrary draft/unmerged proposals or missing official documents remain unverifiable without a separate submitted source. A future isolated source-worker must accept an immutable source reference, enforce resource limits, derive structural facts from the compiler, evaluate constraints, and produce independent EVM evidence before any general-science claim.
 
 ## Pinned scientific dossier: ERC-8060 × ERC-8098
 
-The workbench defaults to ERC-8060 × ERC-8098. Select **Inspect available evidence** to see the report created by OECL's pinned local-EVM workflow.
+The workbench defaults to ERC-8060 × ERC-8098 and loads its pinned local-EVM dossier automatically. Select another official numeric ERC pair to start a documentary comparison.
 
 - UI: src/components/ScientificDossierResults.tsx
 - Read-only API: GET /api/scientific/dossier?protocolA=ERC-8060&protocolB=ERC-8098
