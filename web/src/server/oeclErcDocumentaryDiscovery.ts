@@ -25,6 +25,11 @@ export type DocumentaryPair = {
 };
 type Transport = (url: string,init?: RequestInit) => Promise<Response>;
 const MAX_BYTES=400_000, MAX_CHARS=200_000;
+const PUBLIC_CACHE_MAX=128, PUBLIC_CACHE_TTL_MS=120_000, NEGATIVE_CACHE_TTL_MS=15_000;
+type CachedDocument={document:StandardDocument;expiresAt:number};
+const publicCache=new Map<string,CachedDocument>();
+const pendingPublicReads=new Map<string,Promise<StandardDocument>>();
+
 export function normalizeErcNumber(value:string|null):string|null{
   if(value===null||value.length>24)return null;
   const m=value.trim().toUpperCase().match(/^(?:ERC[- ]?)?([1-9][0-9]{0,7})$/);
@@ -122,8 +127,7 @@ async function boundedText(response:Response):Promise<string>{
   for(const c of chunks){bytes.set(c,pos);pos+=c.byteLength;}
   return new TextDecoder("utf-8",{fatal:true}).decode(bytes);
 }
-export async function readOfficialErc(id:string,transport:Transport=fetch):Promise<StandardDocument>{
-  if(normalizeErcNumber(id)!==id)throw Error("INVALID_ERC_ID");
+async function fetchOfficialErc(id:string,transport:Transport):Promise<StandardDocument>{
   try{
     const r=await transport(source(id),{method:"GET",cache:"no-store",redirect:"error",
       headers:{Accept:"text/plain"},signal:AbortSignal.timeout(7500)});
@@ -131,6 +135,44 @@ export async function readOfficialErc(id:string,transport:Transport=fetch):Promi
     if(!r.ok)return missing(id,"SOURCE_UNAVAILABLE");
     return parseOfficialErc(id,await boundedText(r))??missing(id,"UNPARSEABLE_SPECIFICATION");
   }catch{return missing(id,"SOURCE_UNAVAILABLE");}
+}
+/**
+ * Reuse public document bytes for a short interval, with a strict cache bound.
+ * A single Vercel instance cache is NOT an atomic or cross-instance rate limiter.
+ * Injected transports bypass caching unless explicitly opted in by a test.
+ */
+export async function readOfficialErc(
+  id:string,transport:Transport=fetch,options?:{cache?:boolean}
+):Promise<StandardDocument>{
+  if(normalizeErcNumber(id)!==id)throw Error("INVALID_ERC_ID");
+  if(transport!==fetch && options?.cache!==true)return fetchOfficialErc(id,transport);
+  const now=Date.now();
+  const cached=publicCache.get(id);
+  if(cached && cached.expiresAt>now){
+    // Promote recently used entries without allowing unbounded growth.
+    publicCache.delete(id);publicCache.set(id,cached);
+    return cached.document;
+  }
+  if(cached)publicCache.delete(id);
+  const pending=pendingPublicReads.get(id);
+  if(pending)return pending;
+  const task=fetchOfficialErc(id,transport).then(document=>{
+    const ttl=document.availability==="PUBLISHED"?
+      PUBLIC_CACHE_TTL_MS:NEGATIVE_CACHE_TTL_MS;
+    // Only immutable response values are shared. Each document retains its source SHA-256.
+    if(publicCache.has(id))publicCache.delete(id);
+    publicCache.set(id,{document,expiresAt:Date.now()+ttl});
+    while(publicCache.size>PUBLIC_CACHE_MAX){
+      const oldest=publicCache.keys().next().value;
+      if(oldest===undefined)break;
+      publicCache.delete(oldest);
+    }
+    return document;
+  }).finally(()=>{
+    if(pendingPublicReads.get(id)===task)pendingPublicReads.delete(id);
+  });
+  pendingPublicReads.set(id,task);
+  return task;
 }
 export function deriveRelation(a:StandardDocument,b:StandardDocument):DocumentaryPair["relation"]{
   if(a.availability!=="PUBLISHED"||b.availability!=="PUBLISHED")
