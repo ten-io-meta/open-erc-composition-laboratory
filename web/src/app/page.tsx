@@ -2,6 +2,7 @@ import { CompositionWorkbench } from "@/components/CompositionWorkbench";
 import { EvidenceReceiptGateway } from "@/components/EvidenceReceiptGateway";
 import { ProtocolDiscovery } from "@/components/ProtocolDiscovery";
 import { ScientificCorpusOverview } from "@/components/ScientificCorpusOverview";
+import { ResearchDisclosure } from "@/components/ResearchDisclosure";
 
 export default function Home() {
   return (
@@ -88,29 +89,20 @@ export default function Home() {
             </p>
           </div>
 
-          <details className="group rounded-2xl border border-[#d7e2da] bg-white p-5 md:p-7">
-            <summary className="cursor-pointer text-sm font-semibold text-[#27523c]">
-              ERC-8004 live chain observations & EvidenceReceipts
-              <span className="ml-3 text-xs font-normal text-[#829183]">Independent RPC witnesses and The Graph</span>
-            </summary>
-            <div className="mt-4 border-t border-[#dfe8e0] pt-4"><EvidenceReceiptGateway /></div>
-          </details>
+          <ResearchDisclosure title="ERC-8004 live chain observations & EvidenceReceipts"
+            description="Independent RPC witnesses and The Graph — separate from composition findings">
+            <EvidenceReceiptGateway />
+          </ResearchDisclosure>
 
-          <details className="rounded-2xl border border-[#d7e2da] bg-white p-5 md:p-7">
-            <summary className="cursor-pointer text-sm font-semibold text-[#27523c]">
-              Historical scientific discovery corpus
-              <span className="ml-3 text-xs font-normal text-[#829183]">Materialized candidates, not the live pair analyzer</span>
-            </summary>
-            <div className="mt-4 border-t border-[#dfe8e0] pt-4"><ScientificCorpusOverview /></div>
-          </details>
+          <ResearchDisclosure title="Historical scientific discovery corpus"
+            description="Materialized candidates, not a newly executed pair analysis">
+            <ScientificCorpusOverview />
+          </ResearchDisclosure>
 
-          <details className="rounded-2xl border border-[#d7e2da] bg-white p-5 md:p-7">
-            <summary className="cursor-pointer text-sm font-semibold text-[#27523c]">
-              Advanced protocol discovery via The Graph
-              <span className="ml-3 text-xs font-normal text-[#829183]">Indexing presence is not composability</span>
-            </summary>
-            <div className="mt-4 border-t border-[#dfe8e0] pt-4"><ProtocolDiscovery /></div>
-          </details>
+          <ResearchDisclosure title="Advanced protocol discovery via The Graph"
+            description="Indexed protocol presence is not evidence of composability">
+            <ProtocolDiscovery />
+          </ResearchDisclosure>
         </section>
       </div>
 
