@@ -45,11 +45,11 @@ const tabs: { id: Tab; label: string }[] = [
 
 function normalize(value: string): string {
   const raw = value.trim().toUpperCase().replace(/\s+/g, "");
-  const match = raw.match(/^(?:ERC-?)?([1-9][0-9]*)$/);
+  const match = raw.match(/^(?:ERC-?)?([1-9][0-9]{0,7})$/);
   return match ? "ERC-" + match[1] : raw;
 }
 function validId(value: string): boolean {
-  return /^ERC-[1-9][0-9]*$/.test(value) || value === "ERC-20-BURNABLE";
+  return /^ERC-[1-9][0-9]{0,7}$/.test(value) || value === "ERC-20-BURNABLE";
 }
 function verifiedPair(pair: Pair): Pair | null {
   const entry = examples.find(x =>
