@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json";
+import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with { type: "json" };
 
 /**
  * Discovery index only. An ERC document existing in ethereum/ERCs does not
