@@ -31,23 +31,24 @@ export default function Home() {
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.17em] text-[#23724e]">OECL / Scientific composition workbench</p>
             <h1 className="mt-4 max-w-4xl text-[clamp(2.3rem,5.1vw,4.8rem)] font-semibold leading-[1.08] tracking-[-0.055em]">
-              Find what two protocols can do together.
+              Investigate how two ERC standards connect.
             </h1>
             <p className="mt-5 max-w-3xl text-[15px] leading-7 text-[#596e60] md:text-[17px]">
-              Discover candidate relationships from Solidity source, inspect concrete local EVM observations
-              and understand which permissions, paths and security conditions remain unproven.
-              Evidence first. No invented compatibility verdicts.
+              Compare published ERC specifications and their declared requirements, then inspect compiler-grounded
+              Solidity and EVM observations wherever audited implementations are available.
+              Real evidence first. No invented compatibility verdicts.
             </p>
           </div>
           <aside className="rounded-2xl border border-[#ceded2] bg-white p-5" aria-label="Current scientific capabilities">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#4a7460]">Available in this release</p>
             <ul className="mt-3 space-y-3 text-sm leading-5 text-[#3a5545]">
+              <li><strong>Any published ERC pair</strong> for documented requirements</li>
               <li><strong>4</strong> reviewed AST composition examples</li>
               <li><strong>1</strong> scoped ERC-8060 × ERC-8098 dossier</li>
               <li><strong>10</strong> independent local-EVM receipts for a burnable ERC-20 example</li>
-              <li><strong>0</strong> arbitrary on-demand analyses enabled</li>
+              <li><strong>0</strong> arbitrary Solidity executions enabled</li>
             </ul>
-            <p className="mt-3 text-xs leading-5 text-[#7b887d]">Numbers describe audited snapshots, not complete ERC coverage.</p>
+            <p className="mt-3 text-xs leading-5 text-[#7b887d]">Published specifications are document-level evidence; only pinned examples have tested Solidity and local-EVM coverage.</p>
           </aside>
         </section>
 
