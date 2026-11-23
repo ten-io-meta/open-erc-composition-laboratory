@@ -41,6 +41,8 @@ jobs:
         run: node --experimental-strip-types scripts/check-on-demand-jobs.mjs
       - name: Verify generic source-job dispatch and source selection policy
         run: node scripts/check-generic-source-jobs.cjs
+      - name: Verify arbitrary ERC documentary discovery, provenance and fail-closed behavior
+        run: node --experimental-strip-types scripts/check-erc-documentary-discovery.mjs
       - name: Verify scientific AST snapshots and ZIP integrity
         run: node --experimental-strip-types scripts/check-source-graph-view.mjs
       - name: Verify independent EVM receipts and native source property snapshot
