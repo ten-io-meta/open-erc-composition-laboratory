@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync,mkdirSync,writeFileSync} from "node:fs";
 import {resolve,dirname} from "node:path";
-import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with {type:"json"};
+import registry from "../../laboratory/scientific-open-source-worker/source-registry.json" with {type:"json"};
 
 // Inventory only: verifies what AST CI schedules, NOT whether untested pairs are compatible.
 const workflow=readFileSync(resolve(process.argv[2]||"oecl/.github/workflows/oecl-generic-source-lab.yml"),"utf8");
