@@ -89,7 +89,7 @@ async function test(){
   assert.equal(await evalJs('document.querySelector("label[for=oecl-protocol-b]")?.innerText.trim()'),"ERC protocol B");
   assert.equal(await evalJs('document.querySelectorAll("#oecl-protocol-a").length'),1);
   assert.equal(await evalJs('document.querySelectorAll("#oecl-protocol-b").length'),1);
-  const headerBefore=await evalJs('document.body.innerText.indexOf("Choose two ERC implementations")');
+  const headerBefore=await evalJs('document.body.innerText.indexOf("Choose any two ERC standards")');
   const otherBefore=await evalJs('document.body.innerText.indexOf("Related data, separate scientific questions")');
   assert.ok(headerBefore>=0&&otherBefore>headerBefore,"Main composition UI must appear before secondary services");
   await expectUi('document.querySelector("[data-testid=oecl-outcome]")!==null',"verified pair summary automatically loads");
