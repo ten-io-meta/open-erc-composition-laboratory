@@ -25,7 +25,7 @@ export function anchoredSpecCue(id,sourceText){
     const code=/\b(?:function|event)\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/.test(line);
     const rule=/\b(?:MUST(?:\s+NOT)?|SHALL(?:\s+NOT)?|SHOULD(?:\s+NOT)?)\b/i.test(line);
     const format=/\b(?:keccak256|sha256|encode|decode|checksum|storage[- ]location|formula|signature|key derivation|0x19|m \/|bytes32|ABI|bitwise|uint256)\b/i.test(line);
-    const descriptive=/\b(?:defined as|defined by|uses|is defined|consists of|represents|contains|calculat(?:e|ed|ion)|requires|returned|implements|transfers|increments|decrements|must be|should be|reverts|may be|shall be)\b/i.test(line);
+    const descriptive=/\b(?:defined as|defined by|uses|is defined|consists of|represents|contains|calls|calculat(?:e|ed|ion)|requires|returned|implements|transfers|increments|decrements|must be|should be|reverts|may be|shall be)\b/i.test(line);
     if(!rule&&!code&&!format&&!descriptive&&!external)continue;
     const evidenceType=external?"EXTERNAL_SPECIFICATION_REFERENCE":
       rule?"NORMATIVE_STATEMENT":code?"DECLARED_CODE_FRAGMENT":
