@@ -8,6 +8,7 @@ const registry=require("./source-registry.json");
 const root=path.resolve(process.argv[2]||".");
 const output=path.resolve(process.argv[3]||"source-output/pair-8098-4626");
 const hash=s=>crypto.createHash("sha256").update(s).digest("hex");
+const {readPrerecordedPredictions,runPreregisteredFalsification}=require("./run-preregistered-8098-4626-falsification.cjs");
 const wrapper=[
 "// SPDX-License-Identifier: MIT",
 "pragma solidity ^0.8.20;",
@@ -39,6 +40,8 @@ async function main(){
     if(!contract?.abi || !/^[a-f0-9]+$/i.test(contract?.evm?.bytecode?.object||""))
       throw Error("PINNED_8098_VAULT_BYTECODE_MISSING:"+name);
   }
+  // Freeze the controlled prediction plan before deploying any EVM fixture.
+  const preregistration=readPrerecordedPredictions();
   process.chdir(root);
   const hre=require(path.join(root,"node_modules/hardhat"));
   const [owner,attacker]=await hre.ethers.getSigners();
@@ -62,6 +65,7 @@ async function main(){
     assert.equal(receipt.transactionHash,transaction.hash);
     receipts.push({name,txHash:transaction.hash,blockNumber:receipt.blockNumber,
       status:receipt.status,gasUsed:receipt.gasUsed.toString()});
+    return receipt;
   }
   async function snap(){
     const [underlyingSupply,underlyingOwner,underlyingVault,vaultShareSupply,
@@ -78,13 +82,23 @@ async function main(){
   assert.equal(before.vaultShareSupply,"0");
   await tx("approve ERC8098 asset for the vault",()=>asset.approve(vault.address,deposit));
   assert((await vault.previewDeposit(deposit)).eq(deposit),"Unadvertised initial vault exchange rate");
-  await tx("deposit ERC8098 underlying, mint separate ERC4626 shares",
+  const verifiedDepositReceipt=await tx("deposit ERC8098 underlying, mint separate ERC4626 shares",
     ()=>vault.deposit(deposit,owner.address));
   const afterDeposit=await snap();
   assert.equal(afterDeposit.underlyingSupply,initial.toString(),
     "Underlying monotone supply increased on vault deposit");
   assert.equal(afterDeposit.underlyingVault,deposit.toString());
   assert.equal(afterDeposit.vaultShareSupply,deposit.toString());
+  await runPreregisteredFalsification({
+    registration:preregistration,provider:hre.ethers.provider,
+    ethers:hre.ethers,asset,vault,owner,before,afterDeposit,
+    depositReceipt:verifiedDepositReceipt,deposit,output,
+    sourceRevision:a.revision,
+    sourceSha256:collected.files.get(collected.roots[0]).sha256,
+    vaultWrapperSha256:hash(wrapper),compilerVersion:compiler.version(),
+    openzeppelinVersion:collected.deps.version,
+    dependencyIntegrity:collected.deps.integrity
+  });
   async function mustRevert(name,fn){
     const previous=await snap();let reverted=false;
     try{await fn();}catch{reverted=true;}

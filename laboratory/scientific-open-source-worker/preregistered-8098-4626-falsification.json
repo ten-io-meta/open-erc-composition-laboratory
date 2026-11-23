@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "OECL_PREREGISTERED_CONTROLLED_EVM_FALSIFICATION_V1",
+  "experimentId": "OECL-PINNED-8098-4626-ROLE-FALSIFICATION-V1",
+  "origin": "CONTROLLED_ADVERSARIAL_HYPOTHESES_NOT_AUTONOMOUS_DISCOVERY",
+  "scenarioId": "ERC8098_UNDERLYING_SEPARATE_ERC4626_SHARES_DEPOSIT",
+  "erc8098SourceRevision": "68a05289bd68d89db8453c49500e0a1ae6cd11ec",
+  "toolchainDependencyRevision": "c7eed906835ab39fbc8439eb0493e5a5371b23a2",
+  "openzeppelinVersion": "4.9.6",
+  "depositAmountWei": "100000000000000000000",
+  "plannedBeforeExecution": true,
+  "hypotheses": [
+    {
+      "hypothesisId": "HYP-8098-UNDERLYING-SUPPLY-CONSERVED",
+      "role": "UNDERLYING_ERC8098",
+      "participantSide": "A",
+      "constraintId": "C-8098-SUPPLY-NONINCREASING",
+      "operator": "LTE",
+      "leftMetric": "underlyingSupplyAfter",
+      "rightMetric": "underlyingSupplyBefore",
+      "expectedConstraintVerdict": "PRESERVED",
+      "statement": "ERC-8098 underlying totalSupply should not increase when deposited into ERC-4626 vault",
+      "falsificationCriterion": "Post-deposit ERC-8098 totalSupply exceeds pre-deposit totalSupply"
+    },
+    {
+      "hypothesisId": "HYP-4626-SHARE-SUPPLY-FROZEN-ADVERSARIAL",
+      "role": "SEPARATE_ERC4626_SHARES",
+      "participantSide": "B",
+      "constraintId": "C-4626-SHARES-NO-MINT-ADVERSARIAL",
+      "operator": "EQ",
+      "leftMetric": "vaultShareSupplyAfter",
+      "rightMetric": "vaultShareSupplyBefore",
+      "expectedConstraintVerdict": "PRESERVED",
+      "statement": "Deliberately adversarial hypothesis: ERC-4626 share supply does not change on ERC-8098 asset deposit",
+      "falsificationCriterion": "A successful deposit mints ERC-4626 shares and increases their totalSupply"
+    }
+  ]
+}
