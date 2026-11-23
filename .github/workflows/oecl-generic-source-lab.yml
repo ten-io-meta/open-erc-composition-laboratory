@@ -156,6 +156,10 @@ jobs:
         run: |
           node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-8098-4626/independent-8098-underlying-4626-evm.json"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.evmExecuted!==true||r.localChainId!==31337||r.minedReceipts.length!==4||r.readOnlyNegativeControls.length!==3||!r.readOnlyNegativeControls.every(x=>x.transactionMined===false&&x.statePreserved===true)||r.observations.afterDeposit.underlyingSupply!==r.observations.before.underlyingSupply)throw Error("UNVERIFIED_8098_ASSET_VAULT_EVM");console.log("OECL_8098_UNDERLYING_4626_EVM_SCOPE_PASS")'
 
+      - name: Falsify pre-registered scientific predictions against independently recomputed local EVM measurements
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/laboratory/scientific-open-source-worker/check-preregistered-8098-4626-falsification.cjs source-output/pair-8098-4626
+
       - name: Verify and project four independently sourced AST graphs for browser exploration
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/scripts/check-source-graph-view.cjs source-output
