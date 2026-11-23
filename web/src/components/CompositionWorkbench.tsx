@@ -6,6 +6,7 @@ import { ScientificDossierResults } from "@/components/ScientificDossierResults"
 import { IndependentEvmEvidencePanel } from "@/components/IndependentEvmEvidencePanel";
 import { DocumentaryPairExplorer } from "@/components/DocumentaryPairExplorer";
 import { ErcCatalogBrowser } from "@/components/ErcCatalogBrowser";
+import { FreshPairSourceAnalysis } from "@/components/FreshPairSourceAnalysis";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -390,7 +391,9 @@ export function CompositionWorkbench() {
         </section>}
       </>}
 
-      {!loading && !failure && !graph && pinned && <p role="alert" className="text-sm text-[#805b35]">Expected source evidence was unavailable. Scientific evaluation remains inconclusive.</p>}
+      {!loading && !failure && !graph && pinned && <p role="alert" className="text-sm text-[#805b35]">Expected source evidence was unavailable. Scientific evaluation remains inconclusive.</p>
+
+      <FreshPairSourceAnalysis key={pairKey} sourceA={pair.a} sourceB={pair.b} />}
     </article>
   </section>;
 }
