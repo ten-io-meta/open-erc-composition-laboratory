@@ -70,7 +70,7 @@ export function parseOfficialErc(id:string,text:string):StandardDocument|null{
   const abstract=readable((section(body,"Abstract")||section(body,"Simple Summary"))
     .split(/\n\s*\n/)[0]||"").slice(0,500)||null;
   const requires=[...new Set((meta.requires||"").split(",").map(x=>x.trim())
-    .filter(x=>/^[1-9][0-9]{0,7}$/.test(x)).map(x=>"ERC-"+x))].slice(0,30);
+    .filter(x=>/^[1-9][0-9]{0,7}$/.test(x)).map(x=>"EIP-"+x))].slice(0,30);
   // Document headings / code snippets only. NOT compiler-resolved ABI facts.
   const names=[...spec.matchAll(/^#{3,5}\s+([A-Za-z][A-Za-z0-9_]{1,54})\s*$/gm)]
     .map(x=>x[1]).filter(x=>!["Methods","Method","Events","Event","Specification","Interfaces","Interface","Definitions"].includes(x));
@@ -116,8 +116,8 @@ export function deriveRelation(a:StandardDocument,b:StandardDocument):Documentar
   const overlap=a.interfaceNames.filter(x=>b.interfaceNames.includes(x)).slice(0,12);
   const common=a.requires.filter(x=>b.requires.includes(x));
   const direct:string[]=[];
-  if(a.requires.includes(b.id))direct.push(a.id+" explicitly lists "+b.id+" as a prerequisite.");
-  if(b.requires.includes(a.id))direct.push(b.id+" explicitly lists "+a.id+" as a prerequisite.");
+  if(a.requires.includes("EIP-"+b.id.slice(4)))direct.push(a.id+" explicitly lists "+b.id+" as a prerequisite.");
+  if(b.requires.includes("EIP-"+a.id.slice(4)))direct.push(b.id+" explicitly lists "+a.id+" as a prerequisite.");
   if(direct.length)return {kind:"DECLARED_DEPENDENCY",statements:direct,
     sharedPrerequisites:common,overlappingInterfaceNames:overlap};
   if(common.length)return {kind:"SHARED_DEPENDENCY",statements:[
@@ -137,6 +137,7 @@ export async function investigateErcSpecifications(
     relation:deriveRelation(documents[0],documents[1]),
     scientificVerdict:"NOT_EVALUATED",candidateAdmission:"NOT_ADMITTED",
     evmExecuted:false,implementationVerified:false,warnings:[
+      "Specification metadata can list Core EIPs as well as ERCs, and is not a compatibility proof.",
       "Specification dependencies do not establish that two implementations can interact safely.",
       "Matching interface names are only documentary names, not verified ABI or behavioral matches.",
       "Official documents are fetched from a mutable branch; content hashes document what was read.",
