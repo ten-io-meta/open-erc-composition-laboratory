@@ -117,6 +117,25 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
       </p>}
     </div>
 
+    {d.researchQuestions.length>0 && <section className="rounded-2xl border border-[#d4dfd5] bg-white p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h4 className="text-lg font-semibold">Specific integration questions worth testing</h4>
+        <span className="rounded-full bg-[#fff3df] px-3 py-1 text-xs text-[#866333]">DESIGN ONLY · NOT EXECUTED</span>
+      </div>
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        {d.researchQuestions.map(q=><article key={q.id} className="rounded-xl bg-[#f5f8f5] p-4">
+          <p className="text-sm font-medium leading-6 text-[#344f3b]">{q.question}</p>
+          <p className="mt-2 text-xs text-[#54705c]">Document anchors: {q.basis.join(" · ")}</p>
+          <details className="mt-3">
+            <summary className="cursor-pointer text-xs font-semibold text-[#41704c]">Evidence required for an actual verdict</summary>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-xs leading-5 text-[#596d5e]">
+              {q.requiredEvidence.map(x=><li key={x}>{x}</li>)}
+            </ul>
+          </details>
+        </article>)}
+      </div>
+    </section>}
+
     <div className="grid gap-4 lg:grid-cols-2">
       {d.standards.map(s=><DocumentationCard key={s.id} item={s}/>)}
     </div>
