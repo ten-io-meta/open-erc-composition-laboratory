@@ -75,7 +75,10 @@ export function parseOfficialErc(id:string,text:string):StandardDocument|null{
   // Document headings / code snippets only. NOT compiler-resolved ABI facts.
   const names=[...spec.matchAll(/^#{3,5}\s+([A-Za-z][A-Za-z0-9_]{1,54})\s*$/gm)]
     .map(x=>x[1]).filter(x=>!["Methods","Method","Events","Event","Specification","Interfaces","Interface","Definitions"].includes(x));
-  const declared=[...spec.matchAll(/\b(?:function|event)\s+([A-Za-z_][A-Za-z0-9_]{1,54})\s*\(/g)].map(x=>x[1]);
+  // Only inspect declarations inside an explicit interface block. Example contracts and
+  // tutorial function snippets are not specifications of the standard interface.
+  const declared=[...spec.matchAll(/\binterface\s+[A-Za-z_][A-Za-z0-9_]*\s*\{([\s\S]*?)\}/g)]
+    .flatMap(block=>[...block[1].matchAll(/\b(?:function|event)\s+([A-Za-z_][A-Za-z0-9_]{1,54})\s*\(/g)].map(x=>x[1]));
   const interfaceNames=[...new Set([...names,...declared])].slice(0,24);
   const requirements=spec.split(/\r?\n/).filter(s=>/\b(?:MUST|SHALL|SHOULD)\b/.test(s))
     .map(readable).filter(s=>s.length>=24&&s.length<=300).slice(0,6);
