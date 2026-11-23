@@ -1,0 +1,50 @@
+name: OECL All Published ERC Documentary Matrix
+
+on:
+  pull_request:
+    paths:
+      - "web/scripts/audit-all-erc-documentary-matrix.mjs"
+      - "web/src/server/oeclErcDocumentaryDiscovery.ts"
+      - ".github/workflows/oecl-all-erc-documentary-matrix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-all-erc-documentary-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documentary-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout OECL research code
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout immutable official ERC documentation (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: ethereum/ERCs
+          ref: e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d
+          path: official-ercs
+          persist-credentials: false
+      - name: Set up Node.js without running Solidity
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify pinned revision and test all official ERC documentary pairs
+        run: |
+          test "$(git -C official-ercs rev-parse HEAD)" = "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d"
+          node --experimental-strip-types oecl/web/scripts/audit-all-erc-documentary-matrix.mjs official-ercs/ERCS audit-output/all-erc-documentary-matrix.json
+      - name: Archive documentary manifest with SHA-256 provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-all-erc-documentary-matrix
+          path: audit-output/all-erc-documentary-matrix.json
+          if-no-files-found: warn
+          retention-days: 14
