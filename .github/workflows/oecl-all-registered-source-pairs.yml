@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "scripts/run-remaining-registered-source-pairs.cjs"
+      - "scripts/check-blind-scientist-autonomy-baseline.cjs"
+      - "scripts/check-blind-autonomy-boundary.cjs"
       - ".github/workflows/oecl-all-registered-source-pairs.yml"
       - "laboratory/scientific-open-source-worker/**"
   workflow_dispatch:
@@ -57,6 +59,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           OECL_MATRIX_SHARD: ${{ matrix.shard }}
         run: node oecl/scripts/run-remaining-registered-source-pairs.cjs "$OECL_MATRIX_SHARD"
+      - name: Benchmark source-only research autonomy across EVERY uncovered registered pair
+        run: |
+          node oecl/scripts/check-blind-scientist-autonomy-baseline.cjs "${{ matrix.shard }}" source-output
+          node oecl/scripts/check-blind-autonomy-boundary.cjs source-output "${{ matrix.shard }}"
       - name: Archive source graphs and all pass/fail outcomes for scientific review
         if: always()
         uses: actions/upload-artifact@v4
