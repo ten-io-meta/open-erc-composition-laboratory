@@ -165,6 +165,7 @@ async function main(){
   if(txReceipts.length!==7||negative.length!==3)throw Error("EVM_OBSERVATION_COUNT_MISMATCH");
   fs.mkdirSync(output,{recursive:true});
   fs.writeFileSync(path.join(output,"independent-local-evm.json"),JSON.stringify(result,null,2)+"\n");
+  console.log("OECL_ERC4626_ERC20_EVM_RECORD:"+JSON.stringify(result));
   console.log("OECL_ERC4626_ERC20_EVM_PASS:"+JSON.stringify({
     pair:result.selected,receipts:txReceipts.length,callStaticReverts:negative.length,
     localChainId:result.localChainId,scientificVerdict:result.scientificVerdict,
