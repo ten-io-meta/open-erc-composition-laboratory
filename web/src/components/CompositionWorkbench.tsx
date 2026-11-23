@@ -67,26 +67,28 @@ export function CompositionWorkbench() {
   const [inputB, setInputB] = useState("ERC-8098");
   const [pair, setPair] = useState<Pair>({ a: "ERC-8060", b: "ERC-8098" });
   const [tab, setTab] = useState<Tab>("overview");
-  const [graph, setGraph] = useState<AstGraphView | null>(null);
-  const [dossier, setDossier] = useState<ScientificDossier | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [failure, setFailure] = useState<string | null>(null);
+  const [result, setResult] = useState<{
+    key: string; graph: AstGraphView | null; dossier: ScientificDossier | null; failure: string | null;
+  } | null>(null);
 
   const normalizedA = normalize(inputA), normalizedB = normalize(inputB);
   const canInspect = validId(normalizedA) && validId(normalizedB) && normalizedA !== normalizedB;
   const dirty = normalizedA !== pair.a || normalizedB !== pair.b;
   const pinned = verifiedPair(pair);
+  const pairKey = pair.a + "|" + pair.b;
+  const current = result?.key === pairKey ? result : null;
+  const graph = current?.graph ?? null;
+  const dossier = current?.dossier ?? null;
+  const failure = current?.failure ?? null;
+  const loading = Boolean(pinned) && current === null;
   const dossierPair = isDossier(pair);
   const independentEvm = isIndependentEvm(pair);
 
   useEffect(() => {
     const abort = new AbortController();
-    setGraph(null);
-    setDossier(null);
-    setFailure(null);
-    setLoading(Boolean(verifiedPair(pair)));
     const selected = verifiedPair(pair);
     if (!selected) return () => abort.abort();
+    const key = pair.a + "|" + pair.b;
 
     async function read() {
       try {
@@ -119,14 +121,14 @@ export function CompositionWorkbench() {
           }
           pinnedDossier = result.dossier;
         }
-        if (!abort.signal.aborted) {
-          setGraph(view.view);
-          setDossier(pinnedDossier);
-        }
+        if (!abort.signal.aborted) setResult({
+          key, graph: view.view, dossier: pinnedDossier, failure: null,
+        });
       } catch (cause) {
-        if (!abort.signal.aborted) setFailure(cause instanceof Error ? cause.message : "Evidence unavailable.");
-      } finally {
-        if (!abort.signal.aborted) setLoading(false);
+        if (!abort.signal.aborted) setResult({
+          key, graph: null, dossier: null,
+          failure: cause instanceof Error ? cause.message : "Evidence unavailable.",
+        });
       }
     }
     void read();
