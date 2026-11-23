@@ -17,6 +17,7 @@ export type DocumentaryPair = {
     "NO_DECLARED_DEPENDENCY" | "INCOMPLETE_SPECIFICATIONS";
     statements: string[]; sharedPrerequisites: string[];
     overlappingInterfaceNames: string[]};
+  researchQuestions: {id:string; basis:string[]; question:string; requiredEvidence:string[]}[];
   scientificVerdict: "NOT_EVALUATED"; candidateAdmission: "NOT_ADMITTED";
   implementationVerified: false; evmExecuted: false; warnings: string[];
 };
@@ -127,6 +128,47 @@ export function deriveRelation(a:StandardDocument,b:StandardDocument):Documentar
     "Neither document lists the other as a direct prerequisite. This does not establish incompatibility."
   ],sharedPrerequisites:[],overlappingInterfaceNames:overlap};
 }
+/**
+ * Test DESIGN only, derived from labels present in both source documents.
+ * Never an admitted relation, compiled ABI or emergent-property discovery.
+ */
+export function proposeDocumentaryTests(a:StandardDocument,b:StandardDocument){
+  if(a.availability!=="PUBLISHED"||b.availability!=="PUBLISHED")return [];
+  const questions:{id:string;basis:string[];question:string;requiredEvidence:string[]}[]=[];
+  const aNames=new Set(a.interfaceNames),bNames=new Set(b.interfaceNames);
+  const aRequiresB=a.requires.includes("EIP-"+b.id.slice(4));
+  const bRequiresA=b.requires.includes("EIP-"+a.id.slice(4));
+  if(aRequiresB||bRequiresA)questions.push({
+    id:"DECLARED_DEPENDENCY_CONFORMANCE",
+    basis:[aRequiresB?a.id+" requires "+b.id:b.id+" requires "+a.id],
+    question:"Does the selected implementation actually satisfy the required standard, including authorization and failure semantics?",
+    requiredEvidence:["Immutable implementations and resolved ABI","Compiler source graph and compliance tests","Adversarial EVM executions"],
+  });
+  const matching=a.interfaceNames.filter(n=>bNames.has(n));
+  if(matching.length)questions.push({
+    id:"SHARED_METHOD_SEMANTICS",
+    basis:matching.slice(0,5).map(n=>a.id+" / "+b.id+": "+n),
+    question:"Do similarly named interface elements agree on argument types, asset units, access rules and state effects?",
+    requiredEvidence:["Typed function signatures","Behavioral constraints for both implementations","Positive and negative EVM scenarios"],
+  });
+  const assetFlow=["transferFrom","safeTransferFrom","transfer","safeBatchTransferFrom"];
+  const receiving=["deposit","mint","redeem","withdraw"];
+  const flows=[
+    {giver:a,taker:b,gives:assetFlow.find(n=>aNames.has(n)),takes:receiving.find(n=>bNames.has(n))},
+    {giver:b,taker:a,gives:assetFlow.find(n=>bNames.has(n)),takes:receiving.find(n=>aNames.has(n))},
+  ];
+  for(const path of flows){
+    if(!path.gives||!path.takes)continue;
+    questions.push({
+      id:"POTENTIAL_ASSET_FLOW_TEST",
+      basis:[path.giver.id+"."+path.gives,path.taker.id+"."+path.takes],
+      question:"Could a separately designed adapter coordinate these documented operations while preserving token type, custody and transaction rollback?",
+      requiredEvidence:["Prove compatible asset classes and units","Verify allowance, ownership and receiver permissions","Execute authorized, unauthorized and rollback cases on isolated EVM"],
+    });
+    break;
+  }
+  return questions.slice(0,3);
+}
 export async function investigateErcSpecifications(
   first:string,second:string,transport:Transport=fetch):Promise<DocumentaryPair>{
   const a=normalizeErcNumber(first),b=normalizeErcNumber(second);
@@ -135,6 +177,7 @@ export async function investigateErcSpecifications(
   return {status:"DOCUMENTARY_COMPARISON",scope:"OFFICIAL_ERC_SPECIFICATIONS_ONLY",
     protocols:[a,b],standards:[documents[0],documents[1]],
     relation:deriveRelation(documents[0],documents[1]),
+    researchQuestions:proposeDocumentaryTests(documents[0],documents[1]),
     scientificVerdict:"NOT_EVALUATED",candidateAdmission:"NOT_ADMITTED",
     evmExecuted:false,implementationVerified:false,warnings:[
       "Specification metadata can list Core EIPs as well as ERCs, and is not a compatibility proof.",
