@@ -153,6 +153,26 @@ async function test(){
     "negative control graph evidence");
   console.log("OECL_BROWSER_NEGATIVE_CONTROL_PASS");
 
+  await click("Vaults × fungible tokens");
+  await expectUi('document.getElementById("oecl-protocol-a")?.value==="ERC-4626" && document.getElementById("oecl-protocol-b")?.value==="ERC-20"',
+    "arbitrary official ERC pair is selectable");
+  await expectUi('document.querySelector("[data-testid=oecl-documentary-results]")!==null',
+    "published ERC documentary research is returned",30000);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results]").innerText.includes("NOT EVALUATED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results]").innerText.includes("NOT ADMITTED")'),true);
+  const documentary=await fetch(base+"/api/scientific/standards-pair?protocolA=ERC-4626&protocolB=ERC-20");
+  assert.equal(documentary.status,200,"Documentary endpoint must return scoped response");
+  const documentaryJson=await documentary.json();
+  assert.equal(documentaryJson.status,"DOCUMENTARY_COMPARISON");
+  assert.equal(documentaryJson.scientificVerdict,"NOT_EVALUATED");
+  assert.equal(documentaryJson.evmExecuted,false);
+  assert.equal(documentaryJson.implementationVerified,false);
+  if(documentaryJson.standards.every(s=>s.availability==="PUBLISHED")){
+    assert.equal(documentaryJson.relation.kind,"DECLARED_DEPENDENCY");
+    assert.ok(documentaryJson.relation.statements.some(s=>s.includes("ERC-4626")&&s.includes("ERC-20")));
+  }else assert.equal(documentaryJson.relation.kind,"INCOMPLETE_SPECIFICATIONS");
+  console.log("OECL_BROWSER_ANY_ERC_DOCUMENTARY_COMPARISON_PASS");
+
   const edited=await evalJs('(()=>{const el=document.getElementById("oecl-protocol-a");if(!(el instanceof HTMLInputElement))return false;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;set.call(el,"ERC-99999");el.dispatchEvent(new Event("input",{bubbles:true}));return true})()');
   assert.equal(edited,true);
   await expectUi('document.getElementById("oecl-protocol-a")?.value==="ERC-99999"',"unlisted ERC user input");
