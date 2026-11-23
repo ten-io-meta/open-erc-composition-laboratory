@@ -5,21 +5,13 @@ import { ScientificAstGraphExplorer, type AstGraphView } from "@/components/Scie
 import { ScientificDossierResults } from "@/components/ScientificDossierResults";
 import { IndependentEvmEvidencePanel } from "@/components/IndependentEvmEvidencePanel";
 import { DocumentaryPairExplorer } from "@/components/DocumentaryPairExplorer";
+import { ErcCatalogBrowser } from "@/components/ErcCatalogBrowser";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
 type Tab = "overview" | "capabilities" | "evidence" | "limits";
 type GraphResponse = { status: string; view?: AstGraphView; message?: string };
 type DossierResponse = { status: string; dossier?: ScientificDossier; message?: string };
-
-const profiles = [
-  { id: "ERC-8060", label: "Value-backed, redeemable NFT" },
-  { id: "ERC-8098", label: "Strictly non-increasing ERC-20 supply" },
-  { id: "ERC-20-BURNABLE", label: "OpenZeppelin burnable extension" },
-  { id: "ERC-20", label: "ERC-20 reference implementation" },
-  { id: "ERC-721", label: "ERC-721 reference implementation" },
-  { id: "ERC-1155", label: "ERC-1155 reference implementation" },
-] as const;
 
 // Only pairs with independently checked, pinned AST-view artifacts are listed
 // as examples. Do not infer coverage from the number of registry entries.
@@ -74,6 +66,7 @@ export function CompositionWorkbench() {
   const [inputB, setInputB] = useState("ERC-8098");
   const [pair, setPair] = useState<Pair>({ a: "ERC-8060", b: "ERC-8098" });
   const [tab, setTab] = useState<Tab>("overview");
+  const [catalogOpen, setCatalogOpen] = useState(false);
   const [result, setResult] = useState<{
     key: string; graph: AstGraphView | null; dossier: ScientificDossier | null; failure: string | null;
   } | null>(null);
@@ -175,22 +168,42 @@ export function CompositionWorkbench() {
       className="grid gap-3 rounded-2xl bg-[#f3f7f3] p-4 md:grid-cols-[1fr_1fr_auto] md:items-end md:p-5">
       <div>
         <label htmlFor="oecl-protocol-a" className="mb-2 block text-xs font-semibold text-[#425b4d]">ERC protocol A</label>
-        <input id="oecl-protocol-a" list="oecl-known-protocols" value={inputA}
+        <input id="oecl-protocol-a" value={inputA}
           onChange={e => setInputA(e.target.value)} autoComplete="off"
           placeholder="ERC-8060" className="w-full rounded-xl border border-[#c9d8ce] bg-white px-4 py-3 text-sm outline-none focus:border-[#27694d] focus:ring-2 focus:ring-[#b4dfc3]" />
       </div>
       <div>
         <label htmlFor="oecl-protocol-b" className="mb-2 block text-xs font-semibold text-[#425b4d]">ERC protocol B</label>
-        <input id="oecl-protocol-b" list="oecl-known-protocols" value={inputB}
+        <input id="oecl-protocol-b" value={inputB}
           onChange={e => setInputB(e.target.value)} autoComplete="off"
           placeholder="ERC-8098" className="w-full rounded-xl border border-[#c9d8ce] bg-white px-4 py-3 text-sm outline-none focus:border-[#27694d] focus:ring-2 focus:ring-[#b4dfc3]" />
       </div>
-      <datalist id="oecl-known-protocols">{profiles.map(p => <option key={p.id} value={p.id}>{p.label}</option>)}</datalist>
+
       <button type="submit" disabled={!canInspect}
         className="rounded-xl bg-[#174c38] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0f3929] focus:outline-none focus:ring-2 focus:ring-[#5eac7b] disabled:cursor-not-allowed disabled:opacity-40">
         Inspect pair
       </button>
     </form>
+
+    <div className="space-y-3 rounded-xl border border-[#d6e4d8] bg-[#f7faf6] p-3 md:p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold text-[#26583d]">Want to combine another ERC?</p>
+          <p className="mt-1 text-xs text-[#607468]">Browse the full official document index plus OECL experimental source profiles — not just the examples below.</p>
+        </div>
+        <button type="button" aria-expanded={catalogOpen} aria-controls="oecl-erc-directory"
+          onClick={() => setCatalogOpen(open => !open)}
+          className="rounded-xl bg-[#225b40] px-4 py-3 text-sm font-semibold text-white hover:bg-[#164630] focus:ring-2 focus:ring-[#80bb91]">
+          {catalogOpen ? "Close ERC directory" : "Browse all ERCs"}
+        </button>
+      </div>
+      {catalogOpen && <div id="oecl-erc-directory">
+        <ErcCatalogBrowser onChoose={(side,id) => {
+          if (side === "A") setInputA(id);
+          else setInputB(id);
+        }}/>
+      </div>}
+    </div>
 
     <div aria-label="Verified example pairs" className="flex flex-wrap items-center gap-2">
       <span className="mr-1 text-xs text-[#607369]">Source-tested examples:</span>
@@ -200,7 +213,7 @@ export function CompositionWorkbench() {
       </button>)}
     </div>
     <p className="text-xs text-[#68796e]">
-      You can investigate any numeric ERC in the published ethereum/ERCs registry. Full Solidity and EVM evidence
+      You can investigate any numeric ERC, including profiles not in the official ethereum/ERCs registry. Full Solidity and EVM evidence
       is available only for reviewed implementations. Unpublished proposals and missing results are not judged incompatible.
     </p>
     <div aria-label="Official ERC specification examples" className="flex flex-wrap items-center gap-2">
