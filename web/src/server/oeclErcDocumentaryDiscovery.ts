@@ -34,7 +34,10 @@ function source(id:string){return "https://raw.githubusercontent.com/ethereum/ER
 function canonical(id:string){return "https://eips.ethereum.org/EIPS/eip-"+id.slice(4);}
 function pinnedSource(id:string):StandardDocument["oeclPinnedSource"]{
   const known=registry.sources.find(x=>x.id===id&&x.kind==="github");
-  return known&&known.kind==="github"?{repository:known.repository,revision:known.revision,contract:known.contract}:null;
+  return known&&known.kind==="github"&&
+    typeof known.repository==="string"&&typeof known.revision==="string"&&
+    typeof known.contract==="string"?
+    {repository:known.repository,revision:known.revision,contract:known.contract}:null;
 }
 function missing(id:string,availability:StandardDocument["availability"]):StandardDocument{
   return {id,availability,title:null,description:null,abstract:null,status:null,
