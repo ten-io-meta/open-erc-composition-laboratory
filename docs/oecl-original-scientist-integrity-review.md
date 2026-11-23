@@ -28,6 +28,16 @@ The EVM is a test instrument, NOT the generator or sole judge of scientific expl
 - The new guard defaults to `PRELIMINARY` when pairwise independence is missing or source evidence IDs are absent; explicit pairwise independence attestation across at least two sources is required for `SUPPORTED`, three for `ESTABLISHED` with a bounded confidence. An upstream error prevents conclusion emission. All these are **research-source** categories, never EVM contract interoperability proofs.
 - Falsification control `check-original-research-conclusion-evidence-boundary.ts` verifies high-confidence spoofing, duplicate identities, contradictory source assessments, missing claims and malformed scores cannot claim `ESTABLISHED`. This change deliberately errs on the side of weaker conclusions when historical pipelines did not persist independent-source attestations.
 
+## Circular hypothesis validation boundary (PR #29 extension)
+
+In the original V2 cycle, learning-derived hypotheses and the hypothesis validator drew on the **same underlying composability evidence claims**. Previously, the validator elevated a matched source claim with confidence >=70 to `CONFIRMED`, could elevate status to `VALIDATED`, and could label hypotheses `REJECTED` merely because there was no matching source claim. Those are not independent confirmations or empirical falsifications.
+
+- The legacy learning generator no longer marks a statistical `STABLE` relation `VALIDATED` merely because the underlying claims scored highly; it proposes `EMERGING` hypotheses awaiting fresh tests.
+- The V2 correlator still records source-claim matches for useful investigation, but **never emits `CONFIRMED` or `VALIDATED` from recycled claims**. It does not raise confidence, counts unique prior claim IDs, and labels no-match as an evidence gap rather than a counterexample.
+- Each validation entry now explicitly declares `verificationScope: PRIOR_SOURCE_CLAIM_CORRELATION_ONLY`, `independentlyValidated:false`, `evmExecuted:false`, `compatibilityVerdict:NOT_EVALUATED`. Existing `PARTIAL` and `UNSUPPORTED` enumeration values are retained for legacy consumers but must be interpreted with these scoped fields.
+- The scientist workflow reruns the archived DOI-0001 historical hypothesis dataset, rejects any circular promotion or unobserved rejection, and archives the regenerated JSON alongside the independent research conclusion. This does **not** change, sign, execute or fabricate EVM receipts.
+- Evidence useful to confirm or refute a hypothesis must be collected separately, with a documented pre-registered test, new provenance, independent source/implementation identity and a reproducible counterfactual.
+
 ## Next scientific/security gates
 
 - Audit all sources of the legacy \`ResearchConclusionEngine\` \`ESTABLISHED\` label and the \`HypothesisValidationEngine\` \`CONFIRMED\` label. Their heuristic/status thresholds cannot be assumed equivalent to independent experimental truth. Introduce typed challenge/corroboration receipts before any user-facing promotion.

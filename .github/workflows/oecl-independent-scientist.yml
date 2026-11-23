@@ -49,11 +49,18 @@ jobs:
         run: npx tsx scripts/check-independent-scientific-reasoning.ts
       - name: Verify original scientist can report provisional conclusions without EVM
         run: npx tsx scripts/run-independent-scientific-review.ts audit-output/original-scientist-source-review.json
+      - name: Re-evaluate original DOI-0001 hypotheses without recycled evidence promotion
+        run: npx tsx scripts/run-hypothesis-v2-validation.ts
+      - name: Enforce exact historical hypothesis scientific boundary
+        run: |
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("hypothesis-validation-results/DOI-0001-v2-validation.json"));if(r.errors.length||!r.validations.length||r.validations.some(v=>v.validationOutcome==="CONFIRMED"||v.statusAfter==="VALIDATED"||v.statusAfter==="REJECTED"||v.independentlyValidated!==false||v.evmExecuted!==false||v.compatibilityVerdict!=="NOT_EVALUATED"))throw Error("HISTORICAL_HYPOTHESIS_SELF_CONFIRMATION");console.log("OECL_HISTORICAL_HYPOTHESIS_NON_CIRCULAR_PASS",r.validations.length)'
       - name: Archive independently reproducible scientific report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: oecl-independent-scientist-source-reasoning
-          path: audit-output/original-scientist-source-review.json
+          path: |
+            audit-output/original-scientist-source-review.json
+            hypothesis-validation-results/DOI-0001-v2-validation.json
           if-no-files-found: warn
           retention-days: 14
