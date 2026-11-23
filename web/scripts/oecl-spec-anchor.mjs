@@ -9,10 +9,11 @@ export function anchoredSpecCue(id,sourceText){
     const m=lines[i].match(/^(#{1,4})[ \t]+(.+?)[ \t]*#*[ \t]*$/);
     if(m)headings.push({index:i,level:m[1].length,title:m[2].trim()});
   }
-  const wanted=/^(?:Specification|Standardized interface|Draft interface|Interface Definitions|Interface|Standard json format|Token Semantics|Test Cases|Contract|Data Structures|Format)$/i;
+  const wanted=/^(?:Specification|Standardized interface|Draft interface|Interface Definitions|Interface|Standard json format|Token Semantics|Test Cases|Contract|Data Structures|Format|Package Specification|Draft implementation)$/i;
   const selected=headings.find(h=>wanted.test(h.title));
   if(!selected)return null;
-  const next=headings.find(h=>h.index>selected.index&&h.level<=selected.level);
+  const next=headings.find(h=>h.index>selected.index&&h.level<=selected.level&&
+    !(selected.title.toLowerCase()==="specification"&&/^RecoverableToken$/i.test(h.title)));
   const end=Math.min(next?.index??lines.length,lines.length),candidates=[];
   let inCode=false;
   for(let i=selected.index+1;i<end;i++){
@@ -22,10 +23,10 @@ export function anchoredSpecCue(id,sourceText){
        /^(?:TODO|TBD|FIXME|Copyright)\b/i.test(line)||
        /^\s*(?:\||[-*]\s*[-|]+\s*$)/.test(line))continue;
     const external=/(?:maintained separately|full specification.{0,25}(?:repository|here|external)|refer(?:s)? to.{0,60}version.{0,20}specification)/i.test(line);
-    const code=/\b(?:function|event)\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/.test(line);
+    const code=/\b(?:function|event|def)\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/.test(line);
     const rule=/\b(?:MUST(?:\s+NOT)?|SHALL(?:\s+NOT)?|SHOULD(?:\s+NOT)?)\b/i.test(line);
-    const format=/\b(?:keccak256|sha256|encode|decode|checksum|storage[- ]location|formula|signature|key derivation|0x19|m \/|bytes32|ABI|bitwise|uint256)\b/i.test(line);
-    const descriptive=/\b(?:defined as|defined by|uses|is defined|consists of|represents|contains|calls|calculat(?:e|ed|ion)|requires|returned|implements|transfers|increments|decrements|must be|should be|reverts|may be|shall be)\b/i.test(line);
+    const format=/\b(?:keccak256|sha256|encode|decode|checksum|storage[- ]location|formula|signature|key derivation|BIP32|hardened|0x19|bytes32|ABI|bitwise|uint256|URI|syntax|derivation|keccak|checksum)\b/i.test(line);
+    const descriptive=/\b(?:defined as|defined by|uses|is defined|consists of|represents|contains|calls|define|calculat(?:e|ed|ion)|requires|returned|implements|transfers|increments|decrements|must be|should be|reverts|may be|shall be)\b/i.test(line);
     if(!rule&&!code&&!format&&!descriptive&&!external)continue;
     const evidenceType=external?"EXTERNAL_SPECIFICATION_REFERENCE":
       rule?"NORMATIVE_STATEMENT":code?"DECLARED_CODE_FRAGMENT":
