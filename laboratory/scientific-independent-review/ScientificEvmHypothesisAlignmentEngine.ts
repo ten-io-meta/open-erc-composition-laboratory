@@ -68,7 +68,7 @@ export class ScientificEvmHypothesisAlignmentEngine {
             !prediction.hypothesisId?.trim() ||
             !prediction.scenarioId?.trim() ||
             prediction.scenarioId!==observedScenarioId ||
-            !/^[0-9a-f]{40}$/i.test(prediction.sourceRevision??"") ||
+            !/^(?:[0-9a-f]{40}|sha256:[0-9a-f]{64})$/i.test(prediction.sourceRevision??"") ||
             constraint.basis!=="SOURCE_DERIVED_BEHAVIORAL_INVARIANT" ||
             prediction.candidateId!==constraint.candidateId ||
             prediction.candidateId!==observation.candidateId ||

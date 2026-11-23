@@ -172,3 +172,37 @@ jobs:
           path: source-output/**/*.json
           if-no-files-found: warn
           retention-days: 14
+
+  independently-reconcile-scientist-with-local-evm:
+    if: github.event_name != 'workflow_dispatch'
+    needs: independent-source-worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the exact committed pre-registered predictions and scientist
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download the preceding EVM source-worker artifact from this exact workflow run
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-generic-ast-evidence
+          path: source-output
+      - name: Set up Node.js for the original scientist
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact scientist lock without package scripts
+        run: npm ci --ignore-scripts --no-fund
+      - name: Independently recompute the scientist's match and counterexample from this run's local EVM artifact
+        run: npx tsx scripts/check-preregistered-scientist-evm-replay.ts source-output/pair-8098-4626/scientist-adversarial-falsification.json laboratory/scientific-open-source-worker/preregistered-8098-4626-falsification.json audit-output/scientist-evm-comparison.json
+      - name: Archive scientific disagreement without changing EVM evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-scientist-vs-local-evm-falsification
+          path: audit-output/scientist-evm-comparison.json
+          if-no-files-found: warn
+          retention-days: 14
