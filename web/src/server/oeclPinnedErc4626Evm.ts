@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import pinned from "@/data/oeclErc4626EvmEvidence.json";
 
 const RUN_ID = 45212718140;
@@ -21,6 +22,9 @@ function invalid(reason:string):never { throw Error("PINNED_ERC4626_EVM_VERIFICA
 
 /** CI-origin local EVM results only. Never treat a workflow success as scientific admission. */
 export function getVerifiedErc4626LocalEvm() {
+  const digest=createHash("sha256").update(JSON.stringify(pinned)).digest("hex");
+  if(digest!=="00a255bb2e2a4be64a6676611eed7b1ba84bb3c4c4a8792cd560dc6231f478dc")
+    invalid("SNAPSHOT_DIGEST");
   const r=pinned.experiment;
   if(pinned.schemaVersion!=="OECL_PINNED_ERC4626_EVM_EVIDENCE_V1"||
      pinned.runId!==RUN_ID||pinned.workflowSha!==WORKFLOW_SHA||
