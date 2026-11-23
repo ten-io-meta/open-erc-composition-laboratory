@@ -235,54 +235,42 @@ export class SourceIndependenceAssessmentEngine {
 
         }
 
-        const explicit =
-            this.explicitEvidenceFor(
-                sourceA.sourceId,
-                sourceB.sourceId,
-                explicitEvidence
-            );
-
-        if (
-            explicit?.status ===
-            "DEPENDENT"
-        ) {
-
-            return {
-                sourceIds,
-                status:
-                    "DEPENDENT",
-                reason:
-                    "DISTINCT_SOURCE_IDENTITY_WITHOUT_DEPENDENCY_EVIDENCE",
-                establishedIndependentSources:
-                    0,
-                explanation:
-                    `Explicit scientific evidence marks ` +
-                    `${sourceA.sourceId} and ${sourceB.sourceId} as dependent. ` +
-                    explicit.basis
-            };
-
-        }
-
-        if (
-            explicit?.status ===
-            "INDEPENDENT"
-        ) {
-
-            return {
-                sourceIds,
-                status:
-                    "INDEPENDENT",
-                reason:
-                    "DISTINCT_SOURCE_IDENTITY_WITHOUT_DEPENDENCY_EVIDENCE",
-                establishedIndependentSources:
-                    2,
-                explanation:
-                    `Scientific independence between ` +
-                    `${sourceA.sourceId} and ${sourceB.sourceId} ` +
-                    `was explicitly established. ` +
-                    explicit.basis
-            };
-
+        const explicit = this.explicitEvidenceFor(
+            sourceA.sourceId,sourceB.sourceId,explicitEvidence
+        );
+        if (explicit.length) {
+            const statuses = new Set(explicit.map(item=>item.status));
+            const malformed = explicit.some(item=>
+                !item.basis?.trim() ||
+                !Array.isArray(item.evidenceIds) ||
+                item.evidenceIds.length===0 ||
+                item.evidenceIds.some(id=>typeof id!=="string"||!id.trim()));
+            // A contradictory or unanchored declaration must not establish
+            // independence by input order or by a bare status label.
+            if (statuses.size!==1 || malformed) {
+                return {
+                    sourceIds,status:"INCONCLUSIVE",
+                    reason:"INSUFFICIENT_PROVENANCE",
+                    establishedIndependentSources:0,
+                    explanation:"Conflicting or unanchored source-independence attestations."
+                };
+            }
+            if (explicit[0].status==="DEPENDENT") {
+                return {
+                    sourceIds,status:"DEPENDENT",
+                    reason:"DISTINCT_SOURCE_IDENTITY_WITHOUT_DEPENDENCY_EVIDENCE",
+                    establishedIndependentSources:0,
+                    explanation:"Explicit documented source dependence: "+explicit[0].basis
+                };
+            }
+            if (explicit[0].status==="INDEPENDENT") {
+                return {
+                    sourceIds,status:"INDEPENDENT",
+                    reason:"DISTINCT_SOURCE_IDENTITY_WITHOUT_DEPENDENCY_EVIDENCE",
+                    establishedIndependentSources:2,
+                    explanation:"Independence explicitly attested with evidence IDs: "+explicit[0].basis
+                };
+            }
         }
 
         if (
@@ -326,20 +314,12 @@ export class SourceIndependenceAssessmentEngine {
         sourceAId: string,
         sourceBId: string,
         explicitEvidence: SourceIndependenceEvidence[]
-    ): SourceIndependenceEvidence | undefined {
-
-        return explicitEvidence.find(
-            evidence =>
-                (
-                    evidence.sourceAId === sourceAId &&
-                    evidence.sourceBId === sourceBId
-                ) ||
-                (
-                    evidence.sourceAId === sourceBId &&
-                    evidence.sourceBId === sourceAId
-                )
+    ): SourceIndependenceEvidence[] {
+        return explicitEvidence.filter(evidence=>
+            evidence &&
+            ((evidence.sourceAId===sourceAId && evidence.sourceBId===sourceBId) ||
+             (evidence.sourceAId===sourceBId && evidence.sourceBId===sourceAId))
         );
-
     }
 
     private repositoryIdentityFor(
