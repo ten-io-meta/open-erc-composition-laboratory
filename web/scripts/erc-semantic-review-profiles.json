@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "OECL_SEMANTIC_RESEARCH_DESIGNS_V1",
+  "sourceRevision": "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d",
+  "reviewLabel": "CURATED_SOURCE_GROUNDED_TEST_DESIGN_NOT_EXECUTED",
+  "entries": [
+    {
+      "ercId": "ERC-55",
+      "mechanism": "ADDRESS_CHECKSUM",
+      "supportPhrase": "In English, convert the address to hex",
+      "conditionalHypothesis": "For a 20-byte address, EIP-55 casing is reproducibly derived by Keccak-256 of its lowercase hex digits, not SHA3-256 or the mixed-case input.",
+      "preconditions": "Exactly 20 address bytes; hash of lowercase hexadecimal ASCII; compare nibble case only where the character is alphabetic.",
+      "positiveControl": "Re-encode each pinned positive test vector and obtain exactly the documented mixed-case output.",
+      "adversarialControl": "Flip one alphabetic checksum nibble in each selected vector and check rejection under a strict checksum validator; measure accidental collision acceptance rather than assuming every changed address is rejected.",
+      "falsificationCriterion": "An independent, byte-for-byte implementation and a pinned reference vector yield different casing for the same input under identical assumptions.",
+      "verificationModality": "OFFCHAIN_DETERMINISTIC_ALGORITHM",
+      "requiredIndependentEvidence": [
+        "Independent Keccak-256 implementation",
+        "Pinned exact input/output vectors",
+        "Selected mutation corpus and collision notes"
+      ],
+      "uncertainties": [
+        "Do not equate optional user-interface acceptance of lowercase addresses with failure of the canonical checksum encoder."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-191",
+      "mechanism": "SIGNED_DATA_DOMAIN_SEPARATION",
+      "supportPhrase": "0x19 <1 byte version>",
+      "conditionalHypothesis": "For the ERC-191 0x00 intended-validator format, changing only the validator-address domain changes the signed preimage and should invalidate a signature produced for the original validator under correct verification.",
+      "preconditions": "Use the 0x19+0x00 format, identical signer/key/payload and the exact intended-validator address; control ECDSA digest encoding.",
+      "positiveControl": "Recover the signing address with an independently computed version-0 preimage for the intended validator.",
+      "adversarialControl": "Use the same signature and payload for a different intended validator; check that the recovered signer no longer matches (within the pinned test fixtures).",
+      "falsificationCriterion": "The same signature is accepted for different validator domains by an implementation claiming proper validator binding, without an explicit allowed cross-domain policy.",
+      "verificationModality": "OFFCHAIN_CRYPTO_WITH_OPTIONAL_EVM_VERIFIER",
+      "requiredIndependentEvidence": [
+        "Exact version-byte and validator-encoding vectors",
+        "Independent signature and digest implementation",
+        "Pinned verifier or contract bytecode with test fixtures"
+      ],
+      "uncertainties": [
+        "No claim that a signature scheme is globally replay-proof without chain-id, nonce, expiry and other relevant domains."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-2535",
+      "mechanism": "DIAMOND_FACET_DISPATCH",
+      "supportPhrase": "A diamond calls functions from its facets using",
+      "conditionalHypothesis": "With a pinned diamond implementation, calls to an installed facet selector should execute using diamond storage, and facet-cut changes should be observable in the prescribed DiamondCut event when applied.",
+      "preconditions": "Known facet selector mapping, deployed diamond/facet code hashes, delegatecall semantics and the particular implementation's upgrade authorization policy.",
+      "positiveControl": "Install a known facet using an authorized cut, inspect selector mapping and emitted event, and verify a deliberate state update in diamond storage.",
+      "adversarialControl": "Attempt an unauthorized cut and a selector replacement/clash; verify exact access policy, event consistency and state isolation under the chosen implementation.",
+      "falsificationCriterion": "The implementation reports a successful facet cut with an inconsistent selector mapping or without a required DiamondCut event, or violates its declared authorization policy.",
+      "verificationModality": "PINNED_EVM_AND_AST",
+      "requiredIndependentEvidence": [
+        "Pinned facet/diamond ABI and bytecode",
+        "Authenticated transaction receipts and event logs",
+        "Storage slot and permission traces"
+      ],
+      "uncertainties": [
+        "The ERC does not by itself prove a specific admin model or security of arbitrary facet code."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-7201",
+      "mechanism": "NAMESPACED_STORAGE_FORMULA",
+      "supportPhrase": "erc7201(id: string) = keccak256",
+      "conditionalHypothesis": "The published ERC-7201 formula produces deterministic namespace storage roots under a fixed namespace ID, and a pinned compiler-annotated struct should agree with that computation.",
+      "preconditions": "Treat the ID as the specified UTF-8 byte sequence; evaluate keccak256(abi.encode(uint256(keccak256(bytes(id))) - 1)) & ~bytes32(uint256(0xff)); keep 256-bit arithmetic fixed.",
+      "positiveControl": "Compute the namespace slot using two independent implementations and compare with a compiler/AST NatSpec annotation in a pinned example.",
+      "adversarialControl": "Vary namespace ID or formula ordering, assert independently computed address differs for selected test vectors, and test collision/alias behavior for deliberate misannotation.",
+      "falsificationCriterion": "Two independent evaluations of the exact formula disagree on the same namespace input or a pinned claimed-implementation uses a different root than its declared ID.",
+      "verificationModality": "OFFCHAIN_FORMAL_ALGORITHM_AND_AST",
+      "requiredIndependentEvidence": [
+        "Pinned exact formula and reference vectors",
+        "Independent Keccak and ABI computation",
+        "Solidity AST annotation and storage-layout sample"
+      ],
+      "uncertainties": [
+        "Different IDs are not mathematically guaranteed collision-free; the test only covers specified identifiers."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-600",
+      "mechanism": "HARDENED_DERIVATION_PATH",
+      "supportPhrase": "m / purpose' / subpurpose' / EIP'",
+      "conditionalHypothesis": "An ERC-600 wallet following the described hierarchy should serialize a hardened BIP32 path whose purpose, subpurpose and EIP indices match the documented convention.",
+      "preconditions": "Pin the external BIP32 derivation definition; parse apostrophes as hardened markers; use purpose=43 and subpurpose=60 from pinned source.",
+      "positiveControl": "Parse and derive a known seed for the documented path with two independently pinned BIP32 implementations.",
+      "adversarialControl": "Change hardened markers or purpose/subpurpose, and demonstrate differing derived public identifiers in controlled reference vectors.",
+      "falsificationCriterion": "A wallet claiming the exact ERC-600 path yields a different derivation from the agreed BIP32 reference for the same seed/index path.",
+      "verificationModality": "OFFCHAIN_DERIVATION_REQUIRES_EXTERNAL_STANDARD",
+      "requiredIndependentEvidence": [
+        "Pinned BIP32/SLIP44 versions and test vectors",
+        "Independent path parser and reference implementation",
+        "Explicit seed-handling test hygiene, no real user secrets"
+      ],
+      "uncertainties": [
+        "Do not test with live mnemonic or private keys; do not presume every wallet accepts ERC-600."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-1328",
+      "mechanism": "WALLETCONNECT_URI_GRAMMAR",
+      "supportPhrase": "request       = \"wc\"",
+      "conditionalHypothesis": "A parser claiming the documented WalletConnect URI syntax should preserve the version discriminator and accept/reject mandatory v1 or v2 parameters according to the pinned document.",
+      "preconditions": "Parse only the URI grammar under this versioned specification; separate URI decoding from network pairing; no remote bridge contacted.",
+      "positiveControl": "Parse pinned v1 and v2 sample URI strings and reproduce topic, version and required field set.",
+      "adversarialControl": "Remove one mandatory parameter or swap v1/v2 parameter sets; check bounded parser rejection and percent-encoding edge cases.",
+      "falsificationCriterion": "A claimed parser silently accepts an explicitly invalid/missing required field or interprets version-specific parameters as a different version under the exact claimed grammar.",
+      "verificationModality": "OFFCHAIN_PARSER_AND_FORMAT_VALIDATION",
+      "requiredIndependentEvidence": [
+        "Pinned version-specific grammar",
+        "Positive/negative URI fixtures",
+        "Percent-encoding and input-boundary test harness"
+      ],
+      "uncertainties": [
+        "No cryptographic pairing or bridge availability is implied by a syntactically valid URI."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-1387",
+      "mechanism": "MERKLE_ATTESTATION_PROOF",
+      "supportPhrase": "function validate(Attestation attestation)",
+      "conditionalHypothesis": "A pinned implementation claiming ERC-1387 attestation validation should distinguish valid Merkle inclusion plus attester authorization from a mutated path or invalid attester signature.",
+      "preconditions": "Pin an actual implementation, Merkle hash/encoding order, attester trust root, and the complete signed payload; the draft interface alone is insufficient.",
+      "positiveControl": "Submit a known valid attester-signed Merkle proof to a locally deployed verifier and record its return/receipt.",
+      "adversarialControl": "Mutate a sibling-path hash, attestation recipient or signature; verify that the selected implementation rejects the altered proof under the same policy.",
+      "falsificationCriterion": "The selected implementation accepts a tampered inclusion proof or unauthorized signer while claiming to enforce the pinned policy.",
+      "verificationModality": "PINNED_EVM_CRYPTOGRAPHIC_PROOF",
+      "requiredIndependentEvidence": [
+        "Pinned Merkle tree shape and hash rules",
+        "Attestation signer/trust-store fixture",
+        "Positive/mutated signatures and receipt traces"
+      ],
+      "uncertainties": [
+        "The provided historic interface is not a complete proof-system definition; human semantic review mandatory."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-1388",
+      "mechanism": "ATTESTATION_ISSUER_AUTHORIZATION",
+      "supportPhrase": "Only he/she/it can change the",
+      "conditionalHypothesis": "For a concrete issuer-list contract implementing the draft model, only the designated list manager should be able to change issuer membership, subject to its documented role model.",
+      "preconditions": "Pin ownership/manager role definition and deployed implementation; distinguish attester issuer addresses from signing keys.",
+      "positiveControl": "An authorized manager adds a known issuer; querying the list reflects the expected membership and capacity.",
+      "adversarialControl": "An unauthorized caller attempts add/remove, and an issuer with wrong capacity attempts trust validation; verify rejection under the particular implementation policy.",
+      "falsificationCriterion": "An implementation claiming manager-only mutation permits an unrelated address to change list membership or accepts an unauthorized issuer under the tested configuration.",
+      "verificationModality": "PINNED_EVM_ROLE_AND_ATTESTATION",
+      "requiredIndependentEvidence": [
+        "Concrete pinned issuer-list implementation",
+        "Typed role and membership interfaces",
+        "Authorization and capacity negative controls"
+      ],
+      "uncertainties": [
+        "Historic draft comments alone do not verify that any current deployed implementation enforces this policy."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-2678",
+      "mechanism": "ETHPM_MANIFEST_STRUCTURE",
+      "supportPhrase": "This EIP defines a data format for *package manifest* documents",
+      "conditionalHypothesis": "A versioned EthPM manifest conforming to the pinned v3 schema should validate its mandatory structure, content-addressed references and declared package version.",
+      "preconditions": "Pin the complete EthPM v3 document and its precise JSON/schema vocabulary; do not equate valid JSON with an authenticated package.",
+      "positiveControl": "Validate a pinned minimal manifest against a second independent parser/schema and resolve only controlled offline fixtures.",
+      "adversarialControl": "Mutate a declared package field, dependency or content hash; verify that strict schema or integrity checks reject the altered artifact.",
+      "falsificationCriterion": "An implementation claiming to enforce the pinned schema accepts an invalid mandatory field or material source digest mismatch under its documented validation scope.",
+      "verificationModality": "OFFCHAIN_SCHEMA_AND_CONTENT_DIGEST",
+      "requiredIndependentEvidence": [
+        "Pinned schema version and mandatory-field definitions",
+        "Independent JSON/schema validator",
+        "Offline immutable package and content hashes"
+      ],
+      "uncertainties": [
+        "No blockchain contract interaction is implied by a manifest, and syntax validity is not supply-chain trust."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-7743",
+      "mechanism": "ADDITIVE_NFT_OWNERSHIP",
+      "supportPhrase": "Transferring ownership adds the new owner",
+      "conditionalHypothesis": "In the documented multi-owner model, a permitted transfer may add the recipient to an ownership set without removing the previous owner, unlike ordinary single-owner transfer semantics.",
+      "preconditions": "Use the specific multi-owner contract and exact provider-fee rule; only compare equivalent defined operations, not generic ERC-721 behavior.",
+      "positiveControl": "Issue a MO-NFT, transfer to another eligible owner and inspect that both original and new owners remain listed under the protocol's rules.",
+      "adversarialControl": "Test duplicate-owner additions, archived-owner transfers and insufficient provider fee; examine whether behavior matches documented policies.",
+      "falsificationCriterion": "The pinned contract claims additive ownership but removes the prior owner after a transfer that should retain them.",
+      "verificationModality": "PINNED_EVM_OWNERSHIP_AND_FEES",
+      "requiredIndependentEvidence": [
+        "Pinned MO-NFT source and owner-set ABI",
+        "Fee and archive state controls",
+        "Authentic before/after ownership and fee receipts"
+      ],
+      "uncertainties": [
+        "Do not claim universal ERC-721 interoperability solely from similarly named transferFrom."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-7837",
+      "mechanism": "DIFFUSIVE_TRANSFER_SUPPLY",
+      "supportPhrase": "`A` does not lose any tokens",
+      "conditionalHypothesis": "The diffusive transfer model proposes that positive transfers mint units for the recipient without decrementing sender balance, while keeping totalSupply at or below maxSupply.",
+      "preconditions": "Assume an eligible positive-quantity transfer, enough native fee, below maxSupply; distinguish these semantics from conservative ERC-20 transfers.",
+      "positiveControl": "Record positive before/after balances and supply under a reviewed implementation; verify minted amount, fee and maxSupply constraint.",
+      "adversarialControl": "Use maxSupply boundary, inadequate native fee and amount zero as controls; compare behavior against conventional ERC-20 and strict non-increasing supply only under explicitly shared roles.",
+      "falsificationCriterion": "An implementation claiming these transfer semantics decreases the sender balance or increases supply beyond maxSupply on an authorized positive transfer.",
+      "verificationModality": "PINNED_EVM_TOKEN_ECONOMICS",
+      "requiredIndependentEvidence": [
+        "Pinned ERC-7837 implementation and supply math",
+        "Fee/maxSupply control and transaction receipts",
+        "Precise role equivalence before composition tests"
+      ],
+      "uncertainties": [
+        "A documentary contradiction with ERC-8098 supply monotonicity is only a conditional hypothesis, not demonstrated same-contract incompatibility."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-897",
+      "mechanism": "DELEGATE_PROXY_INTROSPECTION",
+      "supportPhrase": "function proxyType() public pure",
+      "conditionalHypothesis": "A deployed proxy claiming ERC-897 introspection should return a proxy type and implementation address consistent with its version-specific delegation behavior.",
+      "preconditions": "Pin the exact proxy implementation and type semantics; distinguish implementation() reporting from actual delegatecall target.",
+      "positiveControl": "Deploy a pinned proxy, call both introspection methods and verify the intended implementation by bytecode and delegation trace.",
+      "adversarialControl": "Exercise a fixed vs upgradeable instance and replace target if the type permits; check introspection stays in sync with dispatched code.",
+      "falsificationCriterion": "A purported compliant proxy advertises a target that does not correspond to its observed delegated runtime behavior under the documented type.",
+      "verificationModality": "PINNED_EVM_PROXY_INTROSPECTION",
+      "requiredIndependentEvidence": [
+        "Pinned interface and concrete proxy bytecode",
+        "Decoded calls and delegatecall traces",
+        "Upgrade and spoofing negative controls"
+      ],
+      "uncertainties": [
+        "The two signatures alone do not establish the security of delegatecall or the upgrade authority."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    },
+    {
+      "ercId": "ERC-1822",
+      "mechanism": "UUPS_UPGRADE_SLOT_AND_AUTHORIZATION",
+      "supportPhrase": "The compatibility check `proxiable` prevents irreparable updates",
+      "conditionalHypothesis": "A pinned UUPS implementation should reject an upgrade to a logic contract with an incompatible proxiable identifier, while preserving proxy storage and its declared authorization policy.",
+      "preconditions": "Fix the actual proxy slot, proxiable UUID, upgrade authorization and implementation revision; do not infer safety from a UUID match alone.",
+      "positiveControl": "Upgrade to a compatible implementation under an authorized account and verify storage persistence and correct code dispatch.",
+      "adversarialControl": "Try an incompatible UUID, unauthorized upgrader or dangerous entrypoint invocation and verify rejection or documented limitation under the exact implementation.",
+      "falsificationCriterion": "An implementation claiming compatibility checks accepts an incompatible UUID or an unauthorized upgrade that its own policy forbids.",
+      "verificationModality": "PINNED_EVM_UPGRADE_SECURITY",
+      "requiredIndependentEvidence": [
+        "Pinned proxy and logic source/bytecode",
+        "Exact proxiable UUID and storage-slot model",
+        "Negative upgrade/access/slot controls with local receipts"
+      ],
+      "uncertainties": [
+        "UUPS is an architectural pattern; this does not prove all proxy implementations immune to bricking or takeover."
+      ],
+      "reviewStatus": "PROPOSED_SEMANTIC_DESIGN_REQUIRES_HUMAN_REVIEW",
+      "evmExecuted": false,
+      "compatibilityVerdict": "NOT_EVALUATED"
+    }
+  ]
+}
