@@ -65,6 +65,15 @@ jobs:
           path: dependency-source
           persist-credentials: false
 
+      - name: Checkout immutable ERC-7201 specification for reproducible non-EVM formula testing
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          repository: ethereum/ERCs
+          ref: e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d
+          path: pinned-ercs
+          persist-credentials: false
+
       - name: Setup audited Node toolchain
         uses: actions/setup-node@v4
         with:
@@ -82,6 +91,12 @@ jobs:
           echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
           ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
           node -e 'const fs=require("node:fs");const o=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const s=require("./dependency-source/node_modules/solc");if(o.version!=="4.9.6"||!s.version().startsWith("0.8.26+"))process.exit(1);console.log("OECL_SECURE_AST_TOOLCHAIN:",o.version,s.version())'
+
+      - name: Test ERC-7201 namespace formula against independent offchain Keccak and uint256 encoders
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          test "$(git -C pinned-ercs rev-parse HEAD)" = "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d"
+          node oecl/laboratory/scientific-open-source-worker/check-erc7201-namespace-formula.cjs pinned-ercs/ERCS/erc-7201.md source-output/erc7201/namespace-formula-observations.json
 
       - name: Run generic source and provenance falsification controls
         run: node oecl/scripts/check-generic-source-worker.cjs
