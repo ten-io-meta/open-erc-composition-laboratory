@@ -14,7 +14,9 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
         <h4 className="mt-2 text-lg font-semibold">{item.title ?? "Specification not confirmed"}</h4>
       </div>
       <span className="rounded-full bg-[#edf4ef] px-3 py-1.5 text-[11px] text-[#456c53]">
-        {published ? (item.status ?? "official document") : item.oeclPinnedSource ? "OECL source registered" : "Official source unavailable"}
+        {published ? (item.status ?? "official document") :
+          item.availability === "UNPARSEABLE_SPECIFICATION" ? "Official document unparseable" :
+          item.oeclPinnedSource ? "OECL source registered" : "Official source unavailable"}
       </span>
     </div>
     {published ? <>
@@ -44,7 +46,9 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
     </> : <p className="mt-3 text-sm leading-6 text-[#725936]">
       {item.availability === "SOURCE_UNAVAILABLE"
         ? "The registry could not be reached. This does not mean the ERC does not exist."
-        : "No matching specification was found in the official ethereum/ERCs repository. A draft, unmerged proposal, or custom implementation may still exist."}
+        : item.availability === "UNPARSEABLE_SPECIFICATION"
+          ? "An official ERC document was retrieved, but its format or metadata could not be verified. This is an incomplete document analysis, not absence or incompatibility."
+          : "No matching specification was found in the official ethereum/ERCs repository. A draft, unmerged proposal, or custom implementation may still exist."}
     </p>}
     {item.oeclPinnedSource && <div className="mt-4 rounded-lg border border-[#c6dccd] bg-[#f2f9f4] p-3">
       <p className="text-xs font-semibold text-[#295d40]">OECL has pinned Solidity source for this implementation</p>
