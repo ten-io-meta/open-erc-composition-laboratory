@@ -20,7 +20,7 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
     {published ? <>
       {item.description && <p className="mt-2 text-sm text-[#526a5a]">{item.description}</p>}
       {item.abstract && <p className="mt-3 text-sm leading-6 text-[#66786c]">{item.abstract}</p>}
-      <p className="mt-4 text-xs font-semibold text-[#546e5b]">Declared prerequisites</p>
+      <p className="mt-4 text-xs font-semibold text-[#546e5b]">Declared EIP prerequisites (may be ERC or Core)</p>
       <p className="mt-1 text-sm text-[#3b5745]">
         {item.requires.length ? item.requires.join(" · ") : "None listed in front matter"}
       </p>
