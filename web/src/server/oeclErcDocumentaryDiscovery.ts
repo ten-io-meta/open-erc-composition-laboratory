@@ -3,7 +3,7 @@ import registry from "../../../laboratory/scientific-open-source-worker/source-r
 
 /** Official ERC document comparison, NEVER executable Solidity or candidate admission. */
 export type StandardDocument = {
-  id: string; availability: "PUBLISHED" | "NOT_IN_OFFICIAL_REGISTRY" | "SOURCE_UNAVAILABLE";
+  id: string; availability: "PUBLISHED" | "NOT_IN_OFFICIAL_REGISTRY" | "SOURCE_UNAVAILABLE" | "UNPARSEABLE_SPECIFICATION";
   title: string | null; description: string | null; abstract: string | null;
   status: string | null; category: string | null; requires: string[];
   interfaceNames: string[]; requirements: string[];
@@ -129,7 +129,7 @@ export async function readOfficialErc(id:string,transport:Transport=fetch):Promi
       headers:{Accept:"text/plain"},signal:AbortSignal.timeout(7500)});
     if(r.status===404)return missing(id,"NOT_IN_OFFICIAL_REGISTRY");
     if(!r.ok)return missing(id,"SOURCE_UNAVAILABLE");
-    return parseOfficialErc(id,await boundedText(r))??missing(id,"NOT_IN_OFFICIAL_REGISTRY");
+    return parseOfficialErc(id,await boundedText(r))??missing(id,"UNPARSEABLE_SPECIFICATION");
   }catch{return missing(id,"SOURCE_UNAVAILABLE");}
 }
 export function deriveRelation(a:StandardDocument,b:StandardDocument):DocumentaryPair["relation"]{
