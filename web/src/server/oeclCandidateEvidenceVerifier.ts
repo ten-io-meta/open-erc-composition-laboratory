@@ -99,9 +99,9 @@ export function decodeErc165Boolean(value: unknown): boolean {
     throw new Error("ERC-165 call returned an invalid ABI boolean encoding.");
   }
   const encoded = BigInt(value);
-  if (encoded !== 0n && encoded !== 1n)
+  if (encoded !== BigInt(0) && encoded !== BigInt(1))
     throw new Error("ERC-165 call returned a noncanonical ABI boolean value.");
-  return encoded === 1n;
+  return encoded === BigInt(1);
 }
 
 export function buildConfiguredProtocolDescriptor(
