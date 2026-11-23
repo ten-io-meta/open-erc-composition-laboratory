@@ -242,6 +242,8 @@ jobs:
         run: npx tsx scripts/check-preregistered-scientist-evm-replay.ts source-output/pair-8098-4626/scientist-adversarial-falsification.json laboratory/scientific-open-source-worker/preregistered-8098-4626-falsification.json audit-output/scientist-evm-comparison.json
       - name: Independently classify source-generated zero-quantity counterexamples and overbalance reversions
         run: npx tsx scripts/check-ast-self-falsification-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json
+      - name: Independently check five ERC7201 EVM formula event receipts against pinned offchain oracles
+        run: node laboratory/scientific-independent-review/check-erc7201-evm-witness.cjs source-output/erc7201/namespace-formula-observations.json source-output/erc7201/namespace-slot-evm-witness.json audit-output/erc7201-independent-evm-review.json
       - name: Independently regenerate the AST hypothesis and compare exact same-run EVM observations
         run: npx tsx scripts/check-ast-generated-scientist-evm-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-generated-evm-review.json
       - name: Archive scientific disagreement without changing EVM evidence
@@ -252,6 +254,7 @@ jobs:
           path: |
             audit-output/scientist-evm-comparison.json
             audit-output/scientist-ast-generated-evm-review.json
+            audit-output/erc7201-independent-evm-review.json
             audit-output/scientist-ast-self-falsification-review.json
           if-no-files-found: warn
           retention-days: 14
