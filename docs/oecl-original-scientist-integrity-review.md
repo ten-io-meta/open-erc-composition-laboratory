@@ -17,6 +17,7 @@ The EVM is a test instrument, NOT the generator or sole judge of scientific expl
 ## Implemented research-proof controls in PR #29
 
 - The source independence engine is bounded and deterministic, refuses contradictory/malformed attestations, checks attested independent source count, and never uses JavaScript bit shifts for an unbounded source set.
+- The upstream source-pair assessor is now also fail-closed: conflicting explicit independence/dependence declarations or declarations lacking concrete evidence IDs and a written basis yield INCONCLUSIVE instead of accepting the first record. This addresses the intake gate before set aggregation.
 - The independent review engine takes historical cross-source patterns, pairwise independence attestations and contradictory claims, derives **falsifiable hypotheses** and **provisional textual conclusions**, and always emits compatibility \`NOT_EVALUATED\`, admission \`NOT_ADMITTED\` and \`evmExecuted:false\`.
 - The original research corpus has **no persisted verified independence attestation matrix for its source pair**. Its sample is therefore properly PROVISIONAL, not SOURCE_CORROBORATED or ESTABLISHED. A controlled regression shows the stronger status only when an explicit independent-source attestation is supplied.
 - The automated review outputs a JSON report with SHA-256 of the two original input artifacts and archives it in GitHub Actions, without deploying Vercel or running Solidity/EVM.
