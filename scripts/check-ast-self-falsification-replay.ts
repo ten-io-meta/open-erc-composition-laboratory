@@ -82,9 +82,12 @@ for(let i=0;i<plan.challenges.length;i++){
             assert.match(x.receipt.txHash,/^0x[0-9a-f]{64}$/i);
             assert.match(x.receipt.blockHash,/^0x[0-9a-f]{64}$/i);
             assert.match(x.receipt.contractCodeKeccak256,/^0x[0-9a-f]{64}$/i);
+            assert.match(x.receipt.transactionTo,/^0x[0-9a-f]{40}$/i);
+            assert.match(x.receipt.caller,/^0x[0-9a-f]{40}$/i);
             assert.equal(x.receipt.transactionTo.toLowerCase(),
-                x.receipt.verifiedContractAddress?.toLowerCase() ??
-                x.receipt.transactionTo.toLowerCase());
+                (caseResult.operation==="BURN_UNDERLYING"
+                    ?originalEvm.fixtureAddresses.asset
+                    :originalEvm.fixtureAddresses.vault).toLowerCase());
             assert.equal(x.allTrackedStateUnchanged,true,
                 "Zero-value successful call altered protected tracked state");
         }else{
@@ -123,6 +126,60 @@ const zeroRefuted=checked.filter(x=>x.scientificChallengeStatus==="REFUTED_OVERB
 const overbalanceRefuted=checked.filter(x=>x.scientificChallengeStatus==="EXECUTABILITY_OVERCLAIM_REFUTED").length;
 assert.equal(zeroRefuted,2,"Both reviewed pinned zero-value fixtures should be counterexamples");
 assert.equal(overbalanceRefuted,2,"Both reviewed overbalance negatives should revert");
+const refinedHypotheses=originalPlan.predictions.map((p:any)=>{
+    const actualPositive=positive.observations.find((x:any)=>
+        x.predictionId===p.predictionId&&x.experimentalOperation===p.operation);
+    assert(actualPositive&&actualPositive.strictNumericRelationHolds===true,
+        "No verified positive-quantity baseline for refinement");
+    const zero=checked.find(x=>x.originalScopedPredictionId===p.predictionId&&
+        x.quantityRule==="ZERO");
+    const over=checked.find(x=>x.originalScopedPredictionId===p.predictionId&&
+        x.quantityRule==="OWNED_TOKEN_BALANCE_PLUS_ONE");
+    assert(zero&&over&&zero.scientificChallengeStatus==="REFUTED_OVERBROAD_CLAIM"&&
+        over.scientificChallengeStatus==="EXECUTABILITY_OVERCLAIM_REFUTED");
+    const originCase=evm.cases.find((x:any)=>x.caseId===zero.caseId);
+    assert(originCase.actual.transactionMined===true&&
+        originCase.actual.allTrackedStateUnchanged===true);
+    return {
+      researchRevisionId:"SCI-REV-"+hash(Buffer.from(
+        originalPlan.originHypothesisId+"|"+p.predictionId+"|"+
+        hash(experimentBytes))).slice(0,24),
+      originalAstHypothesisId:originalPlan.originHypothesisId,
+      scopedPredictionId:p.predictionId,
+      participant:p.participant,publicEntrypoint:p.publicEntrypoint,
+      sourceRevision:p.sourceRevision,sourceSha256:p.stateSourceSha256,
+      epistemicStatus:"CONDITIONALLY_SUPPORTED_WITH_FALSIFIED_OVERGENERALIZATIONS",
+      originalAstFindingStillValid:true,
+      revisedStatement:
+        "In the pinned local fixture, one eligible-owner "+
+        p.publicEntrypoint+" transaction of positive quantity decreased "+
+        p.stateVar+"; the successful zero-quantity boundary invocation did not decrease it; "+
+        "an amount above owned balance reverted in an unmined EVM call simulation.",
+      supportedObservation:{
+        strictlyDecreasedForPositiveAmount:true,
+        localMinedReceipt:actualPositive.witness.transactionHash,
+        measuredBefore:actualPositive.before,
+        measuredAfter:actualPositive.after
+      },
+      falsifyingObservations:[
+        {caseId:zero.caseId,claimRefuted:
+          "EVERY_SUCCESSFUL_CALL_STRICTLY_DECREASES_TOTAL_SUPPLY",
+          localMinedReceipt:originCase.actual.receipt.txHash},
+        {caseId:over.caseId,claimRefuted:
+          "PUBLIC_ENTRYPOINT_ALWAYS_EXECUTABLE",
+          unminedCallStaticRevert:true}
+      ],
+      unprovenQuestions:[
+        "Does a separate, fully coordinated operation preserve atomicity across both contracts?",
+        "Are the same semantics preserved under different implementation revisions, modifiers, permissions or asset behavior?",
+        "Do adversarial reentrant callbacks and hostile counterparties preserve all relevant invariants?"
+      ],
+      humanReviewRequired:true,
+      globalCompatibilityVerdict:"NOT_EVALUATED",
+      candidateAdmission:"NOT_ADMITTED"
+    };
+});
+assert.equal(refinedHypotheses.length,2);
 const out={
  schemaVersion:"OECL_INDEPENDENT_AST_SELF_FALSIFICATION_REVIEW_V1",
  sourceHypothesisId:originalPlan.originHypothesisId,
@@ -135,6 +192,7 @@ const out={
  boundaryCounterexamples:zeroRefuted,
  deniedUnconditionalExecutions:overbalanceRefuted,
  cases:checked,
+ refinedHypotheses,
  scientificVerdict:"INCONCLUSIVE",
  globalCompatibilityVerdict:"NOT_EVALUATED",
  candidateAdmission:"NOT_ADMITTED",
@@ -152,5 +210,6 @@ console.log("OECL_INDEPENDENT_AST_SELF_FALSIFICATION_REPLAY_PASS",JSON.stringify
  sourceHypothesisId:out.sourceHypothesisId,
  zeroValueCounterexamples:zeroRefuted,
  overbalanceReverts:overbalanceRefuted,
+ refinedHypotheses:refinedHypotheses.length,
  globalCompatibilityVerdict:out.globalCompatibilityVerdict
 }));
