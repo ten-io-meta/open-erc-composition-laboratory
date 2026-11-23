@@ -31,6 +31,7 @@ const docs=new Map([
   ["2612",makeDoc("2612",{title:"Permit Extension",requires:"20",method:"permit"})],
   ["7575",makeDoc("7575",{title:"Multi-Asset Tokenized Vaults",requires:"20, 4626",method:"withdraw"})],
   ["721",makeDoc("721",{title:"Non-Fungible Token Standard",method:"ownerOf"})],
+  ["8004",makeDoc("8004",{title:"Trustless Agents",requires:"721",method:"getMetadata"})],
 ]);
 const calls=[];
 const mock=async (url,opts)=>{
@@ -108,6 +109,16 @@ assert.equal(unrelated.relation.kind,"NO_DECLARED_DEPENDENCY");
 assert.equal(unrelated.evmExecuted,false);
 assert.deepEqual(unrelated.researchQuestions,[],"Unsupported test hypotheses are never fabricated");
 console.log("OECL_DOCUMENTARY_SHARED_AND_UNRELATED_PASS");
+
+const locallyRegistered=await investigateErcSpecifications("ERC-8060","ERC-8004",mock);
+assert.equal(locallyRegistered.relation.kind,"INCOMPLETE_SPECIFICATIONS");
+assert.equal(locallyRegistered.standards[0].availability,"NOT_IN_OFFICIAL_REGISTRY");
+assert.equal(locallyRegistered.standards[0].oeclPinnedSource.repository,"ten-io-meta/erc8060-native-eth-value");
+assert.match(locallyRegistered.standards[0].oeclPinnedSource.revision,/^[a-f0-9]{40}$/);
+assert.equal(locallyRegistered.standards[1].title,"Trustless Agents");
+assert.equal(locallyRegistered.scientificVerdict,"NOT_EVALUATED");
+assert.deepEqual(locallyRegistered.researchQuestions,[],"No uncovered cross-standard relation must be invented");
+console.log("OECL_DOCUMENTARY_8060_8004_PINNED_SOURCE_PASS");
 
 const missing=await investigateErcSpecifications("ERC-20","ERC-9999",mock);
 assert.equal(missing.standards[1].availability,"NOT_IN_OFFICIAL_REGISTRY");
