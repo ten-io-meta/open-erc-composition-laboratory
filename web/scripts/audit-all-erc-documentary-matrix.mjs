@@ -4,7 +4,7 @@ import {readdirSync,readFileSync,lstatSync,mkdirSync,writeFileSync} from "node:f
 import {resolve,join,dirname} from "node:path";
 import {parseOfficialErc,deriveRelation,proposeDocumentaryTests}
   from "../src/server/oeclErcDocumentaryDiscovery.ts";
-import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with {type:"json"};
+import registry from "../../laboratory/scientific-open-source-worker/source-registry.json" with {type:"json"};
 
 // Documentary-only exhaustive run. Does not compile or execute any ERC Solidity.
 const pinned="e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d";
