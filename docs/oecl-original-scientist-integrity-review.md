@@ -21,6 +21,12 @@ The EVM is a test instrument, NOT the generator or sole judge of scientific expl
 - The original research corpus has **no persisted verified independence attestation matrix for its source pair**. Its sample is therefore properly PROVISIONAL, not SOURCE_CORROBORATED or ESTABLISHED. A controlled regression shows the stronger status only when an explicit independent-source attestation is supplied.
 - The automated review outputs a JSON report with SHA-256 of the two original input artifacts and archives it in GitHub Actions, without deploying Vercel or running Solidity/EVM.
 
+## Confirmed original conclusion authority boundary and mitigation
+
+- The legacy `ResearchConclusionEngine` previously promoted any pattern object with status `SUPPORTED` and confidence >=70 to research conclusion `ESTABLISHED` without itself checking claimed source IDs, concrete evidence IDs or independent source assessments. A direct or corrupted input could falsely inflate research authority.
+- The new guard defaults to `PRELIMINARY` when pairwise independence is missing or source evidence IDs are absent; explicit pairwise independence attestation across at least two sources is required for `SUPPORTED`, three for `ESTABLISHED` with a bounded confidence. An upstream error prevents conclusion emission. All these are **research-source** categories, never EVM contract interoperability proofs.
+- Falsification control `check-original-research-conclusion-evidence-boundary.ts` verifies high-confidence spoofing, duplicate identities, contradictory source assessments, missing claims and malformed scores cannot claim `ESTABLISHED`. This change deliberately errs on the side of weaker conclusions when historical pipelines did not persist independent-source attestations.
+
 ## Next scientific/security gates
 
 - Audit all sources of the legacy \`ResearchConclusionEngine\` \`ESTABLISHED\` label and the \`HypothesisValidationEngine\` \`CONFIRMED\` label. Their heuristic/status thresholds cannot be assumed equivalent to independent experimental truth. Introduce typed challenge/corroboration receipts before any user-facing promotion.
