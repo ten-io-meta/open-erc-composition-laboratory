@@ -53,18 +53,18 @@ export function getVerifiedErc4626LocalEvm() {
   }
   const o=r.observations;
   try{
-    const unit=10n**18n;
-    const dep=100n*unit;
-    const remain=60n*unit;
-    const final=70n*unit;
+    const unit=BigInt(10)**BigInt(18);
+    const dep=BigInt(100)*unit;
+    const remain=BigInt(60)*unit;
+    const final=BigInt(70)*unit;
     const a=o.afterDeposit, b=o.afterAllOperations;
     if(BigInt(o.initialDeposit)!==dep||BigInt(o.initialShares)!==dep||
-       BigInt(o.redeemedAssets)!==40n*unit||
-       BigInt(o.independentDeposit)!==10n*unit||o.assetDecimals!==18||
+       BigInt(o.redeemedAssets)!==BigInt(40)*unit||
+       BigInt(o.independentDeposit)!==BigInt(10)*unit||o.assetDecimals!==18||
        BigInt(a.assetsInVault)!==dep||BigInt(a.sharesOwner)!==dep||
        BigInt(a.vaultShareSupply)!==dep||
        BigInt(b.assetsInVault)!==final||BigInt(b.vaultShareSupply)!==final||
-       BigInt(b.sharesOwner)!==remain||BigInt(b.sharesAttacker)!==10n*unit)
+       BigInt(b.sharesOwner)!==remain||BigInt(b.sharesAttacker)!==BigInt(10)*unit)
       invalid("ASSET_SHARE_ACCOUNTING");
   }catch{invalid("AMOUNT_FORMAT");}
   if(r.limitations.length<4||
