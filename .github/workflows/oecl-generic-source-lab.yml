@@ -118,8 +118,14 @@ jobs:
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE dependency-source source-output/pair-8060-20burnable
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-20 dependency-source source-output/pair-8098-20
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-1155 ERC-20 dependency-source source-output/pair-1155-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-4626 ERC-20 dependency-source source-output/pair-4626-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-721 ERC-165 dependency-source source-output/pair-721-165
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-2981 ERC-721 dependency-source source-output/pair-2981-721
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-2612 ERC-20 dependency-source source-output/pair-2612-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-4626 dependency-source source-output/pair-8060-4626
           node -e 'const fs=require("node:fs");for(const folder of ["pair-8060-8098","pair-8060-20burnable","pair-8098-20"]){const r=JSON.parse(fs.readFileSync("source-output/"+folder+"/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses<1){console.error("OECL_GENERIC_DISCOVERY_REGRESSION:"+folder);process.exit(1)}}'
           node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-1155-20/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses!==0||r.discoveryReason!=="NO_ADMISSIBLE_SOURCE_RELATION_DISCOVERED"){console.error("OECL_NEGATIVE_DISCOVERY_MUST_REMAIN_INCONCLUSIVE");process.exit(1)}'
+          node -e 'const fs=require("node:fs");for(const [dir,a,b] of [["pair-4626-20","ERC-4626","ERC-20"],["pair-721-165","ERC-721","ERC-165"],["pair-2981-721","ERC-2981","ERC-721"],["pair-2612-20","ERC-2612","ERC-20"],["pair-8060-4626","ERC-8060","ERC-4626"]]){const r=JSON.parse(fs.readFileSync("source-output/"+dir+"/source-scientific-report.json","utf8"));if(r.selected?.map(x=>x.id).join("|")!==a+"|"+b||r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.sourceOnly!==true||r.evmExecuted!==false||r.counts.sourceUnits<2)throw Error("NEW_AST_PAIR_FAILED:"+dir)}console.log("OECL_FIVE_ADDITIONAL_REAL_AST_PAIRS:PASS")'
 
       - name: Check path feasibility reports and executable-EVM experiment proposals on real pinned sources
         if: github.event_name != 'workflow_dispatch'
