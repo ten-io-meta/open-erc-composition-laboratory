@@ -82,8 +82,8 @@ try {
   const receiptDownload=await fetch(base+"/api/scientific/erc4626-evm?download=1");
   assert.equal(receiptDownload.status,200);
   assert.match(receiptDownload.headers.get("content-disposition")||"",/attachment; filename=/);
-  const downloaded=await receiptDownload.json();
-  assert.equal(downloaded.runId,45212718140);
+  const downloaded4626=await receiptDownload.json();
+  assert.equal(downloaded4626.runId,45212718140);
   console.log("OECL_ERC4626_NEW_LOCAL_EVM_PUBLIC_RECEIPTS_PASS");
 
   const sourceConfig = await fetch(base + "/api/scientific/source-jobs");
