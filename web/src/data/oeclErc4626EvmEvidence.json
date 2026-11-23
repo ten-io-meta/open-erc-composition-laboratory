@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "OECL_PINNED_ERC4626_EVM_EVIDENCE_V1",
+  "runId": 45212718140,
+  "workflowSha": "f0c0b28eb66e9b935f36d2454aa053e3ef1dc322",
+  "experiment": {
+    "schemaVersion": "OECL_ERC4626_ERC20_LOCAL_EVM_RECEIPTS_V1",
+    "scope": "OZ_4_9_6_ERC4626_ERC20_ISOLATED_FIXTURE_ONLY",
+    "selected": [
+      "ERC-4626",
+      "ERC-20"
+    ],
+    "scientificVerdict": "INCONCLUSIVE",
+    "candidateAdmission": "NOT_ADMITTED",
+    "evmExecuted": true,
+    "localChainId": 31337,
+    "sourceSha256": "2d95b37480c2a458e95045ddd7d69efc30452c7b2e470de8c264df14149ec674",
+    "lockedDependency": {
+      "package": "@openzeppelin/contracts",
+      "version": "4.9.6",
+      "integrity": "sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA=="
+    },
+    "compilerVersion": "0.8.26+commit.8a97fa7a.Emscripten.clang",
+    "fixtureContracts": {
+      "asset": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      "vault": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+    },
+    "observations": {
+      "initialDeposit": "100000000000000000000",
+      "initialShares": "100000000000000000000",
+      "afterDeposit": {
+        "assetsInVault": "100000000000000000000",
+        "sharesOwner": "100000000000000000000",
+        "sharesAttacker": "0",
+        "vaultShareSupply": "100000000000000000000",
+        "ownerUnderlying": "900000000000000000000",
+        "attackerUnderlying": "0"
+      },
+      "redeemedAssets": "40000000000000000000",
+      "afterAllOperations": {
+        "assetsInVault": "70000000000000000000",
+        "sharesOwner": "60000000000000000000",
+        "sharesAttacker": "10000000000000000000",
+        "vaultShareSupply": "70000000000000000000",
+        "ownerUnderlying": "930000000000000000000",
+        "attackerUnderlying": "0"
+      },
+      "independentDeposit": "10000000000000000000",
+      "assetDecimals": 18
+    },
+    "minedReceipts": [
+      {
+        "name": "mint trusted research underlying",
+        "txHash": "0xaac61d763f56d49dd048e9aeed5e1ba288e8e1fe7498c5f3fb56efdffffcdc28",
+        "blockNumber": 3,
+        "status": 1,
+        "gasUsed": "69004"
+      },
+      {
+        "name": "approve vault asset spending",
+        "txHash": "0x54e2575a19b8ff3f90da23175d9fba0d1d1659fb4173a71ca5c591bcdf1b40ad",
+        "blockNumber": 4,
+        "status": 1,
+        "gasUsed": "46878"
+      },
+      {
+        "name": "deposit underlying through ERC4626",
+        "txHash": "0x09229f61502c4af29a948f5df9ea1fb2eab7ffe76f2a5d257bd211357fcf7257",
+        "blockNumber": 5,
+        "status": 1,
+        "gasUsed": "112336"
+      },
+      {
+        "name": "redeem some shares for underlying",
+        "txHash": "0xafe2dee7752a935ecc0028acbad3622e8ecb14cfcee46ed20e3e0b173ee8a5d2",
+        "blockNumber": 6,
+        "status": 1,
+        "gasUsed": "58993"
+      },
+      {
+        "name": "transfer underlying to independent account",
+        "txHash": "0x72f54ed2808bef932c381df89f9a29cc959a3a4e3b0d572c91914e98cfbb5dfb",
+        "blockNumber": 7,
+        "status": 1,
+        "gasUsed": "52151"
+      },
+      {
+        "name": "approve vault from independent account",
+        "txHash": "0x5e4cf60be4fa75fde4fd5eb951ae91116b60543fb317a95596b9bc6f60bfb8b6",
+        "blockNumber": 8,
+        "status": 1,
+        "gasUsed": "46866"
+      },
+      {
+        "name": "independent account deposits underlying",
+        "txHash": "0x155f9be109833c9241d96a73a1375243ce67597255c5c405500ad7ac214872ab",
+        "blockNumber": 9,
+        "status": 1,
+        "gasUsed": "73324"
+      }
+    ],
+    "readOnlyNegativeControls": [
+      {
+        "name": "attacker cannot withdraw owner's shares",
+        "execution": "EVM_CALL_STATIC_REVERT",
+        "transactionMined": false,
+        "statePreserved": true
+      },
+      {
+        "name": "attacker cannot deposit without underlying or approval",
+        "execution": "EVM_CALL_STATIC_REVERT",
+        "transactionMined": false,
+        "statePreserved": true
+      },
+      {
+        "name": "withdraw above owner's share balance",
+        "execution": "EVM_CALL_STATIC_REVERT",
+        "transactionMined": false,
+        "statePreserved": true
+      }
+    ],
+    "limitations": [
+      "This experiment deploys audited OpenZeppelin contracts through a purpose-built fixture, not arbitrary deployed implementations.",
+      "The positive receipts only demonstrate one ERC4626/ERC20 accounting path on a local in-memory EVM.",
+      "Negative callStatic controls are EVM simulations; they are not mined transaction receipts.",
+      "No untrusted source, external RPC, user-controlled contract or new pair candidate was executed.",
+      "Access-control semantics, malicious assets, share rounding, reentrancy and all other scenarios need further independent tests."
+    ]
+  }
+}
