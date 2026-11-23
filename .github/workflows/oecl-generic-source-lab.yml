@@ -98,6 +98,13 @@ jobs:
           test "$(git -C pinned-ercs rev-parse HEAD)" = "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d"
           node oecl/laboratory/scientific-open-source-worker/check-erc7201-namespace-formula.cjs pinned-ercs/ERCS/erc-7201.md source-output/erc7201/namespace-formula-observations.json
 
+      - name: Verify ERC-7201 formula in a controlled Solidity local-EVM probe with mined event receipts
+        if: github.event_name != 'workflow_dispatch'
+        working-directory: dependency-source
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: node ../oecl/laboratory/scientific-open-source-worker/run-erc7201-namespace-local-evm.cjs . ../source-output/erc7201/namespace-formula-observations.json ../source-output/erc7201/namespace-slot-evm-witness.json
+
       - name: Run generic source and provenance falsification controls
         run: node oecl/scripts/check-generic-source-worker.cjs
 
