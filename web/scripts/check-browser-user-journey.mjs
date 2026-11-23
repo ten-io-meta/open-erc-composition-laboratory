@@ -191,6 +191,13 @@ async function test(){
     assert.equal(documentaryJson.relation.kind,"DECLARED_DEPENDENCY");
     assert.ok(documentaryJson.relation.statements.some(s=>s.includes("ERC-4626")&&s.includes("ERC-20")));
   }else assert.equal(documentaryJson.relation.kind,"INCOMPLETE_SPECIFICATIONS");
+  await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
+    "seven independent ERC4626 x ERC20 local EVM receipts are visible",30000);
+  assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-erc4626-evm] table tbody tr").length'),7);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-erc4626-evm]").innerText.includes("GLOBAL VERDICT INCONCLUSIVE")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-erc4626-evm]").innerText.includes("callStatic")'),true);
+  console.log("OECL_BROWSER_NEW_ERC4626_LOCAL_EVM_PASS:7:3");
+
   console.log("OECL_BROWSER_ANY_ERC_DOCUMENTARY_COMPARISON_PASS");
 
   await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("PINNED SOURCE AVAILABLE")',
