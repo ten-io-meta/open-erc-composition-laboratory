@@ -38,7 +38,15 @@ function section(input:string,name:string):string{
   let enabled=false;const lines:string[]=[];
   for(const line of input.split(/\r?\n/)){
     const h=line.match(/^#{2}\s+(.+?)\s*$/);
-    if(h){if(enabled)break;enabled=h[1].toLowerCase()===name.toLowerCase();continue;}
+    if(h){
+      // ERC-20 nests its method specification under a same-level "Token" heading.
+      // Preserve that documented subdivision instead of dropping its methods.
+      if(enabled && name==="Specification" && ["token","methods","events"].includes(h[1].toLowerCase())){
+        lines.push(line);continue;
+      }
+      if(enabled)break;
+      enabled=h[1].toLowerCase()===name.toLowerCase();continue;
+    }
     if(enabled)lines.push(line);
   }
   return lines.join("\n");
