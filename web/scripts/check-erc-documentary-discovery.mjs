@@ -19,6 +19,7 @@ const makeDoc=(num,opts={})=>[
   "This standard defines the documented API for ERC-"+num+".",
   "",
   "## Specification",
+  ...(opts.nestedToken?["## Token"]:[]),
   "### Methods",
   "#### "+(opts.method||"balanceOf"),
   "MUST verify the caller and permitted token accounting before execution.",
@@ -26,7 +27,7 @@ const makeDoc=(num,opts={})=>[
 ].join("\n")+"\n";
 const docs=new Map([
   ["4626",makeDoc("4626",{title:"Tokenized Vaults",requires:"20, 2612",method:"deposit"})],
-  ["20",makeDoc("20",{title:"Token Standard",method:"transfer"})],
+  ["20",makeDoc("20",{title:"Token Standard",method:"transfer",nestedToken:true})],
   ["2612",makeDoc("2612",{title:"Permit Extension",requires:"20",method:"permit"})],
   ["7575",makeDoc("7575",{title:"Multi-Asset Tokenized Vaults",requires:"20, 4626",method:"withdraw"})],
   ["721",makeDoc("721",{title:"Non-Fungible Token Standard",method:"ownerOf"})],
@@ -63,6 +64,7 @@ assert.equal(pair.implementationVerified,false);
 assert.equal(pair.relation.kind,"DECLARED_DEPENDENCY");
 assert.match(pair.relation.statements[0],/ERC-4626 explicitly lists ERC-20/);
 assert.equal(pair.standards[0].title,"Tokenized Vaults");
+assert.deepEqual(pair.standards[1].interfaceNames,["transfer"],"ERC-20 nested Token specification must retain methods");
 assert.deepEqual(pair.standards[0].requires,["ERC-20","ERC-2612"]);
 assert.deepEqual(pair.standards[0].interfaceNames,["deposit"]);
 assert.equal(pair.standards[0].provenance.sha256,
