@@ -4,7 +4,7 @@ const crypto=require("node:crypto");
 const fs=require("node:fs");
 const path=require("node:path");
 const {createRequire}=require("node:module");
-const moduleRequire=createRequire(path.resolve("oecl/integrations/secure-evm-toolchain/package.json"));
+const moduleRequire=createRequire(path.resolve(__dirname,"../../integrations/secure-evm-toolchain/package.json"));
 const solc=moduleRequire("solc");
 const sha256=x=>crypto.createHash("sha256").update(x).digest("hex");
 const depRoot=path.resolve(process.argv[2]||"dependency-source");
