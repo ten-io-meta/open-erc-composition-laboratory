@@ -238,7 +238,14 @@ export function CompositionWorkbench() {
         </p>
       </div>}
 
-      {!pinned && <DocumentaryPairExplorer key={pairKey} protocolA={pair.a} protocolB={pair.b} />}
+      {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
+        <p role="status" className="rounded-xl border border-[#e4d6b9] bg-[#fffaf0] p-4 text-sm text-[#6f5634]">
+          ERC-20 Burnable is an OpenZeppelin implementation extension, not a separate numbered ERC.
+          For a documentary comparison select ERC-20; for source/EVM evidence choose the reviewed
+          ERC-8060 × ERC-20-BURNABLE example. No result is inferred for this untested pair.
+        </p>}
+      {!pinned && pair.a !== "ERC-20-BURNABLE" && pair.b !== "ERC-20-BURNABLE" &&
+        <DocumentaryPairExplorer key={pairKey} protocolA={pair.a} protocolB={pair.b} />}
 
       {!loading && !failure && graph && <>
         <div data-testid="oecl-outcome" className="grid gap-3 lg:grid-cols-3">
