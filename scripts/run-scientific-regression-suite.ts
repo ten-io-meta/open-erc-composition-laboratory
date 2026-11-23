@@ -71,7 +71,12 @@ const integrationRoutedChecks = new Set([
     "check-pinned-real-scientific-discovery.ts",
     // Requires independently generated ERC-8060 x ERC20Burnable AST/EVM evidence.
     // Executed with six pinned inputs in oecl-independent-burnable-evm.yml.
-    "check-independent-burnable-native-properties.ts"
+    "check-independent-burnable-native-properties.ts",
+    // Requires same-run pinned source/EVM artifacts; runs in the independent
+    // source-worker workflow with explicit artifact path and cannot run here.
+    "check-ast-generated-scientist-evm-replay.ts",
+    "check-ast-self-falsification-replay.ts",
+    "check-preregistered-scientist-evm-replay.ts"
 ]);
 
 const credentialGatedChecks = new Set([
