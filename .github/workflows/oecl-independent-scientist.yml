@@ -1,0 +1,46 @@
+name: OECL Independent Scientist Research Review
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-independent-review/**"
+      - "laboratory/source-independence/SourceIndependenceSetAssessmentEngine.ts"
+      - "scripts/check-independent-scientific-reasoning.ts"
+      - "scripts/check-scientific-source-independence-bounded.ts"
+      - "scripts/run-independent-scientific-review.ts"
+      - ".github/workflows/oecl-independent-scientist.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-scientist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact OECL scientist source
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked scientist dependencies (no scripts)
+        run: npm ci --ignore-scripts
+      - name: Falsify independence overflow, contradictory evidence and fake authority
+        run: npx tsx scripts/check-scientific-source-independence-bounded.ts
+      - name: Falsify unsupported hypothesis conclusions without EVM
+        run: npx tsx scripts/check-independent-scientific-reasoning.ts
+      - name: Verify original scientist can report provisional conclusions without EVM
+        run: npx tsx scripts/run-independent-scientific-review.ts audit-output/original-scientist-source-review.json
+      - name: Archive independently reproducible scientific report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-independent-scientist-source-reasoning
+          path: audit-output/original-scientist-source-review.json
+          if-no-files-found: warn
+          retention-days: 14

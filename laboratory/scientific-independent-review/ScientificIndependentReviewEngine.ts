@@ -72,7 +72,7 @@ export class ScientificIndependentReviewEngine {
         const used = new Set<string>();
         const errors:string[]=[];
         for (const pattern of [...input.patterns.patterns].sort(
-            (a,b)=>a.patternId.localeCompare(b.patternId))) {
+            (a,b)=>String(a?.patternId??"").localeCompare(String(b?.patternId??"")))) {
             const sourceIds = Array.isArray(pattern.sources) ?
                 [...new Set(pattern.sources)].sort() : [];
             const evidenceIds = Array.isArray(pattern.evidence) ?
