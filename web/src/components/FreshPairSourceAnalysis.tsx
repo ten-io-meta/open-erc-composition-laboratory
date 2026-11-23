@@ -69,7 +69,7 @@ export function FreshPairSourceAnalysis({ sourceA, sourceB }: {
       } catch (error) {
         if (ctrl.signal.aborted) return;
         setEvidence(old => ({
-          job: old?.job ?? { status: "SOURCE_JOB_STATUS_UNAVAILABLE", requestId: jobId },
+          job: old?.job ?? { status: "SOURCE_JOB_STATUS_UNAVAILABLE", requestId: jobId ?? undefined },
           view: null,
           error: error instanceof Error ? error.message : "Cannot verify job status.",
         }));
