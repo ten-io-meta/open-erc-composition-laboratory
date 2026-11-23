@@ -7,6 +7,7 @@ import { IndependentEvmEvidencePanel } from "@/components/IndependentEvmEvidence
 import { DocumentaryPairExplorer } from "@/components/DocumentaryPairExplorer";
 import { ErcCatalogBrowser } from "@/components/ErcCatalogBrowser";
 import { FreshPairSourceAnalysis } from "@/components/FreshPairSourceAnalysis";
+import { Erc4626LocalEvmPanel } from "@/components/Erc4626LocalEvmPanel";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -84,6 +85,8 @@ export function CompositionWorkbench() {
   const loading = Boolean(pinned) && current === null;
   const dossierPair = isDossier(pair);
   const independentEvm = isIndependentEvm(pair);
+  const hasNewLocalEvm = (pair.a === "ERC-4626" && pair.b === "ERC-20") ||
+    (pair.b === "ERC-4626" && pair.a === "ERC-20");
 
   useEffect(() => {
     const abort = new AbortController();
@@ -236,7 +239,8 @@ export function CompositionWorkbench() {
           <h3 className="mt-2 text-2xl font-semibold tracking-[-0.035em] md:text-3xl">{pair.a} <span className="text-[#90a199]">×</span> {pair.b}</h3>
         </div>
         {loading ? pill("Checking pinned evidence") : failure ? pill("Verification failed") :
-          graph ? pill("INCONCLUSIVE · NOT_ADMITTED") : pill("NOT EVALUATED")}
+          graph ? pill("INCONCLUSIVE · NOT_ADMITTED") :
+          hasNewLocalEvm ? pill("LOCAL EVM OBSERVED · INCONCLUSIVE") : pill("NOT EVALUATED")}
       </header>
 
       {loading && <p role="status" className="rounded-xl bg-[#f3f7f3] p-5 text-sm text-[#506858]">Loading verified source evidence...</p>}
@@ -245,12 +249,18 @@ export function CompositionWorkbench() {
       </p>}
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
-        <h4 className="text-lg font-semibold text-[#694d27]">No pinned Solidity/EVM experiment for this pair</h4>
+        <h4 className="text-lg font-semibold text-[#694d27]">
+          {hasNewLocalEvm ? "New isolated EVM evidence available — compiler AST view not yet pinned" :
+            "No pinned Solidity/EVM experiment for this pair"}
+        </h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          OECL has not tested these implementations in its published EVM suite. This is neither a compatibility approval
-          nor proof of incompatibility. The specification-level discovery below investigates declared dependencies instead.
+          {hasNewLocalEvm ?
+            "A bounded ERC-4626/20 OpenZeppelin fixture was executed on a local Hardhat EVM. Its seven mined transactions and three read-only negative simulations are shown below; that does not certify general interoperability." :
+            "OECL has not tested this composition in its published EVM suite. This is neither a compatibility approval nor proof of incompatibility. Documentary discovery below identifies source-level questions."}
         </p>
       </div>}
+
+      {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
         <p role="status" className="rounded-xl border border-[#e4d6b9] bg-[#fffaf0] p-4 text-sm text-[#6f5634]">
