@@ -204,7 +204,7 @@ async function test(){
     assert.ok(sourceJson.sources.some(x=>x.id===n),"new pinned source profile "+n);
   if(!sourceJson.enabled){
     assert.equal(await evalJs('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("not activated")'),true);
-    assert.equal(await evalJs('document.querySelector("[data-testid=oecl-fresh-ast] button[type=submit]') ,null);
+    assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-fresh-ast] button").length'),0);
   }
   console.log("OECL_BROWSER_FRESH_SOURCE_PREFLIGHT_PASS");
 
