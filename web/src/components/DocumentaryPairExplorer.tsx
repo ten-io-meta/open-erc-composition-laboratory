@@ -14,7 +14,7 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
         <h4 className="mt-2 text-lg font-semibold">{item.title ?? "Specification not confirmed"}</h4>
       </div>
       <span className="rounded-full bg-[#edf4ef] px-3 py-1.5 text-[11px] text-[#456c53]">
-        {published ? (item.status ?? "published document") : "Source not confirmed"}
+        {published ? (item.status ?? "official document") : item.oeclPinnedSource ? "OECL source registered" : "Official source unavailable"}
       </span>
     </div>
     {published ? <>
@@ -46,6 +46,14 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
         ? "The registry could not be reached. This does not mean the ERC does not exist."
         : "No matching specification was found in the official ethereum/ERCs repository. A draft, unmerged proposal, or custom implementation may still exist."}
     </p>}
+    {item.oeclPinnedSource && <div className="mt-4 rounded-lg border border-[#c6dccd] bg-[#f2f9f4] p-3">
+      <p className="text-xs font-semibold text-[#295d40]">OECL has pinned Solidity source for this implementation</p>
+      <p className="mt-1 text-xs text-[#587361]">Contract: {item.oeclPinnedSource.contract}. This does not prove a composition with the other selected standard.</p>
+      <a href={"https://github.com/"+item.oeclPinnedSource.repository+"/tree/"+item.oeclPinnedSource.revision}
+        target="_blank" rel="noopener noreferrer" className="mt-2 inline-block break-all text-xs font-medium text-[#286849] underline">
+        Inspect implementation at pinned revision
+      </a>
+    </div>}
     <a href={item.provenance.sourceUrl} target="_blank" rel="noopener noreferrer"
       className="mt-4 inline-block break-all text-xs font-semibold text-[#236747] underline">
       View original ERC repository document
@@ -55,9 +63,16 @@ function DocumentationCard({ item }: { item: StandardDocument }) {
 
 export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;protocolB:string}){
   const [state,setState]=useState<ReadState|null>(null);
+  const [retry,setRetry]=useState(0);
   const key=protocolA+"|"+protocolB;
   useEffect(()=>{
     const ctrl=new AbortController();
+    let active=true;
+    const timer=setTimeout(()=>{
+      ctrl.abort();
+      if(active)setState({key:protocolA+"|"+protocolB,data:null,
+        error:"The public specification lookup exceeded its time limit. Please retry."});
+    },18000);
     async function read(){
       try{
         const url="/api/scientific/standards-pair?protocolA="+encodeURIComponent(protocolA)+
@@ -77,15 +92,17 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
           error:e instanceof Error?e.message:"The official ERC documents are unavailable."});
       }
     }
-    void read();
-    return ()=>ctrl.abort();
-  },[protocolA,protocolB]);
+    void read().finally(()=>clearTimeout(timer));
+    return ()=>{active=false;clearTimeout(timer);ctrl.abort();};
+  },[protocolA,protocolB,retry]);
   const result=state?.key===key?state:null;
   if(!result)return <div role="status" className="rounded-2xl bg-[#f0f6f2] p-5 text-sm text-[#466a52]">
     Looking up both ERC specifications and their declared dependencies...
   </div>;
   if(result.error)return <div role="alert" className="rounded-2xl border border-[#dec3b9] bg-[#fff8f4] p-5 text-sm text-[#8e4e3a]">
     Official specification lookup unavailable: {result.error}. No relationship is inferred.
+    <button type="button" onClick={()=>{setState(null);setRetry(x=>x+1);}}
+      className="ml-3 font-semibold underline">Retry comparison</button>
   </div>;
   const d=result.data!;
   const relationTitle={
