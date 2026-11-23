@@ -62,7 +62,7 @@ async function checkTx({provider,ethers,receipt,contract,expectedSender,
   assert.equal(actual.blockNumber,receipt.blockNumber);
   const block=await provider.getBlock(actual.blockNumber);
   assert(block&&block.hash===actual.blockHash&&
-    block.transactions.includes(actual.transactionHash));
+    block.transactions.some(h=>h.toLowerCase()===actual.transactionHash.toLowerCase()));
   const tx=await provider.getTransaction(actual.transactionHash);
   assert(tx&&tx.to.toLowerCase()===contract.address.toLowerCase());
   assert.equal(tx.from.toLowerCase(),expectedSender.toLowerCase());
@@ -105,8 +105,8 @@ async function checkSourceGeneratedHypothesis(x){
   assert.equal(plan.provenance.sources[1].revision,openzeppelinVersion);
   assert.equal(plan.provenance.compilerVersion,compilerVersion);
   assert.equal(plan.provenance.dependencyIntegrity,dependencyIntegrity);
-  assert.equal(plan.plannedSequence[0].amountTokens,ethers.utils.formatUnits(redeemAmount,18));
-  assert.equal(plan.plannedSequence[1].amountTokens,ethers.utils.formatUnits(burnAmount,18));
+  assert(ethers.utils.parseUnits(plan.plannedSequence[0].amountTokens,18).eq(redeemAmount));
+  assert(ethers.utils.parseUnits(plan.plannedSequence[1].amountTokens,18).eq(burnAmount));
   const network=await provider.getNetwork();
   assert.equal(Number(network.chainId),31337);
   const witnesses={
