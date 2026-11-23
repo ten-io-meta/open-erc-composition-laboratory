@@ -11,6 +11,7 @@ on:
       - "web/scripts/erc-semantic-review-profiles.json"
       - "web/scripts/generate-deep-erc-semantic-research.mjs"
       - "web/scripts/check-deep-erc-semantic-research.mjs"
+      - "web/scripts/check-erc7837-erc8098-conditional-tension.mjs"
       - "web/scripts/check-registered-source-pair-matrix.mjs"
       - "web/src/server/oeclErcDocumentaryDiscovery.ts"
       - ".github/workflows/oecl-all-erc-documentary-matrix.yml"
@@ -40,6 +41,13 @@ jobs:
           ref: e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d
           path: official-ercs
           persist-credentials: false
+      - name: Checkout immutable ERC-8098 candidate source (not a normative ERC certification)
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8098-reference
+          ref: 68a05289bd68d89db8453c49500e0a1ae6cd11ec
+          path: pinned-8098
+          persist-credentials: false
       - name: Set up Node.js without running Solidity
         uses: actions/setup-node@v4
         with:
@@ -53,6 +61,8 @@ jobs:
           node oecl/web/scripts/check-erc-corpus-falsification-provenance.mjs official-ercs/ERCS audit-output/all-erc-scientific-falsification-agenda.json
           node oecl/web/scripts/generate-deep-erc-semantic-research.mjs official-ercs/ERCS audit-output/all-erc-scientific-falsification-agenda.json audit-output/deep-erc-scientific-hypotheses.json
           node oecl/web/scripts/check-deep-erc-semantic-research.mjs official-ercs/ERCS audit-output/deep-erc-scientific-hypotheses.json audit-output/all-erc-scientific-falsification-agenda.json
+          test "$(git -C pinned-8098 rev-parse HEAD)" = "68a05289bd68d89db8453c49500e0a1ae6cd11ec"
+          node oecl/web/scripts/check-erc7837-erc8098-conditional-tension.mjs official-ercs/ERCS/erc-7837.md pinned-8098/contracts/ERC8098Reference.sol audit-output/all-erc-scientific-falsification-agenda.json audit-output/erc7837-erc8098-conditional-invariant-tension.json
           node oecl/web/scripts/check-registered-source-pair-matrix.mjs oecl/.github/workflows/oecl-generic-source-lab.yml audit-output/registered-source-pairs.json
       - name: Archive documentary manifest with SHA-256 provenance
         if: always()
