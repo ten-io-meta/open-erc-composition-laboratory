@@ -40,11 +40,38 @@ In the original V2 cycle, learning-derived hypotheses and the hypothesis validat
 
 ## Scoped scientific predictions versus EVM measurements
 
-A new side-effect-free `ScientificEvmHypothesisAlignmentEngine` compares a **pre-registered invariant prediction** against a numeric observation, using the existing OECL composition-constraint evaluator to recalculate the predicate from measured operands. A comparison is allowed only when candidate ID, exact 40-character implementation revision, constraint ID, participant side, and named scenario all match.
+A new side-effect-free `ScientificEvmHypothesisAlignmentEngine` compares a **pre-registered invariant prediction** against a numeric observation, using the existing OECL composition-constraint evaluator to recalculate the predicate from measured operands. A comparison is allowed only when candidate ID, an exact immutable source revision (40-hex Git commit or 64-hex SHA-256 source digest), constraint ID, participant side, and named scenario all match.
 
 The comparison **never modifies an EVM observation**. If the predicted outcome and recomputed measured outcome disagree, the output records `REPORTED_MEASUREMENTS_CHALLENGE_PREDICTION`; a matching observation is `REPORTED_MEASUREMENTS_MATCH_PREDICTION`. A mismatched underlying-token versus vault-share scenario, forged verdict, missing receipt hash, or mismatched revision returns `NOT_COMPARABLE`.
 
 **Trust boundary:** this utility checks consistency of **reported** measurements only. It does not query Ethereum or independently authenticate a tx receipt; its output always states `receiptAuthentication:NOT_PERFORMED_BY_COMPARISON_ENGINE`. Only the existing verified pinned-EVM execution/receipt chain can supply an authenticated observation. It never upgrades scientific research to an EVM or universal compatibility verdict.
+
+## AST-originated hypothesis tested against fresh local EVM receipts — 23 November 2026
+
+The fixed compiler source worker, **not a manually crafted positive or negative prediction**, generated two original structural hypotheses for the pinned ERC-8098 + ERC-4626 source pair:
+
+- \`AST-HYP-2d7dcb67ee7551b470d05939\`— \`SHARED_STANDARD_INHERITANCE\`: both concrete implementations share an ERC-20 base.
+- \`AST-HYP-7bb4f7ca6a8dfee4feeb62cc\` — \`POTENTIAL_COUPLED_STATE_DECREASE\`: ERC-8098 has a compiler-resolved public \`burn\` path to \`_totalSupply\` decrease, while ERC-4626 has a \`redeem\` path to \`_totalSupply\` decrease. The path feasibility model says \`NOT_PROVEN_EXECUTABLE\`, not \`EXECUTABLE\`.
+
+A restricted, deterministic **experiment adapter** selected the latter hypothesis by its structural kind, verified the original signed-off graph, source file and path-hypothesis SHA-256s, and generated a plan **before the local test contracts were deployed**. The plan SHA-256 is:
+
+\`5888bd5f87df31a440901f5e37944b538ffe87b71e25c1b607777dae50574991\`
+
+The plan predicted that a successful eligible-owner operation \`redeem\` would strictly decrease vault share \`totalSupply\`, and a successful eligible-owner \`burn\` would strictly decrease ERC-8098 underlying \`totalSupply\`. Two new mined local Hardhat receipts, their blocks, function selectors and Transfer-to-zero burn events were verified against exact source revision and code hashes. Observations:
+
+| Observed operation | Before | After | Restricted hypothesis interpretation |
+| --- | ---: | ---: | --- |
+| ERC-4626 \`redeem\` | 100 shares | 60 shares | Strict source-inspired state decrease observed in this fixture |
+| ERC-8098 \`burn\` | 1,000 underlying | 990 underlying | Strict source-inspired state decrease observed in this fixture |
+
+The scope remains **two separate owner-authorized EVM actions**; it does NOT prove an atomic, coupled or universally interoperable composition. Cross-checks confirmed the underlying totalSupply was unchanged by redeem, and separate vault shares totalSupply was unchanged by burning underlying.
+
+[Source AST and local EVM run 45238186707](https://github.com/ten-io-meta/open-erc-composition-laboratory/actions/runs/45238186707) **PASS**. A separate same-run CI job downloaded those exact source/EVM artifacts, regenerated the AST hypothesis from the recorded graph and independently re-evaluated both measured predicates using the TypeScript scientist comparator: \`OECL_AST_GENERATED_SCIENTIST_INDEPENDENT_EVM_REPLAY_PASS\`, 2/2 scoped positive observations. That scientist comparator still declares \`receiptAuthentication: NOT_PERFORMED_BY_COMPARISON_ENGINE\`; only the upstream live local-provider workflow checked receipts and blocks.
+
+**Scientific honesty:** this is a meaningful first **machine-generated AST hypothesis→preregistered design→EVM observation→independent scientific interpretation** pipeline, using reviewed fixed adapters. It is not autonomous unconstrained hypothesis creation, automatic EVM experiment synthesis, independent Ethereum mainnet attestation, proof of economic security or a globally compatible ERC pairing.
+
+The original 45 registered source-profile pairings remain covered: adding ERC-8098 + ERC-4626 to the dedicated CI source list changes the matrix accounting from **9 configured + 36 remaining** to **10 configured + 35 remaining** (still 45), and shard sizes must be calculated dynamically.
+
 
 ## Next scientific/security gates
 
