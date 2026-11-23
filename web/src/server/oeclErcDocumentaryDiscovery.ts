@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with { type: "json" };
 
 /** Official ERC document comparison, NEVER executable Solidity or candidate admission. */
 export type StandardDocument = {
@@ -6,6 +7,7 @@ export type StandardDocument = {
   title: string | null; description: string | null; abstract: string | null;
   status: string | null; category: string | null; requires: string[];
   interfaceNames: string[]; requirements: string[];
+  oeclPinnedSource: { repository:string; revision:string; contract:string } | null;
   provenance: { sourceUrl: string; canonicalUrl: string; sha256: string | null;
     ref: "master (mutable)" };
 };
@@ -30,9 +32,13 @@ export function normalizeErcNumber(value:string|null):string|null{
 }
 function source(id:string){return "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-"+id.slice(4)+".md";}
 function canonical(id:string){return "https://eips.ethereum.org/EIPS/eip-"+id.slice(4);}
+function pinnedSource(id:string):StandardDocument["oeclPinnedSource"]{
+  const known=registry.sources.find(x=>x.id===id&&x.kind==="github");
+  return known&&known.kind==="github"?{repository:known.repository,revision:known.revision,contract:known.contract}:null;
+}
 function missing(id:string,availability:StandardDocument["availability"]):StandardDocument{
   return {id,availability,title:null,description:null,abstract:null,status:null,
-    category:null,requires:[],interfaceNames:[],requirements:[],provenance:{
+    category:null,requires:[],interfaceNames:[],requirements:[],oeclPinnedSource:pinnedSource(id),provenance:{
     sourceUrl:source(id),canonicalUrl:canonical(id),sha256:null,ref:"master (mutable)"}};
 }
 function section(input:string,name:string):string{
@@ -96,7 +102,7 @@ export function parseOfficialErc(id:string,text:string):StandardDocument|null{
   return {id,availability:"PUBLISHED",title:meta.title.slice(0,160),
     description:meta.description?.slice(0,250)||null,abstract,
     status:meta.status.slice(0,50),category:"ERC",requires,interfaceNames,
-    requirements,provenance:{sourceUrl:source(id),canonicalUrl:canonical(id),
+    requirements,oeclPinnedSource:pinnedSource(id),provenance:{sourceUrl:source(id),canonicalUrl:canonical(id),
     sha256:createHash("sha256").update(text).digest("hex"),ref:"master (mutable)"}};
 }
 async function boundedText(response:Response):Promise<string>{
