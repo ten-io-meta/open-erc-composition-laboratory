@@ -9,6 +9,7 @@ const root=path.resolve(process.argv[2]||".");
 const output=path.resolve(process.argv[3]||"source-output/pair-8098-4626");
 const hash=s=>crypto.createHash("sha256").update(s).digest("hex");
 const {readPrerecordedPredictions,runPreregisteredFalsification}=require("./run-preregistered-8098-4626-falsification.cjs");
+const {readAstDerivedPlan,checkSourceGeneratedHypothesis}=require("./run-ast-generated-8098-4626-evm.cjs");
 const wrapper=[
 "// SPDX-License-Identifier: MIT",
 "pragma solidity ^0.8.20;",
@@ -42,6 +43,7 @@ async function main(){
   }
   // Freeze the controlled prediction plan before deploying any EVM fixture.
   const preregistration=readPrerecordedPredictions();
+  const astRegistration=readAstDerivedPlan(output);
   process.chdir(root);
   const hre=require(path.join(root,"node_modules/hardhat"));
   const [owner,attacker]=await hre.ethers.getSigners();
@@ -113,19 +115,33 @@ async function main(){
     asset.connect(attacker).callStatic.burnFrom(owner.address,ten));
   await mustRevert("unauthorized redeem of third-party vault shares",()=>
     vault.connect(attacker).callStatic.redeem(ten,attacker.address,owner.address));
-  await tx("redeem ERC4626 shares for unchanged-supply ERC8098 asset",
+  const redeemReceipt=await tx("redeem ERC4626 shares for unchanged-supply ERC8098 asset",
     ()=>vault.redeem(redeem,owner.address,owner.address));
   const afterRedeem=await snap();
   assert.equal(afterRedeem.underlyingSupply,initial.toString());
   assert.equal(afterRedeem.vaultShareSupply,deposit.sub(redeem).toString());
   assert.equal(afterRedeem.underlyingVault,deposit.sub(redeem).toString());
-  await tx("burn independently owned ERC8098 underlying after redemption",
+  const burnReceipt=await tx("burn independently owned ERC8098 underlying after redemption",
     ()=>asset.burn(ten));
   const final=await snap();
   assert.equal(final.underlyingSupply,initial.sub(ten).toString(),
     "ERC8098 underlying failed nonincreasing supply check");
   assert.equal(final.underlyingVault,deposit.sub(redeem).toString());
   assert.equal(final.vaultShareSupply,deposit.sub(redeem).toString());
+  await checkSourceGeneratedHypothesis({
+    registration:astRegistration,
+    provider:hre.ethers.provider,ethers:hre.ethers,
+    asset,vault,owner,afterDeposit,afterRedeem,final,
+    redeemReceipt,burnReceipt,redeemAmount:redeem,burnAmount:ten,
+    sourceRevision:a.revision,
+    sourceRootSha256:collected.files.get(collected.roots[0]).sha256,
+    vaultSourceRootSha256:collected.files.get(collected.roots[1]).sha256,
+    vaultWrapperSha256:hash(wrapper),
+    compilerVersion:compiler.version(),
+    dependencyIntegrity:collected.deps.integrity,
+    openzeppelinVersion:collected.deps.version,
+    output
+  });
   const record={
     schemaVersion:"OECL_8098_UNDERLYING_4626_LOCAL_EVM_V1",
     scope:"IMMUTABLE_ERC8098_ASSET_AND_SEPARATE_OZ4_9_6_ERC4626_VAULT_FIXTURE",
