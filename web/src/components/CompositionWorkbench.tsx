@@ -8,6 +8,7 @@ import { DocumentaryPairExplorer } from "@/components/DocumentaryPairExplorer";
 import { ErcCatalogBrowser } from "@/components/ErcCatalogBrowser";
 import { FreshPairSourceAnalysis } from "@/components/FreshPairSourceAnalysis";
 import { Erc4626LocalEvmPanel } from "@/components/Erc4626LocalEvmPanel";
+import { PinnedScientificCyclePanel } from "@/components/PinnedScientificCyclePanel";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -26,6 +27,7 @@ const examples = [
 
 const documentaryExamples = [
   { a: "ERC-4626", b: "ERC-20", title: "Vaults × fungible tokens" },
+  { a: "ERC-8098", b: "ERC-4626", title: "Monotone supply × vault shares (scientific cycle)" },
   { a: "ERC-7575", b: "ERC-4626", title: "Multi-asset vaults × vaults" },
   { a: "ERC-721", b: "ERC-165", title: "NFTs × interface detection" },
 ] as const;
@@ -87,6 +89,9 @@ export function CompositionWorkbench() {
   const independentEvm = isIndependentEvm(pair);
   const hasNewLocalEvm = (pair.a === "ERC-4626" && pair.b === "ERC-20") ||
     (pair.b === "ERC-4626" && pair.a === "ERC-20");
+  const hasPinnedScientificCycle = hasNewLocalEvm ||
+    (pair.a === "ERC-8098" && pair.b === "ERC-4626") ||
+    (pair.b === "ERC-8098" && pair.a === "ERC-4626");
 
   useEffect(() => {
     const abort = new AbortController();
@@ -240,7 +245,7 @@ export function CompositionWorkbench() {
         </div>
         {loading ? pill("Checking pinned evidence") : failure ? pill("Verification failed") :
           graph ? pill("INCONCLUSIVE · NOT_ADMITTED") :
-          hasNewLocalEvm ? pill("LOCAL EVM OBSERVED · INCONCLUSIVE") : pill("NOT EVALUATED")}
+          hasPinnedScientificCycle ? pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
       </header>
 
       {loading && <p role="status" className="rounded-xl bg-[#f3f7f3] p-5 text-sm text-[#506858]">Loading verified source evidence...</p>}
@@ -250,16 +255,18 @@ export function CompositionWorkbench() {
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
         <h4 className="text-lg font-semibold text-[#694d27]">
-          {hasNewLocalEvm ? "New isolated EVM evidence available — compiler AST view not yet pinned" :
+          {hasPinnedScientificCycle ? "Reviewed scientific cycle available — interactive AST graph not yet materialized" :
             "No pinned Solidity/EVM experiment for this pair"}
         </h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          {hasNewLocalEvm ?
-            "A bounded ERC-4626/20 OpenZeppelin fixture was executed on a local Hardhat EVM. Its seven mined transactions and three read-only negative simulations are shown below; that does not certify general interoperability." :
+          {hasPinnedScientificCycle ?
+            "Compiler AST hypotheses and independently reviewed local-EVM experiments are available in the pinned scientific cycle below. A full interactive graph for these sources is not published in this view. The tested fixtures do not establish general compatibility." :
             "OECL has not tested this composition in its published EVM suite. This is neither a compatibility approval nor proof of incompatibility. Documentary discovery below identifies source-level questions."}
         </p>
       </div>}
 
+      {hasPinnedScientificCycle && <PinnedScientificCyclePanel
+        key={pairKey} sourceA={pair.a} sourceB={pair.b} />}
       {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
