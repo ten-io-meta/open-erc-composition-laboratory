@@ -91,7 +91,7 @@ const tampered=make();tampered.report.graphSha256=alpha;
 assert.throws(()=>buildPlan(tampered),/Expected values to be strictly equal/);
 const spoofed=make();spoofed.challenges.challenges[1].caseId=
   spoofed.challenges.challenges[0].caseId;
-assert.throws(()=>buildPlan(spoofed),/true|false|Expected/);
+assert.throws(()=>buildPlan(spoofed),/falsy value/);
 const forged=make();forged.original.predictions[0].stateSourceSha256=gamma;
 assert.throws(()=>buildPlan(forged),/Expected values to be strictly equal/);
 const noEvm=conclude({plan:ready,review:null});
@@ -146,6 +146,6 @@ assert.throws(()=>conclude({...args,review:{...review,
 assert.throws(()=>conclude({...args,review:{...review,
   refinedHypotheses:[{...refined[0],
     supportedObservation:{...refined[0].supportedObservation,
-      measuredAfter:"110"}},refined[1]]}}),/false|true/);
+      measuredAfter:"110"}},refined[1]]}}),/falsy value/);
 console.log("OECL_CAPABILITY_GATED_SCIENTIFIC_CYCLE_ADVERSARIAL_REGRESSION_PASS",
   "blocked/no-hypothesis/preregistered/scoped/receipt-hash/forgery");
