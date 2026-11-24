@@ -84,7 +84,7 @@ assert.equal(ready.proposals.length,1);
 assert.equal(ready.fixture.testIds.length,4);
 assert.equal(buildPlan({...input,original:null,challenges:null}).workflowStatus,
   "BLOCKED_REVIEWED_ADAPTER_REQUIRED");
-assert.equal(buildPlan(make(["ERC-4626","ERC-20"])).fixture.ready,false);
+assert.throws(()=>buildPlan(make(["ERC-4626","ERC-20"])),/Expected values to be strictly equal/);
 assert.equal(buildPlan(make(["ERC-20","ERC-721"],false)).workflowStatus,
   "NO_AST_HYPOTHESIS_OBSERVED");
 const tampered=make();tampered.report.graphSha256=alpha;
