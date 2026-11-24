@@ -21,10 +21,10 @@ const EXPERIMENTS=[
     preconditions:["owner holds shares","redeem amount positive and owned"],
     support:"Successful mined redeem reduces vault total share supply and assets in vault in this exact initial 1:1 fixture",
     falsifier:"Mined successful redeem that leaves vault supply or custody unchanged"},
-  {code:"PLAIN_ERC20_DEPOSIT_SELECTOR_REVERTS",mechanism:"Raw read-only deposit(uint256,address) call to pinned plain-ERC20 asset",
+  {code:"PLAIN_ERC20_DEPOSIT_RESPONSE_UNDECODABLE",mechanism:"Raw read-only deposit(uint256,address) ABI response decoding against pinned plain-ERC20 asset",
     preconditions:["verified asset ABI lacks deposit","same selector accepted by vault","fixed wrapper has no fallback"],
-    support:"EVM eth_call to ERC20 asset with vault deposit selector reverts without changing observed state",
-    falsifier:"The same valid encoded call succeeds against the pinned plain ERC20 asset"}
+    support:"A raw EVM call either reverts or returns data that cannot decode as a valid ERC4626 deposit(uint256,address) result, without changing state",
+    falsifier:"The plain ERC20 asset produces a valid ERC4626 deposit(uint256,address) return value from the exact selector"}
 ];
 
 function assessVaultAssetFixture(x){
@@ -191,7 +191,10 @@ function concludeVaultAsset({plan,planBytes,evm,evmBytes,sourcePlan}){
   assert.equal(probe.probedFunction,"deposit(uint256,address)");
   assert.equal(probe.assetHasDepositAbi,false);
   assert.equal(probe.vaultHasDepositAbi,true);
-  assert.equal(probe.assetCallReverted,true);
+  assert.equal(probe.assetReturnDecodableAsVaultDeposit,false);
+  assert.equal(typeof probe.assetCallReverted,"boolean");
+  if(probe.assetCallReverted)assert.equal(probe.rawReturn,null);
+  else assert(/^0x(?:[a-f0-9]{2})*$/i.test(probe.rawReturn));
   assert.equal(probe.statePreserved,true);
   assert.equal(probe.transactionMined,false);
   assert.equal(probe.asset.toLowerCase(),asset.toLowerCase());
@@ -211,8 +214,8 @@ function concludeVaultAsset({plan,planBytes,evm,evmBytes,sourcePlan}){
        conclusion:"PINNED_VAULT_REDEEM_REDUCED_SHARES_AND_ASSETS",
        localReceipt:redemption.txHash,shareDelta:redeemed.toString()},
       {caseId:plan.fixture.testIds[2],
-       conclusion:"PLAIN_PINNED_ERC20_ASSET_DEPOSIT_SELECTOR_REVERTED",
-       evidence:"UNMINED_PROVIDER_READONLY_CALL_WITH_STATE_CHECK"}
+       conclusion:"PLAIN_PINNED_ERC20_ASSET_NO_DECODABLE_VAULT_DEPOSIT_RESPONSE",
+       evidence:"UNMINED_PROVIDER_READONLY_CALL_WITH_ABI_DECODE_AND_STATE_CHECK"}
     ],
     provenance:{sourcePlanSha256:hash(planBytes),
       sourceGraphSha256:plan.provenance.graphSha256,
