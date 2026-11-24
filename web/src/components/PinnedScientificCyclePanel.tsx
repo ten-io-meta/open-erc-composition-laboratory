@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 import type { PinnedScientificCycle } from "@/server/oeclPinnedScientificCycles";
 
 export function PinnedScientificCyclePanel({sourceA,sourceB}:{sourceA:string;sourceB:string}){
-  const [cycle,setCycle]=useState<PinnedScientificCycle|null>(null);
-  const [error,setError]=useState<string|null>(null);
+  const selectedKey=sourceA+"|"+sourceB;
+  const [record,setRecord]=useState<{key:string;data:PinnedScientificCycle}|null>(null);
+  const [failure,setFailure]=useState<{key:string;message:string}|null>(null);
+  // The selected pair is part of the rendered state identity: never display the
+  // preceding pair's proven observations under a newly selected heading.
+  const cycle=record?.key===selectedKey?record.data:null;
+  const error=failure?.key===selectedKey?failure.message:null;
   useEffect(()=>{
     const ctrl=new AbortController();
     async function load(){
@@ -21,9 +26,10 @@ export function PinnedScientificCyclePanel({sourceA,sourceB}:{sourceA:string;sou
            result.candidateAdmission!=="NOT_ADMITTED"||
            result.selected.sort().join("|")!==[sourceA,sourceB].sort().join("|"))
           throw Error("Reviewed source/EVM cycle failed its scope and provenance checks.");
-        if(!ctrl.signal.aborted)setCycle(result);
+        if(!ctrl.signal.aborted)setRecord({key:sourceA+"|"+sourceB,data:result});
       }catch(cause){
-        if(!ctrl.signal.aborted)setError(cause instanceof Error?cause.message:"Cycle evidence unavailable.");
+        if(!ctrl.signal.aborted)setFailure({key:sourceA+"|"+sourceB,
+          message:cause instanceof Error?cause.message:"Cycle evidence unavailable."});
       }
     }
     void load();
@@ -40,7 +46,7 @@ export function PinnedScientificCyclePanel({sourceA,sourceB}:{sourceA:string;sou
   const x=cycle.cycle;
   const download="/api/scientific/cycles?sourceA="+encodeURIComponent(sourceA)+
     "&sourceB="+encodeURIComponent(sourceB)+"&download=1";
-  return <section data-testid="oecl-scientific-cycle"
+  return <section data-testid="oecl-scientific-cycle" data-pair={selectedKey}
       aria-label="Pinned scientific hypothesis and falsification cycle"
       className="space-y-5 rounded-2xl border border-[#b7cfc0] bg-[#fbfdfa] p-5 md:p-6">
     <header>
