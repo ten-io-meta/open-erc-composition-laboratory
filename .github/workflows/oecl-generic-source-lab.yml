@@ -10,6 +10,7 @@ on:
       - 'scripts/check-source-graph-view.cjs'
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
+      - 'scripts/check-capability-gated-scientific-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   pull_request:
@@ -20,6 +21,7 @@ on:
       - 'scripts/check-source-graph-view.cjs'
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
+      - 'scripts/check-capability-gated-scientific-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   workflow_dispatch:
@@ -170,6 +172,13 @@ jobs:
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/laboratory/scientific-open-source-worker/propose-ast-self-falsifiers.cjs source-output/pair-8098-4626
 
+      - name: Register capability-gated AST falsifiers for the entire source cohort BEFORE local EVM
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node oecl/scripts/check-capability-gated-scientific-cycle.cjs
+          node oecl/laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs plan source-output
+          node -e 'const fs=require("node:fs"),p="source-output/pair-8098-4626/capability-gated-scientific-cycle.json",r=JSON.parse(fs.readFileSync(p));if(r.workflowStatus!=="REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED"||r.fixture.testIds.length!==4||r.localEvmExecuted!==false||r.compatibilityVerdict!=="NOT_EVALUATED")throw Error("SCIENTIFIC_PROTOCOL_PREREGISTRATION_FAILED")'
+
       - name: Produce independent ERC-4626 × ERC-20 local EVM receipts and negative controls
         if: github.event_name != 'workflow_dispatch'
         working-directory: dependency-source
@@ -249,6 +258,12 @@ jobs:
         run: npx tsx scripts/check-preregistered-scientist-evm-replay.ts source-output/pair-8098-4626/scientist-adversarial-falsification.json laboratory/scientific-open-source-worker/preregistered-8098-4626-falsification.json audit-output/scientist-evm-comparison.json
       - name: Independently classify source-generated zero-quantity counterexamples and overbalance reversions
         run: npx tsx scripts/check-ast-self-falsification-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json
+      - name: Conclude only scoped AST hypotheses from the independent EVM falsification replay
+        run: |
+          node scripts/check-capability-gated-scientific-cycle.cjs
+          node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json audit-output/scientist-capability-gated-cycle.json
+          node -e 'const fs=require("node:fs"),r=JSON.parse(fs.readFileSync("audit-output/scientist-capability-gated-cycle.json"));if(r.cycleStatus!=="CONTROLLED_LOCAL_EVM_AND_REPLAY_COMPLETE"||r.scopedConclusions.length!==2||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("SCIENTIFIC_CYCLE_OVERCLAIM_OR_INCOMPLETE")'
+
       - name: Independently verify pinned Diamond facet cuts and ERC7201 storage-reuse EVM evidence
         run: node laboratory/scientific-independent-review/check-erc2535-diamond-artifact.cjs source-output/erc2535/pinned-diamond-local-evm-witness.json source-output/erc7201/namespace-formula-observations.json audit-output/erc2535-independent-diamond-review.json
       - name: Independently check five ERC7201 EVM formula event receipts against pinned offchain oracles
@@ -266,5 +281,6 @@ jobs:
             audit-output/erc7201-independent-evm-review.json
             audit-output/erc2535-independent-diamond-review.json
             audit-output/scientist-ast-self-falsification-review.json
+            audit-output/scientist-capability-gated-cycle.json
           if-no-files-found: warn
           retention-days: 14
