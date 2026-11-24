@@ -59,3 +59,24 @@ jobs:
         run: node scripts/smoke-scientific-dossier.mjs
       - name: Exercise production user journey in headless Chrome
         run: node scripts/check-browser-user-journey.mjs
+
+  verify-deployed-production:
+    name: Verify actual Vercel production journey after main release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: dossier-web
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Checkout verified main source
+        uses: actions/checkout@v4
+      - name: Set up browser test runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exercise published production route, source/EVM evidence and mobile journey
+        env:
+          OECL_BROWSER_BASE_URL: https://open-erc-composition-laboratory.vercel.app
+        run: node scripts/check-browser-user-journey.mjs

@@ -86,6 +86,45 @@ try {
   assert.equal(downloaded4626.runId,45212718140);
   console.log("OECL_ERC4626_NEW_LOCAL_EVM_PUBLIC_RECEIPTS_PASS");
 
+  // The new public dossier is a compact, independently reviewed scientific
+  // cycle, NOT a compatibility approval or a live EVM replay.
+  const cycleUrl=base+"/api/scientific/cycles?sourceA=ERC-4626&sourceB=ERC-20";
+  const cycleRes=await fetch(cycleUrl);
+  assert.equal(cycleRes.status,200);
+  assert.match(cycleRes.headers.get("cache-control")||"",/no-store/);
+  const cycle=await cycleRes.json();
+  assert.equal(cycle.status,"REVIEWED_SCOPED_SCIENTIFIC_CYCLE");
+  assert.equal(cycle.cycle.hypothesisKind,"SHARED_STANDARD_INHERITANCE");
+  assert.equal(cycle.cycle.tests.length,3);
+  assert.equal(cycle.cycle.tests[2].evidenceType,"UNMINED_READ_ONLY_ABI_PROBE");
+  assert.equal(cycle.cycle.tests[2].rawReturn,"0x");
+  assert.equal(cycle.cycle.tests[2].callReverted,false);
+  assert.equal(cycle.cycle.tests[2].decodableAsDeposit,false);
+  assert.equal(cycle.cycle.provenance.sourceRunId,45465965307);
+  assert.equal(cycle.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(cycle.compatibilityVerdict,"NOT_EVALUATED");
+  assert.equal(cycle.candidateAdmission,"NOT_ADMITTED");
+  const reversedCycle=await fetch(base+"/api/scientific/cycles?sourceA=ERC-20&sourceB=ERC-4626");
+  assert.equal(reversedCycle.status,200);
+  assert.equal((await reversedCycle.json()).snapshotSha256,cycle.snapshotSha256);
+  const cycle2=await fetch(base+"/api/scientific/cycles?sourceA=ERC-8098&sourceB=ERC-4626");
+  assert.equal(cycle2.status,200);
+  const cycle2Json=await cycle2.json();
+  assert.equal(cycle2Json.cycle.hypothesisKind,"POTENTIAL_COUPLED_STATE_DECREASE");
+  assert.equal(cycle2Json.cycle.preregisteredTestCount,4);
+  assert.equal(cycle2Json.cycle.tests.length,2);
+  assert.equal(cycle2Json.cycle.tests.every(t=>/^0x[a-f0-9]{64}$/i.test(t.zeroTx)),true);
+  assert.equal(cycle2Json.compatibilityVerdict,"NOT_EVALUATED");
+  const cycleExport=await fetch(cycleUrl+"&download=1");
+  assert.equal(cycleExport.status,200);
+  assert.match(cycleExport.headers.get("content-disposition")||"",/attachment/);
+  assert.deepEqual(await cycleExport.json(),cycle);
+  const unknownCycle=await fetch(base+"/api/scientific/cycles?sourceA=ERC-721&sourceB=ERC-20");
+  assert.equal(unknownCycle.status,404);
+  assert.equal((await unknownCycle.json()).evmExecuted,false);
+  const invalidCycle=await fetch(base+"/api/scientific/cycles?sourceA=ERC-20&sourceB=ERC-20");
+  assert.equal(invalidCycle.status,400);
+  console.log("OECL_SCIENTIFIC_CYCLE_API_PASS:2 reviewed hypothesis-falsifier-EVM-conclusion paths");
   const sourceConfig = await fetch(base + "/api/scientific/source-jobs");
   assert.equal(sourceConfig.status, 200);
   const sourceSettings = await sourceConfig.json();
