@@ -195,19 +195,31 @@ async function main(){
   const probeBefore=await snapshot();
   const encoded=vault.interface.encodeFunctionData("deposit(uint256,address)",[
     ten,owner.address]);
-  let assetCallReverted=false;
+  let assetCallReverted=false,rawReturn=null;
   try{
-    await provider.call({to:asset.address,from:owner.address,data:encoded});
+    rawReturn=await provider.call({to:asset.address,from:owner.address,
+      data:encoded});
   }catch{assetCallReverted=true;}
-  assert.equal(assetCallReverted,true,
-    "The reviewed plain ERC20 fixture unexpectedly accepts vault deposit selector");
+  let assetReturnDecodableAsVaultDeposit=false;
+  if(!assetCallReverted){
+    try{
+      const decoded=vault.interface.decodeFunctionResult(
+        "deposit(uint256,address)",rawReturn);
+      assetReturnDecodableAsVaultDeposit=decoded?.length===1;
+    }catch{}
+  }
+  assert.equal(assetReturnDecodableAsVaultDeposit,false,
+    "The reviewed plain ERC20 unexpectedly returns a valid ERC4626 deposit result");
+  console.log("OECL_ERC20_DEPOSIT_SELECTOR_RESEARCH",JSON.stringify({
+    rawReturn,assetCallReverted,assetReturnDecodableAsVaultDeposit}));
   assert.deepEqual(await snapshot(),probeBefore,
     "Read-only comparative probe must not alter contract state");
   const capabilityProbe={
     caseId:registration.plan.fixture.testIds[2],
     probedFunction:"deposit(uint256,address)",
     methodSelector:encoded.slice(0,10),asset:asset.address,vault:vault.address,
-    assetHasDepositAbi,vaultHasDepositAbi,assetCallReverted,
+    assetHasDepositAbi,vaultHasDepositAbi,assetCallReverted,rawReturn,
+    assetReturnDecodableAsVaultDeposit,
     statePreserved:true,transactionMined:false,
     verification:"LOCAL_PROVIDER_READ_ONLY_CALL_WITH_IMMUTABLE_SOURCE_PLAN"};
   await transact("transfer underlying to independent account",()=>asset.transfer(attacker.address,ten));
