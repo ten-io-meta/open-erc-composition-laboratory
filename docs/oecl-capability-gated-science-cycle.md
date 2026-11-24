@@ -24,8 +24,26 @@ GitHub Actions artifacts retain `source-output/**/capability-gated-scientific-cy
 ## Limitations and release requirements
 
 - The planner is **deterministic**. It does not demonstrate free-form AI reasoning, a generic EVM harness, fully autonomous adapter generation, or execution against all 626 documentary ERCs.
-- Supported EVM execution still uses a **reviewed, pinned local** ERC-8098/4626 fixture. The 626 documents, registry-pair AST analysis and EVM contracts are separate evidence populations.
+- Supported EVM execution uses **two reviewed, pinned local fixtures** for ERC-8098/4626 and ERC-4626/20. The 626 documents, registry-pair AST analysis and EVM contracts are separate evidence populations.
 - ERCs with missing implementations/fixtures are not classified as incompatible. Negative read-only calls are not mined transactions. Mined local-provider receipts are not independently authenticated Ethereum mainnet proofs.
 - Requires exact-head CI success, human review of contract-specific hypotheses and security boundaries, and explicit permission before merge or public deployment.
+
+## Second family: distinguishing shared inheritance from behavioral equivalence
+
+The ERC-4626 × ERC-20 AST emits **only** a shared ERC-20 inheritance hypothesis, not a paired state-decrease or cross-contract atomicity hypothesis. The second preregistered adapter deliberately checks the narrower proposition that two contracts sharing an ERC-20 base need not expose identical extended behavior.
+
+The existing isolated OZ 4.9.6 Hardhat fixture is reused, not expanded to arbitrary code. It records:
+- Successful, receipt-checked vault deposit (asset custody plus minted shares).
+- Successful, receipt-checked vault redemption (asset custody plus burned shares).
+- Read-only raw vault-deposit selector probing on the independent plain ERC20 asset, interpreted using ABI-decoding semantics rather than merely whether `eth_call` threw.
+- Three separate unmined authorization/balance-revert controls.
+
+This second protocol emits `SCOPED_BEHAVIORAL_DIFFERENCE_OBSERVED` only when a separately recomputed source-plan agrees with the committed preregistration and the same-run local EVM evidence passes independent artifact review. Its overall scientific and compatibility verdicts remain `INCONCLUSIVE` and `NOT_EVALUATED`.
+
+Reproduction commands in the same workflow:
+- `node oecl/laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs plan source-output`
+- Existing pinned `run-erc4626-erc20-evm.cjs` consumes the source plan before its first transaction.
+- `node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude-vault source-output/pair-4626-20 audit-output/scientist-vault-asset-capability-cycle.json`
+- `node scripts/check-vault-asset-capability-cycle.cjs source-output/pair-4626-20` exercises tampered-source, tampered-return, duplicate receipt and inflated-admission regressions.
 
 The intended hackathon claim is **a reproducible scoped scientific-cycle demonstrator with honest capability limits**, not a general autonomously operating Solidity scientist.
