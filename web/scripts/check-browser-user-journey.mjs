@@ -85,7 +85,7 @@ async function test(){
   },"DevTools browser startup",20000);
   const {send,evalJs}=await devtools(tab.webSocketDebuggerUrl);
   await send("Page.enable");await send("Runtime.enable");
-  const expectUi=(exp,label)=>until(()=>evalJs(exp),label);
+  const expectUi=(exp,label,timeout=30000)=>until(()=>evalJs(exp),label,timeout);
   const click=async title=>{
     const exp='(()=>{const button=[...document.querySelectorAll("button")].find(x=>x.textContent?.includes('+
       JSON.stringify(title)+'));if(!button||button.disabled)return false;button.click();return true;})()';
@@ -214,7 +214,7 @@ async function test(){
 
   await click("Monotone supply × vault shares (scientific cycle)");
   await sleep(1300);
-  const secondDiagnostic=await evalJs('JSON.stringify({heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.textContent,workbenches:document.querySelectorAll("#composition-workbench").length,reports:document.querySelectorAll("[data-testid=oecl-pair-report]").length,cycles:[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].map(n=>({pair:n.getAttribute("data-pair"),visible:n.getClientRects().length>0,ancestorHidden:!!n.closest("[hidden],[aria-hidden=true]"),text:n.innerText.slice(0,110)})),alerts:[...document.querySelectorAll("[role=alert]")].map(n=>n.innerText.slice(0,220))})');
+  const secondDiagnostic=await evalJs('JSON.stringify({heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.textContent,workbenches:document.querySelectorAll("#composition-workbench").length,reports:document.querySelectorAll("[data-testid=oecl-pair-report]").length,cycles:[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].map(n=>({pair:n.getAttribute("data-pair"),visible:n.getClientRects().length>0,ancestorHidden:!!n.closest("[hidden],[aria-hidden=true]"),text:n.innerText.slice(0,760),kindPresent:n.innerText.includes("POTENTIAL COUPLED STATE DECREASE")})),alerts:[...document.querySelectorAll("[role=alert]")].map(n=>n.innerText.slice(0,220))})');
   console.log("OECL_BROWSER_SECOND_CYCLE_DIAGNOSTIC:"+secondDiagnostic);
   await expectUi('([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].some(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626" && n.innerText.includes("POTENTIAL COUPLED STATE DECREASE"))',
     "second reviewed independent hypothesis-to-EVM report",12000);
