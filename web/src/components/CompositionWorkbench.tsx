@@ -266,7 +266,7 @@ export function CompositionWorkbench() {
       </div>}
 
       {hasPinnedScientificCycle && <PinnedScientificCyclePanel
-        key={pairKey} sourceA={pair.a} sourceB={pair.b} />}
+        sourceA={pair.a} sourceB={pair.b} />}
       {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
