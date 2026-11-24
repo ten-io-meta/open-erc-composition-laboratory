@@ -74,6 +74,7 @@ function assessVaultAssetFixture(x){
     originHypothesisId:h.hypothesisId,
     hypothesisKind:h.kind,
     fixtureSourceSha256:FIXTURE_SHA,
+    dependencyIntegrity:report.dependencyIntegrity,
     testIds:EXPERIMENTS.map(e=>ID(h.hypothesisId,e.code)),
     protocols:EXPERIMENTS.map(e=>({...e,caseId:ID(h.hypothesisId,e.code),
       status:"PREREGISTERED_NOT_EXECUTED"})),
