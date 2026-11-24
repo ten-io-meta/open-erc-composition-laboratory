@@ -108,8 +108,8 @@ async function main(){
       block.transactions.some(h=>h.toLowerCase()===tx.hash.toLowerCase()));
     const transaction=await provider.getTransaction(tx.hash);
     assert(transaction?.to&&transaction.to.toLowerCase()===tx.to.toLowerCase());
-    assert.equal(transaction.from.toLowerCase(),owner.address.toLowerCase()===transaction.from.toLowerCase()?
-      owner.address.toLowerCase():transaction.from.toLowerCase());
+    assert([owner.address.toLowerCase(),attacker.address.toLowerCase()]
+      .includes(transaction.from.toLowerCase()),"Unexpected local fixture caller");
     const code=await provider.getCode(transaction.to,receipt.blockNumber);
     assert(code&&code!=="0x");
     let event=null;
