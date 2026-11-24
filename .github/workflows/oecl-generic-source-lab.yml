@@ -11,6 +11,7 @@ on:
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
       - 'scripts/check-capability-gated-scientific-cycle.cjs'
+      - 'scripts/check-vault-asset-capability-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   pull_request:
@@ -22,6 +23,7 @@ on:
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
       - 'scripts/check-capability-gated-scientific-cycle.cjs'
+      - 'scripts/check-vault-asset-capability-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   workflow_dispatch:
@@ -178,6 +180,7 @@ jobs:
           node oecl/scripts/check-capability-gated-scientific-cycle.cjs
           node oecl/laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs plan source-output
           node -e 'const fs=require("node:fs"),p="source-output/pair-8098-4626/capability-gated-scientific-cycle.json",r=JSON.parse(fs.readFileSync(p));if(r.workflowStatus!=="REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED"||r.fixture.testIds.length!==4||r.localEvmExecuted!==false||r.compatibilityVerdict!=="NOT_EVALUATED")throw Error("SCIENTIFIC_PROTOCOL_PREREGISTRATION_FAILED")'
+          node -e 'const fs=require("node:fs"),p="source-output/pair-4626-20/capability-gated-scientific-cycle.json",r=JSON.parse(fs.readFileSync(p));if(r.workflowStatus!=="REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED"||r.fixture.adapter!=="PINNED_OZ_4_9_6_ERC4626_ERC20_LOCAL_HARDHAT_ONLY"||r.fixture.testIds.length!==3||r.localEvmExecuted!==false||r.compatibilityVerdict!=="NOT_EVALUATED")throw Error("VAULT_ASSET_SOURCE_PROTOCOL_PREREGISTRATION_FAILED")'
 
       - name: Produce independent ERC-4626 × ERC-20 local EVM receipts and negative controls
         if: github.event_name != 'workflow_dispatch'
@@ -264,6 +267,12 @@ jobs:
           node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json audit-output/scientist-capability-gated-cycle.json
           node -e 'const fs=require("node:fs"),r=JSON.parse(fs.readFileSync("audit-output/scientist-capability-gated-cycle.json"));if(r.cycleStatus!=="CONTROLLED_LOCAL_EVM_AND_REPLAY_COMPLETE"||r.scopedConclusions.length!==2||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("SCIENTIFIC_CYCLE_OVERCLAIM_OR_INCOMPLETE")'
 
+      - name: Independently falsify vault-vs-plain-ERC20 interface equivalence using same-run local receipts
+        run: |
+          node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude-vault source-output/pair-4626-20 audit-output/scientist-vault-asset-capability-cycle.json
+          node scripts/check-vault-asset-capability-cycle.cjs source-output/pair-4626-20
+          node -e 'const fs=require("node:fs"),r=JSON.parse(fs.readFileSync("audit-output/scientist-vault-asset-capability-cycle.json"));if(r.status!=="SCOPED_BEHAVIORAL_DIFFERENCE_OBSERVED"||r.scopedConclusions.length!==3||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("VAULT_ASSET_CYCLE_OVERCLAIM_OR_INCOMPLETE")'
+
       - name: Independently verify pinned Diamond facet cuts and ERC7201 storage-reuse EVM evidence
         run: node laboratory/scientific-independent-review/check-erc2535-diamond-artifact.cjs source-output/erc2535/pinned-diamond-local-evm-witness.json source-output/erc7201/namespace-formula-observations.json audit-output/erc2535-independent-diamond-review.json
       - name: Independently check five ERC7201 EVM formula event receipts against pinned offchain oracles
@@ -282,5 +291,6 @@ jobs:
             audit-output/erc2535-independent-diamond-review.json
             audit-output/scientist-ast-self-falsification-review.json
             audit-output/scientist-capability-gated-cycle.json
+            audit-output/scientist-vault-asset-capability-cycle.json
           if-no-files-found: warn
           retention-days: 14
