@@ -14,6 +14,8 @@ const hex64=x=>typeof x==="string"&&/^[a-f0-9]{64}$/.test(x);
 const txHash=x=>typeof x==="string"&&/^0x[a-f0-9]{64}$/i.test(x);
 const pairKey=x=>x.map(s=>s.id).join("|");
 const SUPPORTED="ERC-8098|ERC-4626";
+const VAULT_ASSET="ERC-4626|ERC-20";
+const {assessVaultAssetFixture,concludeVaultAsset}=require("./VaultAssetCapabilityAdapter.cjs");
 
 function requireSourceEvidence({graph,discovery,feasibility,report}){
   assert.equal(graph?.schemaVersion,"OECL_SOLIDITY_COMPILER_AST_GRAPH_V1");
@@ -150,6 +152,8 @@ function buildPlan(x){
   let fixture={ready:false,reason:"NO_REVIEWED_EVM_ADAPTER"};
   if(pairKey(report.selected)===SUPPORTED)
     fixture=assessReviewedFixture(x);
+  else if(pairKey(report.selected)===VAULT_ASSET)
+    fixture=assessVaultAssetFixture(x);
   const verdict=proposals.length===0?"NO_AST_HYPOTHESIS_OBSERVED":
     fixture.ready?"REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED":
     "BLOCKED_REVIEWED_ADAPTER_REQUIRED";
@@ -167,7 +171,7 @@ function buildPlan(x){
     candidateAdmission:"NOT_ADMITTED",
     limitations:[
       "The planner generates conditional falsifiers, not a universal scientific explanation.",
-      "Only the immutable reviewed ERC-8098/4626 fixture has a registered EVM executor.",
+      "Only immutable reviewed ERC-8098/4626 and ERC-4626/20 fixtures have registered local-EVM executors.",
       "AST reachability is not proof that a path is executable.",
       "No EVM outcome or universal compatibility is inferred from this plan."
     ]
@@ -299,7 +303,35 @@ function main(args){
     fs.writeFileSync(out,JSON.stringify(result,null,2)+"\n");
     console.log("OECL_CAPABILITY_GATED_CONCLUSION",result.cycleStatus,
       "scoped",result.scopedConclusions.length);
-  }else throw Error("Usage: node CapabilityGatedScienceCycle.cjs plan <source-output> | conclude <pair-folder> <independent-review.json> <output.json>");
+  }else if(args[0]==="conclude-vault"){
+    const folder=path.resolve(args[1]||"source-output/pair-4626-20");
+    const out=path.resolve(args[2]||"audit-output/scientist-vault-asset-capability-cycle.json");
+    const planFile=load(folder,"capability-gated-scientific-cycle");
+    const source={
+      graph:load(folder,"structural-ast-graph"),
+      discovery:load(folder,"generic-source-hypotheses"),
+      feasibility:load(folder,"path-feasibility"),
+      report:load(folder,"source-scientific-report")
+    };
+    const sourcePlan=buildPlan({
+      graph:source.graph.value,
+      discovery:source.discovery.value,
+      feasibility:source.feasibility.value,
+      report:source.report.value,
+      reportBytes:source.report.bytes,
+      discoveryBytes:source.discovery.bytes
+    });
+    const evm=fs.existsSync(path.join(folder,"independent-local-evm.json"))?
+      load(folder,"independent-local-evm"):null;
+    const result=concludeVaultAsset({
+      plan:planFile.value,planBytes:planFile.bytes,
+      sourcePlan,evm:evm?.value,evmBytes:evm?.bytes
+    });
+    fs.mkdirSync(path.dirname(out),{recursive:true});
+    fs.writeFileSync(out,JSON.stringify(result,null,2)+"\n");
+    console.log("OECL_VAULT_ASSET_SCIENTIST_CONCLUSION",result.status,
+      "scoped",result.scopedConclusions.length);
+  }else throw Error("Usage: CapabilityGatedScienceCycle.cjs plan <root> | conclude <8098-pair-folder> <review.json> <output.json> | conclude-vault <4626-pair-folder> <output.json>");
 }
 if(require.main===module)main(process.argv.slice(2));
 module.exports={buildPlan,conclude,planFolder};
