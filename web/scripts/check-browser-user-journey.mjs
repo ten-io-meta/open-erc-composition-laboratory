@@ -197,6 +197,23 @@ async function test(){
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-erc4626-evm]").innerText.includes("GLOBAL VERDICT INCONCLUSIVE")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-erc4626-evm]").innerText.includes("callStatic")'),true);
   console.log("OECL_BROWSER_NEW_ERC4626_LOCAL_EVM_PASS:7:3");
+  await expectUi('document.querySelector("[data-testid=oecl-scientific-cycle]")!==null',
+    "read-only source hypothesis to falsifier to EVM to conclusion");
+  assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-cycle-case]").length'),3);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("returned 0x (empty bytes)")'),true);
+  console.log("OECL_BROWSER_VAULT_SCIENCE_CYCLE_PASS:3");
+
+  await click("Monotone supply × vault shares (scientific cycle)");
+  await expectUi('document.querySelector("[data-testid=oecl-scientific-cycle]")?.innerText.includes("POTENTIAL COUPLED STATE DECREASE")',
+    "second reviewed independent hypothesis-to-EVM report");
+  assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-cycle-case]").length'),2);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("successful zero-quantity")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
+  console.log("OECL_BROWSER_SECOND_SCIENCE_CYCLE_PASS:2");
+  await click("Vaults × fungible tokens");
+  await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
+    "return to verified vault-specific evidence");
 
   console.log("OECL_BROWSER_ANY_ERC_DOCUMENTARY_COMPARISON_PASS");
 
