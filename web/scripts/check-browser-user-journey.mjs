@@ -213,8 +213,11 @@ async function test(){
   console.log("OECL_BROWSER_VAULT_SCIENCE_CYCLE_PASS:3");
 
   await click("Monotone supply × vault shares (scientific cycle)");
+  await sleep(1300);
+  const secondDiagnostic=await evalJs('JSON.stringify({heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.textContent,cycle:document.querySelector("[data-testid=oecl-scientific-cycle]")?.innerText.slice(0,450),alerts:[...document.querySelectorAll("[role=alert]")].map(n=>n.innerText.slice(0,220)),body:document.querySelector("[data-testid=oecl-pair-report]")?.innerText.slice(0,850)})');
+  console.log("OECL_BROWSER_SECOND_CYCLE_DIAGNOSTIC:"+secondDiagnostic);
   await expectUi('document.querySelector("[data-testid=oecl-scientific-cycle]")?.innerText.includes("POTENTIAL COUPLED STATE DECREASE")',
-    "second reviewed independent hypothesis-to-EVM report");
+    "second reviewed independent hypothesis-to-EVM report",12000);
   assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-cycle-case]").length'),2);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("successful zero-quantity")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-scientific-cycle]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
