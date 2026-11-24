@@ -25,7 +25,7 @@ assert.equal(observed.compatibilityVerdict,"NOT_EVALUATED");
 assert.equal(observed.candidateAdmission,"NOT_ADMITTED");
 assert.equal(observed.scopedConclusions.length,3);
 assert.equal(observed.scopedConclusions[2].evidence,
-  "UNMINED_PROVIDER_READONLY_CALL_WITH_STATE_CHECK");
+  "UNMINED_PROVIDER_READONLY_CALL_WITH_ABI_DECODE_AND_STATE_CHECK");
 const miss=concludeVaultAsset({...base,evm:null,evmBytes:null});
 assert.equal(miss.status,"UNRESOLVED_MISSING_EVM_EVIDENCE");
 assert.equal(miss.evmEvidenceAdmitted,false);
@@ -48,7 +48,7 @@ mutated(x=>{x.minedReceipts[2].witness.proofScope="UNVERIFIED"});
 mutated(x=>{x.minedReceipts[2].witness.event.assets="10"});
 mutated(x=>{x.readOnlyNegativeControls[0].transactionMined=true});
 mutated(x=>{x.capabilityProbe.assetHasDepositAbi=true});
-mutated(x=>{x.capabilityProbe.assetCallReverted=false});
+mutated(x=>{x.capabilityProbe.assetReturnDecodableAsVaultDeposit=true});
 mutated(x=>{x.capabilityProbe.transactionMined=true});
 assert.throws(()=>concludeVaultAsset({...base,
   planBytes:Buffer.from("modified-plan")}));
