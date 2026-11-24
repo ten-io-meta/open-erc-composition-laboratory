@@ -7,7 +7,11 @@ import { join } from "node:path";
 // Tests the actual Next.js production build in a real headless Chromium browser.
 // No wallet, chain deployment, researcher token or external UI-test dependency.
 const webPort=31982,chromePort=31983;
-const base="http://127.0.0.1:"+webPort;
+const productionOrigin="https://open-erc-composition-laboratory.vercel.app";
+const remote=process.env.OECL_BROWSER_BASE_URL||"";
+if(remote&&remote!==productionOrigin)
+  throw Error("Production browser check is restricted to the verified OECL domain");
+const base=remote||"http://127.0.0.1:"+webPort;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let app,browser,connection,profile;
 function stop(p){if(p?.pid)try{process.kill(-p.pid,"SIGTERM");}catch{}}
@@ -56,13 +60,17 @@ async function devtools(target){
   return {send,evalJs};
 }
 async function test(){
-  app=spawn("npm",["run","start","--","--port",String(webPort)],{
-    cwd:process.cwd(),detached:true,stdio:"ignore"
-  });
+  if(!remote){
+    app=spawn("npm",["run","start","--","--port",String(webPort)],{
+      cwd:process.cwd(),detached:true,stdio:"ignore"
+    });
+  }
   await until(async()=>{
-    if(app.exitCode!==null)throw Error("Next production server exited");
+    if(app&&app.exitCode!==null)throw Error("Next production server exited");
     return (await fetch(base)).status===200;
-  },"production server startup",40000);
+  },remote?"Vercel production deployment readiness":"local production server startup",
+    remote?100000:40000);
+  console.log("OECL_BROWSER_VERIFIED_TARGET:"+base);
   profile=await mkdtemp(join(tmpdir(),"oecl-ui-"));
   browser=spawn(locateChrome(),[
     "--headless=new","--no-sandbox","--disable-dev-shm-usage",
