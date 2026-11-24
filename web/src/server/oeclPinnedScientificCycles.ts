@@ -124,9 +124,10 @@ export function getPinnedScientificCycle(sourceA:string,sourceB:string){
   const cycle=PINNED[a as keyof typeof PINNED];
   if(cycle.origin!=="AST_SOURCE_ONLY"||
       cycle.provenance.sourceRunId!==45465965307||
-      cycle.tests.length!==cycle.preregisteredTestCount && a==="ERC-4626|ERC-20"||
-      cycle.preregisteredTestCount!==4 && a==="ERC-8098|ERC-4626"||
-      cycle.tests.some(test=>!/^0x[a-f0-9]{64}$/i.test(test.tx)&&test.evidenceType!=="UNMINED_READ_ONLY_ABI_PROBE"))
+      (a==="ERC-4626|ERC-20" && (cycle.tests.length!==3||cycle.preregisteredTestCount!==3))||
+      (a==="ERC-8098|ERC-4626" && (cycle.tests.length!==2||cycle.preregisteredTestCount!==4))||
+      cycle.tests.some(test=>test.evidenceType!=="UNMINED_READ_ONLY_ABI_PROBE" &&
+        (!("tx" in test)||!/^0x[a-f0-9]{64}$/i.test(test.tx))))
     throw Error("OECL_SCIENTIFIC_CYCLE_SCOPE_FAILURE");
   return {
     schemaVersion:"OECL_PUBLIC_PINNED_SCIENTIFIC_CYCLE_V1" as const,
