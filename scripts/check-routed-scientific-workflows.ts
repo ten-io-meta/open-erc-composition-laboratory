@@ -34,7 +34,9 @@ for (const name of required)
 const paths = [
   ".github/workflows/joint-pinned-references.yml",
   ".github/workflows/joint-native-recipe.yml",
-  ".github/workflows/oecl-independent-burnable-evm.yml"
+  ".github/workflows/oecl-independent-burnable-evm.yml",
+  // Same-run AST/EVM artifacts for source-generated scientific prediction replay.
+  ".github/workflows/oecl-generic-source-lab.yml"
 ];
 const workflows = paths.filter(existsSync)
   .map(path => ({path, text: readFileSync(path, "utf8")}));

@@ -1,0 +1,70 @@
+name: OECL Independent Scientist Research Review
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-independent-review/**"
+      - "laboratory/source-independence/SourceIndependenceSetAssessmentEngine.ts"
+      - "laboratory/source-independence/SourceIndependenceAssessmentEngine.ts"
+      - "laboratory/research-conclusions/ResearchConclusionEngine.ts"
+      - "laboratory/hypothesis/HypothesisValidationEngine.ts"
+      - "laboratory/hypothesis/HypothesisGenerator.ts"
+      - "laboratory/scientific-composition-constraint-evaluation/**"
+      - "scripts/check-independent-scientific-reasoning.ts"
+      - "scripts/check-scientific-source-independence-bounded.ts"
+      - "scripts/check-scientist-independent-source-attestations.ts"
+      - "scripts/check-original-research-conclusion-evidence-boundary.ts"
+      - "scripts/check-hypothesis-circular-validation.ts"
+      - "scripts/check-scoped-scientist-evm-alignment.ts"
+      - "scripts/run-independent-scientific-review.ts"
+      - ".github/workflows/oecl-independent-scientist.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-scientist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact OECL scientist source
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install locked scientist dependencies (no scripts)
+        run: npm ci --ignore-scripts
+      - name: Falsify independence overflow, contradictory evidence and fake authority
+        run: npx tsx scripts/check-scientific-source-independence-bounded.ts
+      - name: Reject contradictory or unanchored upstream source attestations
+        run: npx tsx scripts/check-scientist-independent-source-attestations.ts
+      - name: Reject unjustified established conclusions in original scientist
+        run: npx tsx scripts/check-original-research-conclusion-evidence-boundary.ts
+      - name: Prove original hypothesis validation cannot confirm itself
+        run: npx tsx scripts/check-hypothesis-circular-validation.ts
+      - name: Compare scoped scientific predictions with recomputed numeric EVM reports
+        run: npx tsx scripts/check-scoped-scientist-evm-alignment.ts
+      - name: Falsify unsupported hypothesis conclusions without EVM
+        run: npx tsx scripts/check-independent-scientific-reasoning.ts
+      - name: Verify original scientist can report provisional conclusions without EVM
+        run: npx tsx scripts/run-independent-scientific-review.ts audit-output/original-scientist-source-review.json
+      - name: Re-evaluate original DOI-0001 hypotheses without recycled evidence promotion
+        run: npx tsx scripts/run-hypothesis-v2-validation.ts
+      - name: Enforce exact historical hypothesis scientific boundary
+        run: |
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("hypothesis-validation-results/DOI-0001-v2-validation.json"));if(r.errors.length||!r.validations.length||r.validations.some(v=>v.validationOutcome==="CONFIRMED"||v.statusAfter==="VALIDATED"||v.statusAfter==="REJECTED"||v.independentlyValidated!==false||v.evmExecuted!==false||v.compatibilityVerdict!=="NOT_EVALUATED"))throw Error("HISTORICAL_HYPOTHESIS_SELF_CONFIRMATION");console.log("OECL_HISTORICAL_HYPOTHESIS_NON_CIRCULAR_PASS",r.validations.length)'
+      - name: Archive independently reproducible scientific report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-independent-scientist-source-reasoning
+          path: |
+            audit-output/original-scientist-source-review.json
+            hypothesis-validation-results/DOI-0001-v2-validation.json
+          if-no-files-found: warn
+          retention-days: 14

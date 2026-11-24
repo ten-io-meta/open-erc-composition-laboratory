@@ -87,17 +87,21 @@ function supportsInterfaceCallData(
   return `0x01ffc9a7${encodedInterfaceId}`;
 }
 
-function decodeBoolean(value: unknown): boolean {
+/**
+ * A Solidity ABI bool is exactly one 32-byte word containing 0 or 1.
+ * Reject noncanonical responses so contract-identity evidence fails closed.
+ */
+export function decodeErc165Boolean(value: unknown): boolean {
   if (
     typeof value !== "string" ||
-    !/^0x[0-9a-fA-F]+$/.test(value)
+    !/^0x[0-9a-fA-F]{64}$/.test(value)
   ) {
-    throw new Error(
-      "ERC-165 call returned an invalid value."
-    );
+    throw new Error("ERC-165 call returned an invalid ABI boolean encoding.");
   }
-
-  return BigInt(value) !== BigInt(0);
+  const encoded = BigInt(value);
+  if (encoded !== BigInt(0) && encoded !== BigInt(1))
+    throw new Error("ERC-165 call returned a noncanonical ABI boolean value.");
+  return encoded === BigInt(1);
 }
 
 export function buildConfiguredProtocolDescriptor(
@@ -444,17 +448,17 @@ export async function observeProtocolCandidate(
               ]);
 
               const erc165SelfSupported =
-                decodeBoolean(
+                decodeErc165Boolean(
                   erc165SelfResult
                 );
 
               const erc165InvalidSupported =
-                decodeBoolean(
+                decodeErc165Boolean(
                   erc165InvalidResult
                 );
 
               const targetSupported =
-                decodeBoolean(
+                decodeErc165Boolean(
                   targetResult
                 );
 

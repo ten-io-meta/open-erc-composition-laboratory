@@ -52,6 +52,34 @@
       "kind": "openzeppelin",
       "file": "token/ERC20/extensions/ERC20Burnable.sol",
       "contract": "ERC20Burnable"
+    },
+    {
+      "id": "ERC-165",
+      "label": "ERC-165 interface detection (OpenZeppelin 4.9.6 implementation)",
+      "kind": "openzeppelin",
+      "file": "utils/introspection/ERC165.sol",
+      "contract": "ERC165"
+    },
+    {
+      "id": "ERC-2612",
+      "label": "ERC-2612 permit signatures (OpenZeppelin 4.9.6 implementation)",
+      "kind": "openzeppelin",
+      "file": "token/ERC20/extensions/ERC20Permit.sol",
+      "contract": "ERC20Permit"
+    },
+    {
+      "id": "ERC-2981",
+      "label": "ERC-2981 royalty information (OpenZeppelin 4.9.6 implementation)",
+      "kind": "openzeppelin",
+      "file": "token/common/ERC2981.sol",
+      "contract": "ERC2981"
+    },
+    {
+      "id": "ERC-4626",
+      "label": "ERC-4626 tokenized vault (OpenZeppelin 4.9.6 implementation)",
+      "kind": "openzeppelin",
+      "file": "token/ERC20/extensions/ERC4626.sol",
+      "contract": "ERC4626"
     }
   ]
 }

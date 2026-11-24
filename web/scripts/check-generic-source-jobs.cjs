@@ -29,7 +29,11 @@ assert.equal(api.genericSourceAvailable({
   OECL_ANALYSIS_ACCESS_KEY:"A".repeat(42),
   OECL_GITHUB_ACTIONS_TOKEN:token
 }),true);
-assert.equal(api.availableSourceCatalog().length,6);
+assert.equal(api.availableSourceCatalog().length,10);
+for(const id of ["ERC-165","ERC-2612","ERC-2981","ERC-4626"]){
+  assert.equal(api.acceptedSourcePair(id,"ERC-8060"),true);
+  assert.ok(api.availableSourceCatalog().some(x=>x.id===id));
+}
 assert.equal(api.acceptedSourcePair("ERC-8060","ERC-20-BURNABLE"),true);
 assert.equal(api.acceptedSourcePair("ERC-8098","ERC-20"),true);
 for(const values of [["ERC-8060","ERC-8060"],["ERC-8098","ERC-9999"],

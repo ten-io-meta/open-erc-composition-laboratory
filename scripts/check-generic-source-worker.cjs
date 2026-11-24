@@ -61,6 +61,8 @@ assert.equal(shared.candidateAdmission,"NOT_ADMITTED");
 
 assert.equal(choosePair("ERC-8060","ERC-8098").length,2);
 assert.equal(choosePair("ERC-721","ERC-20-BURNABLE").length,2);
+for(const id of ["ERC-165","ERC-2612","ERC-2981","ERC-4626"])
+  assert.equal(choosePair(id,"ERC-8060").length,2);
 for(const ids of [["ERC-9999","ERC-8060"],["ERC-8060","ERC-8060"],
   ["../../evil","ERC-20"]])assert.throws(()=>choosePair(...ids));
 for(const input of ["../danger.sol","./a.sol","/tmp/a.sol","x//y.sol","a/../b.sol",""])

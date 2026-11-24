@@ -1,13 +1,24 @@
 import type { ResearchConclusion } from "./ResearchConclusion.js";
 import type { ResearchConclusionResult } from "./ResearchConclusionResult.js";
+import type { SourceIndependenceAssessment } from "../source-independence/SourceIndependenceAssessment.js";
+import { SourceIndependenceSetAssessmentEngine } from "../source-independence/SourceIndependenceSetAssessmentEngine.js";
 
 export class ResearchConclusionEngine {
 
-    build(crossSourcePatterns: any): ResearchConclusionResult {
+    build(
+        crossSourcePatterns: any,
+        independenceAssessments: SourceIndependenceAssessment[] = []
+    ): ResearchConclusionResult {
 
         try {
 
-            const patterns = crossSourcePatterns.patterns ?? [];
+            if (!crossSourcePatterns ||
+                !Array.isArray(crossSourcePatterns.patterns) ||
+                (Array.isArray(crossSourcePatterns.errors) && crossSourcePatterns.errors.length > 0)) {
+                throw Error("INVALID_OR_CHALLENGED_SOURCE_PATTERNS");
+            }
+            const patterns = crossSourcePatterns.patterns;
+            const independence = new SourceIndependenceSetAssessmentEngine();
 
             const conclusions: ResearchConclusion[] = patterns.map(
                 (pattern: any, index: number) => {
@@ -16,11 +27,27 @@ export class ResearchConclusionEngine {
                         String(pattern.normalizedRelation ?? pattern.relation ?? "")
                     );
 
+                    const sources: string[] = Array.isArray(pattern.sources)
+                        ? [...new Set<string>(pattern.sources
+                            .filter((source: unknown): source is string =>
+                                typeof source === "string" && source.trim().length > 0)
+                            .map((source: string) => source.trim()))]
+                        : [];
+                    const evidence: string[] = Array.isArray(pattern.evidence)
+                        ? [...new Set<string>(pattern.evidence
+                            .filter((claim: unknown): claim is string =>
+                                typeof claim === "string" && claim.trim().length > 0)
+                            .map((claim: string) => claim.trim()))]
+                        : [];
+                    const independent = independence.build(sources, independenceAssessments);
+                    const confidence = Number(pattern.confidence);
+                    const safeConfidence = Number.isFinite(confidence) &&
+                        confidence >= 0 && confidence <= 100 ? confidence : 0;
                     const statement = this.statementFor(
                         relationParts.subject,
                         relationParts.predicate,
                         relationParts.object,
-                        pattern.sources ?? []
+                        sources
                     );
 
                     return {
@@ -46,22 +73,13 @@ sourcePatternRelation:
         )
         : undefined,
                         statement,
-                        supportedBy:
-    [
-        ...new Set(
-            (
-                pattern.sources ??
-                []
-            ).map(
-                String
-            )
-        )
-    ],
-                        confidence: Number(pattern.confidence ?? 0),
-                        status: this.statusFor(pattern.status, pattern.confidence),
-                        evidence: Array.isArray(pattern.evidence)
-                            ? [...new Set(pattern.evidence.map(String))]
-                            : []
+                        supportedBy: sources,
+                        confidence: safeConfidence,
+                        status: this.statusFor(
+                            pattern.status, safeConfidence, evidence.length,
+                            independent.establishedIndependentSources
+                        ),
+                        evidence
                     };
 
                 }
@@ -168,21 +186,23 @@ sourcePatternRelation:
 
     }
 
+    /**
+     * A high input score and a self-described SUPPORTED pattern are NOT an
+     * attestation. Stronger research labels require nonempty evidence IDs
+     * and independently verified source identities. No EVM claim is made.
+     */
     private statusFor(
         patternStatus: string,
-        confidence: number
+        confidence: number,
+        evidenceCount: number,
+        independentSources: number
     ): ResearchConclusion["status"] {
-
-        if (patternStatus === "SUPPORTED" && confidence >= 70) {
+        if (patternStatus !== "SUPPORTED" || evidenceCount < 1 ||
+            independentSources < 2 || !Number.isFinite(confidence))
+            return "PRELIMINARY";
+        if (independentSources >= 3 && confidence >= 70)
             return "ESTABLISHED";
-        }
-
-        if (patternStatus === "SUPPORTED") {
-            return "SUPPORTED";
-        }
-
-        return "PRELIMINARY";
-
+        return "SUPPORTED";
     }
 
     private pretty(value: string): string {

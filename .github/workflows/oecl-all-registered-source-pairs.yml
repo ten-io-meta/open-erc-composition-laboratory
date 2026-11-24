@@ -1,0 +1,73 @@
+name: OECL Remaining Registered Solidity AST Pair Matrix
+
+on:
+  pull_request:
+    paths:
+      - "scripts/run-remaining-registered-source-pairs.cjs"
+      - "scripts/check-blind-scientist-autonomy-baseline.cjs"
+      - "scripts/check-blind-autonomy-boundary.cjs"
+      - ".github/workflows/oecl-all-registered-source-pairs.yml"
+      - "laboratory/scientific-open-source-worker/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-all-registered-source-pairs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile-source-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - name: Checkout OECL trusted source worker
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout pinned ERC-8060 dependency fixture
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Set up exact compiler toolchain
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install fixed isolated source-analysis toolchain
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify pinned dependencies and link audited compiler
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const p=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const s=require("./dependency-source/node_modules/solc");if(p.version!=="4.9.6"||!s.version().startsWith("0.8.26+"))process.exit(1)'
+      - name: Compile and inspect missing source pair candidates (source-only)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OECL_MATRIX_SHARD: ${{ matrix.shard }}
+        run: node oecl/scripts/run-remaining-registered-source-pairs.cjs "$OECL_MATRIX_SHARD"
+      - name: Benchmark source-only research autonomy across EVERY uncovered registered pair
+        run: |
+          node oecl/scripts/check-blind-scientist-autonomy-baseline.cjs "${{ matrix.shard }}" source-output
+          node oecl/scripts/check-blind-autonomy-boundary.cjs source-output "${{ matrix.shard }}"
+      - name: Archive source graphs and all pass/fail outcomes for scientific review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-source-matrix-shard-${{ matrix.shard }}
+          path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14

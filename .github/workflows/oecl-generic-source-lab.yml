@@ -10,6 +10,8 @@ on:
       - 'scripts/check-source-graph-view.cjs'
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
+      - 'scripts/check-capability-gated-scientific-cycle.cjs'
+      - 'scripts/check-vault-asset-capability-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   pull_request:
@@ -20,6 +22,8 @@ on:
       - 'scripts/check-source-graph-view.cjs'
       - 'scripts/check-ast-path-feasibility.cjs'
       - 'scripts/check-source-path-feasibility-artifacts.cjs'
+      - 'scripts/check-capability-gated-scientific-cycle.cjs'
+      - 'scripts/check-vault-asset-capability-cycle.cjs'
       - 'laboratory/scientific-open-source-worker/ScientificGraphView.cjs'
       - '.github/workflows/oecl-generic-source-lab.yml'
   workflow_dispatch:
@@ -32,12 +36,12 @@ on:
         description: 'First immutable registered source'
         required: true
         type: choice
-        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE]
+        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE, ERC-165, ERC-2612, ERC-2981, ERC-4626]
       source_b:
         description: 'Second immutable registered source'
         required: true
         type: choice
-        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE]
+        options: [ERC-8060, ERC-8098, ERC-20, ERC-721, ERC-1155, ERC-20-BURNABLE, ERC-165, ERC-2612, ERC-2981, ERC-4626]
 
 permissions:
   contents: read
@@ -65,6 +69,15 @@ jobs:
           path: dependency-source
           persist-credentials: false
 
+      - name: Checkout immutable ERC-7201 specification for reproducible non-EVM formula testing
+        if: github.event_name != 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          repository: ethereum/ERCs
+          ref: e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d
+          path: pinned-ercs
+          persist-credentials: false
+
       - name: Setup audited Node toolchain
         uses: actions/setup-node@v4
         with:
@@ -82,6 +95,26 @@ jobs:
           echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
           ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
           node -e 'const fs=require("node:fs");const o=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const s=require("./dependency-source/node_modules/solc");if(o.version!=="4.9.6"||!s.version().startsWith("0.8.26+"))process.exit(1);console.log("OECL_SECURE_AST_TOOLCHAIN:",o.version,s.version())'
+
+      - name: Test ERC-7201 namespace formula against independent offchain Keccak and uint256 encoders
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          test "$(git -C pinned-ercs rev-parse HEAD)" = "e9c1adc6ad36faec8a6bc509cc8a14ec9b8f741d"
+          node oecl/laboratory/scientific-open-source-worker/check-erc7201-namespace-formula.cjs pinned-ercs/ERCS/erc-7201.md source-output/erc7201/namespace-formula-observations.json
+
+      - name: Verify ERC-7201 formula in a controlled Solidity local-EVM probe with mined event receipts
+        if: github.event_name != 'workflow_dispatch'
+        working-directory: dependency-source
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: node ../oecl/laboratory/scientific-open-source-worker/run-erc7201-namespace-local-evm.cjs . ../source-output/erc7201/namespace-formula-observations.json ../source-output/erc7201/namespace-slot-evm-witness.json
+
+      - name: Execute pinned official ERC2535 Diamond with controlled ERC7201-namespaced facet upgrades
+        if: github.event_name != 'workflow_dispatch'
+        working-directory: dependency-source
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: node ../oecl/laboratory/scientific-open-source-worker/run-erc2535-diamond-local-evm.cjs . ../pinned-ercs/assets/erc-2535/reference/Diamond.sol ../pinned-ercs/ERCS/erc-2535.md ../source-output/erc7201/namespace-formula-observations.json ../source-output/erc2535/pinned-diamond-local-evm-witness.json
 
       - name: Run generic source and provenance falsification controls
         run: node oecl/scripts/check-generic-source-worker.cjs
@@ -115,15 +148,78 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-8098 dependency-source source-output/pair-8060-8098
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-4626 dependency-source source-output/pair-8098-4626
+          node -e 'const fs=require("node:fs");const p="source-output/pair-8098-4626/generic-source-hypotheses.json";const r=JSON.parse(fs.readFileSync(p));if(r.verdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.errors.length||!r.hypotheses.length)throw Error("AUTONOMOUS_AST_DISCOVERY_NOT_REPRODUCIBLE");console.log("OECL_8098_4626_AUTONOMOUS_AST_HYPOTHESIS_KINDS",JSON.stringify(r.hypotheses.map(h=>({kind:h.kind,id:h.hypothesisId,evidence:h.evidence?.map(e=>({entry:e.publicEntrypoint?.name,decrease:e.stateDecrease?.state,participant:e.participant}))}))))'
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-20-BURNABLE dependency-source source-output/pair-8060-20burnable
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8098 ERC-20 dependency-source source-output/pair-8098-20
           node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-1155 ERC-20 dependency-source source-output/pair-1155-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-4626 ERC-20 dependency-source source-output/pair-4626-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-721 ERC-165 dependency-source source-output/pair-721-165
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-2981 ERC-721 dependency-source source-output/pair-2981-721
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-2612 ERC-20 dependency-source source-output/pair-2612-20
+          node oecl/laboratory/scientific-open-source-worker/run-generic-source-worker.cjs ERC-8060 ERC-4626 dependency-source source-output/pair-8060-4626
           node -e 'const fs=require("node:fs");for(const folder of ["pair-8060-8098","pair-8060-20burnable","pair-8098-20"]){const r=JSON.parse(fs.readFileSync("source-output/"+folder+"/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses<1){console.error("OECL_GENERIC_DISCOVERY_REGRESSION:"+folder);process.exit(1)}}'
           node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-1155-20/source-scientific-report.json","utf8"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.counts.hypotheses!==0||r.discoveryReason!=="NO_ADMISSIBLE_SOURCE_RELATION_DISCOVERED"){console.error("OECL_NEGATIVE_DISCOVERY_MUST_REMAIN_INCONCLUSIVE");process.exit(1)}'
+          node -e 'const fs=require("node:fs");for(const [dir,a,b] of [["pair-4626-20","ERC-4626","ERC-20"],["pair-721-165","ERC-721","ERC-165"],["pair-2981-721","ERC-2981","ERC-721"],["pair-2612-20","ERC-2612","ERC-20"],["pair-8060-4626","ERC-8060","ERC-4626"]]){const r=JSON.parse(fs.readFileSync("source-output/"+dir+"/source-scientific-report.json","utf8"));if(r.selected?.map(x=>x.id).join("|")!==a+"|"+b||r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.sourceOnly!==true||r.evmExecuted!==false||r.counts.sourceUnits<2)throw Error("NEW_AST_PAIR_FAILED:"+dir)}console.log("OECL_FIVE_ADDITIONAL_REAL_AST_PAIRS:PASS")'
 
       - name: Check path feasibility reports and executable-EVM experiment proposals on real pinned sources
         if: github.event_name != 'workflow_dispatch'
         run: node oecl/scripts/check-source-path-feasibility-artifacts.cjs source-output
+
+      - name: Derive a new reproducible ERC8098 ERC4626 test plan from actual compiler AST findings BEFORE EVM deployment
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/laboratory/scientific-open-source-worker/derive-ast-8098-4626-experiment.cjs source-output/pair-8098-4626
+
+      - name: Self-falsify AST-originated hypothesis with source-derived zero and overbalance boundary challenges BEFORE EVM
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/laboratory/scientific-open-source-worker/propose-ast-self-falsifiers.cjs source-output/pair-8098-4626
+
+      - name: Register capability-gated AST falsifiers for the entire source cohort BEFORE local EVM
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node oecl/scripts/check-capability-gated-scientific-cycle.cjs
+          node oecl/laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs plan source-output
+          node -e 'const fs=require("node:fs"),p="source-output/pair-8098-4626/capability-gated-scientific-cycle.json",r=JSON.parse(fs.readFileSync(p));if(r.workflowStatus!=="REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED"||r.fixture.testIds.length!==4||r.localEvmExecuted!==false||r.compatibilityVerdict!=="NOT_EVALUATED")throw Error("SCIENTIFIC_PROTOCOL_PREREGISTRATION_FAILED")'
+          node -e 'const fs=require("node:fs"),p="source-output/pair-4626-20/capability-gated-scientific-cycle.json",r=JSON.parse(fs.readFileSync(p));if(r.workflowStatus!=="REVIEWED_LOCAL_EVM_PROTOCOL_PREREGISTERED"||r.fixture.adapter!=="PINNED_OZ_4_9_6_ERC4626_ERC20_LOCAL_HARDHAT_ONLY"||r.fixture.testIds.length!==3||r.localEvmExecuted!==false||r.compatibilityVerdict!=="NOT_EVALUATED")throw Error("VAULT_ASSET_SOURCE_PROTOCOL_PREREGISTRATION_FAILED")'
+
+      - name: Produce independent ERC-4626 × ERC-20 local EVM receipts and negative controls
+        if: github.event_name != 'workflow_dispatch'
+        working-directory: dependency-source
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: node ../oecl/laboratory/scientific-open-source-worker/run-erc4626-erc20-evm.cjs . ../source-output/pair-4626-20
+
+      - name: Verify local EVM provenance and observed status without scientific admission
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node -e 'const fs=require("node:fs");const p="source-output/pair-4626-20/independent-local-evm.json";const x=JSON.parse(fs.readFileSync(p,"utf8"));if(x.scientificVerdict!=="INCONCLUSIVE"||x.candidateAdmission!=="NOT_ADMITTED"||x.evmExecuted!==true||x.scope!=="OZ_4_9_6_ERC4626_ERC20_ISOLATED_FIXTURE_ONLY"||x.localChainId!==31337||x.minedReceipts.length!==7||x.readOnlyNegativeControls.length!==3||!x.readOnlyNegativeControls.every(r=>r.transactionMined===false&&r.statePreserved===true))throw Error("UNVERIFIED_ERC4626_LOCAL_EVM");console.log("OECL_ERC4626_ERC20_EVM_ATTESTATION_PASS")'
+
+      - name: Execute ERC-8098 as underlying asset in an ERC-4626 local EVM vault
+        if: github.event_name != 'workflow_dispatch'
+        working-directory: dependency-source
+        env:
+          HARDHAT_NETWORK: hardhat
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node ../oecl/laboratory/scientific-open-source-worker/run-erc8098-erc4626-evm.cjs . ../source-output/pair-8098-4626
+
+      - name: Enforce local-only ERC-8098 asset and separate ERC-4626 shares semantics
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node -e 'const fs=require("node:fs");const r=JSON.parse(fs.readFileSync("source-output/pair-8098-4626/independent-8098-underlying-4626-evm.json"));if(r.scientificVerdict!=="INCONCLUSIVE"||r.candidateAdmission!=="NOT_ADMITTED"||r.evmExecuted!==true||r.localChainId!==31337||r.minedReceipts.length!==4||r.readOnlyNegativeControls.length!==3||!r.readOnlyNegativeControls.every(x=>x.transactionMined===false&&x.statePreserved===true)||r.observations.afterDeposit.underlyingSupply!==r.observations.before.underlyingSupply)throw Error("UNVERIFIED_8098_ASSET_VAULT_EVM");console.log("OECL_8098_UNDERLYING_4626_EVM_SCOPE_PASS")'
+
+      - name: Falsify pre-registered scientific predictions against independently recomputed local EVM measurements
+        if: github.event_name != 'workflow_dispatch'
+        run: node oecl/laboratory/scientific-open-source-worker/check-preregistered-8098-4626-falsification.cjs source-output/pair-8098-4626
+
+      - name: Confirm the AST-derived plan is unchanged and two exact local receipts support its strictly decreasing observed paths
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node -e 'const fs=require("node:fs"),p="source-output/pair-8098-4626/ast-hypothesis-experiment.json";const x=JSON.parse(fs.readFileSync(p));if(x.schemaVersion!=="OECL_AST_GENERATED_HYPOTHESIS_EVM_OBSERVATION_V1"||x.observations.length!==2||!x.observations.every(o=>o.strictNumericRelationHolds===true)||x.candidateAdmission!=="NOT_ADMITTED"||x.fullCompatibilityVerdict!=="NOT_EVALUATED")throw Error("AST_SOURCE_HYPOTHESIS_EVM_SCOPE_INVALID");console.log("OECL_AST_SOURCE_HYPOTHESIS_EVM_SCOPE_PASS")'
+
+      - name: Verify source-generated adversarial-plan output and independent EVM observations
+        if: github.event_name != 'workflow_dispatch'
+        run: |
+          node -e 'const fs=require("node:fs");const p=JSON.parse(fs.readFileSync("source-output/pair-8098-4626/ast-self-falsification-plan.json"));const r=JSON.parse(fs.readFileSync("source-output/pair-8098-4626/ast-self-falsification-evm.json"));if(p.challenges?.length!==4||r.cases?.length!==4||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("UNVERIFIED_AST_SELF_FALSIFICATION");console.log("OECL_AST_SELF_FALSIFICATION_REPORT_SCOPE_PASS")'
 
       - name: Verify and project four independently sourced AST graphs for browser exploration
         if: github.event_name != 'workflow_dispatch'
@@ -135,5 +231,66 @@ jobs:
         with:
           name: oecl-generic-ast-evidence
           path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  independently-reconcile-scientist-with-local-evm:
+    if: github.event_name != 'workflow_dispatch'
+    needs: independent-source-worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the exact committed pre-registered predictions and scientist
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download the preceding EVM source-worker artifact from this exact workflow run
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-generic-ast-evidence
+          path: source-output
+      - name: Set up Node.js for the original scientist
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact scientist lock without package scripts
+        run: npm ci --ignore-scripts --no-fund
+      - name: Independently recompute the scientist's match and counterexample from this run's local EVM artifact
+        run: npx tsx scripts/check-preregistered-scientist-evm-replay.ts source-output/pair-8098-4626/scientist-adversarial-falsification.json laboratory/scientific-open-source-worker/preregistered-8098-4626-falsification.json audit-output/scientist-evm-comparison.json
+      - name: Independently classify source-generated zero-quantity counterexamples and overbalance reversions
+        run: npx tsx scripts/check-ast-self-falsification-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json
+      - name: Conclude only scoped AST hypotheses from the independent EVM falsification replay
+        run: |
+          node scripts/check-capability-gated-scientific-cycle.cjs
+          node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude source-output/pair-8098-4626 audit-output/scientist-ast-self-falsification-review.json audit-output/scientist-capability-gated-cycle.json
+          node -e 'const fs=require("node:fs"),r=JSON.parse(fs.readFileSync("audit-output/scientist-capability-gated-cycle.json"));if(r.cycleStatus!=="CONTROLLED_LOCAL_EVM_AND_REPLAY_COMPLETE"||r.scopedConclusions.length!==2||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("SCIENTIFIC_CYCLE_OVERCLAIM_OR_INCOMPLETE")'
+
+      - name: Independently falsify vault-vs-plain-ERC20 interface equivalence using same-run local receipts
+        run: |
+          node laboratory/scientific-open-source-worker/CapabilityGatedScienceCycle.cjs conclude-vault source-output/pair-4626-20 audit-output/scientist-vault-asset-capability-cycle.json
+          node scripts/check-vault-asset-capability-cycle.cjs source-output/pair-4626-20
+          node -e 'const fs=require("node:fs"),r=JSON.parse(fs.readFileSync("audit-output/scientist-vault-asset-capability-cycle.json"));if(r.status!=="SCOPED_BEHAVIORAL_DIFFERENCE_OBSERVED"||r.scopedConclusions.length!==3||r.compatibilityVerdict!=="NOT_EVALUATED"||r.candidateAdmission!=="NOT_ADMITTED")throw Error("VAULT_ASSET_CYCLE_OVERCLAIM_OR_INCOMPLETE")'
+
+      - name: Independently verify pinned Diamond facet cuts and ERC7201 storage-reuse EVM evidence
+        run: node laboratory/scientific-independent-review/check-erc2535-diamond-artifact.cjs source-output/erc2535/pinned-diamond-local-evm-witness.json source-output/erc7201/namespace-formula-observations.json audit-output/erc2535-independent-diamond-review.json
+      - name: Independently check five ERC7201 EVM formula event receipts against pinned offchain oracles
+        run: node laboratory/scientific-independent-review/check-erc7201-evm-witness.cjs source-output/erc7201/namespace-formula-observations.json source-output/erc7201/namespace-slot-evm-witness.json audit-output/erc7201-independent-evm-review.json
+      - name: Independently regenerate the AST hypothesis and compare exact same-run EVM observations
+        run: npx tsx scripts/check-ast-generated-scientist-evm-replay.ts source-output/pair-8098-4626 audit-output/scientist-ast-generated-evm-review.json
+      - name: Archive scientific disagreement without changing EVM evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-scientist-vs-local-evm-falsification
+          path: |
+            audit-output/scientist-evm-comparison.json
+            audit-output/scientist-ast-generated-evm-review.json
+            audit-output/erc7201-independent-evm-review.json
+            audit-output/erc2535-independent-diamond-review.json
+            audit-output/scientist-ast-self-falsification-review.json
+            audit-output/scientist-capability-gated-cycle.json
+            audit-output/scientist-vault-asset-capability-cycle.json
           if-no-files-found: warn
           retention-days: 14

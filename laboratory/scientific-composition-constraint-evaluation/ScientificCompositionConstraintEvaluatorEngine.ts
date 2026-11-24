@@ -224,7 +224,7 @@ export class ScientificCompositionConstraintEvaluatorEngine {
                     !predicate.rightMetric.trim() ||
                     predicate.leftMetric === predicate.rightMetric ||
                     !["EQ", "LTE", "GTE"].includes(predicate.operator) ||
-                    !revision || !/^[a-f0-9]{40}$/i.test(revision) ||
+                    !revision || !/^(?:[a-f0-9]{40}|sha256:[a-f0-9]{64})$/i.test(revision) ||
                     observation.sourceRevision?.toLowerCase() !== revision.toLowerCase() ||
                     !tx || !/^0x[a-f0-9]{64}$/i.test(tx) ||
                     !values ||

@@ -84,7 +84,8 @@ export class KnowledgePipeline {
 
         const researchConclusions =
             new ResearchConclusionEngine().build(
-                crossSourcePatterns
+                crossSourcePatterns,
+                sourceIndependenceAssessments
             );
 
         /*

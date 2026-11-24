@@ -67,13 +67,34 @@ try {
   assert.equal(refusedBody.status, "NOT_CONFIGURED");
   const unknownStatus = await fetch(base + "/api/scientific/jobs/123e4567-e89b-42d3-a456-426614174000");
   assert.equal(unknownStatus.status, 503);
+  const localEvm=await fetch(base+"/api/scientific/erc4626-evm");
+  assert.equal(localEvm.status,200);
+  const erc4626=await localEvm.json();
+  assert.equal(erc4626.status,"VERIFIED_PINNED_LOCAL_EVM");
+  assert.equal(erc4626.runId,45212718140);
+  assert.equal(erc4626.experiment.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(erc4626.experiment.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(erc4626.experiment.localChainId,31337);
+  assert.equal(erc4626.experiment.minedReceipts.length,7);
+  assert.equal(erc4626.experiment.readOnlyNegativeControls.length,3);
+  assert.ok(erc4626.experiment.minedReceipts.every(r=>r.status===1&&/^0x[0-9a-f]{64}$/.test(r.txHash)));
+  assert.ok(erc4626.experiment.readOnlyNegativeControls.every(r=>r.transactionMined===false));
+  const receiptDownload=await fetch(base+"/api/scientific/erc4626-evm?download=1");
+  assert.equal(receiptDownload.status,200);
+  assert.match(receiptDownload.headers.get("content-disposition")||"",/attachment; filename=/);
+  const downloaded4626=await receiptDownload.json();
+  assert.equal(downloaded4626.runId,45212718140);
+  console.log("OECL_ERC4626_NEW_LOCAL_EVM_PUBLIC_RECEIPTS_PASS");
+
   const sourceConfig = await fetch(base + "/api/scientific/source-jobs");
   assert.equal(sourceConfig.status, 200);
   const sourceSettings = await sourceConfig.json();
   assert.equal(sourceSettings.enabled, false);
   assert.equal(sourceSettings.acceptsArbitraryRepositories, false);
   assert.equal(sourceSettings.runsEvm, false);
-  assert.equal(sourceSettings.sources.length, 6);
+  assert.equal(sourceSettings.sources.length, 10);
+  for (const id of ["ERC-165", "ERC-2612", "ERC-2981", "ERC-4626"])
+    assert.ok(sourceSettings.sources.some(source => source.id === id));
   const sourceRejected = await fetch(base + "/api/scientific/source-jobs", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ sourceA: "ERC-8060", sourceB: "ERC-20-BURNABLE" }),
