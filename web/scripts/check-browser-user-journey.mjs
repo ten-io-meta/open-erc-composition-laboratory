@@ -216,14 +216,14 @@ async function test(){
   await sleep(1300);
   const secondDiagnostic=await evalJs('JSON.stringify({heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.textContent,workbenches:document.querySelectorAll("#composition-workbench").length,reports:document.querySelectorAll("[data-testid=oecl-pair-report]").length,cycles:[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].map(n=>({pair:n.getAttribute("data-pair"),visible:n.getClientRects().length>0,ancestorHidden:!!n.closest("[hidden],[aria-hidden=true]"),text:n.innerText.slice(0,760),kindPresent:n.innerText.includes("POTENTIAL COUPLED STATE DECREASE")})),alerts:[...document.querySelectorAll("[role=alert]")].map(n=>n.innerText.slice(0,220))})');
   console.log("OECL_BROWSER_SECOND_CYCLE_DIAGNOSTIC:"+secondDiagnostic);
-  await expectUi('([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].some(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626" && n.innerText.includes("POTENTIAL COUPLED STATE DECREASE"))',
+  await expectUi('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return !!n && n.innerText.includes("POTENTIAL COUPLED STATE DECREASE")})()',
     "second reviewed independent hypothesis-to-EVM report",12000);
   const displayIntegrity=await evalJs('JSON.stringify([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].filter(n=>n.getClientRects().length>0).map(n=>n.getAttribute("data-pair")))');
   assert.deepEqual(JSON.parse(displayIntegrity),["ERC-8098|ERC-4626"],
     "Only the currently selected pair may have a visible scientific-cycle panel");
-  assert.equal(await evalJs('([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626")?.querySelectorAll("[data-testid=oecl-cycle-case]")?.length)'),2);
-  assert.equal(await evalJs('([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626")?.innerText.includes("successful zero-quantity"))'),true);
-  assert.equal(await evalJs('([...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626")?.innerText.includes("COMPATIBILITY NOT EVALUATED"))'),true);
+  assert.equal(await evalJs('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return n?.querySelectorAll("[data-testid=oecl-cycle-case]").length})()'),2);
+  assert.equal(await evalJs('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return n?.innerText.includes("successful zero-quantity")})()'),true);
+  assert.equal(await evalJs('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return n?.innerText.includes("COMPATIBILITY NOT EVALUATED")})()'),true);
   console.log("OECL_BROWSER_SECOND_SCIENCE_CYCLE_PASS:2");
   await click("Vaults × fungible tokens");
   await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
