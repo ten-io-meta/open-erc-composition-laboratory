@@ -57,7 +57,7 @@ function artifact(profile,mint=false){
   return {abi,evm:{bytecode:{object:"60006000f3",linkReferences:{}}}};
 }
 const original=selected.map(x=>artifact(x.id));
-const harnesses=selected.map((x,i)=>buildHarnessSource(x,i));
+const harnesses=selected.map((x,i)=>buildHarnessSource({...x,contract:refs[i].contract},i));
 const deployable=selected.map(x=>artifact(x.id,true));
 const plan=signedProtocolBody({report,graph,originalArtifacts:original,
   deployableArtifacts:deployable,wrappers:harnesses,
