@@ -9,26 +9,41 @@ const fs=require("node:fs");
 const {review}=require("./review-source-backed-hypotheses.cjs");
 const LOCK_SHA256="73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1";
 const IDS=["ERC-20","ERC-20-BURNABLE"];
-const forbidden=new Set(["evmWitness","receipt","receipts","transactionHash","txHash",
-  "minedReceiptCount","executionPermit","signatureApproval","EVM_PROVEN"]);
-function noWitnessFields(obj,label){
+// Strict schemas stop unreviewed witness fields from being laundered into JSON.
+const SCHEMAS=Object.freeze({
+  REPORT:["schemaVersion","status","registryScope","compilerVersion",
+    "lockSha256","dependencyIntegrity","sourceGraphSha256","participants",
+    "evmExecuted","executionAuthorized","independentReviewStatus",
+    "scientificVerdict","compatibilityVerdict","candidateAdmission","limitations"],
+  PARTICIPANT:["id","revision","contract","sourceUnit","sourceSha256",
+    "abiSha256","structuralPaths","hypothesisCount","hypotheses"],
+  PATH:["signature","kind","stateVariable","path","unresolvedReferences",
+    "externalCallReferences","executionSafety"],
+  HYPOTHESIS:["id","status","signature","sourceSha256","astSha256",
+    "abiSha256","astPath","stateVariable","unresolvedReferences",
+    "externalCallReferences","executionSafety","hypothesis","prediction",
+    "counterexample","prerequisites","evidenceStatus","scientificVerdict",
+    "compatibilityVerdict","candidateAdmission"]
+});
+function exactFields(obj,label){
   assert(obj&&typeof obj==="object"&&!Array.isArray(obj),label+"_INVALID");
-  for(const key of Object.keys(obj))
-    assert(!forbidden.has(key),label+"_UNVERIFIED_WITNESS_FIELD:"+key);
+  const actual=Object.keys(obj).sort(),expected=[...SCHEMAS[label]].sort();
+  assert.deepEqual(actual,expected,label+"_UNREVIEWED_FIELD_OR_MISSING_REQUIRED_FIELD");
 }
 function gate(report){
   review(report,IDS);
   assert.equal(report.lockSha256,LOCK_SHA256,"PINNED_LOCK_CHANGED");
-  noWitnessFields(report,"REPORT");
+  exactFields(report,"REPORT");
   assert(report.limitations&&Array.isArray(report.limitations)&&report.limitations.length>=3,
     "SOURCE_ONLY_LIMITATIONS_REQUIRED");
   assert.equal(report.participants.length,2);
   let count=0;
   for(const p of report.participants){
-    noWitnessFields(p,"PARTICIPANT");
+    exactFields(p,"PARTICIPANT");
+    for(const route of p.structuralPaths)exactFields(route,"PATH");
     assert(p.hypotheses.length<=256,"TOO_MANY_HYPOTHESES");
     for(const h of p.hypotheses){
-      noWitnessFields(h,"HYPOTHESIS");
+      exactFields(h,"HYPOTHESIS");
       assert.equal(h.status,"HYPOTHESIS_ONLY");
       assert.equal(h.executionSafety,"SOURCE_ONLY_REVIEW_REQUIRED");
       assert.equal(h.evidenceStatus,"NOT_EXECUTED");
