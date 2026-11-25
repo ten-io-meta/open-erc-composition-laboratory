@@ -99,6 +99,9 @@ function deriveProtocol({report,graph,artifacts,compilerVersion,dependencyIntegr
       id:selection[i].id,
       abiSha256:canonical(a?.abi??null),
       creationBytecodeSha256:digest(a?.evm?.bytecode?.object??""),
+      deploymentProfile:sha(a?.oeclWrapperSha256)?
+        "PINNED_INHERITANCE_ONLY_WRAPPER":"EXACT_REGISTERED_CONCRETE",
+      wrapperSourceSha256:sha(a?.oeclWrapperSha256)?a.oeclWrapperSha256:null,
       contract:selection[i].contract
     })),
     scientificVerdict:"INCONCLUSIVE",
@@ -110,6 +113,7 @@ function deriveProtocol({report,graph,artifacts,compilerVersion,dependencyIntegr
       "This fixed ABI probe is not a general Solidity test-generation engine.",
       "A common supportsInterface signature is source-level ABI evidence, not a global ERC composability claim.",
       "Only immutable reviewed registry members are eligible; unknown constructors and unsafe method families are blocked.",
+      "A minimal inheritance-only Solidity wrapper may instantiate an otherwise abstract pinned OpenZeppelin base; that generated wrapper source is SHA-256 identified and changes the exact deployed contract type.",
       "Local deployment receipts can be rechecked against the local Hardhat provider, not independently authenticated against Ethereum mainnet.",
       "Read-only EVM calls are not mined transaction receipts."
     ]
@@ -124,7 +128,10 @@ function verifyProtocol(plan){
       JSON.stringify(plan.candidate?.testVectors)!==JSON.stringify(TEST_VECTORS)||
       plan.candidate.maxReadOnlyCalls!==6||plan.candidate.maxDeployments!==2||
       !Array.isArray(plan.compiled)||plan.compiled.length!==2||
-      !plan.compiled.every(c=>sha(c.abiSha256)&&sha(c.creationBytecodeSha256))||
+      !plan.compiled.every(c=>sha(c.abiSha256)&&sha(c.creationBytecodeSha256)&&
+        (c.wrapperSourceSha256===null||sha(c.wrapperSourceSha256))&&
+        c.deploymentProfile===(c.wrapperSourceSha256?
+          "PINNED_INHERITANCE_ONLY_WRAPPER":"EXACT_REGISTERED_CONCRETE"))||
       plan.selected.length!==2||plan.selected.some(x=>!sha(x.sourceSha256))||
       !sha(plan.sourceReportSha256)||!sha(plan.sourceGraphSha256)||
       plan.evmExecuted!==false||plan.candidate.evmExecuted!==false||
