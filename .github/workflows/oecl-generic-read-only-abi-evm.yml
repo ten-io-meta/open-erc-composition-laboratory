@@ -15,8 +15,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: oecl-generic-safe-evm-laboratory
-  cancel-in-progress: false
+  group: oecl-generic-safe-evm-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   source-preregister-and-local-evm:
