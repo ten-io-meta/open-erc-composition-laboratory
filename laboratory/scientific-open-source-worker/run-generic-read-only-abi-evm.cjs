@@ -101,6 +101,8 @@ async function execute(plan,compiled){
     const c=compiled[i];
     assert.equal(digest(c.evm.bytecode.object),plan.compiled[i].creationBytecodeSha256);
     assert.equal(canonical(c.abi),plan.compiled[i].abiSha256);
+    assert.equal(c.oeclWrapperSha256||null,plan.compiled[i].wrapperSourceSha256,
+      "DEPLOYMENT_WRAPPER_SOURCE_CHANGED_AFTER_PREREGISTRATION");
     const contract=await new hre.ethers.ContractFactory(
       c.abi,"0x"+c.evm.bytecode.object,owner).deploy();
     await contract.deployed();
