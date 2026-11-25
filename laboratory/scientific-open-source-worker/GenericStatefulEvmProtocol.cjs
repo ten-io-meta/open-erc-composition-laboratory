@@ -70,6 +70,10 @@ function verifiedSources(report){
     assert.equal(s.repository,ref.kind==="github"?ref.repository:registry.openzeppelin.package);
     assert(sha(s.sourceSha256));
     assert(typeof s.sourceUnit==="string"&&s.sourceUnit.length<220);
+    const expectedUnit=ref.kind==="openzeppelin"?
+      "@openzeppelin/contracts/"+ref.file:
+      "github/"+report.selected.indexOf(s)+"/"+ref.file;
+    assert.equal(s.sourceUnit,expectedUnit,"REGISTRY_SOURCE_UNIT_CHANGED");
     return {id:s.id,kind:s.kind,repository:s.repository,revision,
       sourceUnit:s.sourceUnit,sourceSha256:s.sourceSha256,contract:ref.contract};
   });
@@ -309,6 +313,8 @@ function verifyStatefulPlan(plan){
       const r=registry.sources.find(x=>x.id===s.id);
       if(!r||s.revision!==(r.kind==="github"?r.revision:"4.9.6")||
         s.repository!==(r.kind==="github"?r.repository:"@openzeppelin/contracts")||
+        s.sourceUnit!==(r.kind==="openzeppelin"?
+          "@openzeppelin/contracts/"+r.file:"github/"+plan.selected.indexOf(s)+"/"+r.file)||
         !sha(s.sourceSha256))throw Error("FORGED_SOURCE_IDENTITY");
       return r;
     });
