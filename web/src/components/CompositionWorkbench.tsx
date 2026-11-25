@@ -276,7 +276,7 @@ export function CompositionWorkbench() {
           ERC-8060 × ERC-20-BURNABLE example. No result is inferred for this untested pair.
         </p>}
       {!pinned && pair.a !== "ERC-20-BURNABLE" && pair.b !== "ERC-20-BURNABLE" &&
-        <DocumentaryPairExplorer key={pairKey} protocolA={pair.a} protocolB={pair.b} />}
+        <DocumentaryPairExplorer protocolA={pair.a} protocolB={pair.b} />}
 
       {!loading && !failure && graph && <>
         <div data-testid="oecl-outcome" className="grid gap-3 lg:grid-cols-3">
