@@ -8,6 +8,9 @@ on:
       - "laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs"
       - "scripts/check-generic-hypothesis-planner.test.cjs"
       - "scripts/check-source-backed-hypotheses.test.cjs"
+      - "scripts/review-source-backed-hypotheses.cjs"
+      - "scripts/check-independent-source-hypotheses.test.cjs"
+      - "docs/oecl-generic-hypothesis-planner-v1.md"
       - ".github/workflows/oecl-generic-hypothesis-provenance.yml"
   workflow_dispatch:
 
@@ -44,7 +47,7 @@ jobs:
           ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
       - name: Run generator and adversarial unit tests
         run: |
-          node --test oecl/scripts/check-generic-hypothesis-planner.test.cjs oecl/scripts/check-source-backed-hypotheses.test.cjs
+          node --test oecl/scripts/check-generic-hypothesis-planner.test.cjs oecl/scripts/check-source-backed-hypotheses.test.cjs oecl/scripts/check-independent-source-hypotheses.test.cjs
       - name: Compile registered ERC-20 and ERC-20 Burnable with locked solc
         env:
           OECL_GENERIC_DEBUG: "1"
@@ -91,4 +94,4 @@ jobs:
       - name: Recompile every source and compare full hypothesis dossier
         run: |
           node oecl/laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs ERC-20 ERC-20-BURNABLE dependency-source independent
-          node -e 'const assert=require("node:assert/strict");const fs=require("node:fs"); const a=JSON.parse(fs.readFileSync("archived/source-backed-hypotheses.json"));const b=JSON.parse(fs.readFileSync("independent/source-backed-hypotheses.json"));assert.deepEqual(a,b);assert.equal(b.evmExecuted,false);assert.equal(b.independentReviewStatus,"AWAITING_SEPARATE_RECONSTRUCTION");console.log("OECL_INDEPENDENT_COMPILER_DOSSIER_MATCH")'
+          node oecl/scripts/review-source-backed-hypotheses.cjs archived/source-backed-hypotheses.json independent/source-backed-hypotheses.json
