@@ -35,9 +35,16 @@ function discover({abi, ast, source}) {
       typeof p.stateVariable === "string" && p.stateVariable.length > 0);
     if (paths.length !== 1) continue;
     const p = paths[0];
+    if ((p.unresolvedReferences!==undefined &&
+         (!Number.isSafeInteger(p.unresolvedReferences)||p.unresolvedReferences<0)) ||
+        (p.externalCallReferences!==undefined &&
+         (!Number.isSafeInteger(p.externalCallReferences)||p.externalCallReferences<0))) continue;
     const core = {signature:sig, sourceSha256:source.sourceSha256,
       astSha256:source.astSha256, abiSha256:source.abiSha256,
-      astPath:p.path, stateVariable:p.stateVariable};
+      astPath:p.path, stateVariable:p.stateVariable,
+      unresolvedReferences:p.unresolvedReferences||0,
+      externalCallReferences:p.externalCallReferences||0,
+      executionSafety:"SOURCE_ONLY_REVIEW_REQUIRED"};
     hypotheses.push({
       id:hash(core), status:"HYPOTHESIS_ONLY", ...core,
       hypothesis:"Calling "+sig+" may update "+p.stateVariable,
