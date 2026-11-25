@@ -11,6 +11,7 @@ import { Erc4626LocalEvmPanel } from "@/components/Erc4626LocalEvmPanel";
 import { PinnedScientificCyclePanel } from "@/components/PinnedScientificCyclePanel";
 import { GenericAbiLocalEvmPanel } from "@/components/GenericAbiLocalEvmPanel";
 import { GenericStatefulEvmPanel } from "@/components/GenericStatefulEvmPanel";
+import { GenericNftAuthorizationEvmPanel } from "@/components/GenericNftAuthorizationEvmPanel";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -33,6 +34,7 @@ const documentaryExamples = [
   { a: "ERC-7575", b: "ERC-4626", title: "Multi-asset vaults × vaults" },
   { a: "ERC-721", b: "ERC-165", title: "NFTs × interface detection" },
   { a: "ERC-165", b: "ERC-2981", title: "Interface identity × royalties (generic local EVM)" },
+  { a: "ERC-721", b: "ERC-1155", title: "NFT owners × multitoken operators (local EVM)" },
 ] as const;
 
 const tabs: { id: Tab; label: string }[] = [
@@ -92,6 +94,8 @@ export function CompositionWorkbench() {
   const independentEvm = isIndependentEvm(pair);
   const hasNewLocalEvm = (pair.a === "ERC-4626" && pair.b === "ERC-20") ||
     (pair.b === "ERC-4626" && pair.a === "ERC-20");
+  const hasNftOwnershipEvm = (pair.a === "ERC-721" && pair.b === "ERC-1155") ||
+    (pair.b === "ERC-721" && pair.a === "ERC-1155");
   const hasStatefulErc20Evm = (pair.a === "ERC-20" && pair.b === "ERC-20-BURNABLE") ||
     (pair.b === "ERC-20" && pair.a === "ERC-20-BURNABLE");
   const hasGenericSafeAbiEvm = (pair.a === "ERC-165" && pair.b === "ERC-2981") ||
@@ -259,7 +263,7 @@ export function CompositionWorkbench() {
         </div>
         {loading ? pill("Checking pinned evidence") : failure ? pill("Verification failed") :
           graph ? pill("INCONCLUSIVE · NOT_ADMITTED") :
-          hasPinnedScientificCycle || hasGenericSafeAbiEvm || hasStatefulErc20Evm ?
+          hasPinnedScientificCycle || hasGenericSafeAbiEvm || hasStatefulErc20Evm || hasNftOwnershipEvm ?
             pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
       </header>
 
@@ -270,13 +274,16 @@ export function CompositionWorkbench() {
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
         <h4 className="text-lg font-semibold text-[#694d27]">
-          {hasStatefulErc20Evm ? "Reviewed state-changing ERC20/EVM experiment available — no composability proof" :
+          {hasNftOwnershipEvm ? "Reviewed NFT operator and authorization EVM experiments available — no cross-contract proof" :
+            hasStatefulErc20Evm ? "Reviewed state-changing ERC20/EVM experiment available — no composability proof" :
             hasGenericSafeAbiEvm ? "Reviewed generic ABI / local EVM probe available — no composability proof" :
             hasPinnedScientificCycle ? "Reviewed scientific cycle available — interactive AST graph not yet materialized" :
             "No pinned Solidity/EVM experiment for this pair"}
         </h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          {hasStatefulErc20Evm ?
+          {hasNftOwnershipEvm ?
+            "Compiler AST/ABI-derived NFT ownership and operator tests ran on independent ERC721/1155 fixtures, with 15 local mined receipts, 8 unmined refuters and a fresh independent reviewer. No inter-contract composability claim follows." :
+            hasStatefulErc20Evm ?
             "A compiler AST/ABI-derived, pre-registered allowance transfer and supply burn experiment ran on two isolated test harnesses, with 12 mined local receipts and 6 unmined adversarial reverts. These tests are not cross-contract composability evidence." :
             hasGenericSafeAbiEvm ?
             "A source- and ABI-derived local EVM introspection protocol has been executed on exact registered OpenZeppelin sources, with two mined deployment receipts and six read-only probes. It is not a test of ERC composability." :
@@ -291,6 +298,7 @@ export function CompositionWorkbench() {
       {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
       {hasGenericSafeAbiEvm && <GenericAbiLocalEvmPanel />}
       {hasStatefulErc20Evm && <GenericStatefulEvmPanel />}
+      {hasNftOwnershipEvm && <GenericNftAuthorizationEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
         <p role="status" className="rounded-xl border border-[#e4d6b9] bg-[#fffaf0] p-4 text-sm text-[#6f5634]">
