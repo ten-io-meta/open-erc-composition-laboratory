@@ -46,6 +46,8 @@ jobs:
         run: |
           node --test oecl/scripts/check-generic-hypothesis-planner.test.cjs oecl/scripts/check-source-backed-hypotheses.test.cjs
       - name: Compile registered ERC-20 and ERC-20 Burnable with locked solc
+        env:
+          OECL_GENERIC_DEBUG: "1"
         run: |
           node oecl/laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs ERC-20 ERC-20-BURNABLE dependency-source output
           node -e 'const p=require("./output/source-backed-hypotheses.json"); if(p.schemaVersion!=="OECL_LOCKED_SOURCE_HYPOTHESES_V1"||p.participants.length!==2||p.participants.reduce((n,x)=>n+x.hypothesisCount,0)<1||p.executionAuthorized||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED")throw Error("GENERIC_SOURCE_DISCOVERY_NOT_PROVEN")'
