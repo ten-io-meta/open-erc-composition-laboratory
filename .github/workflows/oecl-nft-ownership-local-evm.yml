@@ -1,0 +1,136 @@
+name: OECL Pinned ERC721 and ERC1155 Ownership Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/GenericNftAuthorizationEvmProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs"
+      - "scripts/check-generic-nft-authorization-evm.cjs"
+      - "scripts/check-generic-nft-witness.cjs"
+      - "scripts/review-generic-nft-authorization-evm.cjs"
+      - ".github/workflows/oecl-nft-ownership-local-evm.yml"
+      - "web/src/components/GenericNftAuthorizationEvmPanel.tsx"
+      - "web/src/components/CompositionWorkbench.tsx"
+      - "web/scripts/check-browser-user-journey.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-ownership-erc721-1155-ci
+  cancel-in-progress: true
+
+jobs:
+  local-evm-owner-and-operator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout exact scientific workbench
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout immutable local Hardhat dependency source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned compiler and Hardhat without dependency install scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify repository and dependency lock integrity
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const oz=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const c=require("./dependency-source/node_modules/solc");if(oz.version!=="4.9.6"||!c.version().startsWith("0.8.26+"))process.exit(1)'
+      - name: Reject synthetic forged AST, ABI, source profiles, permissions and budgets
+        run: node oecl/scripts/check-generic-nft-authorization-evm.cjs
+      - name: Preregister immutable ERC721/1155 source protocol before EVM
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs plan ERC-721 ERC-1155 dependency-source source-output/nft-ownership
+          node -e 'const p=require("./source-output/nft-ownership/ownership-experiment-plan.json");if(p.workflowStatus!=="REVIEWED_OWNERSHIP_PROTOCOL_PREREGISTERED"||p.evmExecuted||p.experimentalCases[0].steps.length!==12||p.experimentalCases[1].steps.length!==9||p.candidateAdmission!=="NOT_ADMITTED")throw Error("OWNERSHIP_PROTOCOL_NOT_PREREGISTERED")'
+      - name: Block unsupported cross-family pair without dispatching EVM
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs plan ERC-721 ERC-20 dependency-source source-output/ownership-rejected
+          node -e 'const p=require("./source-output/ownership-rejected/ownership-experiment-plan.json");if(p.workflowStatus!=="BLOCKED_NO_REVIEWED_OWNERSHIP_CAPABILITY"||p.evmExecuted||p.experimentalCases.length!==0||p.blockedReasons.length===0)throw Error("UNSUPPORTED_PAIR_ADMITTED")'
+          node oecl/laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs execute ERC-721 ERC-20 dependency-source source-output/ownership-rejected
+          test ! -f source-output/ownership-rejected/ownership-local-evm-witness.json
+      - name: Execute only reviewed preregistered ownership/permission cases on local Hardhat
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs execute ERC-721 ERC-1155 dependency-source source-output/nft-ownership
+          node -e 'const p=require("./source-output/nft-ownership/ownership-experiment-plan.json"),r=require("./source-output/nft-ownership/ownership-local-evm-witness.json"),v=require("./oecl/laboratory/scientific-open-source-worker/GenericNftAuthorizationEvmProtocol.cjs");if(!v.verifyPlan(p)||!v.verifyWitness(p,r)||r.minedReceiptCount!==15||r.unminedNegativeCount!==8)throw Error("NFT_REAL_EVM_WITNESS_REJECTED")'
+      - name: Attack real witness with falsified owner approvals and forged mined receipt claims
+        run: node oecl/scripts/check-generic-nft-witness.cjs source-output/nft-ownership
+      - name: Archive source plan, 15 mined local receipts and 8 unmined refuters
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-reviewed-erc721-erc1155-ownership-local-evm
+          path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  independent-source-and-ownership-review:
+    needs: local-evm-owner-and-operator
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Fresh checkout of exact scientist
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Fresh checkout of pinned Solidity dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Download exact archived preregistration and EVM evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-reviewed-erc721-erc1155-ownership-local-evm
+          path: source-output
+      - name: Set up fixed Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact audited compiler without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Verify source repository and dependency lock independently
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Freshly recompile original ERC sources plus wrappers and independently reconcile recorded state
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-nft-authorization-evm.cjs plan ERC-721 ERC-1155 dependency-source independent-nft-review
+          node oecl/scripts/review-generic-nft-authorization-evm.cjs source-output/nft-ownership independent-nft-review
+      - name: Archive independent source recompilation and scientific balance review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-reviewed-erc721-erc1155-independent-review
+          path: independent-nft-review/*.json
+          if-no-files-found: warn
+          retention-days: 14
