@@ -17,7 +17,7 @@ function functionEntries(abi) {
 function discover({abi, ast, source}) {
   if (!source || !isHash(source.sourceSha256) || !isHash(source.astSha256) ||
       !isHash(source.abiSha256) || !Array.isArray(ast?.paths) ||
-      hash(abi) !== source.abiSha256) {
+      hash(abi) !== source.abiSha256 || hash(ast) !== source.astSha256) {
     return {status:"BLOCKED_UNVERIFIED_INPUT_IDENTITY", hypotheses:[]};
   }
   // AST facts are proposals, not verified until an external compiler/source review.
