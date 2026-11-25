@@ -112,19 +112,6 @@ async function runPinnedPair(a,b,dependencyRoot){
     const ast=pathsFromGraph(graph,{unit,contract:ref.contract},abi);
     const source={sourceSha256:collected.files.get(unit).sha256,
       astSha256:hash(ast),abiSha256:hash(abi)};
-    if(process.env.OECL_GENERIC_DEBUG==="1")console.log("OECL_SOURCE_AST_DIAGNOSTIC",JSON.stringify({
-      id:ref.id,root:graph.contracts.filter(c=>c.unit===unit&&c.name===ref.contract),
-      abiMethods:abi.filter(x=>x.type==="function").map(x=>x.name+"("+x.inputs.map(i=>i.type).join(",")+")").slice(0,30),
-      functions:graph.functions.filter(f=>["transfer","transferFrom","_transfer","burn","_burn"].includes(f.name))
-        .map(f=>({id:f.id,name:f.name,kind:f.kind,visibility:f.visibility,contractId:f.contractId,types:f.parameterTypes})).slice(0,30),
-      writeCount:graph.writes.length,
-      writes:graph.writes.filter(w=>["balances","_balances","_totalSupply"].includes(w.state))
-        .map(w=>({owner:w.owner,state:w.state,kind:w.kind})).slice(0,15),
-      callEdges:graph.edges.filter(e=>e.kind==="CALLS"&&[123,346,199].includes(e.from)).map(e=>({from:e.from,to:e.to})).slice(0,20),
-      unresolved:graph.unresolved.filter(e=>[123,346,199].includes(e.owner)).map(e=>({owner:e.owner,kind:e.kind})).slice(0,20),
-      external:graph.externalCalls.filter(e=>[123,346,199].includes(e.owner)).map(e=>({owner:e.owner,kind:e.kind})).slice(0,20),
-      discovered:ast.paths.length
-    }));
     const hypotheses=discover({source,abi,ast});
     assert.equal(hypotheses.status,"SOURCE_IDENTITY_UNATTESTED");
     return {id:ref.id,revision:ref.kind==="github"?ref.revision:"4.9.6",
