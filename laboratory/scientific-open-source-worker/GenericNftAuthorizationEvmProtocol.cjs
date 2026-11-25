@@ -150,7 +150,13 @@ function astCapabilities(graph,src){
     writes("_safeTransferFrom","_balances"),
     writes("setApprovalForAll","_operatorApprovals")
   ];
-  if(stateChecks.some(x=>!x))return {status:"REQUIRED_STATE_WRITE_NOT_RESOLVED"};
+  if(stateChecks.some(x=>!x))return {status:"REQUIRED_STATE_WRITE_NOT_RESOLVED",
+    checks:stateChecks,
+    observedWrites:graph.writes.filter(w=>
+      Object.values(funcs).some(f=>f.id===w.owner)).map(w=>({
+        owner:graph.functions.find(f=>f.id===w.owner)?.name,
+        state:w.state,kind:w.kind})),
+    functions:Object.fromEntries(Object.entries(funcs).map(([k,v])=>[k,v.id]))};
   return {status:"READY",mainContractAstId:root.id,baseContractIds:[...bases],
     transferPath,authorityPath,tokenApprovePath:approvals,
     sourceSha256:src.sourceSha256,
