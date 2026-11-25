@@ -126,8 +126,9 @@ function astCapabilities(graph,src){
   };
   const id=src.id,required=id==="ERC-721"?
     ["transferFrom","_transfer","_mint","approve","_approve",
-      "setApprovalForAll","_isApprovedOrOwner"]:
-    ["safeTransferFrom","_safeTransferFrom","_mint","setApprovalForAll"];
+      "setApprovalForAll","_setApprovalForAll","_isApprovedOrOwner"]:
+    ["safeTransferFrom","_safeTransferFrom","_mint","setApprovalForAll",
+      "_setApprovalForAll"];
   const funcs=Object.fromEntries(required.map(n=>[n,functions(n)]));
   if(Object.values(funcs).some(x=>!x))return {status:"REQUIRED_COMPILER_FUNCTION_MISSING"};
   const transferPath=id==="ERC-721"?
@@ -141,14 +142,18 @@ function astCapabilities(graph,src){
     reachable(graph,funcs.approve.id,funcs._approve.id):null;
   if(id==="ERC-721"&&(!authorityPath||!approvals))
     return {status:"TOKEN_APPROVAL_PATH_UNRESOLVED"};
+  const globalApprovalPath=reachable(graph,funcs.setApprovalForAll.id,
+    funcs._setApprovalForAll.id);
+  if(!globalApprovalPath)
+    return {status:"GLOBAL_OPERATOR_APPROVAL_PATH_UNRESOLVED"};
   const stateChecks=id==="ERC-721"?[
     writes("_mint","_owners"),writes("_transfer","_owners"),
     writes("_approve","_tokenApprovals"),
-    writes("setApprovalForAll","_operatorApprovals")
+    writes("_setApprovalForAll","_operatorApprovals")
   ]:[
     writes("_mint","_balances"),
     writes("_safeTransferFrom","_balances"),
-    writes("setApprovalForAll","_operatorApprovals")
+    writes("_setApprovalForAll","_operatorApprovals")
   ];
   if(stateChecks.some(x=>!x))return {status:"REQUIRED_STATE_WRITE_NOT_RESOLVED",
     checks:stateChecks,
@@ -159,6 +164,7 @@ function astCapabilities(graph,src){
     functions:Object.fromEntries(Object.entries(funcs).map(([k,v])=>[k,v.id]))};
   return {status:"READY",mainContractAstId:root.id,baseContractIds:[...bases],
     transferPath,authorityPath,tokenApprovePath:approvals,
+    globalApprovalPath,
     sourceSha256:src.sourceSha256,
     effectEvidence:{compilerWrites:stateChecks.length,
       semantics:"STRUCTURAL_ONLY_NEEDS_EVM_CONFIRMATION"}};
