@@ -47,7 +47,8 @@ function buildAbi(collected,pair){
     if(source.kind!=="openzeppelin")return original;
     assert(/^[A-Za-z][A-Za-z0-9_]{0,80}$/.test(source.contract));
     assert(unit.startsWith("@openzeppelin/contracts/")&&
-      /^[A-Za-z0-9_./-]+$/.test(unit)&&!unit.includes("..")&&unit.endsWith(".sol"));
+      /^[A-Za-z0-9_./-]+$/.test(unit.slice("@openzeppelin/contracts/".length))&&
+      !unit.includes("..")&&unit.endsWith(".sol"));
     const wrapper="OECLReadOnlyAuto"+i;
     const filename="OECL_Auto_Registered_Only_"+i+".sol";
     const solidity=[
