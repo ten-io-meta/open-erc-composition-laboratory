@@ -6,6 +6,10 @@ import type { DocumentaryPair, StandardDocument } from "./oeclErcDocumentaryDisc
  * This module is deliberately NOT an LLM, EVM runtime, semantic proof engine,
  * general ERC compatibility classifier or source code execution service.
  */
+type DocumentaryResearchInput=Pick<DocumentaryPair,
+  "status"|"scope"|"protocols"|"standards"|"scientificVerdict"|
+  "candidateAdmission"|"implementationVerified"|"evmExecuted">;
+
 export type ScientistAnchor = {
   sourceId:string;
   documentSha256:string;
@@ -120,7 +124,7 @@ const allGaps=[
   "No isolated EVM execution, authenticated receipt, test oracle or general interoperability result exists for this plan.",
 ];
 
-export function designAutonomousResearch(pair:DocumentaryPair):AutonomousResearchPlan{
+export function designAutonomousResearch(pair:DocumentaryResearchInput):AutonomousResearchPlan{
   if(pair.status!=="DOCUMENTARY_COMPARISON"||
      pair.scope!=="OFFICIAL_ERC_SPECIFICATIONS_ONLY"||
      pair.standards.length!==2||pair.protocols.length!==2||
@@ -317,7 +321,7 @@ export function designAutonomousResearch(pair:DocumentaryPair):AutonomousResearc
  * check of source-scoped protocol design, NOT an independent experiment.
  */
 export function verifyAutonomousResearchPlan(
-  pair:DocumentaryPair,plan:AutonomousResearchPlan
+  pair:DocumentaryResearchInput,plan:AutonomousResearchPlan
 ):boolean{
   try{
     if(!plan||typeof plan!=="object")return false;
