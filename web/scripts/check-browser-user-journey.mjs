@@ -249,6 +249,7 @@ async function test(){
     "archived generic compiler/ABI-derived local EVM evidence");
   assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-generic-abi-probe]").length'),3);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("0x2a55205a")'),true);
+  assert.equal(await evalJs('(()=>{const d=document.querySelector("[data-testid=oecl-generic-abi-evm] details");if(!d)return false;d.open=true;return d.open})()'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("0x8e00f3aa947403e1c19b293c55c686389226abb4e1562511cfc20c0c39a5ff45")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("NOT ADMITTED")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("does not")'),true);
