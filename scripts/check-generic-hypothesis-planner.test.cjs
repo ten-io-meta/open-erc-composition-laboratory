@@ -7,7 +7,7 @@ const abi=[{type:"function",name:"transfer",stateMutability:"nonpayable",
   inputs:[{type:"address"},{type:"uint256"}],outputs:[]}];
 const ast={paths:[{signature:"transfer(address,uint256)",kind:"STATE_WRITE",
   path:"transfer -> _transfer",stateVariable:"balances"}]};
-const source={sourceSha256:H,astSha256:A,abiSha256:hash(abi)};
+const source={sourceSha256:H,astSha256:hash(ast),abiSha256:hash(abi)};
 test("produce a deterministic, bounded, data-only hypothesis",()=>{
   const plan=discover({abi,ast,source});
   assert.equal(plan.status,"SOURCE_IDENTITY_UNATTESTED");
