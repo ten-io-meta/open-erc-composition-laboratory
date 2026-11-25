@@ -80,6 +80,14 @@ assert.equal(pair.scientificVerdict,"NOT_EVALUATED");
 assert.equal(pair.candidateAdmission,"NOT_ADMITTED");
 assert.equal(pair.evmExecuted,false);
 assert.equal(pair.implementationVerified,false);
+assert.equal(pair.autonomousResearch.engine,"DETERMINISTIC_SOURCE_ANCHORED_PLANNER");
+assert.equal(pair.autonomousResearch.planningStatus,"CROSS_STANDARD_CANDIDATES_FOR_REVIEW");
+assert.equal(pair.autonomousResearch.compatibilityVerdict,"NOT_EVALUATED");
+assert.equal(pair.autonomousResearch.evmExecuted,false);
+assert.equal(pair.autonomousResearch.hypotheses.some(h=>
+  h.family==="DECLARED_PREREQUISITE_CONFORMANCE"),true);
+assert.equal(pair.autonomousResearch.hypotheses.every(h=>h.falsifier&&h.positiveControl&&
+  h.negativeControl&&h.anchors.length),true);
 assert.equal(pair.relation.kind,"DECLARED_DEPENDENCY");
 assert.ok(pair.researchQuestions.some(q=>q.id==="DECLARED_DEPENDENCY_CONFORMANCE"));
 assert.ok(pair.researchQuestions.some(q=>q.id==="POTENTIAL_ASSET_FLOW_TEST"));
@@ -108,6 +116,10 @@ const unrelated=await investigateErcSpecifications("ERC-20","ERC-721",mock);
 assert.equal(unrelated.relation.kind,"NO_DECLARED_DEPENDENCY");
 assert.equal(unrelated.evmExecuted,false);
 assert.deepEqual(unrelated.researchQuestions,[],"Unsupported test hypotheses are never fabricated");
+assert.equal(unrelated.autonomousResearch.planningStatus,
+  "SINGLE_STANDARD_ONLY_NO_COMPOSITION_INFERRED");
+assert.equal(unrelated.autonomousResearch.hypotheses.every(h=>
+  h.relationshipScope==="SINGLE_STANDARD_ONLY"),true);
 console.log("OECL_DOCUMENTARY_SHARED_AND_UNRELATED_PASS");
 
 const locallyRegistered=await investigateErcSpecifications("ERC-8060","ERC-8004",mock);
@@ -123,6 +135,8 @@ console.log("OECL_DOCUMENTARY_8060_8004_PINNED_SOURCE_PASS");
 const missing=await investigateErcSpecifications("ERC-20","ERC-9999",mock);
 assert.equal(missing.standards[1].availability,"NOT_IN_OFFICIAL_REGISTRY");
 assert.equal(missing.relation.kind,"INCOMPLETE_SPECIFICATIONS");
+assert.equal(missing.autonomousResearch.planningStatus,"PARTIAL_DOCUMENTS_NO_PAIR_CLAIM");
+assert.equal(missing.autonomousResearch.evmExecuted,false);
 assert.deepEqual(missing.researchQuestions,[],"Missing sources cannot produce test designs");
 assert.ok(missing.relation.statements[0].includes("No relationship"));
 const fetchedButUnparseable=await readOfficialErc("ERC-20",async()=>new Response("not valid ERC frontmatter",{status:200}));
