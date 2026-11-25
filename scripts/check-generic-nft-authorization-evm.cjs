@@ -7,7 +7,7 @@ const {
 }=require("../laboratory/scientific-open-source-worker/GenericNftAuthorizationEvmProtocol.cjs");
 const refs=PROFILES.map(id=>registry.sources.find(x=>x.id===id));
 const selected=refs.map(ref=>({
-  id:ref.id,kind:"openzeppelin",repository:"@openzeppelin/contracts",
+  id:ref.id,contract:ref.contract,kind:"openzeppelin",repository:"@openzeppelin/contracts",
   revision:"4.9.6",sourceUnit:"@openzeppelin/contracts/"+ref.file,
   sourceSha256:hash("synthetic AST only: "+ref.file)
 }));
@@ -71,6 +71,7 @@ function build(g=graph,r=report,org=original,dep=compiled,wrap=wrappers){
     compilerVersion:r.compilerVersion,dependencyIntegrity:r.dependencyIntegrity});
 }
 const plan=build();
+console.log("OECL_NFT_MOCK_CAPABILITIES",JSON.stringify(plan.capabilities.map(x=>({id:x.id,status:x.status,ast:x.sourceAST.status,harness:x.harnessSourceSha256}))));
 assert.equal(plan.workflowStatus,"REVIEWED_OWNERSHIP_PROTOCOL_PREREGISTERED");
 assert.deepEqual(plan.experimentalCases.map(x=>x.steps.length),[12,9]);
 assert.equal(plan.evmExecuted,false);
