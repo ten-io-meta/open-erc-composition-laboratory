@@ -37,6 +37,8 @@ function pathsFromGraph(graph,root,abi){
   const c=graph.contracts.filter(x=>x.unit===root.unit&&x.name===root.contract&&x.kind==="contract");
   assert.equal(c.length,1,"ROOT_CONTRACT_NOT_UNIQUE");
   const bases=new Set([c[0].id,...c[0].linearizedBaseContracts]);
+  // Solidity interface ABI declarations are inherited but are not executable bodies.
+  const concrete=new Set(graph.contracts.filter(x=>x.kind==="contract").map(x=>x.id));
   const facts=[];
   for(const entry of abi.filter(x=>x.type==="function"&&
       ["payable","nonpayable"].includes(x.stateMutability)&&
@@ -44,6 +46,7 @@ function pathsFromGraph(graph,root,abi){
     const sig=entry.name+"("+entry.inputs.map(x=>x.type).join(",")+")";
     const candidates=graph.functions.filter(f=>f.kind==="function"&&f.implemented&&
       ["public","external"].includes(f.visibility)&&bases.has(f.contractId)&&
+      concrete.has(f.contractId)&&
       f.name===entry.name&&Array.isArray(f.parameterTypes)&&
       f.parameterTypes.every(p=>types.has(type(p)))&&signature(f)===sig);
     if(candidates.length!==1)continue; // overloaded, ambiguous, or unresolved
