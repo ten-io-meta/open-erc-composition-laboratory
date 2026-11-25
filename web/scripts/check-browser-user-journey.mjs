@@ -268,11 +268,18 @@ async function test(){
   const edited=await evalJs('(()=>{const el=document.getElementById("oecl-protocol-a");if(!(el instanceof HTMLInputElement))return false;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;set.call(el,"ERC-99999");el.dispatchEvent(new Event("input",{bubbles:true}));return true})()');
   assert.equal(edited,true);
   await expectUi('document.getElementById("oecl-protocol-a")?.value==="ERC-99999"',"unlisted ERC user input");
+  await expectUi('document.body.innerText.includes("Selection changed. Press")',
+    "React state must accept newly entered ERC before inspecting");
   await click("Inspect pair");
+  await expectUi('document.querySelector("[data-testid=oecl-pair-report] h3")?.innerText.includes("ERC-99999")',
+    "pair heading must actually update before inspecting unfamiliar ERC evidence");
   await expectUi('document.querySelector("[data-testid=oecl-no-evidence]")!==null',
     "unverified pair does not invent scientific evidence");
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-no-evidence]").innerText.includes("neither a compatibility approval")'),true);
   console.log("OECL_BROWSER_UNSUPPORTED_PAIR_TRUTHFUL_PASS");
+  await sleep(900);
+  const unknownDiagnostic=await evalJs('JSON.stringify({input:document.getElementById("oecl-protocol-a")?.value,heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.innerText,plan:document.querySelector("[data-testid=oecl-autonomous-research]")?.getAttribute("data-pair"),status:document.querySelector("[data-testid=oecl-autonomous-research]")?.innerText.slice(0,420),alerts:[...document.querySelectorAll("[role=alert]")].map(x=>x.innerText.slice(0,200))})');
+  console.log("OECL_BROWSER_UNKNOWN_ERC_DIAGNOSTIC:"+unknownDiagnostic);
   await expectUi('(()=>{const n=document.querySelector("[data-testid=oecl-autonomous-research]");return n?.getAttribute("data-pair")==="ERC-20|ERC-99999" && n?.innerText.includes("PARTIAL DOCUMENTS NO PAIR CLAIM")})()',
     "unsupported ERC still gets an honest, correctly keyed abstaining scientific plan",30000);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
