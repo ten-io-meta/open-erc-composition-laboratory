@@ -8,6 +8,9 @@ on:
       - "laboratory/scientific-open-source-worker/run-generic-source-worker.cjs"
       - "scripts/check-generic-safe-abi-evm.cjs"
       - "scripts/review-generic-safe-abi-evm.cjs"
+      - "web/src/components/GenericAbiLocalEvmPanel.tsx"
+      - "web/src/components/CompositionWorkbench.tsx"
+      - "web/scripts/check-browser-user-journey.mjs"
       - ".github/workflows/oecl-generic-read-only-abi-evm.yml"
   workflow_dispatch:
 
