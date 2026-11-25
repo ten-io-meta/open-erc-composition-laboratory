@@ -10,6 +10,7 @@ import { FreshPairSourceAnalysis } from "@/components/FreshPairSourceAnalysis";
 import { Erc4626LocalEvmPanel } from "@/components/Erc4626LocalEvmPanel";
 import { PinnedScientificCyclePanel } from "@/components/PinnedScientificCyclePanel";
 import { GenericAbiLocalEvmPanel } from "@/components/GenericAbiLocalEvmPanel";
+import { GenericStatefulEvmPanel } from "@/components/GenericStatefulEvmPanel";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -91,6 +92,8 @@ export function CompositionWorkbench() {
   const independentEvm = isIndependentEvm(pair);
   const hasNewLocalEvm = (pair.a === "ERC-4626" && pair.b === "ERC-20") ||
     (pair.b === "ERC-4626" && pair.a === "ERC-20");
+  const hasStatefulErc20Evm = (pair.a === "ERC-20" && pair.b === "ERC-20-BURNABLE") ||
+    (pair.b === "ERC-20" && pair.a === "ERC-20-BURNABLE");
   const hasGenericSafeAbiEvm = (pair.a === "ERC-165" && pair.b === "ERC-2981") ||
     (pair.b === "ERC-165" && pair.a === "ERC-2981");
   const hasPinnedScientificCycle = hasNewLocalEvm ||
@@ -236,6 +239,13 @@ export function CompositionWorkbench() {
         {x.title}
       </button>)}
     </div>
+    <div aria-label="Stateful registered Solidity experiment" className="flex flex-wrap items-center gap-2">
+      <span className="mr-1 text-xs text-[#607369]">State-changing scientific EVM fixture:</span>
+      <button type="button" onClick={() => inspect("ERC-20","ERC-20-BURNABLE")}
+        className="rounded-full border border-[#b8d5c3] bg-[#ecf7ef] px-3 py-2 text-xs font-medium text-[#265841] transition hover:bg-[#ddf0e2] focus:ring-2 focus:ring-[#90c4a1]">
+        ERC-20 × Burnable (stateful local EVM)
+      </button>
+    </div>
     {dirty && <p role="status" className="rounded-xl border border-[#decda8] bg-[#fff9ec] p-3 text-xs text-[#766023]">
       Selection changed. Press <strong>Inspect pair</strong> to update the report; the report below still describes {pair.a} × {pair.b}.
     </p>}
@@ -249,7 +259,8 @@ export function CompositionWorkbench() {
         </div>
         {loading ? pill("Checking pinned evidence") : failure ? pill("Verification failed") :
           graph ? pill("INCONCLUSIVE · NOT_ADMITTED") :
-          hasPinnedScientificCycle || hasGenericSafeAbiEvm ? pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
+          hasPinnedScientificCycle || hasGenericSafeAbiEvm || hasStatefulErc20Evm ?
+            pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
       </header>
 
       {loading && <p role="status" className="rounded-xl bg-[#f3f7f3] p-5 text-sm text-[#506858]">Loading verified source evidence...</p>}
@@ -259,12 +270,15 @@ export function CompositionWorkbench() {
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
         <h4 className="text-lg font-semibold text-[#694d27]">
-          {hasGenericSafeAbiEvm ? "Reviewed generic ABI / local EVM probe available — no composability proof" :
+          {hasStatefulErc20Evm ? "Reviewed state-changing ERC20/EVM experiment available — no composability proof" :
+            hasGenericSafeAbiEvm ? "Reviewed generic ABI / local EVM probe available — no composability proof" :
             hasPinnedScientificCycle ? "Reviewed scientific cycle available — interactive AST graph not yet materialized" :
             "No pinned Solidity/EVM experiment for this pair"}
         </h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          {hasGenericSafeAbiEvm ?
+          {hasStatefulErc20Evm ?
+            "A compiler AST/ABI-derived, pre-registered allowance transfer and supply burn experiment ran on two isolated test harnesses, with 12 mined local receipts and 6 unmined adversarial reverts. These tests are not cross-contract composability evidence." :
+            hasGenericSafeAbiEvm ?
             "A source- and ABI-derived local EVM introspection protocol has been executed on exact registered OpenZeppelin sources, with two mined deployment receipts and six read-only probes. It is not a test of ERC composability." :
             hasPinnedScientificCycle ?
             "Compiler AST hypotheses and independently reviewed local-EVM experiments are available in the pinned scientific cycle below. A full interactive graph for these sources is not published in this view. The tested fixtures do not establish general compatibility." :
@@ -276,12 +290,15 @@ export function CompositionWorkbench() {
         sourceA={pair.a} sourceB={pair.b} />}
       {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
       {hasGenericSafeAbiEvm && <GenericAbiLocalEvmPanel />}
+      {hasStatefulErc20Evm && <GenericStatefulEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
         <p role="status" className="rounded-xl border border-[#e4d6b9] bg-[#fffaf0] p-4 text-sm text-[#6f5634]">
           ERC-20 Burnable is an OpenZeppelin implementation extension, not a separate numbered ERC.
-          For a documentary comparison select ERC-20; for source/EVM evidence choose the reviewed
-          ERC-8060 × ERC-20-BURNABLE example. No result is inferred for this untested pair.
+          For documentary comparison use ERC-20. The ERC-20 × ERC-20-BURNABLE local EVM
+          fixture above (when selected) only examines independent token transfer and burn accounting;
+          the ERC-8060 × Burnable experiment is a different, separately pinned research pair.
+          Neither experiment establishes general interoperability.
         </p>}
       {!pinned && pair.a !== "ERC-20-BURNABLE" && pair.b !== "ERC-20-BURNABLE" &&
         <DocumentaryPairExplorer protocolA={pair.a} protocolB={pair.b} />}
