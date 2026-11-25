@@ -78,6 +78,7 @@ async function execute(plan,compiled){
   assert(verifyStatefulPlan(plan));
   assert.equal(plan.workflowStatus,"REVIEWED_STATEFUL_PROTOCOL_PREREGISTERED");
   assert.equal(process.env.HARDHAT_NETWORK||"hardhat","hardhat","REMOTE_PROVIDER_FORBIDDEN");
+  process.chdir(root); // Resolve only the pinned local Hardhat project, never a remote RPC.
   const hre=require(path.join(root,"node_modules/hardhat"));
   const provider=hre.ethers.provider;
   const network=await provider.getNetwork();
