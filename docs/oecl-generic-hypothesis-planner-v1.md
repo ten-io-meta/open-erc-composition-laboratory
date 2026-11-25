@@ -26,3 +26,15 @@ Demonstration narrative (not a newly executed proof):
 - Expose only archived evidence in the UI and preserve existing MISL regression and ERC-721/ERC-1155 suites.
 
 Existing ERC-721/1155 results and their independently reviewed EVM witnesses remain unchanged by this increment.
+
+## Locked-source compiler bridge (implemented on this PR)
+The generic source bridge does not accept a user-supplied ABI or AST file. It calls the existing registered-source collector, validates the exact pinned dependency lock SHA-256, compiles all collected source units with solc 0.8.26, and reads typed ABI and AST from **one compiler invocation**. It independently checks source bytes against compiler graph hashes. Traversal uses compiler-resolved function IDs and call edges; multiple concrete implementations, interface-only declarations, unresolved calls, external calls or multi-state effects fail closed rather than getting optimistic execution plans.
+
+CI command, with the audited dependency checkout and its locked node_modules installed:
+```bash
+node --test scripts/check-generic-hypothesis-planner.test.cjs scripts/check-source-backed-hypotheses.test.cjs
+node laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs ERC-20 ERC-20-BURNABLE ../dependency-source output
+```
+The GitHub workflow `oecl-generic-hypothesis-provenance.yml` runs the compiler against those two registered implementations and recompiles the complete dossier in an independent runner. Check its current conclusion before using a claim of passing validation.
+
+This produces source-grounded **hypothesis candidates**, not permission to execute a transaction or an independently accepted local EVM witness. The existing ERC-721/ERC-1155 Hardhat proof remains a separate experiment. In particular, ERC-20 and ERC-20 Burnable inheritance is **not** evidence of interoperability with ERC-721 or ERC-1155.
