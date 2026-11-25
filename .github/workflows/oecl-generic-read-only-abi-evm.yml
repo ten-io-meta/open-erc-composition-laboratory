@@ -1,0 +1,129 @@
+name: OECL Generic Capability-Derived Local EVM ABI Probe
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/GenericReadOnlyAbiEvmProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-generic-read-only-abi-evm.cjs"
+      - "laboratory/scientific-open-source-worker/run-generic-source-worker.cjs"
+      - "scripts/check-generic-safe-abi-evm.cjs"
+      - "scripts/review-generic-safe-abi-evm.cjs"
+      - ".github/workflows/oecl-generic-read-only-abi-evm.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-generic-safe-evm-laboratory
+  cancel-in-progress: false
+
+jobs:
+  source-preregister-and-local-evm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout trusted, reviewed OECL engine
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout exact registered dependency implementation and Hardhat project
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Set up fixed Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install only reviewed exact toolchain without running package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify source revision and mount compiler plus isolated EVM
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const o=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const c=require("./dependency-source/node_modules/solc");if(o.version!=="4.9.6"||!c.version().startsWith("0.8.26+"))process.exit(1)'
+      - name: Attack synthetic source/ABI protocol and forged receipts
+        run: node oecl/scripts/check-generic-safe-abi-evm.cjs
+      - name: Compile registered source and preregister typed challenges BEFORE deploying EVM
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-read-only-abi-evm.cjs plan ERC-165 ERC-2981 dependency-source source-output/read-only
+          node -e 'const p=require("./source-output/read-only/generic-read-only-plan.json");if(p.workflowStatus!=="PREREGISTERED_SAFE_READ_ONLY_PROTOCOL"||p.evmExecuted!==false||p.candidate.testVectors.length!==3||p.compatibilityVerdict!=="NOT_EVALUATED")throw Error("NOT_SAFE_OR_NOT_PREREGISTERED")'
+      - name: Reject unsupported registered pair instead of fabricating a deployable protocol
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-read-only-abi-evm.cjs plan ERC-20 ERC-721 dependency-source source-output/rejected
+          node -e 'const p=require("./source-output/rejected/generic-read-only-plan.json");if(p.workflowStatus!=="BLOCKED_NO_REVIEWED_EXECUTION_CAPABILITY"||p.evmExecuted!==false||p.blockedReasons.length===0)throw Error("UNSUPPORTED_PAIR_NOT_REFUSED")'
+      - name: Execute ONLY preregistered ABI calls on isolated local Hardhat provider
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-read-only-abi-evm.cjs execute ERC-165 ERC-2981 dependency-source source-output/read-only
+          node -e 'const p=require("./source-output/read-only/generic-read-only-plan.json"),r=require("./source-output/read-only/generic-read-only-evm-witness.json"),v=require("./oecl/laboratory/scientific-open-source-worker/GenericReadOnlyAbiEvmProtocol.cjs");if(!v.verifyProtocol(p)||!v.verifyWitness(p,r)||r.deployments.length!==2||r.readOnlyProbes.length!==3)throw Error("EVM_REPLAY_WITNESS_REJECTED")'
+      - name: Preserve source preregistration, two local deployment receipts and six unmined read-only probes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-safe-abi-evm
+          path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  independent-source-and-evidence-review:
+    needs: source-preregister-and-local-evm
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exactly the same reviewed OECL source
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout the exact source dependency root independently
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Download the first job's artifact for independent comparison
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-generic-safe-abi-evm
+          path: source-output
+      - name: Set up exact reviewer toolchain
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned source compiler without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Verify dependency commit and lock before re-compilation
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Recompute source graph, typed ABI, constructor safety and exact protocol
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-read-only-abi-evm.cjs plan ERC-165 ERC-2981 dependency-source independent-review
+          node oecl/scripts/review-generic-safe-abi-evm.cjs source-output/read-only independent-review
+      - name: Archive independently reviewed evidence summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-abi-independent-replay
+          path: independent-review/*.json
+          if-no-files-found: warn
+          retention-days: 14
