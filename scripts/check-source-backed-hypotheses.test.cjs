@@ -47,9 +47,14 @@ test("reject altered source hashes and undeclared roots",()=>{
 test("block unresolved, external, ambiguous, or multi-effect AST paths",()=>{
  const {graph,unit}=sample();
  graph.unresolved=[{owner:3}];
- assert.equal(pathsFromGraph(graph,{unit,contract:"Test"},abi).paths.length,0);
+ let observed=pathsFromGraph(graph,{unit,contract:"Test"},abi).paths;
+ assert.equal(observed.length,1);
+ assert.equal(observed[0].unresolvedReferences,1);
+ assert.equal(observed[0].executionSafety,"SOURCE_ONLY_REVIEW_REQUIRED");
  graph.unresolved=[];graph.externalCalls=[{owner:2}];
- assert.equal(pathsFromGraph(graph,{unit,contract:"Test"},abi).paths.length,0);
+ observed=pathsFromGraph(graph,{unit,contract:"Test"},abi).paths;
+ assert.equal(observed.length,1);
+ assert.equal(observed[0].externalCallReferences,1);
  graph.externalCalls=[];graph.writes.push({owner:3,state:"_totalSupply",location:{unit,start:20}});
  assert.equal(pathsFromGraph(graph,{unit,contract:"Test"},abi).paths.length,0);
  graph.writes.pop();graph.functions.push({...graph.functions[0],id:5});
