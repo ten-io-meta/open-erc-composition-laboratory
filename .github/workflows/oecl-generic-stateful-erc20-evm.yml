@@ -1,0 +1,133 @@
+name: OECL Generic Stateful ERC20 Capability-Gated Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/GenericStatefulEvmProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs"
+      - "scripts/check-generic-stateful-evm.cjs"
+      - "scripts/review-generic-stateful-evm.cjs"
+      - ".github/workflows/oecl-generic-stateful-erc20-evm.yml"
+      - "web/src/components/GenericStatefulEvmPanel.tsx"
+      - "web/src/components/CompositionWorkbench.tsx"
+      - "web/scripts/check-browser-user-journey.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-local-stateful-reviewed-ci
+  cancel-in-progress: true
+
+jobs:
+  preregister-and-execute-stateful:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout reviewed OECL scientist and controls
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout immutable Hardhat dependency source
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Set up locked Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned compiler and Hardhat dependencies without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Pin dependency checkout identity and exact Solidity toolchain
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const oz=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const c=require("./dependency-source/node_modules/solc");if(oz.version!=="4.9.6"||!c.version().startsWith("0.8.26+"))process.exit(1)'
+      - name: Falsify spoofed AST, typed ABI, forged state deltas and mined receipt claims
+        run: node oecl/scripts/check-generic-stateful-evm.cjs
+      - name: Compile ERC20 and ERC20Burnable AST and preregister amount, allowance and refuters BEFORE local EVM
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs plan ERC-20 ERC-20-BURNABLE dependency-source source-output/stateful
+          node -e 'const p=require("./source-output/stateful/stateful-scientific-plan.json");if(p.workflowStatus!=="REVIEWED_STATEFUL_PROTOCOL_PREREGISTERED"||p.evmExecuted!==false||p.experimentalCases.length!==2||p.experimentalCases[0].steps.length!==6||p.experimentalCases[1].steps.length!==10||p.candidateAdmission!=="NOT_ADMITTED")throw Error("STATEFUL_PROTOCOL_NOT_PREREGISTERED")'
+      - name: Refuse ERC20 and ERC721 stateful execution when reviewed capabilities are absent
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs plan ERC-20 ERC-721 dependency-source source-output/blocked
+          node -e 'const p=require("./source-output/blocked/stateful-scientific-plan.json");if(p.workflowStatus!=="BLOCKED_NO_REVIEWED_STATEFUL_CAPABILITY"||p.evmExecuted!==false||p.experimentalCases.length!==0||p.blockedReasons.length===0)throw Error("UNSUPPORTED_STATEFUL_PAIR_NOT_BLOCKED")'
+          node oecl/laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs execute ERC-20 ERC-721 dependency-source source-output/blocked
+          test ! -f source-output/blocked/stateful-local-evm-witness.json
+      - name: Execute only the unchanged preregistered amount and permission protocol on local Hardhat 31337
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs execute ERC-20 ERC-20-BURNABLE dependency-source source-output/stateful
+          node -e 'const p=require("./source-output/stateful/stateful-scientific-plan.json"),r=require("./source-output/stateful/stateful-local-evm-witness.json"),v=require("./oecl/laboratory/scientific-open-source-worker/GenericStatefulEvmProtocol.cjs");if(!v.verifyStatefulPlan(p)||!v.verifyStatefulWitness(p,r)||r.minedReceiptCount!==12||r.unminedNegativeCount!==6)throw Error("STATEFUL_EVM_WITNESS_REJECTED")'
+      - name: Archive source preregistration, exact mined local receipts and unmined adversarial observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-reviewed-generic-stateful-erc20-evm
+          path: source-output/**/*.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  independently-recompile-and-reconcile-state:
+    needs: preregister-and-execute-stateful
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Fresh checkout of exact scientist code
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Fresh checkout of immutable Solidity dependency fixture
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Download first job's exact source and execution evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-reviewed-generic-stateful-erc20-evm
+          path: source-output
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact local compiler without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Independently re-verify dependency and compiler integrity
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Independently regenerate AST, ABI, typed constructor and complete controls
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-stateful-erc20-evm.cjs plan ERC-20 ERC-20-BURNABLE dependency-source independent-stateful-review
+          node oecl/scripts/review-generic-stateful-evm.cjs source-output/stateful independent-stateful-review
+      - name: Archive independently reconstructed protocol and arithmetic review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-reviewed-stateful-independent-replay
+          path: independent-stateful-review/*.json
+          if-no-files-found: warn
+          retention-days: 14
