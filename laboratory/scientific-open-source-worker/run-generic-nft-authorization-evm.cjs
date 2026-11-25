@@ -284,6 +284,9 @@ async function main(){
   const {plan,artifacts}=await resolve();
   if(mode==="plan"){
     fs.writeFileSync(planPath,JSON.stringify(plan,null,2)+"\n");
+    if(plan.workflowStatus!=="REVIEWED_OWNERSHIP_PROTOCOL_PREREGISTERED")
+      console.log("OECL_OWNERSHIP_AST_DEBUG",JSON.stringify(
+        plan.capabilities.map(c=>({id:c.id,ast:c.sourceAST,status:c.status}))));
     console.log("OECL_OWNERSHIP_AST_ABI_PREREGISTRATION",JSON.stringify({
       selected:plan.selected.map(x=>x.id),status:plan.workflowStatus,
       blockers:plan.blockedReasons,planSha256:plan.planSha256,
