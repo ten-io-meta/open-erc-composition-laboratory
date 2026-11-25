@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { designAutonomousResearch, type AutonomousResearchPlan } from "./oeclAutonomousResearchPlanner";
 import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with { type: "json" };
 
 /** Official ERC document comparison, NEVER executable Solidity or candidate admission. */
@@ -20,6 +21,7 @@ export type DocumentaryPair = {
     statements: string[]; sharedPrerequisites: string[];
     overlappingInterfaceNames: string[]};
   researchQuestions: {id:string; basis:string[]; question:string; requiredEvidence:string[]}[];
+  autonomousResearch: AutonomousResearchPlan;
   scientificVerdict: "NOT_EVALUATED"; candidateAdmission: "NOT_ADMITTED";
   implementationVerified: false; evmExecuted: false; warnings: string[];
 };
@@ -239,7 +241,7 @@ export async function investigateErcSpecifications(
   const a=normalizeErcNumber(first),b=normalizeErcNumber(second);
   if(!a||!b||a===b)throw Error("INVALID_ERC_PAIR");
   const documents=await Promise.all([readOfficialErc(a,transport),readOfficialErc(b,transport)]);
-  return {status:"DOCUMENTARY_COMPARISON",scope:"OFFICIAL_ERC_SPECIFICATIONS_ONLY",
+  const report:Omit<DocumentaryPair,"autonomousResearch">={status:"DOCUMENTARY_COMPARISON",scope:"OFFICIAL_ERC_SPECIFICATIONS_ONLY",
     protocols:[a,b],standards:[documents[0],documents[1]],
     relation:deriveRelation(documents[0],documents[1]),
     researchQuestions:proposeDocumentaryTests(documents[0],documents[1]),
@@ -251,4 +253,5 @@ export async function investigateErcSpecifications(
       "Official documents are fetched from a mutable branch; content hashes document what was read.",
       "Compiler AST, constraints, authorization, and independent EVM evidence are required for scientific admission.",
     ]};
+  return {...report,autonomousResearch:designAutonomousResearch(report)};
 }
