@@ -284,6 +284,9 @@ async function test(){
     "unsupported ERC still gets an honest, correctly keyed abstaining scientific plan",30000);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").getAttribute("data-pair")'),"ERC-20|ERC-99999");
+  const visiblePlans=await evalJs('JSON.stringify([...document.querySelectorAll("[data-testid=oecl-autonomous-research]")].filter(x=>x.getClientRects().length>0).map(x=>x.getAttribute("data-pair")))');
+  assert.deepEqual(JSON.parse(visiblePlans),["ERC-20|ERC-99999"],
+    "No research plan for the previously selected pair may remain visible");
   console.log("OECL_BROWSER_AUTONOMOUS_MISSING_ERC_ABSTAINS_PASS");
 
   await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("SOURCE REVIEW REQUIRED")',
