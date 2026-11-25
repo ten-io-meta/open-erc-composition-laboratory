@@ -273,10 +273,10 @@ async function test(){
     "unverified pair does not invent scientific evidence");
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-no-evidence]").innerText.includes("neither a compatibility approval")'),true);
   console.log("OECL_BROWSER_UNSUPPORTED_PAIR_TRUTHFUL_PASS");
-  await expectUi('document.querySelector("[data-testid=oecl-autonomous-research]")!==null',
-    "unsupported ERC still gets an honest abstaining source research plan",30000);
+  await expectUi('(()=>{const n=document.querySelector("[data-testid=oecl-autonomous-research]");return n?.getAttribute("data-pair")==="ERC-20|ERC-99999" && n?.innerText.includes("PARTIAL DOCUMENTS NO PAIR CLAIM")})()',
+    "unsupported ERC still gets an honest, correctly keyed abstaining scientific plan",30000);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
-  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("PARTIAL DOCUMENTS NO PAIR CLAIM")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").getAttribute("data-pair")'),"ERC-20|ERC-99999");
   console.log("OECL_BROWSER_AUTONOMOUS_MISSING_ERC_ABSTAINS_PASS");
 
   await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("SOURCE REVIEW REQUIRED")',
