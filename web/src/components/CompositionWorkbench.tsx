@@ -9,6 +9,7 @@ import { ErcCatalogBrowser } from "@/components/ErcCatalogBrowser";
 import { FreshPairSourceAnalysis } from "@/components/FreshPairSourceAnalysis";
 import { Erc4626LocalEvmPanel } from "@/components/Erc4626LocalEvmPanel";
 import { PinnedScientificCyclePanel } from "@/components/PinnedScientificCyclePanel";
+import { GenericAbiLocalEvmPanel } from "@/components/GenericAbiLocalEvmPanel";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
 
 type Pair = { a: string; b: string };
@@ -30,6 +31,7 @@ const documentaryExamples = [
   { a: "ERC-8098", b: "ERC-4626", title: "Monotone supply × vault shares (scientific cycle)" },
   { a: "ERC-7575", b: "ERC-4626", title: "Multi-asset vaults × vaults" },
   { a: "ERC-721", b: "ERC-165", title: "NFTs × interface detection" },
+  { a: "ERC-165", b: "ERC-2981", title: "Interface identity × royalties (generic local EVM)" },
 ] as const;
 
 const tabs: { id: Tab; label: string }[] = [
@@ -89,6 +91,8 @@ export function CompositionWorkbench() {
   const independentEvm = isIndependentEvm(pair);
   const hasNewLocalEvm = (pair.a === "ERC-4626" && pair.b === "ERC-20") ||
     (pair.b === "ERC-4626" && pair.a === "ERC-20");
+  const hasGenericSafeAbiEvm = (pair.a === "ERC-165" && pair.b === "ERC-2981") ||
+    (pair.b === "ERC-165" && pair.a === "ERC-2981");
   const hasPinnedScientificCycle = hasNewLocalEvm ||
     (pair.a === "ERC-8098" && pair.b === "ERC-4626") ||
     (pair.b === "ERC-8098" && pair.a === "ERC-4626");
@@ -245,7 +249,7 @@ export function CompositionWorkbench() {
         </div>
         {loading ? pill("Checking pinned evidence") : failure ? pill("Verification failed") :
           graph ? pill("INCONCLUSIVE · NOT_ADMITTED") :
-          hasPinnedScientificCycle ? pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
+          hasPinnedScientificCycle || hasGenericSafeAbiEvm ? pill("REVIEWED LOCAL EVM · INCONCLUSIVE") : pill("NOT EVALUATED")}
       </header>
 
       {loading && <p role="status" className="rounded-xl bg-[#f3f7f3] p-5 text-sm text-[#506858]">Loading verified source evidence...</p>}
@@ -255,11 +259,14 @@ export function CompositionWorkbench() {
       {!loading && !failure && !graph && <div data-testid="oecl-no-evidence"
         className="rounded-2xl border border-[#e2ddc9] bg-[#fffcf3] p-6">
         <h4 className="text-lg font-semibold text-[#694d27]">
-          {hasPinnedScientificCycle ? "Reviewed scientific cycle available — interactive AST graph not yet materialized" :
+          {hasGenericSafeAbiEvm ? "Reviewed generic ABI / local EVM probe available — no composability proof" :
+            hasPinnedScientificCycle ? "Reviewed scientific cycle available — interactive AST graph not yet materialized" :
             "No pinned Solidity/EVM experiment for this pair"}
         </h4>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#695f47]">
-          {hasPinnedScientificCycle ?
+          {hasGenericSafeAbiEvm ?
+            "A source- and ABI-derived local EVM introspection protocol has been executed on exact registered OpenZeppelin sources, with two mined deployment receipts and six read-only probes. It is not a test of ERC composability." :
+            hasPinnedScientificCycle ?
             "Compiler AST hypotheses and independently reviewed local-EVM experiments are available in the pinned scientific cycle below. A full interactive graph for these sources is not published in this view. The tested fixtures do not establish general compatibility." :
             "OECL has not tested this composition in its published EVM suite. This is neither a compatibility approval nor proof of incompatibility. Documentary discovery below identifies source-level questions."}
         </p>
@@ -268,6 +275,7 @@ export function CompositionWorkbench() {
       {hasPinnedScientificCycle && <PinnedScientificCyclePanel
         sourceA={pair.a} sourceB={pair.b} />}
       {hasNewLocalEvm && <Erc4626LocalEvmPanel />}
+      {hasGenericSafeAbiEvm && <GenericAbiLocalEvmPanel />}
 
       {!pinned && (pair.a === "ERC-20-BURNABLE" || pair.b === "ERC-20-BURNABLE") &&
         <p role="status" className="rounded-xl border border-[#e4d6b9] bg-[#fffaf0] p-4 text-sm text-[#6f5634]">

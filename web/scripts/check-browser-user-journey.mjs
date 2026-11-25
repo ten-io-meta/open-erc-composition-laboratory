@@ -243,6 +243,17 @@ async function test(){
   assert.equal(await evalJs('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return n?.innerText.includes("successful zero-quantity")})()'),true);
   assert.equal(await evalJs('(()=>{const n=[...document.querySelectorAll("[data-testid=oecl-scientific-cycle]")].find(n=>n.getAttribute("data-pair")==="ERC-8098|ERC-4626");return n?.innerText.includes("COMPATIBILITY NOT EVALUATED")})()'),true);
   console.log("OECL_BROWSER_SECOND_SCIENCE_CYCLE_PASS:2");
+
+  await click("Interface identity × royalties (generic local EVM)");
+  await expectUi('document.querySelector("[data-testid=oecl-generic-abi-evm]")!==null',
+    "archived generic compiler/ABI-derived local EVM evidence");
+  assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-generic-abi-probe]").length'),3);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("0x2a55205a")'),true);
+  assert.equal(await evalJs('(()=>{const d=document.querySelector("[data-testid=oecl-generic-abi-evm] details");if(!d)return false;d.open=true;return d.open})()'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("0x8e00f3aa947403e1c19b293c55c686389226abb4e1562511cfc20c0c39a5ff45")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("NOT ADMITTED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-generic-abi-evm]").innerText.includes("does not")'),true);
+  console.log("OECL_BROWSER_GENERIC_ABI_LOCAL_EVM_PASS:2:6:1");
   await click("Vaults × fungible tokens");
   await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
     "return to verified vault-specific evidence");
