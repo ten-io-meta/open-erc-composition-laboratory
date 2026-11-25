@@ -195,9 +195,27 @@ async function test(){
   assert.equal(documentaryJson.scientificVerdict,"NOT_EVALUATED");
   assert.equal(documentaryJson.evmExecuted,false);
   assert.equal(documentaryJson.implementationVerified,false);
+  assert.equal(documentaryJson.autonomousResearch.schemaVersion,
+    "OECL_AUTONOMOUS_DOCUMENTARY_SCIENTIST_V1");
+  assert.equal(documentaryJson.autonomousResearch.evmExecuted,false);
+  assert.equal(documentaryJson.autonomousResearch.compatibilityVerdict,"NOT_EVALUATED");
+  assert.equal(documentaryJson.autonomousResearch.experimentDispatched,false);
+  assert.equal(documentaryJson.autonomousResearch.pairKey,"ERC-20|ERC-4626");
+  await expectUi('document.querySelector("[data-testid=oecl-autonomous-research]")!==null',
+    "autonomous source-bound falsifier dossier for documentary ERCs");
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("What should the scientist test next?")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
   if(documentaryJson.standards.every(s=>s.availability==="PUBLISHED")){
     assert.equal(documentaryJson.relation.kind,"DECLARED_DEPENDENCY");
     assert.ok(documentaryJson.relation.statements.some(s=>s.includes("ERC-4626")&&s.includes("ERC-20")));
+    assert.equal(documentaryJson.autonomousResearch.planningStatus,
+      "CROSS_STANDARD_CANDIDATES_FOR_REVIEW");
+    assert.ok(documentaryJson.autonomousResearch.hypotheses.some(h=>
+      h.family==="DECLARED_PREREQUISITE_CONFORMANCE"));
+    assert.ok(documentaryJson.autonomousResearch.hypotheses.every(h=>
+      h.anchors.length&&h.falsifier&&h.positiveControl&&h.negativeControl));
+    assert.ok(await evalJs('document.querySelectorAll("[data-testid=oecl-autonomous-hypothesis]").length>0'));
+    console.log("OECL_BROWSER_ANY_ERC_AUTONOMOUS_FALSIFIER_PASS");
   }else assert.equal(documentaryJson.relation.kind,"INCOMPLETE_SPECIFICATIONS");
   await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
     "seven independent ERC4626 x ERC20 local EVM receipts are visible",30000);
@@ -250,11 +268,26 @@ async function test(){
   const edited=await evalJs('(()=>{const el=document.getElementById("oecl-protocol-a");if(!(el instanceof HTMLInputElement))return false;const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,"value").set;set.call(el,"ERC-99999");el.dispatchEvent(new Event("input",{bubbles:true}));return true})()');
   assert.equal(edited,true);
   await expectUi('document.getElementById("oecl-protocol-a")?.value==="ERC-99999"',"unlisted ERC user input");
+  await expectUi('document.body.innerText.includes("Selection changed. Press")',
+    "React state must accept newly entered ERC before inspecting");
   await click("Inspect pair");
+  await expectUi('document.querySelector("[data-testid=oecl-pair-report] h3")?.innerText.includes("ERC-99999")',
+    "pair heading must actually update before inspecting unfamiliar ERC evidence");
   await expectUi('document.querySelector("[data-testid=oecl-no-evidence]")!==null',
     "unverified pair does not invent scientific evidence");
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-no-evidence]").innerText.includes("neither a compatibility approval")'),true);
   console.log("OECL_BROWSER_UNSUPPORTED_PAIR_TRUTHFUL_PASS");
+  await sleep(900);
+  const unknownDiagnostic=await evalJs('JSON.stringify({input:document.getElementById("oecl-protocol-a")?.value,heading:document.querySelector("[data-testid=oecl-pair-report] h3")?.innerText,plan:document.querySelector("[data-testid=oecl-autonomous-research]")?.getAttribute("data-pair"),status:document.querySelector("[data-testid=oecl-autonomous-research]")?.innerText.slice(0,420),alerts:[...document.querySelectorAll("[role=alert]")].map(x=>x.innerText.slice(0,200))})');
+  console.log("OECL_BROWSER_UNKNOWN_ERC_DIAGNOSTIC:"+unknownDiagnostic);
+  await expectUi('(()=>{const n=document.querySelector("[data-testid=oecl-autonomous-research]");return n?.getAttribute("data-pair")==="ERC-20|ERC-99999" && n?.innerText.includes("PARTIAL DOCUMENTS NO PAIR CLAIM")})()',
+    "unsupported ERC still gets an honest, correctly keyed abstaining scientific plan",30000);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").innerText.includes("COMPATIBILITY NOT EVALUATED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-autonomous-research]").getAttribute("data-pair")'),"ERC-20|ERC-99999");
+  const visiblePlans=await evalJs('JSON.stringify([...document.querySelectorAll("[data-testid=oecl-autonomous-research]")].filter(x=>x.getClientRects().length>0).map(x=>x.getAttribute("data-pair")))');
+  assert.deepEqual(JSON.parse(visiblePlans),["ERC-20|ERC-99999"],
+    "No research plan for the previously selected pair may remain visible");
+  console.log("OECL_BROWSER_AUTONOMOUS_MISSING_ERC_ABSTAINS_PASS");
 
   await expectUi('document.querySelector("[data-testid=oecl-fresh-ast]")?.innerText.includes("SOURCE REVIEW REQUIRED")',
     "unregistered ERC needs concrete source and cannot start EVM");

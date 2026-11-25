@@ -4,6 +4,7 @@ import {readdirSync,readFileSync,lstatSync,mkdirSync,writeFileSync} from "node:f
 import {resolve,join,dirname} from "node:path";
 import {parseOfficialErc,deriveRelation,proposeDocumentaryTests}
   from "../src/server/oeclErcDocumentaryDiscovery.ts";
+import {designAutonomousResearch} from "../src/server/oeclAutonomousResearchPlanner.ts";
 import registry from "../../laboratory/scientific-open-source-worker/source-registry.json" with {type:"json"};
 
 // Documentary-only exhaustive run. Does not compile or execute any ERC Solidity.
@@ -42,7 +43,9 @@ const categories=["DECLARED_DEPENDENCY","SHARED_DEPENDENCY",
 const zero=()=>Object.fromEntries(categories.map(x=>[x,0]));
 const counts=zero(),perErc=Object.fromEntries(documents.map(x=>[x.id,zero()]));
 const directDependencyPairs=[],samples=[];
-let pairs=0,designs=0;
+let pairs=0,designs=0,autonomousPairCandidates=0,autonomousHypotheses=0,
+  autonomousAbstentions=0,autonomousPerStandardOnly=0,autonomousIncomplete=0;
+const autonomousSamples=[];
 for(let i=0;i<docs.length;i++){
   for(let j=i+1;j<docs.length;j++){
     const a=docs[i],b=docs[j],relation=deriveRelation(a,b);
@@ -55,10 +58,42 @@ for(let i=0;i<docs.length;i++){
       samples.push({a:a.id,b:b.id});
     const questions=proposeDocumentaryTests(a,b);
     assert.ok(questions.length<=3&&questions.every(q=>q.requiredEvidence?.length>0));
-    designs+=questions.length;pairs++;
+    designs+=questions.length;
+    const scientific=designAutonomousResearch({
+      status:"DOCUMENTARY_COMPARISON",scope:"OFFICIAL_ERC_SPECIFICATIONS_ONLY",
+      protocols:[a.id,b.id],standards:[a,b],
+      scientificVerdict:"NOT_EVALUATED",candidateAdmission:"NOT_ADMITTED",
+      implementationVerified:false,evmExecuted:false,
+    });
+    assert.equal(scientific.pairKey,[a.id,b.id].join("|"));
+    assert.equal(scientific.evmExecuted,false);
+    assert.equal(scientific.sourceCompiled,false);
+    assert.equal(scientific.experimentDispatched,false);
+    assert.equal(scientific.compatibilityVerdict,"NOT_EVALUATED");
+    assert.equal(scientific.candidateAdmission,"NOT_ADMITTED");
+    assert.ok(scientific.hypotheses.length<=6);
+    assert.ok(scientific.hypotheses.every(h=>h.anchors.length>0&&h.falsifier&&
+      h.positiveControl&&h.negativeControl&&h.hypothesisStatus==="PROPOSED_FOR_HUMAN_SEMANTIC_REVIEW"));
+    autonomousHypotheses+=scientific.hypotheses.length;
+    if(scientific.planningStatus==="CROSS_STANDARD_CANDIDATES_FOR_REVIEW")
+      autonomousPairCandidates++;
+    else if(scientific.planningStatus==="SINGLE_STANDARD_ONLY_NO_COMPOSITION_INFERRED")
+      autonomousPerStandardOnly++;
+    else if(scientific.planningStatus==="ABSTAINED_NO_SUPPORTED_ANCHORS")
+      autonomousAbstentions++;
+    else autonomousIncomplete++;
+    if(autonomousSamples.length<25&&scientific.hypotheses.some(h=>
+      h.relationshipScope==="CROSS_STANDARD_CONDITIONAL"))
+      autonomousSamples.push({pair:scientific.pairKey,
+        families:scientific.hypotheses.map(h=>h.family),
+        planSha256:scientific.planSha256,
+        sourceSha256:scientific.sourceRevisions.map(d=>d.sha256)});
+    pairs++;
   }
 }
 assert.equal(pairs,docs.length*(docs.length-1)/2);
+assert.equal(autonomousPairCandidates+autonomousPerStandardOnly+
+  autonomousAbstentions+autonomousIncomplete,pairs);
 assert.equal(Object.values(counts).reduce((a,b)=>a+b,0),pairs);
 for(const doc of documents){
   assert.equal(Object.values(perErc[doc.id]).reduce((a,b)=>a+b,0),docs.length-1);
@@ -69,6 +104,24 @@ const report={
   provenance:{repository:"ethereum/ERCs",revision:pinned,glob:"ERCS/erc-*.md"},
   evidenceLevel:"SPECIFICATION_ONLY",scientificVerdict:"NOT_EVALUATED",
   candidateAdmission:"NOT_ADMITTED",evmExecuted:false,
+  autonomousScientificDesign:{
+    status:"SOURCE_ANCHORED_RESEARCH_AGENDA_ONLY",
+    algorithm:"DETERMINISTIC_HYPOTHESIS_FALSIFIER_AND_ABSTENTION_PLANNER",
+    documentsRequiredForPairClaim:2,
+    pairsPlanned:pairs,pairsWithCrossStandardCandidates:autonomousPairCandidates,
+    pairsWithPerStandardOnlyTests:autonomousPerStandardOnly,
+    pairsAbstainingWithoutAnchors:autonomousAbstentions,
+    pairsWithIncompleteDocuments:autonomousIncomplete,
+    totalHypothesisDesigns:autonomousHypotheses,
+    generatedEvmAdapters:0,evmExperimentsExecuted:0,independentConfirmations:0,
+    samples:autonomousSamples,
+    limits:[
+      "This deterministic rule-based process is not general autonomous scientific reasoning.",
+      "An unparseable ERC remains unknown, never incompatible.",
+      "Every proposed clause and falsifier needs semantic review before a test is run.",
+      "Source-only proposals cannot establish compatibility or Ethereum runtime behavior."
+    ]
+  },
   summary:{documentsScanned:docs.length,
     documentsParsed:documents.filter(x=>x.status==="PARSED").length,
     documentsUnparseable:documents.filter(x=>x.status!=="PARSED").length,

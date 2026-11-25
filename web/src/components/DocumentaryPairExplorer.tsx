@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { DocumentaryPair, StandardDocument } from "@/server/oeclErcDocumentaryDiscovery";
+import { AutonomousResearchPanel } from "@/components/AutonomousResearchPanel";
 
 type ReadState = { key: string; data: DocumentaryPair | null; error: string | null };
 
@@ -88,7 +89,20 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
           body.scientificVerdict!=="NOT_EVALUATED"||
           body.candidateAdmission!=="NOT_ADMITTED"||
           body.evmExecuted!==false||body.implementationVerified!==false||
-          body.protocols?.[0]!==protocolA||body.protocols?.[1]!==protocolB)
+          body.protocols?.[0]!==protocolA||body.protocols?.[1]!==protocolB||
+          body.autonomousResearch?.schemaVersion!=="OECL_AUTONOMOUS_DOCUMENTARY_SCIENTIST_V1"||
+          body.autonomousResearch?.scope!=="OFFICIAL_ERC_SPECIFICATIONS_ONLY"||
+          body.autonomousResearch?.scientificVerdict!=="NOT_EVALUATED"||
+          body.autonomousResearch?.compatibilityVerdict!=="NOT_EVALUATED"||
+          body.autonomousResearch?.candidateAdmission!=="NOT_ADMITTED"||
+          body.autonomousResearch?.sourceCompiled!==false||
+          body.autonomousResearch?.evmExecuted!==false||
+          body.autonomousResearch?.experimentDispatched!==false||
+          body.autonomousResearch?.humanSemanticReviewRequired!==true||
+          body.autonomousResearch?.pairKey!==[protocolA,protocolB].sort((a,b)=>Number(a.slice(4))-Number(b.slice(4))).join("|")||
+          !/^[a-f0-9]{64}$/.test(body.autonomousResearch?.planSha256??"")||
+          !Array.isArray(body.autonomousResearch?.hypotheses)||
+          body.autonomousResearch.hypotheses.length>6)
           throw Error(body.message||"Documentary evidence failed scope checks.");
         if(!ctrl.signal.aborted)setState({key,data:body as DocumentaryPair,error:null});
       }catch(e){
@@ -137,6 +151,8 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
         These names do not prove compatible signatures or behavior.
       </p>}
     </div>
+
+    <AutonomousResearchPanel plan={d.autonomousResearch}/>
 
     {d.researchQuestions.length>0 && <section className="rounded-2xl border border-[#d4dfd5] bg-white p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
