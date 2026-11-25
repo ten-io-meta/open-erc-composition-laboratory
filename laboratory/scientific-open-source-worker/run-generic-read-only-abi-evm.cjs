@@ -24,17 +24,46 @@ assert(["plan","execute"].includes(mode),"INVALID_RUN_MODE");
 assert(typeof idA==="string"&&typeof idB==="string"&&idA!==idB);
 const planPath=path.join(out,"generic-read-only-plan.json");
 
-function buildAbi(collected){
+function buildAbi(collected,pair){
   const compiler=collected.deps.solc;
   assert(/^0\.8\.26\+/.test(compiler.version()));
   const sources=Object.fromEntries([...collected.files].map(([unit,v])=>[unit,{content:v.content}]));
-  const input={language:"Solidity",sources,settings:{
-    optimizer:{enabled:false},outputSelection:{"*":{"*":["abi","evm.bytecode.object","evm.bytecode.linkReferences"]}}
+  const settings={optimizer:{enabled:false},outputSelection:{
+    "*":{"*":["abi","evm.bytecode.object","evm.bytecode.linkReferences"]}
   }};
-  const result=JSON.parse(compiler.compile(JSON.stringify(input)));
-  const errors=(result.errors||[]).filter(e=>e.severity==="error");
+  const compile=withSources=>JSON.parse(compiler.compile(
+    JSON.stringify({language:"Solidity",sources:withSources,settings})));
+  const base=compile(sources);
+  const errors=(base.errors||[]).filter(e=>e.severity==="error");
   assert.equal(errors.length,0,"LOCKED_EVM_BYTECODE_COMPILATION_FAILED");
-  return result.contracts||{};
+  return pair.map((source,i)=>{
+    const unit=collected.roots[i],original=base.contracts?.[unit]?.[source.contract];
+    assert(original?.abi,"PINNED_PRIMARY_CONTRACT_ABI_NOT_FOUND");
+    // Preserve native concrete bytecode and constructor when possible.
+    if(original?.evm?.bytecode?.object)return original;
+    // The audited OpenZeppelin ERC165 and ERC2981 bases are abstract despite
+    // implementing their methods. Inheritance-only wrapper creation is safe
+    // only for already reviewed, pinned OZ registry profiles.
+    if(source.kind!=="openzeppelin")return original;
+    assert(/^[A-Za-z][A-Za-z0-9_]{0,80}$/.test(source.contract));
+    assert(unit.startsWith("@openzeppelin/contracts/")&&
+      /^[A-Za-z0-9_./-]+$/.test(unit)&&!unit.includes("..")&&unit.endsWith(".sol"));
+    const wrapper="OECLReadOnlyAuto"+i;
+    const filename="OECL_Auto_Registered_Only_"+i+".sol";
+    const solidity=[
+      "// SPDX-License-Identifier: MIT",
+      "pragma solidity ^0.8.20;",
+      'import "'+unit+'";',
+      "contract "+wrapper+" is "+source.contract+" {}",
+      ""
+    ].join("\n");
+    const generated=compile({...sources,[filename]:{content:solidity}});
+    const generatedErrors=(generated.errors||[]).filter(e=>e.severity==="error");
+    if(generatedErrors.length)return original; // Safely blocked, never guess constructor args.
+    const instantiated=generated.contracts?.[filename]?.[wrapper];
+    if(!instantiated?.abi||!instantiated?.evm?.bytecode?.object)return original;
+    return {...instantiated,oeclWrapperSha256:digest(solidity)};
+  });
 }
 async function resolve(){
   const pair=choosePair(idA,idB);
@@ -47,9 +76,7 @@ async function resolve(){
   assert.deepEqual(discovery.errors,[]);
   const feasibility=evaluateFeasibility(buildInfo,graph,discovery);
   const report=resultRecord(pair,collected,graph,discovery,feasibility);
-  const compilation=buildAbi(collected);
-  const compiled=pair.map((e,i)=>
-    compilation[collected.roots[i]]?.[e.contract]||null);
+  const compiled=buildAbi(collected,pair);
   const plan=deriveProtocol({graph,report,artifacts:compiled,
     compilerVersion:collected.deps.solc.version(),
     dependencyIntegrity:collected.deps.integrity});
