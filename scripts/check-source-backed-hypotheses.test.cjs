@@ -31,6 +31,10 @@ test("source graph and bytes reconcile; paths follow compiler IDs",()=>{
  assert.equal(paths[0].signature,"transfer(address,uint256)");
  assert.match(paths[0].path,/#2.*#3/);
  assert.equal(LOCK_SHA256.length,64);
+ graph.contracts.push({id:9,kind:"interface",name:"IToken",unit,linearizedBaseContracts:[9]});
+ graph.contracts[0].linearizedBaseContracts.push(9);
+ graph.functions.push({...graph.functions[0],id:99,contractId:9});
+ assert.equal(pathsFromGraph(graph,{unit,contract:"Test"},abi).paths.length,1);
 });
 test("reject altered source hashes and undeclared roots",()=>{
  const {graph,collected}=sample();
