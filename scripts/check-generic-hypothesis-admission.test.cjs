@@ -20,7 +20,7 @@ function make(){
    prerequisites:["independent witness reconciliation"],
    evidenceStatus:"NOT_EXECUTED",scientificVerdict:"INCONCLUSIVE",
    compatibilityVerdict:"NOT_EVALUATED",candidateAdmission:"NOT_ADMITTED"};
- const p={id:"ERC-20",sourceUnit:"source.sol",sourceSha256:S,abiSha256:B,
+ const p={id:"ERC-20",revision:"4.9.6",contract:"ERC20",sourceUnit:"source.sol",sourceSha256:S,abiSha256:B,
    structuralPaths:[route],hypothesisCount:1,hypotheses:[h]};
  return {schemaVersion:"OECL_LOCKED_SOURCE_HYPOTHESES_V1",
   status:"COMPILER_RECONCILED_SOURCE_ONLY",registryScope:"REVIEWED_SOURCE_REGISTRY",
@@ -30,7 +30,7 @@ function make(){
   scientificVerdict:"INCONCLUSIVE",compatibilityVerdict:"NOT_EVALUATED",
   candidateAdmission:"NOT_ADMITTED",
   limitations:["structural", "source-only", "no EVM"],
-  participants:[p,{...p,id:"ERC-20-BURNABLE"}]};
+  participants:[p,{...p,id:"ERC-20-BURNABLE",contract:"ERC20Burnable"}]};
 }
 test("source-only hypothesis dossier admitted for research, never EVM execution",()=>{
  const g=gate(make());
@@ -47,7 +47,9 @@ test("reject forged admission, EVM proof fields and missing epistemic boundaries
   x=>{x.executionAuthorized=true;},
   x=>{x.lockSha256=G;},
   x=>{x.receipt={status:1};},
+  x=>{x.witness={status:1};},
   x=>{x.participants[0].minedReceiptCount=15;},
+  x=>{x.participants[0].structuralPaths[0].receipt={status:1};},
   x=>{x.participants[0].hypotheses[0].txHash="0x"+"1".repeat(64);},
   x=>{x.participants[0].hypotheses[0].counterexample="";},
   x=>{x.participants[0].hypotheses[0].prerequisites=[];},
