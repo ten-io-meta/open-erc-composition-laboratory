@@ -41,8 +41,8 @@ function discover({abi, ast, source}) {
     hypotheses.push({
       id:hash(core), status:"HYPOTHESIS_ONLY", ...core,
       hypothesis:"Calling "+sig+" may update "+p.stateVariable,
-      prediction:"A successful transaction should produce a measurable before/after state difference",
-      counterexample:"A revert or an unchanged target state would refute the predicted transition",
+      prediction:"With verified preconditions and a nonzero expected effect, a mined success should change the measured target state",
+      counterexample:"A mined success with verified preconditions but no predicted state effect challenges the hypothesis; a revert alone does not refute it",
       prerequisites:["independent source + compiler identity review",
         "explicit bounded calldata and caller policy",
         "local EVM state snapshots and mined receipt",
