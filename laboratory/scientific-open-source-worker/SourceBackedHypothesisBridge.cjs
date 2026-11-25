@@ -114,6 +114,9 @@ async function runPinnedPair(a,b,dependencyRoot){
       writeCount:graph.writes.length,
       writes:graph.writes.filter(w=>["balances","_balances","_totalSupply"].includes(w.state))
         .map(w=>({owner:w.owner,state:w.state,kind:w.kind})).slice(0,15),
+      callEdges:graph.edges.filter(e=>e.kind==="CALLS"&&[123,346,199].includes(e.from)).map(e=>({from:e.from,to:e.to})).slice(0,20),
+      unresolved:graph.unresolved.filter(e=>[123,346,199].includes(e.owner)).map(e=>({owner:e.owner,kind:e.kind})).slice(0,20),
+      external:graph.externalCalls.filter(e=>[123,346,199].includes(e.owner)).map(e=>({owner:e.owner,kind:e.kind})).slice(0,20),
       discovered:ast.paths.length
     }));
     const hypotheses=discover({source,abi,ast});
