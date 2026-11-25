@@ -11,7 +11,7 @@ Neither pathway treats an AST structural relation or an ABI match as compatibili
 
 ## Experiment chosen by source properties, not hardcoded pair-level behavior
 
-The first reproducible fixture runs **ERC-165 × ERC-2981** from the lock-pinned OpenZeppelin 4.9.6 profiles. The generic planner does not encode either standard's expected answer: it checks exact source identity, compiled ABI, constructor safety and three preregistered interface identifiers:
+The first reproducible fixture runs **ERC-165 × ERC-2981** from the lock-pinned OpenZeppelin 4.9.6 profiles. Both originals are marked `abstract` by OpenZeppelin, so solc cannot directly produce deployable creation bytecode. The runner handles this safely by generating SHA-256-identified **inheritance-only** concrete Solidity wrappers from the exact pinned original contracts, with no added methods, no storage initializer and no constructor arguments. A Solidity compile failure or an unsatisfied inherited constructor keeps the candidate blocked; the wrapper is not presented as the exact original contract deployment. The generic planner does not encode either standard's expected answer: it checks exact source identity, compiled ABI, constructor safety and three preregistered interface identifiers:
 
 - \`0x01ffc9a7\`: positive control, canonical IERC165 ID;
 - \`0xffffffff\`: negative control, deliberately invalid interface ID;
@@ -34,7 +34,7 @@ It also requires consistent response booleans and canonical ABI words, two disti
 - source registry is a reviewed finite list with immutable GitHub commits and exact OpenZeppelin package version;
 - source compiler uses locked Solidity 0.8.26, locked dependency integrity and bounded source acquisition;
 - no dependency install scripts or unreviewed GitHub repository build scripts execute;
-- read-only ABI probes only; zero-argument constructor, nonabstract linked bytecode, fixed bytecode bound, fixed number of deployments, calls and test vectors;
+- read-only ABI probes only; zero-argument concrete constructor (including deterministic inheritance-only instantiation wrappers for reviewed abstract OpenZeppelin bases), linked bytecode, fixed bytecode bound, fixed number of deployments, calls and test vectors;
 - ephemeral local Hardhat network ID 31337; no external RPC;
 - public source dispatcher stays disabled; experimental protocol can only run inside the separate CI workflow;
 - a parameter requiring a custom constructor, custom storage setup, transfers or external callbacks is a **blocked execution capability**, not an invitation to guess inputs.
