@@ -180,7 +180,15 @@ function verifyWitness(plan,witness){
         assert.equal(typeof response.value,"boolean");
         assert(/^0x[a-fA-F0-9]*$/.test(response.returnData)&&
           response.returnData.length===66);
+        // ABI bool MUST be the canonical 32-byte word 0 or 1. Never trust a
+        // Boolean attached separately by the experiment runner.
+        assert.equal(response.returnData.toLowerCase(),
+          "0x"+"0".repeat(63)+(response.value?"1":"0"));
       });
+      if(p.vector===TEST_VECTORS[0])
+        assert(p.responses.every(x=>x.value===true),"IERC165_POSITIVE_CONTROL_NOT_MET");
+      if(p.vector===TEST_VECTORS[1])
+        assert(p.responses.every(x=>x.value===false),"INVALID_INTERFACE_NEGATIVE_CONTROL_NOT_MET");
       if(p.responses[0].value!==p.responses[1].value)differences++;
     }
     assert.equal(witness.differingVectorCount,differences);
