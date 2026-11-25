@@ -23,6 +23,41 @@ assert.equal(planned.workflowStatus,"REVIEWED_STATEFUL_PROTOCOL_PREREGISTERED");
 const receipt=read(source,"stateful-local-evm-witness.json");
 assert(verifyStatefulWitness(planned,receipt),
   "INDEPENDENT_LEDGER_RECOMPUTATION_OR_EVM_RECEIPT_SHAPE_FAILED");
+// A second, deliberately separate numerical oracle. Do not call the first
+// job's expectedOutcome() arithmetic from here; recompute ledger deltas.
+for(const group of receipt.participants){
+  const cases=Object.fromEntries(group.cases.map(c=>[c.id,c]));
+  const diff=(id,column)=>BigInt(cases[id].after[column])-
+    BigInt(cases[id].before[column]);
+  assert.equal(diff("MINT_INITIAL","owner"),100n);
+  assert.equal(diff("MINT_INITIAL","supply"),100n);
+  assert.equal(diff("APPROVE_SPENDER","allowance"),50n);
+  assert.equal(diff("AUTHORIZED_TRANSFER","owner"),-25n);
+  assert.equal(diff("AUTHORIZED_TRANSFER","recipient"),25n);
+  assert.equal(diff("AUTHORIZED_TRANSFER","allowance"),-25n);
+  assert.equal(diff("AUTHORIZED_TRANSFER","supply"),0n);
+  assert.deepEqual(cases.ZERO_TRANSFER_BOUNDARY.before,
+    cases.ZERO_TRANSFER_BOUNDARY.after);
+  for(const name of ["NO_ALLOWANCE_ATTACKER","OVER_ALLOWANCE_SPENDER",
+    ...(group.role==="BURNABLE"?
+      ["NO_ALLOWANCE_BURN_ATTACKER","OVER_BALANCE_DIRECT_BURN"]:[])]){
+    assert.deepEqual(cases[name].before,cases[name].after);
+    assert.equal(cases[name].transactionMined,false);
+    assert.equal(cases[name].receipt,null);
+  }
+  if(group.role==="BURNABLE"){
+    assert.equal(diff("AUTHORIZED_BURN_FROM","owner"),-10n);
+    assert.equal(diff("AUTHORIZED_BURN_FROM","supply"),-10n);
+    assert.equal(diff("AUTHORIZED_BURN_FROM","allowance"),-10n);
+    assert.equal(diff("AUTHORIZED_BURN_FROM","recipient"),0n);
+    assert.deepEqual(cases.ZERO_BURN_BOUNDARY.before,
+      cases.ZERO_BURN_BOUNDARY.after);
+  }else assert.equal(cases.AUTHORIZED_BURN_FROM,undefined);
+  assert.equal(group.finalState.owner,group.role==="BURNABLE"?"65":"75");
+  assert.equal(group.finalState.recipient,"25");
+  assert.equal(group.finalState.supply,group.role==="BURNABLE"?"90":"100");
+  assert.equal(group.finalState.allowance,group.role==="BURNABLE"?"15":"25");
+}
 assert.equal(receipt.fixtureHasUnsafeTestMint,true);
 assert.equal(receipt.minedReceiptCount,12);
 assert.equal(receipt.unminedNegativeCount,6);
