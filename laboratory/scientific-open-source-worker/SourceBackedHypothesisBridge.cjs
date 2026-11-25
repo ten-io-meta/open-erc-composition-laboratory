@@ -55,12 +55,18 @@ function pathsFromGraph(graph,root,abi){
         typeof w.location?.unit==="string"&&Number.isSafeInteger(w.location.start))){
       const chain=shortest(graph,f.id,w.owner);
       if(!chain)continue;
-      if(chain.some(id=>(graph.unresolved||[]).some(e=>e.owner===id)||
-        (graph.externalCalls||[]).some(e=>e.owner===id)))continue;
+      // Unresolved references do not erase a structurally observed call-to-write
+      // path. They are disclosed as uncertainty and NEVER authorize EVM dispatch.
+      const unresolvedReferences=chain.reduce((n,id)=>n+
+        (graph.unresolved||[]).filter(e=>e.owner===id).length,0);
+      const externalCallReferences=chain.reduce((n,id)=>n+
+        (graph.externalCalls||[]).filter(e=>e.owner===id).length,0);
       const nodes=chain.map(id=>graph.functions.find(x=>x.id===id));
       if(nodes.some(x=>!x))continue;
       if(!graph.sources.some(s=>s.unit===w.location.unit&&isHash(s.sha256)))continue;
       matches.push({signature:sig,kind:"STATE_WRITE",stateVariable:w.state,
+        unresolvedReferences,externalCallReferences,
+        executionSafety:"SOURCE_ONLY_REVIEW_REQUIRED",
         path:nodes.map(n=>n.name+"#"+n.id).join(" -> ")+" @"+w.location.unit+":"+w.location.start});
     }
     const states=[...new Set(matches.map(m=>m.stateVariable))];
