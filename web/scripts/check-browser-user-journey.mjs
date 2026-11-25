@@ -267,7 +267,21 @@ async function test(){
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-reviewed-stateful-evm]").innerText.includes("0x91f43aff9078161a322f4d47b3a8e033e215719c6baa3b1f4d0f6461a50aacd4")'),true);
   console.log("OECL_BROWSER_STATEFUL_ERC20_EVM_PASS:12:6:2");
 
+  await click("NFT owners × multitoken operators (local EVM)");
+  await expectUi('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]")!==null',
+    "archived ERC721 and ERC1155 permission EVM results");
+  assert.equal(await evalJs('document.querySelectorAll("[data-testid=oecl-nft-ownership-ledger]").length'),2);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]").innerText.includes("15")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]").innerText.includes("8")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]").innerText.includes("NOT ADMITTED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]").innerText.includes("not present in the unchanged originals")'),true);
+  assert.equal(await evalJs('(()=>{const d=document.querySelector("[data-testid=oecl-nft-ownership-local-evm] details");if(!d)return false;d.open=true;return d.open})()'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]").innerText.includes("0xe3a41efeaed576bf6721d29427efab56e3da98863a2f86783554345b6b72da0a")'),true);
+  console.log("OECL_BROWSER_NFT_OWNERSHIP_LOCAL_EVM_PASS:15:8:2");
+
   await click("Vaults × fungible tokens");
+  await expectUi('document.querySelector("[data-testid=oecl-nft-ownership-local-evm]")===null',
+    "stale NFT permission evidence must disappear after changing ERC pair");
   await expectUi('document.querySelector("[data-testid=oecl-reviewed-stateful-evm]")===null',
     "old stateful evidence must disappear after changing ERC pair");
   await expectUi('document.querySelector("[data-testid=oecl-erc4626-evm]")!==null',
