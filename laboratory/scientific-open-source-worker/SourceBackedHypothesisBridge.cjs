@@ -110,7 +110,7 @@ async function runPinnedPair(a,b,dependencyRoot){
     assert(Array.isArray(original?.abi),"LOCKED_CONTRACT_ABI_UNAVAILABLE:"+ref.id);
     const abi=original.abi;
     const source={sourceSha256:collected.files.get(unit).sha256,
-      astSha256:sourceGraphSha256,abiSha256:hash(abi)};
+      astSha256:hash(ast),abiSha256:hash(abi)};
     const ast=pathsFromGraph(graph,{unit,contract:ref.contract},abi);
     if(process.env.OECL_GENERIC_DEBUG==="1")console.log("OECL_SOURCE_AST_DIAGNOSTIC",JSON.stringify({
       id:ref.id,root:graph.contracts.filter(c=>c.unit===unit&&c.name===ref.contract),
