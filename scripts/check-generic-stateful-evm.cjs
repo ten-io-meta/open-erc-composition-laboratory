@@ -62,6 +62,7 @@ const deployable=selected.map(x=>artifact(x.id,true));
 const plan=signedProtocolBody({report,graph,originalArtifacts:original,
   deployableArtifacts:deployable,wrappers:harnesses,
   compilerVersion:report.compilerVersion,dependencyIntegrity:report.dependencyIntegrity});
+console.log("OECL_STATEFUL_MOCK_CAPABILITY_DIAGNOSTIC",JSON.stringify(plan.capabilities.map(x=>({id:x.id,status:x.status,ast:x.sourceAST?.status,hasHarness:x.harnessSourceSha256!==null}))));
 assert.equal(plan.workflowStatus,"REVIEWED_STATEFUL_PROTOCOL_PREREGISTERED");
 assert.equal(plan.experimentalCases.length,2);
 assert.deepEqual(plan.experimentalCases.map(x=>x.steps.length),[6,10]);
