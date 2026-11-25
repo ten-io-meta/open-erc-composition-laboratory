@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { designAutonomousResearch, type AutonomousResearchPlan } from "./oeclAutonomousResearchPlanner";
+import { designAutonomousResearch, type AutonomousResearchPlan } from "./oeclAutonomousResearchPlanner.ts";
 import registry from "../../../laboratory/scientific-open-source-worker/source-registry.json" with { type: "json" };
 
 /** Official ERC document comparison, NEVER executable Solidity or candidate admission. */
