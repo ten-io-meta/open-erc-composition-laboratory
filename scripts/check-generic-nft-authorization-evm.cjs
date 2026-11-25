@@ -43,7 +43,7 @@ for(const [owner,state] of [
 const graph={schemaVersion:"OECL_SOLIDITY_COMPILER_AST_GRAPH_V1",
   sources:selected.map(s=>({unit:s.sourceUnit,sha256:s.sourceSha256})),
   contracts:selected.map((s,i)=>({
-    id:i+1,name:s.contract,unit:s.sourceUnit,
+    id:i+1,name:refs[i].contract,unit:s.sourceUnit,
     linearizedBaseContracts:[i+1]})),functions,edges,writes};
 const report={schemaVersion:"OECL_OPEN_GENERIC_AST_RESULT_V1",selected,
   graphSha256:digest(graph),sourceOnly:true,evmExecuted:false,
