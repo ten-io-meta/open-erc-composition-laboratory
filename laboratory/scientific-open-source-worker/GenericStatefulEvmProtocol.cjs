@@ -344,6 +344,144 @@ function verifyStatefulPlan(plan){
     return digest(body)===planSha256;
   }catch{return false;}
 }
+function expectedOutcome(role,kind,prior){
+  const next={...prior};
+  const n=BigInt(values.minted),a=BigInt(values.approved),
+    t=BigInt(values.transfer),b=BigInt(values.burn);
+  switch(kind){
+    case "MINT_INITIAL":next.owner=n.toString();next.supply=n.toString();break;
+    case "APPROVE_SPENDER":next.allowance=a.toString();break;
+    case "AUTHORIZED_TRANSFER":
+      next.owner=(BigInt(next.owner)-t).toString();
+      next.recipient=(BigInt(next.recipient)+t).toString();
+      next.allowance=(BigInt(next.allowance)-t).toString();break;
+    case "AUTHORIZED_BURN_FROM":
+      assert.equal(role,"BURNABLE");
+      next.owner=(BigInt(next.owner)-b).toString();
+      next.supply=(BigInt(next.supply)-b).toString();
+      next.allowance=(BigInt(next.allowance)-b).toString();break;
+  }
+  return next;
+}
+function expectedEvent(id,roles){
+  const z="0x"+"0".repeat(40);
+  if(id==="APPROVE_SPENDER")
+    return {name:"Approval",from:roles.owner,to:roles.spender,
+      amount:values.approved};
+  if(id==="MINT_INITIAL")return {name:"Transfer",from:z,to:roles.owner,
+    amount:values.minted};
+  if(id==="AUTHORIZED_TRANSFER"||id==="ZERO_TRANSFER_BOUNDARY")
+    return {name:"Transfer",from:roles.owner,to:roles.recipient,
+      amount:id==="AUTHORIZED_TRANSFER"?values.transfer:values.zero};
+  if(id==="AUTHORIZED_BURN_FROM"||id==="ZERO_BURN_BOUNDARY")
+    return {name:"Transfer",from:roles.owner,to:z,
+      amount:id==="AUTHORIZED_BURN_FROM"?values.burn:values.zero};
+  return null;
+}
+function verifyStatefulWitness(plan,witness){
+  if(!verifyStatefulPlan(plan)||
+     plan.workflowStatus!=="REVIEWED_STATEFUL_PROTOCOL_PREREGISTERED")
+    return false;
+  try{
+    assert.equal(witness.schemaVersion,"OECL_GENERIC_STATEFUL_ERC20_LOCAL_EVM_V1");
+    assert.equal(witness.planSha256,plan.planSha256);
+    assert.deepEqual(witness.selected,plan.selected.map(x=>x.id));
+    assert.equal(witness.chainId,31337);
+    assert.equal(witness.providerScope,"EPHEMERAL_LOCAL_HARDHAT_RECEIPT_RECHECKED");
+    assert.equal(witness.evmExecuted,true);
+    assert.equal(witness.scientificVerdict,"INCONCLUSIVE");
+    assert.equal(witness.compatibilityVerdict,"NOT_EVALUATED");
+    assert.equal(witness.candidateAdmission,"NOT_ADMITTED");
+    assert.equal(witness.crossContractAtomicityProven,false);
+    assert.equal(witness.generalCompatibilityClaim,false);
+    assert.equal(witness.fixtureHasUnsafeTestMint,true);
+    assert(witness.isolationCheck?.otherTokenUnchanged===true);
+    const roles=witness.actors;
+    assert(roles&&Object.values(roles).length===4&&
+      Object.values(roles).every(hex40)&&
+      new Set(Object.values(roles).map(x=>x.toLowerCase())).size===4);
+    assert(Array.isArray(witness.deployments)&&witness.deployments.length===2);
+    assert(Array.isArray(witness.participants)&&witness.participants.length===2);
+    const allTx=new Set(),deployments=new Set();
+    function checkReceipt(tx,address,who,method,evt){
+      assert(tx&&tx.transactionMined===true&&tx.status===1);
+      assert(hex64(tx.txHash)&&hex64(tx.blockHash));
+      assert(Number.isSafeInteger(tx.blockNumber)&&tx.blockNumber>=1);
+      assert(/^[1-9][0-9]*$/.test(tx.gasUsed)&&
+        BigInt(tx.gasUsed)<=BigInt(plan.executionBudget.maxGasPerTransaction));
+      assert(hex40(tx.fromAddress)&&tx.fromAddress.toLowerCase()===who.toLowerCase());
+      if(address===null)assert(tx.toAddress===null);
+      else assert(hex40(tx.toAddress)&&
+        tx.toAddress.toLowerCase()===address.toLowerCase());
+      assert(/^0x[a-f0-9]{8}$/i.test(tx.methodSelector));
+      assert.equal(tx.method,method);
+      if(evt){
+        assert(tx.event&&tx.event.name===evt.name);
+        assert.equal(tx.event.from.toLowerCase(),evt.from.toLowerCase());
+        assert.equal(tx.event.to.toLowerCase(),evt.to.toLowerCase());
+        assert.equal(tx.event.amount,evt.amount);
+      }else assert.equal(tx.event,null);
+      assert(!allTx.has(tx.txHash.toLowerCase()),"DUPLICATE_MINED_TRANSACTION");
+      allTx.add(tx.txHash.toLowerCase());
+    }
+    for(let i=0;i<2;i++){
+      const d=witness.deployments[i],expected=plan.selected[i];
+      assert.equal(d.id,expected.id);
+      assert(hex40(d.contractAddress));
+      assert(!deployments.has(d.contractAddress.toLowerCase()));
+      deployments.add(d.contractAddress.toLowerCase());
+      assert(hex64(d.runtimeCodeKeccak256));
+      checkReceipt(d.receipt,null,roles.owner,"CONSTRUCTOR",null);
+      const group=witness.participants[i],protocol=plan.experimentalCases[i];
+      assert.equal(group.id,expected.id);
+      assert.equal(group.role,protocol.role);
+      assert.equal(group.contractAddress.toLowerCase(),d.contractAddress.toLowerCase());
+      assert.deepEqual(group.cases.map(x=>x.id),protocol.steps.map(x=>x.id));
+      let state={owner:"0",recipient:"0",spender:"0",attacker:"0",
+        supply:"0",allowance:"0"};
+      let mined=0,unmined=0;
+      for(let j=0;j<protocol.steps.length;j++){
+        const step=protocol.steps[j],observed=group.cases[j];
+        assert.equal(observed.execution,step.execution);
+        assert.equal(observed.signature,step.signature);
+        assert.equal(observed.caller,step.caller);
+        assert.equal(observed.quantityRole,step.quantityRole);
+        assert.equal(observed.quantity,values[step.quantityRole.toLowerCase()]??
+          ({MINTED:values.minted,APPROVED:values.approved,
+            TRANSFER:values.transfer,BURN:values.burn,ZERO:values.zero,
+            UNAUTHORIZED:values.unauthorized,
+            OVER_ALLOWANCE:values.overAllowance,
+            OVER_BALANCE:values.overBalance})[step.quantityRole]);
+        assert.deepEqual(observed.before,state);
+        const after=expectedOutcome(group.role,step.id,state);
+        assert.deepEqual(observed.after,after);
+        if(step.execution==="READ_ONLY_EXPECT_REVERT"){
+          unmined++;
+          assert.equal(observed.simulation,"ETH_CALL_REVERT");
+          assert.equal(observed.transactionMined,false);
+          assert.equal(observed.statePreserved,true);
+          assert.equal(observed.receipt,null);
+        }else{
+          mined++;
+          assert.equal(observed.transactionMined,true);
+          assert.equal(observed.simulation,null);
+          const evt=expectedEvent(step.id,roles);
+          checkReceipt(observed.receipt,d.contractAddress,
+            roles[step.caller.toLowerCase()],step.signature,evt);
+        }
+        state=after;
+      }
+      assert.equal(group.minedTransactions,mined);
+      assert.equal(group.unminedNegativeControls,unmined);
+      assert.deepEqual(group.finalState,state);
+    }
+    assert.equal(allTx.size,12);
+    assert.equal(witness.minedReceiptCount,12);
+    assert.equal(witness.unminedNegativeCount,6);
+    assert.equal(witness.outcome,"SCOPED_TRANSFER_AND_BURN_BEHAVIOR_OBSERVED");
+    return true;
+  }catch{return false;}
+}
 module.exports={hash,digest,profiles,values,approvedMethods,TYPES,
   abiFunction,astCapability,buildHarnessSource,signedProtocolBody,verifyStatefulPlan,
-  hex40,hex64};
+  expectedOutcome,expectedEvent,verifyStatefulWitness,hex40,hex64};
