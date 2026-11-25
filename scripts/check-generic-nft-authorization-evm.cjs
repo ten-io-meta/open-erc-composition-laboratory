@@ -21,24 +21,28 @@ const f721={
   transferFrom:add(1,"transferFrom"),_transfer:add(1,"_transfer"),
   _mint:add(1,"_mint"),approve:add(1,"approve"),_approve:add(1,"_approve"),
   setApprovalForAll:add(1,"setApprovalForAll"),
+  _setApprovalForAll:add(1,"_setApprovalForAll"),
   _isApprovedOrOwner:add(1,"_isApprovedOrOwner")
 };
 const f1155={
   safeTransferFrom:add(2,"safeTransferFrom"),
   _safeTransferFrom:add(2,"_safeTransferFrom"),
-  _mint:add(2,"_mint"),setApprovalForAll:add(2,"setApprovalForAll")
+  _mint:add(2,"_mint"),setApprovalForAll:add(2,"setApprovalForAll"),
+  _setApprovalForAll:add(2,"_setApprovalForAll")
 };
 function link(a,b){edges.push({from:a,to:b,kind:"CALLS"});}
 link(f721.transferFrom,f721._transfer);
 link(f721.transferFrom,f721._isApprovedOrOwner);
 link(f721.approve,f721._approve);
+link(f721.setApprovalForAll,f721._setApprovalForAll);
+link(f1155.setApprovalForAll,f1155._setApprovalForAll);
 link(f1155.safeTransferFrom,f1155._safeTransferFrom);
 for(const [owner,state] of [
   [f721._mint,"_owners"],[f721._transfer,"_owners"],
   [f721._approve,"_tokenApprovals"],
-  [f721.setApprovalForAll,"_operatorApprovals"],
+  [f721._setApprovalForAll,"_operatorApprovals"],
   [f1155._mint,"_balances"],[f1155._safeTransferFrom,"_balances"],
-  [f1155.setApprovalForAll,"_operatorApprovals"]])
+  [f1155._setApprovalForAll,"_operatorApprovals"]])
   writes.push({owner,state,kind:"ASSIGN"});
 const graph={schemaVersion:"OECL_SOLIDITY_COMPILER_AST_GRAPH_V1",
   sources:selected.map(s=>({unit:s.sourceUnit,sha256:s.sourceSha256})),
@@ -88,7 +92,7 @@ console.log("OECL_NFT_ROLE_PREREGISTRATION_MOCK_PASS");
 
 const noApproval=structuredClone(graph);
 noApproval.writes=noApproval.writes.filter(w=>
-  !(w.owner===f721.setApprovalForAll&&w.state==="_operatorApprovals"));
+  !(w.owner===f721._setApprovalForAll&&w.state==="_operatorApprovals"));
 const missing=build(noApproval,{...report,graphSha256:digest(noApproval)});
 assert.equal(missing.workflowStatus,"BLOCKED_NO_REVIEWED_OWNERSHIP_CAPABILITY");
 assert(missing.blockedReasons.some(x=>x.includes("REQUIRED_STATE_WRITE")));
