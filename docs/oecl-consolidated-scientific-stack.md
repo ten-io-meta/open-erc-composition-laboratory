@@ -27,8 +27,13 @@ original research blobs by their exact Git SHA**, and declares both
 original commits as parents. There was no manual rewriting of
 the scientific compiler, source models, witnesses, negative controls,
 quality verifiers, UI, route or claim ledger during this assembly.
-The only new files are this document, a reproducibility/integrity
-gate, and its own GitHub Actions workflow.
+In the original #49 consolidation, the only new files were this document,
+a reproducibility/integrity gate, and its own GitHub Actions workflow.
+The follow-on draft #51 additionally incorporates **five reviewed
+privacy-boundary changes** from #50 (an ignored private research root,
+the private memory-output path, privacy CI/gate and an IP inventory).
+These are explicitly allowlisted in the extended integrity checker;
+the original 72 scientific research/quality blobs remain unchanged.
 
 A required `OECL Consolidated Scientific Stack Integrity` CI job
 audits the **exact PR head** and checks:
