@@ -2,8 +2,8 @@ import type { ScientificQualityContract } from "./oeclScientificQualityContract"
 import type { ScientificQualityReview } from "./oeclScientificQualityReviewer";
 import type { ScientificClaimLedger } from "./oeclScientificClaimLedger";
 import type { ScientificClaimReview } from "./oeclScientificClaimReviewer";
-import { issueReproducedVaultAddendum } from "./oeclReproducedVaultAddendum";
-import { independentlyReviewReproducedVault } from "./oeclReproducedVaultReviewer";
+import { issueReproducedVaultAddendum } from "./oeclReproducedVaultAddendum.ts";
+import { independentlyReviewReproducedVault } from "./oeclReproducedVaultReviewer.ts";
 
 /** The archived cross-implementation result is only an ADDENDUM.
  * Source-only ERC documentary conclusions remain completely unchanged.
