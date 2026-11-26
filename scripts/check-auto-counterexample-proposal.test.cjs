@@ -36,12 +36,12 @@ test("generated predictions are truly minimal under reviewed finite search bound
 });
 test("new source-derived candidate has state-sensitive controls, pre/post donation",()=>{
  const n=chooseCase().selected;
- assert.equal(maxWithdraw("OPENZEPPELIN",40n,40n,40n+BigInt(n.donation)),"41");
- assert.equal(maxWithdraw("SOLMATE",40n,40n,40n+BigInt(n.donation)),"42");
- assert.equal(convertPreview("OPENZEPPELIN",21n,40n,42n),"21");
- assert.equal(convertPreview("SOLMATE",21n,40n,42n),"20");
- assert.equal(convertPreview("OPENZEPPELIN",41n,40n,42n),"40");
- assert.equal(convertPreview("SOLMATE",41n,40n,42n),"40");
+ assert.equal(maxWithdraw("OPENZEPPELIN",40n,40n,40n+BigInt(n.donation)),41n);
+ assert.equal(maxWithdraw("SOLMATE",40n,40n,40n+BigInt(n.donation)),42n);
+ assert.equal(convertPreview("OPENZEPPELIN",21n,40n,42n),21n);
+ assert.equal(convertPreview("SOLMATE",21n,40n,42n),20n);
+ assert.equal(convertPreview("OPENZEPPELIN",41n,40n,42n),40n);
+ assert.equal(convertPreview("SOLMATE",41n,40n,42n),40n);
  assert.equal(divUp(9n,2n),5n);
 });
 test("unknown economic model and unverified source never allow proposals",()=>{
