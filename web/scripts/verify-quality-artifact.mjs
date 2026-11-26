@@ -251,8 +251,15 @@ export function verifyPortableQuality(sourceResponse,sourceReport,rawSources=nul
  }catch{
   out.failedChecks.push("INVALID_OR_UNREADABLE_QUALITY_STRUCTURE");
  }
+ const optionalClaimLedger=sourceResponse?.claimLedger;
+ const claimLedgerReview=optionalClaimLedger===undefined?null:
+   verifyPortableClaimLedger(optionalClaimLedger,q,
+     sourceReport?.dossier??sourceReport);
+ if(claimLedgerReview&&!claimLedgerReview.accepted)
+   out.failedChecks.push("CLAIM_LEDGER_INDEPENDENT_REVIEW_REJECTED");
  const base={
   ...out,
+  claimLedgerReview,
   evidenceBasis:q.basis,
   submittedContractSha256:shaOk(q?.integrity?.sha256)?q.integrity.sha256:null,
   verificationTier:q.basis==="DOCUMENTARY_SOURCE_ONLY"?
@@ -271,6 +278,149 @@ export function verifyPortableQuality(sourceResponse,sourceReport,rawSources=nul
   remoteSourceOriginAuthenticated:false,
   downloadedFromServerTrusted:false,
  };
+}
+
+
+/**
+ * Independently check the companion claim ledger without using OECL's
+ * server claim builder or server reviewer. A valid ledger only establishes
+ * structural consistency against its separate quality/report inputs.
+ */
+export function verifyPortableClaimLedger(ledger,quality,rawReport){
+ const failures=[],need=(v,label)=>{if(!v)failures.push(label);};
+ const report=rawReport?.dossier??rawReport;
+ if(!ledger||typeof ledger!=="object"||Array.isArray(ledger)||
+    !quality||typeof quality!=="object"||
+    !report||typeof report!=="object")return {
+   accepted:false,status:"REJECTED",failures:["INVALID_CLAIM_CONTEXT"],
+   replayedEvm:false,verifiedExternalImpact:false,
+ };
+ const independentKeys=(v,k)=>keys(v,k);
+ try{
+  const {integrity,...body}=ledger;
+  need(independentKeys(ledger,["schemaVersion","basis","subjectPairKey",
+    "qualityContractSha256","sourceReportSha256","hypotheses","observations",
+    "conclusion","utility","scientificVerdict","compatibilityVerdict",
+    "candidateAdmission","provenance","integrity"])&&
+   independentKeys(ledger.conclusion,["kind","status","scope","statement",
+     "supportingObservationIds","universalCompatibilityProven","independentEvmReplay"])&&
+   independentKeys(ledger.utility,["status","concreteResearchUse",
+     "demonstratedExternalImpact","securityCertification","countingHypothesesIsEvidence",
+     "score","rationale","missingForStrongerClaim"])&&
+   independentKeys(ledger.provenance,["independentSourceOriginAuthentication",
+     "independentEvmReplay","sourceOrExecutionAuthorityGranted"])&&
+   independentKeys(ledger.integrity,["algorithm","sha256","signature",
+     "trustedExternalAttestation"]),"UNEXPECTED_CLAIM_LEDGER_FIELDS");
+  need(ledger.schemaVersion==="OECL_SCIENTIFIC_CLAIM_LEDGER_V1"&&
+   ledger.basis===quality.basis&&
+   ledger.subjectPairKey===quality.subject?.pairKey&&
+   ledger.scientificVerdict===quality.scientificVerdict&&
+   ledger.compatibilityVerdict==="NOT_EVALUATED"&&
+   ledger.candidateAdmission==="NOT_ADMITTED","CLAIM_VERDICT_PROMOTED");
+  need(shaOk(ledger.qualityContractSha256)&&
+   ledger.qualityContractSha256===quality.integrity?.sha256&&
+   ledger.sourceReportSha256===hashable(report)&&shaOk(ledger.sourceReportSha256)&&
+   ledger.integrity?.algorithm==="SHA-256-JSON-INSERTION_ORDER"&&
+   ledger.integrity.sha256===hashable(body)&&shaOk(ledger.integrity.sha256)&&
+   ledger.integrity.signature===false&&
+   ledger.integrity.trustedExternalAttestation===false,
+   "CLAIM_OR_PARENT_DIGEST_TAMPERED");
+  need(ledger.provenance?.independentSourceOriginAuthentication===false&&
+   ledger.provenance?.independentEvmReplay===false&&
+   ledger.provenance?.sourceOrExecutionAuthorityGranted===false&&
+   ledger.conclusion?.universalCompatibilityProven===false&&
+   ledger.conclusion?.independentEvmReplay===false&&
+   ledger.utility?.demonstratedExternalImpact===false&&
+   ledger.utility?.securityCertification===false&&
+   ledger.utility?.countingHypothesesIsEvidence===false&&
+   ledger.utility?.score===null&&
+   equals(ledger.utility?.missingForStrongerClaim,quality.limits?.unknowns),
+   "UNPROVEN_REAL_WORLD_UTILITY_OR_REPLAY");
+  const hypothesisProof=quality.basis==="DOCUMENTARY_SOURCE_ONLY"?
+   "SOURCE_HYPOTHESIS_NOT_EXECUTED":
+   "SOURCE_HYPOTHESIS_NOT_PROVEN_BY_ONE_SCOPED_EXPERIMENT";
+  const expectedHypotheses=(quality.investigate?.hypotheses??[]).map(h=>({
+   id:h.id,kind:"HYPOTHESIS",proofStatus:hypothesisProof,
+   statement:h.statement,prediction:h.prediction,falsifier:h.falsifier,
+   positiveControl:h.positiveControl,negativeControl:h.negativeControl,
+   sourceSha256:h.anchors.map(a=>a.sha256),
+  }));
+  need(equals(ledger.hypotheses,expectedHypotheses)&&
+   expectedHypotheses.every(h=>h.falsifier&&h.positiveControl&&h.negativeControl&&
+     h.sourceSha256.length>0&&h.sourceSha256.every(shaOk)),
+   "UNSUPPORTED_HYPOTHESIS_OR_FALSIFIER");
+  if(quality.basis==="DOCUMENTARY_SOURCE_ONLY"){
+   need(report.status==="DOCUMENTARY_COMPARISON"&&
+    report.evmExecuted===false&&
+    quality.experiment?.status==="NOT_EXECUTED",
+    "FICTIONAL_DOCUMENTARY_EVM_EXECUTION");
+   need(equals(ledger.observations,[])&&
+    equals(ledger.conclusion,{
+      kind:"CONCLUSION",status:"NOT_EVALUATED",scope:"NO_EVM_EXPERIMENT",
+      statement:"No EVM compatibility, safety or economic impact conclusion can be drawn from these source-only hypotheses.",
+      supportingObservationIds:[],universalCompatibilityProven:false,
+      independentEvmReplay:false,
+    }),"DOCUMENTARY_CONCLUSION_OR_OBSERVATION_FORGED");
+   need(equals(ledger.utility,{
+    status:"NOT_YET_DEMONSTRATED",
+    concreteResearchUse:"IDENTIFY_UNTESTED_PRECONDITIONS",
+    demonstratedExternalImpact:false,securityCertification:false,
+    countingHypothesesIsEvidence:false,score:null,
+    rationale:"The report identifies reviewable questions and falsifiers, but provides no executed witness or demonstrated user benefit.",
+    missingForStrongerClaim:[...quality.limits.unknowns],
+   }),"DOCUMENTARY_HYPOTHESIS_VOLUME_MASQUERADES_AS_UTILITY");
+  }else if(quality.basis==="PINNED_LOCAL_EVM_SNAPSHOT"){
+   const e=report.experiment;
+   need(report.schemaVersion==="OECL_USER_SCIENTIFIC_DOSSIER_V1"&&
+    report.verdict==="INCONCLUSIVE"&&e?.chainId===31337&&
+    e.bothBurnsInSameTransaction===true&&
+    e.localConstraintResult==="SUPPORT"&&
+    /^0x[a-f0-9]{64}$/i.test(e.transactionHash)&&
+    [e.ethRedeemedWei,e.nftObligationDecreaseWei,e.supplyBeforeBaseUnits,
+      e.supplyAfterBaseUnits,e.supplyDecreaseBaseUnits].every(
+        x=>typeof x==="string"&&/^[0-9]+$/.test(x)),
+    "MISSING_SCOPE_CONSTRAINED_LOCAL_EVM_SOURCE");
+   need(equals(ledger.observations,[{
+    id:"PINNED_LOCAL_EVM_COUPLED_REDUCTION",kind:"OBSERVATION",
+    proofStatus:"ARCHIVED_LOCAL_EVM_OBSERVATION_NOT_INDEPENDENTLY_REPLAYED",
+    scope:"ONE_PINNED_HARDHAT_TRANSACTION",chainId:31337,
+    transactionHash:e.transactionHash,
+    statement:"BOTH_REDUCTIONS_RECORDED_IN_ONE_PINNED_LOCAL_TRANSACTION",
+    measurements:{
+      ethRedeemedWei:e.ethRedeemedWei,
+      nftObligationDecreaseWei:e.nftObligationDecreaseWei,
+      supplyBeforeBaseUnits:e.supplyBeforeBaseUnits,
+      supplyAfterBaseUnits:e.supplyAfterBaseUnits,
+      supplyDecreaseBaseUnits:e.supplyDecreaseBaseUnits,
+      bothBurnsInSameTransaction:true,localConstraintResult:"SUPPORT",
+    },
+    evidenceRefs:[...quality.demonstrate.evidenceRefs],
+   }]),"FORGED_PINNED_MEASUREMENT_OR_RECEIPT");
+   need(equals(ledger.conclusion,{
+    kind:"CONCLUSION",status:"INCONCLUSIVE",
+    scope:"ONE_PINNED_LOCAL_EVM_SCENARIO_ONLY",
+    statement:"The archived local transaction supports only a bounded coupled-reduction observation; cross-ERC compatibility and broader safety remain unproven.",
+    supportingObservationIds:["PINNED_LOCAL_EVM_COUPLED_REDUCTION"],
+    universalCompatibilityProven:false,independentEvmReplay:false,
+   }),"SCOPED_OBSERVATION_FALSLY_PROMOTED");
+   need(equals(ledger.utility,{
+    status:"SCOPED_REVIEWABLE_FINDING_ONLY",
+    concreteResearchUse:"INSPECT_ONE_PINNED_ATOMICITY_AND_ROLLBACK_SCENARIO",
+    demonstratedExternalImpact:false,securityCertification:false,
+    countingHypothesesIsEvidence:false,score:null,
+    rationale:"A named local receipt and archived artifacts make one scenario reviewable, but do not establish externally reproduced results or real-world safety.",
+    missingForStrongerClaim:[...quality.limits.unknowns],
+   }),"FALSE_ECONOMIC_IMPACT_OR_SECURITY_UTILITY");
+  }else need(false,"UNREVIEWED_SCIENTIFIC_BASIS");
+ }catch{
+  failures.push("CLAIM_RECONSTRUCTION_EXCEPTION");
+ }
+ return {accepted:failures.length===0,
+  status:failures.length?"REJECTED":"CLAIMS_CONSISTENT_WITH_PROVIDED_EVIDENCE",
+  failures,
+  reviewedClaimSha256:typeof ledger.integrity?.sha256==="string"?
+   ledger.integrity.sha256:null,
+  replayedEvm:false,verifiedExternalImpact:false};
 }
 
 function readJson(file){
