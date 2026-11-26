@@ -74,6 +74,7 @@ const documentaryAttacks=[
  ["change subject",x=>x.subject.pairKey="ERC-20|ERC-721"],
  ["remove hypothesis",x=>x.investigate.hypotheses=[]],
  ["remove approved-source warnings",x=>x.limits.unknowns.pop()],
+ ["add fake proof field",x=>x.demonstrate.cryptographicProof="SIGNED_BY_ETHEREUM"],
 ];
 const archiveAttacks=[
  ["promote verdict",x=>x.scientificVerdict="PROVEN"],
@@ -94,13 +95,14 @@ const archiveAttacks=[
  ["change pinned hypothesis",x=>x.investigate.hypotheses[0].statement="ALWAYS_COMPATIBLE"],
  ["remove archived limitation",x=>x.limits.unknowns.pop()],
  ["replace evidence with text",x=>x.demonstrate.evidenceRefs=["I checked it"]],
+ ["add false certification field",x=>x.securityCertification="ETHEREUM_CONSENSUS_VERIFIED"],
 ];
 let rejected=0;
 for(const [label,mutate] of documentaryAttacks){
  const value=structuredClone(doc);mutate(value);
  // Rehash (except explicit forged signing) to test semantic review.
  if(label!=="fake signature"){
-  const {integrity,...rest}=value;
+  const rest={...value};delete rest.integrity;
   value.integrity.sha256=scientificQualityHash(rest);
  }
  assert.equal(reviewScientificQuality(value,docContext).accepted,false,
@@ -110,7 +112,7 @@ for(const [label,mutate] of documentaryAttacks){
 for(const [label,mutate] of archiveAttacks){
  const value=structuredClone(archive);mutate(value);
  if(label!=="claim signature"){
-  const {integrity,...rest}=value;
+  const rest={...value};delete rest.integrity;
   value.integrity.sha256=scientificQualityHash(rest);
  }
  assert.equal(reviewScientificQuality(value,pinContext).accepted,false,
