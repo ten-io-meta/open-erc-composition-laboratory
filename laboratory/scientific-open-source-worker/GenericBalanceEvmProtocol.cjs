@@ -79,7 +79,7 @@ function planFor(sourceReport,originalArtifacts,fixtureArtifacts,fixtures){
   const exactPair=selected.map(x=>x.id).sort().join("|")===IDS.slice().sort().join("|");
   const capabilities=selected.map((src,i)=>{
     const original=originalArtifacts[i],deployed=fixtureArtifacts[i],wrap=fixtures[i],
-      expected=fixture(src.id,i);
+      expected=fixture(src,i);
     const srcValid=Boolean(exactPair&&expected&&src.contract===allowed[src.id].contract&&
       src.sourceUnit===allowed[src.id].sourceUnit&&hex64(src.hypothesisId)&&
       sourceReport.participants[i].structuralPaths.some(p=>
