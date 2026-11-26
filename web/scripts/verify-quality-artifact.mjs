@@ -288,7 +288,11 @@ export function verifyPortableQuality(sourceResponse,sourceReport,rawSources=nul
  */
 export function verifyPortableClaimLedger(ledger,quality,rawReport){
  const failures=[],need=(v,label)=>{if(!v)failures.push(label);};
- const report=rawReport?.dossier??rawReport;
+ const report=rawReport?.dossier??(rawReport?.status==="DOCUMENTARY_COMPARISON"?
+   Object.fromEntries(Object.entries(rawReport).filter(([key])=>
+     !["qualityContract","independentQualityReview",
+       "claimLedger","independentClaimReview"].includes(key))):
+   rawReport);
  if(!ledger||typeof ledger!=="object"||Array.isArray(ledger)||
     !quality||typeof quality!=="object"||
     !report||typeof report!=="object")return {
