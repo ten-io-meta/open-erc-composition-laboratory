@@ -55,6 +55,8 @@ jobs:
         run: node --experimental-strip-types scripts/check-portable-scientific-quality.mjs
       - name: Reject fabricated conclusions, invented EVM observations and unproven utility in both reviewers
         run: node --experimental-strip-types scripts/check-scientific-claim-ledger.mjs
+      - name: Reject 45 rehashed false local-EVM reproduction addenda and preserve documentary quality limits
+        run: node --experimental-strip-types scripts/check-reproduced-scientific-addendum.mjs
       - name: Verify scientific AST snapshots and ZIP integrity
         run: node --experimental-strip-types scripts/check-source-graph-view.mjs
       - name: Verify independent EVM receipts and native source property snapshot

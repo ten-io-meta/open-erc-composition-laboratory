@@ -4,6 +4,7 @@ import { verifyAutonomousResearchPlan } from "@/server/oeclAutonomousResearchPla
 import { documentaryScientificQuality } from "@/server/oeclScientificQualityContract";
 import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
 import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
+import { reviewedReproducedVaultAddendum } from "@/server/oeclReproducedVaultGate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -29,10 +30,15 @@ export async function GET(request: NextRequest) {
     if(!independentQualityReview.accepted)throw Error("SCIENTIFIC_QUALITY_GATE_FAILED");
     const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
       qualityContract,independentQualityReview,result);
+    const archivedReproduction=qualityContract.subject.pairKey==="ERC-20|ERC-4626"?
+      reviewedReproducedVaultAddendum(qualityContract,independentQualityReview,
+        claimLedger,independentClaimReview):null;
     return NextResponse.json({...result,qualityContract,independentQualityReview,
-      claimLedger,independentClaimReview},
+      claimLedger,independentClaimReview,...(archivedReproduction||{})},
       { headers: {...headers,"X-OECL-Quality-SHA256":qualityContract.integrity.sha256,
-        "X-OECL-Claims-SHA256":claimLedger.integrity.sha256} });
+        "X-OECL-Claims-SHA256":claimLedger.integrity.sha256,
+        ...(archivedReproduction?{"X-OECL-Reproduction-SHA256":
+          archivedReproduction.reproductionAddendum.integrity.sha256}:{})} });
   } catch {
     return NextResponse.json({
       status: "DOCUMENTARY_LOOKUP_FAILED",

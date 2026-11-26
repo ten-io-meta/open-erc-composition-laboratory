@@ -4,6 +4,7 @@ import { verifyAutonomousResearchPlan } from "@/server/oeclAutonomousResearchPla
 import { documentaryScientificQuality,pinnedScientificQuality } from "@/server/oeclScientificQualityContract";
 import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
 import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
+import { reviewedReproducedVaultAddendum } from "@/server/oeclReproducedVaultGate";
 import { DOSSIER_EVIDENCE_RUN,DOSSIER_SNAPSHOT_SHA256,getVerifiedScientificDossier,isDossierPair } from "@/server/oeclScientificDossier";
 
 export const runtime="nodejs";
@@ -21,9 +22,11 @@ export async function GET(request:NextRequest){
   const a=normalizeErcNumber(params.get("protocolA")),b=normalizeErcNumber(params.get("protocolB"));
   const basis=params.get("basis")??"documentary",expected=params.get("sha256");
   const requestedClaims=params.get("claimsSha256");
+  const requestedReproduction=params.get("reproductionSha256");
   if(!a||!b||a===b||!["documentary","pinned"].includes(basis)||
      !expected||!/^[a-f0-9]{64}$/.test(expected)||
-     (requestedClaims!==null&&!/^[a-f0-9]{64}$/.test(requestedClaims))){
+     (requestedClaims!==null&&!/^[a-f0-9]{64}$/.test(requestedClaims))||
+     (requestedReproduction!==null&&!/^[a-f0-9]{64}$/.test(requestedReproduction))){
     return NextResponse.json({status:"INVALID_VERIFICATION_REQUEST",
       message:"Supply a valid pair, basis and SHA-256 digest."},{status:400,headers});
   }
@@ -50,13 +53,20 @@ export async function GET(request:NextRequest){
     if(!review.accepted||!sourceReport)throw Error("QUALITY_VERIFICATION_REJECTED");
     const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
       contract,review,sourceReport);
+    const archivedReproduction=basis==="documentary"&&contract.subject.pairKey==="ERC-20|ERC-4626"?
+      reviewedReproducedVaultAddendum(contract,review,claimLedger,independentClaimReview):null;
     const matches=contract.integrity.sha256===expected&&
-      (requestedClaims===null||requestedClaims===claimLedger.integrity.sha256);
+      (requestedClaims===null||requestedClaims===claimLedger.integrity.sha256)&&
+      (requestedReproduction===null||
+        requestedReproduction===archivedReproduction?.reproductionAddendum.integrity.sha256);
     return NextResponse.json({
       status:matches?"QUALITY_DIGEST_MATCHES_RECONSTRUCTED_SOURCE":"QUALITY_DIGEST_MISMATCH",
       matches,submittedSha256:expected,reconstructedSha256:contract.integrity.sha256,
       submittedClaimsSha256:requestedClaims,reconstructedClaimsSha256:claimLedger.integrity.sha256,
       review,independentClaimReview,
+      submittedReproductionSha256:requestedReproduction,
+      reconstructedReproductionSha256:archivedReproduction?.reproductionAddendum.integrity.sha256??null,
+      independentReproductionReview:archivedReproduction?.independentReproductionReview??null,
       note:matches
         ?"The quality contract matches a server-side reconstruction. This does not independently authenticate mutable source documents or replay EVM receipts."
         :"The digest differs from the current source-backed result. Mutable ERC documents may have changed; do not treat the old contract as verified against this snapshot.",

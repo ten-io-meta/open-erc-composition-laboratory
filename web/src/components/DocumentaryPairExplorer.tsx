@@ -8,12 +8,17 @@ import type { ScientificQualityContract } from "@/server/oeclScientificQualityCo
 import type { ScientificQualityReview } from "@/server/oeclScientificQualityReviewer";
 import type { ScientificClaimLedger } from "@/server/oeclScientificClaimLedger";
 import type { ScientificClaimReview } from "@/server/oeclScientificClaimReviewer";
+import type { ReproducedVaultAddendum } from "@/server/oeclReproducedVaultAddendum";
+import type { ReproducedVaultReview } from "@/server/oeclReproducedVaultReviewer";
+import { ReproducedVaultResearchPanel } from "@/components/ReproducedVaultResearchPanel";
 
 type QualityDocumentaryPair=DocumentaryPair&{
   qualityContract:ScientificQualityContract;
   independentQualityReview:ScientificQualityReview;
   claimLedger:ScientificClaimLedger;
   independentClaimReview:ScientificClaimReview;
+  reproductionAddendum?:ReproducedVaultAddendum;
+  independentReproductionReview?:ReproducedVaultReview;
 };
 type ReadState = { key: string; data: QualityDocumentaryPair | null; error: string | null };
 
@@ -128,7 +133,22 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
           body.claimLedger?.utility?.status!=="NOT_YET_DEMONSTRATED"||
           body.independentClaimReview?.accepted!==true||
           body.independentClaimReview?.checkedLedgerSha256!==
-            body.claimLedger?.integrity?.sha256)
+            body.claimLedger?.integrity?.sha256||
+          (body.qualityContract?.subject?.pairKey==="ERC-20|ERC-4626"&&(
+            body.reproductionAddendum?.schemaVersion!=="OECL_SCIENTIFIC_REPRODUCTION_ADDENDUM_V1"||
+            body.reproductionAddendum?.linkage?.documentaryQualitySha256!==
+              body.qualityContract.integrity.sha256||
+            body.reproductionAddendum?.linkage?.documentaryClaimLedgerSha256!==
+              body.claimLedger.integrity.sha256||
+            body.reproductionAddendum?.conclusion?.scientificVerdict!=="INCONCLUSIVE"||
+            body.reproductionAddendum?.conclusion?.compatibilityVerdict!=="NOT_EVALUATED"||
+            body.reproductionAddendum?.experiment?.reexecutedByThisWebRequest!==false||
+            body.independentReproductionReview?.accepted!==true||
+            body.independentReproductionReview?.reviewedAddendumSha256!==
+              body.reproductionAddendum.integrity.sha256))||
+          (body.qualityContract?.subject?.pairKey!=="ERC-20|ERC-4626"&&
+            (body.reproductionAddendum!==undefined||
+              body.independentReproductionReview!==undefined)))
           throw Error(body.message||"Documentary evidence failed scope checks.");
         if(!ctrl.signal.aborted)setState({key,data:body as QualityDocumentaryPair,error:null});
       }catch(e){
@@ -183,6 +203,9 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
       claimLedger={d.claimLedger} claimReview={d.independentClaimReview}
       protocolA={protocolA} protocolB={protocolB} basis="documentary" />
 
+    {d.reproductionAddendum&&d.independentReproductionReview&&
+      <ReproducedVaultResearchPanel evidence={d.reproductionAddendum}
+        review={d.independentReproductionReview} />}
     <AutonomousResearchPanel plan={d.autonomousResearch}/>
 
     {d.researchQuestions.length>0 && <section className="rounded-2xl border border-[#d4dfd5] bg-white p-5">

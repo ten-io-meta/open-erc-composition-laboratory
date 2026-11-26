@@ -4,6 +4,7 @@ import { verifyAutonomousResearchPlan } from "@/server/oeclAutonomousResearchPla
 import { documentaryScientificQuality, pinnedScientificQuality } from "@/server/oeclScientificQualityContract";
 import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
 import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
+import { reviewedReproducedVaultAddendum } from "@/server/oeclReproducedVaultGate";
 import { DOSSIER_EVIDENCE_RUN,DOSSIER_SNAPSHOT_SHA256,getVerifiedScientificDossier,isDossierPair } from "@/server/oeclScientificDossier";
 
 export const runtime="nodejs";
@@ -48,10 +49,14 @@ export async function GET(request:NextRequest){
     if(!review.accepted||!sourceReport)throw Error("SCIENTIFIC_QUALITY_REVIEW_REJECTED");
     const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
       contract,review,sourceReport);
+    const reproduction=basis==="documentary"&&contract.subject.pairKey==="ERC-20|ERC-4626"?
+      reviewedReproducedVaultAddendum(contract,review,claimLedger,independentClaimReview):null;
     const response={status:"SCIENTIFIC_QUALITY_CONTRACT_REVIEWED",contract,review,
-      claimLedger,independentClaimReview};
+      claimLedger,independentClaimReview,...(reproduction||{})};
     const responseHeaders={...headers,"X-OECL-Quality-SHA256":contract.integrity.sha256,
-      "X-OECL-Claims-SHA256":claimLedger.integrity.sha256};
+      "X-OECL-Claims-SHA256":claimLedger.integrity.sha256,
+      ...(reproduction?{"X-OECL-Reproduction-SHA256":
+        reproduction.reproductionAddendum.integrity.sha256}:{})};
     if(request.nextUrl.searchParams.get("download")==="1"){
       return new NextResponse(JSON.stringify(response,null,2)+"\n",{status:200,headers:{
         ...responseHeaders,"Content-Type":"application/json; charset=utf-8",
