@@ -2,12 +2,17 @@
 
 import { useEffect, useState } from "react";
 import type { ScientificDossier } from "@/server/oeclScientificDossier";
+import type { ScientificQualityContract } from "@/server/oeclScientificQualityContract";
+import type { ScientificQualityReview } from "@/server/oeclScientificQualityReviewer";
+import { ScientificQualityPanel } from "@/components/ScientificQualityPanel";
 
 type Response = {
   status: "PINNED_SCIENTIFIC_DOSSIER";
   snapshotSha256: string;
   evidenceRunUrl: string;
   dossier: ScientificDossier;
+  qualityContract:ScientificQualityContract;
+  independentQualityReview:ScientificQualityReview;
 };
 
 function formatEtherFromWei(wei: string): string {
@@ -37,7 +42,15 @@ export function ScientificDossierResults({
       .then(async response => {
         const body = await response.json();
         if (!response.ok) throw new Error(body.message ?? "Scientific evidence unavailable.");
-        if (body.status !== "PINNED_SCIENTIFIC_DOSSIER" || !body.dossier) {
+        if (body.status !== "PINNED_SCIENTIFIC_DOSSIER" || !body.dossier ||
+            body.qualityContract?.basis!=="PINNED_LOCAL_EVM_SNAPSHOT" ||
+            body.qualityContract?.scientificVerdict!=="INCONCLUSIVE" ||
+            body.qualityContract?.candidateAdmission!=="NOT_ADMITTED" ||
+            body.qualityContract?.experiment.chainId!==31337 ||
+            body.independentQualityReview?.accepted!==true ||
+            body.independentQualityReview?.independentEvmReplay!==false ||
+            body.independentQualityReview?.reviewedContractSha256!==
+              body.qualityContract?.integrity.sha256) {
           throw new Error("The scientific dossier was not returned.");
         }
         return body as Response;
@@ -86,6 +99,10 @@ export function ScientificDossierResults({
           {d.verdict}
         </div>
       </header>
+
+      <ScientificQualityPanel contract={data.qualityContract}
+        review={data.independentQualityReview}
+        protocolA={protocolA} protocolB={protocolB} basis="pinned" />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border border-[#dfe4e1] p-4">

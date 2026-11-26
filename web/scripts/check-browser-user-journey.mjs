@@ -139,6 +139,9 @@ async function test(){
   await click("EVM & evidence");
   await expectUi('document.querySelector("[aria-label=\\"Pinned scientific evidence report\\"]")!==null',"pinned 8060 x 8098 dossier");
   assert.equal(await evalJs('document.querySelector("[aria-label=\\"Pinned scientific evidence report\\"]").innerText.includes("INCONCLUSIVE")'),true);
+  await expectUi('document.querySelector("article[aria-label^=Pinned] [data-testid=oecl-scientific-quality-contract]")!==null',
+    "pinned EVM evidence shows its scientific quality contract in main flow");
+  assert.equal(await evalJs('document.querySelector("article[aria-label^=Pinned] [data-testid=oecl-scientific-quality-contract]").innerText.includes("NOT PERFORMED")'),true);
   const dossier=await fetch(base+"/api/scientific/dossier?protocolA=ERC-8060&protocolB=ERC-8098&download=1");
   assert.equal(dossier.status,200,"Dossier JSON export must be accessible");
   assert.match(dossier.headers.get("content-disposition")||"",/attachment; filename=/);
@@ -188,6 +191,11 @@ async function test(){
     "published ERC documentary research is returned",30000);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results]").innerText.includes("NOT EVALUATED")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results]").innerText.includes("NOT ADMITTED")'),true);
+  await expectUi('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-quality-contract]")!==null',
+    "main ERC selector displays independent quality contract for documentary pair");
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-quality-contract]").innerText.includes("NOT_EXECUTED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-quality-contract]").innerText.includes("NOT PERFORMED")'),true);
+  console.log("OECL_BROWSER_FIVE_PILLAR_SCIENTIFIC_QUALITY_CONTRACT_PASS");
   const documentary=await fetch(base+"/api/scientific/standards-pair?protocolA=ERC-4626&protocolB=ERC-20");
   assert.equal(documentary.status,200,"Documentary endpoint must return scoped response");
   const documentaryJson=await documentary.json();
