@@ -91,6 +91,13 @@ const extras={
  "scripts/check-consolidated-evidence-stacks.cjs":"A",
  ".github/workflows/oecl-consolidated-scientific-integrity.yml":"A",
  "docs/oecl-consolidated-scientific-stack.md":"A",
+ // Exact reviewed privacy proposals from #50 only, without changing any
+ // of the original 72 scientific research or quality-source Git blobs.
+ ".github/workflows/oecl-public-private-research-boundary.yml":"A",
+ ".gitignore":"M",
+ "docs/RESEARCH_BOUNDARY_AUDIT.md":"A",
+ "scripts/check-public-research-boundary.cjs":"A",
+ "scripts/run-research-memory.ts":"M",
 };
 const git=(...args)=>execFileSync("git",args,{encoding:"utf8",maxBuffer:10000000}).trim();
 assert.equal(git("merge-base",RESEARCH,QUALITY),SHARED_MAIN,
