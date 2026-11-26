@@ -1,0 +1,128 @@
+name: OECL ERC4626 ERC20 Pinned Local Vault Flow and Independent Review
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/run-erc4626-blind-source-probe.cjs"
+      - "laboratory/scientific-open-source-worker/VaultAssetFlowProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs"
+      - "scripts/review-erc4626-vault-flow.cjs"
+      - "scripts/check-erc4626-vault-protocol.test.cjs"
+      - "scripts/check-erc4626-vault-witness-falsifiers.cjs"
+      - ".github/workflows/oecl-erc4626-vault-local-evm.yml"
+      - "docs/oecl-erc4626-vault-experiment.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preregister-and-mine-local-vault:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - name: Checkout OECL without persisted credentials
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout pinned compiler/Harness dependencies
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install reviewed toolchain without dependency scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Pin revision, package lock and local-only module
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Reject unreviewed ERC pair, unsupported ABI, AST, altered source and policy mutations
+        run: |
+          node --test oecl/scripts/check-erc4626-vault-protocol.test.cjs
+      - name: Preregister before any local EVM transactions
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs plan ERC-4626 ERC-20 dependency-source vault-evidence
+          node -e 'const p=require("./vault-evidence/vault-flow-plan.json");if(p.status!=="REVIEWED_LOCAL_VAULT_FLOW_PREREGISTERED"||p.cases.length!==9||p.candidateAdmission!=="NOT_ADMITTED"||p.evmExecuted||p.experimentDispatched)throw Error("VAULT_PLAN_NOT_SAFELY_PREREGISTERED")'
+      - name: Block unsupported ERC4626 and ERC721 pair before dispatch
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs plan ERC-4626 ERC-721 dependency-source blocked-vault
+          node -e 'const p=require("./blocked-vault/vault-flow-plan.json");if(p.status!=="BLOCKED_INCOMPLETE_SOURCE_OR_ABI"||p.cases.length)throw Error("UNREVIEWED_ERC_PAIR_ALLOWED")'
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs execute ERC-4626 ERC-721 dependency-source blocked-vault
+          test ! -f blocked-vault/vault-flow-witness.json
+      - name: Mine bounded ERC4626 deposit and withdraw with ERC20 custody
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs execute ERC-4626 ERC-20 dependency-source vault-evidence
+          node -e 'const w=require("./vault-evidence/vault-flow-witness.json");if(w.minedReceiptCount!==7||w.unminedNegativeCount!==4||!w.crossContractInteractionObserved||w.universalCompatibilityProven||w.candidateAdmission!=="NOT_ADMITTED")throw Error("UNSAFE_VAULT_EVIDENCE")'
+      - name: Reject forged local EVM evidence and counterexample manipulation
+        run: |
+          node oecl/scripts/check-erc4626-vault-witness-falsifiers.cjs vault-evidence
+      - name: Archive preregistration and local-only witness
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-erc4626-vault-erc20-archived-local-evidence
+          path: vault-evidence/*.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  independently-recompile-and-reconcile:
+    needs: preregister-and-mine-local-vault
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: oecl-erc4626-vault-erc20-archived-local-evidence
+          path: archived
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Independently reinstall locked compiler
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Verify independent dependency bytes
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Rebuild locked source ABI, AST, fixtures and complete preregistration
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-vault-evm.cjs plan ERC-4626 ERC-20 dependency-source independent
+      - name: Independently rederive custody balance, share supply, typed events, receipts and controls
+        run: |
+          node oecl/scripts/review-erc4626-vault-flow.cjs archived independent
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-erc4626-erc20-independent-vault-review
+          path: independent/*.json
+          retention-days: 14
+          if-no-files-found: warn
