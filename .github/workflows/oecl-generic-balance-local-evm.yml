@@ -1,0 +1,127 @@
+name: OECL Generic ABI-Selected Stateful Balance Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/GenericBalanceEvmProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs"
+      - "scripts/check-generic-balance-evm.test.cjs"
+      - "scripts/review-generic-balance-evm.cjs"
+      - ".github/workflows/oecl-generic-balance-local-evm.yml"
+      - "docs/oecl-generic-balance-local-evm.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-abi-derived-stateful-experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout scientist without credential persistence
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout exact immutable Hardhat dependency package lock
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install audited local compiler and Hardhat without scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify dependency Git revision and package lock SHA
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Reject forged source, ABI, plans, receipts and state witnesses
+        run: |
+          node --test oecl/scripts/check-generic-balance-evm.test.cjs
+      - name: Preregister reviewed ABI/AST-derived stateful grammar
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs plan ERC-20 ERC-20-BURNABLE dependency-source source-output/generic-balance
+          node -e 'const p=require("./source-output/generic-balance/generic-balance-plan.json");if(p.workflowStatus!=="REVIEWED_BALANCE_OPERATIONS_PREREGISTERED"||p.cases.length!==2||p.cases.some(x=>x.steps.length!==7)||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED")throw Error("GENERIC_GRAMMAR_NOT_PREREGISTERED")'
+      - name: Block unsupported ERC pair before any EVM dispatch
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs plan ERC-20 ERC-721 dependency-source source-output/blocked-balance
+          node -e 'const p=require("./source-output/blocked-balance/generic-balance-plan.json");if(p.workflowStatus!=="BLOCKED_UNREVIEWED_OPERATION"||p.evmExecuted||p.cases.length)throw Error("UNREVIEWED_ERC_PAIR_ADMITTED")'
+          node oecl/laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs execute ERC-20 ERC-721 dependency-source source-output/blocked-balance
+          test ! -f source-output/blocked-balance/generic-balance-witness.json
+      - name: Execute stateful positive and unmined negative cases on local Hardhat only
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs execute ERC-20 ERC-20-BURNABLE dependency-source source-output/generic-balance
+          node -e 'const p=require("./source-output/generic-balance/generic-balance-plan.json"),w=require("./source-output/generic-balance/generic-balance-witness.json"),v=require("./oecl/laboratory/scientific-open-source-worker/GenericBalanceEvmProtocol.cjs");if(!v.verifyPlan(p)||!v.verifyWitness(p,w)||w.minedReceiptCount!==10||w.unminedNegativeCount!==6||w.crossContractInteroperabilityProven)throw Error("LOCAL_GENERIC_EVM_WITNESS_INVALID")'
+      - name: Archive exact preregistration, receipts, simulated controls and state
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-balance-local-evm
+          path: source-output/generic-balance/*.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  independent-source-and-ledger-review:
+    needs: local-abi-derived-stateful-experiment
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Fresh source checkout
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Fresh exact dependency checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Download archived runtime evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: oecl-generic-balance-local-evm
+          path: archived-balance
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install locked compiler in clean independent runner
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Verify independently checked Git revision and package lock
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Rebuild exact ABI, AST, fixture bytes and preregistration
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-generic-balance-evm.cjs plan ERC-20 ERC-20-BURNABLE dependency-source independent-balance
+      - name: Independently review local receipts, balances and negative simulations
+        run: |
+          node oecl/scripts/review-generic-balance-evm.cjs archived-balance independent-balance
+      - name: Archive independent witness reconciliation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-balance-independent-review
+          path: independent-balance/*.json
+          retention-days: 14
+          if-no-files-found: warn
