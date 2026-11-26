@@ -124,8 +124,8 @@ export function reviewScientificQuality(
       need(q.experiment?.status==="NOT_EXECUTED"&&
         q.experiment.chainId===null&&
         equal(q.experiment.minedTransactionHashes,[])&&
-        q.demonstrate.status==="PROPOSAL_ONLY"&&
-        equal(q.demonstrate.evidenceRefs,[])&&
+        q.demonstrate?.status==="PROPOSAL_ONLY"&&
+        equal(q.demonstrate?.evidenceRefs,[])&&
         q.scientificVerdict==="NOT_EVALUATED",
         "DOCUMENTARY_PLAN_FALSLY_PROMOTED_TO_EVM_EVIDENCE");
       const unknowns=[...new Set([...plan.evidenceGap,...plan.abstentionReasons,
@@ -183,7 +183,7 @@ export function reviewScientificQuality(
         /^0x[a-f0-9]{64}$/i.test(d.experiment.transactionHash),
         "PINNED_LOCAL_EVM_PROVENANCE_CHANGED");
       need(q.demonstrate?.status==="SCOPED_ARCHIVED_OBSERVATION_ONLY"&&
-        equal(q.demonstrate.evidenceRefs,[
+        equal(q.demonstrate?.evidenceRefs,[
           d.artifacts.graph.sha256,d.artifacts.evm.sha256])&&
         q.scientificVerdict==="INCONCLUSIVE",
         "ARCHIVED_EVIDENCE_WRONGLY_UPGRADED");
