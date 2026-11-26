@@ -9,7 +9,6 @@ const assert=require("node:assert/strict");
 const {makePlan:sourceBoundPlan,verifyPlan:verifySourcePlan,digest,SOLMATE_COMMIT}=
  require("./SolmateCrossVaultProtocol.cjs");
 const {checkAbi}=require("./VaultAssetFlowProtocol.cjs");
-const {BOUNDS:OLD_BOUNDS}=require("./VaultDonationCounterexample.cjs");
 const NUMERIC_POLICY=Object.freeze({
  initialAssetBudget:100,initialDeposit:40,donationMin:1,donationMax:12,
  withdrawalMin:1,withdrawalMax:40,
