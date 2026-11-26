@@ -83,7 +83,18 @@ function review(plan,w){
   assert.equal(rc.to===null?null:low(rc.to),to===null?null:low(to));
   assert.equal(rc.method,signature);
   if(signature==="CONSTRUCTOR")assert.equal(rc.methodSelector,"CREATE");
-  else assert(/^0x[0-9a-f]{8}$/i.test(rc.methodSelector));
+  else{
+   assert(/^0x[0-9a-f]{8}$/i.test(rc.methodSelector));
+   const reviewedSelectors={
+    "approve(address,uint256)":"0x095ea7b3",
+    "deposit(uint256,address)":"0x6e553f65",
+    "transfer(address,uint256)":"0xa9059cbb",
+    "withdraw(uint256,address,address)":"0xb460af94"
+   };
+   if(reviewedSelectors[signature])
+    assert.equal(low(rc.methodSelector),reviewedSelectors[signature],
+     "REVIEWED_EVM_METHOD_SELECTOR_CHANGED");
+  }
   assert(Array.isArray(rc.events));
  }
  function modelShares(id,amount,totalShares,totalAssets){
