@@ -1,0 +1,129 @@
+name: OECL Independent Vault Donation Counterexample Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/VaultDonationCounterexample.cjs"
+      - "laboratory/scientific-open-source-worker/run-vault-donation-counterexample.cjs"
+      - "scripts/review-vault-donation-counterexample.cjs"
+      - "scripts/check-vault-donation-counterexample.test.cjs"
+      - "scripts/check-vault-donation-falsifiers.cjs"
+      - ".github/workflows/oecl-vault-donation-counterexample.yml"
+      - "docs/oecl-vault-donation-counterexample.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-local-donation-and-precondition-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: transmissions11/solmate
+          ref: 89365b880c4f3c786bdd453d4b8e8fe410344a69
+          path: solmate-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact toolchain without arbitrary scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Check Git identities, pinned lock and Solidity source file integrity
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C solmate-source rev-parse HEAD)" = "89365b880c4f3c786bdd453d4b8e8fe410344a69"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node oecl/scripts/check-solmate-pinned-source.cjs solmate-source
+      - name: Verify falsifiable math and all typed operation arguments before dispatch
+        run: node --test oecl/scripts/check-vault-donation-counterexample.test.cjs
+      - name: Preregister immutable local prediction about 11 vs 10 shares
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-vault-donation-counterexample.cjs plan dependency-source solmate-source output
+          node -e 'const p=require("./output/vault-donation-plan.json");if(p.status!=="PREREGISTERED_DONATION_COUNTEREXAMPLE"||p.program.length!==12||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED"||p.hypothesis.localVerdict!=="NOT_TESTED")throw Error("DONATION_PLAN_NOT_PREREGISTERED")'
+      - name: Execute reviewed asset donation and adversarial before/after controls on local Hardhat
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-vault-donation-counterexample.cjs execute dependency-source solmate-source output
+          node -e 'const w=require("./output/vault-donation-witness.json");if(w.minedReceipts!==16||w.unminedControls!==10||w.unminedSuccesses!==2||w.scopedHypothesis.verdict!=="REFUTED_IN_LOCAL_TEST_FIXTURES"||w.candidateAdmission!=="NOT_ADMITTED")throw Error("DONATION_WITNESS_UNVERIFIED")'
+      - name: Independently reject edited financial balances, forged receipts and incorrect conclusions
+        run: node oecl/scripts/check-vault-donation-falsifiers.cjs output
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-vault-donation-local-witness
+          path: output/*.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  independent-compiler-and-economic-witness-review:
+    needs: pinned-local-donation-and-precondition-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: transmissions11/solmate
+          ref: 89365b880c4f3c786bdd453d4b8e8fe410344a69
+          path: solmate-source
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: oecl-vault-donation-local-witness
+          path: archived
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reinstall compiler independently from pinned lock
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Recheck original source identities
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C solmate-source rev-parse HEAD)" = "89365b880c4f3c786bdd453d4b8e8fe410344a69"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node oecl/scripts/check-solmate-pinned-source.cjs solmate-source
+      - name: Rebuild compiler AST ABI fixtures and exact preregistration
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-vault-donation-counterexample.cjs plan dependency-source solmate-source independent
+      - name: Independently check shares, receipt events and state-sensitive withdrawal validity
+        run: node oecl/scripts/review-vault-donation-counterexample.cjs archived independent
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-independent-donation-economic-review
+          path: independent/*.json
+          retention-days: 14
+          if-no-files-found: warn

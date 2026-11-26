@@ -3,8 +3,24 @@
 import { useEffect, useState } from "react";
 import type { DocumentaryPair, StandardDocument } from "@/server/oeclErcDocumentaryDiscovery";
 import { AutonomousResearchPanel } from "@/components/AutonomousResearchPanel";
+import { ScientificQualityPanel } from "@/components/ScientificQualityPanel";
+import type { ScientificQualityContract } from "@/server/oeclScientificQualityContract";
+import type { ScientificQualityReview } from "@/server/oeclScientificQualityReviewer";
+import type { ScientificClaimLedger } from "@/server/oeclScientificClaimLedger";
+import type { ScientificClaimReview } from "@/server/oeclScientificClaimReviewer";
+import type { ReproducedVaultAddendum } from "@/server/oeclReproducedVaultAddendum";
+import type { ReproducedVaultReview } from "@/server/oeclReproducedVaultReviewer";
+import { ReproducedVaultResearchPanel } from "@/components/ReproducedVaultResearchPanel";
 
-type ReadState = { key: string; data: DocumentaryPair | null; error: string | null };
+type QualityDocumentaryPair=DocumentaryPair&{
+  qualityContract:ScientificQualityContract;
+  independentQualityReview:ScientificQualityReview;
+  claimLedger:ScientificClaimLedger;
+  independentClaimReview:ScientificClaimReview;
+  reproductionAddendum?:ReproducedVaultAddendum;
+  independentReproductionReview?:ReproducedVaultReview;
+};
+type ReadState = { key: string; data: QualityDocumentaryPair | null; error: string | null };
 
 function DocumentationCard({ item }: { item: StandardDocument }) {
   const published = item.availability === "PUBLISHED";
@@ -102,9 +118,39 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
           body.autonomousResearch?.pairKey!==[protocolA,protocolB].sort((a,b)=>Number(a.slice(4))-Number(b.slice(4))).join("|")||
           !/^[a-f0-9]{64}$/.test(body.autonomousResearch?.planSha256??"")||
           !Array.isArray(body.autonomousResearch?.hypotheses)||
-          body.autonomousResearch.hypotheses.length>6)
+          body.autonomousResearch.hypotheses.length>6||
+          body.qualityContract?.schemaVersion!=="OECL_SCIENTIFIC_QUALITY_CONTRACT_V1"||
+          body.qualityContract?.basis!=="DOCUMENTARY_SOURCE_ONLY"||
+          body.qualityContract?.experiment.status!=="NOT_EXECUTED"||
+          body.qualityContract?.candidateAdmission!=="NOT_ADMITTED"||
+          body.independentQualityReview?.accepted!==true||
+          body.independentQualityReview?.independentEvmReplay!==false||
+          body.independentQualityReview?.reviewedContractSha256!==
+            body.qualityContract?.integrity.sha256||
+          body.claimLedger?.basis!=="DOCUMENTARY_SOURCE_ONLY"||
+          body.claimLedger?.observations?.length!==0||
+          body.claimLedger?.conclusion?.status!=="NOT_EVALUATED"||
+          body.claimLedger?.utility?.status!=="NOT_YET_DEMONSTRATED"||
+          body.independentClaimReview?.accepted!==true||
+          body.independentClaimReview?.checkedLedgerSha256!==
+            body.claimLedger?.integrity?.sha256||
+          (body.qualityContract?.subject?.pairKey==="ERC-20|ERC-4626"&&(
+            body.reproductionAddendum?.schemaVersion!=="OECL_SCIENTIFIC_REPRODUCTION_ADDENDUM_V1"||
+            body.reproductionAddendum?.linkage?.documentaryQualitySha256!==
+              body.qualityContract.integrity.sha256||
+            body.reproductionAddendum?.linkage?.documentaryClaimLedgerSha256!==
+              body.claimLedger.integrity.sha256||
+            body.reproductionAddendum?.conclusion?.scientificVerdict!=="INCONCLUSIVE"||
+            body.reproductionAddendum?.conclusion?.compatibilityVerdict!=="NOT_EVALUATED"||
+            body.reproductionAddendum?.experiment?.reexecutedByThisWebRequest!==false||
+            body.independentReproductionReview?.accepted!==true||
+            body.independentReproductionReview?.reviewedAddendumSha256!==
+              body.reproductionAddendum.integrity.sha256))||
+          (body.qualityContract?.subject?.pairKey!=="ERC-20|ERC-4626"&&
+            (body.reproductionAddendum!==undefined||
+              body.independentReproductionReview!==undefined)))
           throw Error(body.message||"Documentary evidence failed scope checks.");
-        if(!ctrl.signal.aborted)setState({key,data:body as DocumentaryPair,error:null});
+        if(!ctrl.signal.aborted)setState({key,data:body as QualityDocumentaryPair,error:null});
       }catch(e){
         if(!ctrl.signal.aborted)setState({key,data:null,
           error:e instanceof Error?e.message:"The official ERC documents are unavailable."});
@@ -152,6 +198,14 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
       </p>}
     </div>
 
+    <ScientificQualityPanel contract={d.qualityContract}
+      review={d.independentQualityReview}
+      claimLedger={d.claimLedger} claimReview={d.independentClaimReview}
+      protocolA={protocolA} protocolB={protocolB} basis="documentary" />
+
+    {d.reproductionAddendum&&d.independentReproductionReview&&
+      <ReproducedVaultResearchPanel evidence={d.reproductionAddendum}
+        review={d.independentReproductionReview} />}
     <AutonomousResearchPanel plan={d.autonomousResearch}/>
 
     {d.researchQuestions.length>0 && <section className="rounded-2xl border border-[#d4dfd5] bg-white p-5">

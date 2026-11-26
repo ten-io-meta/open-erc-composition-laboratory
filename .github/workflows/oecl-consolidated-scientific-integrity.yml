@@ -1,0 +1,31 @@
+name: OECL Consolidated Scientific Stack Integrity
+
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+      - 'scripts/**'
+      - 'laboratory/**'
+      - 'docs/oecl-*.md'
+      - '.github/workflows/**'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-two-parent-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reject whitespace conflicts or invalid Git conflict markers in submitted patch
+        run: git diff --check 2de920f3ceeb1ed2a5256f6123fb10841d5818cb HEAD
+      - name: Prove two independent scientific histories remain exact original source and quality blobs
+        run: node scripts/check-consolidated-evidence-stacks.cjs
