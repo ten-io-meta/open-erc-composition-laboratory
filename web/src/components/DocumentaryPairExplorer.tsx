@@ -6,10 +6,14 @@ import { AutonomousResearchPanel } from "@/components/AutonomousResearchPanel";
 import { ScientificQualityPanel } from "@/components/ScientificQualityPanel";
 import type { ScientificQualityContract } from "@/server/oeclScientificQualityContract";
 import type { ScientificQualityReview } from "@/server/oeclScientificQualityReviewer";
+import type { ScientificClaimLedger } from "@/server/oeclScientificClaimLedger";
+import type { ScientificClaimReview } from "@/server/oeclScientificClaimReviewer";
 
 type QualityDocumentaryPair=DocumentaryPair&{
   qualityContract:ScientificQualityContract;
   independentQualityReview:ScientificQualityReview;
+  claimLedger:ScientificClaimLedger;
+  independentClaimReview:ScientificClaimReview;
 };
 type ReadState = { key: string; data: QualityDocumentaryPair | null; error: string | null };
 
@@ -117,7 +121,14 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
           body.independentQualityReview?.accepted!==true||
           body.independentQualityReview?.independentEvmReplay!==false||
           body.independentQualityReview?.reviewedContractSha256!==
-            body.qualityContract?.integrity.sha256)
+            body.qualityContract?.integrity.sha256||
+          body.claimLedger?.basis!=="DOCUMENTARY_SOURCE_ONLY"||
+          body.claimLedger?.observations?.length!==0||
+          body.claimLedger?.conclusion?.status!=="NOT_EVALUATED"||
+          body.claimLedger?.utility?.status!=="NOT_YET_DEMONSTRATED"||
+          body.independentClaimReview?.accepted!==true||
+          body.independentClaimReview?.checkedLedgerSha256!==
+            body.claimLedger?.integrity?.sha256)
           throw Error(body.message||"Documentary evidence failed scope checks.");
         if(!ctrl.signal.aborted)setState({key,data:body as QualityDocumentaryPair,error:null});
       }catch(e){
@@ -169,6 +180,7 @@ export function DocumentaryPairExplorer({protocolA,protocolB}:{protocolA:string;
 
     <ScientificQualityPanel contract={d.qualityContract}
       review={d.independentQualityReview}
+      claimLedger={d.claimLedger} claimReview={d.independentClaimReview}
       protocolA={protocolA} protocolB={protocolB} basis="documentary" />
 
     <AutonomousResearchPanel plan={d.autonomousResearch}/>
