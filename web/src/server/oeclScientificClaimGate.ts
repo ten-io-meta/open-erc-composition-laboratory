@@ -2,8 +2,8 @@ import type { ScientificQualityContract } from "./oeclScientificQualityContract"
 import type { ScientificQualityReview } from "./oeclScientificQualityReviewer";
 import type { DocumentaryPair } from "./oeclErcDocumentaryDiscovery";
 import type { ScientificDossier } from "./oeclScientificDossier";
-import { issueScientificClaimLedger } from "./oeclScientificClaimLedger";
-import { independentlyReviewScientificClaims } from "./oeclScientificClaimReviewer";
+import { issueScientificClaimLedger } from "./oeclScientificClaimLedger.ts";
+import { independentlyReviewScientificClaims } from "./oeclScientificClaimReviewer.ts";
 
 /** Gate claim issuance on the independent quality review already performed. */
 export function reviewedScientificClaimLedger(
