@@ -98,14 +98,11 @@ async function main() {
     await writePrivateJson(memoryPath, result.memory);
     await writePrivateJson(resultPath, result);
 
+    // No client identifiers, input content, memory metrics or private
+    // filesystem paths are logged; CI and hosted logs may be public.
     console.log("OECL_PRIVATE_RESEARCH_MEMORY_PASS", JSON.stringify({
         storage: "PRIVATE_RESEARCH_ROOT_NOT_TRACKED_PUBLIC_RESULTS",
-        sourceId,
-        events: result.memory.statistics.events,
-        timelines: result.memory.statistics.timelines,
-        sources: result.memory.statistics.sources,
         publicHistoricalDataChanged: false,
-        files: [memoryPath, resultPath],
     }));
 }
 main().catch(error => {
