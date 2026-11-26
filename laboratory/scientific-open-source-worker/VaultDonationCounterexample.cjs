@@ -44,6 +44,7 @@ function buildPlan(basePlan,artifacts){
   status:ready?"PREREGISTERED_DONATION_COUNTEREXAMPLE":"BLOCKED_UNREVIEWED_DONATION_OPERATION",
   basePlan,
   basePlanSha256:basePlan.planSha256,
+  variants:basePlan.variants,
   program:ready?PROGRAM:[],
   quantities:{...BOUNDS},
   expectedIndependentModels:{
@@ -91,6 +92,7 @@ function verifyPlan(p){
    JSON.stringify(p.quantities)!==JSON.stringify(BOUNDS))return false;
   const raw={...p};delete raw.planSha256;
   if(digest(raw)!==p.planSha256)return false;
+  if(JSON.stringify(p.variants)!==JSON.stringify(p.basePlan.variants))return false;
   if(p.status==="PREREGISTERED_DONATION_COUNTEREXAMPLE"){
    if(JSON.stringify(p.program)!==JSON.stringify(PROGRAM))return false;
   }else if(p.status!=="BLOCKED_UNREVIEWED_DONATION_OPERATION"||
