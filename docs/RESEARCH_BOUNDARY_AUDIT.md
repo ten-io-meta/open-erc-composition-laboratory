@@ -209,11 +209,15 @@ to contributor rights and third-party licenses.
   claims** from an authorized evidence export, rather than trusting
   unreleased private reasoning alone.
 
-**The existing #49 public scientific consolidation remains unmerged.**
-This is an **independent governance/privacy PR based on `main`**.
-Before release, consolidate both sets of reviewed changes into an
-explicitly approved release path; do not blindly merge both in the
-wrong order or silently weaken #49's byte-provenance gate.
+**The existing #49 public scientific consolidation and #50 isolated
+privacy proposal remain unmerged.** The privacy boundary was first
+prepared independently in #50 against `main`; it has now been joined
+to #49 through an **explicit two-parent integration in draft #51**.
+#51 is the intended single future release candidate, not an excuse
+to merge #49 and #50 separately. Its CI must prove that the original
+72 research/quality source blobs are still identical and that the
+five privacy changes are exactly the reviewed files. No main-branch
+merge or public deployment occurs without human authorization.
 
 This is a technical risk review, not an assertion of
 trade-secret eligibility or a substitute for legal advice.
