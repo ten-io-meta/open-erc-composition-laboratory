@@ -1,0 +1,130 @@
+name: OECL Solmate Independent ERC4626 Cross-Implementation Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/SolmateCrossVaultProtocol.cjs"
+      - "laboratory/scientific-open-source-worker/run-solmate-cross-vault-evm.cjs"
+      - "scripts/check-solmate-pinned-source.cjs"
+      - "scripts/review-solmate-cross-vault-evm.cjs"
+      - "scripts/check-solmate-cross-vault-falsifiers.cjs"
+      - ".github/workflows/oecl-solmate-independent-vault.yml"
+      - "docs/oecl-solmate-cross-vault.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-solmate-source-and-local-evm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: transmissions11/solmate
+          ref: 89365b880c4f3c786bdd453d4b8e8fe410344a69
+          path: solmate-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install audited solc and Hardhat without dependency scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Check both immutable Git revisions and toolchain lock bytes
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C solmate-source rev-parse HEAD)" = "89365b880c4f3c786bdd453d4b8e8fe410344a69"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Reject modified third-party Solmate source before compiling
+        run: node oecl/scripts/check-solmate-pinned-source.cjs solmate-source
+      - name: Blind AST observation of external Solmate, without EVM execution
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-solmate-cross-vault-evm.cjs probe dependency-source solmate-source output
+          node -e 'const p=require("./output/solmate-blind-probe.json");if(p.solmateRevision!=="89365b880c4f3c786bdd453d4b8e8fe410344a69"||p.evmExecuted||p.executionAuthorized||p.candidateAdmission!=="NOT_ADMITTED")throw Error("SOLMATE_EXTERNAL_SOURCE_NOT_SAFELY_ATTESTED")'
+      - name: Preregister exactly one reviewed operation grammar across different codebases
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-solmate-cross-vault-evm.cjs plan dependency-source solmate-source output
+          node -e 'const p=require("./output/solmate-grammar-plan.json");if(p.status!=="REVIEWED_CROSS_IMPLEMENTATION_PROGRAM"||p.grammarProgram.length!==9||p.variants.map(x=>x.id).join("|")!=="OPENZEPPELIN|SOLMATE"||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED")throw Error("INDEPENDENT_SOLMATE_PLAN_NOT_PREREGISTERED")'
+      - name: Execute two audited fixture pairs on ephemeral Hardhat only
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-solmate-cross-vault-evm.cjs execute dependency-source solmate-source output
+          node -e 'const w=require("./output/solmate-grammar-witness.json");if(w.minedReceipts!==14||w.unminedControls!==8||!w.sameTypedGrammarProgramAcrossImplementations||w.arbitrarySolidityExecutionEnabled||w.candidateAdmission!=="NOT_ADMITTED")throw Error("UNTRUSTED_SOLMATE_EVM_EVIDENCE")'
+      - name: Reject forged receipts, source links and ledger reports
+        run: node oecl/scripts/check-solmate-cross-vault-falsifiers.cjs output
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-solmate-cross-implementation-local-evidence
+          path: output/*.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  clean-second-runner-independent-reconstruction:
+    needs: pinned-solmate-source-and-local-evm
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: transmissions11/solmate
+          ref: 89365b880c4f3c786bdd453d4b8e8fe410344a69
+          path: solmate-source
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: oecl-solmate-cross-implementation-local-evidence
+          path: archived
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reinstall immutable solc and dependencies
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Recheck exact source revisions and lock bytes
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          test "$(git -C solmate-source rev-parse HEAD)" = "89365b880c4f3c786bdd453d4b8e8fe410344a69"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Independently reconstruct four source blobs, compiler AST and deployment fixtures
+        run: |
+          node oecl/scripts/check-solmate-pinned-source.cjs solmate-source
+          node oecl/laboratory/scientific-open-source-worker/run-solmate-cross-vault-evm.cjs plan dependency-source solmate-source independent
+      - name: Independently review archived receipts, events and conservation math
+        run: node oecl/scripts/review-solmate-cross-vault-evm.cjs archived independent
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-solmate-independent-second-runner-review
+          path: independent/*.json
+          retention-days: 14
+          if-no-files-found: warn
