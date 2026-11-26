@@ -1,5 +1,7 @@
 import type { ScientificQualityContract } from "@/server/oeclScientificQualityContract";
 import type { ScientificQualityReview } from "@/server/oeclScientificQualityReviewer";
+import type { ScientificClaimLedger } from "@/server/oeclScientificClaimLedger";
+import type { ScientificClaimReview } from "@/server/oeclScientificClaimReviewer";
 
 const rubric=[
   {id:"investigate",title:"1 · Investigate"},
@@ -11,10 +13,12 @@ const rubric=[
 
 /** This is presentation only. All fields are server generated and reviewed. */
 export function ScientificQualityPanel({
-  contract,review,protocolA,protocolB,basis,
+  contract,review,claimLedger,claimReview,protocolA,protocolB,basis,
 }:{
   contract:ScientificQualityContract;
   review:ScientificQualityReview;
+  claimLedger:ScientificClaimLedger;
+  claimReview:ScientificClaimReview;
   protocolA:string;protocolB:string;
   basis:"documentary"|"pinned";
 }){
@@ -22,7 +26,8 @@ export function ScientificQualityPanel({
     "&protocolB="+encodeURIComponent(protocolB)+"&basis="+basis;
   const base="/api/scientific/quality?"+params;
   const verify="/api/scientific/quality/verify?"+params+
-    "&sha256="+contract.integrity.sha256;
+    "&sha256="+contract.integrity.sha256+
+    "&claimsSha256="+claimLedger.integrity.sha256;
   const stages:{
     investigate:string;challenge:string;experiment:string;
     demonstrate:string;limits:string;
@@ -60,6 +65,49 @@ export function ScientificQualityPanel({
           {stages[r.id]}
         </p>
       </div>)}
+    </div>
+    <div data-testid="oecl-scientific-claim-ledger" className="space-y-3">
+      <h5 className="text-sm font-semibold text-[#254a36]">
+        Hypothesis · Observation · Conclusion
+      </h5>
+      <div className="grid gap-2 sm:grid-cols-3">
+        <div className="rounded-lg border border-[#d7e4d9] bg-white p-3 text-xs">
+          <p className="font-semibold text-[#315743]">Hypotheses</p>
+          <p className="mt-2 text-[#57695c]">
+            {claimLedger.hypotheses.length} source-anchored questions,
+            not independent proofs.
+          </p>
+        </div>
+        <div className="rounded-lg border border-[#d7e4d9] bg-white p-3 text-xs">
+          <p className="font-semibold text-[#315743]">Observations</p>
+          <p className="mt-2 text-[#57695c]">
+            {claimLedger.observations.length===0?
+              "No EVM experiment executed for this documentary report.":
+              "One archived local-EVM event, not independently replayed here."}
+          </p>
+        </div>
+        <div className="rounded-lg border border-[#d7e4d9] bg-white p-3 text-xs">
+          <p className="font-semibold text-[#315743]">Conclusion</p>
+          <p className="mt-2 font-mono text-[#57695c]">
+            {claimLedger.conclusion.status}
+          </p>
+          <p className="mt-1 text-[#57695c]">{claimLedger.conclusion.scope}</p>
+        </div>
+      </div>
+      <div className="rounded-lg border border-[#d7e4d9] bg-white p-3 text-xs text-[#4b6454]">
+        <p className="font-semibold">
+          Practical value: {claimLedger.utility.status}
+        </p>
+        <p className="mt-1 leading-5">{claimLedger.utility.rationale}</p>
+        <p className="mt-2">
+          Hypothesis volume is not proof of utility. Independent claim review:
+          {" "}<strong>{claimReview.accepted?"PASSED":"REJECTED"}</strong>.
+          {" "}External impact demonstrated: <strong>NO</strong>.
+        </p>
+      </div>
+      <p className="break-all font-mono text-[10px] text-[#596d60]">
+        Claim ledger SHA-256: {claimLedger.integrity.sha256}
+      </p>
     </div>
     <div className="rounded-xl border border-[#d9e5dc] bg-white p-4 text-xs text-[#4b6454]">
       <p className="font-semibold">
