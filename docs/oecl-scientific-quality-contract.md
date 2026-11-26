@@ -125,10 +125,10 @@ scientific evidence or magically authenticate the quality document.
 The required web CI step
 `node --experimental-strip-types scripts/check-scientific-quality-contract.mjs`
 reconstructs source-backed and pinned dossiers, then rejects
-**38 adversarial changes** (including self-rehashed forged claims,
+**40 adversarial changes** (including self-rehashed forged claims,
 false admissions, invented EVM executions, missing falsifiers,
 altered document anchors, forged receipts, hidden untested threats,
-and fake independent replay). Production API smoke tests verify
+and fake independent replay, and hidden forged JSON fields). Production API smoke tests verify
 export, digest matching, wrong-digest HTTP 409, missing pair HTTP
 404, no-store policy and backwards compatibility.
 
