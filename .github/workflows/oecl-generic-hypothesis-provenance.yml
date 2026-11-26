@@ -1,0 +1,99 @@
+name: OECL Generic Scientist Locked Source and AST Provenance
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/GenericHypothesisPlanner.cjs"
+      - "laboratory/scientific-open-source-worker/SourceBackedHypothesisBridge.cjs"
+      - "laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs"
+      - "scripts/check-generic-hypothesis-planner.test.cjs"
+      - "scripts/check-source-backed-hypotheses.test.cjs"
+      - "scripts/review-source-backed-hypotheses.cjs"
+      - "scripts/check-independent-source-hypotheses.test.cjs"
+      - "scripts/check-generic-hypothesis-admission.cjs"
+      - "scripts/check-generic-hypothesis-admission.test.cjs"
+      - "docs/oecl-generic-hypothesis-planner-v1.md"
+      - ".github/workflows/oecl-generic-hypothesis-provenance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-compiler-reconciliation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install locked compiler without running dependency scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Check pinned dependency commit and lock
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Run generator and adversarial unit tests
+        run: |
+          node --test oecl/scripts/check-generic-hypothesis-planner.test.cjs oecl/scripts/check-source-backed-hypotheses.test.cjs oecl/scripts/check-independent-source-hypotheses.test.cjs oecl/scripts/check-generic-hypothesis-admission.test.cjs
+      - name: Compile registered ERC-20 and ERC-20 Burnable with locked solc
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs ERC-20 ERC-20-BURNABLE dependency-source output
+          node -e 'const p=require("./output/source-backed-hypotheses.json"); if(p.schemaVersion!=="OECL_LOCKED_SOURCE_HYPOTHESES_V1"||p.participants.length!==2||p.participants.reduce((n,x)=>n+x.hypothesisCount,0)<1||p.executionAuthorized||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED")throw Error("GENERIC_SOURCE_DISCOVERY_NOT_PROVEN")'
+          node oecl/scripts/check-generic-hypothesis-admission.cjs output/source-backed-hypotheses.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oecl-generic-compiler-reconciled-hypotheses
+          path: output/source-backed-hypotheses.json
+          retention-days: 14
+          if-no-files-found: error
+
+  independent-source-reconstruction:
+    needs: source-only-compiler-reconciliation
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: oecl-generic-compiler-reconciled-hypotheses
+          path: archived
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reinstall independently pinned compiler
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Revalidate dependency identity independently
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Recompile every source and compare full hypothesis dossier
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-source-backed-hypotheses.cjs ERC-20 ERC-20-BURNABLE dependency-source independent
+          node oecl/scripts/review-source-backed-hypotheses.cjs archived/source-backed-hypotheses.json independent/source-backed-hypotheses.json
+          node oecl/scripts/check-generic-hypothesis-admission.cjs archived/source-backed-hypotheses.json
