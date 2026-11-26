@@ -312,17 +312,24 @@ export function verifyVaultReproductionArchive(plan,first,second,comparison,
   assert.equal(comparison.minedReceiptsIndependentlyChecked,28);
   assert.equal(comparison.unminedControlsIndependentlyChecked,12);
   assert.equal(comparison.witnessComparisons,16);
-  assert.equal(comparison.finding?.scopedHypothesisVerdict,
-   "REFUTED_IN_TWO_CI_LOCAL_EVM_EXECUTIONS");
-  assert.deepEqual(comparison.finding.observations,[
-   {implementation:"OPENZEPPELIN",sharesBurned:21,sharesRemaining:19,
-    assetsRemainingInVault:21},
-   {implementation:"SOLMATE",sharesBurned:20,sharesRemaining:20,
-    assetsRemainingInVault:21}
-  ]);
-  assert.equal(comparison.finding.case.depositAssets,40);
-  assert.equal(comparison.finding.case.donationAssets,2);
-  assert.equal(comparison.finding.case.withdrawalAssets,21);
+  assert.deepEqual(comparison.finding,{
+   id:"DONATION_REVIEWED_SHARE_BURN_COUNTEREXAMPLE",
+   claimType:"SCOPED_REPRODUCED_LOCAL_EVM_OBSERVATION",
+   hypothesisId:plan.falsifiableHypothesis.id,
+   scopedHypothesisVerdict:"REFUTED_IN_TWO_CI_LOCAL_EVM_EXECUTIONS",
+   case:{depositAssets:40,donationAssets:2,withdrawalAssets:21},
+   observations:[
+    {implementation:"OPENZEPPELIN",sharesBurned:21,sharesRemaining:19,
+     assetsRemainingInVault:21},
+    {implementation:"SOLMATE",sharesBurned:20,sharesRemaining:20,
+     assetsRemainingInVault:21},
+   ],
+   preconditionControls:"TWO_REVERTS_AND_ONE_SUCCESSFUL_ETH_CALL_PER_IMPLEMENTATION",
+   hasIndependentSecondLocalEvmExecution:true,
+   externallyAuthenticatedSources:false,
+   independentEthereumConsensus:false,
+   universalERCCompatibilityProven:false,
+  },"NO_SCOPED_COMPARISON_CAN_MASQUERADE_AS_UNIVERSAL_COMPATIBILITY");
   return {...result,accepted:true,status:"TWO_LOCAL_EVM_ARCHIVED_WITNESSES_RECONCILED",
    archiveWitnessBytesReconciled:true,
    rejection:null,sourceCommit:"c7fb535fba976488f3a0c24dba2b700b5938dbfd",
