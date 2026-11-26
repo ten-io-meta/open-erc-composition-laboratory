@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { investigateErcSpecifications, normalizeErcNumber } from "@/server/oeclErcDocumentaryDiscovery";
+import { verifyAutonomousResearchPlan } from "@/server/oeclAutonomousResearchPlanner";
+import { documentaryScientificQuality } from "@/server/oeclScientificQualityContract";
+import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
+import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
+import { reviewedReproducedVaultAddendum } from "@/server/oeclReproducedVaultGate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,7 +21,24 @@ export async function GET(request: NextRequest) {
   }
   try {
     const result = await investigateErcSpecifications(a,b);
-    return NextResponse.json(result, { headers });
+    if(!verifyAutonomousResearchPlan(result,result.autonomousResearch))
+      throw Error("UNVERIFIED_DOCUMENTARY_HYPOTHESIS_PLAN");
+    const qualityContract = documentaryScientificQuality(result);
+    const independentQualityReview = reviewScientificQuality(qualityContract,{
+      basis:"DOCUMENTARY_SOURCE_ONLY",report:result,
+    });
+    if(!independentQualityReview.accepted)throw Error("SCIENTIFIC_QUALITY_GATE_FAILED");
+    const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
+      qualityContract,independentQualityReview,result);
+    const archivedReproduction=qualityContract.subject.pairKey==="ERC-20|ERC-4626"?
+      reviewedReproducedVaultAddendum(qualityContract,independentQualityReview,
+        claimLedger,independentClaimReview):null;
+    return NextResponse.json({...result,qualityContract,independentQualityReview,
+      claimLedger,independentClaimReview,...(archivedReproduction||{})},
+      { headers: {...headers,"X-OECL-Quality-SHA256":qualityContract.integrity.sha256,
+        "X-OECL-Claims-SHA256":claimLedger.integrity.sha256,
+        ...(archivedReproduction?{"X-OECL-Reproduction-SHA256":
+          archivedReproduction.reproductionAddendum.integrity.sha256}:{})} });
   } catch {
     return NextResponse.json({
       status: "DOCUMENTARY_LOOKUP_FAILED",

@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { pinnedScientificQuality } from "@/server/oeclScientificQualityContract";
+import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
+import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
 import {
   DOSSIER_EVIDENCE_RUN,
   DOSSIER_SNAPSHOT_SHA256,
@@ -35,11 +38,21 @@ export function GET(request: NextRequest) {
 
   try {
     const dossier = getVerifiedScientificDossier();
+    const qualityContract=pinnedScientificQuality(dossier,DOSSIER_SNAPSHOT_SHA256,DOSSIER_EVIDENCE_RUN);
+    const independentQualityReview=reviewScientificQuality(qualityContract,{
+      basis:"PINNED_LOCAL_EVM_SNAPSHOT",report:dossier,
+      snapshotSha256:DOSSIER_SNAPSHOT_SHA256,evidenceRunUrl:DOSSIER_EVIDENCE_RUN,
+    });
+    if(!independentQualityReview.accepted)throw Error("SCIENTIFIC_QUALITY_GATE_FAILED");
+    const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
+      qualityContract,independentQualityReview,dossier);
     const download = request.nextUrl.searchParams.get("download") === "1";
     const headers: Record<string, string> = {
       "Cache-Control": "no-store",
       "X-OECL-Snapshot-SHA256": DOSSIER_SNAPSHOT_SHA256,
       "X-OECL-Evidence-Run": DOSSIER_EVIDENCE_RUN,
+      "X-OECL-Quality-SHA256": qualityContract.integrity.sha256,
+      "X-OECL-Claims-SHA256": claimLedger.integrity.sha256,
     };
     if (download) {
       return new NextResponse(JSON.stringify(dossier, null, 2) + "\n", {
@@ -56,6 +69,10 @@ export function GET(request: NextRequest) {
       snapshotSha256: DOSSIER_SNAPSHOT_SHA256,
       evidenceRunUrl: DOSSIER_EVIDENCE_RUN,
       dossier,
+      qualityContract,
+      independentQualityReview,
+      claimLedger,
+      independentClaimReview,
     }, { headers });
   } catch {
     return NextResponse.json({

@@ -1,0 +1,121 @@
+name: OECL Reusable Vault Operation Grammar Two Variants Local EVM
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/ReusableVaultOperationGrammar.cjs"
+      - "laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs"
+      - "scripts/check-reusable-vault-grammar.test.cjs"
+      - "scripts/review-reusable-vault-grammar.cjs"
+      - "scripts/check-reusable-vault-witness-falsifiers.cjs"
+      - ".github/workflows/oecl-reusable-vault-grammar.yml"
+      - "docs/oecl-reusable-vault-grammar.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preregister-two-variants-and-mine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned toolchain, without package scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify immutable dependency revision and lock bytes
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Check planner, bounded arguments and fail-closed authorization
+        run: node --test oecl/scripts/check-reusable-vault-grammar.test.cjs
+      - name: Preregister two variants without dispatch
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs plan ERC-4626 ERC-20 dependency-source output
+          node -e 'const p=require("./output/reusable-vault-plan.json");if(p.status!=="BOUNDED_GRAMMAR_PREREGISTERED"||p.variants.length!==2||p.program.length!==9||p.evmExecuted||p.candidateAdmission!=="NOT_ADMITTED")throw Error("GRAMMAR_NOT_PREREGISTERED")'
+      - name: Reject unsupported ERC-721 fixture before deployment
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs plan ERC-4626 ERC-721 dependency-source blocked
+          node -e 'const p=require("./blocked/reusable-vault-plan.json");if(p.status!=="BLOCKED_UNREVIEWED_CONTRACT_OR_OPERATION"||p.program.length)throw Error("UNREVIEWED_SOURCE_NOT_BLOCKED")'
+          node oecl/laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs execute ERC-4626 ERC-721 dependency-source blocked
+          test ! -f blocked/reusable-vault-witness.json
+      - name: Mine both exact vault fixtures through the same typed program
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs execute ERC-4626 ERC-20 dependency-source output
+          node -e 'const w=require("./output/reusable-vault-witness.json");if(w.totalMinedReceipts!==14||w.totalUnminedControls!==8||w.scenarios.length!==2||w.twoIndependentReviewedVaultFamilies||w.candidateAdmission!=="NOT_ADMITTED")throw Error("UNVERIFIED_GENERIC_GRAMMAR_WITNESS")'
+      - name: Independently reject forged local receipts, previews and asset/share ledgers
+        run: node oecl/scripts/check-reusable-vault-witness-falsifiers.cjs output
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-reusable-vault-grammar-local-witness
+          path: output/*.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  second-runner-source-and-ledger-review:
+    needs: preregister-two-variants-and-mine
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: oecl-reusable-vault-grammar-local-witness
+          path: archived
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reinstall independently locked compiler and toolchain
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: npm ci --ignore-scripts --no-fund
+      - name: Verify exact pinned Git revision and lock independently
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Recompile two vault fixtures and compare preregistered grammar
+        env:
+          HARDHAT_NETWORK: hardhat
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-reusable-vault-grammar-evm.cjs plan ERC-4626 ERC-20 dependency-source independent
+      - name: Independently reconstruct fourteen receipts, events and balance deltas
+        run: node oecl/scripts/review-reusable-vault-grammar.cjs archived independent
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: oecl-reusable-vault-independent-review
+          path: independent/*.json
+          retention-days: 14
+          if-no-files-found: warn

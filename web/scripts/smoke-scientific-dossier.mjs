@@ -37,6 +37,26 @@ try {
   assert.equal(body.dossier.scientificQuestions.total, 10);
   assert.equal(body.dossier.scientificQuestions.sourceCoverageComplete, false);
   assert.equal(body.dossier.adversarial.untested.length, 9);
+  assert.equal(body.qualityContract.schemaVersion,"OECL_SCIENTIFIC_QUALITY_CONTRACT_V1");
+  assert.equal(body.qualityContract.basis,"PINNED_LOCAL_EVM_SNAPSHOT");
+  assert.equal(body.qualityContract.experiment.chainId,31337);
+  assert.equal(body.qualityContract.demonstrate.independentlyReplayed,false);
+  assert.equal(body.qualityContract.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(body.independentQualityReview.accepted,true);
+  assert.equal(body.independentQualityReview.independentEvmReplay,false);
+  assert.equal(body.independentQualityReview.reviewedContractSha256,
+    body.qualityContract.integrity.sha256);
+  assert.equal(good.headers.get("x-oecl-quality-sha256"),body.qualityContract.integrity.sha256);
+  assert.equal(body.claimLedger.schemaVersion,"OECL_SCIENTIFIC_CLAIM_LEDGER_V1");
+  assert.equal(body.claimLedger.observations.length,1);
+  assert.equal(body.claimLedger.observations[0].transactionHash,body.dossier.experiment.transactionHash);
+  assert.equal(body.claimLedger.conclusion.status,"INCONCLUSIVE");
+  assert.equal(body.claimLedger.utility.status,"SCOPED_REVIEWABLE_FINDING_ONLY");
+  assert.equal(body.claimLedger.utility.demonstratedExternalImpact,false);
+  assert.equal(body.claimLedger.utility.score,null);
+  assert.equal(body.independentClaimReview.accepted,true);
+  assert.equal(body.independentClaimReview.checkedLedgerSha256,body.claimLedger.integrity.sha256);
+  assert.equal(good.headers.get("x-oecl-claims-sha256"),body.claimLedger.integrity.sha256);
 
   const reversed = await fetch(endpoint + "?protocolA=8098&protocolB=8060");
   assert.equal(reversed.status, 200);
@@ -142,9 +162,104 @@ try {
   assert.ok(/^[a-f0-9]{64}$/.test(anyPairBody.autonomousResearch.planSha256));
   assert.ok(anyPairBody.autonomousResearch.hypotheses.length<=6);
   assert.ok(anyPairBody.autonomousResearch.hypotheses.every(h=>h.falsifier&&h.anchors.length));
+  assert.equal(anyPairBody.qualityContract.schemaVersion,"OECL_SCIENTIFIC_QUALITY_CONTRACT_V1");
+  assert.equal(anyPairBody.qualityContract.basis,"DOCUMENTARY_SOURCE_ONLY");
+  assert.equal(anyPairBody.qualityContract.experiment.status,"NOT_EXECUTED");
+  assert.equal(anyPairBody.qualityContract.demonstrate.independentlyReplayed,false);
+  assert.equal(anyPairBody.independentQualityReview.accepted,true);
+  assert.equal(anyPairBody.independentQualityReview.independentEvmReplay,false);
+  assert.equal(anyPair.headers.get("x-oecl-quality-sha256"),
+    anyPairBody.qualityContract.integrity.sha256);
+  assert.equal(anyPairBody.claimLedger.schemaVersion,"OECL_SCIENTIFIC_CLAIM_LEDGER_V1");
+  assert.deepEqual(anyPairBody.claimLedger.observations,[]);
+  assert.equal(anyPairBody.claimLedger.conclusion.status,"NOT_EVALUATED");
+  assert.equal(anyPairBody.claimLedger.utility.status,"NOT_YET_DEMONSTRATED");
+  assert.equal(anyPairBody.claimLedger.utility.countingHypothesesIsEvidence,false);
+  assert.equal(anyPairBody.independentClaimReview.accepted,true);
+  assert.equal(anyPair.headers.get("x-oecl-claims-sha256"),
+    anyPairBody.claimLedger.integrity.sha256);
+  assert.equal(anyPairBody.reproductionAddendum.schemaVersion,
+    "OECL_SCIENTIFIC_REPRODUCTION_ADDENDUM_V1");
+  assert.equal(anyPairBody.reproductionAddendum.experiment.minedReceiptsAcrossBothRuns,28);
+  assert.equal(anyPairBody.reproductionAddendum.challenge.controls.unminedControlsAcrossBothRuns,12);
+  assert.equal(anyPairBody.reproductionAddendum.demonstrate.openzeppelin.burnedShares,21);
+  assert.equal(anyPairBody.reproductionAddendum.demonstrate.solmate.burnedShares,20);
+  assert.equal(anyPairBody.reproductionAddendum.experiment.reexecutedByThisWebRequest,false);
+  assert.equal(anyPairBody.reproductionAddendum.conclusion.scientificVerdict,"INCONCLUSIVE");
+  assert.equal(anyPairBody.reproductionAddendum.conclusion.compatibilityVerdict,"NOT_EVALUATED");
+  assert.equal(anyPairBody.reproductionAddendum.conclusion.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(anyPairBody.independentReproductionReview.accepted,true);
+  assert.equal(anyPairBody.independentReproductionReview.independentEvmReexecutedByReviewer,false);
+  assert.equal(anyPairBody.independentReproductionReview.reviewedAddendumSha256,
+    anyPairBody.reproductionAddendum.integrity.sha256);
+  assert.equal(anyPair.headers.get("x-oecl-reproduction-sha256"),
+    anyPairBody.reproductionAddendum.integrity.sha256);
+  // Standalone machine-readable scientific quality artifact and a separate
+  // server-side source reconstruction, without trusting user-supplied claims.
+  const pinnedQuality=await fetch(base+"/api/scientific/quality?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098");
+  assert.equal(pinnedQuality.status,200);
+  const pq=await pinnedQuality.json();
+  assert.equal(pq.status,"SCIENTIFIC_QUALITY_CONTRACT_REVIEWED");
+  assert.equal(pq.contract.integrity.sha256,body.qualityContract.integrity.sha256);
+  assert.equal(pq.review.accepted,true);
+  assert.equal(pq.claimLedger.integrity.sha256,body.claimLedger.integrity.sha256);
+  assert.equal(pq.independentClaimReview.accepted,true);
+  const pinnedVerify=await fetch(base+"/api/scientific/quality/verify?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098&sha256="+pq.contract.integrity.sha256);
+  assert.equal(pinnedVerify.status,200);
+  const pVerify=await pinnedVerify.json();
+  assert.equal(pVerify.matches,true);
+  assert.equal(pVerify.review.independentEvmReplay,false);
+  const verifiedClaims=await fetch(base+"/api/scientific/quality/verify?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098&sha256="+pq.contract.integrity.sha256+"&claimsSha256="+pq.claimLedger.integrity.sha256);
+  assert.equal(verifiedClaims.status,200);
+  const verifiedClaimsResult=await verifiedClaims.json();
+  assert.equal(verifiedClaimsResult.matches,true);
+  assert.equal(verifiedClaimsResult.independentClaimReview.accepted,true);
+  assert.equal(verifiedClaimsResult.reconstructedClaimsSha256,pq.claimLedger.integrity.sha256);
+  const alteredClaim=await fetch(base+"/api/scientific/quality/verify?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098&sha256="+pq.contract.integrity.sha256+"&claimsSha256="+"a".repeat(64));
+  assert.equal(alteredClaim.status,409);
+  assert.equal((await alteredClaim.json()).matches,false);
+  const forgedDigest=await fetch(base+"/api/scientific/quality/verify?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098&sha256="+"0".repeat(64));
+  assert.equal(forgedDigest.status,409);
+  assert.equal((await forgedDigest.json()).matches,false);
+  const missingPinned=await fetch(base+"/api/scientific/quality?basis=pinned&protocolA=ERC-4626&protocolB=ERC-20");
+  assert.equal(missingPinned.status,404);
+  const documentaryQuality=await fetch(base+"/api/scientific/quality?basis=documentary&protocolA=ERC-4626&protocolB=ERC-20");
+  assert.equal(documentaryQuality.status,200);
+  const dq=await documentaryQuality.json();
+  assert.equal(dq.contract.experiment.status,"NOT_EXECUTED");
+  assert.equal(dq.contract.candidateAdmission,"NOT_ADMITTED");
+  assert.equal(dq.review.accepted,true);
+  assert.equal(dq.claimLedger.conclusion.status,"NOT_EVALUATED");
+  assert.equal(dq.claimLedger.observations.length,0);
+  assert.equal(dq.independentClaimReview.accepted,true);
+  assert.equal(dq.independentReproductionReview.accepted,true);
+  assert.equal(dq.reproductionAddendum.integrity.sha256,
+    anyPairBody.reproductionAddendum.integrity.sha256);
+  const reproductionVerify=await fetch(base+"/api/scientific/quality/verify?basis=documentary&protocolA=ERC-4626&protocolB=ERC-20&sha256="+dq.contract.integrity.sha256+"&claimsSha256="+dq.claimLedger.integrity.sha256+"&reproductionSha256="+dq.reproductionAddendum.integrity.sha256);
+  assert.equal(reproductionVerify.status,200);
+  assert.equal((await reproductionVerify.json()).matches,true);
+  const forgedReproduction=await fetch(base+"/api/scientific/quality/verify?basis=documentary&protocolA=ERC-4626&protocolB=ERC-20&sha256="+dq.contract.integrity.sha256+"&reproductionSha256="+"a".repeat(64));
+  assert.equal(forgedReproduction.status,409);
+  assert.equal((await forgedReproduction.json()).matches,false);
+  const documentaryVerify=await fetch(base+"/api/scientific/quality/verify?basis=documentary&protocolA=ERC-4626&protocolB=ERC-20&sha256="+dq.contract.integrity.sha256);
+  assert.equal(documentaryVerify.status,200);
+  assert.equal((await documentaryVerify.json()).matches,true);
+  const qualityDownload=await fetch(base+"/api/scientific/quality?basis=pinned&protocolA=ERC-8060&protocolB=ERC-8098&download=1");
+  assert.equal(qualityDownload.status,200);
+  assert.match(qualityDownload.headers.get("content-disposition")||"",/attachment/);
+  const downloadedQuality=await qualityDownload.json();
+  assert.equal(downloadedQuality.contract.integrity.sha256,
+    pq.contract.integrity.sha256);
+  assert.equal(downloadedQuality.claimLedger.integrity.sha256,
+    pq.claimLedger.integrity.sha256);
+  console.log("OECL_CLAIM_LEDGER_PRODUCTION_API_PASS");
+  console.log("OECL_SCIENTIFIC_QUALITY_AGENT_READABLE_API_AND_DIGEST_VERIFICATION_PASS");
   const unknownPlan=await fetch(base+"/api/scientific/standards-pair?protocolA=ERC-20&protocolB=ERC-99999");
   assert.equal(unknownPlan.status,200);
   const unknownPlanBody=await unknownPlan.json();
+  assert.equal(unknownPlanBody.reproductionAddendum,undefined);
+  assert.equal(unknownPlanBody.independentReproductionReview,undefined);
+  console.log("OECL_REPRODUCED_LOCAL_EVM_QUALITY_BRIDGE_API_PASS");
   assert.equal(unknownPlanBody.autonomousResearch.planningStatus,"PARTIAL_DOCUMENTS_NO_PAIR_CLAIM");
   assert.equal(unknownPlanBody.autonomousResearch.compatibilityVerdict,"NOT_EVALUATED");
   assert.equal(unknownPlanBody.autonomousResearch.evmExecuted,false);
