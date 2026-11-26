@@ -1,0 +1,50 @@
+name: OECL Blind ERC4626 ERC20 Compiler AST Probe
+
+on:
+  pull_request:
+    paths:
+      - "laboratory/scientific-open-source-worker/run-erc4626-blind-source-probe.cjs"
+      - ".github/workflows/oecl-erc4626-blind-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locked-blind-source-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned compiler without scripts
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify fixed source revision and dependency lock
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+      - name: Blind structural inference before any purpose-built protocol
+        run: |
+          node oecl/laboratory/scientific-open-source-worker/run-erc4626-blind-source-probe.cjs ERC-4626 ERC-20 dependency-source output
+          node -e 'const p=require("./output/blind-vault-probe.json");if(p.participants.map(x=>x.id).join("|")!=="ERC-4626|ERC-20"||p.evmExecuted||p.executionAuthorized||p.candidateAdmission!=="NOT_ADMITTED"||!p.participants[0].operations.every(o=>o.supportedByAbi))throw Error("BLIND_ERC4626_SOURCE_PROBE_NOT_VERIFIED")'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oecl-erc4626-blind-source-only-dossier
+          path: output/blind-vault-probe.json
+          retention-days: 14
+          if-no-files-found: error
