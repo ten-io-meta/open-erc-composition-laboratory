@@ -49,6 +49,8 @@ jobs:
         run: node --experimental-strip-types scripts/check-erc-documentary-discovery.mjs
       - name: Blind adversarial tests of any-ERC scientist plans, explicit falsifiers and abstentions
         run: node --experimental-strip-types scripts/check-autonomous-research-planner.mjs
+      - name: Independently falsify scientific quality contracts, source claims, EVM promotion and digest forgeries
+        run: node --experimental-strip-types scripts/check-scientific-quality-contract.mjs
       - name: Verify scientific AST snapshots and ZIP integrity
         run: node --experimental-strip-types scripts/check-source-graph-view.mjs
       - name: Verify independent EVM receipts and native source property snapshot
