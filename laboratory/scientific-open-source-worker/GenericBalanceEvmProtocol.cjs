@@ -72,7 +72,7 @@ function planFor(sourceReport,originalArtifacts,fixtureArtifacts,fixtures){
   assert(Array.isArray(sourceReport.participants)&&sourceReport.participants.length===2);
   assert([originalArtifacts,fixtureArtifacts,fixtures].every(x=>Array.isArray(x)&&x.length===2));
   const selected=sourceReport.participants.map(x=>({id:x.id,contract:x.contract,
-    sourceUnit:x.sourceUnit,sourceSha256:x.sourceSha256,abiSha256:x.abiSha256,
+    revision:x.revision,sourceUnit:x.sourceUnit,sourceSha256:x.sourceSha256,abiSha256:x.abiSha256,
     hypothesisId:x.hypotheses.find(h=>h.signature==="transfer(address,uint256)"&&
       h.stateVariable==="_balances"&&h.status==="HYPOTHESIS_ONLY"&&
       h.executionSafety==="SOURCE_ONLY_REVIEW_REQUIRED")?.id||null}));
