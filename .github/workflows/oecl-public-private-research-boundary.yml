@@ -1,0 +1,54 @@
+name: OECL Public-Private Research Boundary
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  prevent-private-data-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Fail closed on private data or new tracked research-memory output
+        env:
+          OECL_PUBLIC_BOUNDARY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          node scripts/check-public-research-boundary.cjs
+          git diff --check "$OECL_PUBLIC_BOUNDARY_BASE" HEAD
+      - name: Install existing pinned TypeScript runner dependencies
+        run: npm ci --ignore-scripts --no-fund
+      - name: Reject redirecting research memory into historical tracked public results
+        env:
+          OECL_PRIVATE_RESEARCH_ROOT: ${{ github.workspace }}/research-memory-results
+        run: |
+          if ./node_modules/.bin/tsx scripts/run-research-memory.ts; then
+            echo "PRIVATE_RESEARCH_WROTE_UNDER_PUBLIC_FIXTURE_PATH" >&2
+            exit 1
+          fi
+      - name: Run existing scientific memory engine with local-private output
+        env:
+          OECL_PRIVATE_RESEARCH_ROOT: ${{ runner.temp }}/oecl-private-research
+        run: |
+          ./node_modules/.bin/tsx scripts/run-research-memory.ts
+          test -s "$OECL_PRIVATE_RESEARCH_ROOT/research-memory/OECL-V2-RESEARCH-MEMORY.json"
+          test -s "$OECL_PRIVATE_RESEARCH_ROOT/research-memory/OECL-V2-RESEARCH-MEMORY-RESULT.json"
+          node -e 'const fs=require("fs");const p=process.env.OECL_PRIVATE_RESEARCH_ROOT+"/research-memory/OECL-V2-RESEARCH-MEMORY.json";const m=JSON.parse(fs.readFileSync(p));if(!Array.isArray(m.timelines)||!m.statistics||m.statistics.events===undefined)throw Error("PRIVATE_MEMORY_OUTPUT_NOT_SCIENTIFIC_RESULT")'
+          test -z "$(git status --porcelain -- research-memory-results research-knowledge-results knowledge-consolidation-results)"
+          test ! -e .oecl-private/research-memory/OECL-V2-RESEARCH-MEMORY.json
+      - name: Ensure private memory never appeared in the Git tracked tree
+        env:
+          OECL_PUBLIC_BOUNDARY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          node scripts/check-public-research-boundary.cjs

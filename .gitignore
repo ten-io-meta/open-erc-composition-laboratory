@@ -12,3 +12,10 @@ migration-backup-*/
 
 external/
 github-adapter-results/
+
+# Never version prospective private research memory, client analyses or secrets.
+# These ignores do NOT hide or relicense previously committed public artifacts.
+.oecl-private/
+private-research/
+client-research/
+research-secret/
