@@ -1,5 +1,5 @@
 "use strict";
-/** 
+/**
  * Invariant gate for a real two-parent Git integration of two independently
  * tested, *still unmerged* scientific stacks. Detects accidental partial
  * copying, unexplained new work, and changed research or evidence bytes.
