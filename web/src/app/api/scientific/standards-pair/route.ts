@@ -3,6 +3,7 @@ import { investigateErcSpecifications, normalizeErcNumber } from "@/server/oeclE
 import { verifyAutonomousResearchPlan } from "@/server/oeclAutonomousResearchPlanner";
 import { documentaryScientificQuality } from "@/server/oeclScientificQualityContract";
 import { reviewScientificQuality } from "@/server/oeclScientificQualityReviewer";
+import { reviewedScientificClaimLedger } from "@/server/oeclScientificClaimGate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,8 +27,12 @@ export async function GET(request: NextRequest) {
       basis:"DOCUMENTARY_SOURCE_ONLY",report:result,
     });
     if(!independentQualityReview.accepted)throw Error("SCIENTIFIC_QUALITY_GATE_FAILED");
-    return NextResponse.json({...result,qualityContract,independentQualityReview},
-      { headers: {...headers,"X-OECL-Quality-SHA256":qualityContract.integrity.sha256} });
+    const {claimLedger,independentClaimReview}=reviewedScientificClaimLedger(
+      qualityContract,independentQualityReview,result);
+    return NextResponse.json({...result,qualityContract,independentQualityReview,
+      claimLedger,independentClaimReview},
+      { headers: {...headers,"X-OECL-Quality-SHA256":qualityContract.integrity.sha256,
+        "X-OECL-Claims-SHA256":claimLedger.integrity.sha256} });
   } catch {
     return NextResponse.json({
       status: "DOCUMENTARY_LOOKUP_FAILED",
