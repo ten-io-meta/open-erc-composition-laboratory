@@ -370,7 +370,9 @@ export class ScientificEmergenceAdmissionPreflight {
             if (report && replay && (report.id === replay.id ||
                 report.sourceId === replay.sourceId))
                 fail("G6", "REPLICATION_NOT_SOURCE_INDEPENDENT");
-            const prereg = evidenceById.get(input.origin.preregistrationEvidenceId);
+            const prereg = record(input.origin) &&
+                typeof input.origin.preregistrationEvidenceId === "string" ?
+                    evidenceById.get(input.origin.preregistrationEvidenceId) : undefined;
             if (report && prereg &&
                 Date.parse(prereg.recordedAt) >= Date.parse(report.recordedAt))
                 fail("G2", "CONFIRMATORY_OBSERVATION_PRECEDES_PREREGISTRATION");
@@ -398,8 +400,14 @@ export class ScientificEmergenceAdmissionPreflight {
         const prepared = (gateId: EmergenceGateId) =>
             gates.find(gate => gate.gateId === gateId)!.status ===
                 "PREPARED_NOT_VERIFIED";
-        const candidateReady = (["G1", "G2", "G3", "G4", "G5", "G7"] as const)
-            .every(prepared);
+        // G6 must stay UNRESOLVED until a separate authenticating verifier
+        // exists. Invalid supplied execution metadata nevertheless blocks even
+        // structural candidacy; only the explicit absent-verifier reason is
+        // tolerated at this exploratory tier.
+        const invalidDemonstration = failures.get("G6")!.some(reason =>
+            reason !== "INDEPENDENT_EVIDENCE_AUTHENTICATION_NOT_IMPLEMENTED");
+        const candidateReady = !invalidDemonstration &&
+            (["G1", "G2", "G3", "G4", "G5", "G7"] as const).every(prepared);
         const status: EmergencePreflightStatus = candidateReady ?
             "EMERGENCE_CANDIDATE" :
             prepared("G1") && prepared("G2") ?
