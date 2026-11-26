@@ -195,6 +195,15 @@ async function test(){
     "main ERC selector displays independent quality contract for documentary pair");
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-quality-contract]").innerText.includes("NOT_EXECUTED")'),true);
   assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-quality-contract]").innerText.includes("NOT PERFORMED")'),true);
+  await expectUi('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-claim-ledger]")!==null',
+    "documentary claim ledger displays hypothesis, observation and abstention tiers");
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-claim-ledger]").innerText.includes("NOT_EVALUATED")'),true);
+  assert.equal(await evalJs('document.querySelector("[data-testid=oecl-documentary-results] [data-testid=oecl-scientific-claim-ledger]").innerText.includes("NOT_YET_DEMONSTRATED")'),true);
+  await expectUi('document.querySelector("article[aria-label^=Pinned] [data-testid=oecl-scientific-claim-ledger]")!==null',
+    "pinned EVM displays separate claim evidence and limited utility");
+  assert.equal(await evalJs('document.querySelector("article[aria-label^=Pinned] [data-testid=oecl-scientific-claim-ledger]").innerText.includes("INCONCLUSIVE")'),true);
+  assert.equal(await evalJs('document.querySelector("article[aria-label^=Pinned] [data-testid=oecl-scientific-claim-ledger]").innerText.includes("SCOPED_REVIEWABLE_FINDING_ONLY")'),true);
+  console.log("OECL_BROWSER_HYPOTHESIS_OBSERVATION_CONCLUSION_LAYERS_PASS");
   console.log("OECL_BROWSER_FIVE_PILLAR_SCIENTIFIC_QUALITY_CONTRACT_PASS");
   const documentary=await fetch(base+"/api/scientific/standards-pair?protocolA=ERC-4626&protocolB=ERC-20");
   assert.equal(documentary.status,200,"Documentary endpoint must return scoped response");
