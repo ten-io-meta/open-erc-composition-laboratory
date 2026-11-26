@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import type { DocumentaryPair } from "./oeclErcDocumentaryDiscovery";
 import type { ScientificDossier } from "./oeclScientificDossier";
 import type { ScientificQualityContract } from "./oeclScientificQualityContract";
-import { verifyAutonomousResearchPlan } from "./oeclAutonomousResearchPlanner";
+import { verifyAutonomousResearchPlan } from "./oeclAutonomousResearchPlanner.ts";
 
 /**
  * Independent structural reviewer: intentionally never imports the quality
