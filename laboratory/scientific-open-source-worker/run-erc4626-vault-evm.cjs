@@ -217,7 +217,9 @@ async function executeEvm(plan,artifacts){
    expected.push({contract:"ASSET",name:"Approval",from:owner.address,
     to:vault.address,amount:step.id==="APPROVE_40"?"40":"101"});
   if(step.id==="DEPOSIT_40"){
-   expected.push({contract:"ASSET",name:"Transfer",from:owner.address,to:vault.address,amount:"40"},
+   // OpenZeppelin 4.9.6 transferFrom reduces allowance and emits Approval before Transfer.
+   expected.push({contract:"ASSET",name:"Approval",from:owner.address,to:vault.address,amount:"0"},
+    {contract:"ASSET",name:"Transfer",from:owner.address,to:vault.address,amount:"40"},
     {contract:"VAULT",name:"Transfer",from:ZERO,to:owner.address,amount:preview.shares},
     {contract:"VAULT",name:"Deposit",sender:owner.address,receiver:owner.address,
       assets:"40",shares:preview.shares});
