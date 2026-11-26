@@ -33,6 +33,9 @@ const sha=(value:unknown)=>createHash("sha256")
   .update(JSON.stringify(value)).digest("hex");
 const shaOk=(v:unknown)=>typeof v==="string"&&/^[a-f0-9]{64}$/.test(v);
 const equal=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
+const exactKeys=(value:unknown,expected:string[]):boolean=>
+  value!==null&&typeof value==="object"&&!Array.isArray(value)&&
+  equal(Object.keys(value).sort(),[...expected].sort());
 
 export function reviewScientificQuality(
   input:unknown,context:Context
@@ -57,6 +60,23 @@ export function reviewScientificQuality(
   }
   try{
     const {integrity,...content}=q;
+    need(exactKeys(q,[
+      "schemaVersion","basis","subject","provenance","investigate","challenge",
+      "experiment","demonstrate","limits","scientificVerdict",
+      "compatibilityVerdict","candidateAdmission","integrity",
+    ])&&
+      exactKeys(q.subject,["pairKey","scope"])&&
+      exactKeys(q.provenance,["sourceRecords","planSha256","snapshotSha256",
+        "evidenceRunUrl","graphSha256","evmArtifactSha256"])&&
+      exactKeys(q.investigate,["status","hypotheses"])&&
+      exactKeys(q.challenge,["status","observedCaseIds","untestedThreats"])&&
+      exactKeys(q.experiment,["status","chainId","minedTransactionHashes",
+        "evmReceiptReplayedByQualityVerifier","noExecutionAuthority"])&&
+      exactKeys(q.demonstrate,["status","evidenceRefs","sourceCoverageComplete",
+        "universalCompatibilityProven","independentlyReplayed"])&&
+      exactKeys(q.limits,["status","unknowns"])&&
+      exactKeys(q.integrity,["algorithm","sha256","signature","trustedExternalAttestation"]),
+      "UNRECOGNIZED_OR_MISSING_QUALITY_SCHEMA_FIELDS");
     need(q.schemaVersion==="OECL_SCIENTIFIC_QUALITY_CONTRACT_V1","SCHEMA_NOT_RECOGNIZED");
     need(q.basis===context.basis,"BASIS_CONTEXT_MISMATCH");
     need(integrity?.algorithm==="SHA-256-JSON-INSERTION_ORDER"&&
