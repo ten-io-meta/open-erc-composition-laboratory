@@ -114,6 +114,8 @@ const resolveArgs=(step,actors)=>{
 function expectedPreview(variant,assets,before){
  const a=BigInt(assets),s=BigInt(before.sharesSupply),
   total=BigInt(before.vaultTotalAssets);
+ // Solmate uses a 1:1 initial exchange rate before shares exist.
+ if(variant==="SOLMATE"&&s===0n)return a.toString();
  const numerator=variant==="OPENZEPPELIN"?a*(s+1n):a*s;
  const denominator=variant==="OPENZEPPELIN"?total+1n:total;
  assert(denominator>0n&&a>0n);
