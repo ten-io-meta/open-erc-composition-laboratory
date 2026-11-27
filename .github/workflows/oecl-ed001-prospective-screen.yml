@@ -1,0 +1,112 @@
+name: OECL-ED-001 Prospective Blind Source Science
+
+on:
+  pull_request:
+    paths:
+      - "scripts/build-oecl-ed001-prospective-register.cjs"
+      - "scripts/check-oecl-ed001-prospective-register.test.cjs"
+      - "docs/research-campaigns/OECL-ED-001.md"
+      - ".github/workflows/oecl-ed001-prospective-screen.yml"
+  workflow_dispatch:
+
+# Only an immutable registered source cohort is analyzed. No arbitrary code,
+# deployed contracts, client research, wallet, or user-supplied RPC.
+permissions:
+  contents: read
+
+concurrency:
+  group: oecl-ed001-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  blind-registered-source-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - name: Checkout OECL frozen campaign and research tools
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Checkout exact approved compiler dependency fixture
+        uses: actions/checkout@v4
+        with:
+          repository: ten-io-meta/erc8060-native-eth-value
+          ref: c7eed906835ab39fbc8439eb0493e5a5371b23a2
+          path: dependency-source
+          persist-credentials: false
+      - name: Setup pinned Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install fixed compiler in existing audited toolchain
+        working-directory: oecl/integrations/secure-evm-toolchain
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=moderate
+      - name: Verify registered source lock and compiler
+        run: |
+          test "$(git -C dependency-source rev-parse HEAD)" = "c7eed906835ab39fbc8439eb0493e5a5371b23a2"
+          echo "73a70b40bad9d064a244d1a36986b78be9adedc85d2043a6431add0c428b41b1  dependency-source/package-lock.json" | sha256sum --check
+          ln -s ../oecl/integrations/secure-evm-toolchain/node_modules dependency-source/node_modules
+          node -e 'const p=require("./dependency-source/node_modules/@openzeppelin/contracts/package.json");const solc=require("./dependency-source/node_modules/solc");if(p.version!=="4.9.6"||!solc.version().startsWith("0.8.26+"))process.exit(1)'
+      - name: Run adversarial preregistered selection tests
+        if: matrix.shard == 0
+        run: node --test oecl/scripts/check-oecl-ed001-prospective-register.test.cjs
+      - name: Explore assigned registered Solidity pairs without EVM execution
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OECL_MATRIX_SHARD: ${{ matrix.shard }}
+        run: node oecl/scripts/run-remaining-registered-source-pairs.cjs "$OECL_MATRIX_SHARD"
+      - name: Independently check rule-bound blind scientific proposals
+        env:
+          OECL_MATRIX_SHARD: ${{ matrix.shard }}
+        run: |
+          node oecl/scripts/check-blind-scientist-autonomy-baseline.cjs "$OECL_MATRIX_SHARD" source-output
+          node oecl/scripts/check-blind-autonomy-boundary.cjs source-output "$OECL_MATRIX_SHARD"
+      - name: Archive all source-only results, including failed shards
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-ed001-blind-source-shard-${{ matrix.shard }}
+          path: source-output/
+          retention-days: 30
+          if-no-files-found: warn
+
+  register-prospective-results:
+    needs: blind-registered-source-screen
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout unchanged aggregation and scientific rules
+        uses: actions/checkout@v4
+        with:
+          path: oecl
+          persist-credentials: false
+      - name: Setup fixed Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Download all three blind shards without rerunning exploration
+        uses: actions/download-artifact@v4
+        with:
+          pattern: oecl-ed001-blind-source-shard-*
+          merge-multiple: true
+          path: source-output
+      - name: Build source-anchored register with deterministic review queue
+        run: |
+          node --test oecl/scripts/check-oecl-ed001-prospective-register.test.cjs
+          node oecl/scripts/build-oecl-ed001-prospective-register.cjs source-output oecl-ed001-prospective-register.json
+          node -e 'const r=require("./oecl-ed001-prospective-register.json");if(r.canAnnounceEmergence!==false||r.evmExecuted!==false||r.experimentAuthorized!==false||r.summary.pairsAttempted!==35||r.summary.provenEmergentProperties!==0||r.summary.verifiedAutonomousDiscoveries!==0||r.candidateAdmission!=="NOT_ADMITTED"||r.verdict!=="NO_EMERGENT_DISCOVERY_CLAIM")process.exit(1)'
+      - name: Archive reproducible source research questions, all empty outcomes and limitations
+        uses: actions/upload-artifact@v4
+        with:
+          name: oecl-ed001-prospective-source-register
+          path: oecl-ed001-prospective-register.json
+          retention-days: 30
+          if-no-files-found: error
