@@ -8,6 +8,7 @@ on:
       - "docs/research-campaigns/OECL-ED-001.md"
       - "laboratory/scientific-causal-mechanism/**"
       - "scripts/check-oecl-ed001-causal-source-triage.test.cjs"
+      - "scripts/check-oecl-ed001-pinned-vault-asset-witness.test.cjs"
       - ".github/workflows/oecl-ed001-prospective-screen.yml"
   workflow_dispatch:
 
@@ -71,6 +72,15 @@ jobs:
         run: |
           node oecl/scripts/check-blind-scientist-autonomy-baseline.cjs "$OECL_MATRIX_SHARD" source-output
           node oecl/scripts/check-blind-autonomy-boundary.cjs source-output "$OECL_MATRIX_SHARD"
+      - name: Verify real constructor-supplied ERC4626 to IERC20 source call paths
+        if: matrix.shard == 1
+        env:
+          OECL_ED001_FIXED_SOURCE_PAIR_DIR: source-output/matrix-ERC-20-BURNABLE-ERC-4626
+          OECL_ED001_PINNED_OZ_ROOT: dependency-source/node_modules/@openzeppelin/contracts
+        run: |
+          node --test oecl/scripts/check-oecl-ed001-pinned-vault-asset-witness.test.cjs
+          node oecl/laboratory/scientific-causal-mechanism/PinnedVaultAssetCallWitness.cjs source-output/matrix-ERC-20-BURNABLE-ERC-4626 dependency-source/node_modules/@openzeppelin/contracts source-output/oecl-ed001-typed-asset-call-witness.json
+          node -e 'const w=require("./source-output/oecl-ed001-typed-asset-call-witness.json");if(w.callChains.length!==4||w.scientificFinding!=="PINNED_GENERIC_IERC20_TRANSFER_DEPENDENCY_IN_ERC4626_SOURCE_ONLY"||w.actualCrossParticipantCausalEffect!=="NOT_ESTABLISHED"||w.novelEmergentProperty!=="NOT_DEMONSTRATED"||w.canAnnounceEmergence!==false||w.evmExecuted!==false)process.exit(1)'
       - name: Archive all source-only results, including failed shards
         if: always()
         uses: actions/upload-artifact@v4
@@ -100,6 +110,9 @@ jobs:
           pattern: oecl-ed001-blind-source-shard-*
           merge-multiple: true
           path: source-output
+      - name: Ensure source-bound IERC20 witness was independently archived, not promoted
+        run: |
+          node -e 'const w=require("./source-output/oecl-ed001-typed-asset-call-witness.json");if(w.evaluatedPair!=="ERC-20-BURNABLE|ERC-4626"||w.callChains.length!==4||w.identifiedSourceLevelDependency.runtimeCalleeAddress!=="UNRESOLVED_UNTIL_DEPLOYED_CONSTRUCTOR_ARG_AND_CODE_CHECK"||w.identifiedSourceLevelDependency.burnableImplementationAsActualAsset!=="NOT_ESTABLISHED"||w.evmExecuted!==false||w.canAnnounceEmergence!==false||w.changesExistingVerdicts!==false)process.exit(1)'
       - name: Build source-anchored register with deterministic review queue
         run: |
           node --test oecl/scripts/check-oecl-ed001-prospective-register.test.cjs
@@ -120,5 +133,6 @@ jobs:
           path: |
             oecl-ed001-prospective-register.json
             oecl-ed001-causal-triage.json
+            source-output/oecl-ed001-typed-asset-call-witness.json
           retention-days: 30
           if-no-files-found: error
