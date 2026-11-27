@@ -6,6 +6,8 @@ on:
       - "scripts/build-oecl-ed001-prospective-register.cjs"
       - "scripts/check-oecl-ed001-prospective-register.test.cjs"
       - "docs/research-campaigns/OECL-ED-001.md"
+      - "laboratory/scientific-causal-mechanism/**"
+      - "scripts/check-oecl-ed001-causal-source-triage.test.cjs"
       - ".github/workflows/oecl-ed001-prospective-screen.yml"
   workflow_dispatch:
 
@@ -103,10 +105,20 @@ jobs:
           node --test oecl/scripts/check-oecl-ed001-prospective-register.test.cjs
           node oecl/scripts/build-oecl-ed001-prospective-register.cjs source-output oecl-ed001-prospective-register.json
           node -e 'const r=require("./oecl-ed001-prospective-register.json");if(r.canAnnounceEmergence!==false||r.evmExecuted!==false||r.experimentAuthorized!==false||r.summary.pairsAttempted!==35||r.summary.provenEmergentProperties!==0||r.summary.verifiedAutonomousDiscoveries!==0||r.candidateAdmission!=="NOT_ADMITTED"||r.verdict!=="NO_EMERGENT_DISCOVERY_CLAIM")process.exit(1)'
+      - name: Independently triage all thirteen source hypotheses for causal gaps
+        env:
+          OECL_ED001_CI_SOURCE_DIR: source-output
+          OECL_ED001_CI_REGISTER: oecl-ed001-prospective-register.json
+        run: |
+          node --test oecl/scripts/check-oecl-ed001-causal-source-triage.test.cjs
+          node oecl/laboratory/scientific-causal-mechanism/ScientificCausalSourceTriage.cjs source-output oecl-ed001-prospective-register.json oecl-ed001-causal-triage.json
+          node -e 'const r=require("./oecl-ed001-causal-triage.json");if(r.reviewedHypotheses!==13||r.categories.SHARED_IMPLEMENTATION_ANCESTRY_ONLY!==7||r.categories.OFFSETTING_BALANCE_WRITE_PATH_NOT_SUPPLY_BURN!==4||r.categories.SAME_SOURCE_DEFINITION_NOT_SHARED_RUNTIME_STORAGE!==2||r.emergentPropertyDemonstrated!==false||r.evmExperimentExecuted!==false||r.evmExecutionAuthorized!==false||r.candidateAdmission!=="NOT_ADMITTED")process.exit(1)'
       - name: Archive reproducible source research questions, all empty outcomes and limitations
         uses: actions/upload-artifact@v4
         with:
           name: oecl-ed001-prospective-source-register
-          path: oecl-ed001-prospective-register.json
+          path: |
+            oecl-ed001-prospective-register.json
+            oecl-ed001-causal-triage.json
           retention-days: 30
           if-no-files-found: error
