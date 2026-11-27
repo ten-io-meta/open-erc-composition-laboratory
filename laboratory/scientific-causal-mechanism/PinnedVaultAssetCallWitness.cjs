@@ -34,6 +34,8 @@ function check(condition,reason){
 function reportMatch(report,rawReport,graph){
   check(Buffer.isBuffer(rawReport) && hash(rawReport)===REPORT_SHA,
     "PINNED_SOURCE_REPORT_CHANGED");
+  check(JSON.stringify(JSON.parse(rawReport.toString("utf8")))===JSON.stringify(report),
+    "PARSED_REPORT_DIFFERS_FROM_PINNED_BYTES");
   check(report?.schemaVersion==="OECL_OPEN_GENERIC_AST_RESULT_V1" &&
     report?.sourceOnly===true && report?.evmExecuted===false &&
     report?.scientificVerdict==="INCONCLUSIVE" &&
@@ -92,9 +94,10 @@ function sourceCheck(files){
   }
 }
 function compilerPath(graph){
-  const fn=(contract,name,id)=>{
+  const fn=(contract,name,id,expectedArity)=>{
     const matches=graph.functions.filter(f=>f.contractName===contract &&
-      f.name===name && f.unit===UNIT+PATHS[id] && f.implemented===true);
+      f.name===name && f.unit===UNIT+PATHS[id] && f.implemented===true &&
+      (expectedArity===undefined || f.parameterTypes?.length===expectedArity));
     check(matches.length===1,"EXACT_FUNCTION_NOT_FOUND_"+contract+"_"+name);
     return matches[0];
   };
@@ -106,7 +109,7 @@ function compilerPath(graph){
     safeTransferFrom:fn("SafeERC20","safeTransferFrom","SAFE"),
     safeTransfer:fn("SafeERC20","safeTransfer","SAFE"),
     _callOptionalReturn:fn("SafeERC20","_callOptionalReturn","SAFE"),
-    functionCall:fn("Address","functionCall","ADDRESS"),
+    functionCall:fn("Address","functionCall","ADDRESS",3),
     burnableBurn:fn("ERC20Burnable","burn","BURNABLE"),
     inheritedBurn:fn("ERC20","_burn","ERC20")
   };
