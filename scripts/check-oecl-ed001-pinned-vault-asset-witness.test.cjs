@@ -53,11 +53,11 @@ test("an inserted forged compiler call path is not accepted",()=>{
 });
 test("forged machine-origin emergent claim is rejected",()=>{
  reject(x=>{x.report.scientificVerdict="SCOPED_EMERGENCE_SUPPORTED";},
-   "PINNED_SOURCE_REPORT_CHANGED");
+   "PARSED_REPORT_DIFFERS_FROM_PINNED_BYTES");
 });
 test("swapping profile identities rejects cross-contract binding illusion",()=>{
  reject(x=>{x.report.selected[0].id="ERC-721";},
-   "PINNED_SOURCE_REPORT_CHANGED");
+   "PARSED_REPORT_DIFFERS_FROM_PINNED_BYTES");
 });
 test("missing selected raw source bytes is not a valid proof",()=>{
  reject(x=>{delete x.files.IERC20;}, "SOURCE_FILE_SET_NOT_EXACT");
